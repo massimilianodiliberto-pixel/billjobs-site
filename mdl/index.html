@@ -48,7 +48,7 @@
 
     <!-- HERO -->
     <section class="hero">
-      <video class="hero-video" autoplay muted loop playsinline poster="assets/poster.jpg">
+      <video class="hero-video" autoplay muted loop playsinline disablepictureinpicture>
         <source src="assets/reel.mp4" type="video/mp4">
       </video>
       <div class="hero-overlay"></div>
@@ -134,10 +134,17 @@
   <script>
     function playHeroEntrance() {
       const tl = gsap.timeline();
-      tl.to('.hero-video',     { opacity: 1, duration: 0.01, delay: 0.2 })
-        .to('.hero-name',      { opacity: 1, duration: 1.4, ease: 'power2.out', delay: 0.4 })
-        .to('.hero-subtitle',  { opacity: 1, duration: 1.0, ease: 'power2.out' }, '-=0.6')
+      tl.to('.hero-name',        { opacity: 1, duration: 1.4, ease: 'power2.out', delay: 0.4 })
+        .to('.hero-subtitle',    { opacity: 1, duration: 1.0, ease: 'power2.out' }, '-=0.6')
         .to('.scroll-indicator', { opacity: 1, duration: 0.8 }, '-=0.4');
+
+      /* Reveal video only when it can actually play — gradient shows otherwise */
+      const v = document.querySelector('.hero-video');
+      if (v) {
+        v.addEventListener('canplay', () => {
+          gsap.to(v, { opacity: 1, duration: 1.5, ease: 'power2.out' });
+        }, { once: true });
+      }
 
       lenis.on('scroll', () => {
         gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });

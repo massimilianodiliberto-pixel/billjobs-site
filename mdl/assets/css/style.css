@@ -235,7 +235,7 @@ footer a:hover { color: var(--text-primary); }
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: var(--bg);
+  background: linear-gradient(160deg, #111010 0%, #0a0908 50%, #060606 100%);
 }
 .hero-video {
   position: absolute;
@@ -243,7 +243,11 @@ footer a:hover { color: var(--text-primary); }
   width: 100%; height: 100%;
   object-fit: cover;
   opacity: 0;
+  pointer-events: none;
 }
+.hero-video::-webkit-media-controls,
+.hero-video::-webkit-media-controls-enclosure,
+.hero-video::-webkit-media-controls-panel { display: none !important; }
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -658,8 +662,7 @@ footer a:hover { color: var(--text-primary); }
   gap: 14px;
 }
 .sys-list span {
-  font-family: var(--font-editorial);
-  font-style: italic;
+  font-family: var(--font-ui);
   font-size: 22px;
   color: var(--text-primary);
 }
