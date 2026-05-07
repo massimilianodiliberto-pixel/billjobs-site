@@ -1,206 +1,204 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Massimiliano Di Liberto — Direction · Production · Visual Systems</title>
-  <meta name="description" content="Massimiliano Di Liberto. Direction, production, visual systems. 20+ anni tra musica, fashion, brand e cinema." />
+  <meta name="description" content="Massimiliano Di Liberto. Direction, production, visual systems.">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-  <!-- Page transition overlay -->
-  <div id="page-transition" aria-hidden="true"></div>
+  <div id="page-transition"></div>
 
-  <!-- Custom cursor -->
-  <div id="cursor" aria-hidden="true"></div>
-  <div id="cursor-ring" aria-hidden="true"></div>
+  <!-- INTRO -->
+  <div id="intro">
+    <div class="intro-bg"></div>
+    <div class="intro-panel-top"></div>
+    <div class="intro-panel-bottom"></div>
+    <div class="intro-text">INSIDE THE FRAME</div>
+    <button class="intro-skip">SKIP</button>
+  </div>
 
-  <!-- ── NAV ──────────────────────────────────────────────────── -->
+  <!-- NAV -->
   <nav id="nav">
-    <a href="index.html" class="nav__logo">MDL</a>
-    <ul class="nav__links" aria-label="Navigazione principale">
-      <li><a href="work/index.html">Work</a></li>
-      <li><a href="about/index.html">Author</a></li>
-      <li><a href="system/index.html">System</a></li>
-      <li><a href="contact/index.html">Signal</a></li>
-    </ul>
-    <button class="nav__burger" id="navBurger" aria-label="Apri menu" aria-expanded="false">
-      <span></span><span></span>
-    </button>
+    <a class="nav-logo" href="index.html">MDL</a>
+    <div class="nav-links">
+      <a href="index.html"          class="nav-link active">FRAME</a>
+      <a href="work/index.html"     class="nav-link">WORK</a>
+      <a href="system/index.html"   class="nav-link">SYSTEM</a>
+      <a href="contact/index.html"  class="nav-link">SIGNAL</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">MENU</button>
   </nav>
 
-  <!-- ── MOBILE MENU ──────────────────────────────────────────── -->
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <button class="mobile-menu__close" id="mobileClose" aria-label="Chiudi menu">✕</button>
-    <nav class="mobile-menu__nav">
-      <a href="work/index.html"    class="mobile-menu__link" data-close>Work</a>
-      <a href="about/index.html"   class="mobile-menu__link" data-close>Author</a>
-      <a href="system/index.html"  class="mobile-menu__link" data-close>System</a>
-      <a href="contact/index.html" class="mobile-menu__link" data-close>Signal</a>
-    </nav>
-    <div class="mobile-menu__foot">
-      <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
-    </div>
+  <div id="mobile-menu">
+    <a href="index.html">FRAME</a>
+    <a href="work/index.html">WORK</a>
+    <a href="system/index.html">SYSTEM</a>
+    <a href="contact/index.html">SIGNAL</a>
   </div>
 
-  <!-- ── HERO ─────────────────────────────────────────────────── -->
-  <section class="entry-hero">
+  <main class="entry-page">
 
-    <!-- Video placeholder — replace with <video> tag when ready -->
-    <div class="entry-hero__media" aria-hidden="true">
-      <div class="entry-hero__grain"></div>
-    </div>
+    <!-- HERO -->
+    <section class="hero">
+      <video class="hero-video" autoplay muted loop playsinline poster="assets/poster.jpg">
+        <source src="assets/reel.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-name">Massimiliano Di Liberto</h1>
+        <p class="hero-subtitle">DIRECTION &nbsp;·&nbsp; PRODUCTION &nbsp;·&nbsp; VISUAL SYSTEMS</p>
+      </div>
+      <div class="scroll-indicator"></div>
+    </section>
 
-    <div class="entry-hero__vignette" aria-hidden="true"></div>
+    <!-- FEATURED -->
+    <section class="featured">
+      <div class="featured-grid">
 
-    <div class="entry-hero__content">
-      <h1 class="entry-hero__title" id="heroTitle">
-        <span class="entry-hero__line">Massimiliano</span>
-        <span class="entry-hero__line entry-hero__line--italic">Di Liberto</span>
-      </h1>
-      <p class="entry-hero__sub" id="heroSub">
-        Direction &nbsp;·&nbsp; Production &nbsp;·&nbsp; Visual Systems
+        <a href="work/index.html" class="feat-item feat-large">
+          <div class="feat-media">
+            <img src="assets/gamma-duality.jpg" alt="Gamma+ Duality">
+          </div>
+          <div class="feat-info">
+            <span class="feat-title">Gamma+ — Duality</span>
+            <span class="feat-meta">GAMMA+ PROFESSIONAL &nbsp;·&nbsp; LIVE SHOW DIRECTION</span>
+          </div>
+        </a>
+
+        <a href="work/index.html" class="feat-item feat-medium">
+          <div class="feat-media">
+            <img src="assets/mr-rain.jpg" alt="Mr. Rain">
+          </div>
+          <div class="feat-info">
+            <span class="feat-title">Mr. Rain</span>
+            <span class="feat-meta">WARNER MUSIC &nbsp;·&nbsp; DIRECTION · PRODUCTION</span>
+          </div>
+        </a>
+
+        <a href="work/index.html" class="feat-item feat-medium">
+          <div class="feat-media">
+            <img src="assets/up-all-night.jpg" alt="Up All Night">
+          </div>
+          <div class="feat-info">
+            <span class="feat-title">Up All Night</span>
+            <span class="feat-meta">BERLINALE EFM &nbsp;·&nbsp; DEVELOPMENT · DIRECTION</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- CREDENTIALS -->
+    <section class="credentials">
+      <p class="credentials-text">
+        Warner Music &nbsp;·&nbsp; Cosmoprof &nbsp;·&nbsp; Berlinale EFM
+        &nbsp;·&nbsp; PwC &nbsp;·&nbsp; Giuseppe Tornatore
+        &nbsp;·&nbsp; Festival Cinema Venezia &nbsp;·&nbsp; Confindustria
       </p>
-    </div>
+    </section>
 
-    <div class="entry-hero__scroll" id="heroScroll" aria-hidden="true">
-      <div class="entry-hero__scroll-bar"></div>
-    </div>
+    <!-- BILL JOBS INTRO -->
+    <section class="bj-intro">
+      <div class="bj-left">
+        <h2 class="bj-title">Bill Jobs Studio</h2>
+      </div>
+      <div class="bj-right">
+        <p class="bj-text">
+          Produzione indipendente.<br>
+          Musica, visuals, progetti fuori brief.
+        </p>
+        <a href="system/index.html" class="bj-link">SYSTEM →</a>
+      </div>
+    </section>
 
-  </section>
+  </main>
 
-  <!-- ── FEATURED WORK ─────────────────────────────────────────── -->
-  <section class="featured-work">
-
-    <div class="featured-work__header" data-reveal style="opacity:0">
-      <span class="featured-work__label">Progetti selezionati</span>
-      <a href="work/index.html" class="featured-work__all">Tutto il lavoro →</a>
-    </div>
-
-    <div class="featured-work__grid">
-
-      <!-- 01 -->
-      <article class="featured-work__item" data-href="work/index.html?cat=eventi" data-reveal style="opacity:0">
-        <div class="featured-work__media fw-media--1" aria-hidden="true">
-          <div class="featured-work__grain" aria-hidden="true"></div>
-        </div>
-        <div class="featured-work__info">
-          <span class="featured-work__num">01</span>
-          <div>
-            <h3 class="featured-work__title">Gamma+ "Duality"</h3>
-            <p class="featured-work__meta">Live Show Direction &nbsp;·&nbsp; 2024</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- 02 -->
-      <article class="featured-work__item" data-href="work/index.html?cat=music" data-reveal style="opacity:0">
-        <div class="featured-work__media fw-media--2" aria-hidden="true">
-          <div class="featured-work__grain" aria-hidden="true"></div>
-        </div>
-        <div class="featured-work__info">
-          <span class="featured-work__num">02</span>
-          <div>
-            <h3 class="featured-work__title">Mr. Rain — Visual Direction</h3>
-            <p class="featured-work__meta">Warner Music &nbsp;·&nbsp; Direction · Set Design &nbsp;·&nbsp; 2023</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- 03 -->
-      <article class="featured-work__item" data-href="work/index.html?cat=fashion" data-reveal style="opacity:0">
-        <div class="featured-work__media fw-media--3" aria-hidden="true">
-          <div class="featured-work__grain" aria-hidden="true"></div>
-        </div>
-        <div class="featured-work__info">
-          <span class="featured-work__num">03</span>
-          <div>
-            <h3 class="featured-work__title">Pleasure Professional</h3>
-            <p class="featured-work__meta">Fashion · Visual Development &nbsp;·&nbsp; 2023</p>
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-  </section>
-
-  <!-- ── CREDENTIALS ───────────────────────────────────────────── -->
-  <div class="credentials" data-reveal style="opacity:0">
-    <p class="credentials__text">
-      Warner Music &nbsp;·&nbsp; Berlinale EFM &nbsp;·&nbsp; Festival del Cinema di Venezia
-      &nbsp;·&nbsp; Gamma+ Professional &nbsp;·&nbsp; PwC &nbsp;·&nbsp; Cotril
-      &nbsp;·&nbsp; Confindustria Verona
-    </p>
-  </div>
-
-  <!-- ── FOOTER ───────────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <span class="site-footer__copy">&copy; 2026 Massimiliano Di Liberto</span>
-    <a href="mailto:massimiliano.diliberto@gmail.com" class="site-footer__email">
-      massimiliano.diliberto@gmail.com
-    </a>
+  <footer>
+    <span>© 2026 Massimiliano Di Liberto &nbsp;·&nbsp; Bill Jobs Studio</span>
+    <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
   </footer>
 
-  <!-- GSAP + Lenis CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
-  <script>gsap.registerPlugin(ScrollTrigger);</script>
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
   <script src="assets/js/core.js"></script>
 
   <script>
-    /* ── Hero entrance timeline ──────────────────────────────── */
-    window.addEventListener('load', () => {
-      const tl = gsap.timeline({ delay: 0.9 });
+    function playHeroEntrance() {
+      const tl = gsap.timeline();
+      tl.to('.hero-video',     { opacity: 1, duration: 0.01, delay: 0.2 })
+        .to('.hero-name',      { opacity: 1, duration: 1.4, ease: 'power2.out', delay: 0.4 })
+        .to('.hero-subtitle',  { opacity: 1, duration: 1.0, ease: 'power2.out' }, '-=0.6')
+        .to('.scroll-indicator', { opacity: 1, duration: 0.8 }, '-=0.4');
 
-      tl.fromTo('.entry-hero__line',
-        { yPercent: 110 },
-        { yPercent: 0, duration: 1.5, ease: 'expo.out', stagger: 0.20 }
-      )
-      .fromTo('#heroSub',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' },
-        '-=0.5'
-      )
-      .fromTo('#heroScroll',
-        { opacity: 0 },
-        { opacity: 1, duration: 0.8, ease: 'power2.out' },
-        '-=0.3'
+      lenis.on('scroll', () => {
+        gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });
+      }, { once: true });
+    }
+
+    function initSite() {
+      gsap.set('#page-transition', { scaleY: 0 });
+      playHeroEntrance();
+    }
+
+    function playIntro(onComplete) {
+      const tl = gsap.timeline({ onComplete });
+      tl.to('.intro-text', { opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.3 })
+        .to('.intro-text', { opacity: 0, duration: 0.5, ease: 'power2.in', delay: 0.6 })
+        .to(['.intro-panel-top', '.intro-panel-bottom'], {
+          scaleY: 0, duration: 0.7, ease: 'power3.inOut', stagger: 0,
+        })
+        .set('#intro', { display: 'none' });
+    }
+
+    function skipIntro() {
+      gsap.killTweensOf('*');
+      gsap.set('#intro', { display: 'none' });
+      initSite();
+    }
+
+    document.querySelector('.intro-skip').addEventListener('click', skipIntro);
+
+    if (sessionStorage.getItem('introSeen')) {
+      gsap.set('#intro', { display: 'none' });
+      initSite();
+    } else {
+      sessionStorage.setItem('introSeen', 'true');
+      playIntro(initSite);
+    }
+
+    /* Featured hover */
+    document.querySelectorAll('.feat-item').forEach(item => {
+      const img  = item.querySelector('img');
+      const info = item.querySelector('.feat-info');
+      item.addEventListener('mouseenter', () => {
+        gsap.to(img,  { scale: 1.04, duration: 0.9, ease: 'power2.out' });
+        gsap.to(info, { opacity: 1, y: 0,  duration: 0.5, ease: 'power2.out' });
+      });
+      item.addEventListener('mouseleave', () => {
+        gsap.to(img,  { scale: 1,    duration: 0.7, ease: 'power2.out' });
+        gsap.to(info, { opacity: 0,  y: 10, duration: 0.4 });
+      });
+    });
+
+    /* Scroll reveal */
+    gsap.utils.toArray('.featured, .credentials, .bj-intro').forEach(el => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1, y: 0, duration: 1.1, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 82%', toggleActions: 'play none none none' },
+        }
       );
     });
-
-    /* ── Featured work item click ────────────────────────────── */
-    document.querySelectorAll('.featured-work__item[data-href]').forEach(item => {
-      item.addEventListener('click', () => {
-        const dest = item.dataset.href;
-        const pt = document.getElementById('page-transition');
-        if (pt) {
-          gsap.to(pt, {
-            scaleY: 1, duration: 0.65, ease: 'power3.inOut',
-            transformOrigin: 'bottom',
-            onComplete: () => { window.location.href = dest; }
-          });
-        } else {
-          window.location.href = dest;
-        }
-      });
-      item.style.cursor = 'pointer';
-    });
-
-    /* ── Scroll indicator hide ───────────────────────────────── */
-    const scrollEl = document.getElementById('heroScroll');
-    if (scrollEl) {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 80) scrollEl.classList.add('hidden');
-      }, { passive: true, once: true });
-    }
   </script>
 
 </body>

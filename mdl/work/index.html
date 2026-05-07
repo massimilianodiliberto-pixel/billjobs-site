@@ -1,319 +1,248 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Work — Massimiliano Di Liberto</title>
-  <meta name="description" content="Portfolio selezionato di Massimiliano Di Liberto: musica, cinema, brand, live." />
+  <meta name="description" content="Portfolio selezionato — Massimiliano Di Liberto. Direction, production, visual systems.">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 
-  <div id="page-transition" aria-hidden="true"></div>
-  <div id="cursor" aria-hidden="true"></div>
-  <div id="cursor-ring" aria-hidden="true"></div>
+  <div id="page-transition"></div>
 
-  <!-- ── NAV ──────────────────────────────────────────────────── -->
+  <!-- NAV -->
   <nav id="nav">
-    <a href="../index.html" class="nav__logo">MDL</a>
-    <ul class="nav__links" aria-label="Navigazione principale">
-      <li><a href="../work/index.html" class="nav__link--active">Work</a></li>
-      <li><a href="../about/index.html">Author</a></li>
-      <li><a href="../system/index.html">System</a></li>
-      <li><a href="../contact/index.html">Signal</a></li>
-    </ul>
-    <button class="nav__burger" id="navBurger" aria-label="Apri menu">
-      <span></span><span></span>
-    </button>
+    <a class="nav-logo" href="../index.html">MDL</a>
+    <div class="nav-links">
+      <a href="../index.html"          class="nav-link">FRAME</a>
+      <a href="../work/index.html"     class="nav-link active">WORK</a>
+      <a href="../system/index.html"   class="nav-link">SYSTEM</a>
+      <a href="../contact/index.html"  class="nav-link">SIGNAL</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">MENU</button>
   </nav>
 
-  <!-- ── MOBILE MENU ──────────────────────────────────────────── -->
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <button class="mobile-menu__close" id="mobileClose" aria-label="Chiudi menu">✕</button>
-    <nav class="mobile-menu__nav">
-      <a href="../work/index.html"    class="mobile-menu__link" data-close>Work</a>
-      <a href="../about/index.html"   class="mobile-menu__link" data-close>Author</a>
-      <a href="../system/index.html"  class="mobile-menu__link" data-close>System</a>
-      <a href="../contact/index.html" class="mobile-menu__link" data-close>Signal</a>
-    </nav>
-    <div class="mobile-menu__foot">
-      <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
+  <div id="mobile-menu">
+    <a href="../index.html">FRAME</a>
+    <a href="../work/index.html">WORK</a>
+    <a href="../system/index.html">SYSTEM</a>
+    <a href="../contact/index.html">SIGNAL</a>
+  </div>
+
+  <main class="work-page">
+
+    <div class="work-filters">
+      <button class="filter active" data-filter="all">ALL</button>
+      <button class="filter" data-filter="beauty">BEAUTY &amp; LUXURY</button>
+      <button class="filter" data-filter="music">MUSIC</button>
+      <button class="filter" data-filter="branded">BRANDED CONTENT</button>
+      <button class="filter" data-filter="visual">VISUAL DEVELOPMENT</button>
     </div>
-  </div>
 
-  <!-- ── WORK HEADER ──────────────────────────────────────────── -->
-  <div class="work-header">
-    <h1 class="work-header__title" id="workTitle">Work</h1>
-    <p class="work-header__count" id="workCount">13 progetti selezionati</p>
-  </div>
+    <div class="work-grid">
 
-  <!-- ── FILTER ───────────────────────────────────────────────── -->
-  <div class="work-filter" id="workFilter">
-    <button class="work-filter__btn active" data-filter="all">All</button>
-    <button class="work-filter__btn" data-filter="musica">Musica</button>
-    <button class="work-filter__btn" data-filter="live">Live</button>
-    <button class="work-filter__btn" data-filter="cinema">Cinema</button>
-    <button class="work-filter__btn" data-filter="fashion">Fashion</button>
-    <button class="work-filter__btn" data-filter="brand">Brand</button>
-  </div>
-
-  <!-- ── WORK GRID ─────────────────────────────────────────────── -->
-  <main class="work-grid" id="workGrid">
-
-    <!-- ── FLAGSHIP ─────────────────────── -->
-
-    <!-- 01 · span 12 -->
-    <article class="work-grid__item" data-cat="live">
-      <div class="work-grid__media wg--1" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">01</span>
-        <div>
-          <h2 class="work-grid__title">Gamma+ — Duality</h2>
-          <p class="work-grid__meta">Gamma+ Professional &nbsp;·&nbsp; Creative Direction · Live Show Direction</p>
-          <div class="work-grid__tags"><span>Direction</span><span>Live</span><span>Creative</span></div>
+      <!-- 01 · span 12 -->
+      <a href="#" class="work-item" data-cat="beauty">
+        <img src="../assets/gamma-duality.jpg" alt="Gamma+ Duality">
+        <div class="thumb-info">
+          <div class="thumb-title">Gamma+ — Duality</div>
+          <div class="thumb-meta">GAMMA+ PROFESSIONAL &nbsp;·&nbsp; LIVE SHOW DIRECTION</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- 02 · span 7 -->
-    <article class="work-grid__item" data-cat="musica">
-      <div class="work-grid__media wg--2" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">02</span>
-        <div>
-          <h2 class="work-grid__title">Mr. Rain</h2>
-          <p class="work-grid__meta">Warner Music &nbsp;·&nbsp; Direction · Set Design · Production</p>
-          <div class="work-grid__tags"><span>Direction</span><span>Set Design</span><span>Production</span></div>
+      <!-- 02 · span 7 -->
+      <a href="#" class="work-item" data-cat="music">
+        <img src="../assets/mr-rain.jpg" alt="Mr. Rain">
+        <div class="thumb-info">
+          <div class="thumb-title">Mr. Rain</div>
+          <div class="thumb-meta">WARNER MUSIC &nbsp;·&nbsp; DIRECTION · PRODUCTION</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- 03 · span 5 · portrait -->
-    <article class="work-grid__item" data-cat="fashion">
-      <div class="work-grid__media wg--3" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">03</span>
-        <div>
-          <h2 class="work-grid__title">Pleasure Professional</h2>
-          <p class="work-grid__meta">Creative Production · Visual Development</p>
-          <div class="work-grid__tags"><span>Fashion</span><span>Creative</span></div>
+      <!-- 03 · span 5 · portrait -->
+      <a href="#" class="work-item" data-cat="visual">
+        <img src="../assets/pleasure.jpg" alt="Pleasure Professional">
+        <div class="thumb-info">
+          <div class="thumb-title">Pleasure Professional</div>
+          <div class="thumb-meta">PLEASURE &nbsp;·&nbsp; VISUAL DEVELOPMENT</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- 04 · span 12 -->
-    <article class="work-grid__item" data-cat="musica">
-      <div class="work-grid__media wg--4" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">04</span>
-        <div>
-          <h2 class="work-grid__title">Dolcenera</h2>
-          <p class="work-grid__meta">Direction · Art Direction</p>
-          <div class="work-grid__tags"><span>Direction</span><span>Art Direction</span></div>
+      <!-- 04 · span 12 -->
+      <a href="#" class="work-item" data-cat="music">
+        <img src="../assets/dolcenera.jpg" alt="Dolcenera">
+        <div class="thumb-info">
+          <div class="thumb-title">Dolcenera</div>
+          <div class="thumb-meta">DIRECTION &nbsp;·&nbsp; ART DIRECTION</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- 05 · span 7 -->
-    <article class="work-grid__item" data-cat="cinema">
-      <div class="work-grid__media wg--5" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">05</span>
-        <div>
-          <h2 class="work-grid__title">Up All Night</h2>
-          <p class="work-grid__meta">Berlinale EFM &nbsp;·&nbsp; Development · Direction · Production</p>
-          <div class="work-grid__tags"><span>Cinema</span><span>International</span></div>
+      <!-- 05 · span 6 -->
+      <a href="#" class="work-item" data-cat="branded">
+        <img src="../assets/up-all-night.jpg" alt="Up All Night">
+        <div class="thumb-info">
+          <div class="thumb-title">Up All Night</div>
+          <div class="thumb-meta">BERLINALE EFM &nbsp;·&nbsp; DEVELOPMENT · DIRECTION</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- ── SUPPORTO ──────────────────────── -->
-
-    <!-- 06 · span 5 · portrait -->
-    <article class="work-grid__item" data-cat="musica">
-      <div class="work-grid__media wg--6" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">06</span>
-        <div>
-          <h2 class="work-grid__title">Joan Thiele</h2>
-          <p class="work-grid__meta">Direction · Production</p>
-          <div class="work-grid__tags"><span>Musica</span><span>Direction</span></div>
+      <!-- 06 · span 6 -->
+      <a href="#" class="work-item" data-cat="music">
+        <img src="../assets/joan-thiele.jpg" alt="Joan Thiele Mellow Yellow">
+        <div class="thumb-info">
+          <div class="thumb-title">Joan Thiele — Mellow Yellow</div>
+          <div class="thumb-meta">DIRECTION</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- 07 · span 6 -->
-    <article class="work-grid__item" data-cat="musica">
-      <div class="work-grid__media wg--7" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">07</span>
-        <div>
-          <h2 class="work-grid__title">Tibe</h2>
-          <p class="work-grid__meta">Direction · Production</p>
-          <div class="work-grid__tags"><span>Musica</span></div>
+      <!-- 07 · span 5 · portrait -->
+      <a href="#" class="work-item" data-cat="music">
+        <img src="../assets/tibe.jpg" alt="Tibe">
+        <div class="thumb-info">
+          <div class="thumb-title">Tibe — Eccesso / Ballo di Occhi</div>
+          <div class="thumb-meta">DIRECTION &nbsp;·&nbsp; PRODUCTION</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- 08 · span 6 -->
-    <article class="work-grid__item" data-cat="musica">
-      <div class="work-grid__media wg--8" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">08</span>
-        <div>
-          <h2 class="work-grid__title">Maida Madò</h2>
-          <p class="work-grid__meta">Direction · Production</p>
-          <div class="work-grid__tags"><span>Musica</span></div>
+      <!-- 08 · span 7 -->
+      <a href="#" class="work-item" data-cat="visual">
+        <img src="../assets/maida-mado.jpg" alt="Maida Madò">
+        <div class="thumb-info">
+          <div class="thumb-title">Maida Madò</div>
+          <div class="thumb-meta">BILL JOBS STUDIO &nbsp;·&nbsp; VISUAL DEVELOPMENT</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- 09 · span 5 -->
-    <article class="work-grid__item" data-cat="brand">
-      <div class="work-grid__media wg--9" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">09</span>
-        <div>
-          <h2 class="work-grid__title">Confindustria Verona</h2>
-          <p class="work-grid__meta">Direction · Production</p>
-          <div class="work-grid__tags"><span>Brand</span><span>Events</span></div>
+      <!-- 09 · span 12 -->
+      <a href="#" class="work-item" data-cat="branded">
+        <img src="../assets/confindustria.jpg" alt="Confindustria Verona">
+        <div class="thumb-info">
+          <div class="thumb-title">Confindustria Verona</div>
+          <div class="thumb-meta">EVENT DIRECTION &nbsp;·&nbsp; 50° ANNIVERSARIO</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- 10 · span 7 -->
-    <article class="work-grid__item" data-cat="brand">
-      <div class="work-grid__media wg--10" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">10</span>
-        <div>
-          <h2 class="work-grid__title">PwC</h2>
-          <p class="work-grid__meta">Corporate Film · Direction</p>
-          <div class="work-grid__tags"><span>Brand</span><span>Corporate</span></div>
+      <!-- 10 · span 6 -->
+      <a href="#" class="work-item" data-cat="branded">
+        <img src="../assets/pwc.jpg" alt="PwC">
+        <div class="thumb-info">
+          <div class="thumb-title">PwC</div>
+          <div class="thumb-meta">EVENT DIRECTION</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- 11 · span 4 -->
-    <article class="work-grid__item" data-cat="brand">
-      <div class="work-grid__media wg--11" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">11</span>
-        <div>
-          <h2 class="work-grid__title">Cotril</h2>
-          <p class="work-grid__meta">Festival Cinema Venezia · Brand Film</p>
-          <div class="work-grid__tags"><span>Brand</span><span>Beauty</span></div>
+      <!-- 11 · span 6 -->
+      <a href="#" class="work-item" data-cat="branded">
+        <img src="../assets/cotril.jpg" alt="Cotril Festival Cinema Venezia">
+        <div class="thumb-info">
+          <div class="thumb-title">Cotril — Festival Cinema Venezia</div>
+          <div class="thumb-meta">EVENT CONTENT PRODUCTION</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- 12 · span 4 -->
-    <article class="work-grid__item" data-cat="brand">
-      <div class="work-grid__media wg--12" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">12</span>
-        <div>
-          <h2 class="work-grid__title">Verco</h2>
-          <p class="work-grid__meta">Brand Film · Direction</p>
-          <div class="work-grid__tags"><span>Brand</span></div>
+      <!-- 12 · span 7 -->
+      <a href="#" class="work-item" data-cat="branded">
+        <img src="../assets/verco.jpg" alt="Verco">
+        <div class="thumb-info">
+          <div class="thumb-title">Verco</div>
+          <div class="thumb-meta">DIRECTION &nbsp;·&nbsp; INSTITUTIONAL FILM</div>
         </div>
-      </div>
-    </article>
+      </a>
 
-    <!-- 13 · span 4 -->
-    <article class="work-grid__item" data-cat="brand">
-      <div class="work-grid__media wg--13" aria-hidden="true"></div>
-      <div class="work-grid__info">
-        <span class="work-grid__num">13</span>
-        <div>
-          <h2 class="work-grid__title">Salumi Negroni</h2>
-          <p class="work-grid__meta">Brand Film · Direction</p>
-          <div class="work-grid__tags"><span>Brand</span></div>
+      <!-- 13 · span 5 · portrait -->
+      <a href="#" class="work-item" data-cat="branded">
+        <img src="../assets/negroni.jpg" alt="Salumi Negroni">
+        <div class="thumb-info">
+          <div class="thumb-title">Salumi Negroni</div>
+          <div class="thumb-meta">DIRECTION &nbsp;·&nbsp; INSTITUTIONAL FILM</div>
         </div>
-      </div>
-    </article>
+      </a>
+
+      <!-- 14 · span 12 -->
+      <a href="#" class="work-item" data-cat="beauty">
+        <img src="../assets/andrea-perreca.jpg" alt="Andrea Perreca">
+        <div class="thumb-info">
+          <div class="thumb-title">Andrea Perreca</div>
+          <div class="thumb-meta">DIRECTION &nbsp;·&nbsp; FASHION FILM</div>
+        </div>
+      </a>
+
+      <!-- 15 · span 6 -->
+      <a href="#" class="work-item" data-cat="beauty">
+        <img src="../assets/myshow.jpg" alt="MyShow Hair Beauty Nails">
+        <div class="thumb-info">
+          <div class="thumb-title">MyShow — Hair Beauty &amp; Nails</div>
+          <div class="thumb-meta">LIVE SHOW DIRECTION &nbsp;·&nbsp; BEAUTY EVENT</div>
+        </div>
+      </a>
+
+      <!-- 16 · span 6 -->
+      <a href="#" class="work-item" data-cat="branded">
+        <img src="../assets/tecres.jpg" alt="Tecres">
+        <div class="thumb-info">
+          <div class="thumb-title">Tecres</div>
+          <div class="thumb-meta">DIRECTION &nbsp;·&nbsp; CORPORATE FILM · K+ FILM</div>
+        </div>
+      </a>
+
+    </div>
 
   </main>
 
-  <!-- ── FOOTER ───────────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <span class="site-footer__copy">&copy; 2026 Massimiliano Di Liberto</span>
-    <a href="mailto:massimiliano.diliberto@gmail.com" class="site-footer__email">
-      massimiliano.diliberto@gmail.com
-    </a>
+  <footer>
+    <span>© 2026 Massimiliano Di Liberto &nbsp;·&nbsp; Bill Jobs Studio</span>
+    <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
-  <script>gsap.registerPlugin(ScrollTrigger);</script>
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
   <script src="../assets/js/core.js"></script>
 
   <script>
-    window.addEventListener('load', () => {
-      gsap.fromTo('#workTitle',
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.0, ease: 'power3.out', delay: 0.9 }
-      );
-      gsap.fromTo('#workCount',
-        { opacity: 0 },
-        { opacity: 1, duration: 0.6, ease: 'power2.out', delay: 1.3 }
-      );
-      gsap.fromTo('#workFilter',
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 1.4 }
-      );
-    });
-
-    document.querySelectorAll('.work-grid__item').forEach(item => {
-      const media = item.querySelector('.work-grid__media');
-      item.addEventListener('mouseenter', () => gsap.to(media, { scale: 1.04, duration: 0.6, ease: 'power2.out' }));
-      item.addEventListener('mouseleave', () => gsap.to(media, { scale: 1, duration: 0.6, ease: 'power2.inOut' }));
-    });
-
-    gsap.utils.toArray('.work-grid__item').forEach((item, i) => {
-      gsap.fromTo(item,
-        { opacity: 0, y: 52 },
-        { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: item, start: 'top 86%' }, delay: (i % 2) * 0.14 }
-      );
-    });
-
-    const filterBtns = document.querySelectorAll('.work-filter__btn');
-    const items      = document.querySelectorAll('.work-grid__item');
-    const countEl    = document.getElementById('workCount');
-
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        items.forEach(item => {
-          const match = filter === 'all' || item.dataset.cat === filter;
-          if (match) {
-            item.style.display = '';
-            gsap.to(item, { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' });
-          } else {
-            gsap.to(item, { opacity: 0, scale: 0.97, duration: 0.3, ease: 'power2.in', onComplete: () => { item.style.display = 'none'; } });
-          }
-        });
-        setTimeout(() => {
-          const shown = filter === 'all' ? items.length : document.querySelectorAll(`.work-grid__item[data-cat="${filter}"]`).length;
-          if (countEl) countEl.textContent = shown + (shown === 1 ? ' progetto' : ' progetti selezionati');
-        }, 350);
+    /* Work item hover */
+    document.querySelectorAll('.work-item').forEach(item => {
+      const img  = item.querySelector('img');
+      const info = item.querySelector('.thumb-info');
+      item.addEventListener('mouseenter', () => {
+        gsap.to(img,  { scale: 1.04, duration: 0.85, ease: 'power2.out' });
+        gsap.to(info, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+      });
+      item.addEventListener('mouseleave', () => {
+        gsap.to(img,  { scale: 1,   duration: 0.65, ease: 'power2.out' });
+        gsap.to(info, { opacity: 0, y: 8,  duration: 0.4 });
       });
     });
 
-    const params = new URLSearchParams(window.location.search);
-    const cat = params.get('cat');
-    if (cat) {
-      const target = document.querySelector(`.work-filter__btn[data-filter="${cat}"]`);
-      if (target) target.click();
-    }
+    /* Filters */
+    document.querySelectorAll('.filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.work-item').forEach(item => {
+          const show = f === 'all' || item.dataset.cat === f;
+          gsap.to(item, { opacity: show ? 1 : 0.12, duration: 0.45, ease: 'power2.out' });
+        });
+      });
+    });
+
+    /* Scroll reveal */
+    gsap.utils.toArray('.work-item').forEach((item, i) => {
+      gsap.fromTo(item,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1, y: 0, duration: 0.85, ease: 'power2.out', delay: i * 0.05,
+          scrollTrigger: { trigger: item, start: 'top 88%', toggleActions: 'play none none none' },
+        }
+      );
+    });
   </script>
 
 </body>
