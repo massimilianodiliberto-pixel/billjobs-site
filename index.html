@@ -9,13 +9,38 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/intro.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
+  <!-- Cinematic 3D Intro -->
+  <div id="intro" aria-hidden="true">
+    <div id="intro-logo">
+      <div class="intro-logo__eyebrow">EST. MMXV &nbsp;·&nbsp; LOS ANGELES</div>
+      <div class="intro-logo__wordmark">
+        <span class="intro-logo__bill">BILL</span>
+        <span class="intro-logo__jobs">JOBS</span>
+      </div>
+      <div class="intro-logo__production">PRODUCTION</div>
+      <div class="intro-logo__tagline">Cinema Is Our Language.</div>
+    </div>
+    <button id="intro-skip" aria-label="Skip intro">Skip</button>
+  </div>
+  <!-- Safety fallback: remove intro after 22 s if JS fails -->
+  <script>setTimeout(function(){var el=document.getElementById('intro');if(el)el.remove();},22000);</script>
+
   <div class="cursor" id="cursor"></div>
   <div class="cursor-follower" id="cursorFollower"></div>
 
   <!-- Film grain overlay -->
-  <canvas class="grain" id="grain"></canvas>
+  <canvas class="grain" id="grain" style="opacity:0"></canvas>
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
@@ -459,5 +484,6 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/intro.js"></script>
 </body>
 </html>

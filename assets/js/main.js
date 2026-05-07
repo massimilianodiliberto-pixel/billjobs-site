@@ -57,8 +57,18 @@ function renderGrain() {
   grainAnimFrame = requestAnimationFrame(renderGrain);
 }
 
-resizeGrain();
-renderGrain();
+function startGrain() {
+  grainCanvas.style.transition = 'opacity 1s ease';
+  grainCanvas.style.opacity = '0.04';
+  resizeGrain();
+  renderGrain();
+}
+
+if (document.getElementById('intro')) {
+  window.addEventListener('introComplete', startGrain, { once: true });
+} else {
+  startGrain();
+}
 window.addEventListener('resize', resizeGrain);
 
 /* ── Navigation: scroll state & mobile toggle ──────────────── */
