@@ -12,128 +12,203 @@
 </head>
 <body>
 
-  <!-- ── NAVIGATION ─────────────────────────────────────── -->
+  <!-- Custom cursor (desktop) -->
+  <div id="cursor" aria-hidden="true"></div>
+
+  <!-- ── NAVIGATION ──────────────────────────────────────────── -->
   <nav id="nav">
     <a href="#" class="nav__name">
       <span class="nav__name--desktop">Massimiliano Di Liberto</span>
       <span class="nav__name--mobile">M. Di Liberto</span>
     </a>
-    <ul class="nav__links">
-      <li><a href="#work">WORK</a></li>
-      <li><a href="#studio">ABOUT</a></li>
-      <li><a href="#studio">BILL JOBS STUDIO</a></li>
-      <li><a href="#contact">CONTACT</a></li>
+    <ul class="nav__links" aria-label="Primary navigation">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#studio">Bill Jobs Studio</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="nav__burger" id="navBurger" aria-label="Menu">MENU</button>
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
   </nav>
 
-  <!-- ── MOBILE MENU ────────────────────────────────────── -->
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu__close" id="mobileClose" aria-label="Close">CLOSE</button>
+  <!-- ── MOBILE MENU ─────────────────────────────────────────── -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <button class="mobile-menu__close" id="mobileClose" aria-label="Close menu">
+      <span></span><span></span>
+    </button>
     <nav class="mobile-menu__nav">
       <a href="#work"   class="mobile-menu__link" data-close>Work</a>
-      <a href="#studio" class="mobile-menu__link" data-close>About</a>
+      <a href="#about"  class="mobile-menu__link" data-close>About</a>
       <a href="#studio" class="mobile-menu__link" data-close>Bill Jobs Studio</a>
       <a href="#contact"class="mobile-menu__link" data-close>Contact</a>
     </nav>
+    <div class="mobile-menu__foot">
+      <span>massimiliano.diliberto@gmail.com</span>
+    </div>
   </div>
 
-  <!-- ── HERO ───────────────────────────────────────────── -->
+  <!-- ── HERO ────────────────────────────────────────────────── -->
   <section id="hero">
+
     <!--
-      VIDEO PLACEHOLDER
-      Sostituisci il div.hero__placeholder con:
-      <video class="hero__video" autoplay muted loop playsinline>
+      VIDEO — sostituisci il div.hero__media con:
+      <video class="hero__media" autoplay muted loop playsinline>
         <source src="reel.mp4" type="video/mp4" />
       </video>
     -->
-    <div class="hero__placeholder" aria-hidden="true">
-      <span class="hero__placeholder-label">VIDEO REEL</span>
+    <div class="hero__media" aria-hidden="true">
+      <div class="hero__media-light"></div>
+      <div class="hero__media-grain"></div>
+      <div class="hero__media-label">REEL 2024</div>
     </div>
 
-    <div class="hero__overlay"></div>
+    <div class="hero__vignette"></div>
 
     <div class="hero__text">
-      <h1 class="hero__name">Massimiliano Di Liberto</h1>
-      <p class="hero__role">Senior Creative Producer &nbsp;·&nbsp; Director</p>
+      <h1 class="hero__name">
+        <span class="hero__name-inner">Massimiliano Di Liberto</span>
+      </h1>
+      <p class="hero__role">
+        <span class="hero__role-inner">Senior Creative Producer &nbsp;·&nbsp; Director</span>
+      </p>
     </div>
+
+    <button class="hero__play" id="heroPlay" aria-label="Play showreel">
+      <span class="hero__play-ring"></span>
+      <span class="hero__play-icon">▶</span>
+    </button>
 
     <div class="hero__scroll" id="scrollIndicator" aria-hidden="true">
-      <div class="hero__scroll-line"></div>
+      <div class="hero__scroll-bar"></div>
     </div>
+
   </section>
 
-  <!-- ── FEATURED WORK ──────────────────────────────────── -->
+  <!-- ── FEATURED WORK ───────────────────────────────────────── -->
   <section id="work">
+
     <div class="work__grid">
 
-      <!-- Item 1 — large -->
-      <article class="work__item work__item--large">
-        <!--
-          Sostituisci .work__thumb con <img src="..." alt="..." />
-          oppure <video autoplay muted loop playsinline poster="...">
-        -->
-        <div class="work__thumb work__thumb--1" aria-hidden="true"></div>
-        <div class="work__overlay"></div>
+      <!-- 01 — Large item -->
+      <article class="work__item work__item--large reveal-scale">
+        <div class="work__media work__media--1" aria-hidden="true"></div>
+        <div class="work__shade"></div>
+        <div class="work__num" aria-hidden="true">01</div>
         <div class="work__info">
+          <div class="work__info-line" aria-hidden="true"></div>
           <h3 class="work__title">Gamma+ "Duality"</h3>
           <p class="work__meta">Gamma+ &nbsp;·&nbsp; Live Show Direction</p>
         </div>
       </article>
 
-      <!-- Items 2 + 3 stacked -->
-      <div class="work__col">
-        <article class="work__item">
-          <div class="work__thumb work__thumb--2" aria-hidden="true"></div>
-          <div class="work__overlay"></div>
+      <div class="work__stack">
+
+        <!-- 02 -->
+        <article class="work__item reveal-scale delay-1">
+          <div class="work__media work__media--2" aria-hidden="true"></div>
+          <div class="work__shade"></div>
+          <div class="work__num" aria-hidden="true">02</div>
           <div class="work__info">
+            <div class="work__info-line" aria-hidden="true"></div>
             <h3 class="work__title">Mr. Rain — Visual Direction</h3>
             <p class="work__meta">Sony Music &nbsp;·&nbsp; Direction · Production</p>
           </div>
         </article>
 
-        <article class="work__item">
-          <div class="work__thumb work__thumb--3" aria-hidden="true"></div>
-          <div class="work__overlay"></div>
+        <!-- 03 -->
+        <article class="work__item reveal-scale delay-2">
+          <div class="work__media work__media--3" aria-hidden="true"></div>
+          <div class="work__shade"></div>
+          <div class="work__num" aria-hidden="true">03</div>
           <div class="work__info">
+            <div class="work__info-line" aria-hidden="true"></div>
             <h3 class="work__title">Pleasure Professional</h3>
             <p class="work__meta">Pleasure &nbsp;·&nbsp; Visual Development</p>
           </div>
         </article>
-      </div>
 
+      </div>
     </div>
 
     <div class="work__footer">
-      <a href="work.html" class="work__all">View All Work</a>
+      <a href="work.html" class="link-underline reveal-up delay-1">View All Work</a>
+    </div>
+
+  </section>
+
+  <!-- ── ABOUT LINE ──────────────────────────────────────────── -->
+  <section id="about" class="about">
+    <div class="about__inner">
+      <p class="about__statement reveal-up">
+        Creative Producer e Director con 20 anni di esperienza.<br />
+        Musica, fashion, branded content, cinema, eventi live.
+      </p>
+      <div class="about__aside reveal-up delay-2">
+        <span class="about__aside-label">Basato in</span>
+        <span class="about__aside-val">Salò, Italia — disponibile ovunque</span>
+      </div>
     </div>
   </section>
 
-  <!-- ── CREDENTIALS ────────────────────────────────────── -->
-  <div id="credentials">
+  <!-- ── CREDENTIALS ─────────────────────────────────────────── -->
+  <div id="credentials" class="reveal-up">
     <p class="credentials__text">
-      Warner Music &nbsp;·&nbsp; Cosmoprof &nbsp;·&nbsp; Berlinale EFM &nbsp;·&nbsp;
-      PwC &nbsp;·&nbsp; Tornatore &nbsp;·&nbsp; Festival Cinema Venezia
+      Warner Music &nbsp;·&nbsp; Cosmoprof &nbsp;·&nbsp; Berlinale EFM
+      &nbsp;·&nbsp; PwC &nbsp;·&nbsp; Tornatore &nbsp;·&nbsp; Festival Cinema Venezia
     </p>
   </div>
 
-  <!-- ── BILL JOBS STUDIO ────────────────────────────────── -->
+  <!-- ── BILL JOBS STUDIO ────────────────────────────────────── -->
   <section id="studio">
-    <div class="studio__inner">
+
+    <div class="studio__body">
       <div class="studio__left">
-        <h2 class="studio__title">Bill Jobs Studio</h2>
+        <span class="studio__eyebrow reveal-up">Independent Studio</span>
+        <h2 class="studio__name">
+          <span class="studio__name-clip reveal-clip">Bill Jobs</span><br />
+          <em class="studio__name-clip reveal-clip delay-1">Studio</em>
+        </h2>
       </div>
       <div class="studio__right">
-        <p class="studio__body">
+        <p class="studio__desc reveal-up delay-1">
           Produzione indipendente.<br />
           Musica, visuals, progetti fuori brief.
         </p>
-        <a href="studio.html" class="studio__link">Entra nello studio &nbsp;→</a>
+        <p class="studio__manifesto reveal-up delay-2">
+          Idea &nbsp;→&nbsp; Produzione &nbsp;→&nbsp; Risultato
+        </p>
+        <a href="studio.html" class="studio__cta link-underline reveal-up delay-3">
+          Entra nello studio →
+        </a>
       </div>
     </div>
+
+    <!-- Discipline ticker -->
+    <div class="studio__ticker" aria-hidden="true">
+      <div class="studio__ticker-track">
+        <span>MUSICA</span><span class="t-sep">·</span>
+        <span>VISUALS</span><span class="t-sep">·</span>
+        <span>BRAND</span><span class="t-sep">·</span>
+        <span>CINEMA</span><span class="t-sep">·</span>
+        <span>FASHION</span><span class="t-sep">·</span>
+        <span>EVENTI</span><span class="t-sep">·</span>
+        <span>AI CONTENT</span><span class="t-sep">·</span>
+        <span>POST-PRODUZIONE</span><span class="t-sep">·</span>
+        <span>MUSICA</span><span class="t-sep">·</span>
+        <span>VISUALS</span><span class="t-sep">·</span>
+        <span>BRAND</span><span class="t-sep">·</span>
+        <span>CINEMA</span><span class="t-sep">·</span>
+        <span>FASHION</span><span class="t-sep">·</span>
+        <span>EVENTI</span><span class="t-sep">·</span>
+        <span>AI CONTENT</span><span class="t-sep">·</span>
+        <span>POST-PRODUZIONE</span><span class="t-sep">·</span>
+      </div>
+    </div>
+
   </section>
 
-  <!-- ── FOOTER ──────────────────────────────────────────── -->
+  <!-- ── FOOTER ──────────────────────────────────────────────── -->
   <footer id="contact">
     <span class="footer__copy">&copy; 2026 Massimiliano Di Liberto</span>
     <a href="mailto:massimiliano.diliberto@gmail.com" class="footer__email">
