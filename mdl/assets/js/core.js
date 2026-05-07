@@ -1,13 +1,13 @@
 'use strict';
 
-/* ── Lenis smooth scroll ───────────────────────────────────── */
+/* ── Lenis smooth scroll — cinematic pacing ────────────────── */
 const lenis = new Lenis({
-  duration: 1.4,
+  duration: 1.6,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   orientation: 'vertical',
   smoothWheel: true,
-  wheelMultiplier: 0.8,
-  touchMultiplier: 1.2,
+  wheelMultiplier: 0.75,
+  touchMultiplier: 1.0,
 });
 
 lenis.on('scroll', ScrollTrigger.update);
@@ -22,10 +22,10 @@ gsap.ticker.lagSmoothing(0);
 window.addEventListener('load', () => {
   gsap.to('#page-transition', {
     scaleY: 0,
-    duration: 0.7,
+    duration: 0.9,
     ease: 'power3.inOut',
     transformOrigin: 'top',
-    delay: 0.1,
+    delay: 0.05,
   });
 });
 
@@ -35,18 +35,19 @@ const navEl = document.querySelector('nav');
 
 function revealNav() {
   if (!navRevealed && navEl) {
+    gsap.to(navEl, { opacity: 1, duration: 0.8, ease: 'power2.out' });
     navEl.classList.add('visible');
     navRevealed = true;
   }
 }
 
 window.addEventListener('mousemove', revealNav, { once: true });
-window.addEventListener('scroll', revealNav, { once: true });
+window.addEventListener('scroll',    revealNav, { once: true });
 window.addEventListener('touchstart', revealNav, { once: true });
 
 /* Nav scroll state */
 window.addEventListener('scroll', () => {
-  if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 80);
+  if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
 /* ── Mobile menu ───────────────────────────────────────────── */
@@ -62,8 +63,8 @@ function openMenu() {
   lenis.stop();
 
   gsap.fromTo('.mobile-menu__link',
-    { y: 24, opacity: 0 },
-    { y: 0, opacity: 1, stagger: 0.08, duration: 0.5, ease: 'power2.out', delay: 0.15 }
+    { y: 32, opacity: 0 },
+    { y: 0, opacity: 1, stagger: 0.1, duration: 0.7, ease: 'power3.out', delay: 0.12 }
   );
 }
 
@@ -93,7 +94,7 @@ document.querySelectorAll('a[href]').forEach(link => {
     if (transition) {
       gsap.to(transition, {
         scaleY: 1,
-        duration: 0.55,
+        duration: 0.65,
         ease: 'power3.inOut',
         transformOrigin: 'bottom',
         onComplete: () => { window.location.href = dest; },
@@ -104,39 +105,70 @@ document.querySelectorAll('a[href]').forEach(link => {
   });
 });
 
-/* ── [data-reveal] scroll animations ────────────────────────── */
-const reveals = document.querySelectorAll('[data-reveal]');
-
-if (reveals.length) {
+/* ── [data-reveal] scroll animations — slow, cinematic ──────── */
+if (document.querySelectorAll('[data-reveal]').length) {
   ScrollTrigger.batch('[data-reveal]', {
     onEnter: batch => {
       gsap.fromTo(batch,
-        { opacity: 0, y: 36, x: 0 },
-        { opacity: 1, y: 0, x: 0, duration: 0.9, ease: 'power3.out', stagger: 0.12, overwrite: 'auto' }
+        { opacity: 0, y: 44, filter: 'blur(4px)' },
+        {
+          opacity: 1, y: 0, filter: 'blur(0px)',
+          duration: 1.2,
+          ease: 'power3.out',
+          stagger: 0.14,
+          overwrite: 'auto',
+        }
       );
     },
     start: 'top 88%',
   });
 }
 
-/* ── [data-reveal-clip] — text clip reveal ──────────────────── */
-document.querySelectorAll('[data-reveal-clip]').forEach(el => {
-  gsap.fromTo(el,
-    { clipPath: 'inset(0 100% 0 0)' },
-    {
-      clipPath: 'inset(0 0% 0 0)',
-      duration: 1.0,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-      },
-    }
-  );
+/* ── Hero media parallax (entry page only) ──────────────────── */
+const heroMedia = document.querySelector('.entry-hero__media');
+if (heroMedia) {
+  gsap.to(heroMedia, {
+    yPercent: 22,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.entry-hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 2.5,
+    },
+  });
+}
+
+/* ── Featured work items — subtle parallax on scroll ────────── */
+document.querySelectorAll('.featured-work__media').forEach(media => {
+  gsap.to(media, {
+    yPercent: 8,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: media.closest('.featured-work__item'),
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 1.8,
+    },
+  });
+});
+
+/* ── Work grid media — parallax on scroll ───────────────────── */
+document.querySelectorAll('.work-grid__media').forEach(media => {
+  gsap.to(media, {
+    yPercent: 10,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: media.closest('.work-grid__item'),
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 2,
+    },
+  });
 });
 
 /* ── Custom cursor ───────────────────────────────────────────── */
-const cursor = document.getElementById('cursor');
+const cursor     = document.getElementById('cursor');
 const cursorRing = document.getElementById('cursor-ring');
 
 if (cursor && cursorRing && window.matchMedia('(pointer: fine)').matches) {
@@ -150,8 +182,8 @@ if (cursor && cursorRing && window.matchMedia('(pointer: fine)').matches) {
   });
 
   gsap.ticker.add(() => {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
+    rx += (mx - rx) * 0.10;
+    ry += (my - ry) * 0.10;
     gsap.set(cursorRing, { x: rx, y: ry });
   });
 

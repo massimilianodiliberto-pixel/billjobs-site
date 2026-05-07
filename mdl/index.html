@@ -182,21 +182,21 @@
   <script>
     /* ── Hero entrance timeline ──────────────────────────────── */
     window.addEventListener('load', () => {
-      const tl = gsap.timeline({ delay: 0.8 });
+      const tl = gsap.timeline({ delay: 0.9 });
 
       tl.fromTo('.entry-hero__line',
-        { y: '100%', opacity: 0 },
-        { y: '0%', opacity: 1, duration: 1.1, ease: 'power3.out', stagger: 0.14 }
+        { yPercent: 110 },
+        { yPercent: 0, duration: 1.5, ease: 'expo.out', stagger: 0.20 }
       )
       .fromTo('#heroSub',
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
-        '-=0.4'
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' },
+        '-=0.5'
       )
       .fromTo('#heroScroll',
         { opacity: 0 },
-        { opacity: 1, duration: 0.6, ease: 'power1.out' },
-        '-=0.2'
+        { opacity: 1, duration: 0.8, ease: 'power2.out' },
+        '-=0.3'
       );
     });
 
@@ -207,7 +207,7 @@
         const pt = document.getElementById('page-transition');
         if (pt) {
           gsap.to(pt, {
-            scaleY: 1, duration: 0.55, ease: 'power3.inOut',
+            scaleY: 1, duration: 0.65, ease: 'power3.inOut',
             transformOrigin: 'bottom',
             onComplete: () => { window.location.href = dest; }
           });
