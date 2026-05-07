@@ -455,6 +455,7 @@ footer a:hover { color: var(--text-primary); }
   background: var(--bg-surface);
   aspect-ratio: 16/9;
   cursor: pointer;
+  opacity: 0;
 }
 .work-item:nth-child(3),
 .work-item:nth-child(7),
@@ -699,7 +700,7 @@ footer a:hover { color: var(--text-primary); }
   justify-content: center;
   padding: var(--section-h);
 }
-.signal-content { text-align: center; }
+.signal-content { text-align: center; opacity: 0; }
 .signal-email {
   display: block;
   font-family: var(--font-ui);

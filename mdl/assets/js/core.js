@@ -54,13 +54,20 @@ const mobileMenu = document.getElementById('mobile-menu');
 if (navToggle && mobileMenu) {
   navToggle.addEventListener('click', () => {
     mobileMenu.classList.toggle('open');
-    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    if (mobileMenu.classList.contains('open')) {
+      document.body.style.overflow = 'hidden';
+      lenis.stop();
+    } else {
+      document.body.style.overflow = '';
+      lenis.start();
+    }
   });
 
   mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
       document.body.style.overflow = '';
+      lenis.start();
     });
   });
 }
