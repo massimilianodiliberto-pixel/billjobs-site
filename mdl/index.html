@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Massimiliano Di Liberto — Senior Creative Producer · Director</title>
+  <meta name="description" content="Senior Creative Producer e Director. 20+ anni tra musica, fashion, brand e cinema." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- Page transition overlay -->
+  <div id="page-transition" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ── NAV ──────────────────────────────────────────────────── -->
+  <nav id="nav">
+    <a href="index.html" class="nav__logo">MDL</a>
+    <ul class="nav__links" aria-label="Navigazione principale">
+      <li><a href="work/index.html">Work</a></li>
+      <li><a href="about/index.html">About</a></li>
+      <li><a href="system/index.html">System</a></li>
+      <li><a href="contact/index.html">Contact</a></li>
+    </ul>
+    <button class="nav__burger" id="navBurger" aria-label="Apri menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── MOBILE MENU ──────────────────────────────────────────── -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <button class="mobile-menu__close" id="mobileClose" aria-label="Chiudi menu">✕</button>
+    <nav class="mobile-menu__nav">
+      <a href="work/index.html"    class="mobile-menu__link" data-close>Work</a>
+      <a href="about/index.html"   class="mobile-menu__link" data-close>About</a>
+      <a href="system/index.html"  class="mobile-menu__link" data-close>System</a>
+      <a href="contact/index.html" class="mobile-menu__link" data-close>Contact</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- ── HERO ─────────────────────────────────────────────────── -->
+  <section class="entry-hero">
+
+    <!-- Video placeholder — replace with <video> tag when ready -->
+    <div class="entry-hero__media" aria-hidden="true">
+      <div class="entry-hero__grain"></div>
+    </div>
+
+    <div class="entry-hero__vignette" aria-hidden="true"></div>
+
+    <div class="entry-hero__content">
+      <h1 class="entry-hero__title" id="heroTitle">
+        <span class="entry-hero__line">Pensiero</span>
+        <span class="entry-hero__line entry-hero__line--italic">cinematografico.</span>
+        <span class="entry-hero__line">Esecuzione</span>
+        <span class="entry-hero__line entry-hero__line--italic">precisa.</span>
+      </h1>
+      <p class="entry-hero__sub" id="heroSub">
+        Senior Creative Producer &nbsp;·&nbsp; Director &nbsp;·&nbsp; Salò, Italia
+      </p>
+    </div>
+
+    <div class="entry-hero__scroll" id="heroScroll" aria-hidden="true">
+      <div class="entry-hero__scroll-bar"></div>
+    </div>
+
+  </section>
+
+  <!-- ── FEATURED WORK ─────────────────────────────────────────── -->
+  <section class="featured-work">
+
+    <div class="featured-work__header" data-reveal style="opacity:0">
+      <span class="featured-work__label">Progetti selezionati</span>
+      <a href="work/index.html" class="featured-work__all">Tutto il lavoro →</a>
+    </div>
+
+    <div class="featured-work__grid">
+
+      <!-- 01 -->
+      <article class="featured-work__item" data-href="work/index.html?cat=eventi" data-reveal style="opacity:0">
+        <div class="featured-work__media fw-media--1" aria-hidden="true">
+          <div class="featured-work__grain" aria-hidden="true"></div>
+        </div>
+        <div class="featured-work__info">
+          <span class="featured-work__num">01</span>
+          <div>
+            <h3 class="featured-work__title">Gamma+ "Duality"</h3>
+            <p class="featured-work__meta">Live Show Direction &nbsp;·&nbsp; 2024</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="featured-work__item" data-href="work/index.html?cat=music" data-reveal style="opacity:0">
+        <div class="featured-work__media fw-media--2" aria-hidden="true">
+          <div class="featured-work__grain" aria-hidden="true"></div>
+        </div>
+        <div class="featured-work__info">
+          <span class="featured-work__num">02</span>
+          <div>
+            <h3 class="featured-work__title">Mr. Rain — Visual Direction</h3>
+            <p class="featured-work__meta">Sony Music · Direction &nbsp;·&nbsp; 2023</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="featured-work__item" data-href="work/index.html?cat=fashion" data-reveal style="opacity:0">
+        <div class="featured-work__media fw-media--3" aria-hidden="true">
+          <div class="featured-work__grain" aria-hidden="true"></div>
+        </div>
+        <div class="featured-work__info">
+          <span class="featured-work__num">03</span>
+          <div>
+            <h3 class="featured-work__title">Pleasure Professional</h3>
+            <p class="featured-work__meta">Fashion · Visual Development &nbsp;·&nbsp; 2023</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- ── CREDENTIALS ───────────────────────────────────────────── -->
+  <div class="credentials" data-reveal style="opacity:0">
+    <p class="credentials__text">
+      Warner Music &nbsp;·&nbsp; Sony Music &nbsp;·&nbsp; Cosmoprof &nbsp;·&nbsp; Berlinale EFM
+      &nbsp;·&nbsp; PwC &nbsp;·&nbsp; Giuseppe Tornatore &nbsp;·&nbsp; Festival del Cinema di Venezia
+      &nbsp;·&nbsp; Gamma+ &nbsp;·&nbsp; Elisabetta Franchi &nbsp;·&nbsp; Cotril
+    </p>
+  </div>
+
+  <!-- ── BILL JOBS INTRO ───────────────────────────────────────── -->
+  <section class="bj-intro">
+    <div class="bj-intro__inner">
+      <div class="bj-intro__left" data-reveal style="opacity:0">
+        <span class="bj-intro__eyebrow">Studio Indipendente</span>
+        <h2 class="bj-intro__title">Bill Jobs<br /><em>Studio</em></h2>
+      </div>
+      <div class="bj-intro__right">
+        <p class="bj-intro__body" data-reveal style="opacity:0">
+          Produzione indipendente per chi non si accontenta del brief.<br />
+          Musica, visuals, progetti fuori schema.
+        </p>
+        <p class="bj-intro__manifesto" data-reveal style="opacity:0">
+          Idea &nbsp;→&nbsp; Produzione &nbsp;→&nbsp; Risultato
+        </p>
+        <a href="system/index.html" class="bj-intro__cta" data-reveal style="opacity:0">
+          Entra nello studio →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <span class="site-footer__copy">&copy; 2026 Massimiliano Di Liberto</span>
+    <a href="mailto:massimiliano.diliberto@gmail.com" class="site-footer__email">
+      massimiliano.diliberto@gmail.com
+    </a>
+  </footer>
+
+  <!-- GSAP + Lenis CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
+  <script>gsap.registerPlugin(ScrollTrigger);</script>
+  <script src="assets/js/core.js"></script>
+
+  <script>
+    /* ── Hero entrance timeline ──────────────────────────────── */
+    window.addEventListener('load', () => {
+      const tl = gsap.timeline({ delay: 0.8 });
+
+      tl.fromTo('.entry-hero__line',
+        { y: '100%', opacity: 0 },
+        { y: '0%', opacity: 1, duration: 1.1, ease: 'power3.out', stagger: 0.14 }
+      )
+      .fromTo('#heroSub',
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+        '-=0.4'
+      )
+      .fromTo('#heroScroll',
+        { opacity: 0 },
+        { opacity: 1, duration: 0.6, ease: 'power1.out' },
+        '-=0.2'
+      );
+    });
+
+    /* ── Featured work item click ────────────────────────────── */
+    document.querySelectorAll('.featured-work__item[data-href]').forEach(item => {
+      item.addEventListener('click', () => {
+        const dest = item.dataset.href;
+        const pt = document.getElementById('page-transition');
+        if (pt) {
+          gsap.to(pt, {
+            scaleY: 1, duration: 0.55, ease: 'power3.inOut',
+            transformOrigin: 'bottom',
+            onComplete: () => { window.location.href = dest; }
+          });
+        } else {
+          window.location.href = dest;
+        }
+      });
+      item.style.cursor = 'pointer';
+    });
+
+    /* ── Scroll indicator hide ───────────────────────────────── */
+    const scrollEl = document.getElementById('heroScroll');
+    if (scrollEl) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 80) scrollEl.classList.add('hidden');
+      }, { passive: true, once: true });
+    }
+  </script>
+
+</body>
+</html>

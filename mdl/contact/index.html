@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Massimiliano Di Liberto</title>
+  <meta name="description" content="Contatta Massimiliano Di Liberto — Senior Creative Producer e Director." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <div id="page-transition" aria-hidden="true"></div>
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ── NAV ──────────────────────────────────────────────────── -->
+  <nav id="nav">
+    <a href="../index.html" class="nav__logo">MDL</a>
+    <ul class="nav__links" aria-label="Navigazione principale">
+      <li><a href="../work/index.html">Work</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../system/index.html">System</a></li>
+      <li><a href="../contact/index.html" class="nav__link--active">Contact</a></li>
+    </ul>
+    <button class="nav__burger" id="navBurger" aria-label="Apri menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── MOBILE MENU ──────────────────────────────────────────── -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <button class="mobile-menu__close" id="mobileClose" aria-label="Chiudi menu">✕</button>
+    <nav class="mobile-menu__nav">
+      <a href="../work/index.html"    class="mobile-menu__link" data-close>Work</a>
+      <a href="../about/index.html"   class="mobile-menu__link" data-close>About</a>
+      <a href="../system/index.html"  class="mobile-menu__link" data-close>System</a>
+      <a href="../contact/index.html" class="mobile-menu__link" data-close>Contact</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- ── SIGNAL PAGE ───────────────────────────────────────────── -->
+  <section class="signal">
+
+    <div class="signal__inner">
+
+      <p class="signal__pre" id="signalPre">Hai un progetto?</p>
+
+      <a href="mailto:massimiliano.diliberto@gmail.com" class="signal__email" id="signalEmail">
+        massimiliano<br />.diliberto<br />@gmail.com
+      </a>
+
+      <div class="signal__divider" aria-hidden="true"></div>
+
+      <div class="signal__meta" id="signalMeta">
+        <div class="signal__meta-item">
+          <span class="signal__meta-label">Telefono</span>
+          <a href="tel:+393333614166" class="signal__meta-val">+39 333 361 4166</a>
+        </div>
+        <div class="signal__meta-item">
+          <span class="signal__meta-label">Basato a</span>
+          <span class="signal__meta-val">Salò, Lago di Garda — disponibile ovunque</span>
+        </div>
+        <div class="signal__meta-item">
+          <span class="signal__meta-label">Risposta in</span>
+          <span class="signal__meta-val">24–48 ore</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ── FOOTER ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <span class="site-footer__copy">&copy; 2026 Massimiliano Di Liberto</span>
+    <a href="mailto:massimiliano.diliberto@gmail.com" class="site-footer__email">
+      massimiliano.diliberto@gmail.com
+    </a>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
+  <script>gsap.registerPlugin(ScrollTrigger);</script>
+  <script src="../assets/js/core.js"></script>
+
+  <script>
+    window.addEventListener('load', () => {
+      const tl = gsap.timeline({ delay: 0.9 });
+
+      tl.fromTo('#signalPre',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }
+      )
+      .fromTo('#signalEmail',
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' },
+        '-=0.3'
+      )
+      .fromTo('#signalMeta',
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+        '-=0.4'
+      );
+    });
+  </script>
+
+</body>
+</html>

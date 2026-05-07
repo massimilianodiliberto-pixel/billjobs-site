@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System — Bill Jobs Studio</title>
+  <meta name="description" content="Bill Jobs Studio: produzione indipendente. Musica, visuals, brand, cinema." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <div id="page-transition" aria-hidden="true"></div>
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ── NAV ──────────────────────────────────────────────────── -->
+  <nav id="nav">
+    <a href="../index.html" class="nav__logo">MDL</a>
+    <ul class="nav__links" aria-label="Navigazione principale">
+      <li><a href="../work/index.html">Work</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../system/index.html" class="nav__link--active">System</a></li>
+      <li><a href="../contact/index.html">Contact</a></li>
+    </ul>
+    <button class="nav__burger" id="navBurger" aria-label="Apri menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── MOBILE MENU ──────────────────────────────────────────── -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <button class="mobile-menu__close" id="mobileClose" aria-label="Chiudi menu">✕</button>
+    <nav class="mobile-menu__nav">
+      <a href="../work/index.html"    class="mobile-menu__link" data-close>Work</a>
+      <a href="../about/index.html"   class="mobile-menu__link" data-close>About</a>
+      <a href="../system/index.html"  class="mobile-menu__link" data-close>System</a>
+      <a href="../contact/index.html" class="mobile-menu__link" data-close>Contact</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- ── SYSTEM HERO ───────────────────────────────────────────── -->
+  <section class="system-hero">
+    <div class="system-hero__inner">
+      <span class="system-hero__eyebrow" id="sysEyebrow">Bill Jobs Studio</span>
+      <h1 class="system-hero__title" id="sysTitle">
+        Un sistema<br /><em>di produzione</em><br />indipendente.
+      </h1>
+    </div>
+  </section>
+
+  <!-- ── SYSTEM DEFINITION ─────────────────────────────────────── -->
+  <section class="system-def" data-reveal style="opacity:0">
+    <div class="system-def__inner">
+      <p class="system-def__text">
+        Bill Jobs Studio è lo spazio dove il brief non esiste.<br />
+        Dove l'idea prende forma prima ancora che il cliente la veda.<br />
+        Produzione a servizio della visione — non il contrario.
+      </p>
+      <p class="system-def__manifesto">
+        Idea &nbsp;→&nbsp; Produzione &nbsp;→&nbsp; Risultato
+      </p>
+    </div>
+  </section>
+
+  <!-- ── SYSTEM AREAS ──────────────────────────────────────────── -->
+  <section class="system-areas">
+
+    <article class="system-area" data-reveal style="opacity:0">
+      <span class="system-area__num">01</span>
+      <h2 class="system-area__title">Musica &amp; Visuals</h2>
+      <p class="system-area__desc">
+        Music video, live visuals, artwork, identità visiva per artisti.
+        Dalla produzione esecutiva alla regia creativa completa.
+      </p>
+      <ul class="system-area__list">
+        <li>Music video direction</li>
+        <li>Live show visuals</li>
+        <li>Artist identity</li>
+        <li>Post-produzione</li>
+      </ul>
+    </article>
+
+    <article class="system-area" data-reveal style="opacity:0">
+      <span class="system-area__num">02</span>
+      <h2 class="system-area__title">Brand &amp; Fashion</h2>
+      <p class="system-area__desc">
+        Campagne, film istituzionali, lookbook animati, eventi.
+        Lusso, beauty, moda — l'immagine come strumento di posizionamento.
+      </p>
+      <ul class="system-area__list">
+        <li>Brand film</li>
+        <li>Fashion content</li>
+        <li>Event direction</li>
+        <li>Beauty campaign</li>
+      </ul>
+    </article>
+
+    <article class="system-area" data-reveal style="opacity:0">
+      <span class="system-area__num">03</span>
+      <h2 class="system-area__title">Cinema &amp; AI</h2>
+      <p class="system-area__desc">
+        Produzione cinematografica indipendente, co-produzioni internazionali,
+        sperimentazione AI. Dove il mezzo incontra il racconto.
+      </p>
+      <ul class="system-area__list">
+        <li>Produzione cinema</li>
+        <li>Festival distribution</li>
+        <li>AI content generation</li>
+        <li>Post-produzione</li>
+      </ul>
+    </article>
+
+  </section>
+
+  <!-- ── SYSTEM PROJECTS ───────────────────────────────────────── -->
+  <section class="system-projects">
+    <div class="system-projects__header" data-reveal style="opacity:0">
+      <h2 class="system-projects__title">Progetti studio</h2>
+    </div>
+
+    <ul class="system-projects__list">
+      <li class="system-projects__item" data-reveal style="opacity:0">
+        <span class="system-projects__name">Gamma+ "Duality" — Live Show</span>
+        <span class="system-projects__year">2024</span>
+      </li>
+      <li class="system-projects__item" data-reveal style="opacity:0">
+        <span class="system-projects__name">AI Content Sperimentazione</span>
+        <span class="system-projects__year">2024</span>
+      </li>
+      <li class="system-projects__item" data-reveal style="opacity:0">
+        <span class="system-projects__name">Mr. Rain — Visual Direction</span>
+        <span class="system-projects__year">2023</span>
+      </li>
+      <li class="system-projects__item" data-reveal style="opacity:0">
+        <span class="system-projects__name">Pleasure Professional — Fashion</span>
+        <span class="system-projects__year">2023</span>
+      </li>
+      <li class="system-projects__item" data-reveal style="opacity:0">
+        <span class="system-projects__name">Cotril — Brand Film</span>
+        <span class="system-projects__year">2022</span>
+      </li>
+      <li class="system-projects__item" data-reveal style="opacity:0">
+        <span class="system-projects__name">Berlinale EFM — Co-Produzione</span>
+        <span class="system-projects__year">2020</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── SYSTEM CONTACT ────────────────────────────────────────── -->
+  <section class="system-contact" data-reveal style="opacity:0">
+    <h2 class="system-contact__title">Parliamo di un progetto</h2>
+    <a href="../contact/index.html" class="system-contact__cta">
+      Entra in contatto →
+    </a>
+  </section>
+
+  <!-- ── FOOTER ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <span class="site-footer__copy">&copy; 2026 Massimiliano Di Liberto</span>
+    <a href="mailto:massimiliano.diliberto@gmail.com" class="site-footer__email">
+      massimiliano.diliberto@gmail.com
+    </a>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
+  <script>gsap.registerPlugin(ScrollTrigger);</script>
+  <script src="../assets/js/core.js"></script>
+
+  <script>
+    window.addEventListener('load', () => {
+      const tl = gsap.timeline({ delay: 0.9 });
+      tl.fromTo('#sysEyebrow',
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }
+      )
+      .fromTo('#sysTitle',
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' },
+        '-=0.3'
+      );
+    });
+  </script>
+
+</body>
+</html>
