@@ -1,188 +1,101 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>System — Massimiliano Di Liberto</title>
-  <meta name="description" content="Il sistema di lavoro di Massimiliano Di Liberto: direction, production, visual systems." />
+  <meta name="description" content="Bill Jobs Studio — il framework operativo e metodologico di Massimiliano Di Liberto.">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 
-  <div id="page-transition" aria-hidden="true"></div>
-  <div id="cursor" aria-hidden="true"></div>
-  <div id="cursor-ring" aria-hidden="true"></div>
+  <div id="page-transition"></div>
 
-  <!-- ── NAV ──────────────────────────────────────────────────── -->
+  <!-- NAV -->
   <nav id="nav">
-    <a href="../index.html" class="nav__logo">MDL</a>
-    <ul class="nav__links" aria-label="Navigazione principale">
-      <li><a href="../work/index.html">Work</a></li>
-      <li><a href="../about/index.html">Author</a></li>
-      <li><a href="../system/index.html" class="nav__link--active">System</a></li>
-      <li><a href="../contact/index.html">Signal</a></li>
-    </ul>
-    <button class="nav__burger" id="navBurger" aria-label="Apri menu">
-      <span></span><span></span>
-    </button>
+    <a class="nav-logo" href="../index.html">MDL</a>
+    <div class="nav-links">
+      <a href="../index.html"          class="nav-link">FRAME</a>
+      <a href="../work/index.html"     class="nav-link">WORK</a>
+      <a href="../system/index.html"   class="nav-link active">SYSTEM</a>
+      <a href="../contact/index.html"  class="nav-link">SIGNAL</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">MENU</button>
   </nav>
 
-  <!-- ── MOBILE MENU ──────────────────────────────────────────── -->
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <button class="mobile-menu__close" id="mobileClose" aria-label="Chiudi menu">✕</button>
-    <nav class="mobile-menu__nav">
-      <a href="../work/index.html"    class="mobile-menu__link" data-close>Work</a>
-      <a href="../about/index.html"   class="mobile-menu__link" data-close>Author</a>
-      <a href="../system/index.html"  class="mobile-menu__link" data-close>System</a>
-      <a href="../contact/index.html" class="mobile-menu__link" data-close>Signal</a>
-    </nav>
-    <div class="mobile-menu__foot">
-      <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
-    </div>
+  <div id="mobile-menu">
+    <a href="../index.html">FRAME</a>
+    <a href="../work/index.html">WORK</a>
+    <a href="../system/index.html">SYSTEM</a>
+    <a href="../contact/index.html">SIGNAL</a>
   </div>
 
-  <!-- ── METHOD HERO ───────────────────────────────────────────── -->
-  <section class="system-hero">
-    <div class="system-hero__inner">
-      <span class="system-hero__eyebrow" id="sysEyebrow">Come lavoro</span>
-      <h1 class="system-hero__title" id="sysTitle">
-        Dall'intuizione<br /><em>al risultato.</em><br />Senza compromessi.
-      </h1>
-    </div>
-  </section>
+  <main class="system-page">
 
-  <!-- ── METHOD DEFINITION ─────────────────────────────────────── -->
-  <section class="system-def" data-reveal style="opacity:0">
-    <div class="system-def__inner">
-      <p class="system-def__text">
-        Non separo mai la visione creativa dall'esecuzione produttiva.<br />
-        Ogni progetto nasce da un'idea precisa e si chiude con un risultato misurabile.<br />
-        Il brief è un punto di partenza — non un limite.
+    <section class="system-hero" data-reveal>
+      <h1 class="system-statement">Everything behind the frame.</h1>
+    </section>
+
+    <section class="system-def" data-reveal>
+      <p>
+        Bill Jobs Studio è l'infrastruttura creativa e produttiva
+        sviluppata in oltre vent'anni di lavoro.<br>
+        Non un brand separato. Il modo in cui le cose vengono fatte.
       </p>
-    </div>
-  </section>
+    </section>
 
-  <!-- ── METHOD AREAS ──────────────────────────────────────────── -->
-  <section class="system-areas">
+    <section class="system-areas">
+      <div class="system-area" data-reveal>
+        <h3>DIRECTION</h3>
+        <p>Creative concept</p>
+        <p>Trattamento creativo</p>
+        <p>Art direction</p>
+      </div>
+      <div class="system-area" data-reveal>
+        <h3>PRODUCTION</h3>
+        <p>End-to-end management</p>
+        <p>Budget · Scheduling</p>
+        <p>Team coordination</p>
+      </div>
+      <div class="system-area" data-reveal>
+        <h3>VISUAL DEVELOPMENT</h3>
+        <p>AI-enhanced workflows</p>
+        <p>Experimental visuals</p>
+        <p>Process innovation</p>
+      </div>
+    </section>
 
-    <article class="system-area" data-reveal style="opacity:0">
-      <span class="system-area__num">01</span>
-      <h2 class="system-area__title">Musica &amp; Live</h2>
-      <p class="system-area__desc">
-        Direction di musica video, concerti e show live, identità visiva per artisti.
-        Dall'ideazione alla regia, dalla produzione al montaggio.
-      </p>
-      <ul class="system-area__list">
-        <li>Music video direction</li>
-        <li>Live show direction</li>
-        <li>Set design</li>
-        <li>Post-produzione</li>
-      </ul>
-    </article>
+    <section class="system-projects" data-reveal>
+      <p class="sys-label">PRODUCED UNDER THIS FRAMEWORK</p>
+      <div class="sys-list">
+        <span>Pleasure Professional &nbsp;·&nbsp; Visual Development</span>
+        <span>Maida Madò &nbsp;·&nbsp; AI-assisted music visuals</span>
+      </div>
+    </section>
 
-    <article class="system-area" data-reveal style="opacity:0">
-      <span class="system-area__num">02</span>
-      <h2 class="system-area__title">Brand &amp; Fashion</h2>
-      <p class="system-area__desc">
-        Campagne, film istituzionali, contenuti fashion e beauty.
-        L'immagine di marca come strumento di posizionamento premium.
-      </p>
-      <ul class="system-area__list">
-        <li>Brand film</li>
-        <li>Fashion content</li>
-        <li>Event direction</li>
-        <li>Creative production</li>
-      </ul>
-    </article>
+    <section class="system-contact" data-reveal>
+      <p>Projects outside the brief</p>
+      <a href="mailto:massimiliano.diliberto@gmail.com">
+        massimiliano.diliberto@gmail.com
+      </a>
+    </section>
 
-    <article class="system-area" data-reveal style="opacity:0">
-      <span class="system-area__num">03</span>
-      <h2 class="system-area__title">Cinema &amp; Sviluppo</h2>
-      <p class="system-area__desc">
-        Produzione e sviluppo cinematografico indipendente,
-        co-produzioni internazionali, distribuzione festival.
-      </p>
-      <ul class="system-area__list">
-        <li>Sviluppo progetto</li>
-        <li>Produzione cinema</li>
-        <li>Festival strategy</li>
-        <li>Co-produzione</li>
-      </ul>
-    </article>
+  </main>
 
-  </section>
-
-  <!-- ── METHOD PROJECTS ───────────────────────────────────────── -->
-  <section class="system-projects">
-    <div class="system-projects__header" data-reveal style="opacity:0">
-      <h2 class="system-projects__title">Progetti recenti</h2>
-    </div>
-
-    <ul class="system-projects__list">
-      <li class="system-projects__item" data-reveal style="opacity:0">
-        <span class="system-projects__name">Gamma+ — Duality, Live Show Direction</span>
-        <span class="system-projects__year">2024</span>
-      </li>
-      <li class="system-projects__item" data-reveal style="opacity:0">
-        <span class="system-projects__name">Mr. Rain, Direction · Set Design · Production</span>
-        <span class="system-projects__year">2023</span>
-      </li>
-      <li class="system-projects__item" data-reveal style="opacity:0">
-        <span class="system-projects__name">Pleasure Professional, Creative Production</span>
-        <span class="system-projects__year">2023</span>
-      </li>
-      <li class="system-projects__item" data-reveal style="opacity:0">
-        <span class="system-projects__name">Dolcenera, Direction · Art Direction</span>
-        <span class="system-projects__year">2022</span>
-      </li>
-      <li class="system-projects__item" data-reveal style="opacity:0">
-        <span class="system-projects__name">Up All Night, Berlinale EFM</span>
-        <span class="system-projects__year">2020</span>
-      </li>
-    </ul>
-  </section>
-
-  <!-- ── METHOD CONTACT ────────────────────────────────────────── -->
-  <section class="system-contact" data-reveal style="opacity:0">
-    <h2 class="system-contact__title">Hai un progetto?</h2>
-    <a href="../contact/index.html" class="system-contact__cta">
-      Parliamone →
-    </a>
-  </section>
-
-  <!-- ── FOOTER ───────────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <span class="site-footer__copy">&copy; 2026 Massimiliano Di Liberto</span>
-    <a href="mailto:massimiliano.diliberto@gmail.com" class="site-footer__email">
-      massimiliano.diliberto@gmail.com
-    </a>
+  <footer>
+    <span>© 2026 Massimiliano Di Liberto &nbsp;·&nbsp; Bill Jobs Studio</span>
+    <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
-  <script>gsap.registerPlugin(ScrollTrigger);</script>
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
   <script src="../assets/js/core.js"></script>
-
-  <script>
-    window.addEventListener('load', () => {
-      const tl = gsap.timeline({ delay: 0.9 });
-      tl.fromTo('#sysEyebrow',
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }
-      )
-      .fromTo('#sysTitle',
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' },
-        '-=0.3'
-      );
-    });
-  </script>
 
 </body>
 </html>
