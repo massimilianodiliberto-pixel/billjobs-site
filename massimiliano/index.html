@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Massimiliano Di Liberto — Senior Creative Producer · Director</title>
+  <meta name="description" content="Senior Creative Producer and Director. 20+ years across music, fashion, brand and cinema." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── NAVIGATION ─────────────────────────────────────── -->
+  <nav id="nav">
+    <a href="#" class="nav__name">
+      <span class="nav__name--desktop">Massimiliano Di Liberto</span>
+      <span class="nav__name--mobile">M. Di Liberto</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="#work">WORK</a></li>
+      <li><a href="#studio">ABOUT</a></li>
+      <li><a href="#studio">BILL JOBS STUDIO</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+    <button class="nav__burger" id="navBurger" aria-label="Menu">MENU</button>
+  </nav>
+
+  <!-- ── MOBILE MENU ────────────────────────────────────── -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu__close" id="mobileClose" aria-label="Close">CLOSE</button>
+    <nav class="mobile-menu__nav">
+      <a href="#work"   class="mobile-menu__link" data-close>Work</a>
+      <a href="#studio" class="mobile-menu__link" data-close>About</a>
+      <a href="#studio" class="mobile-menu__link" data-close>Bill Jobs Studio</a>
+      <a href="#contact"class="mobile-menu__link" data-close>Contact</a>
+    </nav>
+  </div>
+
+  <!-- ── HERO ───────────────────────────────────────────── -->
+  <section id="hero">
+    <!--
+      VIDEO PLACEHOLDER
+      Sostituisci il div.hero__placeholder con:
+      <video class="hero__video" autoplay muted loop playsinline>
+        <source src="reel.mp4" type="video/mp4" />
+      </video>
+    -->
+    <div class="hero__placeholder" aria-hidden="true">
+      <span class="hero__placeholder-label">VIDEO REEL</span>
+    </div>
+
+    <div class="hero__overlay"></div>
+
+    <div class="hero__text">
+      <h1 class="hero__name">Massimiliano Di Liberto</h1>
+      <p class="hero__role">Senior Creative Producer &nbsp;·&nbsp; Director</p>
+    </div>
+
+    <div class="hero__scroll" id="scrollIndicator" aria-hidden="true">
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ── FEATURED WORK ──────────────────────────────────── -->
+  <section id="work">
+    <div class="work__grid">
+
+      <!-- Item 1 — large -->
+      <article class="work__item work__item--large">
+        <!--
+          Sostituisci .work__thumb con <img src="..." alt="..." />
+          oppure <video autoplay muted loop playsinline poster="...">
+        -->
+        <div class="work__thumb work__thumb--1" aria-hidden="true"></div>
+        <div class="work__overlay"></div>
+        <div class="work__info">
+          <h3 class="work__title">Gamma+ "Duality"</h3>
+          <p class="work__meta">Gamma+ &nbsp;·&nbsp; Live Show Direction</p>
+        </div>
+      </article>
+
+      <!-- Items 2 + 3 stacked -->
+      <div class="work__col">
+        <article class="work__item">
+          <div class="work__thumb work__thumb--2" aria-hidden="true"></div>
+          <div class="work__overlay"></div>
+          <div class="work__info">
+            <h3 class="work__title">Mr. Rain — Visual Direction</h3>
+            <p class="work__meta">Sony Music &nbsp;·&nbsp; Direction · Production</p>
+          </div>
+        </article>
+
+        <article class="work__item">
+          <div class="work__thumb work__thumb--3" aria-hidden="true"></div>
+          <div class="work__overlay"></div>
+          <div class="work__info">
+            <h3 class="work__title">Pleasure Professional</h3>
+            <p class="work__meta">Pleasure &nbsp;·&nbsp; Visual Development</p>
+          </div>
+        </article>
+      </div>
+
+    </div>
+
+    <div class="work__footer">
+      <a href="work.html" class="work__all">View All Work</a>
+    </div>
+  </section>
+
+  <!-- ── CREDENTIALS ────────────────────────────────────── -->
+  <div id="credentials">
+    <p class="credentials__text">
+      Warner Music &nbsp;·&nbsp; Cosmoprof &nbsp;·&nbsp; Berlinale EFM &nbsp;·&nbsp;
+      PwC &nbsp;·&nbsp; Tornatore &nbsp;·&nbsp; Festival Cinema Venezia
+    </p>
+  </div>
+
+  <!-- ── BILL JOBS STUDIO ────────────────────────────────── -->
+  <section id="studio">
+    <div class="studio__inner">
+      <div class="studio__left">
+        <h2 class="studio__title">Bill Jobs Studio</h2>
+      </div>
+      <div class="studio__right">
+        <p class="studio__body">
+          Produzione indipendente.<br />
+          Musica, visuals, progetti fuori brief.
+        </p>
+        <a href="studio.html" class="studio__link">Entra nello studio &nbsp;→</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────────── -->
+  <footer id="contact">
+    <span class="footer__copy">&copy; 2026 Massimiliano Di Liberto</span>
+    <a href="mailto:massimiliano.diliberto@gmail.com" class="footer__email">
+      massimiliano.diliberto@gmail.com
+    </a>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
