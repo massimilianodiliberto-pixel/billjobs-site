@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bill Jobs Production — Cinema Is Our Language</title>
+  <meta name="description" content="Bill Jobs Production — A luxury film production company crafting cinematic stories that endure." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- Film grain overlay -->
+  <canvas class="grain" id="grain"></canvas>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav__logo">
+      <span class="nav__logo-bill">BILL</span>
+      <span class="nav__logo-jobs">JOBS</span>
+      <span class="nav__logo-production">PRODUCTION</span>
+    </a>
+    <button class="nav__menu-toggle" id="menuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#work" class="nav__link">Work</a></li>
+      <li><a href="#about" class="nav__link">About</a></li>
+      <li><a href="#services" class="nav__link">Services</a></li>
+      <li><a href="#contact" class="nav__link nav__link--cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <div class="hero__bg-gradient"></div>
+      <div class="hero__bg-lines"></div>
+    </div>
+    <div class="hero__content">
+      <div class="hero__eyebrow reveal-up">EST. MMXV &nbsp;&mdash;&nbsp; LOS ANGELES</div>
+      <h1 class="hero__title">
+        <span class="hero__title-line reveal-up delay-1">Cinema Is</span>
+        <span class="hero__title-line hero__title-line--italic reveal-up delay-2">Our Language.</span>
+      </h1>
+      <p class="hero__subtitle reveal-up delay-3">
+        We craft stories that endure — from concept to screen,<br />with uncompromising artistry and vision.
+      </p>
+      <div class="hero__actions reveal-up delay-4">
+        <a href="#work" class="btn btn--primary">View Our Work</a>
+        <a href="#about" class="btn btn--ghost">Our Story</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+    <div class="hero__reel-badge">
+      <svg viewBox="0 0 100 100" class="hero__reel-svg">
+        <defs>
+          <path id="circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/>
+        </defs>
+        <text class="hero__reel-text">
+          <textPath href="#circle">AWARD&#8202;WINNING&#8202;·&#8202;FILM&#8202;PRODUCTION&#8202;·&#8202;SINCE&#8202;2015&#8202;·&#8202;</textPath>
+        </text>
+      </svg>
+      <div class="hero__reel-icon">▶</div>
+    </div>
+  </section>
+
+  <!-- Marquee ticker -->
+  <div class="ticker">
+    <div class="ticker__track">
+      <span>Feature Films</span><span class="ticker__sep">✦</span>
+      <span>Commercials</span><span class="ticker__sep">✦</span>
+      <span>Music Videos</span><span class="ticker__sep">✦</span>
+      <span>Documentaries</span><span class="ticker__sep">✦</span>
+      <span>Short Films</span><span class="ticker__sep">✦</span>
+      <span>Brand Films</span><span class="ticker__sep">✦</span>
+      <span>Feature Films</span><span class="ticker__sep">✦</span>
+      <span>Commercials</span><span class="ticker__sep">✦</span>
+      <span>Music Videos</span><span class="ticker__sep">✦</span>
+      <span>Documentaries</span><span class="ticker__sep">✦</span>
+      <span>Short Films</span><span class="ticker__sep">✦</span>
+      <span>Brand Films</span><span class="ticker__sep">✦</span>
+    </div>
+  </div>
+
+  <!-- Work / Productions -->
+  <section class="work" id="work">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Selected Works</span>
+        <h2 class="section-title">Our Productions</h2>
+      </div>
+    </div>
+
+    <div class="work__grid">
+
+      <article class="work__item work__item--large reveal-fade">
+        <div class="work__item-bg" style="background: linear-gradient(135deg, #1a0a00 0%, #3d1f00 50%, #0a0a0a 100%)"></div>
+        <div class="work__item-overlay"></div>
+        <div class="work__item-content">
+          <span class="work__item-year">2024</span>
+          <h3 class="work__item-title">The Last Meridian</h3>
+          <p class="work__item-type">Feature Film</p>
+          <div class="work__item-tags">
+            <span>Drama</span><span>Thriller</span>
+          </div>
+        </div>
+        <div class="work__item-awards">
+          <span>✦ Cannes Selection</span>
+        </div>
+      </article>
+
+      <article class="work__item reveal-fade delay-1">
+        <div class="work__item-bg" style="background: linear-gradient(135deg, #000a1a 0%, #001f3d 50%, #0a0a0a 100%)"></div>
+        <div class="work__item-overlay"></div>
+        <div class="work__item-content">
+          <span class="work__item-year">2023</span>
+          <h3 class="work__item-title">Velvet Hour</h3>
+          <p class="work__item-type">Short Film</p>
+          <div class="work__item-tags">
+            <span>Romance</span>
+          </div>
+        </div>
+        <div class="work__item-awards">
+          <span>✦ Sundance Winner</span>
+        </div>
+      </article>
+
+      <article class="work__item reveal-fade delay-2">
+        <div class="work__item-bg" style="background: linear-gradient(135deg, #0a000a 0%, #1f003d 50%, #0a0a0a 100%)"></div>
+        <div class="work__item-overlay"></div>
+        <div class="work__item-content">
+          <span class="work__item-year">2023</span>
+          <h3 class="work__item-title">Echo Chamber</h3>
+          <p class="work__item-type">Documentary</p>
+          <div class="work__item-tags">
+            <span>Social</span><span>Politics</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work__item work__item--wide reveal-fade delay-1">
+        <div class="work__item-bg" style="background: linear-gradient(135deg, #000a00 0%, #0a1f00 50%, #0a0a0a 100%)"></div>
+        <div class="work__item-overlay"></div>
+        <div class="work__item-content">
+          <span class="work__item-year">2022</span>
+          <h3 class="work__item-title">Phantom Gold</h3>
+          <p class="work__item-type">Music Video</p>
+          <div class="work__item-tags">
+            <span>Visual Art</span>
+          </div>
+        </div>
+        <div class="work__item-awards">
+          <span>✦ MTV VMA Nominated</span>
+        </div>
+      </article>
+
+      <article class="work__item reveal-fade delay-2">
+        <div class="work__item-bg" style="background: linear-gradient(135deg, #1a0a00 0%, #2a1500 50%, #0a0a0a 100%)"></div>
+        <div class="work__item-overlay"></div>
+        <div class="work__item-content">
+          <span class="work__item-year">2022</span>
+          <h3 class="work__item-title">Desert Glass</h3>
+          <p class="work__item-type">Commercial</p>
+          <div class="work__item-tags">
+            <span>Luxury Brand</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="container work__footer reveal-up">
+      <a href="#contact" class="btn btn--outline">Commission a Project</a>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="container stats__grid">
+      <div class="stat reveal-up">
+        <span class="stat__number" data-target="47">0</span>
+        <span class="stat__label">Productions</span>
+      </div>
+      <div class="stat reveal-up delay-1">
+        <span class="stat__number" data-target="23">0</span>
+        <span class="stat__label">Awards Won</span>
+      </div>
+      <div class="stat reveal-up delay-2">
+        <span class="stat__number" data-target="12">0</span>
+        <span class="stat__label">Countries</span>
+      </div>
+      <div class="stat reveal-up delay-3">
+        <span class="stat__number" data-target="10">0</span>
+        <span class="stat__label">Years of Excellence</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="about__visual reveal-fade">
+      <div class="about__visual-frame">
+        <div class="about__visual-inner">
+          <div class="about__visual-lines">
+            <div class="line"></div><div class="line"></div>
+            <div class="line"></div><div class="line"></div>
+          </div>
+          <div class="about__visual-circle">
+            <svg viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="80" stroke="#C9A84C" stroke-width="0.5" fill="none" stroke-dasharray="4 8"/>
+              <circle cx="100" cy="100" r="60" stroke="#C9A84C" stroke-width="0.25" fill="none"/>
+              <circle cx="100" cy="100" r="8" fill="#C9A84C"/>
+              <line x1="100" y1="20" x2="100" y2="180" stroke="#C9A84C" stroke-width="0.25" opacity="0.5"/>
+              <line x1="20" y1="100" x2="180" y2="100" stroke="#C9A84C" stroke-width="0.25" opacity="0.5"/>
+              <text x="100" y="105" text-anchor="middle" fill="#C9A84C" font-size="8" font-family="Montserrat" letter-spacing="3" opacity="0.8">BJP</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about__content">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Our Story</span>
+        <h2 class="section-title">Artistry Without Compromise</h2>
+      </div>
+      <p class="about__lead reveal-up delay-1">
+        Founded in 2015 by Bill Jobs, our production house was built on a singular conviction: that cinema is the most powerful language humans have ever invented.
+      </p>
+      <p class="about__body reveal-up delay-2">
+        Every frame we compose, every cut we make, every score we choose — it is all in service of a story that demands to be felt. We work with the world's most visionary directors, cinematographers, and storytellers to bring ambitious projects to life.
+      </p>
+      <p class="about__body reveal-up delay-3">
+        From intimate short films to global commercial campaigns, our commitment to craft remains unchanged: beauty, truth, and technical mastery in equal measure.
+      </p>
+      <div class="about__signature reveal-up delay-4">
+        <div class="about__signature-text">Bill Jobs</div>
+        <div class="about__signature-role">Founder &amp; Creative Director</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header section-header--center reveal-up">
+        <span class="section-eyebrow">What We Do</span>
+        <h2 class="section-title">Full-Spectrum Production</h2>
+      </div>
+
+      <div class="services__grid">
+
+        <div class="service reveal-up">
+          <div class="service__number">01</div>
+          <div class="service__icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <rect x="4" y="10" width="40" height="28" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M16 10V38M32 10V38M4 20H16M4 28H16M32 20H44M32 28H44" stroke="#C9A84C" stroke-width="1"/>
+              <circle cx="24" cy="24" r="5" stroke="#C9A84C" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3 class="service__title">Feature Films</h3>
+          <p class="service__desc">End-to-end production of cinematic feature films, from development through post-production and distribution strategy.</p>
+        </div>
+
+        <div class="service reveal-up delay-1">
+          <div class="service__number">02</div>
+          <div class="service__icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="18" stroke="#C9A84C" stroke-width="1.5"/>
+              <circle cx="24" cy="24" r="6" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M24 6V12M24 36V42M6 24H12M36 24H42" stroke="#C9A84C" stroke-width="1"/>
+              <path d="M18 18L13 13M30 30L35 35M30 18L35 13M18 30L13 35" stroke="#C9A84C" stroke-width="0.75"/>
+            </svg>
+          </div>
+          <h3 class="service__title">Commercial &amp; Brand</h3>
+          <p class="service__desc">High-end commercial production for luxury brands that demand visual distinction and cultural resonance.</p>
+        </div>
+
+        <div class="service reveal-up delay-2">
+          <div class="service__number">03</div>
+          <div class="service__icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M8 40L24 8L40 40" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M13 30H35" stroke="#C9A84C" stroke-width="1"/>
+              <circle cx="24" cy="8" r="3" fill="#C9A84C"/>
+            </svg>
+          </div>
+          <h3 class="service__title">Music Videos</h3>
+          <p class="service__desc">Conceptual music videos that amplify an artist's vision, blending narrative and visual poetry into a single unified statement.</p>
+        </div>
+
+        <div class="service reveal-up delay-1">
+          <div class="service__number">04</div>
+          <div class="service__icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M8 12H40M8 24H32M8 36H24" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="40" cy="36" r="6" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M38 36L40 34L42 36" stroke="#C9A84C" stroke-width="1"/>
+            </svg>
+          </div>
+          <h3 class="service__title">Documentary</h3>
+          <p class="service__desc">Deeply researched, beautifully photographed documentary storytelling that illuminates the human condition.</p>
+        </div>
+
+        <div class="service reveal-up delay-2">
+          <div class="service__number">05</div>
+          <div class="service__icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M24 4L28.5 16.5H42L31.5 24L36 36.5L24 29L12 36.5L16.5 24L6 16.5H19.5L24 4Z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="service__title">Short Films</h3>
+          <p class="service__desc">Auteur-driven short film projects that push the boundaries of format, narrative structure, and visual language.</p>
+        </div>
+
+        <div class="service reveal-up delay-3">
+          <div class="service__number">06</div>
+          <div class="service__icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <rect x="6" y="16" width="36" height="24" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M16 16V10C16 8.9 16.9 8 18 8H30C31.1 8 32 8.9 32 10V16" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M20 28L24 24L28 28" stroke="#C9A84C" stroke-width="1.25" stroke-linecap="round"/>
+              <path d="M24 24V34" stroke="#C9A84C" stroke-width="1.25" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="service__title">Post-Production</h3>
+          <p class="service__desc">World-class color grading, VFX, sound design, and editing services available as standalone offerings.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="quote-section">
+    <div class="container">
+      <blockquote class="quote reveal-up">
+        <p class="quote__text">"Every great film begins as a whisper — <em>an idea so fragile it could vanish</em> — and our work is to protect it until it becomes something the world cannot ignore."</p>
+        <cite class="quote__cite">— Bill Jobs</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Clients -->
+  <section class="clients">
+    <div class="container">
+      <div class="section-header section-header--center reveal-up">
+        <span class="section-eyebrow">Trusted By</span>
+        <h2 class="section-title section-title--sm">Our Collaborators</h2>
+      </div>
+      <div class="clients__grid reveal-up delay-1">
+        <div class="client">PARAMOUNT</div>
+        <div class="client">A24</div>
+        <div class="client">NETFLIX</div>
+        <div class="client">HBO</div>
+        <div class="client">SONY</div>
+        <div class="client">MIRAMAX</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="contact__bg-text" aria-hidden="true">CONTACT</div>
+    <div class="container">
+      <div class="contact__inner">
+        <div class="contact__left">
+          <div class="section-header reveal-up">
+            <span class="section-eyebrow">Get In Touch</span>
+            <h2 class="section-title">Let's Create<br/><em>Something Lasting.</em></h2>
+          </div>
+          <div class="contact__info reveal-up delay-1">
+            <div class="contact__info-item">
+              <span class="contact__info-label">Email</span>
+              <a href="mailto:hello@billjobsproduction.com" class="contact__info-value">hello@billjobsproduction.com</a>
+            </div>
+            <div class="contact__info-item">
+              <span class="contact__info-label">New Business</span>
+              <a href="mailto:projects@billjobsproduction.com" class="contact__info-value">projects@billjobsproduction.com</a>
+            </div>
+            <div class="contact__info-item">
+              <span class="contact__info-label">Location</span>
+              <span class="contact__info-value">Los Angeles, CA &amp; New York, NY</span>
+            </div>
+          </div>
+          <div class="contact__social reveal-up delay-2">
+            <a href="#" class="social-link">Instagram</a>
+            <a href="#" class="social-link">Vimeo</a>
+            <a href="#" class="social-link">IMDb</a>
+          </div>
+        </div>
+
+        <form class="contact__form reveal-fade delay-1" id="contactForm">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@studio.com" required />
+          </div>
+          <div class="form-group">
+            <label for="project">Project Type</label>
+            <select id="project" name="project">
+              <option value="" disabled selected>Select a category</option>
+              <option value="feature">Feature Film</option>
+              <option value="commercial">Commercial / Brand</option>
+              <option value="music">Music Video</option>
+              <option value="documentary">Documentary</option>
+              <option value="short">Short Film</option>
+              <option value="post">Post-Production</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Tell Us About Your Project</label>
+            <textarea id="message" name="message" rows="4" placeholder="Describe your vision, timeline, and budget range..."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Send Inquiry</button>
+          <div class="form-success" id="formSuccess">
+            <span>✦</span> Your inquiry has been received. We'll be in touch within 48 hours.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__logo">
+          <span class="nav__logo-bill">BILL</span>
+          <span class="nav__logo-jobs">JOBS</span>
+          <span class="nav__logo-production">PRODUCTION</span>
+        </div>
+        <nav class="footer__nav">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="footer__divider"></div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 Bill Jobs Production. All rights reserved.</p>
+        <p class="footer__tagline">Cinema Is Our Language.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
