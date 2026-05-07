@@ -19,16 +19,16 @@
   --font-editorial: 'DM Serif Display', Georgia, serif;
   --font-ui:        'DM Sans', system-ui, sans-serif;
 
-  --text-hero:      clamp(58px, 10.5vw, 136px);
-  --text-display:   clamp(42px, 6.5vw, 88px);
-  --text-title:     clamp(26px, 3.5vw, 52px);
+  --text-hero:      clamp(52px, 13vw, 196px);
+  --text-display:   clamp(48px, 7.5vw, 108px);
+  --text-title:     clamp(28px, 4vw, 60px);
   --text-body:      15px;
   --text-label:     10px;
   --text-micro:     9px;
 
-  --section-v:      clamp(120px, 16vw, 240px);
+  --section-v:      clamp(140px, 18vw, 280px);
   --section-h:      6vw;
-  --grid-gap:       2px;
+  --grid-gap:       1px;
   --nav-h:          72px;
 }
 
