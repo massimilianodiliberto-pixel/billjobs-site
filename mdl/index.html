@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,10 +18,12 @@
 
   <!-- INTRO -->
   <div id="intro">
-    <div class="intro-bg"></div>
-    <div class="intro-panel-top"></div>
-    <div class="intro-panel-bottom"></div>
-    <div class="intro-text">INSIDE THE FRAME</div>
+    <div class="intro-panel intro-top"></div>
+    <div class="intro-panel intro-bottom"></div>
+    <div class="intro-center">
+      <div class="intro-line"></div>
+      <div class="intro-text">INSIDE THE FRAME</div>
+    </div>
     <button class="intro-skip">SKIP</button>
   </div>
 
@@ -48,8 +50,9 @@
 
     <!-- HERO -->
     <section class="hero">
-      <video class="hero-video" autoplay muted loop playsinline disablepictureinpicture>
-        <source src="assets/reel.mp4" type="video/mp4">
+      <div class="hero-bg"></div>
+      <video class="hero-video" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback x-webkit-airplay="deny">
+        <source src="assets/video/hero-loop.mp4" type="video/mp4">
       </video>
       <div class="hero-overlay"></div>
       <div class="hero-content">
@@ -65,7 +68,7 @@
 
         <a href="work/index.html" class="feat-item feat-large">
           <div class="feat-media">
-            <img src="assets/gamma-duality.jpg" alt="Gamma+ Duality">
+            <img src="assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png" alt="Gamma+ Duality" style="object-position: center 30%;">
           </div>
           <div class="feat-info">
             <span class="feat-title">Gamma+ — Duality</span>
@@ -75,7 +78,7 @@
 
         <a href="work/index.html" class="feat-item feat-medium">
           <div class="feat-media">
-            <img src="assets/mr-rain.jpg" alt="Mr. Rain">
+            <img src="assets/img/IMG_7623.jpeg" alt="Mr. Rain" style="object-position: center 40%;">
           </div>
           <div class="feat-info">
             <span class="feat-title">Mr. Rain</span>
@@ -85,7 +88,7 @@
 
         <a href="work/index.html" class="feat-item feat-medium">
           <div class="feat-media">
-            <img src="assets/up-all-night.jpg" alt="Up All Night">
+            <img src="assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png" alt="Up All Night" style="object-position: center center;">
           </div>
           <div class="feat-info">
             <span class="feat-title">Up All Night</span>
@@ -134,9 +137,8 @@
   <script>
     function playHeroEntrance() {
       const tl = gsap.timeline();
-      tl.to('.hero-name',        { opacity: 1, duration: 1.4, ease: 'power2.out', delay: 0.4 })
-        .to('.hero-subtitle',    { opacity: 1, duration: 1.0, ease: 'power2.out' }, '-=0.6')
-        .to('.scroll-indicator', { opacity: 1, duration: 0.8 }, '-=0.4');
+      tl.to('.hero-name',     { opacity: 1, duration: 1.4, ease: 'power2.out', delay: 0.4 })
+        .to('.hero-subtitle', { opacity: 1, duration: 1.0, ease: 'power2.out' }, '-=0.6');
 
       /* Reveal video only when it can actually play — gradient shows otherwise */
       const v = document.querySelector('.hero-video');
@@ -144,7 +146,17 @@
         v.addEventListener('canplay', () => {
           gsap.to(v, { opacity: 1, duration: 1.5, ease: 'power2.out' });
         }, { once: true });
+        v.addEventListener('error', () => {}, { once: true });
       }
+
+      /* Signal line appears after delay, then fades on scroll */
+      setTimeout(() => {
+        const si = document.querySelector('.scroll-indicator');
+        if (si) {
+          si.classList.add('active');
+          gsap.to(si, { opacity: 1, duration: 0.8, ease: 'power2.out' });
+        }
+      }, 2800);
 
       lenis.on('scroll', () => {
         gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });
@@ -158,9 +170,11 @@
 
     function playIntro(onComplete) {
       const tl = gsap.timeline({ onComplete });
-      tl.to('.intro-text', { opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.3 })
-        .to('.intro-text', { opacity: 0, duration: 0.5, ease: 'power2.in', delay: 0.6 })
-        .to(['.intro-panel-top', '.intro-panel-bottom'], {
+      tl.to('.intro-line', { height: 44, duration: 0.6, ease: 'power2.out', delay: 0.3 })
+        .to('.intro-text', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2')
+        .to('.intro-text', { opacity: 0, duration: 0.4, ease: 'power2.in', delay: 0.5 })
+        .to('.intro-line', { height: 0,  duration: 0.4, ease: 'power2.in' }, '-=0.2')
+        .to(['.intro-top', '.intro-bottom'], {
           scaleY: 0, duration: 0.7, ease: 'power3.inOut', stagger: 0,
         })
         .set('#intro', { display: 'none' });
