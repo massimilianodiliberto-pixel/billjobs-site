@@ -75,10 +75,10 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   background: transparent;
 }
 
+/* Panels — cover hero, split from center */
 .intro-panel {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 0; bottom: 0;
   width: 50%;
   background: #080808;
   z-index: 2;
@@ -87,11 +87,11 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
 .intro-left  { left: 0;  }
 .intro-right { right: 0; }
 
-/* Grain */
+/* Grain — topmost, blends over everything */
 .intro-grain {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 5;
   pointer-events: none;
   opacity: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -100,15 +100,35 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   animation: grain-shift 0.9s steps(2) infinite;
 }
 @keyframes grain-shift {
-  0%   { transform: translate(0, 0);     }
-  25%  { transform: translate(-1px, 1px);  }
-  50%  { transform: translate(1px, -1px);  }
-  75%  { transform: translate(0, 1px);     }
-  100% { transform: translate(-1px, 0);    }
+  0%   { transform: translate(0, 0);      }
+  25%  { transform: translate(-1px, 1px); }
+  50%  { transform: translate(1px, -1px); }
+  75%  { transform: translate(0, 1px);    }
+  100% { transform: translate(-1px, 0);   }
 }
 
-/* Center content */
-.intro-center {
+/* Zoom layer — "ENTER THE FRAME" with slow camera push */
+.intro-zoom {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.intro-label {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 0.48em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  opacity: 0;
+}
+
+/* Signals — appear through the split */
+.intro-signals {
   position: absolute;
   inset: 0;
   z-index: 4;
@@ -116,46 +136,20 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 14px;
   pointer-events: none;
-  padding: 0 32px;
 }
-
-/* Name container */
-.intro-name-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0;
-  font-family: var(--font-ui);
-  font-size: clamp(22px, 5vw, 56px);
-  font-weight: 300;
-  color: #EFEFEF;
-  letter-spacing: 0.08em;
-  line-height: 1.2;
-  text-align: center;
-}
-.intro-letter {
-  display: inline-block;
-  opacity: 0;
-}
-.intro-space {
-  display: inline-block;
-  width: 0.3em;
-}
-
-/* Subtitle */
-.intro-subtitle {
+.intro-signal {
   font-family: var(--font-ui);
   font-size: 9px;
   font-weight: 300;
-  letter-spacing: 0.3em;
-  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.38em;
+  color: rgba(255, 255, 255, 0.55);
   text-transform: uppercase;
   opacity: 0;
 }
 
-/* Skip button */
+/* Skip */
 .intro-skip {
   position: absolute;
   top: 24px;
@@ -168,7 +162,7 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 5;
+  z-index: 6;
   text-transform: uppercase;
   transition: color 300ms ease;
 }
