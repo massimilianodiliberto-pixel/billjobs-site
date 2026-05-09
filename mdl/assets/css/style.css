@@ -273,7 +273,7 @@ footer a:hover { color: var(--text-primary); }
 .hero-content {
   position: absolute;
   bottom: 7vh;
-  left: var(--section-h);
+  left: 6vw;
 }
 .hero-name {
   font-family: var(--font-ui);
@@ -332,12 +332,14 @@ footer a:hover { color: var(--text-primary); }
 .feat-medium { grid-column: span 6;  aspect-ratio: 16/9; }
 
 .feat-media {
-  width: 100%; height: 100%;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }
 .feat-media img {
   width: 100%; height: 100%;
   object-fit: cover;
+  display: block;
 }
 .feat-info {
   position: absolute;
