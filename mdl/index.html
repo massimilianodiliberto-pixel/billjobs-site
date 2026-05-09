@@ -66,7 +66,7 @@
     <section class="featured">
       <div class="featured-grid">
 
-        <a href="work/index.html" class="feat-item feat-large">
+        <a href="#" class="feat-item feat-large" data-project="gamma-duality">
           <div class="feat-media">
             <img src="assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png" alt="Gamma+ Duality" style="object-position: center 30%;">
           </div>
@@ -76,7 +76,7 @@
           </div>
         </a>
 
-        <a href="work/index.html" class="feat-item feat-medium">
+        <a href="#" class="feat-item feat-medium" data-project="mr-rain">
           <div class="feat-media">
             <img src="assets/img/IMG_7623.jpeg" alt="Mr. Rain" style="object-position: center 40%;">
           </div>
@@ -86,7 +86,7 @@
           </div>
         </a>
 
-        <a href="work/index.html" class="feat-item feat-medium">
+        <a href="#" class="feat-item feat-medium" data-project="up-all-night">
           <div class="feat-media">
             <img src="assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png" alt="Up All Night" style="object-position: center center;">
           </div>
@@ -220,6 +220,126 @@
         }
       );
     });
+  </script>
+
+  <!-- PROJECT OVERLAY -->
+  <div id="project-overlay" class="overlay" aria-hidden="true">
+    <div class="overlay-backdrop"></div>
+    <div class="overlay-panel">
+      <button class="overlay-close" aria-label="Close"><span>✕</span></button>
+      <div class="overlay-media"></div>
+      <div class="overlay-content">
+        <div class="overlay-header">
+          <h2 class="overlay-title"></h2>
+          <p class="overlay-credits"></p>
+        </div>
+        <div class="overlay-description"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const overlay      = document.getElementById('project-overlay');
+      const overlayMedia = overlay.querySelector('.overlay-media');
+      const overlayTitle = overlay.querySelector('.overlay-title');
+      const overlayCreds = overlay.querySelector('.overlay-credits');
+      const overlayDesc  = overlay.querySelector('.overlay-description');
+      const overlayClose = overlay.querySelector('.overlay-close');
+
+      const projects = {
+        'gamma-duality': {
+          title: 'Gamma+ — Duality',
+          credits: 'Gamma+ Professional · 2023 · Creative Direction · Live Show Direction',
+          description: [
+            'A 30-minute live show conceived as a complete visual experience for Cosmoprof Bologna — the largest professional beauty event in the world.',
+            'Concept, video and audio production, coordination of all visual outputs in real time. Every element — light, projection, rhythm — built around a narrative logic before any technical decision.'
+          ],
+          role: 'Creative Direction · Live Show Direction · Content Production',
+          videoId: '4UbHLSG5Yy0',
+          type: 'youtube'
+        },
+        'mr-rain': {
+          title: 'Mr. Rain',
+          credits: 'Warner Music · 2021–2023 · Production · Location · Logistics',
+          description: [
+            'An ongoing collaboration across multiple projects — music videos, live concert visuals, and the development of the artist\'s visual identity.',
+            'Production management, location scouting, permits, technical crew coordination. The behind-the-scenes infrastructure that makes the creative vision possible.'
+          ],
+          role: 'Production · Location Scouting · Permits · Technical Coordination',
+          videoId: 'Q1brWO76mrk',
+          type: 'youtube'
+        },
+        'up-all-night': {
+          title: 'Up All Night',
+          credits: 'Berlinale EFM · Development · Direction · Production',
+          description: [
+            'A feature film project developed and presented at the European Film Market — Berlinale. Screenplay, production plan, location research, casting structure.',
+            'Three Italian Film Commissions involved. Potential funding: ~690.000€. A film that exists before it is shot.'
+          ],
+          role: 'Director · Writer · Producer',
+          image: 'assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png',
+          type: 'image'
+        }
+      };
+
+      function openOverlay(id) {
+        const p = projects[id];
+        if (!p) return;
+        overlayTitle.textContent = p.title;
+        overlayCreds.textContent = p.credits;
+        overlayMedia.innerHTML = '';
+        if (p.type === 'youtube') {
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://www.youtube.com/embed/${p.videoId}?autoplay=0&rel=0&modestbranding=1`;
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+          iframe.allowFullscreen = true;
+          overlayMedia.appendChild(iframe);
+        } else if (p.type === 'image') {
+          const img = document.createElement('img');
+          img.src = p.image;
+          img.alt = p.title;
+          overlayMedia.appendChild(img);
+        }
+        overlayDesc.innerHTML = '';
+        p.description.forEach(text => {
+          const el = document.createElement('p');
+          el.textContent = text;
+          overlayDesc.appendChild(el);
+        });
+        if (p.role) {
+          const role = document.createElement('span');
+          role.className = 'overlay-role';
+          role.textContent = p.role;
+          overlayDesc.appendChild(role);
+        }
+        overlay.setAttribute('aria-hidden', 'false');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        lenis.stop();
+        gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.4, ease: 'power2.out' });
+      }
+
+      function closeOverlay() {
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        lenis.start();
+        gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.4, ease: 'power2.out' });
+        setTimeout(() => { overlayMedia.innerHTML = ''; }, 650);
+      }
+
+      overlayClose.addEventListener('click', closeOverlay);
+      overlay.querySelector('.overlay-backdrop').addEventListener('click', closeOverlay);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
+
+      document.querySelectorAll('[data-project]').forEach(el => {
+        el.addEventListener('click', e => {
+          e.preventDefault();
+          openOverlay(el.dataset.project);
+        });
+      });
+    })();
   </script>
 
 </body>
