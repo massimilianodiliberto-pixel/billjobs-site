@@ -18,11 +18,10 @@
 
   <!-- INTRO -->
   <div id="intro">
-    <div class="intro-panel intro-top"></div>
-    <div class="intro-panel intro-bottom"></div>
-    <div class="intro-center">
-      <div class="intro-line"></div>
-      <div class="intro-text">INSIDE THE FRAME</div>
+    <div class="intro-grain"></div>
+    <div class="intro-content">
+      <h1 class="intro-name">Massimiliano Di Liberto</h1>
+      <p class="intro-sub">DIRECTION &nbsp;·&nbsp; PRODUCTION &nbsp;·&nbsp; VISUAL SYSTEMS</p>
     </div>
     <button class="intro-skip">SKIP</button>
   </div>
@@ -170,18 +169,18 @@
 
     function playIntro(onComplete) {
       const tl = gsap.timeline({ onComplete });
-      tl.to('.intro-line', { height: 44, duration: 0.6, ease: 'power2.out', delay: 0.3 })
-        .to('.intro-text', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2')
-        .to('.intro-text', { opacity: 0, duration: 0.4, ease: 'power2.in', delay: 0.5 })
-        .to('.intro-line', { height: 0,  duration: 0.4, ease: 'power2.in' }, '-=0.2')
-        .to(['.intro-top', '.intro-bottom'], {
-          scaleY: 0, duration: 0.7, ease: 'power3.inOut', stagger: 0,
+      tl.to('.intro-grain', { opacity: 0.03, duration: 1.0, ease: 'power1.out', delay: 0.3 })
+        .to('.intro-name',  { opacity: 1,    duration: 1.6, ease: 'power1.out', delay: 0.2 })
+        .to('.intro-sub',   { opacity: 1,    duration: 0.8, ease: 'power1.out' }, '-=0.4')
+        .call(() => {
+          document.querySelector('.intro-name').style.animation = 'light-breathe 3.5s ease-in-out infinite';
         })
-        .set('#intro', { display: 'none' });
+        .to({}, { duration: 0.9 })
+        .call(() => { gsap.set('#intro', { display: 'none' }); });
     }
 
     function skipIntro() {
-      gsap.killTweensOf('*');
+      gsap.killTweensOf(['.intro-name', '.intro-sub', '.intro-grain']);
       gsap.set('#intro', { display: 'none' });
       initSite();
     }
