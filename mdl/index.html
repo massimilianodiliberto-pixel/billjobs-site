@@ -22,8 +22,8 @@
     <div class="intro-panel intro-left"></div>
     <div class="intro-panel intro-right"></div>
     <div class="intro-center">
-      <div class="intro-line"></div>
-      <p class="intro-label">ENTER THE FRAME</p>
+      <div class="intro-name-wrap"></div>
+      <p class="intro-subtitle">DIRECTION &nbsp;·&nbsp; PRODUCTION &nbsp;·&nbsp; VISUAL SYSTEMS</p>
     </div>
     <button class="intro-skip">SKIP</button>
   </div>
@@ -158,36 +158,55 @@
       }, { once: true });
     }
 
-    function initSite() {
-      gsap.set('#page-transition', { scaleY: 0 });
-      const si = document.querySelector('.scroll-indicator');
-      if (si) {
-        si.style.display = 'block';
-        setTimeout(() => {
-          si.classList.add('active');
-          gsap.to(si, { opacity: 1, duration: 1.0, ease: 'power2.out' });
-        }, 2800);
-      }
-      playHeroEntrance();
+    function buildLetters() {
+      const wrap = document.querySelector('.intro-name-wrap');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+      ['MASSIMILIANO', 'DI', 'LIBERTO'].forEach((word, wi, arr) => {
+        word.split('').forEach(char => {
+          const s = document.createElement('span');
+          s.className = 'intro-letter';
+          s.textContent = char;
+          wrap.appendChild(s);
+        });
+        if (wi < arr.length - 1) {
+          const sp = document.createElement('span');
+          sp.className = 'intro-space';
+          wrap.appendChild(sp);
+        }
+      });
     }
 
+    buildLetters();
+    gsap.set('.intro-letter', { y: 6 });
+
     function playIntro(onComplete) {
+      const letters  = document.querySelectorAll('.intro-letter');
+      const subtitle = document.querySelector('.intro-subtitle');
       const tl = gsap.timeline({ onComplete });
-      tl.to('.intro-grain',  { opacity: 0.035, duration: 0.8, ease: 'power1.out' })
-        .to('.intro-line',   { height: 48, opacity: 1, duration: 0.9, ease: 'power2.out' }, 0.4)
-        .to('.intro-label',  { opacity: 1, duration: 0.7, ease: 'power1.out' }, '-=0.4')
-        .to({}, { duration: 0.5 })
-        .to('.intro-line',   { opacity: 0, duration: 0.3, ease: 'power1.in' })
-        .to('.intro-label',  { opacity: 0, duration: 0.3, ease: 'power1.in' }, '<')
+      tl.to('.intro-grain', { opacity: 0.03, duration: 0.6, ease: 'power1.out' })
+        .to(letters, {
+          opacity: 1, y: 0, duration: 0.06,
+          stagger: { each: 0.045, from: 'random' },
+          ease: 'power2.out'
+        }, 0.5)
+        .to(subtitle, { opacity: 1, duration: 0.7, ease: 'power1.out' }, '-=0.2')
+        .to({}, { duration: 0.7 })
+        .to(subtitle, { opacity: 0, duration: 0.3 })
+        .to(letters, {
+          opacity: 0, duration: 0.4,
+          stagger: { each: 0.01, from: 'center' },
+          ease: 'power1.in'
+        }, '-=0.1')
         .call(() => { gsap.set('#page-transition', { scaleY: 0 }); })
-        .to('.intro-left',   { x: '-100%', duration: 0.85, ease: 'power3.inOut' })
-        .to('.intro-right',  { x: '100%',  duration: 0.85, ease: 'power3.inOut' }, '<')
+        .to('.intro-left',  { x: '-100%', duration: 0.9, ease: 'power3.inOut' })
+        .to('.intro-right', { x: '100%',  duration: 0.9, ease: 'power3.inOut' }, '<')
         .set('#intro', { display: 'none' });
     }
 
     function skipIntro() {
-      gsap.killTweensOf(['.intro-grain', '.intro-line', '.intro-label', '.intro-left', '.intro-right']);
-      gsap.set(['#intro', '#page-transition'], { display: 'none', scaleY: 0 });
+      gsap.killTweensOf(['.intro-grain', '.intro-letter', '.intro-subtitle', '.intro-left', '.intro-right']);
+      gsap.set('#intro', { display: 'none' });
       initSite();
     }
 
@@ -199,6 +218,19 @@
     } else {
       sessionStorage.setItem('introSeen', 'true');
       playIntro(initSite);
+    }
+
+    function initSite() {
+      gsap.set('#page-transition', { scaleY: 0 });
+      const si = document.querySelector('.scroll-indicator');
+      if (si) {
+        si.style.display = 'block';
+        setTimeout(() => {
+          si.classList.add('active');
+          gsap.to(si, { opacity: 1, duration: 1.0, ease: 'power2.out' });
+        }, 2800);
+      }
+      if (typeof playHeroEntrance === 'function') playHeroEntrance();
     }
 
     /* Featured hover */

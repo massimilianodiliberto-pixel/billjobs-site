@@ -75,7 +75,6 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   background: transparent;
 }
 
-/* Left / right panels cover the screen and split from center */
 .intro-panel {
   position: absolute;
   top: 0;
@@ -85,8 +84,8 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   z-index: 2;
   will-change: transform;
 }
-.intro-left  { left: 0;  transform-origin: left;  }
-.intro-right { right: 0; transform-origin: right; }
+.intro-left  { left: 0;  }
+.intro-right { right: 0; }
 
 /* Grain */
 .intro-grain {
@@ -108,7 +107,7 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   100% { transform: translate(-1px, 0);    }
 }
 
-/* Center content — sits above panels */
+/* Center content */
 .intro-center {
   position: absolute;
   inset: 0;
@@ -117,25 +116,41 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 20px;
   pointer-events: none;
+  padding: 0 32px;
 }
 
-/* Vertical line */
-.intro-line {
-  width: 1px;
-  height: 0;
-  background: rgba(255, 255, 255, 0.25);
+/* Name container */
+.intro-name-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  font-family: var(--font-ui);
+  font-size: clamp(22px, 5vw, 56px);
+  font-weight: 300;
+  color: #EFEFEF;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-align: center;
+}
+.intro-letter {
+  display: inline-block;
   opacity: 0;
 }
+.intro-space {
+  display: inline-block;
+  width: 0.3em;
+}
 
-/* Label */
-.intro-label {
+/* Subtitle */
+.intro-subtitle {
   font-family: var(--font-ui);
   font-size: 9px;
   font-weight: 300;
-  letter-spacing: 0.45em;
-  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.25);
   text-transform: uppercase;
   opacity: 0;
 }
@@ -157,7 +172,7 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   text-transform: uppercase;
   transition: color 300ms ease;
 }
-.intro-skip:hover { color: rgba(255, 255, 255, 0.5); }
+.intro-skip:hover { color: rgba(255, 255, 255, 0.45); }
 
 /* ============================================================
    NAVIGATION
