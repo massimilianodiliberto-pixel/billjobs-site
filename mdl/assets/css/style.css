@@ -64,7 +64,7 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
 }
 
 /* ============================================================
-   INTRO CINEMATICA
+   INTRO
    ============================================================ */
 
 #intro {
@@ -72,116 +72,62 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   inset: 0;
   z-index: 9500;
   overflow: hidden;
-  background: transparent;
+  background: #ECEAE5;
 }
 
-/* Two black panels — cover the entire viewport, split from center */
-.intro-panel {
+/* Panels — warm off-white, cover the dark hero underneath */
+.intro-left-panel,
+.intro-right-panel {
   position: absolute;
   top: 0; bottom: 0;
   width: 50%;
-  background: #000;
+  background: #ECEAE5;
   z-index: 2;
   will-change: transform;
 }
-.intro-left  { left: 0; }
-.intro-right { right: 0; }
+.intro-left-panel  { left: 0; }
+.intro-right-panel { right: 0; }
 
-/* Film grain — oversized to allow scale zoom without edge artifact */
-.intro-grain {
-  position: absolute;
-  inset: -8%;
-  z-index: 5;
-  pointer-events: none;
-  opacity: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  mix-blend-mode: overlay;
-  animation: grain-shift 0.9s steps(2) infinite;
-  will-change: transform, opacity;
-}
-@keyframes grain-shift {
-  0%   { transform: translate(0, 0);      }
-  25%  { transform: translate(-1px, 1px); }
-  50%  { transform: translate(1px, -1px); }
-  75%  { transform: translate(0, 1px);    }
-  100% { transform: translate(-1px, 0);   }
-}
-
-/* "ENTER THE FRAME" — suspended in darkness, minimal */
-.intro-zoom {
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-.intro-label {
-  font-family: var(--font-ui);
-  font-size: 8px;
-  font-weight: 300;
-  letter-spacing: 0.58em;
-  color: rgba(255, 255, 255, 0.34);
-  text-transform: uppercase;
-  opacity: 0;
-  will-change: opacity, transform;
-}
-
-/* Three discipline signals — floating at different perceptual depths */
-.intro-signals {
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  pointer-events: none;
-}
-.intro-signal {
-  font-family: var(--font-ui);
-  font-weight: 300;
-  text-transform: uppercase;
-  opacity: 0;
-  will-change: opacity, transform, filter;
-}
-/* DIRECTION — furthest: smallest, dimmest, slightly soft */
-.intro-signal:nth-child(1) {
-  font-size: 7.5px;
-  letter-spacing: 0.44em;
-  color: rgba(255, 255, 255, 0.36);
-  filter: blur(0.5px);
-}
-/* PRODUCTION — closest: largest, sharpest, brightest */
-.intro-signal:nth-child(2) {
-  font-size: 8.5px;
-  letter-spacing: 0.48em;
-  color: rgba(255, 255, 255, 0.54);
-}
-/* VISUAL SYSTEMS — mid-depth */
-.intro-signal:nth-child(3) {
-  font-size: 7.8px;
-  letter-spacing: 0.44em;
-  color: rgba(255, 255, 255, 0.42);
-  filter: blur(0.25px);
-}
-
-/* Architectural split line — precise, minimal, the catalyst */
+/* Vertical split line — descends from top to bottom */
 .intro-line {
   position: absolute;
-  left: 50%;
   top: 0;
-  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 1px;
-  transform: translateX(-50%) scaleY(0);
-  transform-origin: 50% 50%;
-  background: rgba(255, 255, 255, 0.5);
-  z-index: 8;
+  height: 0;
+  background: #1A1A1A;
+  z-index: 3;
+  opacity: 0;
+  will-change: height, opacity;
+}
+
+/* Center — holds the phrase */
+.intro-center {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
-  will-change: transform, opacity;
+}
+
+/* Phrase */
+.intro-phrase {
+  font-family: var(--font-ui);
+  font-size: clamp(11px, 1.8vw, 15px);
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  color: #1A1A1A;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Individual letters injected by JS */
+.intro-letter {
+  display: inline-block;
+  opacity: 0;
 }
 
 /* Skip */
@@ -192,16 +138,17 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   font-family: var(--font-ui);
   font-size: 9px;
   font-weight: 400;
-  letter-spacing: 0.22em;
-  color: rgba(255, 255, 255, 0.16);
+  letter-spacing: 0.2em;
+  color: rgba(0, 0, 0, 0.25);
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 9;
+  z-index: 5;
   text-transform: uppercase;
   transition: color 300ms ease;
+  pointer-events: all;
 }
-.intro-skip:hover { color: rgba(255, 255, 255, 0.38); }
+.intro-skip:hover { color: rgba(0, 0, 0, 0.6); }
 
 /* ============================================================
    NAVIGATION

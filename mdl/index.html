@@ -18,19 +18,13 @@
 
   <!-- INTRO -->
   <div id="intro">
-    <div class="intro-grain"></div>
-    <div class="intro-panel intro-left"></div>
-    <div class="intro-panel intro-right"></div>
+    <div class="intro-left-panel"></div>
+    <div class="intro-right-panel"></div>
     <div class="intro-line"></div>
-    <div class="intro-zoom">
-      <p class="intro-label">ENTER THE FRAME</p>
+    <div class="intro-center">
+      <p class="intro-phrase" aria-label="Enter the frame"></p>
     </div>
-    <div class="intro-signals">
-      <span class="intro-signal">DIRECTION</span>
-      <span class="intro-signal">PRODUCTION</span>
-      <span class="intro-signal">VISUAL SYSTEMS</span>
-    </div>
-    <button class="intro-skip">SKIP</button>
+    <button class="intro-skip" aria-label="Skip intro">SKIP</button>
   </div>
 
   <!-- NAV -->
@@ -141,74 +135,75 @@
   <script src="assets/js/core.js"></script>
 
   <script>
-    /* Hide scroll indicator until after intro */
-    const _si = document.querySelector('.scroll-indicator');
-    if (_si) _si.style.display = 'none';
+    /* ── PRELOAD VIDEO IMMEDIATELY ── */
+    const heroVideo = document.querySelector('.hero-video');
+    if (heroVideo) {
+      heroVideo.setAttribute('preload', 'auto');
+      heroVideo.load();
+      heroVideo.addEventListener('canplay', () => {
+        gsap.to(heroVideo, { opacity: 1, duration: 1.2, ease: 'power2.out' });
+      }, { once: true });
+      heroVideo.addEventListener('error', () => {
+        heroVideo.style.display = 'none';
+      });
+    }
+
+    /* Hide scroll indicator during intro */
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) scrollIndicator.style.display = 'none';
 
     function playHeroEntrance() {
       const tl = gsap.timeline();
       tl.to('.hero-name',     { opacity: 1, duration: 1.4, ease: 'power2.out', delay: 0.4 })
         .to('.hero-subtitle', { opacity: 1, duration: 1.0, ease: 'power2.out' }, '-=0.6');
-
-      const v = document.querySelector('.hero-video');
-      if (v) {
-        v.addEventListener('canplay', () => {
-          gsap.to(v, { opacity: 1, duration: 1.5, ease: 'power2.out' });
-        }, { once: true });
-        v.addEventListener('error', () => {}, { once: true });
-      }
-
       lenis.on('scroll', () => {
         gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });
       }, { once: true });
     }
 
+    function buildPhrase() {
+      const phrase = document.querySelector('.intro-phrase');
+      if (!phrase) return;
+      const text = 'ENTER THE FRAME';
+      phrase.innerHTML = '';
+      text.split('').forEach(char => {
+        const span = document.createElement('span');
+        span.className = 'intro-letter';
+        span.textContent = char === ' ' ? ' ' : char;
+        phrase.appendChild(span);
+      });
+    }
+
+    buildPhrase();
+
     function playIntro(onComplete) {
-      /* Initial depth states — each signal at a different perceptual distance */
-      gsap.set('.intro-label',              { scale: 0.97 });
-      gsap.set('.intro-signal:nth-child(1)', { y: -6 });   /* DIRECTION floats higher */
-      gsap.set('.intro-signal:nth-child(3)', { y:  6 });   /* VISUAL SYSTEMS floats lower */
+      const letters = document.querySelectorAll('.intro-letter');
+      const phrase  = document.querySelector('.intro-phrase');
+      const line    = document.querySelector('.intro-line');
+      const tl      = gsap.timeline({ onComplete });
 
-      const tl = gsap.timeline({ onComplete });
-
-      /* ── ATMOSPHERE ─────────────────────────────────────────── */
-      tl.to('.intro-grain', { opacity: 0.038, duration: 1.4, ease: 'power1.out' }, 0)
-        .to('.intro-grain', { scale: 1.07,    duration: 6.2, ease: 'none'       }, 0)
-
-      /* ── "ENTER THE FRAME" ──────────────────────────────────── */
-        .to('.intro-label', { opacity: 1, scale: 1.0,  duration: 1.1, ease: 'power1.out' }, 0.3)
-        .to('.intro-label', { scale: 1.03,              duration: 5.8, ease: 'none'       }, 0.3)
-        .to('.intro-label', { opacity: 0,               duration: 1.3, ease: 'power2.in'  }, 2.1)
-
-      /* ── THREE SIGNALS EMERGE ───────────────────────────────── */
-        .to('.intro-signal:nth-child(1)', { opacity: 1, y: -11, duration: 1.2, ease: 'power1.out' }, 2.6)
-        .to('.intro-signal:nth-child(2)', { opacity: 1,         duration: 1.1, ease: 'power1.out' }, 3.0)
-        .to('.intro-signal:nth-child(3)', { opacity: 1, y:  11, duration: 1.2, ease: 'power1.out' }, 3.4)
-
-      /* ── ARCHITECTURAL LINE ─────────────────────────────────── */
-        .to('.intro-line', { scaleY: 1,    duration: 0.5,  ease: 'power2.inOut' }, 4.1)
-        .to('.intro-line', { opacity: 0.88, duration: 0.2, ease: 'power2.out'   }, 4.6)
-
-      /* ── THE SPLIT ──────────────────────────────────────────── */
-        .call(() => { gsap.set('#page-transition', { scaleY: 0 }); }, [], 4.8)
-        .to('.intro-left',  { x: '-100%', duration: 1.8, ease: 'power3.inOut' }, 4.8)
-        .to('.intro-right', { x: '100%',  duration: 1.8, ease: 'power3.inOut' }, 4.8)
-
-      /* Signals dissolve into the opening */
-        .to('.intro-signal:nth-child(1)', { opacity: 0, y: -18, duration: 1.3, ease: 'power2.in' }, 4.8)
-        .to('.intro-signal:nth-child(2)', { opacity: 0,         duration: 1.3, ease: 'power2.in' }, 4.95)
-        .to('.intro-signal:nth-child(3)', { opacity: 0, y:  18, duration: 1.3, ease: 'power2.in' }, 5.1)
-        .to('.intro-line',  { opacity: 0, duration: 0.6, ease: 'power2.in' }, 4.8)
-        .to('.intro-grain', { opacity: 0, duration: 1.0, ease: 'power1.in' }, 5.0)
-
+      tl.to({}, { duration: 0.4 })
+        .to(letters, {
+          opacity: 1, duration: 0.25, ease: 'power1.out',
+          stagger: { each: 0.06, from: 'start' }
+        })
+        .to({}, { duration: 0.4 })
+        .to(phrase, { opacity: 0.25, duration: 0.08 })
+        .to(phrase, { opacity: 1,    duration: 0.08 })
+        .to(phrase, { opacity: 0.25, duration: 0.08 })
+        .to(phrase, { opacity: 1,    duration: 0.08 })
+        .to(phrase, { opacity: 0,    duration: 0.25, ease: 'power1.in' })
+        .to(line,   { opacity: 1, height: '100%', duration: 0.6, ease: 'power2.inOut' })
+        .call(() => { gsap.set('#page-transition', { scaleY: 0 }); })
+        .to('.intro-left-panel',  { x: '-100%', duration: 0.8, ease: 'power3.inOut' })
+        .to('.intro-right-panel', { x: '100%',  duration: 0.8, ease: 'power3.inOut' }, '<')
         .set('#intro', { display: 'none' });
     }
 
     function skipIntro() {
       gsap.killTweensOf([
-        '.intro-grain', '.intro-label', '.intro-line',
-        '.intro-left',  '.intro-right',
-        '.intro-signal:nth-child(1)', '.intro-signal:nth-child(2)', '.intro-signal:nth-child(3)'
+        '.intro-letter', '.intro-phrase', '.intro-line',
+        '.intro-left-panel', '.intro-right-panel'
       ]);
       gsap.set('#page-transition', { scaleY: 0 });
       gsap.set('#intro', { display: 'none' });
