@@ -140,12 +140,9 @@
     if (heroVideo) {
       heroVideo.setAttribute('preload', 'auto');
       heroVideo.load();
-      heroVideo.addEventListener('canplay', () => {
-        gsap.to(heroVideo, { opacity: 1, duration: 1.2, ease: 'power2.out' });
-      }, { once: true });
       heroVideo.addEventListener('error', () => {
         heroVideo.style.display = 'none';
-      });
+      }, { once: true });
     }
 
     /* Hide scroll indicator during intro */
@@ -182,6 +179,9 @@
       const line    = document.querySelector('.intro-line');
       const tl      = gsap.timeline({ onComplete });
 
+      /* Ensure GSAP owns initial state — prevents CSS-flash before first frame */
+      gsap.set(line, { opacity: 0, height: 0 });
+
       tl.to({}, { duration: 0.4 })
         .to(letters, {
           opacity: 1, duration: 0.25, ease: 'power1.out',
@@ -193,8 +193,12 @@
         .to(phrase, { opacity: 0.25, duration: 0.08 })
         .to(phrase, { opacity: 1,    duration: 0.08 })
         .to(phrase, { opacity: 0,    duration: 0.25, ease: 'power1.in' })
+        .to({}, { duration: 0.1 })  /* gap: ensure phrase is fully gone before line starts */
         .to(line,   { opacity: 1, height: '100%', duration: 0.6, ease: 'power2.inOut' })
-        .call(() => { gsap.set('#page-transition', { scaleY: 0 }); })
+        .call(() => {
+          gsap.set('#page-transition', { scaleY: 0 });
+          gsap.set('.hero-video', { opacity: 1 }); /* show video regardless of canplay state */
+        })
         .to('.intro-left-panel',  { x: '-100%', duration: 0.8, ease: 'power3.inOut' })
         .to('.intro-right-panel', { x: '100%',  duration: 0.8, ease: 'power3.inOut' }, '<')
         .set('#intro', { display: 'none' });
