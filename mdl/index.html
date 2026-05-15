@@ -26,8 +26,8 @@
     </div>
     <!-- Phase 2: Frame -->
     <div id="intro-p2">
-      <svg class="intro-frame-svg" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-        <rect class="intro-frame-rect" x="2" y="2" width="296" height="196" rx="0"/>
+      <svg class="intro-frame-svg" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+        <rect class="intro-frame-rect" x="2" y="2" width="316" height="176" rx="0"/>
       </svg>
       <div class="intro-frame-text">
         <span class="ift-line1">ENTER</span>
@@ -165,7 +165,6 @@
       v.load();
       function showVideo() {
         gsap.set(v, { opacity: 1 });
-        v.play().catch(() => {});
       }
       if (v.readyState >= 3) {
         showVideo();
