@@ -16,7 +16,14 @@
 
   <div id="page-transition"></div>
 
-  <!-- INTRO -->
+  <!-- INTRO WORDS (Phase 1) -->
+  <div id="intro-words">
+    <span class="iw" data-word="DIRECTION"></span>
+    <span class="iw" data-word="PRODUCTION"></span>
+    <span class="iw" data-word="VISUAL SYSTEMS"></span>
+  </div>
+
+  <!-- INTRO (Phase 2 + 3) -->
   <div id="intro">
     <div class="intro-left-panel"></div>
     <div class="intro-right-panel"></div>
@@ -180,6 +187,19 @@
 
     buildPhrase();
 
+    function playWords(onComplete) {
+      const words = document.querySelectorAll('.iw');
+      words.forEach(w => { w.textContent = w.dataset.word; });
+      const tl = gsap.timeline({ onComplete });
+      tl.to(words, {
+          opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+          stagger: 0.55
+        })
+        .to({}, { duration: 0.7 })
+        .to(words, { opacity: 0, duration: 0.4, ease: 'power1.in' })
+        .set('#intro-words', { display: 'none' });
+    }
+
     function playIntro(onComplete) {
       const letters = document.querySelectorAll('.intro-letter');
       const phrase  = document.querySelector('.intro-phrase');
@@ -213,9 +233,11 @@
 
     function skipIntro() {
       gsap.killTweensOf([
+        '.iw',
         '.intro-letter', '.intro-phrase', '.intro-line',
         '.intro-left-panel', '.intro-right-panel'
       ]);
+      gsap.set('#intro-words', { display: 'none' });
       gsap.set('#page-transition', { scaleY: 0 });
       gsap.set('#intro', { display: 'none' });
       initSite();
@@ -224,11 +246,12 @@
     document.querySelector('.intro-skip')?.addEventListener('click', skipIntro);
 
     if (sessionStorage.getItem('introSeen')) {
+      gsap.set('#intro-words', { display: 'none' });
       gsap.set('#intro', { display: 'none' });
       initSite();
     } else {
       sessionStorage.setItem('introSeen', 'true');
-      playIntro(initSite);
+      playWords(() => playIntro(initSite));
     }
 
     function initSite() {

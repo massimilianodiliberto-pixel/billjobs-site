@@ -67,6 +67,29 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
    INTRO
    ============================================================ */
 
+#intro-words {
+  position: fixed;
+  inset: 0;
+  z-index: 9600;
+  background: #080808;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.iw {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: clamp(10px, 1.6vw, 13px);
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: #888888;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
 #intro {
   position: fixed;
   inset: 0;
