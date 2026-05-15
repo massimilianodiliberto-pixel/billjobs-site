@@ -67,94 +67,99 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
    INTRO
    ============================================================ */
 
-#intro-words {
+#intro {
   position: fixed;
   inset: 0;
-  z-index: 9600;
+  z-index: 1000;
   background: #080808;
+  overflow: hidden;
+}
+
+#intro-p1 {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 18px;
 }
-.iw {
+
+.intro-word {
   display: block;
   font-family: var(--font-ui);
   font-size: clamp(10px, 1.6vw, 13px);
   font-weight: 300;
-  letter-spacing: 0.3em;
-  color: #888888;
+  letter-spacing: 0.32em;
+  color: #777777;
   text-transform: uppercase;
   opacity: 0;
-  transform: translateY(8px);
 }
 
-#intro {
-  position: fixed;
-  inset: 0;
-  z-index: 9500;
-  overflow: hidden;
-  background: #ECEAE5;
-}
-
-/* Panels — warm off-white, cover the dark hero underneath */
-.intro-left-panel,
-.intro-right-panel {
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 50%;
-  background: #ECEAE5;
-  z-index: 2;
-  will-change: transform;
-}
-.intro-left-panel  { left: 0; }
-.intro-right-panel { right: 0; }
-
-/* Vertical split line — descends from top to bottom */
-.intro-line {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 0;
-  background: #1A1A1A;
-  z-index: 3;
-  opacity: 0;
-  will-change: height, opacity;
-}
-
-/* Center — holds the phrase */
-.intro-center {
+#intro-p2 {
   position: absolute;
   inset: 0;
-  z-index: 4;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
   pointer-events: none;
 }
 
-/* Phrase */
-.intro-phrase {
-  font-family: var(--font-ui);
-  font-size: clamp(11px, 1.8vw, 15px);
-  font-weight: 300;
-  letter-spacing: 0.35em;
-  color: #1A1A1A;
-  text-transform: uppercase;
-  margin: 0;
+.intro-frame-svg {
+  width: min(72vw, 320px);
+  height: auto;
+  position: absolute;
 }
 
-/* Individual letters injected by JS */
-.intro-letter {
-  display: inline-block;
+.intro-frame-rect {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 1;
+}
+
+.intro-frame-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
   opacity: 0;
 }
 
-/* Skip */
-.intro-skip {
+.ift-line1,
+.ift-line2 {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: clamp(11px, 1.8vw, 15px);
+  font-weight: 300;
+  letter-spacing: 0.38em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+}
+
+#intro-flash {
+  position: absolute;
+  inset: 0;
+  background: #FFFFFF;
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+#intro-zoom {
+  position: absolute;
+  inset: -20%;
+  background: #080808;
+  opacity: 0;
+  z-index: 9;
+  pointer-events: none;
+  transform-origin: center;
+}
+
+#intro-skip {
   position: absolute;
   top: 24px;
   right: 24px;
@@ -162,16 +167,15 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   font-size: 9px;
   font-weight: 400;
   letter-spacing: 0.2em;
-  color: rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.18);
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 5;
+  z-index: 20;
   text-transform: uppercase;
   transition: color 300ms ease;
-  pointer-events: all;
 }
-.intro-skip:hover { color: rgba(0, 0, 0, 0.6); }
+#intro-skip:hover { color: rgba(255, 255, 255, 0.45); }
 
 /* ============================================================
    NAVIGATION
