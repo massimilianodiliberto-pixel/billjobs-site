@@ -140,6 +140,13 @@
     if (heroVideo) {
       heroVideo.setAttribute('preload', 'auto');
       heroVideo.load();
+      if (heroVideo.readyState >= 3) {
+        gsap.set(heroVideo, { opacity: 1 });
+      } else {
+        heroVideo.addEventListener('canplay', () => {
+          gsap.to(heroVideo, { opacity: 1, duration: 1.2, ease: 'power2.out' });
+        }, { once: true });
+      }
       heroVideo.addEventListener('error', () => {
         heroVideo.style.display = 'none';
       }, { once: true });
@@ -226,7 +233,9 @@
 
     function initSite() {
       window.scrollTo(0, 0);
+      lenis.scrollTo(0, { immediate: true });
       gsap.set('#page-transition', { scaleY: 0 });
+      ScrollTrigger.refresh();
       const si = document.querySelector('.scroll-indicator');
       if (si) {
         si.style.display = 'block';
