@@ -22,15 +22,19 @@
     <div class="intro-vignette"></div>
     <div class="intro-ambient"></div>
     <div id="intro-p1">
-      <span class="iw" id="iw1">DIRECTION</span>
-      <span class="iw" id="iw2">PRODUCTION</span>
-      <span class="iw" id="iw3">VISUAL SYSTEMS</span>
+      <span class="iw" id="iw1" style="opacity:0">DIRECTION</span>
+      <span class="iw" id="iw2" style="opacity:0">PRODUCTION</span>
+      <span class="iw" id="iw3" style="opacity:0">VISUAL SYSTEMS</span>
     </div>
     <button id="intro-skip">SKIP</button>
   </div>
 
-  <!-- ETF OVERLAY — floats over hero video after intro dissolves -->
+  <!-- ETF OVERLAY — same texture video as mobile menu, floats over page -->
   <div id="etf-overlay">
+    <video id="etf-video" class="menu-video" muted loop playsinline preload="none">
+      <source src="assets/img/Hero.mp4" type="video/mp4">
+    </video>
+    <div class="menu-video-overlay"></div>
     <span id="intro-etf"></span>
   </div>
 
@@ -62,9 +66,6 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-bg"></div>
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny">
-        <source src="assets/img/Hero.mp4" type="video/mp4">
-      </video>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <h1 class="hero-name">Massimiliano Di Liberto</h1>
@@ -144,12 +145,6 @@
     const scrollIndicator = document.querySelector('.scroll-indicator');
     if (scrollIndicator) scrollIndicator.style.display = 'none';
 
-    /* Hero video is opacity:1 in CSS — preload it while intro plays */
-    (function () {
-      const v = document.querySelector('.hero-video');
-      if (v) v.load();
-    })();
-
     /* ── HERO ENTRANCE ──────────────────────────────────────── */
 
     function playHeroEntrance() {
@@ -187,6 +182,12 @@
       introTimeouts.push(setTimeout(() => { document.getElementById('iw1').style.opacity = '1'; }, 700));
       introTimeouts.push(setTimeout(() => { document.getElementById('iw2').style.opacity = '1'; }, 1100));
       introTimeouts.push(setTimeout(() => { document.getElementById('iw3').style.opacity = '1'; }, 1500));
+      /* FIX 3: synchronized light pulse after all three words are fully visible */
+      introTimeouts.push(setTimeout(() => {
+        gsap.timeline()
+          .to(['#iw1', '#iw2', '#iw3'], { opacity: 0.28, duration: 0.32, ease: 'power2.in' })
+          .to(['#iw1', '#iw2', '#iw3'], { opacity: 1,    duration: 0.46, ease: 'power2.out' });
+      }, 2800));
       introTimeouts.push(setTimeout(() => {
         document.getElementById('intro-p1').style.opacity = '0';
         gsap.to('#intro', { opacity: 0, duration: 1.0, ease: 'power2.inOut', onComplete: () => {
@@ -197,6 +198,8 @@
     }
 
     function startETF() {
+      const etfVideo = document.getElementById('etf-video');
+      if (etfVideo) etfVideo.play().catch(() => {});
       const etfEl = document.getElementById('intro-etf');
       etfEl.innerHTML = '';
       'ENTER THE FRAME'.split('').forEach(ch => {
@@ -221,12 +224,14 @@
     }
 
     function afterETF() {
-      const heroVideo = document.querySelector('.hero-video');
-      if (heroVideo) { heroVideo.muted = true; heroVideo.play().catch(() => {}); }
       playHeroEntrance();
       gsap.to('#etf-overlay', { opacity: 0, duration: 0.8, ease: 'power2.inOut', onComplete: () => {
         const el = document.getElementById('etf-overlay');
-        if (el) el.style.display = 'none';
+        if (el) {
+          const v = el.querySelector('video');
+          if (v) v.pause();
+          el.style.display = 'none';
+        }
         initSite();
       }});
     }

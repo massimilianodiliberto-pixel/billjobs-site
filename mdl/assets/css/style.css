@@ -165,16 +165,9 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   pointer-events: none;
   opacity: 0;
 }
-#etf-overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 45%, transparent 28%, rgba(0, 0, 0, 0.6) 100%);
-}
-
 #intro-etf {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: block;
   font-family: var(--font-ui);
   font-size: clamp(9px, 0.95vw, 10px);
@@ -287,6 +280,18 @@ nav.scrolled {
   text-transform: uppercase;
 }
 #mobile-menu a:hover { color: rgba(255, 255, 255, 0.72); }
+
+@keyframes menu-link-pulse {
+  0%, 100% { color: rgba(255, 255, 255, 0.22); }
+  50%       { color: rgba(255, 255, 255, 0.92); }
+}
+#mobile-menu.open a {
+  animation: menu-link-pulse 2200ms ease-in-out infinite;
+}
+#mobile-menu.open a:nth-child(3) { animation-delay:     0ms; }
+#mobile-menu.open a:nth-child(4) { animation-delay:  -580ms; }
+#mobile-menu.open a:nth-child(5) { animation-delay: -1220ms; }
+#mobile-menu.open a:nth-child(6) { animation-delay: -1750ms; }
 
 .menu-video {
   position: absolute;
