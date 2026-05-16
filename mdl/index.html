@@ -26,10 +26,12 @@
       <span class="iw" id="iw2">PRODUCTION</span>
       <span class="iw" id="iw3">VISUAL SYSTEMS</span>
     </div>
-    <div id="intro-p2">
-      <span id="intro-etf">ENTER THE FRAME</span>
-    </div>
     <button id="intro-skip">SKIP</button>
+  </div>
+
+  <!-- ETF OVERLAY — floats over hero video after intro dissolves -->
+  <div id="etf-overlay">
+    <span id="intro-etf"></span>
   </div>
 
   <!-- NAV -->
@@ -181,53 +183,58 @@
     let introTimeouts = [];
 
     function playIntro() {
-      /* Split "ENTER THE FRAME" into individual char spans */
+      /* Phase 1: three words fade in via CSS opacity transitions */
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw1').style.opacity = '1'; }, 700));
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw2').style.opacity = '1'; }, 1100));
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw3').style.opacity = '1'; }, 1500));
+      introTimeouts.push(setTimeout(() => {
+        document.getElementById('intro-p1').style.opacity = '0';
+        gsap.to('#intro', { opacity: 0, duration: 1.0, ease: 'power2.inOut', onComplete: () => {
+          document.getElementById('intro').style.display = 'none';
+        }});
+      }, 4300));
+      introTimeouts.push(setTimeout(startETF, 5400));
+    }
+
+    function startETF() {
       const etfEl = document.getElementById('intro-etf');
       etfEl.innerHTML = '';
       'ENTER THE FRAME'.split('').forEach(ch => {
         const s = document.createElement('span');
         s.className = 'etf-char';
-        s.textContent = ch === ' ' ? ' ' : ch;
+        s.textContent = ch;
         etfEl.appendChild(s);
       });
+      gsap.set('.etf-char', { opacity: 0, scale: 0.88 });
+      gsap.to('#etf-overlay', { opacity: 1, duration: 0.4, ease: 'power2.out' });
+      const chars = document.querySelectorAll('.etf-char');
+      chars.forEach((char, i) => {
+        gsap.to(char, {
+          keyframes: [
+            { opacity: 1, scale: 1.08, duration: 0.35, ease: 'power2.out' },
+            { opacity: 0, scale: 1.05, duration: 0.45, ease: 'power2.inOut' }
+          ],
+          delay: i * 0.09,
+          onComplete: i === chars.length - 1 ? afterETF : undefined
+        });
+      });
+    }
 
-      gsap.set('.etf-char', { opacity: 0, scale: 0.88, filter: 'blur(2px)' });
-
-      /* 1 — Words fade in via CSS transition, constant stagger */
-      introTimeouts.push(setTimeout(() => { document.getElementById('iw1').style.opacity = '1'; }, 700));
-      introTimeouts.push(setTimeout(() => { document.getElementById('iw2').style.opacity = '1'; }, 1100));
-      introTimeouts.push(setTimeout(() => { document.getElementById('iw3').style.opacity = '1'; }, 1500));
-
-      /* 2 — After hold: p1 fades, video reveals under ETF */
-      introTimeouts.push(setTimeout(() => {
-        document.getElementById('intro-p1').style.opacity = '0';
-        gsap.to('#intro', { backgroundColor: 'rgba(6,6,6,0)', duration: 1.2, ease: 'power2.inOut' });
-      }, 4300));
-
-      /* 3 — ENTER THE FRAME chars animate over the hero video */
-      introTimeouts.push(setTimeout(() => {
-        const tl = gsap.timeline();
-        tl.to('.etf-char', {
-            opacity: 1, scale: 1.14, filter: 'blur(0px)',
-            duration: 0.42, stagger: 0.062, ease: 'power2.out'
-          })
-          .to({}, { duration: 0.85 })
-          .to('.etf-char', {
-            opacity: 0, scale: 0.93, filter: 'blur(1px)',
-            duration: 0.32, stagger: { amount: 0.65, from: 'start' }, ease: 'power1.in'
-          })
-          .call(playHeroEntrance)
-          .to('#intro', { opacity: 0, duration: 2.0, ease: 'power2.inOut' }, '-=0.4')
-          .set('#intro', { display: 'none' })
-          .call(initSite);
-      }, 5500));
+    function afterETF() {
+      playHeroEntrance();
+      gsap.to('#etf-overlay', { opacity: 0, duration: 0.8, ease: 'power2.inOut', onComplete: () => {
+        const el = document.getElementById('etf-overlay');
+        if (el) el.style.display = 'none';
+        initSite();
+      }});
     }
 
     function skipIntro() {
       introTimeouts.forEach(id => clearTimeout(id));
       introTimeouts = [];
-      gsap.killTweensOf(['.etf-char', '#intro']);
+      gsap.killTweensOf(['#intro', '#etf-overlay', '.etf-char']);
       gsap.set('#intro', { display: 'none' });
+      gsap.set('#etf-overlay', { display: 'none' });
       playHeroEntrance();
       initSite();
     }
@@ -236,6 +243,7 @@
 
     if (sessionStorage.getItem('introSeen')) {
       gsap.set('#intro', { display: 'none' });
+      gsap.set('#etf-overlay', { display: 'none' });
       playHeroEntrance();
       initSite();
     } else {

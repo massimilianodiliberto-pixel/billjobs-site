@@ -539,7 +539,7 @@
         media.appendChild(iframe);
       } else if (p.action === 'link_video' && p.video) {
         const vid = document.createElement('video');
-        vid.src = p.video; vid.controls = true; vid.autoplay = true;
+        vid.src = p.video; vid.controls = true; vid.autoplay = true; vid.setAttribute('playsinline', '');
         media.appendChild(vid);
       } else if (p.image) {
         const img = document.createElement('img');

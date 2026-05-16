@@ -154,18 +154,27 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   transition: opacity 1000ms ease-in-out;
 }
 
-/* Phase 2 — ENTER THE FRAME */
-#intro-p2 {
-  position: absolute;
+/* ETF Overlay — floats over hero video after intro dissolves */
+#etf-overlay {
+  position: fixed;
   inset: 0;
-  z-index: 2;
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  opacity: 0;
+}
+#etf-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 45%, transparent 28%, rgba(0, 0, 0, 0.6) 100%);
 }
 
 #intro-etf {
+  position: relative;
+  z-index: 1;
   display: block;
   font-family: var(--font-ui);
   font-size: clamp(9px, 0.95vw, 10px);
@@ -173,7 +182,6 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   letter-spacing: 0.68em;
   color: rgba(255, 255, 255, 0.62);
   text-transform: uppercase;
-  opacity: 0;
 }
 .etf-char {
   display: inline-block;
