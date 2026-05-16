@@ -41,14 +41,17 @@
 
   <main class="work-page">
 
+    <div class="work-header">
+      <h1 class="work-title" id="work-title">ALL WORKS</h1>
+    </div>
+
     <div class="work-filters" id="work-filters">
-      <button class="filter active" data-filter="all">All<br>Work</button>
-      <button class="filter" data-filter="beauty-fashion">Beauty &amp;<br>Fashion</button>
-      <button class="filter" data-filter="ai-visuals">Artificial<br>Intelligence<br>Production</button>
-      <button class="filter" data-filter="music">Music<br>Videos</button>
-      <button class="filter" data-filter="events-live">Events &amp;<br>Live Shows</button>
-      <button class="filter" data-filter="commercial">Commercials<br>&amp; Industrial</button>
-      <button class="filter" data-filter="film-development">Film &amp;<br>Development</button>
+      <button class="filter" data-filter="beauty-fashion">BEAUTY &amp;<br>FASHION</button>
+      <button class="filter" data-filter="music">MUSIC<br>VIDEOS</button>
+      <button class="filter" data-filter="events-live">EVENTS &amp;<br>LIVE SHOWS</button>
+      <button class="filter" data-filter="commercial">COMMERCIALS<br>&amp; INDUSTRIAL</button>
+      <button class="filter" data-filter="film-development">FILM &amp;<br>DEVELOPMENT</button>
+      <button class="filter" data-filter="ai-visuals">ARTIFICIAL<br>PRODUCTION</button>
     </div>
 
     <div class="wk-grid" id="wk-grid"></div>
@@ -179,7 +182,7 @@
       {
         id: 'pleasure-filler',
         title: 'Pleasure Professional Luxury — Filler Pure Oil',
-        cat: 'ai-visuals', catLabel: 'AI Visuals',
+        cat: 'ai-visuals', catLabel: 'Artificial Production',
         role: 'Director / Creative Producer',
         desc: 'Spot luxury beauty realizzato interamente con workflow AI generativa. Visual immersivi per prodotto cosmetico premium.',
         action: 'link_youtube', youtube: null, video: null, image: null,
@@ -188,7 +191,7 @@
       {
         id: 'pleasure-divine',
         title: 'Pleasure Professional Luxury — Divine Nectar',
-        cat: 'ai-visuals', catLabel: 'AI Visuals',
+        cat: 'ai-visuals', catLabel: 'Artificial Production',
         role: 'Director / Creative Producer',
         desc: 'Spot luxury beauty realizzato interamente con AI generativa. Narrazione visiva per lancio prodotto.',
         action: 'link_youtube', youtube: null, video: null, image: null,
@@ -197,7 +200,7 @@
       {
         id: 'maida-mado',
         title: 'Maida Madò — Videoclip',
-        cat: 'ai-visuals', catLabel: 'AI Visuals',
+        cat: 'ai-visuals', catLabel: 'Artificial Production',
         role: 'Director / Producer',
         desc: 'Videoclip realizzato con workflow AI generativa. Produzione indipendente.',
         action: 'link_youtube', youtube: null, video: null, image: null,
@@ -499,14 +502,25 @@
 
     /* ── FILTER ──────────────────────────────────────────────── */
 
+    function showAll() {
+      document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+      grid.querySelectorAll('.wk-card').forEach(card => {
+        card.style.display = '';
+        gsap.to(card, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+      });
+    }
+
+    document.getElementById('work-title').addEventListener('click', showAll);
+
     document.getElementById('work-filters').addEventListener('click', e => {
       const btn = e.target.closest('.filter');
       if (!btn) return;
+      if (btn.classList.contains('active')) { showAll(); return; }
       document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const f = btn.dataset.filter;
       grid.querySelectorAll('.wk-card').forEach(card => {
-        const show = f === 'all' || card.dataset.cat === f;
+        const show = card.dataset.cat === f;
         if (show) {
           card.style.display = '';
           gsap.to(card, { opacity: 1, duration: 0.35, ease: 'power2.out' });
