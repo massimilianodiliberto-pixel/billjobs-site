@@ -14,31 +14,18 @@
 </head>
 <body>
 
+  <div id="grain"></div>
   <div id="page-transition"></div>
 
   <!-- INTRO -->
   <div id="intro">
-    <!-- Phase 1: Three words -->
-    <div id="intro-p1">
-      <span class="intro-word" id="iw1">DIRECTION</span>
-      <span class="intro-word" id="iw2">PRODUCTION</span>
-      <span class="intro-word" id="iw3">VISUAL SYSTEMS</span>
+    <div id="intro-pl"></div>
+    <div id="intro-pr"></div>
+    <div id="intro-text">
+      <span id="it-eyebrow">Massimiliano Di Liberto</span>
+      <span id="it-main">ENTER THE FRAME</span>
+      <span id="it-sub">Direction · Production · Visual Systems</span>
     </div>
-    <!-- Phase 2: Frame -->
-    <div id="intro-p2">
-      <svg class="intro-frame-svg" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
-        <rect class="intro-frame-rect" x="2" y="2" width="316" height="176" rx="0"/>
-      </svg>
-      <div class="intro-frame-text">
-        <span class="ift-line1">ENTER</span>
-        <span class="ift-line2">THE FRAME</span>
-      </div>
-    </div>
-    <!-- Phase 3: Flash -->
-    <div id="intro-flash"></div>
-    <!-- Zoom layer -->
-    <div id="intro-zoom"></div>
-    <!-- Skip -->
     <button id="intro-skip">SKIP</button>
   </div>
 
@@ -46,17 +33,17 @@
   <nav id="nav">
     <a class="nav-logo" href="index.html">MDL</a>
     <div class="nav-links">
-      <a href="index.html"          class="nav-link active">FRAME</a>
-      <a href="work/index.html"     class="nav-link">WORK</a>
-      <a href="system/index.html"   class="nav-link">SYSTEM</a>
-      <a href="contact/index.html"  class="nav-link">SIGNAL</a>
+      <a href="work/index.html"    class="nav-link">WORK</a>
+      <a href="author/index.html"  class="nav-link">AUTHOR</a>
+      <a href="system/index.html"  class="nav-link">SYSTEM</a>
+      <a href="contact/index.html" class="nav-link">SIGNAL</a>
     </div>
     <button class="nav-toggle" aria-label="Menu">MENU</button>
   </nav>
 
   <div id="mobile-menu">
-    <a href="index.html">FRAME</a>
     <a href="work/index.html">WORK</a>
+    <a href="author/index.html">AUTHOR</a>
     <a href="system/index.html">SYSTEM</a>
     <a href="contact/index.html">SIGNAL</a>
   </div>
@@ -66,13 +53,14 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-bg"></div>
-      <video class="hero-video" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback x-webkit-airplay="deny">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny">
         <source src="assets/img/Hero.mp4" type="video/mp4">
       </video>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <h1 class="hero-name">Massimiliano Di Liberto</h1>
         <p class="hero-subtitle">DIRECTION &nbsp;·&nbsp; PRODUCTION &nbsp;·&nbsp; VISUAL SYSTEMS</p>
+        <p class="hero-descriptor">Creative Producer · Director working across cinema, live events, branded content and visual systems.</p>
       </div>
       <div class="scroll-indicator"></div>
     </section>
@@ -130,8 +118,7 @@
       </div>
       <div class="bj-right">
         <p class="bj-text">
-          Produzione indipendente.<br>
-          Musica, visuals, progetti fuori brief.
+          A cinematic lab for independent productions, music visuals and experimental systems.
         </p>
         <a href="system/index.html" class="bj-link">SYSTEM →</a>
       </div>
@@ -157,102 +144,34 @@
     /* Remove page-transition overlay so intro (z-index:1000) is visible */
     gsap.set('#page-transition', { scaleY: 0 });
 
-    /* HERO VIDEO PRELOAD */
+    /* HERO VIDEO — trigger preload; video plays behind panels at opacity:1 */
     (function () {
       const v = document.querySelector('.hero-video');
-      if (!v) return;
-      v.setAttribute('preload', 'auto');
-      v.load();
-      function showVideo() {
-        gsap.set(v, { opacity: 1 });
-      }
-      if (v.readyState >= 3) {
-        showVideo();
-      } else {
-        v.addEventListener('canplay', showVideo, { once: true });
-      }
+      if (v) v.load();
     })();
 
-    /* SVG stroke setup */
-    (function () {
-      const rect = document.querySelector('.intro-frame-rect');
-      if (!rect) return;
-      const perimeter = 984;
-      rect.style.strokeDasharray = perimeter;
-      rect.style.strokeDashoffset = perimeter;
-    })();
+    /* ── INTRO ───────────────────────────────────────────── */
 
-    function playPhase1(onComplete) {
-      const w1 = document.getElementById('iw1');
-      const w2 = document.getElementById('iw2');
-      const w3 = document.getElementById('iw3');
-      const tl = gsap.timeline({ onComplete });
-      tl
-        .to(w1, { opacity: 1, duration: 0.6, ease: 'power1.out', delay: 0.4 })
-        .to(w1, { opacity: 0, duration: 0.4, ease: 'power1.in' }, '+=0.5')
-        .to(w2, { opacity: 1, duration: 0.6, ease: 'power1.out' }, '-=0.1')
-        .to(w2, { opacity: 0, duration: 0.4, ease: 'power1.in' }, '+=0.5')
-        .to(w3, { opacity: 1, duration: 0.6, ease: 'power1.out' }, '-=0.1')
-        .to(w3, { opacity: 0, duration: 0.4, ease: 'power1.in' }, '+=0.5')
-        .set('#intro-p1', { display: 'none' });
-    }
-
-    function playPhase2(onComplete) {
-      const p2   = document.getElementById('intro-p2');
-      const rect = document.querySelector('.intro-frame-rect');
-      const txt  = document.querySelector('.intro-frame-text');
-      const tl   = gsap.timeline({ onComplete });
-      tl
-        .set(p2, { opacity: 1 })
-        .to(rect, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut' })
-        .to(txt,  { opacity: 1, duration: 0.6, ease: 'power1.out' }, '-=0.2')
-        .to({},   { duration: 0.5 });
-    }
-
-    function playPhase3(onComplete) {
-      const flash = document.getElementById('intro-flash');
-      const zoom  = document.getElementById('intro-zoom');
-      const tl    = gsap.timeline({ onComplete });
-      tl
-        .to(flash, { opacity: 1, duration: 0.05 })
-        .to(flash, { opacity: 0, duration: 0.18, ease: 'power2.in' })
-        .set('#intro-p2', { opacity: 0 })
-        .set(zoom, { opacity: 1, scale: 1 })
-        .to(zoom,  { scale: 4, duration: 0.5, ease: 'power3.in' })
-        .to(zoom,  { opacity: 0, duration: 0.3, ease: 'power1.out' }, '-=0.15')
-        .set('#intro', { display: 'none' });
-    }
-
-    function playIntro(onComplete) {
-      playPhase1(() => {
-        playPhase2(() => {
-          playPhase3(onComplete);
-        });
-      });
-    }
-
-    function skipIntro() {
-      gsap.killTweensOf([
-        '#iw1', '#iw2', '#iw3',
-        '.intro-frame-rect', '.intro-frame-text',
-        '#intro-flash', '#intro-zoom'
-      ]);
-      gsap.set('#intro', { display: 'none' });
-      initSite();
-    }
-
-    document.getElementById('intro-skip')
-      ?.addEventListener('click', skipIntro);
-
-    if (sessionStorage.getItem('introSeen')) {
-      gsap.set('#intro', { display: 'none' });
-      initSite();
-    } else {
-      sessionStorage.setItem('introSeen', 'true');
-      playIntro(initSite);
+    function playHeroEntrance() {
+      const tl = gsap.timeline();
+      tl.to('.hero-name',       { opacity: 1, duration: 1.6, ease: 'power2.out', delay: 0.3 })
+        .to('.hero-subtitle',   { opacity: 1, duration: 1.2, ease: 'power2.out' }, '-=0.8')
+        .to('.hero-descriptor', { opacity: 1, duration: 1.0, ease: 'power2.out' }, '-=0.7');
+      if (typeof lenis !== 'undefined') {
+        lenis.on('scroll', () => {
+          gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });
+        }, { once: true });
+      }
     }
 
     function initSite() {
+      window.scrollTo(0, 0);
+      if (typeof lenis !== 'undefined') {
+        lenis.scrollTo(0, { immediate: true });
+      }
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
       const si = document.querySelector('.scroll-indicator');
       if (si) {
         si.style.display = 'block';
@@ -261,25 +180,53 @@
           gsap.to(si, { opacity: 1, duration: 1 });
         }, 2800);
       }
-      window.scrollTo(0, 0);
-      if (typeof lenis !== 'undefined') {
-        lenis.scrollTo(0, { immediate: true });
-      }
-      if (typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.refresh();
-      }
-      if (typeof playHeroEntrance === 'function') {
-        playHeroEntrance();
-      }
     }
 
-    function playHeroEntrance() {
+    function playIntro() {
+      const pl = document.getElementById('intro-pl');
+      const pr = document.getElementById('intro-pr');
       const tl = gsap.timeline();
-      tl.to('.hero-name',     { opacity: 1, duration: 1.4, ease: 'power2.out', delay: 0.4 })
-        .to('.hero-subtitle', { opacity: 1, duration: 1.0, ease: 'power2.out' }, '-=0.6');
-      lenis.on('scroll', () => {
-        gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });
-      }, { once: true });
+
+      /* 1 — Text fades in slowly */
+      tl.to('#it-eyebrow', { opacity: 1, duration: 1.4, ease: 'power1.out', delay: 0.6 })
+        .to('#it-main',    { opacity: 1, duration: 1.2, ease: 'power1.out' }, '-=0.8')
+        .to('#it-sub',     { opacity: 1, duration: 1.0, ease: 'power1.out' }, '-=0.6')
+
+      /* 2 — Hold */
+        .to({}, { duration: 1.2 })
+
+      /* 3 — Text fades out, drifts up */
+        .to('#intro-text', { opacity: 0, y: -28, duration: 0.8, ease: 'power2.in' })
+
+      /* 4 — Hero animates in as panels start opening */
+        .call(playHeroEntrance)
+
+      /* 5 — Panels slide apart */
+        .to(pl, { xPercent: -100, duration: 1.8, ease: 'expo.inOut' }, '-=0.1')
+        .to(pr, { xPercent:  100, duration: 1.8, ease: 'expo.inOut' }, '<')
+
+      /* 6 — Cleanup */
+        .set('#intro', { display: 'none' })
+        .call(initSite);
+    }
+
+    function skipIntro() {
+      gsap.killTweensOf(['#it-eyebrow', '#it-main', '#it-sub', '#intro-text', '#intro-pl', '#intro-pr']);
+      gsap.set('#intro', { display: 'none' });
+      playHeroEntrance();
+      initSite();
+    }
+
+    document.getElementById('intro-skip')
+      ?.addEventListener('click', skipIntro);
+
+    if (sessionStorage.getItem('introSeen')) {
+      gsap.set('#intro', { display: 'none' });
+      playHeroEntrance();
+      initSite();
+    } else {
+      sessionStorage.setItem('introSeen', 'true');
+      playIntro();
     }
 
     /* Featured hover */

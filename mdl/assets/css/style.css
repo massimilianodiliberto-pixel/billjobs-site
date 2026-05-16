@@ -64,100 +64,72 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
 }
 
 /* ============================================================
-   INTRO
+   INTRO — cinematic two-panel reveal
    ============================================================ */
 
 #intro {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: #080808;
   overflow: hidden;
-}
-
-#intro-p1 {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-}
-
-.intro-word {
-  display: block;
-  font-family: var(--font-ui);
-  font-size: clamp(10px, 1.6vw, 13px);
-  font-weight: 300;
-  letter-spacing: 0.32em;
-  color: #777777;
-  text-transform: uppercase;
-  opacity: 0;
-}
-
-#intro-p2 {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
   pointer-events: none;
 }
 
-.intro-frame-svg {
-  width: min(80vw, 360px);
-  height: auto;
+#intro-pl,
+#intro-pr {
   position: absolute;
-  background: transparent;
+  top: 0;
+  bottom: 0;
+  width: calc(50% + 1px);
+  background: #060606;
+  will-change: transform;
+  pointer-events: all;
 }
+#intro-pl { left: 0; }
+#intro-pr { right: 0; }
 
-.intro-frame-rect {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.4);
-  stroke-width: 1;
-}
-
-.intro-frame-text {
-  position: relative;
+#intro-text {
+  position: absolute;
+  inset: 0;
   z-index: 2;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  opacity: 0;
+  justify-content: center;
+  gap: 14px;
+  pointer-events: none;
 }
 
-.ift-line1,
-.ift-line2 {
+#it-eyebrow {
   display: block;
   font-family: var(--font-ui);
-  font-size: clamp(11px, 1.8vw, 15px);
+  font-size: clamp(9px, 1.1vw, 11px);
   font-weight: 300;
-  letter-spacing: 0.38em;
-  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.3);
   text-transform: uppercase;
+  opacity: 0;
 }
 
-#intro-flash {
-  position: absolute;
-  inset: 0;
-  background: #FFFFFF;
+#it-main {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: clamp(13px, 2.2vw, 18px);
+  font-weight: 300;
+  letter-spacing: 0.4em;
+  color: rgba(255, 255, 255, 0.72);
+  text-transform: uppercase;
   opacity: 0;
-  z-index: 10;
-  pointer-events: none;
 }
 
-#intro-zoom {
-  position: absolute;
-  inset: -20%;
-  background: #080808;
+#it-sub {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: clamp(9px, 1vw, 10px);
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.2);
   opacity: 0;
-  z-index: 9;
-  pointer-events: none;
-  transform-origin: center;
 }
 
 #intro-skip {
@@ -168,15 +140,16 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   font-size: 9px;
   font-weight: 400;
   letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.15);
   background: none;
   border: none;
   cursor: pointer;
   z-index: 20;
   text-transform: uppercase;
   transition: color 300ms ease;
+  pointer-events: all;
 }
-#intro-skip:hover { color: rgba(255, 255, 255, 0.45); }
+#intro-skip:hover { color: rgba(255, 255, 255, 0.42); }
 
 /* ============================================================
    NAVIGATION
@@ -313,24 +286,22 @@ footer a:hover { color: var(--text-primary); }
   inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  opacity: 0;
+  opacity: 1; /* always visible — intro panels are the overlay */
   pointer-events: none;
   z-index: 1;
 }
 .hero-video::-webkit-media-controls,
 .hero-video::-webkit-media-controls-enclosure,
 .hero-video::-webkit-media-controls-panel { display: none !important; }
-/* Gradient overlay — always above video, ensures text contrast */
+/* Gradient overlay — cinematic vignette + bottom fade for text contrast */
 .hero-overlay {
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.92) 0%,
-    rgba(0, 0, 0, 0.30) 50%,
-    rgba(0, 0, 0, 0.10) 100%
-  );
+  background:
+    radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(0, 0, 0, 0.52) 100%),
+    linear-gradient(to right, rgba(0, 0, 0, 0.36) 0%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.36) 100%),
+    linear-gradient(to top,   rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.30) 50%, rgba(0, 0, 0, 0.15) 100%);
 }
 .hero-content {
   position: absolute;
@@ -355,6 +326,17 @@ footer a:hover { color: var(--text-primary); }
   color: var(--text-muted);
   margin-top: 18px;
   opacity: 0;
+}
+.hero-descriptor {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.2);
+  margin-top: 32px;
+  opacity: 0;
+  max-width: 480px;
+  line-height: 1.9;
 }
 .scroll-indicator {
   position: absolute;
@@ -1025,6 +1007,35 @@ footer a:hover { color: var(--text-primary); }
   .overlay.active .overlay-panel {
     transform: translateX(0);
   }
+}
+
+/* ============================================================
+   FILM GRAIN
+   ============================================================ */
+
+#grain {
+  position: fixed;
+  inset: -200px;
+  z-index: 9990;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: grain-drift 0.12s steps(1) infinite;
+}
+
+@keyframes grain-drift {
+  0%   { background-position:   0px   0px; }
+  10%  { background-position: -42px -63px; }
+  20%  { background-position:  17px  85px; }
+  30%  { background-position: -71px  14px; }
+  40%  { background-position:  55px -37px; }
+  50%  { background-position: -29px  62px; }
+  60%  { background-position:  88px -18px; }
+  70%  { background-position: -14px  47px; }
+  80%  { background-position:  33px -91px; }
+  90%  { background-position: -66px  28px; }
+  100% { background-position:  11px -54px; }
 }
 
 /* ============================================================
