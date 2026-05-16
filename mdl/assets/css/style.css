@@ -147,7 +147,7 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   font-size: clamp(9px, 1.05vw, 11px);
   font-weight: 300;
   letter-spacing: 0.55em;
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(255, 255, 255, 0.72);
   text-transform: uppercase;
   opacity: 0;
 }
@@ -169,9 +169,14 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   font-size: clamp(9px, 0.95vw, 10px);
   font-weight: 300;
   letter-spacing: 0.68em;
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.62);
   text-transform: uppercase;
   opacity: 0;
+}
+.etf-char {
+  display: inline-block;
+  transform-origin: center 60%;
+  white-space: pre;
 }
 
 /* Skip */
@@ -261,13 +266,14 @@ nav.scrolled {
 #mobile-menu.open { display: flex; }
 #mobile-menu a {
   font-family: var(--font-ui);
-  font-size: 32px;
+  font-size: 11px;
   font-weight: 300;
-  letter-spacing: 0.1em;
-  color: var(--text-primary);
+  letter-spacing: 0.52em;
+  color: rgba(255, 255, 255, 0.38);
   transition: color 300ms ease;
+  text-transform: uppercase;
 }
-#mobile-menu a:hover { color: var(--accent); }
+#mobile-menu a:hover { color: rgba(255, 255, 255, 0.72); }
 
 @media (max-width: 767px) {
   .nav-links  { display: none; }
@@ -521,23 +527,30 @@ footer a:hover { color: var(--text-primary); }
 .work-filters {
   padding: 0 var(--section-h) 44px;
   display: flex;
-  gap: 28px;
+  gap: 32px;
   flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  align-items: flex-start;
 }
 .work-filters::-webkit-scrollbar { display: none; }
 .filter {
   font-family: var(--font-ui);
-  font-size: var(--text-label);
-  font-weight: 400;
-  letter-spacing: 0.16em;
-  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1.75;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: normal;
   transition: color 300ms ease;
+  flex-shrink: 0;
+  max-width: 88px;
 }
 .filter.active,
-.filter:hover { color: var(--text-primary); }
+.filter:hover { color: rgba(255, 255, 255, 0.68); }
 
 .work-grid {
   display: grid;

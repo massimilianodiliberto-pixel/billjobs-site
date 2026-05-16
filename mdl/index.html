@@ -105,15 +105,6 @@
       </div>
     </section>
 
-    <!-- CREDENTIALS -->
-    <section class="credentials">
-      <p class="credentials-text">
-        Warner Music &nbsp;·&nbsp; Cosmoprof &nbsp;·&nbsp; Berlinale EFM
-        &nbsp;·&nbsp; PwC &nbsp;·&nbsp; Giuseppe Tornatore
-        &nbsp;·&nbsp; Festival Cinema Venezia &nbsp;·&nbsp; Confindustria
-      </p>
-    </section>
-
     <!-- BILL JOBS INTRO -->
     <section class="bj-intro">
       <div class="bj-left">
@@ -184,8 +175,18 @@
     /* ── INTRO SEQUENCE ─────────────────────────────────────── */
 
     function playIntro() {
+      /* Split "ENTER THE FRAME" into individual char spans */
+      const etfEl = document.getElementById('intro-etf');
+      etfEl.innerHTML = '';
+      'ENTER THE FRAME'.split('').forEach(ch => {
+        const s = document.createElement('span');
+        s.className = 'etf-char';
+        s.textContent = ch === ' ' ? ' ' : ch;
+        etfEl.appendChild(s);
+      });
+
       gsap.set(['#iw1', '#iw2', '#iw3'], { opacity: 0, filter: 'blur(7px)' });
-      gsap.set('#intro-etf',              { opacity: 0, filter: 'blur(5px)' });
+      gsap.set('.etf-char', { opacity: 0, scale: 0.88, filter: 'blur(2px)' });
 
       const tl = gsap.timeline();
 
@@ -198,24 +199,33 @@
         .to({}, { duration: 1.8 })
 
       /* 3 — Fade out the three lines */
-        .to('#intro-p1', { opacity: 0, duration: 1.2, ease: 'power2.inOut' })
+        .to('#intro-p1', { opacity: 0, duration: 1.0, ease: 'power2.inOut' })
 
-      /* 4 — ENTER THE FRAME dissolves in */
-        .to({}, { duration: 0.5 })
-        .to('#intro-etf', { opacity: 1, filter: 'blur(0px)', duration: 2.6, ease: 'power2.out' })
+      /* 4 — ENTER THE FRAME: projector lights each letter left → right */
+        .to({}, { duration: 0.4 })
+        .to('.etf-char', {
+          opacity: 1, scale: 1.14, filter: 'blur(0px)',
+          duration: 0.42, stagger: 0.062, ease: 'power2.out'
+        })
 
-      /* 5 — Hold */
-        .to({}, { duration: 1.8 })
+      /* 5 — Hold — all letters lit */
+        .to({}, { duration: 0.85 })
 
-      /* 6 — Trigger hero entrance, then dissolve intro into hero */
+      /* 6 — Letters extinguish left → right — projector off */
+        .to('.etf-char', {
+          opacity: 0, scale: 0.93, filter: 'blur(1px)',
+          duration: 0.32, stagger: { amount: 0.65, from: 'start' }, ease: 'power1.in'
+        })
+
+      /* 7 — Hero entrance, intro dissolves */
         .call(playHeroEntrance)
-        .to('#intro', { opacity: 0, duration: 2.6, ease: 'power2.inOut' }, '-=0.3')
+        .to('#intro', { opacity: 0, duration: 2.0, ease: 'power2.inOut' }, '-=0.4')
         .set('#intro', { display: 'none' })
         .call(initSite);
     }
 
     function skipIntro() {
-      gsap.killTweensOf(['#iw1', '#iw2', '#iw3', '#intro-p1', '#intro-etf', '#intro']);
+      gsap.killTweensOf(['#iw1', '#iw2', '#iw3', '#intro-p1', '.etf-char', '#intro']);
       gsap.set('#intro', { display: 'none' });
       playHeroEntrance();
       initSite();
@@ -249,7 +259,7 @@
 
     /* ── SCROLL REVEAL ──────────────────────────────────────── */
 
-    gsap.utils.toArray('.featured, .credentials, .bj-intro').forEach(el => {
+    gsap.utils.toArray('.featured, .bj-intro').forEach(el => {
       gsap.fromTo(el,
         { opacity: 0, y: 24 },
         {
