@@ -221,6 +221,8 @@
     }
 
     function afterETF() {
+      const heroVideo = document.querySelector('.hero-video');
+      if (heroVideo) { heroVideo.muted = true; heroVideo.play().catch(() => {}); }
       playHeroEntrance();
       gsap.to('#etf-overlay', { opacity: 0, duration: 0.8, ease: 'power2.inOut', onComplete: () => {
         const el = document.getElementById('etf-overlay');
