@@ -561,7 +561,7 @@ footer a:hover { color: var(--text-primary); }
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  align-items: flex-start;
+  align-items: center;
 }
 .work-filters::-webkit-scrollbar { display: none; }
 .filter {
@@ -571,7 +571,7 @@ footer a:hover { color: var(--text-primary); }
   letter-spacing: 0.2em;
   color: rgba(255, 255, 255, 0.28);
   line-height: 1.75;
-  text-align: left;
+  text-align: center;
   text-transform: uppercase;
   white-space: normal;
   transition: color 300ms ease;
@@ -883,6 +883,14 @@ footer a:hover { color: var(--text-primary); }
   letter-spacing: 0.16em;
   color: var(--text-muted);
   margin-bottom: 14px;
+}
+.system-contact .sys-copy {
+  font-size: var(--text-body);
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.9;
+  margin-bottom: 28px;
+  letter-spacing: 0;
 }
 .system-contact a {
   font-family: var(--font-ui);
