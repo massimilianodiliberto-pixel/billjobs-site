@@ -45,6 +45,10 @@
   </nav>
 
   <div id="mobile-menu">
+    <video class="menu-video" muted loop playsinline preload="none">
+      <source src="assets/img/Hero.mp4" type="video/mp4">
+    </video>
+    <div class="menu-video-overlay"></div>
     <a href="work/index.html">WORK</a>
     <a href="about/index.html">AUTHOR</a>
     <a href="system/index.html">SYSTEM</a>
@@ -174,6 +178,8 @@
 
     /* ── INTRO SEQUENCE ─────────────────────────────────────── */
 
+    let introTimeouts = [];
+
     function playIntro() {
       /* Split "ENTER THE FRAME" into individual char spans */
       const etfEl = document.getElementById('intro-etf');
@@ -185,47 +191,42 @@
         etfEl.appendChild(s);
       });
 
-      gsap.set(['#iw1', '#iw2', '#iw3'], { opacity: 0, filter: 'blur(7px)' });
       gsap.set('.etf-char', { opacity: 0, scale: 0.88, filter: 'blur(2px)' });
 
-      const tl = gsap.timeline();
+      /* 1 — Words fade in via CSS transition, constant stagger */
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw1').style.opacity = '1'; }, 700));
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw2').style.opacity = '1'; }, 1100));
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw3').style.opacity = '1'; }, 1500));
 
-      /* 1 — DIRECTION / PRODUCTION / VISUAL SYSTEMS */
-      tl.to('#iw1', { opacity: 1, filter: 'blur(0px)', duration: 1.9, ease: 'power2.out', delay: 0.9 })
-        .to('#iw2', { opacity: 1, filter: 'blur(0px)', duration: 1.7, ease: 'power2.out' }, '-=1.1')
-        .to('#iw3', { opacity: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power2.out' }, '-=1.0')
+      /* 2 — After hold: p1 fades, video reveals under ETF */
+      introTimeouts.push(setTimeout(() => {
+        document.getElementById('intro-p1').style.opacity = '0';
+        gsap.to('#intro', { backgroundColor: 'rgba(6,6,6,0)', duration: 1.2, ease: 'power2.inOut' });
+      }, 4300));
 
-      /* 2 — Breathe */
-        .to({}, { duration: 1.8 })
-
-      /* 3 — Fade out the three lines */
-        .to('#intro-p1', { opacity: 0, duration: 1.0, ease: 'power2.inOut' })
-
-      /* 4 — ENTER THE FRAME: projector lights each letter left → right */
-        .to({}, { duration: 0.4 })
-        .to('.etf-char', {
-          opacity: 1, scale: 1.14, filter: 'blur(0px)',
-          duration: 0.42, stagger: 0.062, ease: 'power2.out'
-        })
-
-      /* 5 — Hold — all letters lit */
-        .to({}, { duration: 0.85 })
-
-      /* 6 — Letters extinguish left → right — projector off */
-        .to('.etf-char', {
-          opacity: 0, scale: 0.93, filter: 'blur(1px)',
-          duration: 0.32, stagger: { amount: 0.65, from: 'start' }, ease: 'power1.in'
-        })
-
-      /* 7 — Hero entrance, intro dissolves */
-        .call(playHeroEntrance)
-        .to('#intro', { opacity: 0, duration: 2.0, ease: 'power2.inOut' }, '-=0.4')
-        .set('#intro', { display: 'none' })
-        .call(initSite);
+      /* 3 — ENTER THE FRAME chars animate over the hero video */
+      introTimeouts.push(setTimeout(() => {
+        const tl = gsap.timeline();
+        tl.to('.etf-char', {
+            opacity: 1, scale: 1.14, filter: 'blur(0px)',
+            duration: 0.42, stagger: 0.062, ease: 'power2.out'
+          })
+          .to({}, { duration: 0.85 })
+          .to('.etf-char', {
+            opacity: 0, scale: 0.93, filter: 'blur(1px)',
+            duration: 0.32, stagger: { amount: 0.65, from: 'start' }, ease: 'power1.in'
+          })
+          .call(playHeroEntrance)
+          .to('#intro', { opacity: 0, duration: 2.0, ease: 'power2.inOut' }, '-=0.4')
+          .set('#intro', { display: 'none' })
+          .call(initSite);
+      }, 5500));
     }
 
     function skipIntro() {
-      gsap.killTweensOf(['#iw1', '#iw2', '#iw3', '#intro-p1', '.etf-char', '#intro']);
+      introTimeouts.forEach(id => clearTimeout(id));
+      introTimeouts = [];
+      gsap.killTweensOf(['.etf-char', '#intro']);
       gsap.set('#intro', { display: 'none' });
       playHeroEntrance();
       initSite();

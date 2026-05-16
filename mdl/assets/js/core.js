@@ -52,14 +52,18 @@ const navToggle  = document.querySelector('.nav-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 
 if (navToggle && mobileMenu) {
+  const menuVideo = mobileMenu.querySelector('.menu-video');
+
   navToggle.addEventListener('click', () => {
     mobileMenu.classList.toggle('open');
     if (mobileMenu.classList.contains('open')) {
       document.body.style.overflow = 'hidden';
       lenis.stop();
+      if (menuVideo) menuVideo.play();
     } else {
       document.body.style.overflow = '';
       lenis.start();
+      if (menuVideo) menuVideo.pause();
     }
   });
 
@@ -68,6 +72,7 @@ if (navToggle && mobileMenu) {
       mobileMenu.classList.remove('open');
       document.body.style.overflow = '';
       lenis.start();
+      if (menuVideo) menuVideo.pause();
     });
   });
 }
