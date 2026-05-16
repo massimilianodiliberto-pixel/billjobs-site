@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>System — Massimiliano Di Liberto</title>
-  <meta name="description" content="Bill Jobs Studio — the operational and creative framework of Massimiliano Di Liberto.">
+  <title>System &#8212; Massimiliano Di Liberto</title>
+  <meta name="description" content="Bill Jobs Studio &#8212; the operational and creative framework of Massimiliano Di Liberto.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,6 @@
 
   <div id="page-transition"></div>
 
-  <!-- NAV -->
   <nav id="nav">
     <a class="nav-logo" href="../index.html">MDL</a>
     <div class="nav-links">
@@ -39,54 +38,39 @@
     <a href="../contact/index.html">SIGNAL</a>
   </div>
 
-  <main class="system-page">
+  <main>
 
-    <section class="system-hero" data-reveal>
-      <h1 class="system-statement">Everything behind the frame.</h1>
-    </section>
-
-    <section class="system-def" data-reveal>
-      <p>
-        Bill Jobs Studio is the creative and production infrastructure
-        built over twenty years of work.<br>
-        Not a separate brand. The way things get made.
-      </p>
-    </section>
-
-    <section class="system-areas">
-      <div class="system-area" data-reveal>
-        <h3>DIRECTION</h3>
-        <p>Creative concept</p>
-        <p>Treatment &amp; narrative</p>
-        <p>Art direction</p>
+    <section class="system-cinematic">
+      <canvas id="system-canvas"></canvas>
+      <div class="system-content">
+        <div class="system-words">
+          <span class="sys-word" id="sw1">EVERYTHING</span>
+          <span class="sys-word sys-word--mid" id="sw2">BEHIND</span>
+          <span class="sys-word" id="sw3">THE FRAME</span>
+        </div>
+        <p class="sys-desc" id="sys-desc">A creative system where vision, production and post<br>come together in balance. Ideas take shape.<br>Stories come to life.</p>
       </div>
-      <div class="system-area" data-reveal>
+    </section>
+
+    <section class="system-cols">
+      <div class="system-col" data-reveal>
+        <h3>PREPRODUCTION</h3>
+        <p>Concept development, research, planning, visual strategy.</p>
+      </div>
+      <div class="system-col" data-reveal>
         <h3>PRODUCTION</h3>
-        <p>End-to-end management</p>
-        <p>Budget · Scheduling</p>
-        <p>Team coordination</p>
+        <p>Direction, coordination, on set execution, creative supervision.</p>
       </div>
-      <div class="system-area" data-reveal>
-        <h3>VISUAL DEVELOPMENT</h3>
-        <p>AI-enhanced workflows</p>
-        <p>Experimental visuals</p>
-        <p>Process innovation</p>
-        <p>VFX · Compositing · Color Grading · Motion Graphics · Post-Production</p>
+      <div class="system-col" data-reveal>
+        <h3>POSTPRODUCTION</h3>
+        <p>Editing, VFX, compositing, color grading, motion graphics, final delivery.</p>
       </div>
-    </section>
-
-    <section class="system-contact" data-reveal>
-      <p>A project outside the brief</p>
-      <p class="sys-copy">Bill Jobs Studio is the creative and production space where vision matters more than brief. A place for experimentation, pure expression and work that exists beyond the expected.</p>
-      <a href="mailto:massimiliano.diliberto@gmail.com">
-        massimiliano.diliberto@gmail.com
-      </a>
     </section>
 
   </main>
 
   <footer>
-    <span>© 2026 Massimiliano Di Liberto &nbsp;·&nbsp; Bill Jobs Studio</span>
+    <span>&copy; 2026 Massimiliano Di Liberto &nbsp;&middot;&nbsp; Bill Jobs Studio</span>
     <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
   </footer>
 
@@ -94,6 +78,186 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
   <script src="../assets/js/core.js"></script>
+
+  <script>
+  (function () {
+    var canvas = document.getElementById('system-canvas');
+    var ctx = canvas.getContext('2d');
+    var W, H, orbits = [], nodes = [], vignette = null;
+    var mx = 0, my = 0, tmx = 0, tmy = 0;
+
+    var ORBIT_DEFS = [
+      { raF: 0.220, rbF: 0.295, tilt:  0.22, speed:  0.000178 },
+      { raF: 0.140, rbF: 0.190, tilt: -0.38, speed: -0.000238 },
+      { raF: 0.275, rbF: 0.185, tilt:  0.62, speed:  0.000148 },
+    ];
+
+    var ANCHOR_DEF = [
+      { oi: 0, phase: -1.20, r: 3.2, op: 0.52 },
+      { oi: 0, phase:  0.52, r: 2.8, op: 0.46 },
+      { oi: 0, phase:  2.50, r: 3.0, op: 0.50 },
+      { oi: 0, phase:  4.10, r: 2.5, op: 0.42 },
+      { oi: 1, phase:  0.90, r: 3.8, op: 0.58 },
+      { oi: 1, phase:  3.40, r: 2.4, op: 0.38 },
+      { oi: 2, phase:  1.10, r: 3.0, op: 0.50 },
+      { oi: 2, phase:  3.70, r: 2.8, op: 0.46 },
+      { oi: 2, phase: -0.60, r: 2.5, op: 0.38 },
+    ];
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+      vignette = null;
+      build();
+    }
+
+    function build() {
+      var cx = W * 0.625;
+      var cy = H * 0.500;
+      orbits = ORBIT_DEFS.map(function (d) {
+        return { cx: cx, cy: cy, ra: W * d.raF, rb: H * d.rbF, tilt: d.tilt, speed: d.speed };
+      });
+      nodes = [];
+      ANCHOR_DEF.forEach(function (d) {
+        nodes.push({
+          type: 'orbit', orb: orbits[d.oi],
+          angle: d.phase, speed: orbits[d.oi].speed,
+          r: d.r, op: d.op, anchor: true, x: 0, y: 0
+        });
+      });
+      for (var i = 0; i < 16; i++) {
+        var orb = orbits[i % 3];
+        nodes.push({
+          type: 'orbit', orb: orb,
+          angle: Math.random() * Math.PI * 2,
+          speed: orb.speed * (0.65 + Math.random() * 0.70),
+          r: Math.random() * 0.75 + 0.35,
+          op: Math.random() * 0.09 + 0.04,
+          anchor: false, x: 0, y: 0
+        });
+      }
+      for (var j = 0; j < 12; j++) {
+        nodes.push({
+          type: 'drift',
+          x: Math.random() * W, y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.075,
+          vy: (Math.random() - 0.5) * 0.075,
+          r: Math.random() * 0.60 + 0.28,
+          op: Math.random() * 0.06 + 0.025,
+          anchor: false
+        });
+      }
+    }
+
+    function tick() {
+      nodes.forEach(function (n) {
+        if (n.type === 'orbit') {
+          n.angle += n.speed;
+          var c = Math.cos(n.orb.tilt), s = Math.sin(n.orb.tilt);
+          var ex = Math.cos(n.angle) * n.orb.ra;
+          var ey = Math.sin(n.angle) * n.orb.rb;
+          n.x = n.orb.cx + ex * c - ey * s;
+          n.y = n.orb.cy + ex * s + ey * c;
+        } else {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < -50) n.x = W + 50;
+          if (n.x > W + 50) n.x = -50;
+          if (n.y < -50) n.y = H + 50;
+          if (n.y > H + 50) n.y = -50;
+        }
+      });
+    }
+
+    function getVignette() {
+      if (vignette) return vignette;
+      var g = ctx.createRadialGradient(W / 2, H / 2, H * 0.12, W / 2, H / 2, H * 0.82);
+      g.addColorStop(0, 'rgba(0,0,0,0)');
+      g.addColorStop(1, 'rgba(0,0,0,0.72)');
+      vignette = g;
+      return vignette;
+    }
+
+    function render() {
+      tick();
+      ctx.clearRect(0, 0, W, H);
+
+      tmx += (mx - tmx) * 0.038;
+      tmy += (my - tmy) * 0.038;
+
+      ctx.save();
+      ctx.translate(tmx, tmy);
+
+      orbits.forEach(function (orb) {
+        ctx.beginPath();
+        ctx.ellipse(orb.cx, orb.cy, orb.ra, orb.rb, orb.tilt, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,255,255,0.020)';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      });
+
+      var len = nodes.length;
+      for (var i = 0; i < len; i++) {
+        for (var j = i + 1; j < len; j++) {
+          var a = nodes[i], b = nodes[j];
+          var d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < 175) {
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(255,255,255,' + ((1 - d / 175) * 0.036) + ')';
+            ctx.lineWidth = 0.4;
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      nodes.forEach(function (n) {
+        if (!n.anchor) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,255,255,' + n.op + ')';
+          ctx.fill();
+        }
+      });
+
+      nodes.forEach(function (n) {
+        if (n.anchor) {
+          ctx.shadowColor = 'rgba(255,255,255,0.10)';
+          ctx.shadowBlur = 5;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,255,255,' + n.op + ')';
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      });
+
+      ctx.restore();
+
+      ctx.fillStyle = getVignette();
+      ctx.fillRect(0, 0, W, H);
+
+      requestAnimationFrame(render);
+    }
+
+    window.addEventListener('mousemove', function (e) {
+      mx = (e.clientX / W - 0.5) * 16;
+      my = (e.clientY / H - 0.5) * 10;
+    });
+    window.addEventListener('resize', resize);
+
+    resize();
+    render();
+  })();
+
+  window.addEventListener('load', function () {
+    gsap.fromTo('#sw1', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out', delay: 0.55 });
+    gsap.fromTo('#sw2', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out', delay: 0.80 });
+    gsap.fromTo('#sw3', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out', delay: 1.05 });
+    gsap.fromTo('#sys-desc', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', delay: 1.40 });
+  });
+  </script>
 
 </body>
 </html>

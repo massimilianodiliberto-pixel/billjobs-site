@@ -799,46 +799,64 @@ footer a:hover { color: var(--text-primary); }
    SYSTEM PAGE
    ============================================================ */
 
-.system-page { padding-top: 120px; }
-
-.system-hero {
-  padding: 140px var(--section-h);
-  text-align: center;
+.system-cinematic {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 620px;
+  background: #060606;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
-.system-statement {
+#system-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.system-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 var(--section-h);
+  pointer-events: none;
+  max-width: 52%;
+}
+.sys-word {
+  display: block;
   font-family: var(--font-editorial);
-  font-size: var(--text-display);
+  font-size: clamp(52px, 10.2vw, 162px);
   font-weight: 300;
+  line-height: 1.08;
+  color: rgba(255, 255, 255, 0.88);
+  opacity: 0;
+}
+.sys-word--mid {
   font-style: italic;
-  color: var(--text-primary);
+  color: rgba(255, 255, 255, 0.44);
 }
-
-.system-def {
-  max-width: 580px;
-  margin: 0 auto;
-  padding: 64px var(--section-h) var(--section-v);
-  text-align: center;
-  border-top: 1px solid var(--border);
-}
-.system-def p {
+.sys-desc {
+  margin-top: 38px;
   font-family: var(--font-ui);
   font-size: var(--text-body);
   font-weight: 300;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.26);
   line-height: 1.95;
+  opacity: 0;
 }
 
-.system-areas {
+.system-cols {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
   border-top: 1px solid var(--border);
 }
-.system-area {
+.system-col {
   padding: 56px var(--section-h);
   background: var(--bg-soft);
 }
-.system-area h3 {
+.system-col h3 {
   font-family: var(--font-ui);
   font-size: var(--text-label);
   font-weight: 500;
@@ -846,7 +864,7 @@ footer a:hover { color: var(--text-primary); }
   color: var(--accent);
   margin-bottom: 22px;
 }
-.system-area p {
+.system-col p {
   font-family: var(--font-ui);
   font-size: var(--text-body);
   font-weight: 300;
@@ -854,60 +872,9 @@ footer a:hover { color: var(--text-primary); }
   line-height: 2.1;
 }
 
-.system-projects {
-  padding: var(--section-v) var(--section-h);
-  border-top: 1px solid var(--border);
-}
-.sys-label {
-  font-family: var(--font-ui);
-  font-size: var(--text-label);
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  color: var(--text-muted);
-  margin-bottom: 36px;
-}
-.sys-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.sys-list span {
-  font-family: var(--font-ui);
-  font-size: 22px;
-  color: var(--text-primary);
-}
-
-.system-contact {
-  padding: var(--section-v) var(--section-h);
-  border-top: 1px solid var(--border);
-}
-.system-contact p {
-  font-family: var(--font-ui);
-  font-size: var(--text-label);
-  font-weight: 400;
-  letter-spacing: 0.16em;
-  color: var(--text-muted);
-  margin-bottom: 14px;
-}
-.system-contact .sys-copy {
-  font-size: var(--text-body);
-  font-weight: 300;
-  color: var(--text-secondary);
-  line-height: 1.9;
-  margin-bottom: 28px;
-  letter-spacing: 0;
-}
-.system-contact a {
-  font-family: var(--font-ui);
-  font-size: 24px;
-  font-weight: 300;
-  color: var(--text-primary);
-  transition: color 300ms ease;
-}
-.system-contact a:hover { color: var(--accent); }
-
 @media (max-width: 767px) {
-  .system-areas { grid-template-columns: 1fr; }
+  .system-content { max-width: 90%; }
+  .system-cols { grid-template-columns: 1fr; }
 }
 
 /* ============================================================
