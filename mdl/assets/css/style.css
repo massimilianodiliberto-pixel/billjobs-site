@@ -50,6 +50,35 @@ img, video { display: block; max-width: 100%; }
 button { font-family: var(--font-ui); cursor: pointer; background: none; border: none; padding: 0; }
 
 /* ============================================================
+   GRAIN
+   ============================================================ */
+
+#grain {
+  position: fixed;
+  inset: -200px;
+  z-index: 9990;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: grain-drift 0.12s steps(1) infinite;
+}
+
+@keyframes grain-drift {
+  0%   { background-position:   0px   0px; }
+  10%  { background-position: -42px -63px; }
+  20%  { background-position:  17px  85px; }
+  30%  { background-position: -71px  14px; }
+  40%  { background-position:  55px -37px; }
+  50%  { background-position: -29px  62px; }
+  60%  { background-position:  88px -18px; }
+  70%  { background-position: -14px  47px; }
+  80%  { background-position:  33px -91px; }
+  90%  { background-position: -66px  28px; }
+  100% { background-position:  11px -54px; }
+}
+
+/* ============================================================
    PAGE TRANSITION
    ============================================================ */
 
@@ -64,7 +93,7 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
 }
 
 /* ============================================================
-   INTRO — cinematic two-panel reveal
+   INTRO — cinematic atmospheric fade
    ============================================================ */
 
 #intro {
@@ -72,23 +101,35 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   inset: 0;
   z-index: 1000;
   overflow: hidden;
-  pointer-events: none;
-}
-
-#intro-pl,
-#intro-pr {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: calc(50% + 1px);
   background: #060606;
-  will-change: transform;
-  pointer-events: all;
 }
-#intro-pl { left: 0; }
-#intro-pr { right: 0; }
 
-#intro-text {
+/* Vignette — darkens edges, adds depth */
+.intro-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 45%, transparent 22%, rgba(0, 0, 0, 0.78) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ambient drift — very subtle warm light movement */
+.intro-ambient {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(ellipse 55% 38% at 50% 52%, rgba(22, 15, 9, 0.5) 0%, transparent 62%);
+  animation: intro-drift 16s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes intro-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(3%, -2%) scale(1.07); }
+}
+
+/* Phase 1 — three discipline lines */
+#intro-p1 {
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -96,42 +137,44 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 30px;
   pointer-events: none;
 }
 
-#it-eyebrow {
+.iw {
   display: block;
   font-family: var(--font-ui);
-  font-size: clamp(9px, 1.1vw, 11px);
+  font-size: clamp(9px, 1.05vw, 11px);
   font-weight: 300;
-  letter-spacing: 0.3em;
-  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.55em;
+  color: rgba(255, 255, 255, 0.38);
   text-transform: uppercase;
   opacity: 0;
 }
 
-#it-main {
+/* Phase 2 — ENTER THE FRAME */
+#intro-p2 {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+#intro-etf {
   display: block;
   font-family: var(--font-ui);
-  font-size: clamp(13px, 2.2vw, 18px);
+  font-size: clamp(9px, 0.95vw, 10px);
   font-weight: 300;
-  letter-spacing: 0.4em;
-  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: 0.68em;
+  color: rgba(255, 255, 255, 0.22);
   text-transform: uppercase;
   opacity: 0;
 }
 
-#it-sub {
-  display: block;
-  font-family: var(--font-ui);
-  font-size: clamp(9px, 1vw, 10px);
-  font-weight: 300;
-  letter-spacing: 0.22em;
-  color: rgba(255, 255, 255, 0.2);
-  opacity: 0;
-}
-
+/* Skip */
 #intro-skip {
   position: absolute;
   top: 24px;
@@ -140,7 +183,7 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   font-size: 9px;
   font-weight: 400;
   letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.12);
   background: none;
   border: none;
   cursor: pointer;
@@ -149,7 +192,7 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   transition: color 300ms ease;
   pointer-events: all;
 }
-#intro-skip:hover { color: rgba(255, 255, 255, 0.42); }
+#intro-skip:hover { color: rgba(255, 255, 255, 0.36); }
 
 /* ============================================================
    NAVIGATION

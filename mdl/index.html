@@ -19,12 +19,15 @@
 
   <!-- INTRO -->
   <div id="intro">
-    <div id="intro-pl"></div>
-    <div id="intro-pr"></div>
-    <div id="intro-text">
-      <span id="it-eyebrow">Massimiliano Di Liberto</span>
-      <span id="it-main">ENTER THE FRAME</span>
-      <span id="it-sub">Direction · Production · Visual Systems</span>
+    <div class="intro-vignette"></div>
+    <div class="intro-ambient"></div>
+    <div id="intro-p1">
+      <span class="iw" id="iw1">DIRECTION</span>
+      <span class="iw" id="iw2">PRODUCTION</span>
+      <span class="iw" id="iw3">VISUAL SYSTEMS</span>
+    </div>
+    <div id="intro-p2">
+      <span id="intro-etf">ENTER THE FRAME</span>
     </div>
     <button id="intro-skip">SKIP</button>
   </div>
@@ -34,7 +37,7 @@
     <a class="nav-logo" href="index.html">MDL</a>
     <div class="nav-links">
       <a href="work/index.html"    class="nav-link">WORK</a>
-      <a href="author/index.html"  class="nav-link">AUTHOR</a>
+      <a href="about/index.html"   class="nav-link">AUTHOR</a>
       <a href="system/index.html"  class="nav-link">SYSTEM</a>
       <a href="contact/index.html" class="nav-link">SIGNAL</a>
     </div>
@@ -43,7 +46,7 @@
 
   <div id="mobile-menu">
     <a href="work/index.html">WORK</a>
-    <a href="author/index.html">AUTHOR</a>
+    <a href="about/index.html">AUTHOR</a>
     <a href="system/index.html">SYSTEM</a>
     <a href="contact/index.html">SIGNAL</a>
   </div>
@@ -137,26 +140,26 @@
   <script src="assets/js/core.js"></script>
 
   <script>
-    /* Hide scroll indicator during intro */
+    /* Collapse page-transition overlay immediately */
+    gsap.set('#page-transition', { scaleY: 0 });
+
+    /* Hide scroll indicator until intro ends */
     const scrollIndicator = document.querySelector('.scroll-indicator');
     if (scrollIndicator) scrollIndicator.style.display = 'none';
 
-    /* Remove page-transition overlay so intro (z-index:1000) is visible */
-    gsap.set('#page-transition', { scaleY: 0 });
-
-    /* HERO VIDEO — trigger preload; video plays behind panels at opacity:1 */
+    /* Hero video is opacity:1 in CSS — preload it while intro plays */
     (function () {
       const v = document.querySelector('.hero-video');
       if (v) v.load();
     })();
 
-    /* ── INTRO ───────────────────────────────────────────── */
+    /* ── HERO ENTRANCE ──────────────────────────────────────── */
 
     function playHeroEntrance() {
       const tl = gsap.timeline();
-      tl.to('.hero-name',       { opacity: 1, duration: 1.6, ease: 'power2.out', delay: 0.3 })
-        .to('.hero-subtitle',   { opacity: 1, duration: 1.2, ease: 'power2.out' }, '-=0.8')
-        .to('.hero-descriptor', { opacity: 1, duration: 1.0, ease: 'power2.out' }, '-=0.7');
+      tl.to('.hero-name',       { opacity: 1, duration: 1.8, ease: 'power2.out', delay: 0.2 })
+        .to('.hero-subtitle',   { opacity: 1, duration: 1.4, ease: 'power2.out' }, '-=0.8')
+        .to('.hero-descriptor', { opacity: 1, duration: 1.2, ease: 'power2.out' }, '-=0.7');
       if (typeof lenis !== 'undefined') {
         lenis.on('scroll', () => {
           gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });
@@ -166,12 +169,8 @@
 
     function initSite() {
       window.scrollTo(0, 0);
-      if (typeof lenis !== 'undefined') {
-        lenis.scrollTo(0, { immediate: true });
-      }
-      if (typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.refresh();
-      }
+      if (typeof lenis !== 'undefined') lenis.scrollTo(0, { immediate: true });
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
       const si = document.querySelector('.scroll-indicator');
       if (si) {
         si.style.display = 'block';
@@ -182,43 +181,47 @@
       }
     }
 
+    /* ── INTRO SEQUENCE ─────────────────────────────────────── */
+
     function playIntro() {
-      const pl = document.getElementById('intro-pl');
-      const pr = document.getElementById('intro-pr');
+      gsap.set(['#iw1', '#iw2', '#iw3'], { opacity: 0, filter: 'blur(7px)' });
+      gsap.set('#intro-etf',              { opacity: 0, filter: 'blur(5px)' });
+
       const tl = gsap.timeline();
 
-      /* 1 — Text fades in slowly */
-      tl.to('#it-eyebrow', { opacity: 1, duration: 1.4, ease: 'power1.out', delay: 0.6 })
-        .to('#it-main',    { opacity: 1, duration: 1.2, ease: 'power1.out' }, '-=0.8')
-        .to('#it-sub',     { opacity: 1, duration: 1.0, ease: 'power1.out' }, '-=0.6')
+      /* 1 — DIRECTION / PRODUCTION / VISUAL SYSTEMS */
+      tl.to('#iw1', { opacity: 1, filter: 'blur(0px)', duration: 1.9, ease: 'power2.out', delay: 0.9 })
+        .to('#iw2', { opacity: 1, filter: 'blur(0px)', duration: 1.7, ease: 'power2.out' }, '-=1.1')
+        .to('#iw3', { opacity: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power2.out' }, '-=1.0')
 
-      /* 2 — Hold */
-        .to({}, { duration: 1.2 })
+      /* 2 — Breathe */
+        .to({}, { duration: 1.8 })
 
-      /* 3 — Text fades out, drifts up */
-        .to('#intro-text', { opacity: 0, y: -28, duration: 0.8, ease: 'power2.in' })
+      /* 3 — Fade out the three lines */
+        .to('#intro-p1', { opacity: 0, duration: 1.2, ease: 'power2.inOut' })
 
-      /* 4 — Hero animates in as panels start opening */
+      /* 4 — ENTER THE FRAME dissolves in */
+        .to({}, { duration: 0.5 })
+        .to('#intro-etf', { opacity: 1, filter: 'blur(0px)', duration: 2.6, ease: 'power2.out' })
+
+      /* 5 — Hold */
+        .to({}, { duration: 1.8 })
+
+      /* 6 — Trigger hero entrance, then dissolve intro into hero */
         .call(playHeroEntrance)
-
-      /* 5 — Panels slide apart */
-        .to(pl, { xPercent: -100, duration: 1.8, ease: 'expo.inOut' }, '-=0.1')
-        .to(pr, { xPercent:  100, duration: 1.8, ease: 'expo.inOut' }, '<')
-
-      /* 6 — Cleanup */
+        .to('#intro', { opacity: 0, duration: 2.6, ease: 'power2.inOut' }, '-=0.3')
         .set('#intro', { display: 'none' })
         .call(initSite);
     }
 
     function skipIntro() {
-      gsap.killTweensOf(['#it-eyebrow', '#it-main', '#it-sub', '#intro-text', '#intro-pl', '#intro-pr']);
+      gsap.killTweensOf(['#iw1', '#iw2', '#iw3', '#intro-p1', '#intro-etf', '#intro']);
       gsap.set('#intro', { display: 'none' });
       playHeroEntrance();
       initSite();
     }
 
-    document.getElementById('intro-skip')
-      ?.addEventListener('click', skipIntro);
+    document.getElementById('intro-skip')?.addEventListener('click', skipIntro);
 
     if (sessionStorage.getItem('introSeen')) {
       gsap.set('#intro', { display: 'none' });
@@ -229,7 +232,8 @@
       playIntro();
     }
 
-    /* Featured hover */
+    /* ── FEATURED HOVER ─────────────────────────────────────── */
+
     document.querySelectorAll('.feat-item').forEach(item => {
       const img  = item.querySelector('img');
       const info = item.querySelector('.feat-info');
@@ -243,7 +247,8 @@
       });
     });
 
-    /* Scroll reveal */
+    /* ── SCROLL REVEAL ──────────────────────────────────────── */
+
     gsap.utils.toArray('.featured, .credentials, .bj-intro').forEach(el => {
       gsap.fromTo(el,
         { opacity: 0, y: 24 },
