@@ -77,8 +77,30 @@ if (navToggle && mobileMenu) {
   });
 }
 
+/* ── MDL logo: clear introSeen and restart from intro ───── */
+const navLogo = document.querySelector('.nav-logo');
+if (navLogo) {
+  navLogo.addEventListener('click', e => {
+    e.preventDefault();
+    sessionStorage.removeItem('introSeen');
+    const homeUrl = navLogo.href;
+    if (window.location.href === homeUrl) {
+      window.location.reload();
+    } else {
+      gsap.to('#page-transition', {
+        scaleY: 1,
+        duration: 0.55,
+        ease: 'power3.inOut',
+        transformOrigin: 'bottom',
+        onComplete: () => { window.location.href = homeUrl; },
+      });
+    }
+  });
+}
+
 /* ── Page transitions on internal links ─────────────────── */
 document.querySelectorAll('a[href]').forEach(link => {
+  if (link.classList.contains('nav-logo')) return;
   const href = link.getAttribute('href');
   if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
   if (link.target === '_blank') return;

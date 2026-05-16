@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Author — Massimiliano Di Liberto</title>
-  <meta name="description" content="Massimiliano Di Liberto — Director, Producer, Visual Systems.">
+  <title>Author &#8212; Massimiliano Di Liberto</title>
+  <meta name="description" content="Massimiliano Di Liberto &#8212; Director, Producer, Visual Systems.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,6 @@
 
   <div id="page-transition"></div>
 
-  <!-- NAV -->
   <nav id="nav">
     <a class="nav-logo" href="../index.html">MDL</a>
     <div class="nav-links">
@@ -39,48 +38,78 @@
     <a href="../contact/index.html">SIGNAL</a>
   </div>
 
-  <main class="author-page">
+  <main class="author-main">
 
-    <section class="author-hero" data-reveal>
-      <h1 class="author-statement">
-        Director. Producer.<br><em>Visual Systems.</em>
-      </h1>
-    </section>
-
-    <section class="author-method" data-reveal>
-      <div class="method-label">APPROACH</div>
-      <div class="method-body">
-        <p>
-          Ho iniziato quando si girava in pellicola e il tempo sul set
-          aveva un costo reale. Quel metodo non è sparito —
-          è quello che ancora oggi permette alle idee di diventare concrete.
-        </p>
-        <p>
-          Lavoro nello spazio tra la visione e la realtà.
-          Dalla direzione artistica alla consegna finale,
-          in beauty, musica e branded content.
-        </p>
+    <!-- BLOCK 1 -->
+    <section class="auth-block" data-reveal>
+      <div class="auth-text-wrap">
+        <span class="auth-line">I STARTED</span>
+        <span class="auth-line">WHEN FILMS</span>
+        <span class="auth-line auth-line--thin">WERE STILL SHOT ON FILM.</span>
       </div>
     </section>
 
-    <section class="author-credentials" data-reveal>
-      <p>
-        Warner Music &nbsp;·&nbsp; Cosmoprof &nbsp;·&nbsp; Berlinale EFM
-        &nbsp;·&nbsp; PwC &nbsp;·&nbsp; Giuseppe Tornatore
-        &nbsp;·&nbsp; Festival Cinema Venezia &nbsp;·&nbsp;
-        Confindustria &nbsp;·&nbsp; Tecres
-      </p>
+    <!-- VIDEO 1 -->
+    <div class="auth-video-wrap" data-reveal>
+      <video class="auth-video" muted loop playsinline>
+        <!-- footage: film strip / cutting table — src to be added -->
+      </video>
+      <div class="auth-video-placeholder"></div>
+    </div>
+
+    <!-- BLOCK 2 -->
+    <section class="auth-block" data-reveal>
+      <div class="auth-text-wrap">
+        <span class="auth-line">WHEN TIME ON SET</span>
+        <span class="auth-line auth-line--dim">HAD A REAL VALUE.</span>
+      </div>
     </section>
 
-    <section class="author-system-link" data-reveal>
-      <p>Bill Jobs Studio è il framework operativo dietro ogni produzione.</p>
-      <a href="../system/index.html">SYSTEM →</a>
+    <!-- VIDEO 2 -->
+    <div class="auth-video-wrap" data-reveal>
+      <video class="auth-video" muted loop playsinline>
+        <!-- footage: film being cut / spliced — src to be added -->
+      </video>
+      <div class="auth-video-placeholder"></div>
+    </div>
+
+    <!-- BLOCK 3 -->
+    <section class="auth-block" data-reveal>
+      <div class="auth-text-wrap">
+        <span class="auth-line">THAT METHOD</span>
+        <span class="auth-line auth-line--dim">NEVER DISAPPEARED.</span>
+      </div>
+    </section>
+
+    <!-- VIDEO 3 -->
+    <div class="auth-video-wrap" data-reveal>
+      <video class="auth-video" muted loop playsinline>
+        <!-- footage: film reels / machine detail — src to be added -->
+      </video>
+      <div class="auth-video-placeholder"></div>
+    </div>
+
+    <!-- BLOCK 4 -->
+    <section class="auth-block" data-reveal>
+      <div class="auth-text-wrap">
+        <span class="auth-line">IT IS STILL</span>
+        <span class="auth-line">WHAT MAKES</span>
+        <span class="auth-line auth-line--close">IDEAS REAL.</span>
+      </div>
+    </section>
+
+    <!-- DARK PAUSE -->
+    <div class="auth-pause"></div>
+
+    <!-- CLOSING -->
+    <section class="auth-closing" data-reveal>
+      <span class="auth-closing-text">24 YEARS AGO.</span>
     </section>
 
   </main>
 
   <footer>
-    <span>© 2026 Massimiliano Di Liberto &nbsp;·&nbsp; Bill Jobs Studio</span>
+    <span>&copy; 2026 Massimiliano Di Liberto &nbsp;&middot;&nbsp; Bill Jobs Studio</span>
     <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
   </footer>
 
@@ -88,6 +117,26 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
   <script src="../assets/js/core.js"></script>
+
+  <script>
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var vid = entry.target.querySelector('.auth-video');
+        if (!vid) return;
+        if (entry.isIntersecting) {
+          vid.play().catch(function () {});
+        } else {
+          vid.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+    document.querySelectorAll('.auth-video-wrap').forEach(function (el) {
+      obs.observe(el);
+    });
+  })();
+  </script>
 
 </body>
 </html>
