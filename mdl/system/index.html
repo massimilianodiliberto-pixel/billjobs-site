@@ -548,12 +548,12 @@
       }, { threshold: 0.1 }).observe(cinematic);
     }
 
-    /* ── Audio: ambient hum + section pulse triggers ── */
+    /* ── Audio: ambient pulse loop + section triggers ── */
     window.addEventListener('load', function () {
 
       function startSysAmbient () {
-        window.sound.loop('hum',  0.04);
-        window.sound.play('drone', 0.03, 1.0);
+        console.log('[Sound/System] sound:enabled → pulse loop');
+        window.sound.loop('pulse', 0.15);
       }
       if (window.sound.enabled) { startSysAmbient(); }
       document.addEventListener('sound:enabled', startSysAmbient);
@@ -563,14 +563,14 @@
         trigger: '.system-cinematic',
         start: 'bottom 85%',
         once: true,
-        onEnter: function () { window.sound.play('ascend', 0.05, 0.6); }
+        onEnter: function () { window.sound.play('ascend', 0.12, 0.6); }
       });
 
-      /* Section reveals: pulse */
+      /* Section reveals: ascend stab */
       document.querySelectorAll('.sys-concept').forEach(function (sec) {
         ScrollTrigger.create({
           trigger: sec, start: 'top 68%', once: true,
-          onEnter: function () { window.sound.play('pulse', 0.06, 0.18); }
+          onEnter: function () { window.sound.play('ascend', 0.10, 0.18); }
         });
       });
 
@@ -579,7 +579,7 @@
       if (closingSec) {
         ScrollTrigger.create({
           trigger: closingSec, start: 'top 72%', once: true,
-          onEnter: function () { window.sound.play('descend', 0.05, 0.5); }
+          onEnter: function () { window.sound.play('descend', 0.12, 0.5); }
         });
       }
     });

@@ -180,6 +180,7 @@ class SoundSystem {
         return;
       }
       this.buffers[name] = await this.ctx.decodeAudioData(await res.arrayBuffer());
+      console.log('[Sound] loaded:', name);
     } catch (e) {
       console.warn(`[SoundSystem] Failed to load "${name}" from ${url}:`, e);
     }
@@ -196,7 +197,7 @@ class SoundSystem {
     src.buffer = this.buffers[name];
     const gain = this.ctx.createGain();
     gain.gain.setValueAtTime(0, this.ctx.currentTime);
-    gain.gain.linearRampToValueAtTime(Math.min(vol, 0.10), this.ctx.currentTime + fadeIn);
+    gain.gain.linearRampToValueAtTime(Math.min(vol, 0.20), this.ctx.currentTime + fadeIn);
     src.connect(gain);
     gain.connect(this.ctx.destination);
     src.start();
@@ -217,7 +218,7 @@ class SoundSystem {
     src.loop   = true;
     const gain = this.ctx.createGain();
     gain.gain.setValueAtTime(0, this.ctx.currentTime);
-    gain.gain.linearRampToValueAtTime(Math.min(vol, 0.10), this.ctx.currentTime + 2.5);
+    gain.gain.linearRampToValueAtTime(Math.min(vol, 0.20), this.ctx.currentTime + 2.5);
     src.connect(gain);
     gain.connect(this.ctx.destination);
     src.start();
@@ -284,14 +285,20 @@ window.sound = new SoundSystem();
   if (toggle) {
     toggle.addEventListener('click', () => {
       const open = mm.classList.contains('open');
-      window.sound.play('distortion-fade', 0.06, 0.10);
-      if (open) { av.load(); av.play().catch(() => {}); }
-      else { av.pause(); }
+      window.sound.play('distortion-fade', 0.12, 0.10);
+      if (open) {
+        av.load(); av.play().catch(() => {});
+        window.sound.loop('hum', 0.15);
+        console.log('[Sound] menu open → hum loop');
+      } else {
+        av.pause();
+        window.sound.stop('hum');
+        console.log('[Sound] menu close → hum stopped');
+      }
     });
   }
   mm.querySelectorAll('a').forEach(lnk => {
-    lnk.addEventListener('mouseenter', () => window.sound.play('fade', 0.07, 0.18));
-    lnk.addEventListener('click', () => av.pause());
+    lnk.addEventListener('click', () => { av.pause(); window.sound.stop('hum'); });
   });
 }());
 

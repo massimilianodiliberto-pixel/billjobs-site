@@ -501,7 +501,8 @@
                       (style.opacity !== '' && parseFloat(style.opacity) < 0.05);
           if (!gone) {
             av.load(); av.play().catch(function(){});
-            window.sound.play('feedback', 0.04, 0.6);
+            window.sound.play('feedback', 0.12, 0.6);
+        console.log('[Sound/Home] ETF → feedback');
           } else {
             av.pause();
           }
@@ -510,7 +511,8 @@
     }
 
     document.addEventListener('sound:enabled', function () {
-      window.sound.loop('drone', 0.06);
+      console.log('[Sound/Home] sound:enabled → drone loop');
+      window.sound.loop('drone', 0.15);
     });
 
   }());

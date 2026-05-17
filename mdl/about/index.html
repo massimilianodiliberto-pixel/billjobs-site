@@ -300,7 +300,8 @@
       }
 
       document.addEventListener('sound:enabled', function () {
-        window.sound.loop('tv-static', 0.04);
+        console.log('[Sound/About] sound:enabled → tv-static loop');
+        window.sound.loop('tv-static', 0.12);
       });
     });
 

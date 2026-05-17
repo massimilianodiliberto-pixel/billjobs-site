@@ -735,7 +735,8 @@
 
     window.addEventListener('load', function () {
       document.addEventListener('sound:enabled', function () {
-        window.sound.loop('hiss', 0.05);
+        console.log('[Sound/Work] sound:enabled → hiss loop');
+        window.sound.loop('hiss', 0.12);
       });
     });
 
