@@ -13,6 +13,7 @@
 <body>
 
   <div id="page-transition"></div>
+  <img id="bck-bg" src="../assets/img/BCK03.jpg" alt="" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.05;filter:grayscale(30%);mix-blend-mode:overlay;z-index:0;pointer-events:none;user-select:none;">
 
   <nav id="nav">
     <a class="nav-logo" href="../index.html">MDL</a>
@@ -268,7 +269,7 @@
       av.id = 'author-vid-texture'; av.muted = true; av.playsInline = true;
       av.preload = 'none'; av.loop = true;
       var as = document.createElement('source');
-      as.src = '../assets/video/Analog_Transition_6.mp4'; as.type = 'video/mp4';
+      as.src = '../assets/video/Analog%20Transition%206.mp4'; as.type = 'video/mp4';
       av.appendChild(as);
       authorMain.insertBefore(av, authorMain.firstChild);
 

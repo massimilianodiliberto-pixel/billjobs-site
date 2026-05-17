@@ -165,8 +165,10 @@ class SoundSystem {
     await Promise.allSettled(names.map(n => this._load(n)));
   }
   async _load (name) {
+    const fileMap = { 'distortion-fade': 'DistortionFade', 'feedback-transition': 'feedback-Transtion' };
+    const filename = fileMap[name] || name;
     try {
-      const res = await fetch(this._base + name + '.mp3');
+      const res = await fetch(this._base + filename + '.mp3');
       if (!res.ok) return;
       this.buffers[name] = await this.ctx.decodeAudioData(await res.arrayBuffer());
     } catch (_) {}
@@ -255,7 +257,7 @@ window.sound = new SoundSystem();
   vid.id = 'vid-transition';
   vid.muted = true; vid.playsInline = true; vid.preload = 'none'; vid.loop = false;
   const s = document.createElement('source');
-  s.src = _assetBase + 'video/Analog_Transition_3.mp4'; s.type = 'video/mp4';
+  s.src = _assetBase + 'video/Analog%20Transition%203.mp4'; s.type = 'video/mp4';
   vid.appendChild(s); pt.appendChild(vid);
 }());
 
@@ -267,7 +269,7 @@ window.sound = new SoundSystem();
   av.className = 'menu-vid-analog';
   av.muted = true; av.playsInline = true; av.preload = 'none'; av.loop = true;
   const as = document.createElement('source');
-  as.src = _assetBase + 'video/Analog_Transition_1.mp4'; as.type = 'video/mp4';
+  as.src = _assetBase + 'video/Analog%20Transition%201.mp4'; as.type = 'video/mp4';
   av.appendChild(as); mm.appendChild(av);
 
   const toggle = document.querySelector('.nav-toggle');

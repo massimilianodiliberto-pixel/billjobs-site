@@ -129,7 +129,7 @@
         cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
         role: 'Creative Director / Producer',
         desc: 'Complete beauty production: product shooting, catalogues, display visuals, stand materials, corporate and social content.',
-        action: 'image_only', youtube: null, video: null, image: '../assets/img/G+C01.png',
+        action: 'image_only', youtube: null, video: null, image: '../assets/img/G+C01.jpg',
         size: 'wide'
       },
       {
@@ -684,7 +684,7 @@
     wvf.id = 'vid-work-flash'; wvf.muted = true; wvf.playsInline = true;
     wvf.preload = 'none'; wvf.loop = false;
     var wvs = document.createElement('source');
-    wvs.src = '../assets/video/Distortion_Transition_4.mp4'; wvs.type = 'video/mp4';
+    wvs.src = '../assets/video/Distortion%20Transition%204.mp4'; wvs.type = 'video/mp4';
     wvf.appendChild(wvs); document.body.appendChild(wvf);
 
     function triggerWorkFlash () {
@@ -724,6 +724,83 @@
       }, true);
     }
 
+  }());
+  </script>
+
+  <!-- GAMMA+ CAMPAIGN SLIDESHOW -->
+  <script>
+  (function () {
+    var SLIDES = [
+      '../assets/img/G+C01.jpg',
+      '../assets/img/G+C03.jpg',
+      '../assets/img/G+C04.jpg',
+      '../assets/img/G+C06.jpg',
+      '../assets/img/G+C07.jpg',
+      '../assets/img/G+C08.jpg',
+      '../assets/img/G+C09.jpg'
+    ];
+    var INTERVAL = 3500;
+    var FADE     = 1000;
+
+    function initSlideshow () {
+      var card = document.querySelector('.wk-card[data-id="gamma-campagne"]');
+      if (!card) return;
+      var media = card.querySelector('.wk-media');
+      if (!media) return;
+
+      /* Build two stacked <img> layers for cross-fade */
+      var imgA = document.createElement('img');
+      var imgB = document.createElement('img');
+      imgA.alt = imgB.alt = 'Gamma+ Campaign';
+      imgA.setAttribute('loading', 'lazy');
+      imgB.setAttribute('loading', 'lazy');
+      imgA.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity ' + (FADE / 1000) + 's ease;opacity:1;';
+      imgB.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity ' + (FADE / 1000) + 's ease;opacity:0;';
+      media.style.position = 'relative';
+      /* Remove existing img */
+      var existing = media.querySelector('img');
+      if (existing) existing.remove();
+      media.prepend(imgB);
+      media.prepend(imgA);
+
+      imgA.src = SLIDES[0];
+
+      var current = 0;
+      var active  = imgA;
+      var passive = imgB;
+      var timer   = null;
+
+      function advance () {
+        current = (current + 1) % SLIDES.length;
+        passive.src = SLIDES[current];
+        passive.onload = function () {
+          active.style.opacity  = '0';
+          passive.style.opacity = '1';
+          var tmp = active; active = passive; passive = tmp;
+        };
+      }
+
+      function startSlide () {
+        if (timer) return;
+        timer = setInterval(advance, INTERVAL);
+      }
+      function stopSlide () {
+        clearInterval(timer);
+        timer = null;
+      }
+
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { startSlide(); }
+        else { stopSlide(); }
+      }, { threshold: 0.1 }).observe(card);
+    }
+
+    /* Cards are built by the PROJECTS loop; wait for it */
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSlideshow);
+    } else {
+      initSlideshow();
+    }
   }());
   </script>
 
