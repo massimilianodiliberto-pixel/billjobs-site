@@ -48,7 +48,7 @@
           </filter>
         </defs>
         <g id="auth-line-g">
-          <path id="auth-line-path" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7" filter="url(#auth-glow-f)"/>
+          <path id="auth-line-path" fill="none" stroke="none" stroke-width="0"/>
         </g>
       </svg>
     </div>
@@ -201,7 +201,6 @@
         scrollTrigger: { id: 'auth-draw', trigger: mainEl, start: 'top top', end: 'bottom bottom', scrub: 1.2 }
       });
       gsap.killTweensOf(groupEl);
-      gsap.to(groupEl, { x: 3.5, duration: 5.5, yoyo: true, repeat: -1, ease: 'sine.inOut' });
     }
 
     window.addEventListener('load', function () {
@@ -227,6 +226,8 @@
         });
         if (num) tl.fromTo(num, { opacity: 0 }, { opacity: 0.28, duration: 0.6, ease: 'power2.out' });
         tl.fromTo(title, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out' }, '-=0.15');
+        gsap.to(title, { y: -14, ease: 'none',
+          scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 2 } });
       });
 
       var bjSection = document.getElementById('bill-jobs');

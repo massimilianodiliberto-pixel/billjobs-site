@@ -486,14 +486,16 @@
       var rule   = section.querySelector('.sys-section-rule');
       var dur    = 4.2 + idx * 0.9;
       var tl = gsap.timeline({
-        scrollTrigger: { trigger: section, start: 'top 76%', toggleActions: 'play none none none' },
+        scrollTrigger: { trigger: section, start: 'top 65%', toggleActions: 'play none none none' },
         onComplete: function () {
-          if (phrase && phrase.dataset.phrase) {
-            gsap.set(phrase, { opacity: 1 });
-            typewriterSimple(phrase, phrase.dataset.phrase, 34);
-          }
+          setTimeout(function () {
+            if (phrase && phrase.dataset.phrase) {
+              gsap.set(phrase, { opacity: 1 });
+              typewriterSimple(phrase, phrase.dataset.phrase, 34);
+            }
+          }, 450);
           var body = section.querySelector('.sys-concept-body');
-          if (body) gsap.fromTo(body, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', delay: 0.6 });
+          if (body) gsap.fromTo(body, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', delay: 1.4 });
           gsap.to(word, { opacity: 0.82, y: 5, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.6 });
         }
       });
