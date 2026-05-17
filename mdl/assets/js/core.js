@@ -253,7 +253,7 @@ window.sound = new SoundSystem();
   if (!pt) return;
   const vid = document.createElement('video');
   vid.id = 'vid-transition';
-  vid.muted = true; vid.playsInline = true; vid.preload = 'none'; vid.loop = true;
+  vid.muted = true; vid.playsInline = true; vid.preload = 'none'; vid.loop = false;
   const s = document.createElement('source');
   s.src = _assetBase + 'video/Analog_Transition_3.mp4'; s.type = 'video/mp4';
   vid.appendChild(s); pt.appendChild(vid);
@@ -267,7 +267,7 @@ window.sound = new SoundSystem();
   av.className = 'menu-vid-analog';
   av.muted = true; av.playsInline = true; av.preload = 'none'; av.loop = true;
   const as = document.createElement('source');
-  as.src = _assetBase + 'video/Analog_Overlay_8.mp4'; as.type = 'video/mp4';
+  as.src = _assetBase + 'video/Analog_Transition_1.mp4'; as.type = 'video/mp4';
   av.appendChild(as); mm.appendChild(av);
 
   const toggle = document.querySelector('.nav-toggle');
@@ -275,6 +275,7 @@ window.sound = new SoundSystem();
     toggle.addEventListener('click', () => {
       const open = mm.classList.contains('open');
       window.sound.play('power', 0.07, 0.08);
+      window.sound.play('distortion-fade', 0.05, 0.10);
       if (open) { av.load(); av.play().catch(() => {}); }
       else { av.pause(); }
     });

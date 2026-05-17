@@ -537,7 +537,7 @@
       sv.id = 'system-vid-bg'; sv.muted = true; sv.playsInline = true;
       sv.preload = 'none'; sv.loop = true;
       var ss = document.createElement('source');
-      ss.src = '../assets/video/Distortion_Background_7.mp4'; ss.type = 'video/mp4';
+      ss.src = '../assets/video/Analog_Overlay_8.mp4'; ss.type = 'video/mp4';
       sv.appendChild(ss);
       cinematic.insertBefore(sv, canvas);
 
@@ -551,8 +551,8 @@
     window.addEventListener('load', function () {
 
       function startSysAmbient () {
-        window.sound.loop('hum',   0.04);
-        window.sound.loop('drone', 0.03);
+        window.sound.loop('hum',  0.04);
+        window.sound.play('drone', 0.03, 1.0);
       }
       if (window.sound.enabled) { startSysAmbient(); }
       document.addEventListener('sound:enabled', startSysAmbient);

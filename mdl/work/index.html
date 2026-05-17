@@ -707,6 +707,7 @@
         muts.forEach(function (m) {
           if (m.attributeName === 'class' && wkOv.classList.contains('active')) {
             triggerWorkFlash();
+            window.sound.playShort('woosh', 0.04, 500);
             window.sound.play('distortion-fade', 0.05, 0.18);
           }
         });
