@@ -19,11 +19,10 @@ gsap.ticker.lagSmoothing(0);
 window.addEventListener('load', () => {
   if (!document.getElementById('intro')) {
     gsap.to('#page-transition', {
-      scaleY: 0,
-      duration: 0.8,
-      ease: 'power3.inOut',
-      transformOrigin: 'top',
-      delay: 0.1,
+      autoAlpha: 0,
+      duration: 0.7,
+      ease: 'power2.out',
+      delay: 0.15,
     });
   }
 });
@@ -88,10 +87,9 @@ if (navLogo) {
       window.location.reload();
     } else {
       gsap.to('#page-transition', {
-        scaleY: 1,
-        duration: 0.55,
-        ease: 'power3.inOut',
-        transformOrigin: 'bottom',
+        autoAlpha: 1,
+        duration: 0.45,
+        ease: 'power2.in',
         onComplete: () => { window.location.href = homeUrl; },
       });
     }
@@ -110,10 +108,9 @@ document.querySelectorAll('a[href]').forEach(link => {
     if (dest === window.location.href) return;
     e.preventDefault();
     gsap.to('#page-transition', {
-      scaleY: 1,
-      duration: 0.55,
-      ease: 'power3.inOut',
-      transformOrigin: 'bottom',
+      autoAlpha: 1,
+      duration: 0.45,
+      ease: 'power2.in',
       onComplete: () => { window.location.href = dest; },
     });
   });
@@ -156,8 +153,10 @@ class SoundSystem {
     if (this.initialized) return;
     this.ctx = new (window.AudioContext || window.webkitAudioContext)();
     await this.ctx.resume();
+    console.log('[Sound] AudioContext state after resume:', this.ctx.state);
     this.initialized = true;
     await this._loadAll();
+    console.log('[Sound] buffers loaded:', Object.keys(this.buffers));
   }
   async _loadAll () {
     const names = ['hum','drone','pulse','ascend','descend',
@@ -187,6 +186,7 @@ class SoundSystem {
       }
       return null;
     }
+    console.log('[Sound] play:', name, 'vol:', vol);
     const src  = this.ctx.createBufferSource();
     src.buffer = this.buffers[name];
     const gain = this.ctx.createGain();
@@ -206,6 +206,7 @@ class SoundSystem {
   }
   loop (name, vol = 0.05) {
     if (!this.enabled || !this.initialized || !this.buffers[name] || this.nodes[name]) return;
+    console.log('[Sound] loop:', name, 'vol:', vol);
     const src  = this.ctx.createBufferSource();
     src.buffer = this.buffers[name];
     src.loop   = true;
@@ -231,6 +232,7 @@ class SoundSystem {
   }
   toggle () {
     this.enabled = !this.enabled;
+    console.log('[Sound] toggle → enabled:', this.enabled);
     sessionStorage.setItem('soundEnabled', String(this.enabled));
     if (!this.enabled) {
       this.stopAll();
@@ -261,18 +263,6 @@ window.sound = new SoundSystem();
   });
 }());
 
-/* ── Page transition video (inside #page-transition) ─────── */
-(function () {
-  const pt = document.getElementById('page-transition');
-  if (!pt) return;
-  const vid = document.createElement('video');
-  vid.id = 'vid-transition';
-  vid.muted = true; vid.playsInline = true; vid.preload = 'auto'; vid.loop = false;
-  const s = document.createElement('source');
-  s.src = _assetBase + 'video/Analog%20Transition%203.mp4'; s.type = 'video/mp4';
-  vid.appendChild(s); pt.appendChild(vid);
-  vid.load();
-}());
 
 /* ── Mobile menu analog overlay video ────────────────────── */
 (function () {
@@ -289,8 +279,7 @@ window.sound = new SoundSystem();
   if (toggle) {
     toggle.addEventListener('click', () => {
       const open = mm.classList.contains('open');
-      window.sound.play('power', 0.07, 0.08);
-      window.sound.play('distortion-fade', 0.05, 0.10);
+      window.sound.play('distortion-fade', 0.06, 0.10);
       if (open) { av.load(); av.play().catch(() => {}); }
       else { av.pause(); }
     });
@@ -301,14 +290,12 @@ window.sound = new SoundSystem();
   });
 }());
 
-/* ── Page transition: start video + sound on internal nav ── */
+/* ── Page transition: sound on internal nav ── */
 document.addEventListener('click', e => {
   const link = e.target.closest('a[href]');
   if (!link) return;
   const href = link.getAttribute('href');
   if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
   if (link.target === '_blank' || link.classList.contains('nav-logo')) return;
-  const vid = document.getElementById('vid-transition');
-  if (vid) { vid.load(); vid.play().catch(() => {}); }
   window.sound.play('feedback-transition', 0.06, 0.18);
 }, true);

@@ -87,8 +87,6 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   inset: 0;
   background: var(--bg);
   z-index: 9000;
-  transform: scaleY(1);
-  transform-origin: top;
   pointer-events: none;
 }
 
