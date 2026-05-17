@@ -38,7 +38,7 @@
     <a href="../contact/index.html">SIGNAL</a>
   </div>
 
-  <main>
+  <main class="system-main">
 
     <section class="system-cinematic">
       <canvas id="system-canvas"></canvas>
@@ -52,36 +52,72 @@
       </div>
     </section>
 
-    <!-- BALANCE -->
-    <section class="sys-concept">
+    <!-- SVG wave line -->
+    <div id="sys-line-wrap" aria-hidden="true">
+      <svg id="sys-line-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="sys-glow-f" x="-50%" y="-10%" width="200%" height="120%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <g id="sys-line-g">
+          <path id="sys-line-path" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="0.7" filter="url(#sys-glow-f)"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- 01 BALANCE -->
+    <section class="sys-concept" data-idx="0">
+      <div class="sys-section-header">
+        <span class="sys-section-num">01</span>
+        <div class="sys-section-rule"></div>
+      </div>
       <span class="sys-concept-word">BALANCE</span>
-      <p class="sys-concept-phrase">The point where vision survives reality.</p>
+      <p class="sys-concept-phrase" data-phrase="The point where vision survives reality."></p>
     </section>
 
-    <!-- STRUCTURE -->
-    <section class="sys-concept sys-concept--right">
+    <!-- 02 STRUCTURE -->
+    <section class="sys-concept sys-concept--right" data-idx="1">
+      <div class="sys-section-header">
+        <span class="sys-section-num">02</span>
+        <div class="sys-section-rule"></div>
+      </div>
       <span class="sys-concept-word">STRUCTURE</span>
-      <p class="sys-concept-phrase">Knowing the roles, the rules and the chain that make a set work.</p>
+      <p class="sys-concept-phrase" data-phrase="Knowing the roles, the rules and the chain that make a set work."></p>
     </section>
 
-    <!-- PRESSURE -->
-    <section class="sys-concept">
+    <!-- 03 PRESSURE -->
+    <section class="sys-concept" data-idx="2">
+      <div class="sys-section-header">
+        <span class="sys-section-num">03</span>
+        <div class="sys-section-rule"></div>
+      </div>
       <span class="sys-concept-word">PRESSURE</span>
-      <p class="sys-concept-phrase">Deadlines, people, limits and decisions.</p>
+      <p class="sys-concept-phrase" data-phrase="Deadlines, people, limits and decisions."></p>
     </section>
 
-    <!-- EXECUTION -->
-    <section class="sys-concept sys-concept--right">
+    <!-- 04 EXECUTION -->
+    <section class="sys-concept sys-concept--right" data-idx="3">
+      <div class="sys-section-header">
+        <span class="sys-section-num">04</span>
+        <div class="sys-section-rule"></div>
+      </div>
       <span class="sys-concept-word">EXECUTION</span>
-      <p class="sys-concept-phrase">Ideas only matter when they can be made.</p>
+      <p class="sys-concept-phrase" data-phrase="Ideas only matter when they can be made."></p>
     </section>
 
-    <!-- CLOSING -->
-    <section class="sys-closing">
+    <!-- 05 CLOSING -->
+    <section class="sys-closing" data-idx="4">
+      <div class="sys-section-header">
+        <span class="sys-section-num">05</span>
+        <div class="sys-section-rule"></div>
+      </div>
       <span class="sys-closing-line">REAL</span>
       <span class="sys-closing-line">PRODUCTIONS</span>
       <span class="sys-closing-line">ARE NEVER</span>
       <span class="sys-closing-line sys-closing-line--accent">ACCIDENTAL.</span>
+      <p class="sys-closing-subtext">The system is invisible. The connections are real.</p>
     </section>
 
   </main>
@@ -371,29 +407,99 @@
     gsap.fromTo('#sw3', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out', delay: 1.05 });
     gsap.fromTo('#sys-desc', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', delay: 1.40 });
 
+    function typewriterSimple(el, text, speed) {
+      el.textContent = '';
+      var i = 0;
+      function step() {
+        if (i < text.length) { el.textContent += text[i++]; setTimeout(step, speed || 34); }
+      }
+      step();
+    }
+
+    var sysLineWrap = document.getElementById('sys-line-wrap');
+    var sysLineSvg  = document.getElementById('sys-line-svg');
+    var sysLinePath = document.getElementById('sys-line-path');
+    var sysLineG    = document.getElementById('sys-line-g');
+    var sysMain     = document.querySelector('.system-main');
+
+    function buildSysLine() {
+      if (!sysLineSvg || !sysLinePath || !sysMain) return;
+      var W = window.innerWidth;
+      var H = sysMain.scrollHeight;
+      sysLineWrap.style.height = H + 'px';
+      sysLineSvg.setAttribute('width', W);
+      sysLineSvg.setAttribute('height', H);
+      sysLineSvg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      var hero = document.querySelector('.system-cinematic');
+      var startY = hero ? hero.offsetTop + hero.offsetHeight : 0;
+      var sections = Array.from(sysMain.querySelectorAll('.sys-concept, .sys-closing'));
+      var xL = W * 0.16, xR = W * 0.84;
+      var pts = [{ x: W * 0.50, y: startY }];
+      sections.forEach(function (sec, i) {
+        var x = (i % 2 === 0) ? xL : xR;
+        pts.push({ x: x, y: sec.offsetTop + sec.offsetHeight * 0.50 });
+      });
+      var last = sections[sections.length - 1];
+      pts.push({ x: W * 0.50, y: last ? last.offsetTop + last.offsetHeight - 40 : H });
+      var d = 'M ' + pts[0].x.toFixed(1) + ' ' + pts[0].y.toFixed(1);
+      for (var i = 0; i < pts.length - 1; i++) {
+        var p0 = pts[i], p1 = pts[i + 1], dy = p1.y - p0.y;
+        d += ' C ' + p0.x.toFixed(1) + ' ' + (p0.y + dy * 0.45).toFixed(1);
+        d += ',' + p1.x.toFixed(1) + ' ' + (p1.y - dy * 0.45).toFixed(1);
+        d += ',' + p1.x.toFixed(1) + ' ' + p1.y.toFixed(1);
+      }
+      sysLinePath.setAttribute('d', d);
+      var existing = ScrollTrigger.getAll().filter(function (t) { return t.vars && t.vars.id === 'sys-draw'; });
+      existing.forEach(function (t) { t.kill(); });
+      var pLen = sysLinePath.getTotalLength ? sysLinePath.getTotalLength() : 4000;
+      sysLinePath.style.strokeDasharray = pLen;
+      sysLinePath.style.strokeDashoffset = pLen;
+      gsap.to(sysLinePath, {
+        strokeDashoffset: 0, ease: 'none',
+        scrollTrigger: { id: 'sys-draw', trigger: sysMain, start: 'top top', end: 'bottom bottom', scrub: 1.5 }
+      });
+      gsap.killTweensOf(sysLineG);
+      gsap.to(sysLineG, { x: 4, duration: 6, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    }
+
+    buildSysLine();
+    window.addEventListener('resize', buildSysLine);
+
     document.querySelectorAll('.sys-concept').forEach(function (section, idx) {
       var word   = section.querySelector('.sys-concept-word');
       var phrase = section.querySelector('.sys-concept-phrase');
+      var num    = section.querySelector('.sys-section-num');
+      var rule   = section.querySelector('.sys-section-rule');
       var dur    = 4.2 + idx * 0.9;
       var tl = gsap.timeline({
         scrollTrigger: { trigger: section, start: 'top 76%', toggleActions: 'play none none none' },
         onComplete: function () {
-          gsap.to(word,   { opacity: 0.82, y: 5,  duration: dur,        yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.6 });
-          gsap.to(phrase, { opacity: 0.60,         duration: dur * 1.25, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.6 + 1.2 });
+          if (phrase && phrase.dataset.phrase) typewriterSimple(phrase, phrase.dataset.phrase, 34);
+          gsap.to(word, { opacity: 0.82, y: 5, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.6 });
         }
       });
-      tl.fromTo(word,   { opacity: 0, y: 32 },                        { opacity: 1, y: 0,            duration: 1.0, ease: 'power2.out' });
-      tl.fromTo(phrase, { opacity: 0, filter: 'blur(8px)', y: 12 },   { opacity: 1, filter: 'blur(0px)', y: 0, duration: 1.2, ease: 'power2.out' }, '-=0.28');
+      if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 0.30, duration: 0.5, ease: 'power2.out' });
+      if (rule) tl.fromTo(rule, { scaleX: 0 },  { scaleX: 1, duration: 0.5, ease: 'power2.out', transformOrigin: 'left center' }, '-=0.2');
+      tl.fromTo(word, { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out' }, '-=0.15');
     });
 
     var closing = document.querySelector('.sys-closing');
     if (closing) {
-      gsap.fromTo(
+      var closingNum  = closing.querySelector('.sys-section-num');
+      var closingRule = closing.querySelector('.sys-section-rule');
+      var closingTL = gsap.timeline({
+        scrollTrigger: { trigger: closing, start: 'top 78%', toggleActions: 'play none none none' }
+      });
+      if (closingNum)  closingTL.fromTo(closingNum,  { opacity: 0 }, { opacity: 0.30, duration: 0.5, ease: 'power2.out' });
+      if (closingRule) closingTL.fromTo(closingRule, { scaleX: 0 },  { scaleX: 1, duration: 0.5, ease: 'power2.out', transformOrigin: 'left center' }, '-=0.2');
+      closingTL.fromTo(
         closing.querySelectorAll('.sys-closing-line'),
         { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 1.1, ease: 'power2.out', stagger: 0.20,
-          scrollTrigger: { trigger: closing, start: 'top 78%', toggleActions: 'play none none none' } }
+        { opacity: 1, y: 0, duration: 1.1, ease: 'power2.out', stagger: 0.20 },
+        '-=0.15'
       );
+      var subtext = closing.querySelector('.sys-closing-subtext');
+      if (subtext) closingTL.fromTo(subtext, { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power2.out' }, '-=0.4');
     }
   });
   </script>

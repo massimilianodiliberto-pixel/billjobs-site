@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Author &#8212; Massimiliano Di Liberto</title>
   <meta name="description" content="Massimiliano Di Liberto &#8212; Director, Producer, Visual Systems.">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -40,55 +38,65 @@
 
   <main class="author-main">
 
-    <!-- BLOCK 1 -->
-    <section class="auth-block" data-reveal>
-      <div class="auth-text-wrap">
-        <span class="auth-line">I STARTED</span>
-        <span class="auth-line">WHEN FILMS</span>
-        <span class="auth-line auth-line--thin">WERE STILL SHOT ON FILM.</span>
-      </div>
+    <!-- Organic path line -->
+    <div id="auth-line-wrap" aria-hidden="true">
+      <svg id="auth-line-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="auth-glow-f" x="-50%" y="-10%" width="200%" height="120%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <g id="auth-line-g">
+          <path id="auth-line-path" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7" filter="url(#auth-glow-f)"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- 01 -->
+    <section class="auth-moment" data-idx="0">
+      <span class="auth-moment-num">01</span>
+      <h2 class="auth-moment-title">I STARTED WHEN FILMS<br>WERE STILL SHOT ON FILM.</h2>
+      <div class="auth-moment-sub" data-lines="Before digital.|Before shortcuts.|When every frame had a cost."></div>
     </section>
 
-
-    <!-- BLOCK 2 -->
-    <section class="auth-block" data-reveal>
-      <div class="auth-text-wrap">
-        <span class="auth-line">WHEN TIME ON SET</span>
-        <span class="auth-line auth-line--dim">HAD A REAL VALUE.</span>
-      </div>
+    <!-- 02 -->
+    <section class="auth-moment auth-moment--right" data-idx="1">
+      <span class="auth-moment-num">02</span>
+      <h2 class="auth-moment-title">WHEN TIME ON SET<br>HAD A REAL VALUE.</h2>
+      <div class="auth-moment-sub" data-lines="Days were planned.|Decisions were real.|Waste was not an option."></div>
     </section>
 
-
-    <!-- BLOCK 3 -->
-    <section class="auth-block" data-reveal>
-      <div class="auth-text-wrap">
-        <span class="auth-line">THAT METHOD</span>
-        <span class="auth-line auth-line--dim">NEVER DISAPPEARED.</span>
-      </div>
+    <!-- 03 -->
+    <section class="auth-moment" data-idx="2">
+      <span class="auth-moment-num">03</span>
+      <h2 class="auth-moment-title">THAT METHOD<br>NEVER DISAPPEARED.</h2>
+      <div class="auth-moment-sub" data-lines="Technology changed.|Tools evolved.|The method stayed.|Because it works."></div>
     </section>
 
-
-    <!-- BLOCK 4 -->
-    <section class="auth-block" data-reveal>
-      <div class="auth-text-wrap">
-        <span class="auth-line">IT IS STILL</span>
-        <span class="auth-line">WHAT MAKES</span>
-        <span class="auth-line auth-line--close">IDEAS REAL.</span>
-      </div>
+    <!-- 04 -->
+    <section class="auth-moment auth-moment--right" data-idx="3">
+      <span class="auth-moment-num">04</span>
+      <h2 class="auth-moment-title">IT IS STILL WHAT<br>MAKES IDEAS REAL.</h2>
+      <div class="auth-moment-sub" data-lines="Not effects.|Not trends.|Real ideas.|Real execution."></div>
     </section>
 
-    <!-- DARK PAUSE -->
-    <div class="auth-pause"></div>
-
-    <!-- CLOSING -->
-    <section class="auth-closing" data-reveal>
-      <span class="auth-closing-text">24 YEARS AGO.</span>
+    <!-- 05 -->
+    <section class="auth-moment auth-moment--pause" data-idx="4">
+      <span class="auth-moment-num">05</span>
+      <h2 class="auth-moment-title auth-moment-title--large">24 YEARS AGO.</h2>
+      <div class="auth-moment-sub" data-lines="A long way.|A lot of sets.|A lot of people.|A lot of stories."></div>
     </section>
 
-    <!-- BILL JOBS -->
-    <section class="auth-billjobs" data-reveal>
+    <!-- WHO IS BILL JOBS? -->
+    <section class="auth-billjobs" id="bill-jobs">
       <h2 class="auth-bj-title">WHO IS BILL JOBS?</h2>
-      <p class="auth-bj-phrase">Not a portfolio. Just the human side behind the frame.</p>
+      <div class="auth-bj-body">
+        <p>Not a portfolio.</p>
+        <p>Not a company presentation.</p>
+        <p>Just the human side behind the frame.</p>
+        <p>The part you usually never see:<br>the person balancing vision, production, people and reality.</p>
+      </div>
       <div class="auth-bj-reel">
         <iframe
           src="https://www.youtube.com/embed/TrLO4PL-8jI?rel=0&modestbranding=1&color=white"
@@ -97,6 +105,7 @@
           loading="lazy">
         </iframe>
       </div>
+      <p class="auth-bj-closing"><em>Sometimes the best creative solutions<br>come from understanding every part of the process.</em></p>
     </section>
 
   </main>
@@ -111,7 +120,141 @@
   <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
   <script src="../assets/js/core.js"></script>
 
+  <script>
+  (function () {
 
+    function typewriterLines(el, linesStr, speed) {
+      var lines = linesStr.split('|');
+      el.innerHTML = '';
+      var lineIdx = 0, charIdx = 0, currentNode = null;
+      function step() {
+        if (lineIdx >= lines.length) return;
+        var line = lines[lineIdx];
+        if (charIdx === 0) {
+          if (lineIdx > 0) el.appendChild(document.createElement('br'));
+          currentNode = document.createTextNode('');
+          el.appendChild(currentNode);
+        }
+        if (charIdx < line.length) {
+          currentNode.nodeValue += line[charIdx++];
+          setTimeout(step, speed || 38);
+        } else {
+          lineIdx++; charIdx = 0;
+          if (lineIdx < lines.length) setTimeout(step, (speed || 38) * 3.5);
+        }
+      }
+      step();
+    }
+
+    var svgEl   = document.getElementById('auth-line-svg');
+    var pathEl  = document.getElementById('auth-line-path');
+    var wrapEl  = document.getElementById('auth-line-wrap');
+    var groupEl = document.getElementById('auth-line-g');
+    var mainEl  = document.querySelector('.author-main');
+    var organicX = [-0.04, 0.06, -0.07, 0.05, -0.03, 0.04];
+
+    function buildAuthLine() {
+      if (!svgEl || !pathEl || !mainEl) return;
+      var W = window.innerWidth;
+      var H = mainEl.scrollHeight;
+      wrapEl.style.height = H + 'px';
+      svgEl.setAttribute('width', W);
+      svgEl.setAttribute('height', H);
+      svgEl.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      var xBase = Math.max(28, Math.min(W * 0.055, 52));
+      var sections = Array.from(mainEl.querySelectorAll('.auth-moment, .auth-billjobs'));
+      var pts = [{ x: xBase, y: 70 }];
+      sections.forEach(function (sec, i) {
+        var xOff = (organicX[i % organicX.length] || 0) * W * 0.06;
+        pts.push({ x: xBase + xOff, y: sec.offsetTop + sec.offsetHeight * 0.36 });
+      });
+      var ls = sections[sections.length - 1];
+      pts.push({ x: xBase, y: ls.offsetTop + ls.offsetHeight - 60 });
+      var d = 'M ' + pts[0].x.toFixed(1) + ' ' + pts[0].y.toFixed(1);
+      for (var i = 0; i < pts.length - 1; i++) {
+        var p0 = pts[i], p1 = pts[i + 1], dy = p1.y - p0.y;
+        d += ' C ' + p0.x.toFixed(1) + ' ' + (p0.y + dy * 0.45).toFixed(1);
+        d += ',' + p1.x.toFixed(1) + ' ' + (p1.y - dy * 0.45).toFixed(1);
+        d += ',' + p1.x.toFixed(1) + ' ' + p1.y.toFixed(1);
+      }
+      pathEl.setAttribute('d', d);
+      svgEl.querySelectorAll('.auth-dot').forEach(function (el) { el.remove(); });
+      for (var j = 1; j < pts.length - 1; j++) {
+        var dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        dot.setAttribute('cx', pts[j].x.toFixed(1));
+        dot.setAttribute('cy', pts[j].y.toFixed(1));
+        dot.setAttribute('r', '2.5');
+        dot.setAttribute('fill', 'rgba(255,255,255,0.52)');
+        dot.setAttribute('filter', 'url(#auth-glow-f)');
+        dot.classList.add('auth-dot');
+        dot.setAttribute('data-didx', j - 1);
+        dot.style.opacity = '0';
+        svgEl.appendChild(dot);
+      }
+      var existing = ScrollTrigger.getAll().filter(function (t) { return t.vars && t.vars.id === 'auth-draw'; });
+      existing.forEach(function (t) { t.kill(); });
+      var pLen = pathEl.getTotalLength ? pathEl.getTotalLength() : 3000;
+      pathEl.style.strokeDasharray = pLen;
+      pathEl.style.strokeDashoffset = pLen;
+      gsap.to(pathEl, {
+        strokeDashoffset: 0, ease: 'none',
+        scrollTrigger: { id: 'auth-draw', trigger: mainEl, start: 'top top', end: 'bottom bottom', scrub: 1.2 }
+      });
+      gsap.killTweensOf(groupEl);
+      gsap.to(groupEl, { x: 3.5, duration: 5.5, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    }
+
+    window.addEventListener('load', function () {
+      buildAuthLine();
+      window.addEventListener('resize', buildAuthLine);
+
+      document.querySelectorAll('.auth-moment').forEach(function (section, idx) {
+        var title = section.querySelector('.auth-moment-title');
+        var subEl = section.querySelector('.auth-moment-sub');
+        var num   = section.querySelector('.auth-moment-num');
+        var dot   = document.querySelector('.auth-dot[data-didx="' + idx + '"]');
+        gsap.set(title, { opacity: 0 });
+        var tl = gsap.timeline({
+          scrollTrigger: { trigger: section, start: 'top 74%', toggleActions: 'play none none none' },
+          onComplete: function () {
+            if (subEl && subEl.dataset.lines) typewriterLines(subEl, subEl.dataset.lines, 38);
+            if (dot) {
+              gsap.to(dot, { opacity: 0.7, duration: 0.5, ease: 'power2.out',
+                onComplete: function () { gsap.to(dot, { opacity: 0.28, duration: 2.8, yoyo: true, repeat: -1, ease: 'sine.inOut' }); }
+              });
+            }
+          }
+        });
+        if (num) tl.fromTo(num, { opacity: 0 }, { opacity: 0.28, duration: 0.6, ease: 'power2.out' });
+        tl.fromTo(title, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out' }, '-=0.15');
+      });
+
+      var bjSection = document.getElementById('bill-jobs');
+      if (bjSection) {
+        var bjDot = document.querySelector('.auth-dot[data-didx="5"]');
+        gsap.set(bjSection, { opacity: 0 });
+        gsap.to(bjSection, {
+          opacity: 1, y: 0, duration: 1.2, ease: 'power2.out',
+          scrollTrigger: { trigger: bjSection, start: 'top 76%', toggleActions: 'play none none none' },
+          onComplete: function () {
+            if (bjDot) gsap.to(bjDot, { opacity: 0.7, duration: 0.6, ease: 'power2.out' });
+          }
+        });
+      }
+
+      if (window.location.hash === '#bill-jobs') {
+        var target = document.getElementById('bill-jobs');
+        if (target) {
+          setTimeout(function () {
+            if (typeof lenis !== 'undefined') { lenis.scrollTo(target, { duration: 1.5 }); }
+            else { target.scrollIntoView({ behavior: 'smooth' }); }
+          }, 400);
+        }
+      }
+    });
+
+  })();
+  </script>
 
 </body>
 </html>
