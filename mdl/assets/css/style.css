@@ -751,7 +751,7 @@ footer a:hover { color: var(--text-primary); }
 .system-content {
   position: relative;
   z-index: 2;
-  padding: 0 var(--section-h);
+  padding: 0 var(--section-h) 10vh;
   pointer-events: none;
   max-width: 52%;
 }
@@ -769,44 +769,18 @@ footer a:hover { color: var(--text-primary); }
   color: rgba(255, 255, 255, 0.44);
 }
 .sys-desc {
-  margin-top: 38px;
+  margin-top: 56px;
   font-family: var(--font-ui);
-  font-size: var(--text-body);
+  font-size: 12px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.26);
-  line-height: 1.95;
+  letter-spacing: 0.10em;
+  color: rgba(255, 255, 255, 0.32);
+  line-height: 2.2;
   opacity: 0;
 }
 
-.system-cols {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  border-top: 1px solid var(--border);
-}
-.system-col {
-  padding: 56px var(--section-h);
-  background: var(--bg-soft);
-}
-.system-col h3 {
-  font-family: var(--font-ui);
-  font-size: var(--text-label);
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  color: var(--accent);
-  margin-bottom: 22px;
-}
-.system-col p {
-  font-family: var(--font-ui);
-  font-size: var(--text-body);
-  font-weight: 300;
-  color: var(--text-muted);
-  line-height: 2.1;
-}
-
 @media (max-width: 767px) {
-  .system-content { max-width: 90%; }
-  .system-cols { grid-template-columns: 1fr; }
+  .system-content { max-width: 90%; padding-bottom: 6vh; }
 }
 
 /* ============================================================

@@ -48,24 +48,10 @@
           <span class="sys-word sys-word--mid" id="sw2">BEHIND</span>
           <span class="sys-word" id="sw3">THE FRAME</span>
         </div>
-        <p class="sys-desc" id="sys-desc">A creative system where vision, production and post<br>come together in balance. Ideas take shape.<br>Stories come to life.</p>
+        <p class="sys-desc" id="sys-desc">Where vision, budget, people and execution find the same frame.</p>
       </div>
     </section>
 
-    <section class="system-cols">
-      <div class="system-col" data-reveal>
-        <h3>PREPRODUCTION</h3>
-        <p>Concept development, research, planning, visual strategy.</p>
-      </div>
-      <div class="system-col" data-reveal>
-        <h3>PRODUCTION</h3>
-        <p>Direction, coordination, on set execution, creative supervision.</p>
-      </div>
-      <div class="system-col" data-reveal>
-        <h3>POSTPRODUCTION</h3>
-        <p>Editing, VFX, compositing, color grading, motion graphics, final delivery.</p>
-      </div>
-    </section>
 
   </main>
 
@@ -83,9 +69,9 @@
   (function () {
     var canvas = document.getElementById('system-canvas');
     var ctx = canvas.getContext('2d');
-    var W, H, orbits = [], nodes = [], vignette = null;
+    var W, H, orbits = [], nodes = [], words = [], vignette = null;
     var mx = 0, my = 0, tmx = 0, tmy = 0;
-    var fontsReady = false;
+    var fontsReady = false, frame = 0;
 
     document.fonts.ready.then(function () { fontsReady = true; });
 
@@ -104,6 +90,12 @@
       { oi: 2, phase:  1.10, r: 4.5, op: 0.68, label: 'STRATEGY'   },
       { oi: 2, phase:  3.70, r: 4.0, op: 0.62, label: 'POST'       },
       { oi: 2, phase: -0.60, r: 3.5, op: 0.58, label: 'BUDGET'     },
+    ];
+
+    var WORD_LIST = [
+      'VISION','BUDGET','PEOPLE','TIME','LIMITS',
+      'PERMITS','SET','PRESSURE','POST','DELIVERY',
+      'BALANCE','EXECUTION','PRECISION','REALITY'
     ];
 
     function resize() {
@@ -138,6 +130,18 @@
           label: null, anchor: false, x: 0, y: 0
         });
       }
+      words = WORD_LIST.map(function (text, i) {
+        return {
+          text: text,
+          x: W * (0.10 + Math.random() * 0.80),
+          y: H * (0.08 + Math.random() * 0.84),
+          vx: (Math.random() - 0.5) * 0.07,
+          vy: (Math.random() - 0.5) * 0.05,
+          phase: (i / WORD_LIST.length) * Math.PI * 2 + Math.random() * 1.2,
+          cycleSpeed: 0.00035 + Math.random() * 0.00025,
+          maxOp: 0.13 + Math.random() * 0.09,
+        };
+      });
     }
 
     function tick() {
@@ -151,6 +155,14 @@
           n.y = n.orb.cy + ex * s + ey * c;
         }
       });
+      words.forEach(function (w) {
+        w.x += w.vx;
+        w.y += w.vy;
+        if (w.x < -90) w.x = W + 90;
+        if (w.x > W + 90) w.x = -90;
+        if (w.y < -20) w.y = H + 20;
+        if (w.y > H + 20) w.y = -20;
+      });
     }
 
     function getVignette() {
@@ -163,6 +175,7 @@
     }
 
     function render() {
+      frame++;
       tick();
       ctx.clearRect(0, 0, W, H);
 
@@ -194,6 +207,20 @@
             ctx.stroke();
           }
         }
+      }
+
+      if (fontsReady) {
+        ctx.font = '300 10px "Space Grotesk", sans-serif';
+        ctx.letterSpacing = '0.14em';
+        ctx.textAlign = 'left';
+        words.forEach(function (w) {
+          var op = Math.max(0, Math.sin(frame * w.cycleSpeed + w.phase));
+          op = op * op * w.maxOp;
+          if (op > 0.005) {
+            ctx.fillStyle = 'rgba(255,255,255,' + op.toFixed(3) + ')';
+            ctx.fillText(w.text, w.x, w.y);
+          }
+        });
       }
 
       nodes.forEach(function (n) {
