@@ -427,9 +427,16 @@
         title: 'Up All Night',
         cat: 'film-development', catLabel: 'Film & Development',
         role: 'Director / Writer / Producer',
-        desc: 'Feature film. Concept, sceneggiatura e piano di produzione completo. Presentato all\'European Film Market — Berlinale. Tre Film Commission italiane coinvolte. Fondi potenziali: ~690.000€.',
-        action: 'link_youtube', youtube: null, video: null,
+        subtitle: 'Development teaser — European Film Market, Berlinale.',
+        intro: 'A cinematic production teaser created to support financing, visual direction and institutional presentation.',
+        statements: [
+          'The project received funding intentions from multiple Italian regional film commissions for a total amount of approximately €690,000 and is currently completing its financial structure.',
+          'The teaser was designed to communicate tone, scale, production potential and cinematic direction to institutional partners and investors.'
+        ],
+        desc: 'Feature film presented at the European Film Market — Berlinale. Director / Writer / Producer.',
+        action: 'image_only', youtube: null, video: null,
         image: '../assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png',
+        skin: 'film-dossier',
         size: 'wide'
       },
       {
@@ -537,10 +544,27 @@
     const ov = document.getElementById('wk-overlay');
 
     function openOverlay(p) {
+      const panel = ov.querySelector('.wk-ov-panel');
+      panel.dataset.skin = p.skin || '';
+
       ov.querySelector('.wk-ov-cat').textContent   = p.catLabel;
       ov.querySelector('.wk-ov-role').textContent  = p.role;
       ov.querySelector('.wk-ov-title').textContent = p.title;
-      ov.querySelector('.wk-ov-desc').textContent  = p.desc;
+
+      const descEl = ov.querySelector('.wk-ov-desc');
+      if (p.skin === 'film-dossier') {
+        let html = '';
+        if (p.subtitle) html += '<p class="wk-ov-subtitle">' + p.subtitle + '</p>';
+        if (p.intro)    html += '<p class="wk-ov-intro">' + p.intro + '</p>';
+        if (p.statements && p.statements.length) {
+          html += '<div class="wk-film-stmts">';
+          p.statements.forEach(function (s) { html += '<p class="wk-film-stmt">' + s + '</p>'; });
+          html += '</div>';
+        }
+        descEl.innerHTML = html;
+      } else {
+        descEl.textContent = p.desc;
+      }
 
       const media = ov.querySelector('.wk-ov-media');
       media.innerHTML = '';
@@ -576,7 +600,10 @@
       document.body.style.overflow = '';
       if (typeof lenis !== 'undefined') lenis.start();
       gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.4, ease: 'power2.out' });
-      setTimeout(() => { ov.querySelector('.wk-ov-media').innerHTML = ''; }, 600);
+      setTimeout(() => {
+        ov.querySelector('.wk-ov-media').innerHTML = '';
+        ov.querySelector('.wk-ov-panel').dataset.skin = '';
+      }, 600);
     }
 
     ov.querySelector('.wk-ov-close').addEventListener('click', closeOverlay);
