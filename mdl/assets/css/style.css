@@ -897,7 +897,7 @@ footer a:hover { color: var(--text-primary); }
 
 /* Cinematic concept sections */
 .sys-concept {
-  padding: 22vh var(--section-h);
+  padding: 14vh var(--section-h);
   background: #060606;
   position: relative;
   overflow: hidden;
@@ -929,14 +929,14 @@ footer a:hover { color: var(--text-primary); }
   z-index: 2;
 }
 .sys-concept-phrase {
-  margin-top: 32px;
+  margin-top: 28px;
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.28);
-  letter-spacing: 0.09em;
+  color: rgba(255, 255, 255, 0.52);
+  letter-spacing: 0.07em;
   line-height: 2.0;
-  max-width: 420px;
+  max-width: 520px;
   opacity: 0;
   position: relative;
   z-index: 2;
@@ -965,7 +965,7 @@ footer a:hover { color: var(--text-primary); }
 .sys-concept-body p:last-child { margin-bottom: 0; }
 
 .sys-closing {
-  padding: 26vh var(--section-h) 24vh;
+  padding: 18vh var(--section-h) 20vh;
   background: #030306;
 }
 .sys-closing-line {
@@ -985,8 +985,8 @@ footer a:hover { color: var(--text-primary); }
 }
 
 @media (max-width: 767px) {
-  .sys-concept { padding: 16vh var(--section-h); }
-  .sys-closing { padding: 18vh var(--section-h) 16vh; }
+  .sys-concept { padding: 10vh var(--section-h); }
+  .sys-closing { padding: 14vh var(--section-h) 12vh; }
 }
 
 .system-main { position: relative; }

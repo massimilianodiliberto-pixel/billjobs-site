@@ -272,7 +272,7 @@
       orbits.forEach(function (orb) {
         ctx.beginPath();
         ctx.ellipse(orb.cx, orb.cy, orb.ra, orb.rb, orb.tilt, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+        ctx.strokeStyle = 'rgba(255,255,255,0.04)';
         ctx.lineWidth = 0.7;
         ctx.stroke();
       });
@@ -488,7 +488,10 @@
       var tl = gsap.timeline({
         scrollTrigger: { trigger: section, start: 'top 76%', toggleActions: 'play none none none' },
         onComplete: function () {
-          if (phrase && phrase.dataset.phrase) typewriterSimple(phrase, phrase.dataset.phrase, 34);
+          if (phrase && phrase.dataset.phrase) {
+            gsap.set(phrase, { opacity: 1 });
+            typewriterSimple(phrase, phrase.dataset.phrase, 34);
+          }
           var body = section.querySelector('.sys-concept-body');
           if (body) gsap.fromTo(body, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', delay: 0.6 });
           gsap.to(word, { opacity: 0.82, y: 5, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.6 });
