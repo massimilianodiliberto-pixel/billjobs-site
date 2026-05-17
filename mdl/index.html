@@ -14,6 +14,16 @@
 </head>
 <body>
 
+  <div id="intro-loader">
+    <svg id="il-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="24" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none"/>
+      <circle id="il-arc" cx="32" cy="32" r="24" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" fill="none"
+        stroke-dasharray="150.796" stroke-dashoffset="150.796"
+        stroke-linecap="round" transform="rotate(-90 32 32)"/>
+    </svg>
+    <span id="il-label">LOADING</span>
+  </div>
+
   <div id="grain"></div>
   <div id="page-transition"></div>
 
@@ -247,14 +257,77 @@
 
     document.getElementById('intro-skip')?.addEventListener('click', skipIntro);
 
+    /* ── INTRO LOADER ──────────────────────────────────────── */
+
+    function startIntroLoader(onDone) {
+      var arc  = document.getElementById('il-arc');
+      var circ = 150.796; // 2pi x r24
+      var loaded = 0, isDone = false;
+
+      var assets = [
+        { type: 'video', src: 'assets/img/Hero.mp4' },
+        { type: 'video', src: 'assets/video/Analog%20Transition%202.mp4' },
+        { type: 'image', src: 'assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png' },
+        { type: 'image', src: 'assets/img/IMG_7623.jpeg' },
+        { type: 'image', src: 'assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png' },
+      ];
+      var total = assets.length;
+
+      function setProgress(p) {
+        if (arc) arc.style.strokeDashoffset = (circ * (1 - Math.min(p, 1))).toFixed(3);
+      }
+
+      function tick() {
+        loaded = Math.min(loaded + 1, total);
+        setProgress(loaded / total);
+        if (loaded >= total) complete();
+      }
+
+      function complete() {
+        if (isDone) return;
+        isDone = true;
+        setProgress(1);
+        setTimeout(function () {
+          var el = document.getElementById('intro-loader');
+          if (el) { el.style.transition = 'opacity 600ms ease-out'; el.style.opacity = '0'; }
+          setTimeout(function () {
+            if (el && el.parentNode) el.remove();
+            onDone();
+          }, 650);
+        }, 200);
+      }
+
+      setTimeout(function () { if (!isDone) complete(); }, 4000);
+
+      assets.forEach(function (asset) {
+        if (asset.type === 'image') {
+          var img = new Image();
+          img.onload = tick; img.onerror = tick; img.src = asset.src;
+        } else {
+          var _fired = false;
+          var _tick = function () { if (!_fired) { _fired = true; tick(); } };
+          var vid = document.createElement('video');
+          vid.muted = true; vid.setAttribute('playsinline', ''); vid.preload = 'auto';
+          vid.addEventListener('canplaythrough', _tick, { once: true });
+          vid.addEventListener('error', _tick, { once: true });
+          setTimeout(_tick, 2500);
+          var vsrc = document.createElement('source');
+          vsrc.src = asset.src; vsrc.type = 'video/mp4';
+          vid.appendChild(vsrc); vid.load();
+        }
+      });
+    }
+
     if (sessionStorage.getItem('introSeen')) {
+      var _il = document.getElementById('intro-loader');
+      if (_il) _il.style.display = 'none';
       gsap.set('#intro', { display: 'none' });
       gsap.set('#etf-overlay', { display: 'none' });
       playHeroEntrance();
       initSite();
     } else {
       sessionStorage.setItem('introSeen', 'true');
-      playIntro();
+      startIntroLoader(function () { playIntro(); });
     }
 
     /* ── FEATURED HOVER ─────────────────────────────────────── */

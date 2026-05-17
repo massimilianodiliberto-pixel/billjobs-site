@@ -87,7 +87,7 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   inset: 0;
   background: var(--bg);
   z-index: 9000;
-  pointer-events: none;
+  pointer-events: all;
 }
 
 /* ============================================================
@@ -1721,4 +1721,48 @@ footer a:hover { color: var(--text-primary); }
   #author-vid-texture   { opacity: 0.18; }
   #intro-vid-analog     { opacity: 0.18; }
   #vid-work-flash       { display: none; }
+}
+
+/* ============================================================
+   INTRO LOADER
+   ============================================================ */
+
+#intro-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #060606;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+#il-svg {
+  width: 56px;
+  height: 56px;
+}
+
+#il-arc {
+  transition: stroke-dashoffset 500ms ease-out;
+}
+
+#il-label {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================================
+   NAV GATE
+   ============================================================ */
+
+#nav-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #060606;
+  pointer-events: all;
 }

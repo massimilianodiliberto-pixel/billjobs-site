@@ -15,17 +15,32 @@ lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => { lenis.raf(time * 1000); });
 gsap.ticker.lagSmoothing(0);
 
-/* ── Page transition — reveal on load (skip if intro present) */
-window.addEventListener('load', () => {
-  if (!document.getElementById('intro')) {
-    gsap.to('#page-transition', {
-      autoAlpha: 0,
-      duration: 0.7,
-      ease: 'power2.out',
-      delay: 0.15,
-    });
-  }
+/* ── Navigation gate helpers ─────────────────────────────── */
+
+function waitForVideo(el, maxMs) {
+  return new Promise(resolve => {
+    if (!el || el.readyState >= 3 || el.getAttribute('preload') === 'none') return resolve();
+    const t = setTimeout(resolve, maxMs);
+    el.addEventListener('canplaythrough', () => { clearTimeout(t); resolve(); }, { once: true });
+  });
+}
+
+/* Destination page: hold #page-transition until primary video ready */
+window.addEventListener('load', async () => {
+  if (document.getElementById('intro')) return;
+  const primaryVid = document.querySelector('#system-vid-bg, #author-vid-texture');
+  if (primaryVid) await waitForVideo(primaryVid, 2500);
+  gsap.to('#page-transition', { autoAlpha: 0, duration: 0.7, ease: 'power2.out', delay: 0.15 });
 });
+
+/* Source page: instant black gate + navigate */
+function gateAndNavigate(url) {
+  const gate = document.createElement('div');
+  gate.id = 'nav-gate';
+  document.body.appendChild(gate);
+  window.sound.play('feedback-transition', 0.06, 0.18);
+  setTimeout(() => { window.location.href = url; }, 50);
+}
 
 /* ── Nav reveal ─────────────────────────────────────────── */
 let navRevealed = false;
@@ -86,12 +101,7 @@ if (navLogo) {
     if (window.location.href === homeUrl) {
       window.location.reload();
     } else {
-      gsap.to('#page-transition', {
-        autoAlpha: 1,
-        duration: 0.45,
-        ease: 'power2.in',
-        onComplete: () => { window.location.href = homeUrl; },
-      });
+      gateAndNavigate(homeUrl);
     }
   });
 }
@@ -107,12 +117,7 @@ document.querySelectorAll('a[href]').forEach(link => {
     const dest = link.href;
     if (dest === window.location.href) return;
     e.preventDefault();
-    gsap.to('#page-transition', {
-      autoAlpha: 1,
-      duration: 0.45,
-      ease: 'power2.in',
-      onComplete: () => { window.location.href = dest; },
-    });
+    gateAndNavigate(dest);
   });
 });
 
@@ -290,12 +295,3 @@ window.sound = new SoundSystem();
   });
 }());
 
-/* ── Page transition: sound on internal nav ── */
-document.addEventListener('click', e => {
-  const link = e.target.closest('a[href]');
-  if (!link) return;
-  const href = link.getAttribute('href');
-  if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
-  if (link.target === '_blank' || link.classList.contains('nav-logo')) return;
-  window.sound.play('feedback-transition', 0.06, 0.18);
-}, true);
