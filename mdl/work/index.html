@@ -111,25 +111,61 @@
         cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
         role: 'Director',
         desc: 'Fashion event content production. Milano Fashion Week.',
-        action: 'image_only', youtube: null, video: null, image: null,
+        action: 'link_youtube', youtube: '89hgFuTDaQ0', video: null, image: '../assets/img/ElisabettaFranchi.png',
         size: 'normal'
       },
       {
-        id: 'gamma-campagne',
-        title: 'Gamma+ — Campagne',
+        id: 'cotril-anteprima',
+        title: 'Cotril × Anteprima',
         cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
-        role: 'Creative Producer / Director',
-        desc: 'Produzione completa beauty: shooting prodotto, cataloghi, gigantografie, visual stand e contenuti corporate e social.',
-        action: 'image_only', youtube: null, video: null, image: null,
+        role: 'Director',
+        desc: 'Fashion film. Direzione e visual storytelling.',
+        action: 'link_youtube', youtube: 'Aa7VrzxoXf8', video: null, image: '../assets/img/Cotril_Anteprima.png',
         size: 'wide'
       },
       {
+        id: 'gamma-campagne',
+        title: 'Gamma+ — Campaign',
+        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
+        role: 'Creative Director / Producer',
+        desc: 'Complete beauty production: product shooting, catalogues, display visuals, stand materials, corporate and social content.',
+        action: 'image_only', youtube: null, video: null, image: '../assets/img/G+C01.png',
+        size: 'wide'
+      },
+      {
+        id: 'gamma-product-visuals',
+        title: 'Gamma+ — Product Visuals',
+        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
+        role: 'Director / Creative Producer',
+        desc: 'Video prodotto beauty. Visual per lancio collezione.',
+        action: 'link_youtube', youtube: '0FsqDcX4Ou8', video: null, image: '../assets/img/MixGamma+.png',
+        size: 'normal'
+      },
+      {
         id: 'post-scriptum',
-        title: 'Post Scriptum',
+        title: 'Post Scriptum — Spring Summer 2024',
         cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
         role: 'Director',
-        desc: 'Campagne stagionali beauty/fashion. Visual e video collezione.',
-        action: 'image_only', youtube: null, video: null, image: null,
+        desc: 'Campagna stagionale beauty/fashion. Visual e video collezione.',
+        action: 'link_youtube', youtube: '0hhzo41ZZWg', video: null, image: '../assets/img/PS2024.png',
+        size: 'normal'
+      },
+      {
+        id: 'post-scriptum-ss2023',
+        title: 'Post Scriptum — Spring Summer 2023',
+        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
+        role: 'Director',
+        desc: 'Campagna stagionale beauty/fashion. Visual e video collezione.',
+        action: 'link_youtube', youtube: 'r8IhiUhoOtU', video: null, image: '../assets/img/PS2023.png',
+        size: 'normal'
+      },
+      {
+        id: 'post-scriptum-fw2324',
+        title: 'Post Scriptum — Fall Winter 2023/24',
+        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
+        role: 'Director',
+        desc: 'Campagna stagionale beauty/fashion. Visual e video collezione.',
+        action: 'link_youtube', youtube: 'MBh8WQwSloA', video: null, image: '../assets/img/PS2324.png',
         size: 'normal'
       },
       {
@@ -152,30 +188,48 @@
       },
       {
         id: 'goa-goa',
-        title: 'Goa Goa',
+        title: 'Goa Goa — Fall Winter 2023/24',
         cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
         role: 'Director',
         desc: 'Video collezione moda.',
-        action: 'image_only', youtube: null, video: null, image: null,
+        action: 'link_youtube', youtube: 'cGeNrFihIYo', video: null, image: '../assets/img/GoaGoa.png',
         size: 'normal'
       },
       {
-        id: 'video-acqua',
-        title: 'Video Acqua',
+        id: 'linea-cinque',
+        title: 'Linea Cinque — Spring Summer 2023',
         cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
         role: 'Director',
         desc: 'Video collezione moda.',
-        action: 'image_only', youtube: null, video: null, image: null,
+        action: 'link_youtube', youtube: 'xh5Fd7Nn8Eo', video: null, image: '../assets/img/LineaCinque.png',
+        size: 'normal'
+      },
+      {
+        id: 'trame-di-donna',
+        title: 'Trame di Donna — Spring Summer 2023',
+        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
+        role: 'Director',
+        desc: 'Video collezione moda.',
+        action: 'link_youtube', youtube: 'cIuPLUgqC2c', video: null, image: '../assets/img/TrameDiDonna.png',
         size: 'normal'
       },
       {
         id: 'andrea-perreca',
-        title: 'Andrea Perreca',
+        title: 'Andrea Perreca — in Milano',
         cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
         role: 'Director',
         desc: 'Fashion film. Direzione e visual storytelling.',
-        action: 'image_only', youtube: null, video: null, image: null,
+        action: 'link_youtube', youtube: 'qRLsMxRZ5X4', video: null, image: '../assets/img/AndreaPerreca.jpg',
         size: 'portrait'
+      },
+      {
+        id: 'giulia-petronio',
+        title: 'Giulia Petronio — In Venice',
+        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
+        role: 'Director',
+        desc: 'Fashion film. Direzione e visual storytelling.',
+        action: 'link_youtube', youtube: 'GOfOdPu-S28', video: null, image: '../assets/img/GiuliaPetronio.png',
+        size: 'normal'
       },
 
       /* ── AI VISUALS ───────────────────────────────────────── */
@@ -341,9 +395,9 @@
         id: 'banca-consulia',
         title: 'Banca Consulia',
         cat: 'events-live', catLabel: 'Events & Live Shows',
-        role: 'Creative Producer',
+        role: 'Creative Producer / Director',
         desc: 'Ideazione e produzione contenuti per evento interno.',
-        action: 'image_only', youtube: null, video: null, image: null,
+        action: 'link_youtube', youtube: 'djb-TJ1qLXA', video: null, image: '../assets/img/BancaConsulia.png',
         size: 'normal'
       },
       {
@@ -408,7 +462,16 @@
         cat: 'commercial', catLabel: 'Commercial',
         role: 'Director',
         desc: 'Regia video aziendale.',
-        action: 'image_only', youtube: null, video: null, image: null,
+        action: 'link_youtube', youtube: '-sBfhPNNRxE', video: null, image: '../assets/img/Verco.png',
+        size: 'normal'
+      },
+      {
+        id: 'twentyfour',
+        title: 'TwentyFour',
+        cat: 'commercial', catLabel: 'Commercial',
+        role: 'Director / Content Creator',
+        desc: 'Regia video commercial.',
+        action: 'link_youtube', youtube: 'gxb57yFV3uQ', video: null, image: '../assets/img/Twentyfour.png',
         size: 'normal'
       },
       {
