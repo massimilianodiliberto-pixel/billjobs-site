@@ -49,13 +49,6 @@
       </div>
     </section>
 
-    <!-- VIDEO 1 -->
-    <div class="auth-video-wrap" data-reveal>
-      <video class="auth-video" muted loop playsinline>
-        <!-- footage: film strip / cutting table — src to be added -->
-      </video>
-      <div class="auth-video-placeholder"></div>
-    </div>
 
     <!-- BLOCK 2 -->
     <section class="auth-block" data-reveal>
@@ -65,13 +58,6 @@
       </div>
     </section>
 
-    <!-- VIDEO 2 -->
-    <div class="auth-video-wrap" data-reveal>
-      <video class="auth-video" muted loop playsinline>
-        <!-- footage: film being cut / spliced — src to be added -->
-      </video>
-      <div class="auth-video-placeholder"></div>
-    </div>
 
     <!-- BLOCK 3 -->
     <section class="auth-block" data-reveal>
@@ -81,13 +67,6 @@
       </div>
     </section>
 
-    <!-- VIDEO 3 -->
-    <div class="auth-video-wrap" data-reveal>
-      <video class="auth-video" muted loop playsinline>
-        <!-- footage: film reels / machine detail — src to be added -->
-      </video>
-      <div class="auth-video-placeholder"></div>
-    </div>
 
     <!-- BLOCK 4 -->
     <section class="auth-block" data-reveal>
@@ -109,6 +88,7 @@
     <!-- BILL JOBS -->
     <section class="auth-billjobs" data-reveal>
       <h2 class="auth-bj-title">WHO IS BILL JOBS?</h2>
+      <p class="auth-bj-phrase">Not a portfolio. Just the human side behind the frame.</p>
       <div class="auth-bj-reel">
         <iframe
           src="https://www.youtube.com/embed/TrLO4PL-8jI?rel=0&modestbranding=1&color=white"
@@ -131,25 +111,7 @@
   <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
   <script src="../assets/js/core.js"></script>
 
-  <script>
-  (function () {
-    if (!('IntersectionObserver' in window)) return;
-    var obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        var vid = entry.target.querySelector('.auth-video');
-        if (!vid) return;
-        if (entry.isIntersecting) {
-          vid.play().catch(function () {});
-        } else {
-          vid.pause();
-        }
-      });
-    }, { threshold: 0.25 });
-    document.querySelectorAll('.auth-video-wrap').forEach(function (el) {
-      obs.observe(el);
-    });
-  })();
-  </script>
+
 
 </body>
 </html>
