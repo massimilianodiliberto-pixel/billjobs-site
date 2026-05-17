@@ -54,6 +54,29 @@
       </svg>
     </div>
 
+    <!-- OPENING -->
+    <section class="auth-opening">
+      <h1 class="auth-name">MASSIMILIANO<br>DI LIBERTO</h1>
+      <p class="auth-role-line">DIRECTION · PRODUCTION · VISUAL SYSTEMS</p>
+    </section>
+
+    <div class="auth-breath" aria-hidden="true"></div>
+
+    <div class="auth-frag auth-frag--large">
+      <span>20 YEARS INSIDE<br>IMAGE CONSTRUCTION</span>
+    </div>
+
+    <div class="auth-frag auth-frag--mid">
+      <span>BEAUTY</span>
+      <span>MUSIC</span>
+      <span>CINEMA</span>
+      <span>CORPORATE</span>
+    </div>
+
+    <div class="auth-frag auth-frag--small">
+      <span>WARNER MUSIC · COSMOPROF · BERLINALE · VENEZIA</span>
+    </div>
+
     <!-- 01 -->
     <section class="auth-moment" data-idx="0">
       <span class="auth-moment-num">01</span>
@@ -207,6 +230,19 @@
     window.addEventListener('load', function () {
       buildAuthLine();
       window.addEventListener('resize', buildAuthLine);
+
+      // Opening hero animation
+      gsap.to('.auth-name', { opacity: 1, duration: 2.2, ease: 'power1.out', delay: 0.3 });
+      gsap.to('.auth-role-line', { opacity: 1, duration: 1.8, ease: 'power1.out', delay: 1.6 });
+
+      // Fragment scroll reveals
+      gsap.set('.auth-frag', { y: 20 });
+      document.querySelectorAll('.auth-frag').forEach(function (frag) {
+        gsap.to(frag, {
+          opacity: 1, y: 0, duration: 1.2, ease: 'power2.out',
+          scrollTrigger: { trigger: frag, start: 'top 78%', toggleActions: 'play none none none' }
+        });
+      });
 
       document.querySelectorAll('.auth-moment').forEach(function (section, idx) {
         var title = section.querySelector('.auth-moment-title');

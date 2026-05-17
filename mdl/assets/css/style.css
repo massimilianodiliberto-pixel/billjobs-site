@@ -842,6 +842,72 @@ footer a:hover { color: var(--text-primary); }
   .auth-moment--pause { padding-top: 20vh; padding-bottom: 20vh; }
 }
 
+/* AUTH OPENING */
+.auth-opening {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: clamp(1.5rem, 6vw, 7rem);
+  padding-right: clamp(1.5rem, 6vw, 7rem);
+}
+.auth-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(3rem, 10vw, 9rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  opacity: 0;
+  margin: 0 0 2rem;
+}
+.auth-role-line {
+  font-size: clamp(0.6rem, 1.1vw, 0.8rem);
+  letter-spacing: 0.28em;
+  font-weight: 300;
+  opacity: 0;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* BREATH */
+.auth-breath {
+  height: 60vh;
+  min-height: 380px;
+}
+
+/* FRAGMENTS */
+.auth-frag {
+  opacity: 0;
+  margin-bottom: 18vh;
+  padding-left: clamp(1.5rem, 6vw, 7rem);
+  padding-right: clamp(1.5rem, 6vw, 7rem);
+}
+.auth-frag--large span {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 4.5rem);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: rgba(255, 255, 255, 0.72);
+}
+.auth-frag--mid {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  flex-wrap: wrap;
+}
+.auth-frag--mid span {
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.45);
+}
+.auth-frag--small span {
+  font-size: clamp(0.65rem, 1.2vw, 0.9rem);
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.28);
+}
+
 /* ============================================================
    SYSTEM PAGE
    ============================================================ */
@@ -893,6 +959,10 @@ footer a:hover { color: var(--text-primary); }
 .sys-word--mid {
   font-style: italic;
   color: rgba(255, 255, 255, 0.44);
+}
+.sys-word--accent {
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: -0.01em;
 }
 .sys-desc {
   margin-top: 56px;
@@ -1285,7 +1355,7 @@ footer a:hover { color: var(--text-primary); }
 .wk-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: var(--grid-gap);
+  gap: clamp(1.5rem, 3vw, 3rem);
 }
 
 .wk-card {

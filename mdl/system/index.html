@@ -47,7 +47,7 @@
         <div class="system-words">
           <span class="sys-word" id="sw1">EVERYTHING</span>
           <span class="sys-word sys-word--mid" id="sw2">BEHIND</span>
-          <span class="sys-word" id="sw3">THE FRAME</span>
+          <span class="sys-word sys-word--accent" id="sw3">THE FRAME.</span>
         </div>
         <p class="sys-desc" id="sys-desc">Where vision, budget, people and execution find the same frame.</p>
       </div>
@@ -220,11 +220,11 @@
           text: text,
           x: cW * col + cW * 0.15 + Math.random() * cW * 0.70,
           y: cH * row + cH * 0.25 + Math.random() * cH * 0.50,
-          vx: (Math.random() - 0.5) * 0.07,
-          vy: (Math.random() - 0.5) * 0.05,
+          vx: (Math.random() - 0.5) * 0.022,
+          vy: (Math.random() - 0.5) * 0.016,
           phase: (i / WORD_LIST.length) * Math.PI * 2 + Math.random() * 1.2,
           cycleSpeed: 0.00035 + Math.random() * 0.00025,
-          maxOp: 0.06 + Math.random() * 0.06,
+          maxOp: 0.032 + Math.random() * 0.028,
         };
       });
     }
@@ -283,9 +283,9 @@
         for (var j = i + 1; j < anchors.length; j++) {
           var a = anchors[i], b = anchors[j];
           var d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d < 230) {
+          if (d < 160) {
             ctx.beginPath();
-            ctx.strokeStyle = 'rgba(255,255,255,' + ((1 - d / 230) * 0.04) + ')';
+            ctx.strokeStyle = 'rgba(255,255,255,' + ((1 - d / 160) * 0.018) + ')';
             ctx.lineWidth = 0.5;
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -474,7 +474,7 @@
         scrollTrigger: { id: 'sys-draw', trigger: sysMain, start: 'top top', end: 'bottom bottom', scrub: 1.5 }
       });
       gsap.killTweensOf(sysLineG);
-      gsap.to(sysLineG, { x: 4, duration: 6, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+      gsap.to(sysLineG, { x: 1.5, duration: 9, yoyo: true, repeat: -1, ease: 'sine.inOut' });
     }
 
     buildSysLine();

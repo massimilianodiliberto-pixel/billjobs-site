@@ -42,16 +42,17 @@
   <main class="work-page">
 
     <div class="work-header">
-      <h1 class="work-title" id="work-title">ALL WORKS</h1>
+      <h1 class="work-title" id="work-title">SELECTED WORK</h1>
     </div>
 
     <div class="work-filters" id="work-filters">
       <button class="filter" data-filter="beauty-fashion">BEAUTY &amp;<br>FASHION</button>
       <button class="filter" data-filter="music">MUSIC<br>VIDEOS</button>
       <button class="filter" data-filter="events-live">EVENTS &amp;<br>LIVE SHOWS</button>
-      <button class="filter" data-filter="commercial">COMMERCIALS<br>&amp; INDUSTRIAL</button>
+      <button class="filter" data-filter="commercial">BRAND<br>FILMS</button>
       <button class="filter" data-filter="film-development">FILM &amp;<br>DEVELOPMENT</button>
       <button class="filter" data-filter="ai-visuals">ARTIFICIAL<br>PRODUCTION</button>
+      <button class="filter filter--all" data-filter="all">ALL<br>WORK</button>
     </div>
 
     <div class="wk-grid" id="wk-grid"></div>
@@ -430,7 +431,7 @@
       {
         id: 'plusfood',
         title: 'Plusfood',
-        cat: 'commercial', catLabel: 'Commercial',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director',
         desc: 'Regia spot TV. Produzione e post-produzione in formati broadcast.',
         action: 'image_only', youtube: null, video: null, image: null, // TODO: add image
@@ -439,7 +440,7 @@
       {
         id: 'salumi-negroni',
         title: 'Salumi Negroni',
-        cat: 'commercial', catLabel: 'Commercial',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director / Production Manager',
         desc: 'Film istituzionale. Direzione di produzione e post-produzione.',
         action: 'image_only', youtube: null, video: null, image: null, // TODO: add image
@@ -448,7 +449,7 @@
       {
         id: 'agsm',
         title: 'AGSM Verona',
-        cat: 'commercial', catLabel: 'Commercial',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director',
         desc: 'Regia video istituzionale. Direzione artistica.',
         action: 'image_only', youtube: null, video: null, image: null, // TODO: add image
@@ -457,7 +458,7 @@
       {
         id: 'verco',
         title: 'Verco',
-        cat: 'commercial', catLabel: 'Commercial',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director',
         desc: 'Regia video aziendale.',
         action: 'link_youtube', youtube: '-sBfhPNNRxE', video: null, image: '../assets/img/Verco.jpg',
@@ -466,7 +467,7 @@
       {
         id: 'twentyfour',
         title: 'TwentyFour',
-        cat: 'commercial', catLabel: 'Commercial',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director / Content Creator',
         desc: 'Regia video commercial.',
         action: 'link_youtube', youtube: 'gxb57yFV3uQ', video: null, image: '../assets/img/Twentyfour.jpg',
@@ -475,7 +476,7 @@
       {
         id: 'techres',
         title: 'Techres',
-        cat: 'commercial', catLabel: 'Commercial',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director',
         desc: 'Regia video aziendale.',
         action: 'image_only', youtube: null, video: null, image: null, // TODO: add image
@@ -579,7 +580,10 @@
       });
     }
 
-    document.getElementById('work-title').addEventListener('click', showAll);
+    document.getElementById('work-title').addEventListener('click', function () {
+      showAll();
+      document.getElementById('work-title').textContent = 'SELECTED WORK';
+    });
 
     document.getElementById('work-filters').addEventListener('click', e => {
       const btn = e.target.closest('.filter');
@@ -588,6 +592,7 @@
       document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const f = btn.dataset.filter;
+      if (f === 'all') { showAll(); return; }
       grid.querySelectorAll('.wk-card').forEach(card => {
         const show = card.dataset.cat === f;
         if (show) {
@@ -672,9 +677,22 @@
     ov.querySelector('.wk-ov-backdrop').addEventListener('click', closeOverlay);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
 
+    /* ── DEFAULT FILTER: BEAUTY & FASHION ───────────────────── */
+    (function () {
+      var defaultFilter = 'beauty-fashion';
+      var defaultBtn = document.querySelector('.filter[data-filter="' + defaultFilter + '"]');
+      if (defaultBtn) defaultBtn.classList.add('active');
+      document.querySelectorAll('.wk-card').forEach(function (card) {
+        if (card.dataset.cat !== defaultFilter) {
+          card.style.display = 'none';
+          card.style.opacity = '0';
+        }
+      });
+    }());
+
     /* ── ENTRANCE ────────────────────────────────────────────── */
 
-    gsap.fromTo('.wk-card',
+    gsap.fromTo('.wk-card:not([style*="display: none"])',
       { opacity: 0, y: 18 },
       { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
         stagger: { amount: 0.5 }, delay: 0.15 }
