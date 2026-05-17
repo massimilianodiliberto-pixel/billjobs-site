@@ -492,6 +492,7 @@
       as.src = 'assets/video/Analog%20Transition%202.mp4'; as.type = 'video/mp4';
       av.appendChild(as);
       etfOverlay.insertBefore(av, etfOverlay.firstChild);
+      av.load();
 
       /* Watch ETF overlay style changes to start/stop video */
       new MutationObserver(function (muts) {

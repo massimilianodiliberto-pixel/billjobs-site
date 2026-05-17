@@ -25,11 +25,30 @@ function waitForVideo(el, maxMs) {
   });
 }
 
-/* Destination page: hold #page-transition until primary video ready */
+function waitForAboveFoldImages(maxMs) {
+  return new Promise(resolve => {
+    const imgs = Array.from(document.querySelectorAll('img')).filter(img => {
+      if (img.complete) return false;
+      const r = img.getBoundingClientRect();
+      return r.top < window.innerHeight * 1.3;
+    });
+    if (!imgs.length) return resolve();
+    let done = 0;
+    const t = setTimeout(resolve, maxMs);
+    const tick = () => { if (++done >= imgs.length) { clearTimeout(t); resolve(); } };
+    imgs.forEach(img => {
+      img.addEventListener('load',  tick, { once: true });
+      img.addEventListener('error', tick, { once: true });
+    });
+  });
+}
+
+/* Destination page: hold #page-transition until content is ready */
 window.addEventListener('load', async () => {
   if (document.getElementById('intro')) return;
   const primaryVid = document.querySelector('#system-vid-bg, #author-vid-texture');
   if (primaryVid) await waitForVideo(primaryVid, 2500);
+  await waitForAboveFoldImages(2500);
   gsap.to('#page-transition', { autoAlpha: 0, duration: 0.7, ease: 'power2.out', delay: 0.15 });
 });
 
@@ -39,7 +58,7 @@ function gateAndNavigate(url) {
   gate.id = 'nav-gate';
   document.body.appendChild(gate);
   window.sound.play('feedback-transition', 0.06, 0.18);
-  setTimeout(() => { window.location.href = url; }, 50);
+  requestAnimationFrame(() => requestAnimationFrame(() => { window.location.href = url; }));
 }
 
 /* ── Nav reveal ─────────────────────────────────────────── */
