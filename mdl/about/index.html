@@ -257,5 +257,50 @@
   })();
   </script>
 
+  <!-- AUTHOR VIDEO + AUDIO LAYER -->
+  <script>
+  (function () {
+
+    /* ── Analog memory texture behind content ── */
+    var authorMain = document.querySelector('.author-main');
+    if (authorMain) {
+      var av = document.createElement('video');
+      av.id = 'author-vid-texture'; av.muted = true; av.playsInline = true;
+      av.preload = 'none'; av.loop = true;
+      var as = document.createElement('source');
+      as.src = '../assets/video/Analog_Transition_6.mp4'; as.type = 'video/mp4';
+      av.appendChild(as);
+      authorMain.insertBefore(av, authorMain.firstChild);
+
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { av.load(); av.play().catch(function(){}); }
+        else { av.pause(); }
+      }, { threshold: 0.05 }).observe(authorMain);
+    }
+
+    /* ── Audio triggers ── */
+    window.addEventListener('load', function () {
+
+      /* Micro tv-static on each moment transition */
+      document.querySelectorAll('.auth-moment').forEach(function (sec) {
+        ScrollTrigger.create({
+          trigger: sec, start: 'top 72%', once: true,
+          onEnter: function () { window.sound.playShort('tv-static', 0.04, 250); }
+        });
+      });
+
+      /* feedback on WHO IS BILL JOBS reveal */
+      var bjSec = document.getElementById('bill-jobs');
+      if (bjSec) {
+        ScrollTrigger.create({
+          trigger: bjSec, start: 'top 76%', once: true,
+          onEnter: function () { window.sound.play('feedback', 0.04, 0.5); }
+        });
+      }
+    });
+
+  }());
+  </script>
+
 </body>
 </html>

@@ -683,5 +683,56 @@
 
   </script>
 
+  <!-- WORK VIDEO + AUDIO LAYER -->
+  <script>
+  (function () {
+
+    /* ── Distortion flash video for overlay open ── */
+    var wvf = document.createElement('video');
+    wvf.id = 'vid-work-flash'; wvf.muted = true; wvf.playsInline = true;
+    wvf.preload = 'none'; wvf.loop = false;
+    var wvs = document.createElement('source');
+    wvs.src = '../assets/video/Distortion_Transition_4.mp4'; wvs.type = 'video/mp4';
+    wvf.appendChild(wvs); document.body.appendChild(wvf);
+
+    function triggerWorkFlash () {
+      wvf.currentTime = 0;
+      wvf.load();
+      wvf.play().catch(function(){});
+      gsap.fromTo(wvf, { opacity: 0 }, { opacity: 0.12, duration: 0.10, ease: 'power2.out',
+        onComplete: function () {
+          gsap.to(wvf, { opacity: 0, duration: 0.55, delay: 0.20, ease: 'power2.in',
+            onComplete: function () { wvf.pause(); }
+          });
+        }
+      });
+    }
+
+    /* ── Overlay open: watch for active class ── */
+    var wkOv = document.getElementById('wk-overlay');
+    if (wkOv) {
+      new MutationObserver(function (muts) {
+        muts.forEach(function (m) {
+          if (m.attributeName === 'class' && wkOv.classList.contains('active')) {
+            triggerWorkFlash();
+            window.sound.play('distortion-fade', 0.05, 0.18);
+          }
+        });
+      }).observe(wkOv, { attributes: true });
+    }
+
+    /* ── Card hover: hiss on mouseenter ── */
+    var wkGrid = document.getElementById('wk-grid');
+    if (wkGrid) {
+      wkGrid.addEventListener('mouseenter', function (e) {
+        if (e.target.closest('.wk-card')) {
+          window.sound.play('hiss', 0.04, 0.10);
+        }
+      }, true);
+    }
+
+  }());
+  </script>
+
 </body>
 </html>

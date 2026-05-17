@@ -405,5 +405,39 @@
     })();
   </script>
 
+  <!-- HOME INTRO VIDEO + AUDIO LAYER -->
+  <script>
+  (function () {
+
+    /* ── Analog texture inside ETF overlay ── */
+    var etfOverlay = document.getElementById('etf-overlay');
+    if (etfOverlay) {
+      var av = document.createElement('video');
+      av.id = 'intro-vid-analog'; av.muted = true; av.playsInline = true;
+      av.preload = 'none'; av.loop = true;
+      var as = document.createElement('source');
+      as.src = 'assets/video/Analog_Transition_1.mp4'; as.type = 'video/mp4';
+      av.appendChild(as);
+      etfOverlay.insertBefore(av, etfOverlay.firstChild);
+
+      /* Watch ETF overlay style changes to start/stop video */
+      new MutationObserver(function (muts) {
+        muts.forEach(function () {
+          var style = etfOverlay.style;
+          var gone  = style.display === 'none' ||
+                      (style.opacity !== '' && parseFloat(style.opacity) < 0.05);
+          if (!gone) {
+            av.load(); av.play().catch(function(){});
+            window.sound.play('feedback', 0.04, 0.6);
+          } else {
+            av.pause();
+          }
+        });
+      }).observe(etfOverlay, { attributes: true, attributeFilter: ['style'] });
+    }
+
+  }());
+  </script>
+
 </body>
 </html>
