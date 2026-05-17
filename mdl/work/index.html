@@ -700,7 +700,7 @@
       wvf.currentTime = 0;
       wvf.load();
       wvf.play().catch(function(){});
-      gsap.fromTo(wvf, { opacity: 0 }, { opacity: 0.12, duration: 0.10, ease: 'power2.out',
+      gsap.fromTo(wvf, { opacity: 0 }, { opacity: 0.35, duration: 0.10, ease: 'power2.out',
         onComplete: function () {
           gsap.to(wvf, { opacity: 0, duration: 0.55, delay: 0.20, ease: 'power2.in',
             onComplete: function () { wvf.pause(); }
@@ -732,6 +732,12 @@
         }
       }, true);
     }
+
+    window.addEventListener('load', function () {
+      document.addEventListener('sound:enabled', function () {
+        window.sound.play('fade', 0.04, 0.2);
+      });
+    });
 
   }());
   </script>

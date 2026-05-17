@@ -155,6 +155,7 @@ class SoundSystem {
   async init () {
     if (this.initialized) return;
     this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    await this.ctx.resume();
     this.initialized = true;
     await this._loadAll();
   }
@@ -167,14 +168,25 @@ class SoundSystem {
   async _load (name) {
     const fileMap = { 'distortion-fade': 'DistortionFade', 'feedback-transition': 'feedback-Transtion' };
     const filename = fileMap[name] || name;
+    const url = this._base + filename + '.mp3';
     try {
-      const res = await fetch(this._base + filename + '.mp3');
-      if (!res.ok) return;
+      const res = await fetch(url);
+      if (!res.ok) {
+        console.warn(`[SoundSystem] HTTP ${res.status} — "${name}" not found at ${url}`);
+        return;
+      }
       this.buffers[name] = await this.ctx.decodeAudioData(await res.arrayBuffer());
-    } catch (_) {}
+    } catch (e) {
+      console.warn(`[SoundSystem] Failed to load "${name}" from ${url}:`, e);
+    }
   }
   play (name, vol = 0.05, fadeIn = 0.3) {
-    if (!this.enabled || !this.initialized || !this.buffers[name]) return null;
+    if (!this.enabled || !this.initialized || !this.buffers[name]) {
+      if (this.enabled && this.initialized && !this.buffers[name]) {
+        console.warn(`[SoundSystem] Buffer missing: "${name}"`);
+      }
+      return null;
+    }
     const src  = this.ctx.createBufferSource();
     src.buffer = this.buffers[name];
     const gain = this.ctx.createGain();
@@ -255,10 +267,11 @@ window.sound = new SoundSystem();
   if (!pt) return;
   const vid = document.createElement('video');
   vid.id = 'vid-transition';
-  vid.muted = true; vid.playsInline = true; vid.preload = 'none'; vid.loop = false;
+  vid.muted = true; vid.playsInline = true; vid.preload = 'auto'; vid.loop = false;
   const s = document.createElement('source');
   s.src = _assetBase + 'video/Analog%20Transition%203.mp4'; s.type = 'video/mp4';
   vid.appendChild(s); pt.appendChild(vid);
+  vid.load();
 }());
 
 /* ── Mobile menu analog overlay video ────────────────────── */

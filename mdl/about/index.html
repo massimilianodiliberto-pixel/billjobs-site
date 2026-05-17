@@ -298,6 +298,10 @@
           onEnter: function () { window.sound.play('feedback', 0.04, 0.5); }
         });
       }
+
+      document.addEventListener('sound:enabled', function () {
+        window.sound.playShort('tv-static', 0.03, 200);
+      });
     });
 
   }());

@@ -437,6 +437,10 @@
       }).observe(etfOverlay, { attributes: true, attributeFilter: ['style'] });
     }
 
+    document.addEventListener('sound:enabled', function () {
+      window.sound.play('feedback', 0.04, 0.2);
+    });
+
   }());
   </script>
 
