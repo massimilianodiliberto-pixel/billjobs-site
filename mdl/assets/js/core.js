@@ -276,27 +276,66 @@ class SoundSystem {
 
 window.sound = new SoundSystem();
 
-/* ── Sound: auto-unlock on first user gesture ─────────────── */
+/* ── Sound toggle button ─────────────────────────────────── */
 (function () {
-  window.sound.enabled = true;
+  var btn = document.createElement('button');
+  btn.id = 'sound-toggle';
+  btn.setAttribute('aria-label', 'Toggle sound');
+  document.body.appendChild(btn);
 
-  var unlocked = false;
-  var GESTURES = ['touchstart', 'pointerdown', 'click', 'scroll', 'wheel'];
-
-  function unlock () {
-    if (unlocked) return;
-    unlocked = true;
-    GESTURES.forEach(function (ev) {
-      document.removeEventListener(ev, unlock, true);
-    });
-    window.sound.init()
-      .then(function () { document.dispatchEvent(new CustomEvent('sound:enabled')); })
-      .catch(function (e) { console.warn('[Sound] auto-unlock failed:', e); });
+  function syncBtn () {
+    btn.textContent = window.sound.enabled ? 'SOUND OFF' : 'SOUND ON';
+    btn.classList.toggle('active', window.sound.enabled);
   }
 
-  GESTURES.forEach(function (ev) {
-    document.addEventListener(ev, unlock, { capture: true, passive: true });
+  function enable () {
+    window.sound.enabled = true;
+    sessionStorage.setItem('soundEnabled', 'true');
+    syncBtn();
+    /* init() creates AudioContext synchronously before its first await —
+       safe to call from a click handler on iOS Safari */
+    window.sound.init()
+      .then(function () { document.dispatchEvent(new CustomEvent('sound:enabled')); })
+      .catch(function (e) {
+        console.warn('[Sound] init failed:', e);
+        window.sound.enabled = false;
+        sessionStorage.setItem('soundEnabled', 'false');
+        syncBtn();
+      });
+  }
+
+  function disable () {
+    window.sound.enabled = false;
+    sessionStorage.setItem('soundEnabled', 'false');
+    window.sound.stopAll();
+    syncBtn();
+  }
+
+  btn.addEventListener('click', function () {
+    if (window.sound.enabled) { disable(); } else { enable(); }
   });
+
+  /* Restore across page navigation —
+     AudioContext cannot survive page load, so re-init on first click/tap */
+  if (sessionStorage.getItem('soundEnabled') === 'true') {
+    window.sound.enabled = true;
+    syncBtn();
+    var restored = false;
+    function tryRestore (e) {
+      if (restored || window.sound.initialized) return;
+      if (e && e.target === btn) return; /* button's own handler takes over */
+      restored = true;
+      document.removeEventListener('click',    tryRestore, true);
+      document.removeEventListener('touchend', tryRestore, true);
+      window.sound.init()
+        .then(function () { document.dispatchEvent(new CustomEvent('sound:enabled')); syncBtn(); })
+        .catch(function () { window.sound.enabled = false; sessionStorage.setItem('soundEnabled','false'); syncBtn(); });
+    }
+    document.addEventListener('click',    tryRestore, { capture: true });
+    document.addEventListener('touchend', tryRestore, { capture: true });
+  }
+
+  syncBtn();
 }());
 
 
