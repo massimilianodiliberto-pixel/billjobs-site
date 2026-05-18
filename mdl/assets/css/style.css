@@ -371,12 +371,13 @@ footer a:hover { color: var(--text-primary); }
     radial-gradient(ellipse at 60% 40%, #0d0c0b 0%, #000 70%),
     linear-gradient(160deg, #111010 0%, #060606 100%);
 }
-.hero-video {
+.hero-video,
+.hero-vid {
   position: absolute;
   inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  opacity: 1; /* always visible — intro panels are the overlay */
+  opacity: 0.42;
   pointer-events: none;
   z-index: 1;
 }
