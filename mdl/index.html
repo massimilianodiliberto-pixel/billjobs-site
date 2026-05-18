@@ -39,11 +39,8 @@
     <button id="intro-skip">SKIP</button>
   </div>
 
-  <!-- ETF OVERLAY — same texture video as mobile menu, floats over page -->
+  <!-- ETF OVERLAY — analog texture + letter sequence, floats over hero space -->
   <div id="etf-overlay">
-    <video id="etf-video" class="menu-video" muted loop playsinline preload="none">
-      <source src="assets/img/Hero.mp4" type="video/mp4">
-    </video>
     <div class="menu-video-overlay"></div>
     <span id="intro-etf"></span>
   </div>
@@ -72,6 +69,18 @@
   </div>
 
   <main class="entry-page">
+
+    <!-- HERO — reserved for future hero video; keep layout space intact -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-name">Massimiliano<br><span style="white-space:nowrap">Di Liberto</span></h1>
+        <p class="hero-subtitle">CREATIVE PRODUCER &nbsp;·&nbsp; CINEMATIC DIRECTOR &nbsp;·&nbsp; VISUAL SYSTEMS</p>
+        <p class="hero-descriptor">Creative Producer · Director working across cinema, live events, branded content and visual systems.</p>
+      </div>
+      <div class="scroll-indicator"></div>
+    </section>
 
     <!-- FEATURED -->
     <section class="featured">
@@ -147,7 +156,15 @@
     /* ── HERO ENTRANCE ──────────────────────────────────────── */
 
     function playHeroEntrance() {
-      /* Hero section disconnected — kept as stub for skipIntro/afterETF compatibility */
+      const tl = gsap.timeline();
+      tl.fromTo('.hero-name',       { opacity: 0 }, { opacity: 1, duration: 1.8, ease: 'power2.out', delay: 0.2 })
+        .fromTo('.hero-subtitle',   { opacity: 0 }, { opacity: 1, duration: 1.4, ease: 'power2.out' }, '-=0.8')
+        .fromTo('.hero-descriptor', { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power2.out' }, '-=0.7');
+      if (typeof lenis !== 'undefined') {
+        lenis.on('scroll', () => {
+          gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });
+        });
+      }
     }
 
     function initSite() {
@@ -189,8 +206,6 @@
     }
 
     function startETF() {
-      const etfVideo = document.getElementById('etf-video');
-      if (etfVideo) etfVideo.play().catch(() => {});
       const etfEl = document.getElementById('intro-etf');
       etfEl.innerHTML = '';
       'ENTER THE FRAME'.split('').forEach(ch => {
@@ -216,11 +231,7 @@
       playHeroEntrance();
       gsap.to('#etf-overlay', { opacity: 0, duration: 0.8, ease: 'power2.inOut', onComplete: () => {
         const el = document.getElementById('etf-overlay');
-        if (el) {
-          const v = el.querySelector('video');
-          if (v) v.pause();
-          el.style.display = 'none';
-        }
+        if (el) el.style.display = 'none';
         initSite();
       }});
     }
@@ -245,7 +256,6 @@
       var loaded = 0, isDone = false;
 
       var assets = [
-        { type: 'video', src: 'assets/img/Hero.mp4' },
         { type: 'video', src: 'assets/video/Analog%20Transition%202.mp4' },
         { type: 'image', src: 'assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png' },
         { type: 'image', src: 'assets/img/IMG_7623.jpeg' },
