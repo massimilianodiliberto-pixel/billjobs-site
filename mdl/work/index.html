@@ -129,7 +129,7 @@
         cat: 'commercial', catLabel: 'Brand Films',
         role: 'Creative Director / Producer',
         desc: 'Complete beauty production: product shooting, catalogues, display visuals, stand materials, corporate and social content.',
-        action: 'image_only', youtube: null, video: null, image: '../assets/img/g+Frame.jpg',
+        action: 'image_only', youtube: null, video: null, thumb: '../assets/img/GPUFrame.jpeg', image: '../assets/img/GPUSlide07.jpeg',
         size: 'wide'
       },
       {
@@ -245,28 +245,28 @@
       {
         id: 'pleasure-filler',
         title: 'Pleasure Professional Luxury — Filler Pure Oil',
-        cat: 'ai-visuals', catLabel: 'Artificial Production',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director / Creative Producer',
         desc: 'Spot luxury beauty realizzato interamente con workflow AI generativa. Visual immersivi per prodotto cosmetico premium.',
-        action: 'link_youtube', youtube: '2a36lpvWVjA', video: null, image: null, // TODO: add image
+        action: 'link_youtube', youtube: '2a36lpvWVjA', video: null, image: '../assets/img/Filler.jpg',
         size: 'wide'
       },
       {
         id: 'pleasure-divine',
         title: 'Pleasure Professional Luxury — Divine Nectar',
-        cat: 'ai-visuals', catLabel: 'Artificial Production',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director / Creative Producer',
         desc: 'Spot luxury beauty realizzato interamente con AI generativa. Narrazione visiva per lancio prodotto.',
-        action: 'link_youtube', youtube: 'nNCsNeHioDg', video: null, image: null, // TODO: add image
+        action: 'link_youtube', youtube: 'nNCsNeHioDg', video: null, image: '../assets/img/DivineNectar.jpg',
         size: 'wide'
       },
       {
         id: 'pleasure-cosmoprof',
-        title: 'Bella Professional — Cosmoprof',
+        title: 'Pleasure Professional Luxury — Cosmoprof',
         cat: 'events-live', catLabel: 'Events & Live Shows',
         role: 'Director / Creative Producer',
         desc: 'Produzione AI per evento Cosmoprof. Visual generativi per presentazione prodotto.',
-        action: 'link_youtube', youtube: '7YLx2Onasdw', video: null, image: null, // TODO: add image
+        action: 'link_youtube', youtube: '7YLx2Onasdw', video: null, image: '../assets/img/Pleasure_cosmoprof.jpg',
         size: 'normal'
       },
       {
@@ -734,82 +734,6 @@
   }());
   </script>
 
-  <!-- GAMMA+ CAMPAIGN SLIDESHOW -->
-  <script>
-  (function () {
-    var SLIDES = [
-      '../assets/img/g+Slide_01.jpg',
-      '../assets/img/g+Slide_02.jpg',
-      '../assets/img/g+Slide_03.jpg',
-      '../assets/img/g+Slide_04.jpg',
-      '../assets/img/g+Slide_05.jpg',
-      '../assets/img/g+Slide_06.jpg',
-      '../assets/img/g+Slide_07.jpg'
-    ];
-    var INTERVAL = 3500;
-    var FADE     = 1000;
-
-    function initSlideshow () {
-      var card = document.querySelector('.wk-card[data-id="gamma-campagne"]');
-      if (!card) return;
-      var media = card.querySelector('.wk-media');
-      if (!media) return;
-
-      /* Build two stacked <img> layers for cross-fade */
-      var imgA = document.createElement('img');
-      var imgB = document.createElement('img');
-      imgA.alt = imgB.alt = 'Gamma+ Campaign';
-      imgA.setAttribute('loading', 'lazy');
-      imgB.setAttribute('loading', 'lazy');
-      imgA.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity ' + (FADE / 1000) + 's ease;opacity:1;';
-      imgB.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity ' + (FADE / 1000) + 's ease;opacity:0;';
-      media.style.position = 'relative';
-      /* Remove existing img */
-      var existing = media.querySelector('img');
-      if (existing) existing.remove();
-      media.prepend(imgB);
-      media.prepend(imgA);
-
-      imgA.src = SLIDES[0];
-
-      var current = 0;
-      var active  = imgA;
-      var passive = imgB;
-      var timer   = null;
-
-      function advance () {
-        current = (current + 1) % SLIDES.length;
-        passive.src = SLIDES[current];
-        passive.onload = function () {
-          active.style.opacity  = '0';
-          passive.style.opacity = '1';
-          var tmp = active; active = passive; passive = tmp;
-        };
-      }
-
-      function startSlide () {
-        if (timer) return;
-        timer = setInterval(advance, INTERVAL);
-      }
-      function stopSlide () {
-        clearInterval(timer);
-        timer = null;
-      }
-
-      new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) { startSlide(); }
-        else { stopSlide(); }
-      }, { threshold: 0.1 }).observe(card);
-    }
-
-    /* Cards are built by the PROJECTS loop; wait for it */
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initSlideshow);
-    } else {
-      initSlideshow();
-    }
-  }());
-  </script>
 
 </body>
 </html>
