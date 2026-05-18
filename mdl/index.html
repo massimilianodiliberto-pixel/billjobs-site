@@ -73,25 +73,13 @@
 
   <main class="entry-page">
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1 class="hero-name">Massimiliano<br><span style="white-space:nowrap">Di Liberto</span></h1>
-        <p class="hero-subtitle">CREATIVE PRODUCER &nbsp;·&nbsp; CINEMATIC DIRECTOR &nbsp;·&nbsp; VISUAL SYSTEMS</p>
-        <p class="hero-descriptor">Creative Producer · Director working across cinema, live events, branded content and visual systems.</p>
-      </div>
-      <div class="scroll-indicator"></div>
-    </section>
-
     <!-- FEATURED -->
     <section class="featured">
       <div class="featured-grid">
 
         <a href="#" class="feat-item feat-large" data-project="gamma-duality">
           <div class="feat-media">
-            <img src="assets/img/G+C02.jpg" alt="Gamma+ Duality" style="object-position: center 30%;">
+            <img src="assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png" alt="Gamma+ Duality" style="object-position: center 30%;">
           </div>
           <div class="feat-info">
             <span class="feat-title">Gamma+ — Duality</span>
@@ -159,15 +147,7 @@
     /* ── HERO ENTRANCE ──────────────────────────────────────── */
 
     function playHeroEntrance() {
-      const tl = gsap.timeline();
-      tl.fromTo('.hero-name',       { opacity: 0 }, { opacity: 1, duration: 1.8, ease: 'power2.out', delay: 0.2 })
-        .fromTo('.hero-subtitle',   { opacity: 0 }, { opacity: 1, duration: 1.4, ease: 'power2.out' }, '-=0.8')
-        .fromTo('.hero-descriptor', { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power2.out' }, '-=0.7');
-      if (typeof lenis !== 'undefined') {
-        lenis.on('scroll', () => {
-          gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });
-        });
-      }
+      /* Hero section disconnected — kept as stub for skipIntro/afterETF compatibility */
     }
 
     function initSite() {
@@ -267,7 +247,7 @@
       var assets = [
         { type: 'video', src: 'assets/img/Hero.mp4' },
         { type: 'video', src: 'assets/video/Analog%20Transition%202.mp4' },
-        { type: 'image', src: 'assets/img/G+C02.jpg' },
+        { type: 'image', src: 'assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png' },
         { type: 'image', src: 'assets/img/IMG_7623.jpeg' },
         { type: 'image', src: 'assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png' },
       ];
