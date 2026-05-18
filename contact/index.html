@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signal — Massimiliano Di Liberto</title>
+  <meta name="description" content="Contact Massimiliano Di Liberto — Direction, Production, Visual Systems.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <div id="page-transition"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a class="nav-logo" href="../index.html">MDL</a>
+    <div class="nav-links">
+      <a href="../index.html"          class="nav-link">FRAME</a>
+      <a href="../work/index.html"     class="nav-link">WORK</a>
+      <a href="../system/index.html"   class="nav-link">SYSTEM</a>
+      <a href="../contact/index.html"  class="nav-link active">SIGNAL</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">MENU</button>
+  </nav>
+
+  <div id="mobile-menu">
+    <a href="../index.html">FRAME</a>
+    <a href="../work/index.html">WORK</a>
+    <a href="../system/index.html">SYSTEM</a>
+    <a href="../contact/index.html">SIGNAL</a>
+  </div>
+
+  <main class="signal-page">
+    <div class="signal-content">
+      <a href="mailto:massimiliano.diliberto@gmail.com" class="signal-email">
+        massimiliano.diliberto@gmail.com
+      </a>
+      <p class="signal-phone">+39 333 463 9596</p>
+    </div>
+  </main>
+
+  <footer>
+    <span>© 2026 Massimiliano Di Liberto &nbsp;·&nbsp; Bill Jobs Studio</span>
+    <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+  <script src="../assets/js/core.js"></script>
+
+  <script>
+    window.addEventListener('load', () => {
+      gsap.fromTo('.signal-content',
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 1.1, ease: 'power2.out', delay: 0.6 }
+      );
+    });
+  </script>
+
+</body>
+</html>
