@@ -52,7 +52,6 @@
       <button class="filter" data-filter="music">MUSIC<br>VIDEOS</button>
       <button class="filter" data-filter="events-live">EVENTS &amp;<br>LIVE SHOWS</button>
       <button class="filter" data-filter="commercial">BRAND<br>FILMS</button>
-      <button class="filter" data-filter="film-development">FILM &amp;<br>DEVELOPMENT</button>
       <button class="filter" data-filter="ai-visuals">ARTIFICIAL<br>PRODUCTION</button>
       <button class="filter filter--all" data-filter="all">ALL<br>WORK</button>
     </div>
@@ -127,7 +126,7 @@
       {
         id: 'gamma-campagne',
         title: 'Gamma+ — Campaign',
-        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Creative Director / Producer',
         desc: 'Complete beauty production: product shooting, catalogues, display visuals, stand materials, corporate and social content.',
         action: 'image_only', youtube: null, video: null, image: '../assets/img/g+Frame.jpg',
@@ -263,8 +262,8 @@
       },
       {
         id: 'pleasure-cosmoprof',
-        title: 'Pleasure — Cosmoprof',
-        cat: 'ai-visuals', catLabel: 'Artificial Production',
+        title: 'Bella Professional — Cosmoprof',
+        cat: 'events-live', catLabel: 'Events & Live Shows',
         role: 'Director / Creative Producer',
         desc: 'Produzione AI per evento Cosmoprof. Visual generativi per presentazione prodotto.',
         action: 'link_youtube', youtube: '7YLx2Onasdw', video: null, image: null, // TODO: add image
@@ -327,15 +326,6 @@
         size: 'wide'
       },
       {
-        id: 'dolcenera',
-        title: 'Dolcenera — Sanremo',
-        cat: 'music', catLabel: 'Music',
-        role: 'Co-Director / VFX',
-        desc: 'Regia videoclip e art direction scenografia per l\'esibizione al Festival di Sanremo.',
-        action: 'link_youtube', youtube: 'Yz8Wca-VNsk', video: null, image: null, // TODO: add image
-        size: 'normal'
-      },
-      {
         id: 'tibe-eccesso',
         title: 'Tibe — Eccesso',
         cat: 'music', catLabel: 'Music',
@@ -352,15 +342,6 @@
         desc: 'Regia, produzione e montaggio videoclip.',
         action: 'link_youtube', youtube: 'sd0ZRMI_Vnw', video: null, image: '../assets/img/Tibe_ballo.jpg',
         size: 'normal'
-      },
-      {
-        id: 'natalia-green',
-        title: 'Natalia Green — Mania',
-        cat: 'music', catLabel: 'Music',
-        role: 'Director',
-        desc: 'Regia videoclip.',
-        action: 'link_youtube', youtube: null, video: null, image: null, // TODO: add image
-        size: 'wide'
       },
       {
         id: 'speedliner',
@@ -386,7 +367,7 @@
         cat: 'music', catLabel: 'Music',
         role: 'Director',
         desc: 'Video promo album visuals.',
-        action: 'link_youtube', youtube: 'f57B9R45sB4', video: null, image: '../assets/img/MrRain_Visual.jpg',
+        action: 'image_only', youtube: null, video: null, image: '../assets/img/MrRain_Visual.jpg',
         size: 'wide'
       },
 
@@ -437,53 +418,8 @@
         action: 'link_youtube', youtube: 'djb-TJ1qLXA', video: null, image: '../assets/img/BancaConsulia.jpg',
         size: 'normal'
       },
-      {
-        id: 'marmomac',
-        title: 'Marmomac — Verona',
-        cat: 'events-live', catLabel: 'Events & Live Shows',
-        role: 'Director / Producer',
-        desc: 'Produzione contenuti per fiera internazionale. Riprese, montaggio e post-produzione.',
-        action: 'image_only', youtube: null, video: null, image: null, // TODO: add image
-        size: 'normal'
-      },
-      {
-        id: 'fiera-cavalli',
-        title: 'Fiera Cavalli',
-        cat: 'events-live', catLabel: 'Events & Live Shows',
-        role: 'Producer',
-        desc: 'Produzione contenuti evento. Riprese, montaggio, post-produzione.',
-        action: 'image_only', youtube: null, video: null, image: null, // TODO: add image
-        size: 'normal'
-      },
 
       /* ── COMMERCIAL ───────────────────────────────────────── */
-      {
-        id: 'plusfood',
-        title: 'Plusfood',
-        cat: 'commercial', catLabel: 'Brand Films',
-        role: 'Director',
-        desc: 'Regia spot TV. Produzione e post-produzione in formati broadcast.',
-        action: 'image_only', youtube: null, video: null, image: null, // TODO: add image
-        size: 'wide'
-      },
-      {
-        id: 'salumi-negroni',
-        title: 'Salumi Negroni',
-        cat: 'commercial', catLabel: 'Brand Films',
-        role: 'Director / Production Manager',
-        desc: 'Film istituzionale. Direzione di produzione e post-produzione.',
-        action: 'image_only', youtube: null, video: null, image: null, // TODO: add image
-        size: 'normal'
-      },
-      {
-        id: 'agsm',
-        title: 'AGSM Verona',
-        cat: 'commercial', catLabel: 'Brand Films',
-        role: 'Director',
-        desc: 'Regia video istituzionale. Direzione artistica.',
-        action: 'image_only', youtube: null, video: null, image: null,
-        size: 'normal'
-      },
       {
         id: 'plusfood-vinciny',
         title: 'Plusfood — Vinci New York',
@@ -511,21 +447,12 @@
         action: 'link_youtube', youtube: 'gxb57yFV3uQ', video: null, image: '../assets/img/Twentyfour.jpg',
         size: 'normal'
       },
-      {
-        id: 'techres',
-        title: 'Techres',
-        cat: 'commercial', catLabel: 'Brand Films',
-        role: 'Director',
-        desc: 'Regia video aziendale.',
-        action: 'image_only', youtube: null, video: null, image: null, // TODO: add image
-        size: 'normal'
-      },
 
-      /* ── FILM & DEVELOPMENT ───────────────────────────────── */
+      /* ── BRAND & FILM — from Film Development ───────────────────────────────── */
       {
         id: 'up-all-night',
         title: 'Up All Night',
-        cat: 'film-development', catLabel: 'Film & Development',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director / Writer / Producer',
         subtitle: 'Development teaser — European Film Market, Berlinale.',
         intro: 'A cinematic production teaser created to support financing, visual direction and institutional presentation.',
@@ -543,7 +470,7 @@
       {
         id: 'baaria',
         title: 'Baarìa — Giuseppe Tornatore',
-        cat: 'film-development', catLabel: 'Film & Development',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'VFX Compositor',
         desc: 'Compositing e supporto VFX con Shake per il film di Giuseppe Tornatore.',
         action: 'link_youtube', youtube: 'oXdLdn9xi_Q', video: null, image: '../assets/img/Baaria.jpg',
@@ -552,7 +479,7 @@
       {
         id: 'funzioni-primarie',
         title: 'Funzioni Primarie',
-        cat: 'film-development', catLabel: 'Film & Development',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Editor',
         desc: 'Montaggio cortometraggio.',
         action: 'link_youtube', youtube: '8y88vchkQbA', video: null, image: '../assets/img/FunzioniPrimarie.jpg',
