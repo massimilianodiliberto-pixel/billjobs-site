@@ -221,7 +221,9 @@
       // Opening: emerge from grey
       gsap.fromTo('.auth-opening-h1',
         { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 24 },
-        { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 2.4, ease: 'power1.out', delay: 0.4 }
+        { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 2.4, ease: 'power1.out', delay: 0.4,
+          onStart: function () { window.sound.play('ascend', 0.10, 0.8); }
+        }
       );
       gsap.fromTo('.auth-opening-h2',
         { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 },
@@ -341,18 +343,19 @@
         });
       });
 
-      /* feedback on WHO IS BILL JOBS reveal */
+      /* distortion-fade on WHO IS BILL JOBS reveal */
       var bjSec = document.getElementById('bill-jobs');
       if (bjSec) {
         ScrollTrigger.create({
           trigger: bjSec, start: 'top 76%', once: true,
-          onEnter: function () { window.sound.play('feedback', 0.04, 0.5); }
+          onEnter: function () { window.sound.play('distortion-fade', 0.06, 0.5); }
         });
       }
 
       document.addEventListener('sound:enabled', function () {
-        console.log('[Sound/About] sound:enabled → tv-static loop');
-        window.sound.loop('tv-static', 0.12);
+        console.log('[Sound/About] sound:enabled → hiss + fade loops');
+        window.sound.loop('hiss', 0.10);
+        window.sound.loop('fade', 0.08);
       });
     });
 

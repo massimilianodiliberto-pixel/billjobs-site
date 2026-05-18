@@ -70,8 +70,8 @@
   <script>
   (function () {
     function startSignalAmbient() {
-      console.log('[Sound/Signal] sound:enabled → fade loop');
-      window.sound.loop('fade', 0.15);
+      console.log('[Sound/Signal] sound:enabled → hum loop');
+      window.sound.loop('hum', 0.08);
     }
     if (window.sound.enabled) { startSignalAmbient(); }
     document.addEventListener('sound:enabled', function () { startSignalAmbient(); });

@@ -552,8 +552,9 @@
     window.addEventListener('load', function () {
 
       function startSysAmbient () {
-        console.log('[Sound/System] sound:enabled → pulse loop');
+        console.log('[Sound/System] sound:enabled → pulse + hum loops');
         window.sound.loop('pulse', 0.15);
+        window.sound.loop('hum', 0.10);
       }
       if (window.sound.enabled) { startSysAmbient(); }
       document.addEventListener('sound:enabled', startSysAmbient);

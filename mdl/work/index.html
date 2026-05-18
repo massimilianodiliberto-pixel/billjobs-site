@@ -750,10 +750,7 @@
     }
 
     window.addEventListener('load', function () {
-      document.addEventListener('sound:enabled', function () {
-        console.log('[Sound/Work] sound:enabled → hiss loop');
-        window.sound.loop('hiss', 0.12);
-      });
+      /* Work page is mostly silent — no ambient loop */
     });
 
   }());

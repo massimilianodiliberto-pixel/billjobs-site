@@ -304,7 +304,7 @@ window.sound = new SoundSystem();
   if (toggle) {
     toggle.addEventListener('click', () => {
       const open = mm.classList.contains('open');
-      window.sound.play('distortion-fade', 0.12, 0.10);
+      window.sound.play('feedback-transition', 0.12, 0.10);
       if (open) {
         av.load(); av.play().catch(() => {});
         window.sound.loop('hum', 0.15);
