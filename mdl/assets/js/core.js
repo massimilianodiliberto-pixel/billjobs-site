@@ -263,7 +263,9 @@ class SoundSystem {
       this.stopAll();
     } else {
       if (!this.initialized) {
-        this.init().then(() => document.dispatchEvent(new CustomEvent('sound:enabled')));
+        this.init()
+          .then(() => document.dispatchEvent(new CustomEvent('sound:enabled')))
+          .catch(e => { console.warn('[Sound] init failed:', e); this.enabled = false; });
       } else {
         document.dispatchEvent(new CustomEvent('sound:enabled'));
       }
@@ -278,14 +280,37 @@ window.sound = new SoundSystem();
 (function () {
   const btn = document.createElement('button');
   btn.id = 'sound-toggle';
-  btn.textContent = 'SOUND ON';
   btn.setAttribute('aria-label', 'Toggle sound');
   document.body.appendChild(btn);
-  btn.addEventListener('click', () => {
-    const on = window.sound.toggle();
+
+  function syncBtn () {
+    const on = window.sound.enabled;
     btn.textContent = on ? 'SOUND OFF' : 'SOUND ON';
     btn.classList.toggle('active', on);
-  });
+  }
+
+  btn.addEventListener('click', () => { window.sound.toggle(); syncBtn(); });
+
+  /* Restore sound state across page navigation */
+  if (sessionStorage.getItem('soundEnabled') === 'true') {
+    btn.textContent = 'SOUND OFF';
+    btn.classList.add('active');
+    /* Re-init on the first user interaction (browser audio policy requires gesture) */
+    const restore = () => {
+      if (!window.sound.initialized) {
+        window.sound.enabled = true;
+        window.sound.init()
+          .then(() => { document.dispatchEvent(new CustomEvent('sound:enabled')); syncBtn(); })
+          .catch(() => { window.sound.enabled = false; syncBtn(); });
+      }
+      document.removeEventListener('click',     restore, true);
+      document.removeEventListener('touchstart', restore, true);
+    };
+    document.addEventListener('click',     restore, { once: true, capture: true });
+    document.addEventListener('touchstart', restore, { once: true, capture: true });
+  } else {
+    btn.textContent = 'SOUND ON';
+  }
 }());
 
 
