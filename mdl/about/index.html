@@ -56,60 +56,43 @@
 
     <!-- OPENING -->
     <section class="auth-opening">
-      <h1 class="auth-name">MASSIMILIANO<br>DI LIBERTO</h1>
-      <p class="auth-role-line">DIRECTION · PRODUCTION · VISUAL SYSTEMS</p>
+      <h1 class="auth-opening-h1">SHAPED BY<br>PRODUCTION</h1>
+      <h2 class="auth-opening-h2">BUILT THROUGH<br>IMAGES</h2>
     </section>
-
-    <div class="auth-breath" aria-hidden="true"></div>
-
-    <div class="auth-frag auth-frag--large">
-      <span>20 YEARS INSIDE<br>IMAGE CONSTRUCTION</span>
-    </div>
-
-    <div class="auth-frag auth-frag--mid">
-      <span>BEAUTY</span>
-      <span>MUSIC</span>
-      <span>CINEMA</span>
-      <span>CORPORATE</span>
-    </div>
-
-    <div class="auth-frag auth-frag--small">
-      <span>WARNER MUSIC · COSMOPROF · BERLINALE · VENEZIA</span>
-    </div>
 
     <!-- 01 -->
     <section class="auth-moment" data-idx="0">
       <span class="auth-moment-num">01</span>
       <h2 class="auth-moment-title">I STARTED WHEN FILMS<br>WERE STILL SHOT ON FILM.</h2>
-      <div class="auth-moment-sub" data-lines="Before digital.|Before shortcuts.|When every frame had a cost."></div>
+      <div class="auth-moment-sub" data-lines="When color grading meant understanding light differently.|When every minute on set had a real cost.|That discipline never disappeared."></div>
     </section>
 
     <!-- 02 -->
     <section class="auth-moment auth-moment--right" data-idx="1">
       <span class="auth-moment-num">02</span>
-      <h2 class="auth-moment-title">WHEN TIME ON SET<br>HAD A REAL VALUE.</h2>
-      <div class="auth-moment-sub" data-lines="Days were planned.|Decisions were real.|Waste was not an option."></div>
+      <h2 class="auth-moment-title">YEARS SPENT<br>INSIDE IMAGE-MAKING.</h2>
+      <div class="auth-moment-sub" data-lines="Footage. Frames. Cuts.|Film sets. Night edits.|Live stages. Backstage.|Timelines. Deadlines. Broadcast delivery."></div>
     </section>
 
     <!-- 03 -->
     <section class="auth-moment" data-idx="2">
       <span class="auth-moment-num">03</span>
-      <h2 class="auth-moment-title">THAT METHOD<br>NEVER DISAPPEARED.</h2>
-      <div class="auth-moment-sub" data-lines="Technology changed.|Tools evolved.|The method stayed.|Because it works."></div>
+      <h2 class="auth-moment-title">THE INSTINCT COMES FROM<br>ACCUMULATED EXPERIENCE.</h2>
+      <div class="auth-moment-sub" data-lines="Hundreds of edits.|Thousands of shooting hours.|More than 300 music videos on television."></div>
     </section>
 
     <!-- 04 -->
     <section class="auth-moment auth-moment--right" data-idx="3">
       <span class="auth-moment-num">04</span>
-      <h2 class="auth-moment-title">IT IS STILL WHAT<br>MAKES IDEAS REAL.</h2>
-      <div class="auth-moment-sub" data-lines="Not effects.|Not trends.|Real ideas.|Real execution."></div>
+      <h2 class="auth-moment-title">CINEMA. BEAUTY.<br>LIVE EVENTS. TELEVISION.</h2>
+      <div class="auth-moment-sub" data-lines="Sanremo.|Berlinale EFM.|Venice Film Festival.|Cosmoprof."></div>
     </section>
 
     <!-- 05 -->
     <section class="auth-moment auth-moment--pause" data-idx="4">
       <span class="auth-moment-num">05</span>
-      <h2 class="auth-moment-title auth-moment-title--large">24 YEARS AGO.</h2>
-      <div class="auth-moment-sub" data-lines="A long way.|A lot of sets.|A lot of people.|A lot of stories."></div>
+      <h2 class="auth-moment-title auth-moment-title--large">FILM.<br>DIGITAL.<br>AI.</h2>
+      <div class="auth-moment-sub" data-lines="The workflow changed.|The visual instinct remained.|Built to evolve."></div>
     </section>
 
     <!-- WHO IS BILL JOBS? -->
@@ -231,18 +214,15 @@
       buildAuthLine();
       window.addEventListener('resize', buildAuthLine);
 
-      // Opening hero animation
-      gsap.to('.auth-name', { opacity: 1, duration: 2.2, ease: 'power1.out', delay: 0.3 });
-      gsap.to('.auth-role-line', { opacity: 1, duration: 1.8, ease: 'power1.out', delay: 1.6 });
-
-      // Fragment scroll reveals
-      gsap.set('.auth-frag', { y: 20 });
-      document.querySelectorAll('.auth-frag').forEach(function (frag) {
-        gsap.to(frag, {
-          opacity: 1, y: 0, duration: 1.2, ease: 'power2.out',
-          scrollTrigger: { trigger: frag, start: 'top 78%', toggleActions: 'play none none none' }
-        });
-      });
+      // Opening: emerge from grey
+      gsap.fromTo('.auth-opening-h1',
+        { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 24 },
+        { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 2.4, ease: 'power1.out', delay: 0.4 }
+      );
+      gsap.fromTo('.auth-opening-h2',
+        { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 },
+        { opacity: 1, color: 'rgba(255,255,255,0.26)', y: 0, duration: 2.0, ease: 'power1.out', delay: 1.3 }
+      );
 
       document.querySelectorAll('.auth-moment').forEach(function (section, idx) {
         var title = section.querySelector('.auth-moment-title');
