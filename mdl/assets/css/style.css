@@ -1845,22 +1845,9 @@ footer a:hover { color: var(--text-primary); }
   pointer-events: none;
 }
 
-/* Intro ETF — analog texture during Enter the Frame */
-#intro-vid-analog {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 2;
-  mix-blend-mode: screen;
-  opacity: 0.25;
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   #vid-transition, .menu-vid-analog, #system-vid-bg,
-  #author-vid-texture, #vid-work-flash, #intro-vid-analog { display: none; }
+  #author-vid-texture, #vid-work-flash { display: none; }
 }
 
 /* Mobile: reduce all video layer opacity by 50% */
@@ -1869,7 +1856,6 @@ footer a:hover { color: var(--text-primary); }
   .menu-vid-analog      { opacity: 0.18; }
   #system-vid-bg        { opacity: 0.18; }
   #author-vid-texture   { opacity: 0.18; }
-  #intro-vid-analog     { opacity: 0.18; }
   #vid-work-flash       { display: none; }
 }
 

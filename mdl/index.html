@@ -216,6 +216,7 @@
       });
       gsap.set('.etf-char', { opacity: 0, scale: 0.88 });
       gsap.to('#etf-overlay', { opacity: 1, duration: 0.4, ease: 'power2.out' });
+      window.sound.play('woosh', 0.12, 0.6);
       const etfTL = gsap.timeline({ onComplete: afterETF });
       document.querySelectorAll('.etf-char').forEach((char, i) => {
         etfTL.to(char, {
@@ -256,7 +257,6 @@
       var loaded = 0, isDone = false;
 
       var assets = [
-        { type: 'video', src: 'assets/video/Analog%20Transition%202.mp4' },
         { type: 'image', src: 'assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png' },
         { type: 'image', src: 'assets/img/IMG_7623.jpeg' },
         { type: 'image', src: 'assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png' },
@@ -468,38 +468,9 @@
     })();
   </script>
 
-  <!-- HOME INTRO VIDEO + AUDIO LAYER -->
+  <!-- HOME AUDIO LAYER -->
   <script>
   (function () {
-
-    /* ── Analog texture inside ETF overlay ── */
-    var etfOverlay = document.getElementById('etf-overlay');
-    if (etfOverlay) {
-      var av = document.createElement('video');
-      av.id = 'intro-vid-analog'; av.muted = true; av.playsInline = true;
-      av.preload = 'none'; av.loop = true;
-      var as = document.createElement('source');
-      as.src = 'assets/video/Analog%20Transition%202.mp4'; as.type = 'video/mp4';
-      av.appendChild(as);
-      etfOverlay.insertBefore(av, etfOverlay.firstChild);
-      av.load();
-
-      /* Watch ETF overlay style changes to start/stop video */
-      new MutationObserver(function (muts) {
-        muts.forEach(function () {
-          var style = etfOverlay.style;
-          var gone  = style.display === 'none' ||
-                      (style.opacity !== '' && parseFloat(style.opacity) < 0.05);
-          if (!gone) {
-            av.load(); av.play().catch(function(){});
-            window.sound.play('woosh', 0.12, 0.6);
-        console.log('[Sound/Home] ETF → woosh');
-          } else {
-            av.pause();
-          }
-        });
-      }).observe(etfOverlay, { attributes: true, attributeFilter: ['style'] });
-    }
 
     document.addEventListener('sound:enabled', function () {
       console.log('[Sound/Home] sound:enabled → drone + hum loops');
