@@ -417,9 +417,9 @@
   })();
 
   window.addEventListener('load', function () {
-    gsap.fromTo('#sw1', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out', delay: 0.55 });
-    gsap.fromTo('#sw2', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out', delay: 0.80 });
-    gsap.fromTo('#sw3', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out', delay: 1.05 });
+    gsap.fromTo('#sw1', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 1.8, ease: 'power1.out', delay: 0.55 });
+    gsap.fromTo('#sw2', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.44)', y: 0, duration: 1.8, ease: 'power1.out', delay: 0.80 });
+    gsap.fromTo('#sw3', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.92)', y: 0, duration: 1.8, ease: 'power1.out', delay: 1.05 });
     gsap.fromTo('#sys-desc', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', delay: 1.40 });
 
     function typewriterSimple(el, text, speed) {

@@ -262,7 +262,11 @@
           }
         });
         if (num) tl.fromTo(num, { opacity: 0 }, { opacity: 0.28, duration: 0.6, ease: 'power2.out' });
-        tl.fromTo(title, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out' }, '-=0.15');
+        tl.fromTo(title,
+          { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 24 },
+          { opacity: 1, color: 'rgba(255,255,255,0.82)', y: 0, duration: 1.6, ease: 'power1.out' },
+          '-=0.15'
+        );
         gsap.to(title, { y: -14, ease: 'none',
           scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 2 } });
       });
