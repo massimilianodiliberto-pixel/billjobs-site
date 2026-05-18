@@ -12,7 +12,9 @@
 </head>
 <body>
 
-  <div id="page-transition"></div>
+  <div id="page-transition">
+    <img src="../assets/img/Bill%20jobs%20%20logo.jpg" class="page-bj-logo" alt="" aria-hidden="true">
+  </div>
   <img id="bck-bg" src="../assets/img/BCK03.jpg" alt="" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.05;filter:grayscale(30%);mix-blend-mode:overlay;z-index:0;pointer-events:none;user-select:none;">
 
   <nav id="nav">
@@ -97,20 +99,22 @@
 
     <!-- WHO IS BILL JOBS? -->
     <section class="auth-billjobs" id="bill-jobs">
+      <a href="https://www.youtube.com/watch?v=TrLO4PL-8jI" target="_blank" rel="noopener" class="bj-frame-link">
+        <div class="bj-frame">
+          <img src="../assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="" class="bj-frame-img" loading="lazy">
+          <div class="bj-frame-veil"></div>
+          <div class="bj-frame-cta">
+            <svg class="bj-frame-play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>
+            <span class="bj-frame-label">WATCH THE REEL</span>
+          </div>
+        </div>
+      </a>
       <h2 class="auth-bj-title">WHO IS BILL JOBS?</h2>
       <div class="auth-bj-body">
         <p>Not a portfolio.</p>
         <p>Not a company presentation.</p>
         <p>Just the human side behind the frame.</p>
         <p>The part you usually never see:<br>the person balancing vision, production, people and reality.</p>
-      </div>
-      <div class="auth-bj-reel">
-        <iframe
-          src="https://www.youtube.com/embed/TrLO4PL-8jI?rel=0&modestbranding=1&color=white"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
       </div>
       <p class="auth-bj-closing"><em>Sometimes the best creative solutions<br>come from understanding every part of the process.</em></p>
     </section>
@@ -272,6 +276,33 @@
             else { target.scrollIntoView({ behavior: 'smooth' }); }
           }, 400);
         }
+      }
+
+      /* ── Memory image fragments (desktop only) ── */
+      if (window.innerWidth >= 768) {
+        var memFragments = [
+          { src: '../assets/img/BCK02.jpg',  pos: 'right:4vw;top:12%;width:24vw;aspect-ratio:3/2;',  maxOp: 0.09, trigger: '.auth-moment[data-idx="0"]' },
+          { src: '../assets/img/BCK04.jpg',  pos: 'left:3vw;top:58%;width:20vw;aspect-ratio:3/2;',   maxOp: 0.07, trigger: '.auth-moment[data-idx="1"]' },
+          { src: '../assets/img/BCK07.jpg',  pos: 'right:5vw;top:22%;width:22vw;aspect-ratio:3/2;',  maxOp: 0.09, trigger: '.auth-moment[data-idx="2"]' },
+          { src: '../assets/img/G+C09.jpg',  pos: 'right:3vw;top:48%;width:18vw;aspect-ratio:2/3;',  maxOp: 0.12, trigger: '.auth-moment[data-idx="3"]' },
+          { src: '../assets/img/BCK03.jpg',  pos: 'left:4vw;top:28%;width:22vw;aspect-ratio:3/2;',   maxOp: 0.06, trigger: '.auth-moment[data-idx="4"]' },
+        ];
+        memFragments.forEach(function (item) {
+          var img = document.createElement('img');
+          img.src = item.src;
+          img.setAttribute('aria-hidden', 'true');
+          img.style.cssText = 'position:fixed;z-index:1;pointer-events:none;object-fit:cover;opacity:0;filter:grayscale(0.35) contrast(1.08) brightness(0.9);' + item.pos;
+          document.body.appendChild(img);
+          ScrollTrigger.create({
+            trigger: item.trigger,
+            start: 'top 75%',
+            end: 'bottom 25%',
+            onEnter:     function () { gsap.to(img, { opacity: item.maxOp, duration: 2.8, ease: 'power1.out' }); },
+            onLeave:     function () { gsap.to(img, { opacity: 0, duration: 2.2, ease: 'power1.in' }); },
+            onEnterBack: function () { gsap.to(img, { opacity: item.maxOp, duration: 2.8, ease: 'power1.out' }); },
+            onLeaveBack: function () { gsap.to(img, { opacity: 0, duration: 2.2, ease: 'power1.in' }); },
+          });
+        });
       }
     });
 

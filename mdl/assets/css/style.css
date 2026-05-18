@@ -760,19 +760,73 @@ footer a:hover { color: var(--text-primary); }
   line-height: 2.0;
   margin-bottom: 6vh;
 }
-.auth-bj-reel {
+/* Bill Jobs cinematic frame */
+.bj-frame-link {
+  display: block;
+  text-decoration: none;
+  margin-bottom: 52px;
+  overflow: hidden;
+}
+.bj-frame {
   position: relative;
   width: 100%;
-  max-width: 800px;
   aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--bg);
 }
-.auth-bj-reel iframe {
-  position: absolute;
-  inset: 0;
+.bj-frame-img {
   width: 100%;
   height: 100%;
-  border: none;
-  border-radius: 2px;
+  object-fit: cover;
+  opacity: 0.68;
+  filter: grayscale(0.18) contrast(1.06);
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bj-frame-link:hover .bj-frame-img {
+  opacity: 0.86;
+  transform: scale(1.02);
+}
+.bj-frame-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 35%, rgba(3,3,6,0.82) 100%);
+  pointer-events: none;
+}
+.bj-frame-cta {
+  position: absolute;
+  bottom: 32px;
+  left: 36px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.bj-frame-play-icon {
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.52);
+  transition: color 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bj-frame-link:hover .bj-frame-play-icon { color: rgba(255, 255, 255, 0.92); }
+.bj-frame-label {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.32);
+  transition: color 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bj-frame-link:hover .bj-frame-label { color: rgba(255, 255, 255, 0.82); }
+
+/* Bill Jobs micro-logo in page transition */
+.page-bj-logo {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  width: 34px;
+  height: auto;
+  opacity: 0.10;
+  filter: grayscale(1);
+  pointer-events: none;
 }
 
 .auth-bj-body {
