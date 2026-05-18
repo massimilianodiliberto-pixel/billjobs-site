@@ -69,8 +69,9 @@
   <div id="wk-overlay" class="wk-ov" aria-hidden="true">
     <div class="wk-ov-backdrop"></div>
     <div class="wk-ov-panel">
-      <button class="wk-ov-close" aria-label="Close"><span>✕</span></button>
-      <div class="wk-ov-media"></div>
+      <div class="wk-ov-topbar">
+        <button class="wk-ov-close" aria-label="Back to Work">← WORK</button>
+      </div>
       <div class="wk-ov-body">
         <div class="wk-ov-meta">
           <span class="wk-ov-cat"></span>
@@ -79,6 +80,7 @@
         <h2 class="wk-ov-title"></h2>
         <p class="wk-ov-desc"></p>
       </div>
+      <div class="wk-ov-media"></div>
     </div>
   </div>
 
@@ -635,6 +637,12 @@
       setTimeout(() => {
         ov.querySelector('.wk-ov-media').innerHTML = '';
         ov.querySelector('.wk-ov-panel').dataset.skin = '';
+        /* Reset all card hover-info to resting state — browser doesn't re-fire
+           mouseenter when overlay disappears, so info would stay at wrong opacity */
+        document.querySelectorAll('.wk-info').forEach(function(info) {
+          gsap.killTweensOf(info);
+          gsap.set(info, { opacity: 0, y: 8 });
+        });
       }, 600);
     }
 

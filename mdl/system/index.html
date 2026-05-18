@@ -167,20 +167,20 @@
     document.fonts.ready.then(function () { fontsReady = true; });
 
     var ORBIT_DEFS = [
-      { raF: 0.30, rbF: 0.40, tilt:  0.28, speed:  0.000295 },
-      { raF: 0.18, rbF: 0.26, tilt: -0.42, speed: -0.000400 },
-      { raF: 0.38, rbF: 0.24, tilt:  0.68, speed:  0.000250 },
+      { raF: 0.30, rbF: 0.40, tilt:  0.28, speed:  0.000470 },
+      { raF: 0.18, rbF: 0.26, tilt: -0.42, speed: -0.000620 },
+      { raF: 0.38, rbF: 0.24, tilt:  0.68, speed:  0.000400 },
     ];
 
     var ANCHOR_DEF = [
-      { oi: 0, phase: -1.20, r: 4.8, op: 0.36, label: 'DIRECTION'  },
-      { oi: 0, phase:  0.52, r: 4.2, op: 0.32, label: 'PRODUCTION' },
-      { oi: 0, phase:  2.50, r: 4.5, op: 0.34, label: 'EXPERIENCE' },
-      { oi: 1, phase:  0.90, r: 5.2, op: 0.38, label: 'CREATIVE'   },
-      { oi: 1, phase:  3.40, r: 3.8, op: 0.30, label: 'VISION'     },
-      { oi: 2, phase:  1.10, r: 4.5, op: 0.34, label: 'STRATEGY'   },
-      { oi: 2, phase:  3.70, r: 4.0, op: 0.31, label: 'POST'       },
-      { oi: 2, phase: -0.60, r: 3.5, op: 0.29, label: 'BUDGET'     },
+      { oi: 0, phase: -1.20, r: 4.8, op: 0.55, label: 'DIRECTION'  },
+      { oi: 0, phase:  0.52, r: 4.2, op: 0.50, label: 'PRODUCTION' },
+      { oi: 0, phase:  2.50, r: 4.5, op: 0.52, label: 'EXPERIENCE' },
+      { oi: 1, phase:  0.90, r: 5.2, op: 0.58, label: 'CREATIVE'   },
+      { oi: 1, phase:  3.40, r: 3.8, op: 0.48, label: 'VISION'     },
+      { oi: 2, phase:  1.10, r: 4.5, op: 0.52, label: 'STRATEGY'   },
+      { oi: 2, phase:  3.70, r: 4.0, op: 0.49, label: 'POST'       },
+      { oi: 2, phase: -0.60, r: 3.5, op: 0.46, label: 'BUDGET'     },
     ];
 
     var WORD_LIST = [
@@ -282,8 +282,8 @@
       orbits.forEach(function (orb) {
         ctx.beginPath();
         ctx.ellipse(orb.cx, orb.cy, orb.ra, orb.rb, orb.tilt, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-        ctx.lineWidth = 0.7;
+        ctx.strokeStyle = 'rgba(255,255,255,0.11)';
+        ctx.lineWidth = 0.8;
         ctx.stroke();
       });
 
@@ -292,9 +292,9 @@
         for (var j = i + 1; j < anchors.length; j++) {
           var a = anchors[i], b = anchors[j];
           var d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d < 210) {
+          if (d < 260) {
             ctx.beginPath();
-            ctx.strokeStyle = 'rgba(255,255,255,' + ((1 - d / 210) * 0.030) + ')';
+            ctx.strokeStyle = 'rgba(255,255,255,' + ((1 - d / 260) * 0.055) + ')';
             ctx.lineWidth = 0.5;
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -339,9 +339,9 @@
         ctx.shadowBlur = 0;
 
         if (fontsReady) {
-          var labelOp = 0.16 + Math.sin(frame * 0.010 + n.angle * 1.5) * 0.06;
-          var px = n.x > (W * 0.625) ? n.x + n.r + 7 : n.x - n.r - 7;
-          ctx.font = '500 9px "Space Grotesk", sans-serif';
+          var labelOp = 0.32 + Math.sin(frame * 0.010 + n.angle * 1.5) * 0.10;
+          var px = n.x > (W * 0.625) ? n.x + n.r + 8 : n.x - n.r - 8;
+          ctx.font = '500 11px "Space Grotesk", sans-serif';
           ctx.letterSpacing = '0.12em';
           ctx.fillStyle = 'rgba(255,255,255,' + labelOp.toFixed(3) + ')';
           ctx.textAlign = n.x > (W * 0.625) ? 'left' : 'right';
@@ -430,10 +430,14 @@
   })();
 
   window.addEventListener('load', function () {
-    gsap.fromTo('#sw1', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 1.8, ease: 'power1.out', delay: 0.55 });
-    gsap.fromTo('#sw2', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.44)', y: 0, duration: 1.8, ease: 'power1.out', delay: 0.80 });
-    gsap.fromTo('#sw3', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.92)', y: 0, duration: 1.8, ease: 'power1.out', delay: 1.05 });
-    gsap.fromTo('#sys-desc', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', delay: 1.40 });
+    /* Orbital canvas appears first */
+    gsap.fromTo('#system-canvas', { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power2.out', delay: 0.3 });
+    /* Title words appear after orbital is visible */
+    gsap.fromTo('#sw1', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 1.8, ease: 'power1.out', delay: 1.6 });
+    gsap.fromTo('#sw2', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.44)', y: 0, duration: 1.8, ease: 'power1.out', delay: 2.0 });
+    gsap.fromTo('#sw3', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.92)', y: 0, duration: 1.8, ease: 'power1.out', delay: 2.4 });
+    /* sys-desc: fade only, no y movement */
+    gsap.fromTo('#sys-desc', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power2.out', delay: 2.9 });
 
     function typewriterSimple(el, text, speed) {
       el.textContent = '';
@@ -509,13 +513,26 @@
             }
           }, 450);
           var body = section.querySelector('.sys-concept-body');
-          if (body) gsap.fromTo(body, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', delay: 1.4 });
+          if (body) gsap.fromTo(body, { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power2.out', delay: 1.4 });
           gsap.to(word, { opacity: 0.82, y: 5, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.6 });
         }
       });
       if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 0.30, duration: 0.5, ease: 'power2.out' });
       if (rule) tl.fromTo(rule, { scaleX: 0 },  { scaleX: 1, duration: 0.5, ease: 'power2.out', transformOrigin: 'left center' }, '-=0.2');
       tl.fromTo(word, { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out' }, '-=0.15');
+    });
+
+    /* ── CINEMATIC SCROLL FOCUS OPACITY ─────────────────────── */
+    gsap.set('.sys-concept', { opacity: 0.18 });
+    document.querySelectorAll('.sys-concept').forEach(function (sec) {
+      ScrollTrigger.create({
+        trigger: sec, start: 'top 88%', end: 'top 40%', scrub: 1.2,
+        onUpdate: function (self) { gsap.set(sec, { opacity: 0.18 + self.progress * 0.82 }); }
+      });
+      ScrollTrigger.create({
+        trigger: sec, start: 'bottom 60%', end: 'bottom 10%', scrub: 1.2,
+        onUpdate: function (self) { gsap.set(sec, { opacity: 1 - self.progress * 0.82 }); }
+      });
     });
 
     var closing = document.querySelector('.sys-closing');

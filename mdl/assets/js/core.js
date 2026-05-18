@@ -169,7 +169,7 @@ class SoundSystem {
     this.ctx         = null;
     this.buffers     = {};
     this.nodes       = {};
-    this.enabled     = false;
+    this.enabled     = sessionStorage.getItem('soundEnabled') !== 'false';
     this.initialized = false;
     this._base       = _assetBase + 'sound/';
   }
@@ -315,11 +315,10 @@ window.sound = new SoundSystem();
     if (window.sound.enabled) { disable(); } else { enable(); }
   });
 
-  /* Restore across page navigation —
-     AudioContext cannot survive page load, so re-init on first click/tap */
-  if (sessionStorage.getItem('soundEnabled') === 'true') {
-    window.sound.enabled = true;
-    syncBtn();
+  /* Init audio on first interaction (click, touch, scroll).
+     AudioContext cannot survive page load; re-init is required per page.
+     Default state is ON unless user explicitly turned it off. */
+  if (window.sound.enabled) {
     var restored = false;
     function tryRestore (e) {
       if (restored || window.sound.initialized) return;
@@ -327,12 +326,14 @@ window.sound = new SoundSystem();
       restored = true;
       document.removeEventListener('click',    tryRestore, true);
       document.removeEventListener('touchend', tryRestore, true);
+      document.removeEventListener('scroll',   tryRestore, true);
       window.sound.init()
         .then(function () { document.dispatchEvent(new CustomEvent('sound:enabled')); syncBtn(); })
         .catch(function () { window.sound.enabled = false; sessionStorage.setItem('soundEnabled','false'); syncBtn(); });
     }
     document.addEventListener('click',    tryRestore, { capture: true });
     document.addEventListener('touchend', tryRestore, { capture: true });
+    document.addEventListener('scroll',   tryRestore, { capture: true, passive: true });
   }
 
   syncBtn();
