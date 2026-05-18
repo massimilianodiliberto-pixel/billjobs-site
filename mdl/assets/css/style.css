@@ -1131,8 +1131,8 @@ footer a:hover { color: var(--text-primary); }
 
 /* Cinematic concept sections */
 .sys-concept {
-  padding: 14vh var(--section-h);
-  background: #060606;
+  padding: 13vh var(--section-h);
+  background: transparent;
   position: relative;
   overflow: hidden;
 }
@@ -1140,15 +1140,14 @@ footer a:hover { color: var(--text-primary); }
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 72% 50%, rgba(255,255,255,0.014) 0%, transparent 65%);
+  background: radial-gradient(ellipse at 72% 50%, rgba(255,255,255,0.008) 0%, transparent 65%);
   pointer-events: none;
 }
 .sys-concept--right {
   text-align: right;
-  background: #040404;
 }
 .sys-concept--right::before {
-  background: radial-gradient(ellipse at 28% 50%, rgba(255,255,255,0.014) 0%, transparent 65%);
+  background: radial-gradient(ellipse at 28% 50%, rgba(255,255,255,0.008) 0%, transparent 65%);
 }
 .sys-concept-word {
   display: block;

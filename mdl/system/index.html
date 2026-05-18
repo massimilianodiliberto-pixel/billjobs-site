@@ -514,7 +514,7 @@
           }, 450);
           var body = section.querySelector('.sys-concept-body');
           if (body) gsap.fromTo(body, { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power2.out', delay: 1.4 });
-          gsap.to(word, { opacity: 0.82, y: 5, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.6 });
+          gsap.to(word, { opacity: 0.82, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.6 });
         }
       });
       if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 0.30, duration: 0.5, ease: 'power2.out' });
@@ -523,15 +523,13 @@
     });
 
     /* ── CINEMATIC SCROLL FOCUS OPACITY ─────────────────────── */
-    gsap.set('.sys-concept', { opacity: 0.18 });
+    /* Sections start fully visible so entrance animations work cleanly.
+       Only fade OUT when the section has been scrolled past — this creates
+       the cinematic focus on the current section without fighting entrance. */
     document.querySelectorAll('.sys-concept').forEach(function (sec) {
       ScrollTrigger.create({
-        trigger: sec, start: 'top 88%', end: 'top 40%', scrub: 1.2,
-        onUpdate: function (self) { gsap.set(sec, { opacity: 0.18 + self.progress * 0.82 }); }
-      });
-      ScrollTrigger.create({
-        trigger: sec, start: 'bottom 60%', end: 'bottom 10%', scrub: 1.2,
-        onUpdate: function (self) { gsap.set(sec, { opacity: 1 - self.progress * 0.82 }); }
+        trigger: sec, start: 'bottom 72%', end: 'bottom 4%', scrub: 2.0,
+        onUpdate: function (self) { gsap.set(sec, { opacity: 1 - self.progress * 0.78 }); }
       });
     });
 
