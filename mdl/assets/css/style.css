@@ -766,6 +766,12 @@ footer a:hover { color: var(--text-primary); }
   text-decoration: none;
   margin-bottom: 52px;
   overflow: hidden;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
 }
 .bj-frame {
   position: relative;
@@ -1667,6 +1673,20 @@ footer a:hover { color: var(--text-primary); }
   color: #888888;
   line-height: 1.9;
 }
+.bj-ov-reel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 32px;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.38);
+  text-decoration: none;
+  transition: color 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bj-ov-reel:hover { color: rgba(255, 255, 255, 0.88); }
+.bj-ov-reel svg { flex-shrink: 0; }
 
 /* Film dossier overlay skin — UP ALL NIGHT */
 .wk-ov-panel[data-skin="film-dossier"] {
