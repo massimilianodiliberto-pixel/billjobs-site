@@ -119,16 +119,13 @@
       </div>
     </section>
 
-    <!-- BILL JOBS INTRO -->
+    <!-- BILL JOBS INTRO — minimal presence -->
     <section class="bj-intro">
       <div class="bj-left">
-        <h2 class="bj-title">Bill Jobs Studio</h2>
+        <img src="assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="Bill Jobs Studio" class="bj-logo-img">
       </div>
       <div class="bj-right">
-        <p class="bj-text">
-          A cinematic lab for independent productions, music visuals and experimental systems.<br>
-          For projects that need more than execution: a creative mind able to connect vision, production and reality.
-        </p>
+        <p class="bj-tagline">A cinematic lab. Not a portfolio.</p>
         <a href="about/index.html#bill-jobs" class="bj-link">AUTHOR →</a>
       </div>
     </section>
@@ -376,36 +373,39 @@
       const projects = {
         'gamma-duality': {
           title: 'Gamma+ — Duality',
-          credits: 'Gamma+ Professional · 2023 · Creative Direction · Live Show Direction',
+          credits: 'Gamma+ Professional · 2023 · Creative Direction · Campaign · Live Show',
           description: [
-            'A 30-minute live show conceived as a complete visual experience for Cosmoprof Bologna — the largest professional beauty event in the world.',
-            'Concept, video and audio production, coordination of all visual outputs in real time. Every element — light, projection, rhythm — built around a narrative logic before any technical decision.'
+            'A visual identity system built around duality — two forces, two aesthetics, one brand language. Conceived for Cosmoprof Bologna, the largest professional beauty trade show in the world.',
+            'Campaign thinking extended across booth design, brochures, trade show materials and a 30-minute live show. Every output connected to the same visual grammar.'
           ],
-          role: 'Creative Direction · Live Show Direction · Content Production',
-          videoId: '4UbHLSG5Yy0',
-          type: 'youtube'
+          role: 'Creative Direction · Visual Identity · Campaign Architecture · Live Show Direction',
+          image: 'assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png',
+          type: 'image',
+          workLink: 'work/index.html'
         },
         'mr-rain': {
           title: 'Mr. Rain',
-          credits: 'Warner Music · 2021–2023 · Production · Location · Logistics',
+          credits: 'Warner Music · 2021–2023 · Production · Location · Visual Systems',
           description: [
-            'An ongoing collaboration across multiple projects — music videos, live concert visuals, and the development of the artist\'s visual identity.',
-            'Production management, location scouting, permits, technical crew coordination. The behind-the-scenes infrastructure that makes the creative vision possible.'
+            'An ongoing creative relationship spanning multiple years and multiple projects — music videos, live concert visuals, and the sustained development of an artist\'s visual language.',
+            'Production management, location scouting, permits, technical crew coordination. The architecture behind the image.'
           ],
-          role: 'Production · Location Scouting · Permits · Technical Coordination',
-          videoId: 'Q1brWO76mrk',
-          type: 'youtube'
+          role: 'Production · Location Scouting · Technical Coordination',
+          image: 'assets/img/IMG_7623.jpeg',
+          type: 'image',
+          workLink: 'work/index.html'
         },
         'up-all-night': {
           title: 'Up All Night',
           credits: 'Berlinale EFM · Development · Direction · Production',
           description: [
-            'A feature film project developed and presented at the European Film Market — Berlinale. Screenplay, production plan, location research, casting structure.',
-            'Three Italian Film Commissions involved. Potential funding: ~690.000€. A film that exists before it is shot.'
+            'A feature film developed and presented at the European Film Market — Berlinale. Screenplay, production plan, location research, casting structure. Three Italian Film Commissions involved.',
+            'Potential funding: ~690.000€. International coordination at scale. A film that exists before it is shot.'
           ],
           role: 'Director · Writer · Producer',
           image: 'assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png',
-          type: 'image'
+          type: 'image',
+          workLink: 'work/index.html'
         }
       };
 
@@ -438,6 +438,13 @@
           role.className = 'overlay-role';
           role.textContent = p.role;
           overlayDesc.appendChild(role);
+        }
+        if (p.workLink) {
+          const wl = document.createElement('a');
+          wl.href = p.workLink;
+          wl.className = 'overlay-work-link';
+          wl.textContent = 'OPEN IN WORK →';
+          overlayDesc.appendChild(wl);
         }
         overlay.setAttribute('aria-hidden', 'false');
         overlay.classList.add('active');
