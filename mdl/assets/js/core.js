@@ -276,41 +276,27 @@ class SoundSystem {
 
 window.sound = new SoundSystem();
 
-/* ── Sound toggle button ─────────────────────────────────── */
+/* ── Sound: auto-unlock on first user gesture ─────────────── */
 (function () {
-  const btn = document.createElement('button');
-  btn.id = 'sound-toggle';
-  btn.setAttribute('aria-label', 'Toggle sound');
-  document.body.appendChild(btn);
+  window.sound.enabled = true;
 
-  function syncBtn () {
-    const on = window.sound.enabled;
-    btn.textContent = on ? 'SOUND OFF' : 'SOUND ON';
-    btn.classList.toggle('active', on);
+  var unlocked = false;
+  var GESTURES = ['touchstart', 'pointerdown', 'click', 'scroll', 'wheel'];
+
+  function unlock () {
+    if (unlocked) return;
+    unlocked = true;
+    GESTURES.forEach(function (ev) {
+      document.removeEventListener(ev, unlock, true);
+    });
+    window.sound.init()
+      .then(function () { document.dispatchEvent(new CustomEvent('sound:enabled')); })
+      .catch(function (e) { console.warn('[Sound] auto-unlock failed:', e); });
   }
 
-  btn.addEventListener('click', () => { window.sound.toggle(); syncBtn(); });
-
-  /* Restore sound state across page navigation */
-  if (sessionStorage.getItem('soundEnabled') === 'true') {
-    btn.textContent = 'SOUND OFF';
-    btn.classList.add('active');
-    /* Re-init on the first user interaction (browser audio policy requires gesture) */
-    const restore = () => {
-      if (!window.sound.initialized) {
-        window.sound.enabled = true;
-        window.sound.init()
-          .then(() => { document.dispatchEvent(new CustomEvent('sound:enabled')); syncBtn(); })
-          .catch(() => { window.sound.enabled = false; syncBtn(); });
-      }
-      document.removeEventListener('click',     restore, true);
-      document.removeEventListener('touchstart', restore, true);
-    };
-    document.addEventListener('click',     restore, { once: true, capture: true });
-    document.addEventListener('touchstart', restore, { once: true, capture: true });
-  } else {
-    btn.textContent = 'SOUND ON';
-  }
+  GESTURES.forEach(function (ev) {
+    document.addEventListener(ev, unlock, { capture: true, passive: true });
+  });
 }());
 
 
