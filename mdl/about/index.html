@@ -51,7 +51,7 @@
           </filter>
         </defs>
         <g id="auth-line-g">
-          <path id="auth-line-path" fill="none" stroke="none" stroke-width="0"/>
+          <path id="auth-line-path" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.9" filter="url(#auth-glow-f)"/>
         </g>
       </svg>
     </div>
@@ -135,7 +135,7 @@
           <span class="wk-ov-role">Creative Producer &nbsp;·&nbsp; Director</span>
         </div>
         <h2 class="wk-ov-title">WHO IS BILL JOBS?</h2>
-        <p class="wk-ov-desc">Not a portfolio. Not a company presentation.<br>The part you usually never see: the person balancing vision, production, people and reality.<br><br><em>Sometimes the best creative solutions come from understanding every part of the process.</em></p>
+        <p class="wk-ov-desc">Not a portfolio.<br>Not a company presentation.<br><br>A cinematic lab — independent, lateral, built on 24 years of real productions.<br><br>The part you usually never see: the person who reads a budget and feels a story. Who holds the visual and the logistical at the same time. Who knows the difference between a good idea and a producible one.<br><br>Music videos. Live shows. Feature development. Branded content. Experimental systems.<br>Any scale. Any format.<br><br><em>The instinct is the same.<br>The frame changes. The way of seeing does not.</em></p>
         <button type="button" class="bj-ov-reel" id="bj-watch-btn">
           <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11"><polygon points="6,3 20,12 6,21"/></svg>
           WATCH THE REEL
@@ -235,6 +235,38 @@
         scrollTrigger: { id: 'auth-draw', trigger: mainEl, start: 'top top', end: 'bottom bottom', scrub: 1.2 }
       });
       gsap.killTweensOf(groupEl);
+
+      /* Traveling node — glowing point that moves with scroll progress */
+      var tNode = svgEl.querySelector('#auth-travel-node');
+      if (!tNode) {
+        tNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        tNode.id = 'auth-travel-node';
+        tNode.setAttribute('r', '3.5');
+        tNode.setAttribute('fill', 'rgba(255,255,255,0.60)');
+        tNode.setAttribute('filter', 'url(#auth-glow-f)');
+        tNode.setAttribute('opacity', '0');
+        svgEl.appendChild(tNode);
+        gsap.to(tNode, { attr: { r: 5.2 }, duration: 2.8, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+      }
+      var existT = ScrollTrigger.getAll().filter(function (t) { return t.vars && t.vars.id === 'auth-travel'; });
+      existT.forEach(function (t) { t.kill(); });
+      ScrollTrigger.create({
+        id: 'auth-travel',
+        trigger: mainEl,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.5,
+        onUpdate: function (self) {
+          if (!pathEl.getPointAtLength) return;
+          var totalLen = pathEl.getTotalLength();
+          var pt = pathEl.getPointAtLength(totalLen * self.progress);
+          tNode.setAttribute('cx', pt.x.toFixed(2));
+          tNode.setAttribute('cy', pt.y.toFixed(2));
+          var prog = self.progress;
+          var fade = prog < 0.04 ? prog / 0.04 : (prog > 0.94 ? (1 - prog) / 0.06 : 1);
+          tNode.setAttribute('opacity', (0.55 * fade).toFixed(3));
+        }
+      });
     }
 
     window.addEventListener('load', function () {

@@ -15,6 +15,18 @@
 <body>
 
   <div id="page-transition"></div>
+
+  <!-- SYSTEM GATE — lightweight cinematic preloader -->
+  <div id="sys-gate" aria-hidden="true">
+    <svg id="sys-gate-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="32" stroke="rgba(255,255,255,0.07)" stroke-width="0.7" fill="none"/>
+      <circle id="sys-gate-arc" cx="60" cy="60" r="32" stroke="rgba(255,255,255,0.72)" stroke-width="0.7" fill="none"
+        stroke-dasharray="201.062" stroke-dashoffset="201.062"
+        stroke-linecap="round" transform="rotate(-90 60 60)"/>
+    </svg>
+    <span id="sys-gate-txt">SYSTEM</span>
+  </div>
+
   <img id="bck-bg" src="../assets/img/BCK05.jpg" alt="" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.04;filter:grayscale(30%);mix-blend-mode:overlay;z-index:0;pointer-events:none;user-select:none;">
 
   <nav id="nav">
@@ -63,7 +75,7 @@
           </filter>
         </defs>
         <g id="sys-line-g">
-          <path id="sys-line-path" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="0.7" filter="url(#sys-glow-f)"/>
+          <path id="sys-line-path" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.8" filter="url(#sys-glow-f)"/>
         </g>
       </svg>
     </div>
@@ -127,6 +139,23 @@
   <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
   <script src="../assets/js/core.js"></script>
 
+  <!-- SYSTEM GATE animation -->
+  <script>
+  (function () {
+    var gate = document.getElementById('sys-gate');
+    var arc  = document.getElementById('sys-gate-arc');
+    if (!gate || !arc) return;
+    gsap.to(arc, {
+      strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', delay: 0.2,
+      onComplete: function () {
+        gsap.to(gate, { autoAlpha: 0, duration: 0.5, ease: 'power2.out', delay: 0.3,
+          onComplete: function () { gate.style.display = 'none'; }
+        });
+      }
+    });
+  }());
+  </script>
+
   <script>
   (function () {
     var canvas = document.getElementById('system-canvas');
@@ -138,9 +167,9 @@
     document.fonts.ready.then(function () { fontsReady = true; });
 
     var ORBIT_DEFS = [
-      { raF: 0.30, rbF: 0.40, tilt:  0.28, speed:  0.000160 },
-      { raF: 0.18, rbF: 0.26, tilt: -0.42, speed: -0.000220 },
-      { raF: 0.38, rbF: 0.24, tilt:  0.68, speed:  0.000135 },
+      { raF: 0.30, rbF: 0.40, tilt:  0.28, speed:  0.000295 },
+      { raF: 0.18, rbF: 0.26, tilt: -0.42, speed: -0.000400 },
+      { raF: 0.38, rbF: 0.24, tilt:  0.68, speed:  0.000250 },
     ];
 
     var ANCHOR_DEF = [
@@ -204,7 +233,7 @@
           vy: (Math.random() - 0.5) * 0.016,
           phase: (i / WORD_LIST.length) * Math.PI * 2 + Math.random() * 1.2,
           cycleSpeed: 0.00035 + Math.random() * 0.00025,
-          maxOp: 0.032 + Math.random() * 0.028,
+          maxOp: 0.048 + Math.random() * 0.038,
         };
       });
     }
@@ -253,7 +282,7 @@
       orbits.forEach(function (orb) {
         ctx.beginPath();
         ctx.ellipse(orb.cx, orb.cy, orb.ra, orb.rb, orb.tilt, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+        ctx.strokeStyle = 'rgba(255,255,255,0.06)';
         ctx.lineWidth = 0.7;
         ctx.stroke();
       });
@@ -263,9 +292,9 @@
         for (var j = i + 1; j < anchors.length; j++) {
           var a = anchors[i], b = anchors[j];
           var d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d < 160) {
+          if (d < 210) {
             ctx.beginPath();
-            ctx.strokeStyle = 'rgba(255,255,255,' + ((1 - d / 160) * 0.018) + ')';
+            ctx.strokeStyle = 'rgba(255,255,255,' + ((1 - d / 210) * 0.030) + ')';
             ctx.lineWidth = 0.5;
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -298,19 +327,23 @@
       });
 
       anchors.forEach(function (n) {
-        ctx.shadowColor = 'rgba(255,255,255,0.22)';
-        ctx.shadowBlur = 4;
+        var pulse    = 1 + Math.sin(frame * 0.018 + n.angle * 2.3) * 0.24;
+        var breathOp = n.op * (0.80 + Math.sin(frame * 0.012 + n.angle) * 0.20);
+        var glow     = 4 + Math.sin(frame * 0.015 + n.angle) * 2.2;
+        ctx.shadowColor = 'rgba(255,255,255,0.28)';
+        ctx.shadowBlur  = glow;
         ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,' + n.op + ')';
+        ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,' + breathOp.toFixed(3) + ')';
         ctx.fill();
         ctx.shadowBlur = 0;
 
         if (fontsReady) {
+          var labelOp = 0.16 + Math.sin(frame * 0.010 + n.angle * 1.5) * 0.06;
           var px = n.x > (W * 0.625) ? n.x + n.r + 7 : n.x - n.r - 7;
           ctx.font = '500 9px "Space Grotesk", sans-serif';
           ctx.letterSpacing = '0.12em';
-          ctx.fillStyle = 'rgba(255,255,255,0.18)';
+          ctx.fillStyle = 'rgba(255,255,255,' + labelOp.toFixed(3) + ')';
           ctx.textAlign = n.x > (W * 0.625) ? 'left' : 'right';
           ctx.fillText(n.label, px, n.y + 3);
         }
