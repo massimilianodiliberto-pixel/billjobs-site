@@ -633,19 +633,19 @@ footer a:hover { color: var(--text-primary); }
 }
 .work-subtitle {
   font-family: var(--font-ui);
-  font-size: clamp(10px, 1.1vw, 13px);
+  font-size: clamp(12px, 1.3vw, 15px);
   font-weight: 300;
   letter-spacing: 0.26em;
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.44);
   margin-top: 18px;
   opacity: 0;
 }
 .work-tagline {
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 300;
   letter-spacing: 0.18em;
-  color: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.32);
   margin-top: 10px;
   opacity: 0;
 }
@@ -703,6 +703,7 @@ footer a:hover { color: var(--text-primary); }
   flex-shrink: 0;
   max-width: 88px;
   animation: filter-breathe 4000ms ease-in-out infinite;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .work-filters .filter:nth-child(1) { animation-delay:     0ms; }
 .work-filters .filter:nth-child(2) { animation-delay:  -667ms; }
@@ -712,7 +713,8 @@ footer a:hover { color: var(--text-primary); }
 .work-filters .filter:nth-child(6) { animation-delay: -3334ms; }
 .filter.active {
   animation: none;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.92) !important;
+  transform: scale(1.10);
 }
 .filter:hover:not(.active) {
   animation: none;
@@ -953,7 +955,7 @@ footer a:hover { color: var(--text-primary); }
 }
 
 .auth-moment {
-  padding: 20vh var(--section-h);
+  padding: 13vh var(--section-h);
   position: relative;
   z-index: 2;
 }
@@ -961,8 +963,8 @@ footer a:hover { color: var(--text-primary); }
   text-align: right;
 }
 .auth-moment--pause {
-  padding-top: 28vh;
-  padding-bottom: 28vh;
+  padding-top: 18vh;
+  padding-bottom: 18vh;
 }
 .auth-moment-num {
   display: block;
@@ -990,9 +992,9 @@ footer a:hover { color: var(--text-primary); }
 .auth-moment-sub {
   margin-top: 32px;
   font-family: var(--font-ui);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.56);
+  color: rgba(255, 255, 255, 0.70);
   letter-spacing: 0.07em;
   line-height: 2.4;
   min-height: 5em;
@@ -1014,14 +1016,14 @@ footer a:hover { color: var(--text-primary); }
 
 /* AUTH OPENING */
 .auth-opening {
-  min-height: 82vh;
+  min-height: 58vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: clamp(4rem, 14vh, 9rem);
+  padding-top: clamp(2rem, 7vh, 5rem);
   padding-left: clamp(1.5rem, 6vw, 7rem);
   padding-right: clamp(1.5rem, 6vw, 7rem);
-  padding-bottom: 6vh;
+  padding-bottom: 4vh;
 }
 .auth-opening-h1 {
   font-family: var(--font-editorial);
@@ -1045,14 +1047,14 @@ footer a:hover { color: var(--text-primary); }
 }
 .auth-opening-h2--editorial {
   font-size: clamp(1.0rem, 2.0vw, 2.6rem);
-  color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.38);
   letter-spacing: 0;
   line-height: 1.6;
 }
 
 /* CINEMATIC BREATH MOMENT */
 .auth-breath-moment {
-  padding: 16vh var(--section-h);
+  padding: 10vh var(--section-h);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1088,9 +1090,9 @@ footer a:hover { color: var(--text-primary); }
 .wk-statement-text {
   font-family: var(--font-editorial);
   font-style: italic;
-  font-size: clamp(13px, 1.6vw, 20px);
+  font-size: clamp(15px, 1.8vw, 23px);
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.34);
+  color: rgba(255, 255, 255, 0.54);
   line-height: 1.9;
   max-width: 600px;
   margin: 0 auto;
@@ -1251,9 +1253,9 @@ footer a:hover { color: var(--text-primary); }
 .sys-concept-phrase {
   margin-top: 28px;
   font-family: var(--font-ui);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.64);
+  color: rgba(255, 255, 255, 0.76);
   letter-spacing: 0.07em;
   line-height: 2.0;
   max-width: 520px;
@@ -1275,9 +1277,9 @@ footer a:hover { color: var(--text-primary); }
 }
 .sys-concept-body p {
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.36);
+  color: rgba(255, 255, 255, 0.58);
   letter-spacing: 0.06em;
   line-height: 2.2;
   margin-bottom: 14px;
@@ -2050,6 +2052,7 @@ footer a:hover { color: var(--text-primary); }
   transition: color 0.4s;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  display: none;
 }
 #sound-toggle:hover  { color: rgba(255, 255, 255, 0.50); }
 #sound-toggle.active { color: rgba(255, 255, 255, 0.34); }
@@ -2194,43 +2197,56 @@ footer a:hover { color: var(--text-primary); }
    HOMEPAGE — Cinematic Sections
    ============================================================ */
 
-/* Hero philosophy block */
+/* Hero philosophy block — standalone section after hero */
 .hero-philosophy {
-  margin-top: 40px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg);
+  padding: 7vh var(--section-h) 8vh;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 .hero-phil-label {
   display: block;
   font-family: var(--font-ui);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 400;
   letter-spacing: 0.32em;
-  color: rgba(255, 255, 255, 0.28);
-  margin-bottom: 14px;
+  color: rgba(255, 255, 255, 0.46);
+  margin-bottom: 16px;
 }
 .hero-phil-main {
   font-family: var(--font-ui);
-  font-size: clamp(11px, 1.1vw, 13px);
+  font-size: clamp(13px, 1.3vw, 16px);
   font-weight: 300;
   letter-spacing: 0.14em;
-  color: rgba(255, 255, 255, 0.44);
-  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.62);
+  margin-bottom: 12px;
 }
 .hero-phil-sub {
   font-family: var(--font-ui);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 300;
   letter-spacing: 0.22em;
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.38);
   line-height: 1.9;
 }
 
-/* Backstage image sections */
+/* Backstage image sections — editorial layout: title / image / sub */
 .hp-backstage {
+  padding: 8vh var(--section-h) 6vh;
+}
+.hp-bs-title {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(20px, 3.0vw, 48px);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.2;
+  margin-bottom: 4vh;
+  opacity: 0;
+}
+.hp-backstage-media {
   position: relative;
-  height: 72vh;
-  min-height: 380px;
+  width: 100%;
+  aspect-ratio: 21/9;
   overflow: hidden;
 }
 .hp-backstage-img {
@@ -2248,34 +2264,17 @@ footer a:hover { color: var(--text-primary); }
 .hp-backstage-overlay {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(to top, rgba(8,8,8,0.88) 0%, rgba(8,8,8,0.20) 50%, rgba(8,8,8,0.42) 100%),
-    linear-gradient(to right, rgba(8,8,8,0.40) 0%, transparent 40%);
+  background: linear-gradient(to top, rgba(8,8,8,0.55) 0%, transparent 60%);
 }
-.hp-backstage-content {
-  position: absolute;
-  bottom: clamp(36px, 7vh, 72px);
-  left: 6vw;
-  z-index: 2;
-  max-width: min(520px, 72vw);
-}
-.hp-bs-text {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: clamp(14px, 1.8vw, 22px);
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.52);
-  line-height: 1.55;
-  margin-bottom: 16px;
-  opacity: 0;
-}
-.hp-bs-emphasis {
+.hp-bs-sub {
   font-family: var(--font-ui);
-  font-size: clamp(9px, 0.9vw, 11px);
+  font-size: 10px;
   font-weight: 300;
-  letter-spacing: 0.30em;
-  color: rgba(255, 255, 255, 0.28);
-  line-height: 2.0;
+  letter-spacing: 0.32em;
+  color: rgba(255, 255, 255, 0.38);
+  margin-top: 3vh;
+  padding-top: 2vh;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   opacity: 0;
 }
 
@@ -2408,13 +2407,26 @@ footer a:hover { color: var(--text-primary); }
 }
 
 @media (max-width: 767px) {
-  .hero-philosophy { margin-top: 28px; padding-top: 20px; }
-  .hp-backstage { height: 60vh; }
+  .hero-philosophy { padding: 5vh var(--section-h); }
+  .hp-backstage { padding: 5vh 20px 4vh; }
+  .hp-bs-title { font-size: clamp(18px, 5vw, 28px); margin-bottom: 3vh; }
+  .hp-backstage-media { aspect-ratio: 16/9; }
+  .hp-bs-sub { font-size: 9px; }
   .hp-work-frame { aspect-ratio: 16/9; }
-  .hp-wf-content { opacity: 1; transform: none; }
-  .hp-wf-content { bottom: 20px; }
+  .hp-wf-content { opacity: 1; transform: none; bottom: 20px; left: 20px; }
   .hp-closing { height: 62vh; }
-  .hp-backstage-content { left: 20px; max-width: calc(100vw - 40px); }
   .hp-closing-content { left: 20px; max-width: calc(100vw - 40px); }
-  .hp-wf-content { left: 20px; }
+}
+
+/* ============================================================
+   NAV — ACTIVE PAGE STATE
+   ============================================================ */
+
+.nav-link--active {
+  color: rgba(255, 255, 255, 0.80) !important;
+  opacity: 1 !important;
+}
+#mobile-menu a.nav-link--active {
+  color: rgba(255, 255, 255, 0.72);
+  opacity: 1;
 }

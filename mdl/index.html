@@ -81,23 +81,25 @@
         <h1 class="hero-name">Massimiliano<br><span style="white-space:nowrap">Di Liberto</span></h1>
         <p class="hero-subtitle">CREATIVE PRODUCER &nbsp;·&nbsp; CINEMATIC DIRECTOR &nbsp;·&nbsp; VISUAL SYSTEMS</p>
         <p class="hero-descriptor">Creative Producer · Director working across cinema, live events, branded content and visual systems.</p>
-        <div class="hero-philosophy">
-          <p class="hero-phil-label">WHAT I DO</p>
-          <p class="hero-phil-main">Direction. Production. Visual Systems.</p>
-          <p class="hero-phil-sub">FROM CONCEPT TO FINAL FRAME. EVERYTHING UNDER CONTROL.</p>
-        </div>
       </div>
       <div class="scroll-indicator"></div>
     </section>
 
+    <!-- PHILOSOPHY -->
+    <section class="hero-philosophy">
+      <p class="hero-phil-label">WHAT I DO</p>
+      <p class="hero-phil-main">Direction. Production. Visual Systems.</p>
+      <p class="hero-phil-sub">FROM CONCEPT TO FINAL FRAME. EVERYTHING UNDER CONTROL.</p>
+    </section>
+
     <!-- BACKSTAGE 1 -->
     <section class="hp-backstage">
-      <img src="assets/img/G+C09.jpg" alt="" class="hp-backstage-img">
-      <div class="hp-backstage-overlay"></div>
-      <div class="hp-backstage-content">
-        <p class="hp-bs-text">Every frame starts before the camera rolls.</p>
-        <p class="hp-bs-emphasis">INTENTION. LIGHT. PEOPLE. EVERYTHING COUNTS.</p>
+      <h2 class="hp-bs-title">Every frame starts before the camera rolls.</h2>
+      <div class="hp-backstage-media">
+        <img src="assets/img/G+C09.jpg" alt="" class="hp-backstage-img">
+        <div class="hp-backstage-overlay"></div>
       </div>
+      <p class="hp-bs-sub">INTENTION. LIGHT. PEOPLE. EVERYTHING COUNTS.</p>
     </section>
 
     <!-- WORK FRAME 1 -->
@@ -115,12 +117,12 @@
 
     <!-- BACKSTAGE 2 -->
     <section class="hp-backstage">
-      <img src="assets/img/BCK01.jpg" alt="" class="hp-backstage-img">
-      <div class="hp-backstage-overlay"></div>
-      <div class="hp-backstage-content">
-        <p class="hp-bs-text">The journey begins before the frame.</p>
-        <p class="hp-bs-emphasis">DIRECTION. MOVEMENT. INTENTION.</p>
+      <h2 class="hp-bs-title">The journey begins before the frame.</h2>
+      <div class="hp-backstage-media">
+        <img src="assets/img/BCK01.jpg" alt="" class="hp-backstage-img">
+        <div class="hp-backstage-overlay"></div>
       </div>
+      <p class="hp-bs-sub">DIRECTION. MOVEMENT. INTENTION.</p>
     </section>
 
     <!-- WORK FRAME 2 -->
@@ -138,12 +140,12 @@
 
     <!-- BACKSTAGE 3 -->
     <section class="hp-backstage">
-      <img src="assets/img/BCK04.jpg" alt="" class="hp-backstage-img">
-      <div class="hp-backstage-overlay"></div>
-      <div class="hp-backstage-content">
-        <p class="hp-bs-text">Every scene is a balance of choices.</p>
-        <p class="hp-bs-emphasis">STRATEGY. NARRATIVE. DECISION.</p>
+      <h2 class="hp-bs-title">Every scene is a balance of choices.</h2>
+      <div class="hp-backstage-media">
+        <img src="assets/img/BCK04.jpg" alt="" class="hp-backstage-img">
+        <div class="hp-backstage-overlay"></div>
       </div>
+      <p class="hp-bs-sub">STRATEGY. NARRATIVE. DECISION.</p>
     </section>
 
     <!-- WORK FRAME 3 -->
@@ -195,8 +197,7 @@
       const tl = gsap.timeline();
       tl.fromTo('.hero-name',       { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power1.out', delay: 0.2 })
         .fromTo('.hero-subtitle',   { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power1.out' }, '-=0.7')
-        .fromTo('.hero-descriptor', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, '-=0.6')
-        .fromTo('.hero-philosophy', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 1.1, ease: 'power1.out' }, '-=0.4');
+        .fromTo('.hero-descriptor', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, '-=0.6');
       if (typeof lenis !== 'undefined') {
         lenis.on('scroll', () => {
           gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });
@@ -428,22 +429,29 @@
       startIntroLoader(function () { playIntro(); });
     }
 
+    /* ── PHILOSOPHY REVEAL ──────────────────────────────────────── */
+
+    gsap.fromTo('.hero-philosophy', { opacity: 0, y: 14 }, {
+      opacity: 1, y: 0, duration: 1.2, ease: 'power1.out',
+      scrollTrigger: { trigger: '.hero-philosophy', start: 'top 88%', toggleActions: 'play none none none' }
+    });
+
     /* ── BACKSTAGE REVEALS ──────────────────────────────────────── */
 
     document.querySelectorAll('.hp-backstage').forEach(function(section) {
-      var text     = section.querySelector('.hp-bs-text');
-      var emphasis = section.querySelector('.hp-bs-emphasis');
-      if (text) {
-        gsap.fromTo(text, { opacity: 0, y: 16 }, {
+      var title = section.querySelector('.hp-bs-title');
+      var sub   = section.querySelector('.hp-bs-sub');
+      if (title) {
+        gsap.fromTo(title, { opacity: 0, y: 20 }, {
           opacity: 1, y: 0, duration: 1.4, ease: 'power1.out',
-          scrollTrigger: { trigger: section, start: 'top 68%', toggleActions: 'play none none none' }
+          scrollTrigger: { trigger: section, start: 'top 76%', toggleActions: 'play none none none' }
         });
       }
-      if (emphasis) {
-        gsap.fromTo(emphasis, { opacity: 0, y: 10 }, {
-          opacity: 0.55, y: 0, duration: 1.2, ease: 'power1.out',
-          scrollTrigger: { trigger: section, start: 'top 64%', toggleActions: 'play none none none' },
-          delay: 0.4
+      if (sub) {
+        gsap.fromTo(sub, { opacity: 0 }, {
+          opacity: 1, duration: 1.2, ease: 'power1.out',
+          scrollTrigger: { trigger: section, start: 'top 55%', toggleActions: 'play none none none' },
+          delay: 0.3
         });
       }
     });

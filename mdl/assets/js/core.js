@@ -19,7 +19,7 @@ gsap.ticker.lagSmoothing(0);
 
 function waitForVideo(el, maxMs) {
   return new Promise(resolve => {
-    if (!el || el.readyState >= 3 || el.getAttribute('preload') === 'none') return resolve();
+    if (!el || el.readyState >= 3 || el.preload === 'none' || el.getAttribute('preload') === 'none') return resolve();
     const t = setTimeout(resolve, maxMs);
     el.addEventListener('canplaythrough', () => { clearTimeout(t); resolve(); }, { once: true });
   });
@@ -125,6 +125,20 @@ if (navLogo) {
   });
 }
 
+/* ── Nav: highlight current page ─────────────────────────── */
+(function () {
+  const cur = window.location.pathname;
+  document.querySelectorAll('.nav-link, #mobile-menu a').forEach(link => {
+    try {
+      const lp = new URL(link.href).pathname;
+      if (lp === cur || (lp.endsWith('/index.html') && cur.endsWith('/') && lp.slice(0, -10) === cur) ||
+          (cur.endsWith('/index.html') && lp.endsWith('/') && cur.slice(0, -10) === lp)) {
+        link.classList.add('nav-link--active');
+      }
+    } catch (_) {}
+  });
+}());
+
 /* ── Page transitions on internal links ─────────────────── */
 document.querySelectorAll('a[href]').forEach(link => {
   if (link.classList.contains('nav-logo')) return;
@@ -134,7 +148,17 @@ document.querySelectorAll('a[href]').forEach(link => {
 
   link.addEventListener('click', e => {
     const dest = link.href;
-    if (dest === window.location.href) return;
+    if (dest === window.location.href) {
+      e.preventDefault();
+      if (typeof lenis !== 'undefined') { lenis.scrollTo(0, { duration: 1.2 }); }
+      else { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      if (mobileMenu && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+        lenis && lenis.start();
+      }
+      return;
+    }
     e.preventDefault();
     gateAndNavigate(dest);
   });

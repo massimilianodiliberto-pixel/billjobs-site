@@ -426,7 +426,7 @@
         title: 'Plus Food — Vinci New York',
         cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director / Producer',
-        desc: 'Television commercial broadcast on Mediaset national channels.\n\nFull production direction and coordination from concept to final delivery, built around promotional storytelling, talent direction and broadcast-ready visual quality.',
+        desc: 'Spot TV Mediaset.\n\nTelevision commercial broadcast on Mediaset national channels.\n\nFull production direction and coordination from concept to final delivery, built around promotional storytelling, talent direction and broadcast-ready visual quality.',
         action: 'link_youtube', youtube: 'OAJtpu4h0cw', video: null, image: '../assets/img/PlussFood.jpg',
         size: 'wide'
       },
@@ -715,7 +715,7 @@
         '-=0.8'
       )
       .to('.filter',
-        { opacity: 1, duration: 0.6, ease: 'power1.out', stagger: 0.06 },
+        { opacity: 1, duration: 0.8, ease: 'power1.out', stagger: 0.14 },
         '-=0.5'
       )
       .fromTo('.wk-card:not([style*="display: none"])',
@@ -724,12 +724,42 @@
         '-=0.25'
       );
 
-    /* Subtle scroll parallax on title */
+    /* Title light pulse */
+    gsap.to('#work-title', {
+      textShadow: '0 0 48px rgba(255,255,255,0.16)',
+      duration: 4.5,
+      yoyo: true,
+      repeat: -1,
+      ease: 'sine.inOut',
+      delay: 2.2
+    });
+
+    /* Scroll parallax on title */
     gsap.to('#work-title', {
       yPercent: -18,
       ease: 'none',
       scrollTrigger: { trigger: 'main', start: 'top top', end: 'bottom top', scrub: 2.5 }
     });
+
+    /* Card center zoom on scroll */
+    (function () {
+      function updateCardZoom() {
+        var vcenter = window.innerHeight / 2;
+        document.querySelectorAll('.wk-card').forEach(function(card) {
+          var r = card.getBoundingClientRect();
+          var ic = r.top + r.height / 2;
+          var dist = Math.abs(ic - vcenter);
+          var maxDist = window.innerHeight * 0.58;
+          var t = Math.max(0, 1 - dist / maxDist);
+          card.style.transform = 'scale(' + (1 + t * 0.022).toFixed(4) + ')';
+        });
+      }
+      if (typeof lenis !== 'undefined') {
+        lenis.on('scroll', updateCardZoom);
+      } else {
+        window.addEventListener('scroll', updateCardZoom, { passive: true });
+      }
+    }());
 
   </script>
 
