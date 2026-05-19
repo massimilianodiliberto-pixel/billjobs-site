@@ -180,11 +180,11 @@
       svgEl.setAttribute('width', W);
       svgEl.setAttribute('height', H);
       svgEl.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      var xBase = Math.max(28, Math.min(W * 0.055, 52));
+      var xBase = W * 0.50;
       var sections = Array.from(mainEl.querySelectorAll('.auth-moment, .auth-billjobs'));
       var pts = [{ x: xBase, y: 70 }];
       sections.forEach(function (sec, i) {
-        var xOff = (organicX[i % organicX.length] || 0) * W * 0.06;
+        var xOff = (organicX[i % organicX.length] || 0) * W * 0.02;
         pts.push({ x: xBase + xOff, y: sec.offsetTop + sec.offsetHeight * 0.36 });
       });
       var ls = sections[sections.length - 1];
@@ -342,11 +342,11 @@
       /* ── Memory image fragments (desktop only) ── */
       if (window.innerWidth >= 768) {
         var memFragments = [
-          { src: '../assets/img/BCK02.jpg',  pos: 'right:4vw;top:12%;width:24vw;aspect-ratio:3/2;',  maxOp: 0.09, trigger: '.auth-moment[data-idx="0"]' },
-          { src: '../assets/img/BCK04.jpg',  pos: 'left:3vw;top:58%;width:20vw;aspect-ratio:3/2;',   maxOp: 0.07, trigger: '.auth-moment[data-idx="1"]' },
-          { src: '../assets/img/BCK07.jpg',  pos: 'right:5vw;top:22%;width:22vw;aspect-ratio:3/2;',  maxOp: 0.09, trigger: '.auth-moment[data-idx="2"]' },
-          { src: '../assets/img/G+C09.jpg',  pos: 'right:3vw;top:48%;width:18vw;aspect-ratio:2/3;',  maxOp: 0.12, trigger: '.auth-moment[data-idx="3"]' },
-          { src: '../assets/img/BCK03.jpg',  pos: 'left:4vw;top:28%;width:22vw;aspect-ratio:3/2;',   maxOp: 0.06, trigger: '.auth-moment[data-idx="4"]' },
+          { src: '../assets/img/BCK02.jpg',  pos: 'right:4vw;top:12%;width:24vw;aspect-ratio:3/2;',  maxOp: 0.22, trigger: '.auth-moment[data-idx="0"]' },
+          { src: '../assets/img/BCK04.jpg',  pos: 'left:3vw;top:58%;width:20vw;aspect-ratio:3/2;',   maxOp: 0.18, trigger: '.auth-moment[data-idx="1"]' },
+          { src: '../assets/img/BCK07.jpg',  pos: 'right:5vw;top:22%;width:22vw;aspect-ratio:3/2;',  maxOp: 0.22, trigger: '.auth-moment[data-idx="2"]' },
+          { src: '../assets/img/G+C09.jpg',  pos: 'right:3vw;top:48%;width:18vw;aspect-ratio:2/3;',  maxOp: 0.28, trigger: '.auth-moment[data-idx="3"]' },
+          { src: '../assets/img/BCK03.jpg',  pos: 'left:4vw;top:28%;width:22vw;aspect-ratio:3/2;',   maxOp: 0.15, trigger: '.auth-moment[data-idx="4"]' },
         ];
         memFragments.forEach(function (item) {
           var img = document.createElement('img');
@@ -380,6 +380,7 @@
       var av = document.createElement('video');
       av.id = 'author-vid-texture'; av.muted = true; av.playsInline = true;
       av.preload = 'none'; av.loop = true;
+      av.setAttribute('preload', 'none');
       var as = document.createElement('source');
       as.src = '../assets/video/Analog%20Transition%206.mp4'; as.type = 'video/mp4';
       av.appendChild(as);
@@ -451,7 +452,7 @@
     if (watchBtn) {
       watchBtn.addEventListener('click', function (e) {
         e.stopPropagation();
-        window.open('https://www.youtube.com/watch?v=TrLO4PL-8jI', '_blank', 'noopener,noreferrer');
+        window.open('https://youtu.be/TrLO4PL-8jI', '_blank', 'noopener');
       });
     }
 
