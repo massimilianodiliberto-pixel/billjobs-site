@@ -615,6 +615,14 @@ footer a:hover { color: var(--text-primary); }
 .work-header {
   padding: 120px var(--section-h) 0;
 }
+@keyframes work-title-drift {
+  0%   { transform: translate(0px,    0px); }
+  20%  { transform: translate(5px,   -4px); }
+  45%  { transform: translate(-3px,   3px); }
+  65%  { transform: translate(7px,   -2px); }
+  82%  { transform: translate(-5px,   1px); }
+  100% { transform: translate(0px,    0px); }
+}
 .work-title {
   font-family: var(--font-editorial);
   font-size: clamp(52px, 9vw, 140px);
@@ -624,12 +632,7 @@ footer a:hover { color: var(--text-primary); }
   line-height: 1.0;
   cursor: pointer;
   display: inline-block;
-  transition: color 1200ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.work-title:hover {
-  color: rgba(255, 255, 255, 0.97);
-  transform: translateY(-2px);
+  animation: work-title-drift 11s ease-in-out infinite;
 }
 .work-subtitle {
   font-family: var(--font-ui);
@@ -963,8 +966,8 @@ footer a:hover { color: var(--text-primary); }
   text-align: right;
 }
 .auth-moment--pause {
-  padding-top: 18vh;
-  padding-bottom: 18vh;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
 }
 .auth-moment-num {
   display: block;
@@ -1016,14 +1019,14 @@ footer a:hover { color: var(--text-primary); }
 
 /* AUTH OPENING */
 .auth-opening {
-  min-height: 58vh;
+  min-height: 72vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding-top: clamp(2rem, 7vh, 5rem);
+  justify-content: center;
+  padding-top: clamp(6rem, 18vh, 14rem);
   padding-left: clamp(1.5rem, 6vw, 7rem);
   padding-right: clamp(1.5rem, 6vw, 7rem);
-  padding-bottom: 4vh;
+  padding-bottom: 8vh;
 }
 .auth-opening-h1 {
   font-family: var(--font-editorial);
@@ -1387,7 +1390,7 @@ footer a:hover { color: var(--text-primary); }
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 55%;
-  filter: grayscale(0.45) contrast(1.12) brightness(0.16);
+  filter: grayscale(0.45) contrast(1.12) brightness(0.22);
   transform-origin: center;
   animation: signal-drift 32s ease-in-out infinite alternate;
 }
@@ -1452,25 +1455,61 @@ footer a:hover { color: var(--text-primary); }
 .signal-tagline {
   font-family: var(--font-editorial);
   font-style: italic;
-  font-size: clamp(12px, 1.3vw, 17px);
+  font-size: clamp(16px, 1.7vw, 22px);
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.24);
   letter-spacing: 0.03em;
   line-height: 1.75;
   opacity: 0;
 }
 .signal-logo {
   display: block;
-  width: min(80px, 14vw);
+  width: 100%;
   height: auto;
   opacity: 0;
   filter: grayscale(1) brightness(0.55);
 }
 
+/* Pulsating "Send a Signal" title at top of signal page */
+.signal-top-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 var(--section-h);
+  min-height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signal-send-title {
+  font-family: var(--font-editorial);
+  font-size: clamp(28px, 4.5vw, 72px);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.1;
+  animation: signal-title-pulse 3.8s ease-in-out infinite;
+  opacity: 0;
+}
+@keyframes signal-title-pulse {
+  0%, 100% { opacity: 0.72; text-shadow: 0 0 40px rgba(255,255,255,0.08); }
+  50%       { opacity: 0.96; text-shadow: 0 0 80px rgba(255,255,255,0.18); }
+}
+
+/* Frame container for Bill Jobs logo at bottom of signal page */
+.frame-logo-bill-jobs {
+  display: block;
+  width: min(320px, 72vw);
+  position: relative;
+  margin: 0 auto;
+  opacity: 0;
+}
+
 @media (max-width: 767px) {
   .signal-email { font-size: clamp(13px, 4vw, 20px); letter-spacing: 0.03em; }
   .signal-bottom { padding-bottom: 10vh; }
-  .signal-logo { width: min(68px, 18vw); }
+  .frame-logo-bill-jobs { width: min(240px, 80vw); }
+  .signal-send-title { font-size: clamp(24px, 7vw, 48px); }
 }
 
 /* ============================================================
@@ -2229,19 +2268,9 @@ footer a:hover { color: var(--text-primary); }
   line-height: 1.9;
 }
 
-/* Backstage image sections — editorial layout: title / image / sub */
+/* Backstage image sections — cinematic: text inside image */
 .hp-backstage {
-  padding: 8vh var(--section-h) 6vh;
-}
-.hp-bs-title {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: clamp(20px, 3.0vw, 48px);
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.82);
-  line-height: 1.2;
-  margin-bottom: 4vh;
-  opacity: 0;
+  position: relative;
 }
 .hp-backstage-media {
   position: relative;
@@ -2261,20 +2290,68 @@ footer a:hover { color: var(--text-primary); }
   from { transform: scale(1.0); }
   to   { transform: scale(1.04); }
 }
-.hp-backstage-overlay {
+/* Left overlay: dark left, bright right */
+.hp-bs-overlay--left {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(8,8,8,0.55) 0%, transparent 60%);
+  background: linear-gradient(to right,
+    rgba(4,4,6,0.88) 0%,
+    rgba(4,4,6,0.60) 38%,
+    rgba(4,4,6,0.12) 100%);
 }
+/* Side vignette: dark sides, bright center */
+.hp-bs-overlay--sides {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right,
+      rgba(4,4,6,0.80) 0%,
+      transparent 32%,
+      transparent 68%,
+      rgba(4,4,6,0.80) 100%),
+    linear-gradient(to bottom,
+      rgba(4,4,6,0.44) 0%,
+      transparent 28%,
+      transparent 72%,
+      rgba(4,4,6,0.44) 100%);
+}
+/* Inner text container positioned inside image */
+.hp-bs-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 6vw;
+  z-index: 2;
+}
+.hp-bs-inner--left {
+  align-items: flex-start;
+  text-align: left;
+}
+.hp-bs-inner--center {
+  align-items: center;
+  text-align: center;
+}
+/* Title inside image */
+.hp-bs-title {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(22px, 3.2vw, 52px);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.18;
+  opacity: 0;
+  max-width: 560px;
+}
+/* Sub inside image */
 .hp-bs-sub {
   font-family: var(--font-ui);
   font-size: 10px;
   font-weight: 300;
   letter-spacing: 0.32em;
-  color: rgba(255, 255, 255, 0.38);
-  margin-top: 3vh;
-  padding-top: 2vh;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.48);
+  margin-top: 2.4vh;
   opacity: 0;
 }
 
@@ -2376,46 +2453,72 @@ footer a:hover { color: var(--text-primary); }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgba(8,8,8,0.94) 0%, rgba(8,8,8,0.18) 55%, rgba(8,8,8,0.50) 100%),
-    linear-gradient(to right, rgba(8,8,8,0.30) 0%, transparent 50%);
+    radial-gradient(ellipse at 50% 55%, transparent 20%, rgba(4,4,6,0.65) 100%),
+    linear-gradient(to bottom, rgba(4,4,6,0.40) 0%, transparent 30%, transparent 70%, rgba(4,4,6,0.80) 100%);
 }
 .hp-closing-content {
   position: absolute;
-  bottom: clamp(48px, 9vh, 88px);
-  left: 6vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
-  max-width: min(480px, 72vw);
+  text-align: center;
+  width: min(700px, 88vw);
 }
 .hp-closing-text {
   font-family: var(--font-editorial);
   font-style: italic;
-  font-size: clamp(16px, 2.2vw, 28px);
+  font-size: clamp(26px, 4.0vw, 62px);
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.50);
-  line-height: 1.55;
-  margin-bottom: 18px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.3;
+  margin-bottom: 28px;
   opacity: 0;
 }
 .hp-closing-emphasis {
   font-family: var(--font-ui);
-  font-size: clamp(9px, 0.9vw, 11px);
+  font-size: clamp(11px, 1.1vw, 14px);
   font-weight: 300;
-  letter-spacing: 0.30em;
-  color: rgba(255, 255, 255, 0.24);
-  line-height: 2.0;
+  letter-spacing: 0.32em;
+  color: rgba(255, 255, 255, 0.44);
+  line-height: 2.2;
   opacity: 0;
+}
+
+/* Bill Jobs footer frame at bottom of homepage / author / system */
+.hp-bj-footer {
+  position: relative;
+  z-index: 2;
+  padding: 0 var(--section-h) 0;
+}
+.hp-footer-nav-link {
+  display: block;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.38em;
+  color: rgba(255, 255, 255, 0.36);
+  padding: 28px 0 40px;
+  transition: color 600ms ease;
+}
+.hp-footer-nav-link:hover {
+  color: rgba(255, 255, 255, 0.72);
 }
 
 @media (max-width: 767px) {
   .hero-philosophy { padding: 5vh var(--section-h); }
-  .hp-backstage { padding: 5vh 20px 4vh; }
-  .hp-bs-title { font-size: clamp(18px, 5vw, 28px); margin-bottom: 3vh; }
-  .hp-backstage-media { aspect-ratio: 16/9; }
+  .hp-backstage { padding: 0; }
+  .hp-backstage-media { aspect-ratio: 4/3; }
+  .hp-bs-title { font-size: clamp(18px, 5vw, 28px); }
+  .hp-bs-inner { padding: 0 20px; }
   .hp-bs-sub { font-size: 9px; }
   .hp-work-frame { aspect-ratio: 16/9; }
   .hp-wf-content { opacity: 1; transform: none; bottom: 20px; left: 20px; }
   .hp-closing { height: 62vh; }
-  .hp-closing-content { left: 20px; max-width: calc(100vw - 40px); }
+  .hp-closing-text { font-size: clamp(22px, 6vw, 36px); }
+  .hp-closing-emphasis { font-size: clamp(10px, 2.5vw, 12px); }
+  .hp-bj-footer { padding: 0 20px; }
 }
 
 /* ============================================================
