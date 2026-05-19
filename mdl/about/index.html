@@ -157,27 +157,10 @@
   <script>
   (function () {
 
-    function typewriterLines(el, linesStr, speed) {
+    function revealLines(el, linesStr) {
       var lines = linesStr.split('|');
-      el.innerHTML = '';
-      var lineIdx = 0, charIdx = 0, currentNode = null;
-      function step() {
-        if (lineIdx >= lines.length) return;
-        var line = lines[lineIdx];
-        if (charIdx === 0) {
-          if (lineIdx > 0) el.appendChild(document.createElement('br'));
-          currentNode = document.createTextNode('');
-          el.appendChild(currentNode);
-        }
-        if (charIdx < line.length) {
-          currentNode.nodeValue += line[charIdx++];
-          setTimeout(step, speed || 38);
-        } else {
-          lineIdx++; charIdx = 0;
-          if (lineIdx < lines.length) setTimeout(step, (speed || 38) * 3.5);
-        }
-      }
-      step();
+      el.innerHTML = lines.join('<br>');
+      gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power2.out' });
     }
 
     var svgEl   = document.getElementById('auth-line-svg');
@@ -294,7 +277,7 @@
         var tl = gsap.timeline({
           scrollTrigger: { trigger: section, start: 'top 74%', toggleActions: 'play none none none' },
           onComplete: function () {
-            if (subEl && subEl.dataset.lines) typewriterLines(subEl, subEl.dataset.lines, 38);
+            if (subEl && subEl.dataset.lines) revealLines(subEl, subEl.dataset.lines);
             if (dot) {
               gsap.to(dot, { opacity: 0.7, duration: 0.5, ease: 'power2.out',
                 onComplete: function () { gsap.to(dot, { opacity: 0.28, duration: 2.8, yoyo: true, repeat: -1, ease: 'sine.inOut' }); }

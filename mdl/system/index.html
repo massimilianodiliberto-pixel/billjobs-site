@@ -439,13 +439,9 @@
     /* sys-desc: fade only, no y movement */
     gsap.fromTo('#sys-desc', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power2.out', delay: 2.9 });
 
-    function typewriterSimple(el, text, speed) {
-      el.textContent = '';
-      var i = 0;
-      function step() {
-        if (i < text.length) { el.textContent += text[i++]; setTimeout(step, speed || 34); }
-      }
-      step();
+    function revealPhrase(el, text) {
+      el.textContent = text;
+      gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power2.out' });
     }
 
     var sysLineWrap = document.getElementById('sys-line-wrap');
@@ -509,7 +505,7 @@
           setTimeout(function () {
             if (phrase && phrase.dataset.phrase) {
               gsap.set(phrase, { opacity: 1 });
-              typewriterSimple(phrase, phrase.dataset.phrase, 34);
+              revealPhrase(phrase, phrase.dataset.phrase);
             }
           }, 450);
           var body = section.querySelector('.sys-concept-body');

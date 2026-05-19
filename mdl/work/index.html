@@ -100,8 +100,8 @@
       /* ── BEAUTY & FASHION ─────────────────────────────────── */
       {
         id: 'cotril',
-        title: 'Cotril',
-        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
+        title: 'Cotril Festival del Cinema di Venezia — Content Producer — 3 edizioni',
+        cat: 'events-live', catLabel: 'Events & Live Shows',
         role: 'Director / Content Producer',
         desc: 'Produzione contenuti per più edizioni del Festival del Cinema di Venezia e Cosmoprof Bologna. Shooting con testimonial, backstage e visual di brand.',
         action: 'link_youtube', youtube: 'QbBCVG9iGqU', video: null, image: '../assets/img/Cotril_Content_Producer.jpg',
@@ -137,7 +137,7 @@
       {
         id: 'gamma-product-visuals',
         title: 'Gamma+ — Product Visuals',
-        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director / Creative Producer',
         desc: 'Video prodotto beauty. Visual per lancio collezione.',
         action: 'link_youtube', youtube: '0FsqDcX4Ou8', video: null, image: '../assets/img/MixGamma+.jpg',
@@ -172,8 +172,8 @@
       },
       {
         id: 'my-organics',
-        title: 'My Organics',
-        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
+        title: 'My Organics Oxygen',
+        cat: 'commercial', catLabel: 'Brand Films',
         role: 'Director',
         desc: 'Beauty tutorial rituali, shooting trend collection, hair fashion content.',
         action: 'link_youtube', youtube: 'hqVJZKo10Ds', video: null, image: '../assets/img/MyOrganic_oxygen.jpg',
@@ -190,8 +190,8 @@
       },
       {
         id: 'wella-cosmoprof',
-        title: 'Wella Professional — Cosmoprof',
-        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
+        title: 'Wella Cosmoprof — 3 edizioni',
+        cat: 'events-live', catLabel: 'Events & Live Shows',
         role: 'Assistant Art Director',
         desc: 'Art direction e coordinamento contenuti multimediali per tre edizioni consecutive di Cosmoprof Bologna. Visual stand, video evento.',
         action: 'link_youtube', youtube: 'f57B9R45sB4', video: null, image: '../assets/img/Wella.jpg',
@@ -256,7 +256,7 @@
       {
         id: 'pleasure-divine',
         title: 'Pleasure Professional Luxury — Divine Nectar',
-        cat: 'commercial', catLabel: 'Brand Films',
+        cat: 'beauty-fashion', catLabel: 'Beauty & Fashion',
         role: 'Director / Creative Producer',
         desc: 'Spot luxury beauty realizzato interamente con AI generativa. Narrazione visiva per lancio prodotto.',
         action: 'link_youtube', youtube: 'nNCsNeHioDg', video: null, image: '../assets/img/DivineNectar.jpg',
@@ -295,9 +295,9 @@
         id: 'mrrain-meteoriti',
         title: 'Mr. Rain — Meteoriti',
         cat: 'music', catLabel: 'Music',
-        role: 'Producer',
+        role: 'Director of Production',
         desc: 'Produzione videoclip. Visual e coordinamento produzione.',
-        action: 'image_only', youtube: null, video: null, image: '../assets/img/MrRain_Meteoriti.jpg',
+        action: 'link_youtube', youtube: '5OZHuElUGrQ', video: null, image: '../assets/img/MrRain_Meteoriti.jpg',
         size: 'normal'
       },
       {
@@ -677,6 +677,13 @@
       { opacity: 0, y: 10 },
       { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out', delay: 0.80 }
     );
+
+    /* Subtle scroll parallax on title */
+    gsap.to('#work-title', {
+      yPercent: -18,
+      ease: 'none',
+      scrollTrigger: { trigger: 'main', start: 'top top', end: 'bottom top', scrub: 2.5 }
+    });
 
     gsap.fromTo('.wk-card:not([style*="display: none"])',
       { opacity: 0, y: 18 },
