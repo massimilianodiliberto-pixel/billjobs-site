@@ -2271,6 +2271,7 @@ footer a:hover { color: var(--text-primary); }
 /* Backstage image sections — cinematic: text inside image */
 .hp-backstage {
   position: relative;
+  padding: 10vh 0;
 }
 .hp-backstage-media {
   position: relative;
@@ -2362,6 +2363,7 @@ footer a:hover { color: var(--text-primary); }
   aspect-ratio: 21/9;
   overflow: hidden;
   cursor: pointer;
+  margin: 0;
 }
 .hp-work-frame:hover .hp-wf-img img {
   transform: scale(1.03);
@@ -2508,7 +2510,7 @@ footer a:hover { color: var(--text-primary); }
 
 @media (max-width: 767px) {
   .hero-philosophy { padding: 5vh var(--section-h); }
-  .hp-backstage { padding: 0; }
+  .hp-backstage { padding: 6vh 0; }
   .hp-backstage-media { aspect-ratio: 4/3; }
   .hp-bs-title { font-size: clamp(18px, 5vw, 28px); }
   .hp-bs-inner { padding: 0 20px; }

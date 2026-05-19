@@ -104,6 +104,19 @@
       </div>
     </section>
 
+    <!-- WORK FRAME 1 -->
+    <section class="hp-work-frame" data-project="gamma-duality">
+      <div class="hp-wf-img">
+        <img src="assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png" alt="Gamma+ Duality" style="object-position: center 30%;">
+      </div>
+      <div class="hp-wf-overlay"></div>
+      <div class="hp-wf-content">
+        <span class="hp-wf-cat">BEAUTY &amp; FASHION</span>
+        <h2 class="hp-wf-title">Gamma+ — Duality</h2>
+        <span class="hp-wf-cta">VIEW PROJECT →</span>
+      </div>
+    </section>
+
     <!-- BACKSTAGE 2: BCK01 — centered title, side vignette -->
     <section class="hp-backstage">
       <div class="hp-backstage-media">
@@ -116,6 +129,19 @@
       </div>
     </section>
 
+    <!-- WORK FRAME 2 -->
+    <section class="hp-work-frame" data-project="mr-rain">
+      <div class="hp-wf-img">
+        <img src="assets/img/IMG_7623.jpeg" alt="Mr. Rain" style="object-position: center 40%;">
+      </div>
+      <div class="hp-wf-overlay"></div>
+      <div class="hp-wf-content">
+        <span class="hp-wf-cat">MUSIC</span>
+        <h2 class="hp-wf-title">Mr. Rain</h2>
+        <span class="hp-wf-cta">VIEW PROJECT →</span>
+      </div>
+    </section>
+
     <!-- BACKSTAGE 3: BCK04 — left-oriented title, dark left overlay -->
     <section class="hp-backstage">
       <div class="hp-backstage-media">
@@ -125,6 +151,19 @@
           <h2 class="hp-bs-title">Every scene is<br>a balance of choices.</h2>
           <p class="hp-bs-sub">STRATEGY. NARRATIVE. DECISION.</p>
         </div>
+      </div>
+    </section>
+
+    <!-- WORK FRAME 3 -->
+    <section class="hp-work-frame" data-project="up-all-night">
+      <div class="hp-wf-img">
+        <img src="assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png" alt="Up All Night" style="object-position: center center;">
+      </div>
+      <div class="hp-wf-overlay"></div>
+      <div class="hp-wf-content">
+        <span class="hp-wf-cat">BRAND &amp; FILM</span>
+        <h2 class="hp-wf-title">Up All Night</h2>
+        <span class="hp-wf-cta">VIEW PROJECT →</span>
       </div>
     </section>
 
@@ -347,7 +386,9 @@
         { type: 'image', src: 'assets/img/BCK01.jpg' },
         { type: 'image', src: 'assets/img/BCK04.jpg' },
         { type: 'image', src: 'assets/img/BCK06.jpg' },
-        { type: 'image', src: 'assets/img/Logo%20Who%20Is%20BillJobsd.jpg' },
+        { type: 'image', src: 'assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png' },
+        { type: 'image', src: 'assets/img/IMG_7623.jpeg' },
+        { type: 'image', src: 'assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png' },
       ];
       var total = assets.length;
 
@@ -470,6 +511,22 @@
       }
     }());
 
+    /* ── WORK FRAME REVEALS ──────────────────────────────────────── */
+
+    document.querySelectorAll('.hp-work-frame').forEach(function(frame) {
+      gsap.fromTo(frame, { opacity: 0, y: 28 }, {
+        opacity: 1, y: 0, duration: 1.3, ease: 'power2.out',
+        scrollTrigger: { trigger: frame, start: 'top 80%', toggleActions: 'play none none none' }
+      });
+      var img = frame.querySelector('.hp-wf-img img');
+      frame.addEventListener('mouseenter', function() {
+        if (img) gsap.to(img, { scale: 1.04, duration: 1.2, ease: 'power2.out' });
+      });
+      frame.addEventListener('mouseleave', function() {
+        if (img) gsap.to(img, { scale: 1, duration: 0.9, ease: 'power2.out' });
+      });
+    });
+
     /* ── BJ FOOTER REVEAL ────────────────────────────────────────── */
 
     (function() {
@@ -480,6 +537,124 @@
         scrollTrigger: { trigger: bjFooter, start: 'top 82%', toggleActions: 'play none none none' }
       });
     }());
+  </script>
+
+  <!-- PROJECT OVERLAY -->
+  <div id="project-overlay" class="overlay" aria-hidden="true">
+    <div class="overlay-backdrop"></div>
+    <div class="overlay-panel">
+      <button class="overlay-close" aria-label="Close"><span>✕</span></button>
+      <div class="overlay-media"></div>
+      <div class="overlay-content">
+        <div class="overlay-header">
+          <h2 class="overlay-title"></h2>
+          <p class="overlay-credits"></p>
+        </div>
+        <div class="overlay-description"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var overlay      = document.getElementById('project-overlay');
+    var overlayMedia = overlay.querySelector('.overlay-media');
+    var overlayTitle = overlay.querySelector('.overlay-title');
+    var overlayCreds = overlay.querySelector('.overlay-credits');
+    var overlayDesc  = overlay.querySelector('.overlay-description');
+    var overlayClose = overlay.querySelector('.overlay-close');
+
+    var projects = {
+      'gamma-duality': {
+        title: 'Gamma+ — Duality',
+        credits: 'Gamma+ Professional · 2023 · Creative Direction · Campaign · Live Show',
+        description: [
+          'A visual identity system built around duality — two forces, two aesthetics, one brand language. Conceived for Cosmoprof Bologna, the largest professional beauty trade show in the world.',
+          'Campaign thinking extended across booth design, brochures, trade show materials and a 30-minute live show. Every output connected to the same visual grammar.'
+        ],
+        role: 'Creative Direction · Visual Identity · Campaign Architecture · Live Show Direction',
+        image: 'assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png',
+        workLink: 'work/index.html'
+      },
+      'mr-rain': {
+        title: 'Mr. Rain',
+        credits: 'Warner Music · 2021–2023 · Production · Location · Visual Systems',
+        description: [
+          'An ongoing creative relationship spanning multiple years and multiple projects — music videos, live concert visuals, and the sustained development of an artist\'s visual language.',
+          'Production management, location scouting, permits, technical crew coordination. The architecture behind the image.'
+        ],
+        role: 'Production · Location Scouting · Technical Coordination',
+        image: 'assets/img/IMG_7623.jpeg',
+        workLink: 'work/index.html'
+      },
+      'up-all-night': {
+        title: 'Up All Night',
+        credits: 'Berlinale EFM · Development · Direction · Production',
+        description: [
+          'A feature film developed and presented at the European Film Market — Berlinale. Screenplay, production plan, location research, casting structure. Three Italian Film Commissions involved.',
+          'Potential funding: ~690.000€. International coordination at scale. A film that exists before it is shot.'
+        ],
+        role: 'Director · Writer · Producer',
+        image: 'assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png',
+        workLink: 'work/index.html'
+      }
+    };
+
+    function openOverlay(id) {
+      var p = projects[id];
+      if (!p) return;
+      overlayTitle.textContent = p.title;
+      overlayCreds.textContent = p.credits;
+      overlayMedia.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = p.image; img.alt = p.title;
+      overlayMedia.appendChild(img);
+      overlayDesc.innerHTML = '';
+      p.description.forEach(function(text) {
+        var el = document.createElement('p');
+        el.textContent = text;
+        overlayDesc.appendChild(el);
+      });
+      if (p.role) {
+        var role = document.createElement('span');
+        role.className = 'overlay-role';
+        role.textContent = p.role;
+        overlayDesc.appendChild(role);
+      }
+      if (p.workLink) {
+        var wl = document.createElement('a');
+        wl.href = p.workLink;
+        wl.className = 'overlay-work-link';
+        wl.textContent = 'OPEN IN WORK →';
+        overlayDesc.appendChild(wl);
+      }
+      overlay.setAttribute('aria-hidden', 'false');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      if (typeof lenis !== 'undefined') lenis.stop();
+      gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.4, ease: 'power2.out' });
+    }
+
+    function closeOverlay() {
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (typeof lenis !== 'undefined') lenis.start();
+      gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.4, ease: 'power2.out' });
+      setTimeout(function() { overlayMedia.innerHTML = ''; }, 650);
+    }
+
+    overlayClose.addEventListener('click', closeOverlay);
+    overlay.querySelector('.overlay-backdrop').addEventListener('click', closeOverlay);
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeOverlay(); });
+
+    document.querySelectorAll('[data-project]').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        openOverlay(el.dataset.project);
+      });
+    });
+  }());
   </script>
 
   <!-- HOME AUDIO LAYER -->
