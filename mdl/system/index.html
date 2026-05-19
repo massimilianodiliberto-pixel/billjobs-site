@@ -173,14 +173,14 @@
     ];
 
     var ANCHOR_DEF = [
-      { oi: 0, phase: -1.20, r: 4.8, op: 0.55, label: 'DIRECTION'  },
-      { oi: 0, phase:  0.52, r: 4.2, op: 0.50, label: 'PRODUCTION' },
-      { oi: 0, phase:  2.50, r: 4.5, op: 0.52, label: 'EXPERIENCE' },
-      { oi: 1, phase:  0.90, r: 5.2, op: 0.58, label: 'CREATIVE'   },
-      { oi: 1, phase:  3.40, r: 3.8, op: 0.48, label: 'VISION'     },
-      { oi: 2, phase:  1.10, r: 4.5, op: 0.52, label: 'STRATEGY'   },
-      { oi: 2, phase:  3.70, r: 4.0, op: 0.49, label: 'POST'       },
-      { oi: 2, phase: -0.60, r: 3.5, op: 0.46, label: 'BUDGET'     },
+      { oi: 0, phase: -1.20, r: 5.4, op: 0.72, label: 'DIRECTION'  },
+      { oi: 0, phase:  0.52, r: 4.8, op: 0.68, label: 'PRODUCTION' },
+      { oi: 0, phase:  2.50, r: 5.0, op: 0.70, label: 'EXPERIENCE' },
+      { oi: 1, phase:  0.90, r: 5.8, op: 0.75, label: 'CREATIVE'   },
+      { oi: 1, phase:  3.40, r: 4.4, op: 0.65, label: 'VISION'     },
+      { oi: 2, phase:  1.10, r: 5.0, op: 0.70, label: 'STRATEGY'   },
+      { oi: 2, phase:  3.70, r: 4.5, op: 0.66, label: 'POST'       },
+      { oi: 2, phase: -0.60, r: 4.0, op: 0.63, label: 'BUDGET'     },
     ];
 
     var WORD_LIST = [
@@ -282,8 +282,8 @@
       orbits.forEach(function (orb) {
         ctx.beginPath();
         ctx.ellipse(orb.cx, orb.cy, orb.ra, orb.rb, orb.tilt, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255,255,255,0.11)';
-        ctx.lineWidth = 0.8;
+        ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+        ctx.lineWidth = 1.0;
         ctx.stroke();
       });
 
@@ -294,7 +294,7 @@
           var d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d < 260) {
             ctx.beginPath();
-            ctx.strokeStyle = 'rgba(255,255,255,' + ((1 - d / 260) * 0.055) + ')';
+            ctx.strokeStyle = 'rgba(255,255,255,' + ((1 - d / 260) * 0.10) + ')';
             ctx.lineWidth = 0.5;
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -339,7 +339,7 @@
         ctx.shadowBlur = 0;
 
         if (fontsReady) {
-          var labelOp = 0.32 + Math.sin(frame * 0.010 + n.angle * 1.5) * 0.10;
+          var labelOp = 0.50 + Math.sin(frame * 0.010 + n.angle * 1.5) * 0.14;
           var px = n.x > (W * 0.625) ? n.x + n.r + 8 : n.x - n.r - 8;
           ctx.font = '500 11px "Space Grotesk", sans-serif';
           ctx.letterSpacing = '0.12em';

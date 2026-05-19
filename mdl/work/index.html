@@ -532,7 +532,7 @@
         if (img) gsap.to(img, { scale: 1.04, duration: 0.9,  ease: 'power2.out' });
       });
       card.addEventListener('mouseleave', () => {
-        gsap.to(info, { opacity: 0, y: 8,    duration: 0.32 });
+        gsap.to(info, { opacity: 0.72, y: 0, duration: 0.32 });
         if (img) gsap.to(img, { scale: 1,    duration: 0.7,  ease: 'power2.out' });
       });
     });
@@ -641,7 +641,7 @@
            mouseenter when overlay disappears, so info would stay at wrong opacity */
         document.querySelectorAll('.wk-info').forEach(function(info) {
           gsap.killTweensOf(info);
-          gsap.set(info, { opacity: 0, y: 8 });
+          gsap.set(info, { opacity: 0.72, y: 0 });
         });
       }, 600);
     }
@@ -663,20 +663,40 @@
       });
     }());
 
-    /* ── ENTRANCE ────────────────────────────────────────────── */
+    /* ── ENTRANCE — cinematic staged ────────────────────────── */
 
-    gsap.fromTo('#work-title',
-      { opacity: 0, y: 28 },
-      { opacity: 1, y: 0, duration: 1.8, ease: 'power1.out', delay: 0.15 }
-    );
-    gsap.fromTo('#work-subtitle',
-      { opacity: 0, y: 14 },
-      { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out', delay: 0.55 }
-    );
-    gsap.fromTo('.work-tagline',
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out', delay: 0.80 }
-    );
+    gsap.set('.filter', { opacity: 0 });
+
+    var entranceTL = gsap.timeline({ delay: 0.1 });
+    entranceTL
+      .fromTo('#work-title',
+        { opacity: 0, y: 42 },
+        { opacity: 1, y: 0, duration: 2.2, ease: 'power1.out' }
+      )
+      .fromTo('#work-subtitle',
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out' },
+        '-=1.1'
+      )
+      .fromTo('.work-tagline',
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out' },
+        '-=0.9'
+      )
+      .to('.filter',
+        { opacity: 1, duration: 0.7, ease: 'power2.out', stagger: 0.08 },
+        '-=0.6'
+      )
+      .fromTo('.wk-card:not([style*="display: none"])',
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', stagger: { amount: 0.65 } },
+        '-=0.3'
+      )
+      .call(function () {
+        gsap.to('#work-title', {
+          opacity: 0.86, duration: 4.5, yoyo: true, repeat: -1, ease: 'sine.inOut'
+        });
+      });
 
     /* Subtle scroll parallax on title */
     gsap.to('#work-title', {
@@ -684,12 +704,6 @@
       ease: 'none',
       scrollTrigger: { trigger: 'main', start: 'top top', end: 'bottom top', scrub: 2.5 }
     });
-
-    gsap.fromTo('.wk-card:not([style*="display: none"])',
-      { opacity: 0, y: 18 },
-      { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
-        stagger: { amount: 0.5 }, delay: 0.15 }
-    );
 
   </script>
 

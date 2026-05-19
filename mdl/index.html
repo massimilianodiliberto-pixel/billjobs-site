@@ -124,13 +124,6 @@
       <div class="featured-fade featured-fade--bottom"></div>
     </section>
 
-    <!-- BILL JOBS — centered closing block -->
-    <section class="bj-intro">
-      <img src="assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="Bill Jobs Studio" class="bj-logo-img">
-      <p class="bj-tagline">A cinematic lab. Not a portfolio.</p>
-      <a href="about/index.html#bill-jobs" class="bj-link">WHO IS BILL JOBS →</a>
-    </section>
-
   </main>
 
   <footer>
@@ -398,9 +391,34 @@
       });
     });
 
+    /* ── SCROLL FOCUS — viewport center = brightest ─────────── */
+
+    (function () {
+      var items = Array.from(document.querySelectorAll('.feat-item'));
+      if (!items.length) return;
+      function updateFocus() {
+        var vcenter = window.innerHeight / 2;
+        items.forEach(function (item) {
+          var r = item.getBoundingClientRect();
+          var ic = r.top + r.height / 2;
+          var dist = Math.abs(ic - vcenter);
+          var maxDist = window.innerHeight * 0.72;
+          var t = Math.max(0, 1 - dist / maxDist);
+          var op = 0.46 + 0.54 * t;
+          item.style.opacity = op;
+        });
+      }
+      if (typeof lenis !== 'undefined') {
+        lenis.on('scroll', updateFocus);
+      } else {
+        window.addEventListener('scroll', updateFocus, { passive: true });
+      }
+      updateFocus();
+    }());
+
     /* ── SCROLL REVEAL ──────────────────────────────────────── */
 
-    gsap.utils.toArray('.featured, .bj-intro').forEach(el => {
+    gsap.utils.toArray('.featured').forEach(el => {
       gsap.fromTo(el,
         { opacity: 0, y: 24 },
         {

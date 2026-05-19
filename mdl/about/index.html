@@ -99,6 +99,13 @@
 
     <!-- WHO IS BILL JOBS? -->
     <section class="auth-billjobs" id="bill-jobs">
+      <h2 class="auth-bj-title">WHO IS BILL JOBS?</h2>
+      <div class="auth-bj-body">
+        <p>Not a portfolio.</p>
+        <p>Not a company presentation.</p>
+        <p>Just the human side behind the frame.</p>
+        <p>The part you usually never see:<br>the person balancing vision, production, people and reality.</p>
+      </div>
       <button id="bj-frame-trigger" class="bj-frame-link" type="button" aria-haspopup="dialog">
         <div class="bj-frame">
           <img src="../assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="" class="bj-frame-img" loading="lazy">
@@ -109,13 +116,6 @@
           </div>
         </div>
       </button>
-      <h2 class="auth-bj-title">WHO IS BILL JOBS?</h2>
-      <div class="auth-bj-body">
-        <p>Not a portfolio.</p>
-        <p>Not a company presentation.</p>
-        <p>Just the human side behind the frame.</p>
-        <p>The part you usually never see:<br>the person balancing vision, production, people and reality.</p>
-      </div>
       <p class="auth-bj-closing"><em>Sometimes the best creative solutions<br>come from understanding every part of the process.</em></p>
     </section>
 
@@ -260,12 +260,17 @@
       gsap.fromTo('.auth-opening-h1',
         { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 24 },
         { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 2.4, ease: 'power1.out', delay: 0.4,
-          onStart: function () { window.sound.play('ascend', 0.10, 0.8); }
+          onStart: function () { window.sound.play('ascend', 0.10, 0.8); },
+          onComplete: function () {
+            gsap.to('.auth-opening-h1', {
+              opacity: 0.82, duration: 4.2, yoyo: true, repeat: -1, ease: 'sine.inOut'
+            });
+          }
         }
       );
       gsap.fromTo('.auth-opening-h2',
-        { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 },
-        { opacity: 1, color: 'rgba(255,255,255,0.26)', y: 0, duration: 2.0, ease: 'power1.out', delay: 1.3 }
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 1.8, ease: 'power1.out', delay: 1.4 }
       );
 
       document.querySelectorAll('.auth-moment').forEach(function (section, idx) {
