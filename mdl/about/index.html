@@ -160,7 +160,7 @@
     function revealLines(el, linesStr) {
       var lines = linesStr.split('|');
       el.innerHTML = lines.join('<br>');
-      gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power2.out' });
+      gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.85, ease: 'power1.out' });
     }
 
     var svgEl   = document.getElementById('auth-line-svg');
@@ -285,7 +285,7 @@
             if (subEl && subEl.dataset.lines) revealLines(subEl, subEl.dataset.lines);
             if (dot) {
               gsap.to(dot, { opacity: 0.7, duration: 0.5, ease: 'power2.out',
-                onComplete: function () { gsap.to(dot, { opacity: 0.28, duration: 2.8, yoyo: true, repeat: -1, ease: 'sine.inOut' }); }
+                onComplete: function () { gsap.to(dot, { opacity: 0.28, duration: 2.4, yoyo: true, repeat: -1, ease: 'sine.inOut' }); }
               });
             }
           }
@@ -305,10 +305,10 @@
         var bjDot = document.querySelector('.auth-dot[data-didx="5"]');
         gsap.set(bjSection, { opacity: 0 });
         gsap.to(bjSection, {
-          opacity: 1, y: 0, duration: 1.2, ease: 'power2.out',
+          opacity: 1, y: 0, duration: 1.0, ease: 'power1.out',
           scrollTrigger: { trigger: bjSection, start: 'top 76%', toggleActions: 'play none none none' },
           onComplete: function () {
-            if (bjDot) gsap.to(bjDot, { opacity: 0.7, duration: 0.6, ease: 'power2.out' });
+            if (bjDot) gsap.to(bjDot, { opacity: 0.7, duration: 0.5, ease: 'power1.out' });
           }
         });
       }

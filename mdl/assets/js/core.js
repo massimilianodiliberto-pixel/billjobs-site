@@ -143,11 +143,11 @@ document.querySelectorAll('a[href]').forEach(link => {
 /* ── [data-reveal] scroll animations ────────────────────── */
 gsap.utils.toArray('[data-reveal]').forEach(el => {
   gsap.fromTo(el,
-    { opacity: 0, y: 22 },
+    { opacity: 0, y: 18 },
     {
       opacity: 1, y: 0,
-      duration: 1.0,
-      ease: 'power2.out',
+      duration: 0.85,
+      ease: 'power1.out',
       scrollTrigger: {
         trigger: el,
         start: 'top 83%',
