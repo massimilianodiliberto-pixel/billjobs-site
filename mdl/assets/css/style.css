@@ -412,19 +412,19 @@ footer a:hover { color: var(--text-primary); }
 }
 .hero-subtitle {
   font-family: var(--font-ui);
-  font-size: var(--text-label);
+  font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.28em;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.52);
   margin-top: 18px;
   opacity: 0;
 }
 .hero-descriptor {
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 300;
   letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.30);
   margin-top: 32px;
   opacity: 0;
   max-width: 480px;
@@ -921,9 +921,9 @@ footer a:hover { color: var(--text-primary); }
 }
 .auth-bj-body p {
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.42);
+  color: rgba(255, 255, 255, 0.54);
   letter-spacing: 0.04em;
   line-height: 2.6;
   margin: 0;
@@ -985,13 +985,14 @@ footer a:hover { color: var(--text-primary); }
 }
 .auth-moment-title--large {
   font-size: clamp(32px, 5.5vw, 88px);
+  text-shadow: 0 0 80px rgba(255, 255, 255, 0.07);
 }
 .auth-moment-sub {
   margin-top: 32px;
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.44);
+  color: rgba(255, 255, 255, 0.56);
   letter-spacing: 0.07em;
   line-height: 2.4;
   min-height: 5em;
@@ -1003,6 +1004,8 @@ footer a:hover { color: var(--text-primary); }
   .auth-billjobs { padding: 12vh var(--section-h) 16vh; }
   .auth-moment { padding: 14vh var(--section-h); }
   .auth-moment--pause { padding-top: 20vh; padding-bottom: 20vh; }
+  .auth-moment-sub { font-size: 15px; color: rgba(255, 255, 255, 0.62); }
+  .auth-bj-body p { font-size: 15px; color: rgba(255, 255, 255, 0.60); }
 }
 
 /* AUTH OPENING */
@@ -1136,10 +1139,10 @@ footer a:hover { color: var(--text-primary); }
 .sys-desc {
   margin-top: 56px;
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 300;
   letter-spacing: 0.10em;
-  color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.50);
   line-height: 2.2;
   opacity: 0;
 }
@@ -1183,9 +1186,9 @@ footer a:hover { color: var(--text-primary); }
 .sys-concept-phrase {
   margin-top: 28px;
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.52);
+  color: rgba(255, 255, 255, 0.64);
   letter-spacing: 0.07em;
   line-height: 2.0;
   max-width: 520px;
@@ -1207,9 +1210,9 @@ footer a:hover { color: var(--text-primary); }
 }
 .sys-concept-body p {
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.20);
+  color: rgba(255, 255, 255, 0.36);
   letter-spacing: 0.06em;
   line-height: 2.2;
   margin-bottom: 14px;
@@ -1226,7 +1229,8 @@ footer a:hover { color: var(--text-primary); }
   font-size: clamp(40px, 7.5vw, 118px);
   font-weight: 300;
   line-height: 1.12;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(255, 255, 255, 0.86);
+  text-shadow: 0 0 60px rgba(255, 255, 255, 0.05);
   opacity: 0;
   position: relative;
   z-index: 2;
@@ -1239,6 +1243,9 @@ footer a:hover { color: var(--text-primary); }
 @media (max-width: 767px) {
   .sys-concept { padding: 10vh var(--section-h); }
   .sys-closing { padding: 14vh var(--section-h) 12vh; }
+  .sys-desc { font-size: 15px; color: rgba(255, 255, 255, 0.58); }
+  .sys-concept-phrase { font-size: 15px; }
+  .sys-closing-subtext { font-size: 14px; color: rgba(255, 255, 255, 0.56); }
 }
 
 .system-main { position: relative; }
@@ -1281,10 +1288,10 @@ footer a:hover { color: var(--text-primary); }
 .sys-closing-subtext {
   margin-top: 48px;
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 300;
   font-style: italic;
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.50);
   letter-spacing: 0.10em;
   line-height: 2.2;
   opacity: 0;
