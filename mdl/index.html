@@ -220,12 +220,14 @@
     }
 
     function afterETF() {
+      /* Precise cut: video + hero entrance fire the same frame the last ETF letter hits opacity 0.
+         The overlay fades out independently — video is already playing underneath it. */
+      startHeroVideos();
+      initSite();
       playHeroEntrance();
       gsap.to('#etf-overlay', { opacity: 0, duration: 0.8, ease: 'power2.inOut', onComplete: () => {
         const el = document.getElementById('etf-overlay');
         if (el) el.style.display = 'none';
-        initSite();
-        setTimeout(startHeroVideos, 1700);
       }});
     }
 
@@ -235,9 +237,9 @@
       gsap.killTweensOf(['#intro', '#etf-overlay', '.etf-char']);
       gsap.set('#intro', { display: 'none' });
       gsap.set('#etf-overlay', { display: 'none' });
-      playHeroEntrance();
+      startHeroVideos();
       initSite();
-      setTimeout(startHeroVideos, 400);
+      playHeroEntrance();
     }
 
     document.getElementById('intro-skip')?.addEventListener('click', skipIntro);
@@ -368,9 +370,9 @@
       if (_il) _il.style.display = 'none';
       gsap.set('#intro', { display: 'none' });
       gsap.set('#etf-overlay', { display: 'none' });
-      playHeroEntrance();
+      startHeroVideos();
       initSite();
-      setTimeout(startHeroVideos, 500);
+      playHeroEntrance();
     } else {
       sessionStorage.setItem('introSeen', 'true');
       startIntroLoader(function () { playIntro(); });
