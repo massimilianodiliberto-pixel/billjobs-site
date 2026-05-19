@@ -568,11 +568,6 @@
       });
     }
 
-    document.getElementById('work-title').addEventListener('click', function () {
-      showAll();
-      document.getElementById('work-title').textContent = 'SELECTED FRAMES';
-    });
-
     document.getElementById('work-filters').addEventListener('click', e => {
       const btn = e.target.closest('.filter');
       if (!btn) return;
@@ -592,6 +587,7 @@
           });
         }
       });
+      setTimeout(function() { updateCardZoom(); }, 350);
     });
 
     /* ── OVERLAY ─────────────────────────────────────────────── */
@@ -734,11 +730,14 @@
       delay: 2.2
     });
 
-    /* Scroll parallax on title */
+    /* Continuous floating animation on title */
     gsap.to('#work-title', {
-      yPercent: -18,
-      ease: 'none',
-      scrollTrigger: { trigger: 'main', start: 'top top', end: 'bottom top', scrub: 2.5 }
+      y: -10, x: 5,
+      duration: 6,
+      yoyo: true,
+      repeat: -1,
+      ease: 'sine.inOut',
+      delay: 2.0
     });
 
     /* Card center zoom on scroll */
@@ -746,12 +745,16 @@
       function updateCardZoom() {
         var vcenter = window.innerHeight / 2;
         document.querySelectorAll('.wk-card').forEach(function(card) {
+          if (card.style.display === 'none') {
+            card.style.transform = '';
+            return;
+          }
           var r = card.getBoundingClientRect();
           var ic = r.top + r.height / 2;
           var dist = Math.abs(ic - vcenter);
           var maxDist = window.innerHeight * 0.58;
           var t = Math.max(0, 1 - dist / maxDist);
-          card.style.transform = 'scale(' + (1 + t * 0.022).toFixed(4) + ')';
+          card.style.transform = 'scale(' + (1 + t * 0.030).toFixed(4) + ')';
         });
       }
       if (typeof lenis !== 'undefined') {

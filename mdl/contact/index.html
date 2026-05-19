@@ -47,8 +47,10 @@
       <div class="signal-bg-overlay"></div>
     </div>
 
-    <!-- TOP: vertical breathing space -->
-    <div class="signal-spacer-top"></div>
+    <!-- TOP: pulsating title -->
+    <div class="signal-top-header">
+      <h1 class="signal-send-title">Send a Signal.</h1>
+    </div>
 
     <!-- CENTER: focal point -->
     <div class="signal-center">
@@ -61,7 +63,9 @@
     <!-- BOTTOM: tagline + logo -->
     <div class="signal-bottom">
       <p class="signal-tagline">Behind every frame,<br>there is a signal.</p>
-      <img src="../assets/img/Bill%20jobs%20%20logo.jpg" alt="Bill Jobs" class="signal-logo">
+      <div class="frame-logo-bill-jobs">
+        <img src="../assets/img/Bill%20jobs%20%20logo.jpg" alt="Bill Jobs" class="signal-logo">
+      </div>
     </div>
 
   </main>
@@ -79,16 +83,28 @@
   <script>
 (function () {
   window.addEventListener('load', function () {
-    var tl = gsap.timeline({ delay: 0.5 });
+    /* Animate "Send a Signal" title immediately */
+    gsap.fromTo('.signal-send-title',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 1.4, ease: 'power1.out', delay: 0.2,
+        onComplete: function () {
+          /* CSS animation handles the pulsation from here */
+        }
+      }
+    );
+
+    var tl = gsap.timeline({ delay: 0.8 });
     tl.fromTo('.signal-email',   { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.8, ease: 'power1.out' }, 0)
       .fromTo('.signal-phone',   { opacity: 0 },         { opacity: 1, duration: 1.4, ease: 'power1.out' }, 0.7)
       .fromTo('.signal-tagline', { opacity: 0 },         { opacity: 1, duration: 2.0, ease: 'power1.out' }, 1.2)
-      .fromTo('.signal-logo',    { opacity: 0 },         { opacity: 0.28, duration: 2.4, ease: 'power1.out' }, 1.8);
+      .fromTo('.frame-logo-bill-jobs', { opacity: 0 },   { opacity: 1, duration: 2.4, ease: 'power1.out' }, 1.8);
 
     /* slow breathing on logo after it fades in */
     setTimeout(function () {
-      gsap.to('.signal-logo', { opacity: 0.18, duration: 5.5, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-    }, 4200);
+      gsap.to('.signal-logo', { opacity: 0.28, duration: 5.5, yoyo: true, repeat: -1, ease: 'sine.inOut',
+        from: { opacity: 0.48 }
+      });
+    }, 4500);
   });
 
   document.addEventListener('sound:enabled', function () {

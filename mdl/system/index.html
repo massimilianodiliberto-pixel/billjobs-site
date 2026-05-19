@@ -134,7 +134,51 @@
       <p class="sys-closing-subtext">The system is invisible. The connections are real.</p>
     </section>
 
+    <!-- BILL JOBS — same as Author page -->
+    <section class="auth-billjobs" id="sys-bill-jobs">
+      <h2 class="auth-bj-title">WHO IS BILL JOBS?</h2>
+      <div class="auth-bj-body">
+        <p>Not a studio.</p>
+        <p>Not an agency.</p>
+        <p>A production mind<br>built between direction,<br>systems<br>and visual instinct.</p>
+      </div>
+      <button id="sys-bj-frame-trigger" class="bj-frame-link" type="button" aria-haspopup="dialog">
+        <div class="bj-frame">
+          <img src="../assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="" class="bj-frame-img" loading="lazy">
+          <div class="bj-frame-veil"></div>
+          <div class="bj-frame-cta">
+            <svg class="bj-frame-play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>
+            <span class="bj-frame-label">WATCH THE REEL</span>
+          </div>
+        </div>
+      </button>
+      <p class="auth-bj-closing"><em>Sometimes the best creative solutions<br>come from understanding every part of the process.</em></p>
+    </section>
+
   </main>
+
+  <!-- BILL JOBS PANEL -->
+  <div id="sys-bj-overlay" class="wk-ov" aria-hidden="true" role="dialog" aria-label="Bill Jobs">
+    <div class="wk-ov-backdrop"></div>
+    <div class="wk-ov-panel">
+      <button class="wk-ov-close" aria-label="Close"><span>✕</span></button>
+      <div class="wk-ov-media">
+        <img src="../assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="Bill Jobs">
+      </div>
+      <div class="wk-ov-body">
+        <div class="wk-ov-meta">
+          <span class="wk-ov-cat">BILL JOBS STUDIO</span>
+          <span class="wk-ov-role">Creative Producer &nbsp;·&nbsp; Director</span>
+        </div>
+        <h2 class="wk-ov-title">WHO IS BILL JOBS?</h2>
+        <p class="wk-ov-desc">Not a portfolio.<br>Not a company presentation.<br><br>A cinematic lab — independent, lateral, built on 24 years of real productions.<br><br>The part you usually never see: the person who reads a budget and feels a story. Who holds the visual and the logistical at the same time. Who knows the difference between a good idea and a producible one.<br><br>Music videos. Live shows. Feature development. Branded content. Experimental systems.<br>Any scale. Any format.<br><br><em>The instinct is the same.<br>The frame changes. The way of seeing does not.</em></p>
+        <button type="button" class="bj-ov-reel" id="sys-bj-watch-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11"><polygon points="6,3 20,12 6,21"/></svg>
+          WATCH THE REEL
+        </button>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <span>&copy; 2026 Massimiliano Di Liberto &nbsp;&middot;&nbsp; Bill Jobs Studio</span>
@@ -153,11 +197,20 @@
     var gate = document.getElementById('sys-gate');
     var arc  = document.getElementById('sys-gate-arc');
     if (!gate || !arc) return;
+
+    function revealSystemContent() {
+      gsap.fromTo('#system-canvas', { opacity: 0 }, { opacity: 1, duration: 1.25, ease: 'power1.out', delay: 0.15 });
+      gsap.fromTo('#sw1', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 1.875, ease: 'power1.out', delay: 0.55 });
+      gsap.fromTo('#sw2', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.44)', y: 0, duration: 1.875, ease: 'power1.out', delay: 0.875 });
+      gsap.fromTo('#sw3', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.92)', y: 0, duration: 1.875, ease: 'power1.out', delay: 1.2 });
+      gsap.fromTo('#sys-desc', { opacity: 0 }, { opacity: 1, duration: 1.0625, ease: 'power1.out', delay: 1.875 });
+    }
+
     gsap.to(arc, {
       strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', delay: 0.2,
       onComplete: function () {
         gsap.to(gate, { autoAlpha: 0, duration: 0.5, ease: 'power2.out', delay: 0.3,
-          onComplete: function () { gate.style.display = 'none'; }
+          onComplete: function () { gate.style.display = 'none'; revealSystemContent(); }
         });
       }
     });
@@ -182,13 +235,11 @@
 
     var ANCHOR_DEF = [
       { oi: 0, phase: -1.20, r: 5.4, op: 0.72, label: 'DIRECTION'  },
-      { oi: 0, phase:  0.52, r: 4.8, op: 0.68, label: 'PRODUCTION' },
       { oi: 0, phase:  2.50, r: 5.0, op: 0.70, label: 'EXPERIENCE' },
       { oi: 1, phase:  0.90, r: 5.8, op: 0.75, label: 'CREATIVE'   },
       { oi: 1, phase:  3.40, r: 4.4, op: 0.65, label: 'VISION'     },
       { oi: 2, phase:  1.10, r: 5.0, op: 0.70, label: 'STRATEGY'   },
       { oi: 2, phase:  3.70, r: 4.5, op: 0.66, label: 'POST'       },
-      { oi: 2, phase: -0.60, r: 4.0, op: 0.63, label: 'BUDGET'     },
     ];
 
     var WORD_LIST = [
@@ -438,18 +489,10 @@
   })();
 
   window.addEventListener('load', function () {
-    /* Orbital canvas appears first */
-    gsap.fromTo('#system-canvas', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out', delay: 0.25 });
-    /* Title words appear after orbital is visible */
-    gsap.fromTo('#sw1', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 1.5, ease: 'power1.out', delay: 1.4 });
-    gsap.fromTo('#sw2', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.44)', y: 0, duration: 1.5, ease: 'power1.out', delay: 1.7 });
-    gsap.fromTo('#sw3', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.92)', y: 0, duration: 1.5, ease: 'power1.out', delay: 2.0 });
-    /* sys-desc: fade only, no y movement */
-    gsap.fromTo('#sys-desc', { opacity: 0 }, { opacity: 1, duration: 0.85, ease: 'power1.out', delay: 2.5 });
 
     function revealPhrase(el, text) {
       el.textContent = text;
-      gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.85, ease: 'power1.out' });
+      gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 1.0625, ease: 'power1.out' });
     }
 
     var sysLineWrap = document.getElementById('sys-line-wrap');
@@ -498,6 +541,38 @@
       gsap.to(sysLineG, { x: 1.5, duration: 9, yoyo: true, repeat: -1, ease: 'sine.inOut' });
       /* Breathing opacity on the drawn line */
       gsap.to(sysLinePath, { opacity: 0.55, duration: 7, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+
+      /* Traveling sphere at tip of scroll line */
+      var sTNode = sysLineSvg.querySelector('#sys-travel-node');
+      if (!sTNode) {
+        sTNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        sTNode.id = 'sys-travel-node';
+        sTNode.setAttribute('r', '3.5');
+        sTNode.setAttribute('fill', 'rgba(255,255,255,0.65)');
+        sTNode.setAttribute('filter', 'url(#sys-glow-f)');
+        sTNode.setAttribute('opacity', '0');
+        sysLineSvg.appendChild(sTNode);
+        gsap.to(sTNode, { attr: { r: 5.5 }, duration: 2.4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+      }
+      var existST = ScrollTrigger.getAll().filter(function (t) { return t.vars && t.vars.id === 'sys-travel'; });
+      existST.forEach(function (t) { t.kill(); });
+      ScrollTrigger.create({
+        id: 'sys-travel',
+        trigger: sysMain,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.5,
+        onUpdate: function (self) {
+          if (!sysLinePath.getPointAtLength) return;
+          var totalLen = sysLinePath.getTotalLength();
+          var pt = sysLinePath.getPointAtLength(totalLen * self.progress);
+          sTNode.setAttribute('cx', pt.x.toFixed(2));
+          sTNode.setAttribute('cy', pt.y.toFixed(2));
+          var prog = self.progress;
+          var fade = prog < 0.04 ? prog / 0.04 : (prog > 0.94 ? (1 - prog) / 0.06 : 1);
+          sTNode.setAttribute('opacity', (0.60 * fade).toFixed(3));
+        }
+      });
     }
 
     buildSysLine();
@@ -508,7 +583,7 @@
       var phrase = section.querySelector('.sys-concept-phrase');
       var num    = section.querySelector('.sys-section-num');
       var rule   = section.querySelector('.sys-section-rule');
-      var dur    = 3.6 + idx * 0.8;
+      var dur    = 4.5 + idx * 1.0;
       var tl = gsap.timeline({
         scrollTrigger: { trigger: section, start: 'top 65%', toggleActions: 'play none none none' },
         onComplete: function () {
@@ -519,13 +594,13 @@
             }
           }, 450);
           var body = section.querySelector('.sys-concept-body');
-          if (body) gsap.fromTo(body, { opacity: 0 }, { opacity: 1, duration: 0.85, ease: 'power1.out', delay: 1.2 });
+          if (body) gsap.fromTo(body, { opacity: 0 }, { opacity: 1, duration: 1.0625, ease: 'power1.out', delay: 1.5 });
           gsap.to(word, { opacity: 0.82, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.6 });
         }
       });
-      if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 0.42, duration: 0.5, ease: 'power2.out' });
-      if (rule) tl.fromTo(rule, { scaleX: 0 },  { scaleX: 1, duration: 0.5, ease: 'power2.out', transformOrigin: 'left center' }, '-=0.2');
-      tl.fromTo(word, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.85, ease: 'power1.out' }, '-=0.12');
+      if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 0.42, duration: 0.625, ease: 'power2.out' });
+      if (rule) tl.fromTo(rule, { scaleX: 0 },  { scaleX: 1, duration: 0.625, ease: 'power2.out', transformOrigin: 'left center' }, '-=0.25');
+      tl.fromTo(word, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.0625, ease: 'power1.out' }, '-=0.15');
     });
 
     /* Subtle scroll-based parallax drift on large concept titles */
@@ -556,16 +631,16 @@
       var closingTL = gsap.timeline({
         scrollTrigger: { trigger: closing, start: 'top 78%', toggleActions: 'play none none none' }
       });
-      if (closingNum)  closingTL.fromTo(closingNum,  { opacity: 0 }, { opacity: 0.30, duration: 0.42, ease: 'power1.out' });
-      if (closingRule) closingTL.fromTo(closingRule, { scaleX: 0 },  { scaleX: 1, duration: 0.42, ease: 'power1.out', transformOrigin: 'left center' }, '-=0.18');
+      if (closingNum)  closingTL.fromTo(closingNum,  { opacity: 0 }, { opacity: 0.30, duration: 0.525, ease: 'power1.out' });
+      if (closingRule) closingTL.fromTo(closingRule, { scaleX: 0 },  { scaleX: 1, duration: 0.525, ease: 'power1.out', transformOrigin: 'left center' }, '-=0.22');
       closingTL.fromTo(
         closing.querySelectorAll('.sys-closing-line'),
         { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.95, ease: 'power1.out', stagger: 0.17 },
-        '-=0.12'
+        { opacity: 1, y: 0, duration: 1.1875, ease: 'power1.out', stagger: 0.21 },
+        '-=0.15'
       );
       var subtext = closing.querySelector('.sys-closing-subtext');
-      if (subtext) closingTL.fromTo(subtext, { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, '-=0.35');
+      if (subtext) closingTL.fromTo(subtext, { opacity: 0 }, { opacity: 1, duration: 1.25, ease: 'power1.out' }, '-=0.44');
     }
   });
   </script>
@@ -632,5 +707,58 @@
   }());
   </script>
 
+  <!-- SYSTEM BILL JOBS PANEL: open/close -->
+  <script>
+  (function () {
+    var bj = document.getElementById('sys-bj-overlay');
+    if (!bj) return;
+
+    function openBJ () {
+      bj.setAttribute('aria-hidden', 'false');
+      bj.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      if (typeof lenis !== 'undefined') lenis.stop();
+      gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.4, ease: 'power2.out' });
+      window.sound && window.sound.play('distortion-fade', 0.06, 0.5);
+    }
+
+    function closeBJ () {
+      bj.classList.remove('active');
+      bj.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (typeof lenis !== 'undefined') lenis.start();
+      gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.4, ease: 'power2.out' });
+    }
+
+    var trigger = document.getElementById('sys-bj-frame-trigger');
+    if (trigger) trigger.addEventListener('click', openBJ);
+
+    var watchBtn = document.getElementById('sys-bj-watch-btn');
+    if (watchBtn) {
+      watchBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        window.open('https://youtu.be/TrLO4PL-8jI', '_blank', 'noopener');
+      });
+    }
+
+    bj.querySelector('.wk-ov-close').addEventListener('click', closeBJ);
+    bj.querySelector('.wk-ov-backdrop').addEventListener('click', closeBJ);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && bj.classList.contains('active')) closeBJ();
+    });
+
+    /* Reveal BJ section on scroll */
+    window.addEventListener('load', function () {
+      var bjSec = document.getElementById('sys-bill-jobs');
+      if (bjSec) {
+        gsap.set(bjSec, { opacity: 0 });
+        gsap.to(bjSec, {
+          opacity: 1, duration: 1.25, ease: 'power1.out',
+          scrollTrigger: { trigger: bjSec, start: 'top 76%', toggleActions: 'play none none none' }
+        });
+      }
+    });
+  }());
+  </script>
 </body>
 </html>
