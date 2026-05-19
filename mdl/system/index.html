@@ -431,13 +431,13 @@
 
   window.addEventListener('load', function () {
     /* Orbital canvas appears first */
-    gsap.fromTo('#system-canvas', { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power2.out', delay: 0.3 });
+    gsap.fromTo('#system-canvas', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out', delay: 0.25 });
     /* Title words appear after orbital is visible */
-    gsap.fromTo('#sw1', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 1.8, ease: 'power1.out', delay: 1.6 });
-    gsap.fromTo('#sw2', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.44)', y: 0, duration: 1.8, ease: 'power1.out', delay: 2.0 });
-    gsap.fromTo('#sw3', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 }, { opacity: 1, color: 'rgba(255,255,255,0.92)', y: 0, duration: 1.8, ease: 'power1.out', delay: 2.4 });
+    gsap.fromTo('#sw1', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 1.5, ease: 'power1.out', delay: 1.4 });
+    gsap.fromTo('#sw2', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.44)', y: 0, duration: 1.5, ease: 'power1.out', delay: 1.7 });
+    gsap.fromTo('#sw3', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.92)', y: 0, duration: 1.5, ease: 'power1.out', delay: 2.0 });
     /* sys-desc: fade only, no y movement */
-    gsap.fromTo('#sys-desc', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power2.out', delay: 2.9 });
+    gsap.fromTo('#sys-desc', { opacity: 0 }, { opacity: 1, duration: 0.85, ease: 'power1.out', delay: 2.5 });
 
     function revealPhrase(el, text) {
       el.textContent = text;
@@ -498,7 +498,7 @@
       var phrase = section.querySelector('.sys-concept-phrase');
       var num    = section.querySelector('.sys-section-num');
       var rule   = section.querySelector('.sys-section-rule');
-      var dur    = 4.2 + idx * 0.9;
+      var dur    = 3.6 + idx * 0.8;
       var tl = gsap.timeline({
         scrollTrigger: { trigger: section, start: 'top 65%', toggleActions: 'play none none none' },
         onComplete: function () {

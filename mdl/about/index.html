@@ -258,19 +258,19 @@
 
       // Opening: emerge from grey
       gsap.fromTo('.auth-opening-h1',
-        { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 24 },
-        { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 2.4, ease: 'power1.out', delay: 0.4,
+        { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 20 },
+        { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 2.0, ease: 'power1.out', delay: 0.35,
           onStart: function () { window.sound.play('ascend', 0.10, 0.8); },
           onComplete: function () {
             gsap.to('.auth-opening-h1', {
-              opacity: 0.82, duration: 4.2, yoyo: true, repeat: -1, ease: 'sine.inOut'
+              opacity: 0.84, duration: 3.6, yoyo: true, repeat: -1, ease: 'sine.inOut'
             });
           }
         }
       );
       gsap.fromTo('.auth-opening-h2',
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 1.8, ease: 'power1.out', delay: 1.4 }
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 1.5, ease: 'power1.out', delay: 1.2 }
       );
 
       document.querySelectorAll('.auth-moment').forEach(function (section, idx) {
@@ -290,11 +290,11 @@
             }
           }
         });
-        if (num) tl.fromTo(num, { opacity: 0 }, { opacity: 0.28, duration: 0.6, ease: 'power2.out' });
+        if (num) tl.fromTo(num, { opacity: 0 }, { opacity: 0.28, duration: 0.5, ease: 'power1.out' });
         tl.fromTo(title,
-          { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 24 },
-          { opacity: 1, color: 'rgba(255,255,255,0.82)', y: 0, duration: 1.6, ease: 'power1.out' },
-          '-=0.15'
+          { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 18 },
+          { opacity: 1, color: 'rgba(255,255,255,0.82)', y: 0, duration: 1.35, ease: 'power1.out' },
+          '-=0.12'
         );
         gsap.to(title, { y: -14, ease: 'none',
           scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 2 } });

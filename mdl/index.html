@@ -148,9 +148,9 @@
 
     function playHeroEntrance() {
       const tl = gsap.timeline();
-      tl.fromTo('.hero-name',       { opacity: 0 }, { opacity: 1, duration: 1.8, ease: 'power2.out', delay: 0.2 })
-        .fromTo('.hero-subtitle',   { opacity: 0 }, { opacity: 1, duration: 1.4, ease: 'power2.out' }, '-=0.8')
-        .fromTo('.hero-descriptor', { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power2.out' }, '-=0.7');
+      tl.fromTo('.hero-name',       { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power1.out', delay: 0.2 })
+        .fromTo('.hero-subtitle',   { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power1.out' }, '-=0.7')
+        .fromTo('.hero-descriptor', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, '-=0.6');
       if (typeof lenis !== 'undefined') {
         lenis.on('scroll', () => {
           gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });
@@ -178,22 +178,22 @@
 
     function playIntro() {
       /* Phase 1: three words fade in via CSS opacity transitions */
-      introTimeouts.push(setTimeout(() => { document.getElementById('iw1').style.opacity = '1'; }, 700));
-      introTimeouts.push(setTimeout(() => { document.getElementById('iw2').style.opacity = '1'; }, 1100));
-      introTimeouts.push(setTimeout(() => { document.getElementById('iw3').style.opacity = '1'; }, 1500));
-      /* FIX 3: synchronized light pulse after all three words are fully visible */
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw1').style.opacity = '1'; }, 600));
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw2').style.opacity = '1'; }, 940));
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw3').style.opacity = '1'; }, 1280));
+      /* synchronized light pulse after all three words are fully visible */
       introTimeouts.push(setTimeout(() => {
         gsap.timeline()
-          .to(['#iw1', '#iw2', '#iw3'], { opacity: 0.28, duration: 0.32, ease: 'power2.in' })
-          .to(['#iw1', '#iw2', '#iw3'], { opacity: 1,    duration: 0.46, ease: 'power2.out' });
-      }, 2800));
+          .to(['#iw1', '#iw2', '#iw3'], { opacity: 0.28, duration: 0.28, ease: 'power2.in' })
+          .to(['#iw1', '#iw2', '#iw3'], { opacity: 1,    duration: 0.40, ease: 'power2.out' });
+      }, 2400));
       introTimeouts.push(setTimeout(() => {
         document.getElementById('intro-p1').style.opacity = '0';
-        gsap.to('#intro', { opacity: 0, duration: 1.0, ease: 'power2.inOut', onComplete: () => {
+        gsap.to('#intro', { opacity: 0, duration: 0.85, ease: 'power2.inOut', onComplete: () => {
           document.getElementById('intro').style.display = 'none';
         }});
-      }, 4300));
-      introTimeouts.push(setTimeout(startETF, 5400));
+      }, 3700));
+      introTimeouts.push(setTimeout(startETF, 4600));
     }
 
     function startETF() {

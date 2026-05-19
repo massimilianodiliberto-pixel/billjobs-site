@@ -576,8 +576,12 @@
     /* ── OVERLAY ─────────────────────────────────────────────── */
 
     const ov = document.getElementById('wk-overlay');
+    var _ovPending = null;
+    var _ovOpen    = false;
 
     function openOverlay(p) {
+      if (_ovPending) { clearTimeout(_ovPending); _ovPending = null; }
+
       const panel = ov.querySelector('.wk-ov-panel');
       panel.dataset.skin = p.skin || '';
 
@@ -621,29 +625,35 @@
         media.innerHTML = '<div class="wk-ov-empty"><span>' + p.title + '</span></div>';
       }
 
+      _ovOpen = true;
       ov.setAttribute('aria-hidden', 'false');
       ov.classList.add('active');
       document.body.style.overflow = 'hidden';
       if (typeof lenis !== 'undefined') lenis.stop();
-      gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.4, ease: 'power2.out' });
+      gsap.killTweensOf('main, nav');
+      gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.35, ease: 'power1.out' });
     }
 
     function closeOverlay() {
+      if (!_ovOpen) return;
+      _ovOpen = false;
       ov.classList.remove('active');
       ov.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
       if (typeof lenis !== 'undefined') lenis.start();
-      gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.4, ease: 'power2.out' });
-      setTimeout(() => {
+      gsap.killTweensOf('main, nav');
+      gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.35, ease: 'power1.out' });
+      /* Restore card info smoothly — fires while overlay is still fading, so no visible jump */
+      document.querySelectorAll('.wk-info').forEach(function(info) {
+        gsap.killTweensOf(info);
+        gsap.to(info, { opacity: 0.72, y: 0, duration: 0.22, ease: 'none' });
+      });
+      /* Clean up media after CSS transition finishes */
+      _ovPending = setTimeout(function() {
+        _ovPending = null;
         ov.querySelector('.wk-ov-media').innerHTML = '';
         ov.querySelector('.wk-ov-panel').dataset.skin = '';
-        /* Reset all card hover-info to resting state — browser doesn't re-fire
-           mouseenter when overlay disappears, so info would stay at wrong opacity */
-        document.querySelectorAll('.wk-info').forEach(function(info) {
-          gsap.killTweensOf(info);
-          gsap.set(info, { opacity: 0.72, y: 0 });
-        });
-      }, 600);
+      }, 560);
     }
 
     ov.querySelector('.wk-ov-close').addEventListener('click', closeOverlay);
@@ -663,40 +673,35 @@
       });
     }());
 
-    /* ── ENTRANCE — cinematic staged ────────────────────────── */
+    /* ── ENTRANCE — staged, subdued ─────────────────────────── */
 
     gsap.set('.filter', { opacity: 0 });
 
-    var entranceTL = gsap.timeline({ delay: 0.1 });
+    var entranceTL = gsap.timeline({ delay: 0.08 });
     entranceTL
       .fromTo('#work-title',
-        { opacity: 0, y: 42 },
-        { opacity: 1, y: 0, duration: 2.2, ease: 'power1.out' }
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 1.9, ease: 'power1.out' }
       )
       .fromTo('#work-subtitle',
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out' },
-        '-=1.1'
+        { opacity: 0 },
+        { opacity: 1, duration: 1.2, ease: 'power1.out' },
+        '-=1.0'
       )
       .fromTo('.work-tagline',
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out' },
-        '-=0.9'
+        { opacity: 0 },
+        { opacity: 1, duration: 1.0, ease: 'power1.out' },
+        '-=0.8'
       )
       .to('.filter',
-        { opacity: 1, duration: 0.7, ease: 'power2.out', stagger: 0.08 },
-        '-=0.6'
+        { opacity: 1, duration: 0.6, ease: 'power1.out', stagger: 0.06 },
+        '-=0.5'
       )
       .fromTo('.wk-card:not([style*="display: none"])',
-        { opacity: 0, y: 22 },
-        { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', stagger: { amount: 0.65 } },
-        '-=0.3'
-      )
-      .call(function () {
-        gsap.to('#work-title', {
-          opacity: 0.86, duration: 4.5, yoyo: true, repeat: -1, ease: 'sine.inOut'
-        });
-      });
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.85, ease: 'power1.out', stagger: { amount: 0.55 } },
+        '-=0.25'
+      );
 
     /* Subtle scroll parallax on title */
     gsap.to('#work-title', {
