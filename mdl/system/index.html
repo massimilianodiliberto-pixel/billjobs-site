@@ -68,12 +68,12 @@
       <svg id="sys-line-svg" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <filter id="sys-glow-f" x="-50%" y="-10%" width="200%" height="120%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur"/>
             <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
         </defs>
         <g id="sys-line-g">
-          <path id="sys-line-path" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.8" filter="url(#sys-glow-f)"/>
+          <path id="sys-line-path" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" filter="url(#sys-glow-f)"/>
         </g>
       </svg>
     </div>
@@ -86,6 +86,10 @@
       </div>
       <span class="sys-concept-word">BALANCE</span>
       <p class="sys-concept-phrase" data-phrase="The point where vision survives reality."></p>
+      <div class="sys-concept-body">
+        <p>Too much control kills emotion.<br>Too much chaos kills the frame.</p>
+        <p>Direction lives between the two.</p>
+      </div>
     </section>
 
     <!-- 02 STRUCTURE -->
@@ -97,8 +101,8 @@
       <span class="sys-concept-word">STRUCTURE</span>
       <p class="sys-concept-phrase" data-phrase="Every production is a system."></p>
       <div class="sys-concept-body">
-        <p>Direction also means understanding<br>how people, timing and responsibilities connect.</p>
-        <p>From agile crews to larger productions,<br>the structure adapts to the real scale of the idea.</p>
+        <p>People. Timing. Pressure.<br>Everything has to move together.</p>
+        <p>A frame only works<br>when the system behind it does.</p>
       </div>
     </section>
 
@@ -109,7 +113,12 @@
         <div class="sys-section-rule"></div>
       </div>
       <span class="sys-concept-word">EXECUTION</span>
-      <p class="sys-concept-phrase" data-phrase="Ideas only matter when they can be made."></p>
+      <p class="sys-concept-phrase" data-phrase="Ideas mean nothing unfinished."></p>
+      <div class="sys-concept-body">
+        <p>The difference between concepts and cinema<br>is execution.</p>
+        <p>Pressure. Adaptation. Precision. Timing.</p>
+        <p>That is where the frame becomes real.</p>
+      </div>
     </section>
 
     <!-- 04 CLOSING -->
@@ -486,6 +495,9 @@
       });
       gsap.killTweensOf(sysLineG);
       gsap.to(sysLineG, { x: 1.5, duration: 9, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+      /* Breathing opacity on the drawn line */
+      gsap.killTweensOf(sysLinePath);
+      gsap.to(sysLinePath, { opacity: 0.55, duration: 7, yoyo: true, repeat: -1, ease: 'sine.inOut' });
     }
 
     buildSysLine();
@@ -511,9 +523,19 @@
           gsap.to(word, { opacity: 0.82, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.6 });
         }
       });
-      if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 0.30, duration: 0.5, ease: 'power2.out' });
+      if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 0.42, duration: 0.5, ease: 'power2.out' });
       if (rule) tl.fromTo(rule, { scaleX: 0 },  { scaleX: 1, duration: 0.5, ease: 'power2.out', transformOrigin: 'left center' }, '-=0.2');
       tl.fromTo(word, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.85, ease: 'power1.out' }, '-=0.12');
+    });
+
+    /* Subtle scroll-based parallax drift on large concept titles */
+    document.querySelectorAll('.sys-concept').forEach(function (sec) {
+      var word = sec.querySelector('.sys-concept-word');
+      if (!word) return;
+      var isRight = sec.classList.contains('sys-concept--right');
+      gsap.to(word, { x: isRight ? -10 : 10, ease: 'none',
+        scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 3.5 }
+      });
     });
 
     /* ── CINEMATIC SCROLL FOCUS OPACITY ─────────────────────── */

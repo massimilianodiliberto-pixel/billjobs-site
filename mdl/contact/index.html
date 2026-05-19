@@ -40,12 +40,30 @@
   </div>
 
   <main class="signal-page">
-    <div class="signal-content">
+
+    <!-- Cinematic background -->
+    <div class="signal-bg" aria-hidden="true">
+      <img src="../assets/img/BCK02.jpg" alt="" class="signal-bg-img">
+      <div class="signal-bg-overlay"></div>
+    </div>
+
+    <!-- TOP: vertical breathing space -->
+    <div class="signal-spacer-top"></div>
+
+    <!-- CENTER: focal point -->
+    <div class="signal-center">
       <a href="mailto:massimiliano.diliberto@gmail.com" class="signal-email">
         massimiliano.diliberto@gmail.com
       </a>
       <p class="signal-phone">+39 333 463 9596</p>
     </div>
+
+    <!-- BOTTOM: tagline + logo -->
+    <div class="signal-bottom">
+      <p class="signal-tagline">Behind every frame,<br>there is a signal.</p>
+      <img src="../assets/img/Bill%20jobs%20%20logo.jpg" alt="Bill Jobs" class="signal-logo">
+    </div>
+
   </main>
 
   <footer>
@@ -59,23 +77,27 @@
   <script src="../assets/js/core.js"></script>
 
   <script>
-    window.addEventListener('load', () => {
-      gsap.fromTo('.signal-content',
-        { opacity: 0, y: 28 },
-        { opacity: 1, y: 0, duration: 1.1, ease: 'power2.out', delay: 0.6 }
-      );
-    });
-  </script>
+(function () {
+  window.addEventListener('load', function () {
+    var tl = gsap.timeline({ delay: 0.5 });
+    tl.fromTo('.signal-email',   { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.8, ease: 'power1.out' }, 0)
+      .fromTo('.signal-phone',   { opacity: 0 },         { opacity: 1, duration: 1.4, ease: 'power1.out' }, 0.7)
+      .fromTo('.signal-tagline', { opacity: 0 },         { opacity: 1, duration: 2.0, ease: 'power1.out' }, 1.2)
+      .fromTo('.signal-logo',    { opacity: 0 },         { opacity: 0.28, duration: 2.4, ease: 'power1.out' }, 1.8);
 
-  <script>
-  (function () {
-    function startSignalAmbient() {
-      console.log('[Sound/Signal] sound:enabled → hum loop');
-      window.sound.loop('hum', 0.08);
-    }
-    if (window.sound.enabled) { startSignalAmbient(); }
-    document.addEventListener('sound:enabled', function () { startSignalAmbient(); });
-  }());
+    /* slow breathing on logo after it fades in */
+    setTimeout(function () {
+      gsap.to('.signal-logo', { opacity: 0.18, duration: 5.5, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    }, 4200);
+  });
+
+  document.addEventListener('sound:enabled', function () {
+    window.sound.loop('hum', 0.08);
+  });
+  if (window.sound && window.sound.enabled) {
+    window.sound.loop('hum', 0.08);
+  }
+}());
   </script>
 
 </body>
