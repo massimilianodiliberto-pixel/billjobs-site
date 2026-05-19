@@ -149,6 +149,7 @@
   <!-- SYSTEM GATE animation -->
   <script>
   (function () {
+    gsap.set('#page-transition', { autoAlpha: 0 });
     var gate = document.getElementById('sys-gate');
     var arc  = document.getElementById('sys-gate-arc');
     if (!gate || !arc) return;
@@ -228,14 +229,14 @@
           label: null, anchor: false, x: 0, y: 0
         });
       }
-      var wCols = 4, wRows = 3;
+      var wCols = 3, wRows = 4;
       words = WORD_LIST.map(function (text, i) {
         var col = i % wCols, row = Math.floor(i / wCols);
         var cW = W / wCols, cH = H / wRows;
         return {
           text: text,
-          x: cW * col + cW * 0.15 + Math.random() * cW * 0.70,
-          y: cH * row + cH * 0.25 + Math.random() * cH * 0.50,
+          x: cW * col + cW * 0.12 + Math.random() * cW * 0.76,
+          y: cH * row + cH * 0.12 + Math.random() * cH * 0.76,
           vx: (Math.random() - 0.5) * 0.022,
           vy: (Math.random() - 0.5) * 0.016,
           phase: (i / WORD_LIST.length) * Math.PI * 2 + Math.random() * 1.2,
@@ -496,7 +497,6 @@
       gsap.killTweensOf(sysLineG);
       gsap.to(sysLineG, { x: 1.5, duration: 9, yoyo: true, repeat: -1, ease: 'sine.inOut' });
       /* Breathing opacity on the drawn line */
-      gsap.killTweensOf(sysLinePath);
       gsap.to(sysLinePath, { opacity: 0.55, duration: 7, yoyo: true, repeat: -1, ease: 'sine.inOut' });
     }
 
@@ -580,7 +580,7 @@
     if (cinematic && canvas) {
       var sv = document.createElement('video');
       sv.id = 'system-vid-bg'; sv.muted = true; sv.playsInline = true;
-      sv.preload = 'none'; sv.loop = true;
+      sv.preload = 'none'; sv.setAttribute('preload', 'none'); sv.loop = true;
       var ss = document.createElement('source');
       ss.src = '../assets/video/Analog%20Overlay%208.mp4'; ss.type = 'video/mp4';
       sv.appendChild(ss);
