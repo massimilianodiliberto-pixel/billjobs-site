@@ -415,7 +415,7 @@ footer a:hover { color: var(--text-primary); }
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.28em;
-  color: rgba(255, 255, 255, 0.52);
+  color: rgba(255, 255, 255, 0.62);
   margin-top: 18px;
   opacity: 0;
 }
@@ -424,7 +424,7 @@ footer a:hover { color: var(--text-primary); }
   font-size: 12px;
   font-weight: 300;
   letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.30);
+  color: rgba(255, 255, 255, 0.36);
   margin-top: 32px;
   opacity: 0;
   max-width: 480px;
@@ -1492,11 +1492,11 @@ footer a:hover { color: var(--text-primary); }
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 0 var(--section-h) 8vh;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  gap: 0;
   flex: 1;
   justify-content: flex-end;
 }
@@ -1554,11 +1554,14 @@ footer a:hover { color: var(--text-primary); }
 /* Frame container for Bill Jobs logo at bottom of signal page */
 .frame-logo-bill-jobs {
   display: block;
-  width: min(576px, 90vw);
+  width: 100%;
+  max-width: 100%;
   position: relative;
-  margin: 0 auto;
+  margin: 0;
+  background: #000;
   opacity: 0;
   overflow: hidden;
+  align-self: stretch;
 }
 
 .signal-instagram {
@@ -1576,8 +1579,6 @@ footer a:hover { color: var(--text-primary); }
 @media (max-width: 767px) {
   .signal-email { font-size: clamp(13px, 4vw, 20px); letter-spacing: 0.03em; }
   .signal-phone { font-size: clamp(13px, 4vw, 20px); letter-spacing: 0.03em; }
-  .signal-bottom { padding-bottom: 10vh; }
-  .frame-logo-bill-jobs { width: min(400px, 88vw); }
   .signal-send-title { font-size: clamp(24px, 7vw, 48px); }
 }
 
@@ -2352,6 +2353,40 @@ footer a:hover { color: var(--text-primary); }
   line-height: 1;
 }
 
+/* Vertical separator between homepage sections (animated line) */
+.hp-section-sep {
+  height: 12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hp-section-sep::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, transparent, rgba(184,168,152,0.50), transparent);
+  animation: hp-sep-pulse 2.6s ease-in-out infinite;
+}
+@keyframes hp-sep-pulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50%       { opacity: 0.7; transform: scaleY(0.6); }
+}
+
+/* Horizontal line divider (under nav buttons) */
+.hp-divider-h {
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(184,168,152,0.50), transparent);
+  margin: 2vh auto 0;
+  animation: hp-divider-h-pulse 3.0s ease-in-out infinite;
+}
+@keyframes hp-divider-h-pulse {
+  0%, 100% { opacity: 0.32; transform: scaleX(1); }
+  50%       { opacity: 0.72; transform: scaleX(0.65); }
+}
+
 /* Uniform spacing between all work frames */
 .hp-work-frame + .hp-work-frame {
   margin-top: 12vh;
@@ -2440,7 +2475,7 @@ footer a:hover { color: var(--text-primary); }
 .hp-bs-title {
   font-family: var(--font-editorial);
   font-style: italic;
-  font-size: clamp(22px, 3.2vw, 52px);
+  font-size: clamp(28px, 4.2vw, 68px);
   font-weight: 300;
   color: rgba(255, 255, 255, 0.88);
   line-height: 1.18;
@@ -2450,7 +2485,7 @@ footer a:hover { color: var(--text-primary); }
 /* Sub inside image */
 .hp-bs-sub {
   font-family: var(--font-ui);
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 300;
   letter-spacing: 0.32em;
   color: rgba(255, 255, 255, 0.48);

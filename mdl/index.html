@@ -82,8 +82,9 @@
         <p class="hero-subtitle">CREATIVE PRODUCER &nbsp;·&nbsp; CINEMATIC DIRECTOR &nbsp;·&nbsp; VISUAL SYSTEMS</p>
         <p class="hero-descriptor">Creative Producer · Director working across cinema, live events, branded content and visual systems.</p>
       </div>
-      <div class="scroll-indicator"></div>
     </section>
+
+    <div class="hp-section-sep" aria-hidden="true"></div>
 
     <!-- WORK FRAME 1: Gamma+ -->
     <section class="hp-work-frame" data-project="gamma-duality">
@@ -98,6 +99,8 @@
       </div>
     </section>
 
+    <div class="hp-section-sep" aria-hidden="true"></div>
+
     <!-- WORK FRAME 2: Mr. Rain -->
     <section class="hp-work-frame" data-project="mr-rain">
       <div class="hp-wf-img">
@@ -111,6 +114,8 @@
       </div>
     </section>
 
+    <div class="hp-section-sep" aria-hidden="true"></div>
+
     <!-- WORK FRAME 3: Up All Night -->
     <section class="hp-work-frame" data-project="up-all-night">
       <div class="hp-wf-img">
@@ -123,6 +128,8 @@
         <span class="hp-wf-cta">VIEW PROJECT →</span>
       </div>
     </section>
+
+    <div class="hp-section-sep" aria-hidden="true"></div>
 
     <!-- BACKSTAGE: BCK04 — left-aligned title, dark overlay -->
     <section class="hp-backstage">
@@ -148,6 +155,7 @@
     <section class="hp-bj-editorial">
       <p class="hp-bj-editorial-title">Who is Bill Jobs?</p>
       <a href="about/index.html" class="hp-bj-author-btn" aria-label="Go to Author page">AUTHOR</a>
+      <span class="hp-divider-h" aria-hidden="true"></span>
     </section>
 
   </main>
@@ -166,9 +174,7 @@
     /* Hide page-transition overlay immediately on home (intro handles reveal) */
     gsap.set('#page-transition', { autoAlpha: 0 });
 
-    /* Hide scroll indicator until intro ends */
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    if (scrollIndicator) scrollIndicator.style.display = 'none';
+    /* scroll-indicator removed — section separators handle that visual */
 
     /* ── HERO ENTRANCE ──────────────────────────────────────── */
 
@@ -177,25 +183,12 @@
       tl.fromTo('.hero-name',       { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power1.out', delay: 0.2 })
         .fromTo('.hero-subtitle',   { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power1.out' }, '-=0.7')
         .fromTo('.hero-descriptor', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, '-=0.6');
-      if (typeof lenis !== 'undefined') {
-        lenis.on('scroll', () => {
-          gsap.to('.scroll-indicator', { opacity: 0, duration: 0.4 });
-        });
-      }
     }
 
     function initSite() {
       window.scrollTo(0, 0);
       if (typeof lenis !== 'undefined') lenis.scrollTo(0, { immediate: true });
       if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
-      const si = document.querySelector('.scroll-indicator');
-      if (si) {
-        si.style.display = 'block';
-        setTimeout(() => {
-          si.classList.add('active');
-          gsap.to(si, { opacity: 1, duration: 1 });
-        }, 2800);
-      }
     }
 
     /* ── INTRO SEQUENCE ─────────────────────────────────────── */
@@ -421,7 +414,8 @@
         gsap.fromTo(frame,
           { opacity: 0, y: 40 },
           { opacity: 1, y: 0, duration: 1.5, ease: 'expo.out',
-            scrollTrigger: { trigger: frame, start: 'top 86%', toggleActions: 'play none none none' }
+            scrollTrigger: { trigger: frame, start: 'top 86%', toggleActions: 'play none none none' },
+            onComplete: function() { gsap.set(frame, { clearProps: 'y,transform' }); }
           }
         );
         var img = frame.querySelector('.hp-wf-img img');
