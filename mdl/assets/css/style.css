@@ -2293,12 +2293,9 @@ footer a:hover { color: var(--text-primary); }
   line-height: 1;
 }
 
-/* Spacing between consecutive work frames */
+/* Uniform spacing between all work frames */
 .hp-work-frame + .hp-work-frame {
-  margin-top: 10vh;
-}
-.hp-work-frame--sep {
-  margin-top: 14vh !important;
+  margin-top: 12vh;
 }
 
 /* Backstage image sections — cinematic: text inside image */
