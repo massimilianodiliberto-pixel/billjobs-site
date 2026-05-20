@@ -223,11 +223,18 @@ nav.scrolled {
 }
 
 .nav-logo {
-  font-family: var(--font-ui);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+.nav-logo-img {
+  display: block;
+  height: 28px;
+  width: auto;
+  opacity: 0.88;
+  transition: opacity 0.3s ease;
+}
+.nav-logo:hover .nav-logo-img {
+  opacity: 1;
 }
 .nav-links {
   display: flex;
