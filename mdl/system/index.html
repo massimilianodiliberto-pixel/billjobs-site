@@ -163,7 +163,11 @@
     <div class="wk-ov-panel">
       <button class="wk-ov-close" aria-label="Close"><span>✕</span></button>
       <div class="wk-ov-media">
-        <img src="../assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="Bill Jobs">
+        <div class="bj-ov-yt-wrap">
+          <iframe id="sys-bj-yt" src="" frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
       </div>
       <div class="wk-ov-body">
         <div class="wk-ov-meta">
@@ -172,10 +176,6 @@
         </div>
         <h2 class="wk-ov-title">WHO IS BILL JOBS?</h2>
         <p class="wk-ov-desc">Not a portfolio.<br>Not a company presentation.<br><br>A cinematic lab — independent, lateral, built on 24 years of real productions.<br><br>The part you usually never see: the person who reads a budget and feels a story. Who holds the visual and the logistical at the same time. Who knows the difference between a good idea and a producible one.<br><br>Music videos. Live shows. Feature development. Branded content. Experimental systems.<br>Any scale. Any format.<br><br><em>The instinct is the same.<br>The frame changes. The way of seeing does not.</em></p>
-        <button type="button" class="bj-ov-reel" id="sys-bj-watch-btn">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11"><polygon points="6,3 20,12 6,21"/></svg>
-          WATCH THE REEL
-        </button>
       </div>
     </div>
   </div>
@@ -722,6 +722,9 @@
     var bj = document.getElementById('sys-bj-overlay');
     if (!bj) return;
 
+    var ytFrame = document.getElementById('sys-bj-yt');
+    var YT_SRC = 'https://www.youtube.com/embed/TrLO4PL-8jI?autoplay=1&rel=0&modestbranding=1';
+
     function openBJ () {
       bj.setAttribute('aria-hidden', 'false');
       bj.classList.add('active');
@@ -729,6 +732,7 @@
       if (typeof lenis !== 'undefined') lenis.stop();
       gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.4, ease: 'power2.out' });
       window.sound && window.sound.play('distortion-fade', 0.06, 0.5);
+      if (ytFrame) ytFrame.src = YT_SRC;
     }
 
     function closeBJ () {
@@ -737,18 +741,11 @@
       document.body.style.overflow = '';
       if (typeof lenis !== 'undefined') lenis.start();
       gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.4, ease: 'power2.out' });
+      if (ytFrame) ytFrame.src = '';
     }
 
     var trigger = document.getElementById('sys-bj-frame-trigger');
     if (trigger) trigger.addEventListener('click', openBJ);
-
-    var watchBtn = document.getElementById('sys-bj-watch-btn');
-    if (watchBtn) {
-      watchBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        window.open('https://youtu.be/TrLO4PL-8jI', '_blank', 'noopener');
-      });
-    }
 
     bj.querySelector('.wk-ov-close').addEventListener('click', closeBJ);
     bj.querySelector('.wk-ov-backdrop').addEventListener('click', closeBJ);

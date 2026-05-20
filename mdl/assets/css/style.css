@@ -1966,6 +1966,7 @@ footer a:hover { color: var(--text-primary); }
   width: 100%; height: 100%; object-fit: cover;
 }
 .wk-ov-media iframe { width: 100%; height: 100%; border: none; }
+.bj-ov-yt-wrap { width: 100%; height: 100%; background: #000; }
 .wk-ov-empty {
   width: 100%; height: 100%;
   display: flex;
