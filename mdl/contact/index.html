@@ -58,14 +58,23 @@
         massimiliano.diliberto@gmail.com
       </a>
       <p class="signal-phone">+39 333 463 9596</p>
+      <a href="https://www.instagram.com/billjobs_production?igsh=dWF2emcxN3JoZWs2&utm_source=qr"
+         class="signal-instagram" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="3.5"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
     </div>
 
-    <!-- BOTTOM: logo + tagline -->
+    <!-- BOTTOM: logo with tagline overlaid at bottom -->
     <div class="signal-bottom">
       <div class="frame-logo-bill-jobs">
         <img src="../assets/img/Bill%20jobs%20%20logo.jpg" alt="Bill Jobs" class="signal-logo">
+        <p class="signal-tagline">Dietro ogni fotogramma,<br>c'è un segnale.</p>
       </div>
-      <p class="signal-tagline">Dietro ogni fotogramma,<br>c'è un segnale.</p>
     </div>
 
   </main>
@@ -94,15 +103,16 @@
     );
 
     var tl = gsap.timeline({ delay: 0.8 });
-    tl.fromTo('.signal-email',   { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.8, ease: 'power1.out' }, 0)
-      .fromTo('.signal-phone',   { opacity: 0 },         { opacity: 1, duration: 1.4, ease: 'power1.out' }, 0.7)
-      .fromTo('.signal-tagline', { opacity: 0 },         { opacity: 1, duration: 2.0, ease: 'power1.out' }, 1.2)
-      .fromTo('.frame-logo-bill-jobs', { opacity: 0 },   { opacity: 1, duration: 2.4, ease: 'power1.out' }, 1.8);
+    tl.fromTo('.signal-email',       { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.8, ease: 'power1.out' }, 0)
+      .fromTo('.signal-phone',       { opacity: 0 },         { opacity: 1, duration: 1.4, ease: 'power1.out' }, 0.7)
+      .fromTo('.signal-instagram',   { opacity: 0 },         { opacity: 1, duration: 1.2, ease: 'power1.out' }, 1.1)
+      .fromTo('.frame-logo-bill-jobs', { opacity: 0 },       { opacity: 1, duration: 2.4, ease: 'power1.out' }, 1.6)
+      .fromTo('.signal-tagline',     { opacity: 0 },         { opacity: 1, duration: 2.0, ease: 'power1.out' }, 2.4);
 
     /* slow breathing on logo after it fades in */
     setTimeout(function () {
-      gsap.to('.signal-logo', { opacity: 0.60, duration: 5.5, yoyo: true, repeat: -1, ease: 'sine.inOut',
-        from: { opacity: 0.80 }
+      gsap.to('.signal-logo', { opacity: 0.72, duration: 5.5, yoyo: true, repeat: -1, ease: 'sine.inOut',
+        from: { opacity: 0.96 }
       });
     }, 4500);
   });
