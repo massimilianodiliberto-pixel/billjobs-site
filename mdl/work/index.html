@@ -744,6 +744,8 @@
     (function () {
       function updateCardZoom() {
         var vcenter = window.innerHeight / 2;
+        /* Desktop: base 0.88 so max zoom (~0.95) never exceeds grid cell → no overlap */
+        var base = window.innerWidth >= 768 ? 0.88 : 1.0;
         document.querySelectorAll('.wk-card').forEach(function(card) {
           if (card.style.display === 'none') {
             card.style.transform = '';
@@ -754,7 +756,7 @@
           var dist = Math.abs(ic - vcenter);
           var maxDist = window.innerHeight * 0.58;
           var t = Math.max(0, 1 - dist / maxDist);
-          card.style.transform = 'scale(' + (1 + t * 0.070).toFixed(4) + ')';
+          card.style.transform = 'scale(' + (base + t * 0.070).toFixed(4) + ')';
         });
       }
       if (typeof lenis !== 'undefined') {
