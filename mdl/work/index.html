@@ -66,12 +66,10 @@
       <button class="filter" data-filter="beauty-fashion">BEAUTY &amp;<br>FASHION</button>
       <button class="filter" data-filter="music">MUSIC<br>VIDEOS</button>
       <button class="filter" data-filter="events-live">EVENTS &amp;<br>LIVE SHOWS</button>
-      <button class="filter" data-filter="commercial">BRAND<br>FILMS</button>
+      <button class="filter" data-filter="commercial">BRANDS &amp;<br>FILMS</button>
 
       <button class="filter filter--all" data-filter="all">ALL<br>WORK</button>
     </div>
-
-    <span class="hp-divider-h" style="margin: 0 auto 4vh;" aria-hidden="true"></span>
 
     <div class="wk-grid" id="wk-grid"></div>
 
@@ -146,6 +144,7 @@
         action: 'link_youtube', youtube: 'qRLsMxRZ5X4', video: null, image: '../assets/img/AndreaPerreca.jpg',
         size: 'portrait'
       },
+      { type: 'word', cat: 'beauty-fashion', text: 'LIGHT' },
       {
         id: 'cotril-anteprima',
         title: 'Cotril × Anteprima',
@@ -173,6 +172,7 @@
         action: 'link_youtube', youtube: 'nNCsNeHioDg', video: null, image: '../assets/img/DivineNectar.jpg',
         size: 'wide'
       },
+      { type: 'word', cat: 'beauty-fashion', text: 'GAZE' },
       {
         id: 'post-scriptum',
         title: 'Post Scriptum — Spring Summer 2024',
@@ -200,6 +200,7 @@
         action: 'link_youtube', youtube: 'xh5Fd7Nn8Eo', video: null, image: '../assets/img/LineaCinque.jpg',
         size: 'normal'
       },
+      { type: 'word', cat: 'beauty-fashion', text: 'DETAIL' },
       {
         id: 'myorganics-rituals',
         title: 'My Organics — Rituals',
@@ -226,7 +227,7 @@
       /* ── MUSIC ────────────────────────────────────────────── */
       {
         type: 'statement', cat: 'music', pos: 'open',
-        text: 'Sound becomes emotion.<br>Emotion becomes vision.<br><br>Some songs already contain images inside them.<br>The frame is where they become real.'
+        text: 'Some songs already contain images inside them.<br>The frame is where they become real.'
       },
       {
         id: 'mrrain-sincero',
@@ -246,6 +247,7 @@
         action: 'link_youtube', youtube: '5OZHuElUGrQ', video: null, image: '../assets/img/MrRain_Meteoriti.jpg',
         size: 'normal'
       },
+      { type: 'word', cat: 'music', text: 'TREATMENT' },
       {
         id: 'joan-thiele',
         title: 'Joan Thiele — Mellow Yellow',
@@ -264,6 +266,7 @@
         action: 'link_youtube', youtube: 'zuvEShnJfjo', video: null, image: '../assets/img/Maida.jpg',
         size: 'wide'
       },
+      { type: 'word', cat: 'music', text: 'FEELING' },
       {
         id: 'mrrain-fragile',
         title: 'Mr. Rain — Fragile',
@@ -282,6 +285,7 @@
         action: 'link_youtube', youtube: 'sd0ZRMI_Vnw', video: null, image: '../assets/img/Tibe_ballo.jpg',
         size: 'normal'
       },
+      { type: 'word', cat: 'music', text: 'INSTINCT' },
       {
         id: 'tibe-eccesso',
         title: 'Tibe — Eccesso',
@@ -300,6 +304,7 @@
         action: 'link_youtube', youtube: 'U1Y3OcRe-fM', video: null, image: '../assets/img/Assente.jpg',
         size: 'normal'
       },
+      { type: 'word', cat: 'music', text: 'VISION' },
       {
         id: 'speedliner-precipitare',
         title: 'Speedliner — Precipitare',
@@ -338,6 +343,7 @@
         action: 'image_only', youtube: null, video: null, thumb: '../assets/img/Mr_rain_Intro_Live.jpg', image: '../assets/img/Mr_rain_Intro_Image.jpg',
         size: 'normal'
       },
+      { type: 'word', cat: 'events-live', text: 'ENERGY' },
       {
         id: 'wella-cosmoprof',
         title: 'Wella — Cosmoprof Bologna',
@@ -356,6 +362,7 @@
         action: 'link_youtube', youtube: 'QbBCVG9iGqU', video: null, image: '../assets/img/Cotril_Content_Producer.jpg',
         size: 'wide'
       },
+      { type: 'word', cat: 'events-live', text: 'MOMENT' },
       {
         id: 'hair-beauty-myshow',
         title: 'Hair Beauty & Nails — MyShow',
@@ -374,6 +381,7 @@
         action: 'link_youtube', youtube: '7YLx2Onasdw', video: null, image: '../assets/img/Pleasure_cosmoprof.jpg',
         size: 'normal'
       },
+      { type: 'word', cat: 'events-live', text: 'PULSE' },
       {
         id: 'confindustria-verona',
         title: 'Confindustria Verona — 50 Years',
@@ -401,6 +409,7 @@
         action: 'link_youtube', youtube: 'kvDma7WzqAI', video: null, image: '../assets/img/PWC.jpg',
         size: 'normal'
       },
+      { type: 'word', cat: 'events-live', text: 'PRESENCE' },
       {
         type: 'statement', cat: 'events-live', pos: 'close',
         text: 'A live show disappears the moment it ends.<br><br>That is what makes it unforgettable.'
@@ -414,7 +423,7 @@
       {
         id: 'up-all-night',
         title: 'Up All Night',
-        cat: 'commercial', catLabel: 'Brand Films',
+        cat: 'commercial', catLabel: 'Brands & Films',
         role: 'Director / Writer / Producer',
         subtitle: 'Development teaser — European Film Market, Berlinale.',
         intro: 'A cinematic production teaser created to support financing, visual direction and institutional presentation.',
@@ -432,16 +441,17 @@
       {
         id: 'baaria',
         title: 'Baarìa — Giuseppe Tornatore',
-        cat: 'commercial', catLabel: 'Brand Films',
+        cat: 'commercial', catLabel: 'Brands & Films',
         role: 'VFX Compositor',
         desc: 'VFX compositing work developed with Shake for the feature film by Giuseppe Tornatore.\n\nFrame-by-frame compositing integration across multiple sequences, balancing technical precision and cinematic visual continuity.',
         action: 'link_youtube', youtube: 'BBGlQTPJ-iU', video: null, image: '../assets/img/Baaria.jpg',
         size: 'normal'
       },
+      { type: 'word', cat: 'commercial', text: 'STRATEGY' },
       {
         id: 'plusfood-vinciny',
         title: 'Plus Food — Vinci New York',
-        cat: 'commercial', catLabel: 'Brand Films',
+        cat: 'commercial', catLabel: 'Brands & Films',
         role: 'Director / Producer',
         desc: 'Spot TV Mediaset.\n\nTelevision commercial broadcast on Mediaset national channels.\n\nFull production direction and coordination from concept to final delivery, built around promotional storytelling, talent direction and broadcast-ready visual quality.',
         action: 'link_youtube', youtube: 'OAJtpu4h0cw', video: null, image: '../assets/img/PlussFood.jpg',
@@ -450,16 +460,17 @@
       {
         id: 'gamma-campagne',
         title: 'Gamma+ — Campaign',
-        cat: 'commercial', catLabel: 'Brand Films',
+        cat: 'commercial', catLabel: 'Brands & Films',
         role: 'Creative Director / Producer',
         desc: 'Complete beauty brand production system developed across multiple formats.\n\nProduct photography, catalogue visuals, display materials, stand installations, corporate content and social campaign assets — all developed from a unified visual concept and production structure.',
         action: 'image_only', youtube: null, video: null, thumb: '../assets/img/g+Frame.jpg', image: '../assets/img/g+Slide_07.jpg',
         size: 'wide'
       },
+      { type: 'word', cat: 'commercial', text: 'CONCEPT' },
       {
         id: 'pleasure-filler',
         title: 'Pleasure Professional Luxury — Filler Pure Oil',
-        cat: 'commercial', catLabel: 'Brand Films',
+        cat: 'commercial', catLabel: 'Brands & Films',
         role: 'Director / Creative Producer',
         desc: 'Luxury beauty commercial produced entirely through AI generative workflow.\n\nImmersive visual language, high-end cosmetic aesthetics and cinematic advertising direction were combined to create a premium product experience built for contemporary beauty communication.',
         action: 'link_youtube', youtube: '2a36lpvWVjA', video: null, image: '../assets/img/Filler.jpg',
@@ -468,16 +479,17 @@
       {
         id: 'verco',
         title: 'Verco',
-        cat: 'commercial', catLabel: 'Brand Films',
+        cat: 'commercial', catLabel: 'Brands & Films',
         role: 'Director',
         desc: 'Brand film developed around the visual identity and production values of the Verco product line.\n\nDirection, production coordination and cinematic visual language used to communicate brand positioning and product quality.',
         action: 'link_youtube', youtube: '-sBfhPNNRxE', video: null, image: '../assets/img/Verco.jpg',
         size: 'normal'
       },
+      { type: 'word', cat: 'commercial', text: 'IMPACT' },
       {
         id: 'twentyfour',
         title: 'TwentyFour',
-        cat: 'commercial', catLabel: 'Brand Films',
+        cat: 'commercial', catLabel: 'Brands & Films',
         role: 'Director / Content Creator',
         desc: 'Commercial film direction developed around brand narrative and visual product storytelling.\n\nCinematic production approach applied to commercial communication balancing visual quality, brand identity and contemporary content aesthetics.',
         action: 'link_youtube', youtube: 'gxb57yFV3uQ', video: null, image: '../assets/img/Twentyfour.jpg',
@@ -486,7 +498,7 @@
       {
         id: 'funzioni-primarie',
         title: 'Funzioni Primarie',
-        cat: 'commercial', catLabel: 'Brand Films',
+        cat: 'commercial', catLabel: 'Brands & Films',
         role: 'Editor',
         desc: 'Short film editing.\n\nNarrative structure, pacing, emotional rhythm and cinematic continuity developed through post-production editing to bring the director\'s vision to final form.',
         action: 'link_youtube', youtube: 'oXdLdn9xi_Q', video: null, image: '../assets/img/FunzioniPrimarie.jpg',
@@ -495,16 +507,17 @@
       {
         id: 'my-organics',
         title: 'My Organics — Oxygen',
-        cat: 'commercial', catLabel: 'Brand Films',
+        cat: 'commercial', catLabel: 'Brands & Films',
         role: 'Director',
         desc: 'Beauty brand content production exploring product narrative, styling and visual communication.\n\nCinematic direction applied to professional hair care content balancing product clarity, atmosphere and visual brand identity.',
         action: 'link_youtube', youtube: 'hqVJZKo10Ds', video: null, image: '../assets/img/MyOrganic_oxygen.jpg',
         size: 'normal'
       },
+      { type: 'word', cat: 'commercial', text: 'MARK' },
       {
         id: 'gamma-product-visuals',
         title: 'Gamma+ — Product Visuals',
-        cat: 'commercial', catLabel: 'Brand Films',
+        cat: 'commercial', catLabel: 'Brands & Films',
         role: 'Director / Creative Producer',
         desc: 'Product video production developed for the launch of the Gamma+ collection.\n\nVisual direction, product styling and cinematic production combined to create premium content for commercial and digital distribution.',
         action: 'link_youtube', youtube: '0FsqDcX4Ou8', video: null, image: '../assets/img/MixGamma+.jpg',
@@ -526,6 +539,13 @@
         el.dataset.cat = p.cat;
         el.innerHTML = '<p class="wk-statement-text">' + p.text + '</p>' +
           (p.sub ? '<p class="wk-statement-sub">' + p.sub + '</p>' : '');
+        return el;
+      }
+      if (p.type === 'word') {
+        const el = document.createElement('div');
+        el.className = 'wk-word';
+        el.dataset.cat = p.cat;
+        el.innerHTML = '<span class="wk-word-text">' + p.text + '</span>';
         return el;
       }
       const el = document.createElement('article');
@@ -583,6 +603,9 @@
       grid.querySelectorAll('.wk-statement').forEach(stmt => {
         stmt.style.display = 'none';
       });
+      grid.querySelectorAll('.wk-word').forEach(w => {
+        w.style.display = 'none';
+      });
     }
 
     document.getElementById('work-filters').addEventListener('click', e => {
@@ -593,7 +616,7 @@
       btn.classList.add('active');
       const f = btn.dataset.filter;
       if (f === 'all') { showAll(); return; }
-      grid.querySelectorAll('.wk-card, .wk-statement').forEach(card => {
+      grid.querySelectorAll('.wk-card, .wk-statement, .wk-word').forEach(card => {
         const show = card.dataset.cat === f;
         if (show) {
           card.style.display = '';
