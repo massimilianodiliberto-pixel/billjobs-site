@@ -827,6 +827,9 @@ footer a:hover { color: var(--text-primary); }
   background: transparent;
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .auth-bj-title {
   font-family: var(--font-editorial);
@@ -836,6 +839,8 @@ footer a:hover { color: var(--text-primary); }
   color: rgba(255, 255, 255, 0.62);
   margin-bottom: 3vh;
   line-height: 1.1;
+  text-align: center;
+  width: 100%;
 }
 .auth-bj-phrase {
   font-family: var(--font-ui);
