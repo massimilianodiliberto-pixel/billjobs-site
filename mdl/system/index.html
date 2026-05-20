@@ -593,22 +593,22 @@
       var rule   = section.querySelector('.sys-section-rule');
       var dur    = 4.5 + idx * 1.0;
       var tl = gsap.timeline({
-        scrollTrigger: { trigger: section, start: 'top 65%', toggleActions: 'play none none none' },
+        scrollTrigger: { trigger: section, start: 'top 85%', toggleActions: 'play none none none' },
         onComplete: function () {
           setTimeout(function () {
             if (phrase && phrase.dataset.phrase) {
               gsap.set(phrase, { opacity: 1 });
               revealPhrase(phrase, phrase.dataset.phrase);
             }
-          }, 450);
+          }, 300);
           var body = section.querySelector('.sys-concept-body');
-          if (body) gsap.fromTo(body, { opacity: 0 }, { opacity: 1, duration: 1.0625, ease: 'power1.out', delay: 1.5 });
-          gsap.to(word, { opacity: 0.82, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.6 });
+          if (body) gsap.fromTo(body, { opacity: 0 }, { opacity: 1, duration: 0.85, ease: 'power1.out', delay: 0.2 });
+          gsap.to(word, { opacity: 0.82, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.4 });
         }
       });
-      if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 0.42, duration: 0.625, ease: 'power2.out' });
-      if (rule) tl.fromTo(rule, { scaleX: 0 },  { scaleX: 1, duration: 0.625, ease: 'power2.out', transformOrigin: 'left center' }, '-=0.25');
-      tl.fromTo(word, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.0625, ease: 'power1.out' }, '-=0.15');
+      if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 0.42, duration: 0.5, ease: 'power2.out' });
+      if (rule) tl.fromTo(rule, { scaleX: 0 },  { scaleX: 1, duration: 0.5, ease: 'power2.out', transformOrigin: 'left center' }, '-=0.20');
+      tl.fromTo(word, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.85, ease: 'power1.out' }, '-=0.12');
     });
 
     /* Subtle scroll-based parallax drift on large concept titles */
@@ -616,19 +616,8 @@
       var word = sec.querySelector('.sys-concept-word');
       if (!word) return;
       var isRight = sec.classList.contains('sys-concept--right');
-      gsap.to(word, { x: isRight ? -10 : 10, ease: 'none',
+      gsap.to(word, { x: isRight ? -8 : 8, ease: 'none',
         scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 3.5 }
-      });
-    });
-
-    /* ── CINEMATIC SCROLL FOCUS OPACITY ─────────────────────── */
-    /* Sections start fully visible so entrance animations work cleanly.
-       Only fade OUT when the section has been scrolled past — this creates
-       the cinematic focus on the current section without fighting entrance. */
-    document.querySelectorAll('.sys-concept').forEach(function (sec) {
-      ScrollTrigger.create({
-        trigger: sec, start: 'bottom 72%', end: 'bottom 4%', scrub: 2.0,
-        onUpdate: function (self) { gsap.set(sec, { opacity: 1 - self.progress * 0.78 }); }
       });
     });
 
@@ -637,7 +626,7 @@
       var closingNum  = closing.querySelector('.sys-section-num');
       var closingRule = closing.querySelector('.sys-section-rule');
       var closingTL = gsap.timeline({
-        scrollTrigger: { trigger: closing, start: 'top 78%', toggleActions: 'play none none none' }
+        scrollTrigger: { trigger: closing, start: 'top 85%', toggleActions: 'play none none none' }
       });
       if (closingNum)  closingTL.fromTo(closingNum,  { opacity: 0 }, { opacity: 0.30, duration: 0.525, ease: 'power1.out' });
       if (closingRule) closingTL.fromTo(closingRule, { scaleX: 0 },  { scaleX: 1, duration: 0.525, ease: 'power1.out', transformOrigin: 'left center' }, '-=0.22');

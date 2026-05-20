@@ -893,10 +893,12 @@ footer a:hover { color: var(--text-primary); }
 .bj-frame-cta {
   position: absolute;
   bottom: 32px;
-  left: 36px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 14px;
+  white-space: nowrap;
 }
 .bj-frame-play-icon {
   width: 16px;
@@ -907,9 +909,9 @@ footer a:hover { color: var(--text-primary); }
 .bj-frame-link:hover .bj-frame-play-icon { color: rgba(255, 255, 255, 0.92); }
 .bj-frame-label {
   font-family: var(--font-ui);
-  font-size: 9px;
-  letter-spacing: 0.28em;
-  color: rgba(255, 255, 255, 0.32);
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  color: rgba(255, 255, 255, 0.42);
   transition: color 1.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .bj-frame-link:hover .bj-frame-label { color: rgba(255, 255, 255, 0.82); }
@@ -928,6 +930,7 @@ footer a:hover { color: var(--text-primary); }
 
 .auth-bj-body {
   margin-bottom: 6vh;
+  width: 100%;
   text-align: center;
 }
 .auth-bj-body p {
@@ -938,6 +941,7 @@ footer a:hover { color: var(--text-primary); }
   letter-spacing: 0.04em;
   line-height: 2.6;
   margin: 0;
+  text-align: center;
 }
 .auth-bj-closing {
   margin-top: 6vh;
@@ -945,9 +949,10 @@ footer a:hover { color: var(--text-primary); }
   font-style: italic;
   font-size: clamp(16px, 2.2vw, 32px);
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.50);
+  color: rgba(255, 255, 255, 0.62);
   line-height: 1.5;
   text-align: center;
+  width: 100%;
 }
 
 #auth-line-wrap {
@@ -1235,7 +1240,7 @@ footer a:hover { color: var(--text-primary); }
 .sys-word {
   display: block;
   font-family: var(--font-editorial);
-  font-size: clamp(40px, 8.6vw, 138px);
+  font-size: clamp(22px, 4.8vw, 72px);
   font-weight: 300;
   line-height: 1.12;
   color: rgba(255, 255, 255, 0.88);
@@ -1287,7 +1292,7 @@ footer a:hover { color: var(--text-primary); }
 .sys-concept-word {
   display: block;
   font-family: var(--font-editorial);
-  font-size: clamp(46px, 9.5vw, 154px);
+  font-size: clamp(26px, 5.4vw, 82px);
   font-weight: 300;
   line-height: 1.06;
   color: rgba(255, 255, 255, 0.78);
@@ -1339,7 +1344,7 @@ footer a:hover { color: var(--text-primary); }
 .sys-closing-line {
   display: block;
   font-family: var(--font-editorial);
-  font-size: clamp(40px, 7.5vw, 118px);
+  font-size: clamp(22px, 4.4vw, 64px);
   font-weight: 300;
   line-height: 1.12;
   color: rgba(255, 255, 255, 0.86);
