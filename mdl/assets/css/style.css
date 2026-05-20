@@ -983,13 +983,27 @@ footer a:hover { color: var(--text-primary); }
   padding-bottom: 10vh;
 }
 .auth-moment-num {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 18px;
   font-family: var(--font-ui);
-  font-size: 10px;
-  font-weight: 300;
-  letter-spacing: 0.35em;
-  color: rgba(255, 255, 255, 0.28);
-  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 24px;
+}
+.auth-moment-num::after {
+  content: '';
+  display: block;
+  width: 52px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+.auth-moment--right .auth-moment-num {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
 }
 .auth-moment-title {
   font-family: var(--font-editorial);

@@ -266,8 +266,8 @@
     /* ── SEQUENTIAL HERO VIDEO SYSTEM ──────────────────────── */
 
     var HERO_VIDEOS = [
-      'assets/video/Video_Home_01.mov',
-      'assets/video/Video_Home_02.mov'
+      'assets/video/Video_Home_02.mov',
+      'assets/video/Video_Home_01.mov'
     ];
     var _heroVidA, _heroVidB, _heroIdx = 0, _heroActive = 'a', _heroStarted = false;
     var HERO_OPACITY = 0.42, HERO_FADE = 1400;
@@ -307,18 +307,24 @@
     }
 
     function _heroAdvance() {
-      _heroIdx = (_heroIdx + 1) % HERO_VIDEOS.length;
       var cur  = _heroActive === 'a' ? _heroVidA : _heroVidB;
       var next = _heroActive === 'a' ? _heroVidB : _heroVidA;
+      _heroIdx = (_heroIdx + 1) % HERO_VIDEOS.length;
       _heroActive = _heroActive === 'a' ? 'b' : 'a';
-      gsap.set(next, { opacity: 0 });
-      next.src = HERO_VIDEOS[_heroIdx];
-      next.load();
-      _heroPlay(next, function() {
-        gsap.to(next, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.inOut' });
-        gsap.to(cur,  { opacity: 0,            duration: HERO_FADE / 1000, ease: 'power2.inOut',
-          onComplete: function() { cur.pause(); cur.removeAttribute('src'); cur.load(); }
-        });
+      /* Fade current to black, then after 2-second pause fade in next */
+      gsap.to(cur, {
+        opacity: 0, duration: HERO_FADE / 1000, ease: 'power2.inOut',
+        onComplete: function() {
+          cur.pause(); cur.removeAttribute('src'); cur.load();
+          gsap.set(next, { opacity: 0 });
+          next.src = HERO_VIDEOS[_heroIdx];
+          next.load();
+          _heroPlay(next, function() {
+            setTimeout(function() {
+              gsap.to(next, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.inOut' });
+            }, 2000);
+          });
+        }
       });
     }
 
