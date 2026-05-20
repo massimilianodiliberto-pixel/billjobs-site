@@ -569,7 +569,7 @@
           'Each collaboration became an opportunity to build visual worlds designed around atmosphere, performance and emotional connection.'
         ],
         role: 'Production · Location Scouting · Technical Coordination',
-        image: 'assets/img/BCK01.jpg',
+        images: ['assets/img/BCK01.jpg', 'assets/img/BCK07.jpg'],
         workLink: 'work/index.html'
       },
       'up-all-night': {
@@ -582,10 +582,12 @@
           'The project received expressions of funding interest from three regional film commissions, reaching a combined value of approximately €690,000, and continues to move through international financing development.'
         ],
         role: 'Director · Writer · Producer',
-        image: 'assets/img/BCK05.jpg',
+        images: ['assets/img/BCK05.jpg', 'assets/img/BCK03.jpg'],
         workLink: 'work/index.html'
       }
     };
+
+    var carouselInterval = null;
 
     function openOverlay(id) {
       var p = projects[id];
@@ -593,9 +595,29 @@
       overlayTitle.textContent = p.title;
       overlayCreds.textContent = p.credits;
       overlayMedia.innerHTML = '';
-      var img = document.createElement('img');
-      img.src = p.image; img.alt = p.title;
-      overlayMedia.appendChild(img);
+      if (p.images && p.images.length > 1) {
+        var carousel = document.createElement('div');
+        carousel.className = 'overlay-carousel';
+        p.images.forEach(function(src, i) {
+          var img = document.createElement('img');
+          img.src = src; img.alt = p.title;
+          img.style.opacity = i === 0 ? '1' : '0';
+          carousel.appendChild(img);
+        });
+        overlayMedia.appendChild(carousel);
+        var imgs = carousel.querySelectorAll('img');
+        var current = 0;
+        carouselInterval = setInterval(function() {
+          var next = (current + 1) % imgs.length;
+          imgs[current].style.opacity = '0';
+          imgs[next].style.opacity = '1';
+          current = next;
+        }, 3000);
+      } else {
+        var img = document.createElement('img');
+        img.src = p.image; img.alt = p.title;
+        overlayMedia.appendChild(img);
+      }
       overlayDesc.innerHTML = '';
       p.description.forEach(function(text) {
         var el = document.createElement('p');
@@ -623,6 +645,7 @@
     }
 
     function closeOverlay() {
+      if (carouselInterval) { clearInterval(carouselInterval); carouselInterval = null; }
       overlay.classList.remove('active');
       overlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
