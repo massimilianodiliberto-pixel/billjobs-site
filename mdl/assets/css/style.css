@@ -102,6 +102,17 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   background: #060606;
 }
 
+#intro-flash-vid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
 /* Vignette — darkens edges, adds depth */
 .intro-vignette {
   position: absolute;
