@@ -60,12 +60,12 @@
       <p class="signal-phone">+39 333 463 9596</p>
     </div>
 
-    <!-- BOTTOM: tagline + logo -->
+    <!-- BOTTOM: logo + tagline -->
     <div class="signal-bottom">
-      <p class="signal-tagline">Behind every frame,<br>there is a signal.</p>
       <div class="frame-logo-bill-jobs">
         <img src="../assets/img/Bill%20jobs%20%20logo.jpg" alt="Bill Jobs" class="signal-logo">
       </div>
+      <p class="signal-tagline">Dietro ogni fotogramma,<br>c'è un segnale.</p>
     </div>
 
   </main>
@@ -101,8 +101,8 @@
 
     /* slow breathing on logo after it fades in */
     setTimeout(function () {
-      gsap.to('.signal-logo', { opacity: 0.28, duration: 5.5, yoyo: true, repeat: -1, ease: 'sine.inOut',
-        from: { opacity: 0.48 }
+      gsap.to('.signal-logo', { opacity: 0.60, duration: 5.5, yoyo: true, repeat: -1, ease: 'sine.inOut',
+        from: { opacity: 0.80 }
       });
     }, 4500);
   });
