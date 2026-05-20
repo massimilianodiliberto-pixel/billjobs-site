@@ -419,8 +419,8 @@
       /* ── WORK FRAMES: ENTRANCE + IMAGE PARALLAX + HOVER ─────── */
       document.querySelectorAll('.hp-work-frame').forEach(function(frame) {
         gsap.fromTo(frame,
-          { opacity: 0, y: 55, scale: 0.97 },
-          { opacity: 1, y: 0, scale: 1, duration: 1.5, ease: 'expo.out',
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 1.5, ease: 'expo.out',
             scrollTrigger: { trigger: frame, start: 'top 86%', toggleActions: 'play none none none' }
           }
         );
@@ -473,11 +473,12 @@
       if (closing) {
         var emphasis = closing.querySelector('.hp-closing-emphasis');
         if (emphasis) {
-          gsap.fromTo(emphasis, { opacity: 0, y: 20, letterSpacing: '0.20em' }, {
-            opacity: 1, y: 0, letterSpacing: '0.32em', duration: 2.2, ease: 'power1.out',
+          gsap.fromTo(emphasis, { opacity: 0, y: 16, letterSpacing: '0.02em' }, {
+            opacity: 1, y: 0, letterSpacing: '0.28em', duration: 2.2, ease: 'power1.out',
             scrollTrigger: { trigger: closing, start: 'top 72%', toggleActions: 'play none none none' },
             onComplete: function() {
-              gsap.to(emphasis, { y: -8, x: 5, duration: 11, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.5 });
+              gsap.to(emphasis, { y: -6, x: 4, duration: 11, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.5 });
+              gsap.to(emphasis, { opacity: 0.48, duration: 3.8, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.2 });
             }
           });
         }
