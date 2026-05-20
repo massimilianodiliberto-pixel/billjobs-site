@@ -357,32 +357,7 @@
         }
       }
 
-      /* ── Memory image fragments (desktop only) ── */
-      if (window.innerWidth >= 768) {
-        var memFragments = [
-          { src: '../assets/img/BCK02.jpg',  pos: 'right:4vw;top:12%;width:24vw;aspect-ratio:3/2;',  maxOp: 0.22, trigger: '.auth-moment[data-idx="0"]' },
-          { src: '../assets/img/BCK04.jpg',  pos: 'left:3vw;top:58%;width:20vw;aspect-ratio:3/2;',   maxOp: 0.18, trigger: '.auth-moment[data-idx="1"]' },
-          { src: '../assets/img/BCK07.jpg',  pos: 'right:5vw;top:22%;width:22vw;aspect-ratio:3/2;',  maxOp: 0.22, trigger: '.auth-moment[data-idx="2"]' },
-          { src: '../assets/img/G+C09.jpg',  pos: 'right:3vw;top:48%;width:18vw;aspect-ratio:2/3;',  maxOp: 0.28, trigger: '.auth-moment[data-idx="3"]' },
-          { src: '../assets/img/BCK03.jpg',  pos: 'left:4vw;top:28%;width:22vw;aspect-ratio:3/2;',   maxOp: 0.15, trigger: '.auth-moment[data-idx="4"]' },
-        ];
-        memFragments.forEach(function (item) {
-          var img = document.createElement('img');
-          img.src = item.src;
-          img.setAttribute('aria-hidden', 'true');
-          img.style.cssText = 'position:fixed;z-index:1;pointer-events:none;object-fit:cover;opacity:0;filter:grayscale(0.35) contrast(1.08) brightness(0.9);' + item.pos;
-          document.body.appendChild(img);
-          ScrollTrigger.create({
-            trigger: item.trigger,
-            start: 'top 75%',
-            end: 'bottom 25%',
-            onEnter:     function () { gsap.to(img, { opacity: item.maxOp, duration: 2.8, ease: 'power1.out' }); },
-            onLeave:     function () { gsap.to(img, { opacity: 0, duration: 2.2, ease: 'power1.in' }); },
-            onEnterBack: function () { gsap.to(img, { opacity: item.maxOp, duration: 2.8, ease: 'power1.out' }); },
-            onLeaveBack: function () { gsap.to(img, { opacity: 0, duration: 2.2, ease: 'power1.in' }); },
-          });
-        });
-      }
+      /* Memory image fragments removed */
     });
 
   })();
