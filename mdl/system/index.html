@@ -82,10 +82,15 @@
     <div id="sys-line-wrap" aria-hidden="true">
       <svg id="sys-line-svg" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <filter id="sys-glow-f" x="-50%" y="-10%" width="200%" height="120%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          <filter id="sys-glow-f" x="-150%" y="-150%" width="400%" height="400%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
+          <radialGradient id="sys-sphere-grad" cx="38%" cy="35%" r="55%">
+            <stop offset="0%"   stop-color="rgba(255,255,255,0.98)"/>
+            <stop offset="40%"  stop-color="rgba(220,210,200,0.80)"/>
+            <stop offset="100%" stop-color="rgba(180,160,140,0.08)"/>
+          </radialGradient>
         </defs>
         <g id="sys-line-g">
           <path id="sys-line-path" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" filter="url(#sys-glow-f)"/>
@@ -558,7 +563,7 @@
       sysLinePath.style.strokeDashoffset = pLen;
       gsap.to(sysLinePath, {
         strokeDashoffset: 0, ease: 'none',
-        scrollTrigger: { id: 'sys-draw', trigger: sysMain, start: 'top top', end: 'bottom bottom', scrub: 1.5 }
+        scrollTrigger: { id: 'sys-draw', trigger: sysMain, start: 'top top', end: 'bottom bottom', scrub: 1.5, invalidateOnRefresh: true }
       });
       gsap.killTweensOf(sysLineG);
       gsap.to(sysLineG, { x: 1.5, duration: 9, yoyo: true, repeat: -1, ease: 'sine.inOut' });
@@ -570,12 +575,12 @@
       if (!sTNode) {
         sTNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         sTNode.id = 'sys-travel-node';
-        sTNode.setAttribute('r', '3.5');
-        sTNode.setAttribute('fill', 'rgba(255,255,255,0.65)');
+        sTNode.setAttribute('r', '7');
+        sTNode.setAttribute('fill', 'url(#sys-sphere-grad)');
         sTNode.setAttribute('filter', 'url(#sys-glow-f)');
         sTNode.setAttribute('opacity', '0');
         sysLineSvg.appendChild(sTNode);
-        gsap.to(sTNode, { attr: { r: 5.5 }, duration: 2.4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+        gsap.to(sTNode, { attr: { r: 10 }, duration: 2.4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
       }
       var existST = ScrollTrigger.getAll().filter(function (t) { return t.vars && t.vars.id === 'sys-travel'; });
       existST.forEach(function (t) { t.kill(); });
@@ -585,6 +590,7 @@
         start: 'top top',
         end: 'bottom bottom',
         scrub: 1.5,
+        invalidateOnRefresh: true,
         onUpdate: function (self) {
           if (!sysLinePath.getPointAtLength) return;
           var totalLen = sysLinePath.getTotalLength();
@@ -599,6 +605,8 @@
     }
 
     buildSysLine();
+    ScrollTrigger.refresh();
+    setTimeout(function () { ScrollTrigger.refresh(); }, 800);
     window.addEventListener('resize', buildSysLine);
 
     document.querySelectorAll('.sys-concept').forEach(function (section, idx) {

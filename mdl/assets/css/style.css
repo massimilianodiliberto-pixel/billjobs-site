@@ -256,7 +256,7 @@ nav.scrolled {
 .nav-link.active { color: var(--text-primary); }
 
 .nav-toggle {
-  display: none;
+  display: block;
   font-family: var(--font-ui);
   font-size: var(--text-label);
   font-weight: 400;
@@ -265,7 +265,7 @@ nav.scrolled {
 }
 
 #mobile-menu {
-  display: none;
+  display: block;
   position: fixed;
   inset: 0;
   background: #060606;
@@ -2217,7 +2217,7 @@ footer a:hover { color: var(--text-primary); }
   transition: color 0.4s;
   outline: none;
   -webkit-tap-highlight-color: transparent;
-  display: none;
+  display: block;
 }
 #sound-toggle:hover  { color: rgba(255, 255, 255, 0.50); }
 #sound-toggle.active { color: rgba(255, 255, 255, 0.34); }
