@@ -606,7 +606,7 @@
           gsap.to(word, { opacity: 0.82, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.4 });
         }
       });
-      if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 0.42, duration: 0.5, ease: 'power2.out' });
+      if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 1,    duration: 0.5, ease: 'power2.out' });
       if (rule) tl.fromTo(rule, { scaleX: 0 },  { scaleX: 1, duration: 0.5, ease: 'power2.out', transformOrigin: 'left center' }, '-=0.20');
       tl.fromTo(word, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.85, ease: 'power1.out' }, '-=0.12');
     });
