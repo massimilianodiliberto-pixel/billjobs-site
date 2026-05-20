@@ -44,7 +44,7 @@
 /* RESET */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { background: var(--bg); color: var(--text-primary); scroll-behavior: auto; }
-body { font-family: var(--font-ui); font-weight: 300; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-ui); font-weight: 300; overflow-x: hidden; -webkit-font-smoothing: antialiased; background: linear-gradient(180deg, #0f0b09 0%, #030305 18%, #030305 82%, #08060d 100%); }
 a { color: inherit; text-decoration: none; }
 img, video { display: block; max-width: 100%; }
 button { font-family: var(--font-ui); cursor: pointer; background: none; border: none; padding: 0; }
@@ -1053,6 +1053,41 @@ footer a:hover { color: var(--text-primary); }
   color: rgba(255, 255, 255, 0.38);
   letter-spacing: 0;
   line-height: 1.6;
+}
+
+/* flash.mov cinematic video background for Author opening */
+.auth-opening {
+  position: relative;
+  overflow: hidden;
+}
+.auth-flash-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  z-index: 0;
+  filter: saturate(0.25) contrast(1.08) brightness(0.55);
+  animation: auth-flash-fadein 2.2s 0.8s ease-out forwards;
+}
+@keyframes auth-flash-fadein {
+  from { opacity: 0; }
+  to   { opacity: 0.38; }
+}
+.auth-flash-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(4,4,6,0.70) 0%, rgba(4,4,6,0.20) 45%, rgba(4,4,6,0.72) 100%),
+    linear-gradient(to right, rgba(4,4,6,0.36) 0%, transparent 38%, transparent 62%, rgba(4,4,6,0.36) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.auth-opening-h1,
+.auth-opening-h2 {
+  position: relative;
+  z-index: 2;
 }
 
 /* CINEMATIC BREATH MOMENT */
@@ -2258,10 +2293,18 @@ footer a:hover { color: var(--text-primary); }
   line-height: 1;
 }
 
+/* Spacing between consecutive work frames */
+.hp-work-frame + .hp-work-frame {
+  margin-top: 10vh;
+}
+.hp-work-frame--sep {
+  margin-top: 14vh !important;
+}
+
 /* Backstage image sections — cinematic: text inside image */
 .hp-backstage {
   position: relative;
-  padding: 10vh 0;
+  padding: 0;
 }
 .hp-backstage-media {
   position: relative;
@@ -2448,7 +2491,7 @@ footer a:hover { color: var(--text-primary); }
 }
 /* Text-only closing: solid dark background, flex-centered */
 .hp-closing--textonly {
-  background: var(--bg);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2511,7 +2554,7 @@ footer a:hover { color: var(--text-primary); }
   text-align: center;
   gap: 3.2vh;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-  background: var(--bg);
+  background: transparent;
 }
 .hp-bj-editorial-title {
   font-family: var(--font-editorial);

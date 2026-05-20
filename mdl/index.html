@@ -85,15 +85,6 @@
       <div class="scroll-indicator"></div>
     </section>
 
-    <!-- PHILOSOPHY: three-line discipline statement -->
-    <section class="hero-philosophy">
-      <div class="hero-phil-3lines">
-        <span class="hero-phil-line">DIRECTION</span>
-        <span class="hero-phil-line">PRODUCTION</span>
-        <span class="hero-phil-line">VISUAL SYSTEM</span>
-      </div>
-    </section>
-
     <!-- WORK FRAME 1: Gamma+ -->
     <section class="hp-work-frame" data-project="gamma-duality">
       <div class="hp-wf-img">
@@ -104,14 +95,6 @@
         <span class="hp-wf-cat">BEAUTY &amp; FASHION</span>
         <h2 class="hp-wf-title">Gamma+ — Duality</h2>
         <span class="hp-wf-cta">VIEW PROJECT →</span>
-      </div>
-    </section>
-
-    <!-- BACKSTAGE: BCK01 — image only, dark patina, no text -->
-    <section class="hp-backstage hp-backstage--minimal">
-      <div class="hp-backstage-media">
-        <img src="assets/img/BCK01.jpg" alt="" class="hp-backstage-img">
-        <div class="hp-bs-patina"></div>
       </div>
     </section>
 
@@ -129,7 +112,7 @@
     </section>
 
     <!-- WORK FRAME 3: Up All Night -->
-    <section class="hp-work-frame" data-project="up-all-night">
+    <section class="hp-work-frame hp-work-frame--sep" data-project="up-all-night">
       <div class="hp-wf-img">
         <img src="assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png" alt="Up All Night" style="object-position: center center;">
       </div>
@@ -291,8 +274,7 @@
 
     var HERO_VIDEOS = [
       'assets/video/Video_Home_01.mov',
-      'assets/video/Video_Home_02.mov',
-      'assets/video/Video_Home_03.mov'
+      'assets/video/Video_Home_02.mov'
     ];
     var _heroVidA, _heroVidB, _heroIdx = 0, _heroActive = 'a', _heroStarted = false;
     var HERO_OPACITY = 0.42, HERO_FADE = 1400;
@@ -423,88 +405,89 @@
       startIntroLoader(function () { playIntro(); });
     }
 
-    /* ── PHILOSOPHY REVEAL ──────────────────────────────────────── */
-
-    gsap.fromTo('.hero-philosophy', { opacity: 0, y: 14 }, {
-      opacity: 1, y: 0, duration: 1.2, ease: 'power1.out',
-      scrollTrigger: { trigger: '.hero-philosophy', start: 'top 88%', toggleActions: 'play none none none' }
+    /* ── HERO CONTENT SCROLL FADE ─────────────────────────────── */
+    gsap.to('.hero-content', {
+      y: -38, opacity: 0.12, ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'center center', end: 'bottom top', scrub: 2.5 }
     });
 
-    /* ── BACKSTAGE REVEALS (text inside images) ─────────────────── */
+    /* ── WORK FRAMES: ENTRANCE + IMAGE PARALLAX + HOVER ─────── */
+    document.querySelectorAll('.hp-work-frame').forEach(function(frame, i) {
+      gsap.fromTo(frame,
+        { opacity: 0, y: 55, scale: 0.97 },
+        { opacity: 1, y: 0, scale: 1, duration: 1.5, ease: 'expo.out',
+          scrollTrigger: { trigger: frame, start: 'top 86%', toggleActions: 'play none none none' }
+        }
+      );
+      var img = frame.querySelector('.hp-wf-img img');
+      if (img) {
+        gsap.to(img, {
+          yPercent: -10, ease: 'none',
+          scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: 2 }
+        });
+        frame.addEventListener('mouseenter', function() {
+          gsap.to(img, { scale: 1.06, duration: 1.4, ease: 'power2.out' });
+        });
+        frame.addEventListener('mouseleave', function() {
+          gsap.to(img, { scale: 1, duration: 1.0, ease: 'power2.out' });
+        });
+      }
+    });
 
+    /* ── BACKSTAGE: IMAGE PARALLAX + TEXT REVEALS ───────────── */
     document.querySelectorAll('.hp-backstage').forEach(function(section) {
+      var img   = section.querySelector('.hp-backstage-img');
       var title = section.querySelector('.hp-bs-title');
       var sub   = section.querySelector('.hp-bs-sub');
-      var inner = section.querySelector('.hp-bs-inner');
+      if (img) {
+        gsap.to(img, {
+          yPercent: -10, ease: 'none',
+          scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 2 }
+        });
+      }
       if (title) {
-        gsap.fromTo(title, { opacity: 0, y: 24 }, {
-          opacity: 1, y: 0, duration: 1.6, ease: 'power1.out',
-          scrollTrigger: { trigger: section, start: 'top 78%', toggleActions: 'play none none none' },
-          onComplete: function () {
-            /* After reveal, title drifts slowly */
-            gsap.to(title, {
-              y: '-=6', x: '+=4',
-              duration: 7,
-              yoyo: true,
-              repeat: -1,
-              ease: 'sine.inOut',
-              delay: 0.5
-            });
+        gsap.fromTo(title, { opacity: 0, y: 30, x: -14 }, {
+          opacity: 1, y: 0, x: 0, duration: 1.6, ease: 'power2.out',
+          scrollTrigger: { trigger: section, start: 'top 72%', toggleActions: 'play none none none' },
+          onComplete: function() {
+            gsap.to(title, { y: '-=8', x: '+=5', duration: 8, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.5 });
           }
         });
       }
       if (sub) {
-        gsap.fromTo(sub, { opacity: 0 }, {
-          opacity: 1, duration: 1.2, ease: 'power1.out',
-          scrollTrigger: { trigger: section, start: 'top 60%', toggleActions: 'play none none none' },
-          delay: 0.6
+        gsap.fromTo(sub, { opacity: 0, x: -10 }, {
+          opacity: 1, x: 0, duration: 1.2, ease: 'power1.out',
+          scrollTrigger: { trigger: section, start: 'top 62%', toggleActions: 'play none none none' },
+          delay: 0.55
         });
       }
     });
 
-    /* ── CLOSING REVEAL ──────────────────────────────────────────── */
-
+    /* ── CLOSING: REVEAL + PERPETUAL DRIFT ───────────────────── */
     (function() {
       var closing  = document.querySelector('.hp-closing');
       if (!closing) return;
       var emphasis = closing.querySelector('.hp-closing-emphasis');
       if (emphasis) {
-        gsap.fromTo(emphasis, { opacity: 0, y: 12 }, {
-          opacity: 1, y: 0, duration: 1.8, ease: 'power1.out',
+        gsap.fromTo(emphasis, { opacity: 0, y: 20, letterSpacing: '0.20em' }, {
+          opacity: 1, y: 0, letterSpacing: '0.32em', duration: 2.2, ease: 'power1.out',
           scrollTrigger: { trigger: closing, start: 'top 72%', toggleActions: 'play none none none' },
-          onComplete: function () {
-            gsap.to(emphasis, { y: -6, x: 4, duration: 10, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.5 });
+          onComplete: function() {
+            gsap.to(emphasis, { y: -8, x: 5, duration: 11, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.5 });
           }
         });
       }
     }());
 
-    /* ── WORK FRAME REVEALS ──────────────────────────────────────── */
-
-    document.querySelectorAll('.hp-work-frame').forEach(function(frame) {
-      gsap.fromTo(frame, { opacity: 0, y: 28 }, {
-        opacity: 1, y: 0, duration: 1.3, ease: 'power2.out',
-        scrollTrigger: { trigger: frame, start: 'top 80%', toggleActions: 'play none none none' }
-      });
-      var img = frame.querySelector('.hp-wf-img img');
-      frame.addEventListener('mouseenter', function() {
-        if (img) gsap.to(img, { scale: 1.04, duration: 1.2, ease: 'power2.out' });
-      });
-      frame.addEventListener('mouseleave', function() {
-        if (img) gsap.to(img, { scale: 1, duration: 0.9, ease: 'power2.out' });
-      });
-    });
-
-    /* ── BJ EDITORIAL REVEAL ─────────────────────────────────────── */
-
+    /* ── BJ EDITORIAL REVEAL ─────────────────────────────────── */
     (function() {
       var bjEdit = document.querySelector('.hp-bj-editorial');
       if (!bjEdit) return;
       var title = bjEdit.querySelector('.hp-bj-editorial-title');
       var btn   = bjEdit.querySelector('.hp-bj-author-btn');
       if (title) {
-        gsap.fromTo(title, { opacity: 0, y: 18 }, {
-          opacity: 1, y: 0, duration: 1.8, ease: 'power1.out',
+        gsap.fromTo(title, { opacity: 0, y: 26, scale: 0.98 }, {
+          opacity: 1, y: 0, scale: 1, duration: 2.0, ease: 'power2.out',
           scrollTrigger: { trigger: bjEdit, start: 'top 80%', toggleActions: 'play none none none' }
         });
       }
@@ -512,7 +495,7 @@
         gsap.fromTo(btn, { opacity: 0 }, {
           opacity: 1, duration: 1.4, ease: 'power1.out',
           scrollTrigger: { trigger: bjEdit, start: 'top 74%', toggleActions: 'play none none none' },
-          delay: 0.6
+          delay: 0.8
         });
       }
     }());
