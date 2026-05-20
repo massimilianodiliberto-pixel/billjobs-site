@@ -928,6 +928,7 @@ footer a:hover { color: var(--text-primary); }
 
 .auth-bj-body {
   margin-bottom: 6vh;
+  text-align: center;
 }
 .auth-bj-body p {
   font-family: var(--font-ui);
@@ -941,10 +942,12 @@ footer a:hover { color: var(--text-primary); }
 .auth-bj-closing {
   margin-top: 6vh;
   font-family: var(--font-editorial);
+  font-style: italic;
   font-size: clamp(16px, 2.2vw, 32px);
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.50);
   line-height: 1.5;
+  text-align: center;
 }
 
 #auth-line-wrap {

@@ -49,7 +49,7 @@
           </filter>
         </defs>
         <g id="auth-line-g">
-          <path id="auth-line-path" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.9" filter="url(#auth-glow-f)"/>
+          <path id="auth-line-path" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="0.9" filter="url(#auth-glow-f)"/>
         </g>
       </svg>
     </div>
@@ -112,57 +112,16 @@
         <p>Not an agency.</p>
         <p>A production mind<br>built between direction,<br>systems<br>and visual instinct.</p>
       </div>
-      <button id="bj-frame-trigger" class="bj-frame-link" type="button" aria-haspopup="dialog">
-        <div class="bj-frame">
-          <img src="../assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="" class="bj-frame-img" loading="lazy">
-          <div class="bj-frame-veil"></div>
-          <div class="bj-frame-cta">
-            <svg class="bj-frame-play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>
-            <span class="bj-frame-label">WATCH THE REEL</span>
-          </div>
-        </div>
-      </button>
       <p class="auth-bj-closing"><em>Sometimes the best creative solutions<br>come from understanding every part of the process.</em></p>
     </section>
 
-    <!-- FOOTER FRAME → SYSTEM -->
-    <section class="hp-bj-footer">
-      <a href="../system/index.html" class="bj-frame-link" aria-label="Go to System">
-        <div class="bj-frame">
-          <img src="../assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="" class="bj-frame-img" loading="lazy">
-          <div class="bj-frame-veil"></div>
-          <div class="bj-frame-cta">
-            <span class="bj-frame-label">WHO IS BILL JOBS?</span>
-          </div>
-        </div>
-      </a>
-      <a href="../system/index.html" class="hp-footer-nav-link">SYSTEM</a>
+    <!-- FOOTER EDITORIAL → SYSTEM (same layout as Frame → AUTHOR) -->
+    <section class="hp-bj-editorial" id="auth-sys-editorial">
+      <p class="hp-bj-editorial-title">Who is Bill Jobs?</p>
+      <a href="../system/index.html" class="hp-bj-author-btn" aria-label="Go to System page">SYSTEM</a>
     </section>
 
   </main>
-
-  <!-- BILL JOBS PANEL -->
-  <div id="bj-overlay" class="wk-ov" aria-hidden="true" role="dialog" aria-label="Bill Jobs">
-    <div class="wk-ov-backdrop"></div>
-    <div class="wk-ov-panel">
-      <button class="wk-ov-close" aria-label="Close"><span>✕</span></button>
-      <div class="wk-ov-media">
-        <img src="../assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="Bill Jobs">
-      </div>
-      <div class="wk-ov-body">
-        <div class="wk-ov-meta">
-          <span class="wk-ov-cat">BILL JOBS STUDIO</span>
-          <span class="wk-ov-role">Creative Producer &nbsp;·&nbsp; Director</span>
-        </div>
-        <h2 class="wk-ov-title">WHO IS BILL JOBS?</h2>
-        <p class="wk-ov-desc">Not a portfolio.<br>Not a company presentation.<br><br>A cinematic lab — independent, lateral, built on 24 years of real productions.<br><br>The part you usually never see: the person who reads a budget and feels a story. Who holds the visual and the logistical at the same time. Who knows the difference between a good idea and a producible one.<br><br>Music videos. Live shows. Feature development. Branded content. Experimental systems.<br>Any scale. Any format.<br><br><em>The instinct is the same.<br>The frame changes. The way of seeing does not.</em></p>
-        <button type="button" class="bj-ov-reel" id="bj-watch-btn">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11"><polygon points="6,3 20,12 6,21"/></svg>
-          WATCH THE REEL
-        </button>
-      </div>
-    </div>
-  </div>
 
   <footer>
     <span>&copy; 2026 Massimiliano Di Liberto &nbsp;&middot;&nbsp; Bill Jobs Studio</span>
@@ -273,8 +232,14 @@
     }
 
     window.addEventListener('load', function () {
-      buildAuthLine();
-      window.addEventListener('resize', buildAuthLine);
+      document.fonts.ready.then(function () {
+        buildAuthLine();
+        ScrollTrigger.refresh();
+      });
+      window.addEventListener('resize', function () {
+        buildAuthLine();
+        ScrollTrigger.refresh();
+      });
 
       // Opening: emerge from grey
       gsap.fromTo('.auth-opening-h1',
@@ -357,7 +322,20 @@
         }
       }
 
-      /* Memory image fragments removed */
+      /* Editorial footer section reveal */
+      var sysEdit = document.getElementById('auth-sys-editorial');
+      if (sysEdit) {
+        var editTitle = sysEdit.querySelector('.hp-bj-editorial-title');
+        var editBtn   = sysEdit.querySelector('.hp-bj-author-btn');
+        gsap.set([editTitle, editBtn], { opacity: 0 });
+        ScrollTrigger.create({
+          trigger: sysEdit, start: 'top 80%', once: true,
+          onEnter: function () {
+            gsap.to(editTitle, { opacity: 1, y: 0, duration: 1.2, ease: 'power1.out' });
+            gsap.to(editBtn,   { opacity: 1, duration: 1.0, ease: 'power1.out', delay: 0.5 });
+          }
+        });
+      }
     });
 
   })();
@@ -415,47 +393,6 @@
   }());
   </script>
 
-  <!-- BILL JOBS PANEL: open/close -->
-  <script>
-  (function () {
-    var bj = document.getElementById('bj-overlay');
-    if (!bj) return;
-
-    function openBJ () {
-      bj.setAttribute('aria-hidden', 'false');
-      bj.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      if (typeof lenis !== 'undefined') lenis.stop();
-      gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.4, ease: 'power2.out' });
-      window.sound && window.sound.play('distortion-fade', 0.06, 0.5);
-    }
-
-    function closeBJ () {
-      bj.classList.remove('active');
-      bj.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      if (typeof lenis !== 'undefined') lenis.start();
-      gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.4, ease: 'power2.out' });
-    }
-
-    var trigger = document.getElementById('bj-frame-trigger');
-    if (trigger) trigger.addEventListener('click', openBJ);
-
-    var watchBtn = document.getElementById('bj-watch-btn');
-    if (watchBtn) {
-      watchBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        window.open('https://youtu.be/TrLO4PL-8jI', '_blank', 'noopener');
-      });
-    }
-
-    bj.querySelector('.wk-ov-close').addEventListener('click', closeBJ);
-    bj.querySelector('.wk-ov-backdrop').addEventListener('click', closeBJ);
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && bj.classList.contains('active')) closeBJ();
-    });
-  }());
-  </script>
 
 </body>
 </html>
