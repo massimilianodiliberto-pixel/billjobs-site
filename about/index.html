@@ -31,7 +31,7 @@
     <img src="../assets/img/Bill%20jobs%20%20logo.jpg" class="page-bj-logo" alt="" aria-hidden="true">
   </div>
   <nav id="nav">
-    <a class="nav-logo" href="../index.html"><img src="../assets/img/logo_billjobs.png" alt="Bill Jobs Studio" class="nav-logo-img"></a>
+    <a class="nav-logo" href="../index.html"><span class="nav-logo-text">MDL</span></a>
     <div class="nav-links">
       <a href="../index.html"          class="nav-link">FRAME</a>
       <a href="../work/index.html"     class="nav-link">WORK</a>
@@ -149,6 +149,7 @@
   <script src="../assets/js/core.js"></script>
 
   <script>
+  gsap.set('#page-transition', { autoAlpha: 0 });
   (function () {
 
     function revealLines(el, linesStr) {

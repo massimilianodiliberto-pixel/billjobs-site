@@ -1,14 +1,20 @@
 'use strict';
 
 /* ── Lenis smooth scroll ─────────────────────────────────── */
-const lenis = new Lenis({
-  duration: 1.4,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  orientation: 'vertical',
-  smoothWheel: true,
-  wheelMultiplier: 0.75,
-  touchMultiplier: 1.5,
-});
+var lenis;
+try {
+  lenis = new Lenis({
+    duration: 1.4,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    smoothWheel: true,
+    wheelMultiplier: 0.75,
+    touchMultiplier: 1.5,
+  });
+} catch (_) {
+  /* Lenis CDN unavailable — use no-op so rest of core.js still runs */
+  lenis = { on: function(){}, scrollTo: function(){}, stop: function(){}, start: function(){}, raf: function(){} };
+}
 
 gsap.registerPlugin(ScrollTrigger);
 lenis.on('scroll', ScrollTrigger.update);

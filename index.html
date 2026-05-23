@@ -65,7 +65,7 @@
 
   <!-- NAV -->
   <nav id="nav">
-    <a class="nav-logo" href="index.html"><img src="assets/img/logo_billjobs.png" alt="Bill Jobs Studio" class="nav-logo-img"></a>
+    <a class="nav-logo" href="index.html"><span class="nav-logo-text">MDL</span></a>
     <div class="nav-links">
       <a href="work/index.html"    class="nav-link">WORK</a>
       <a href="about/index.html"   class="nav-link">AUTHOR</a>
@@ -253,9 +253,9 @@
       });
       gsap.set('.etf-char', { opacity: 0, scale: 0.88 });
       gsap.to('#etf-overlay', { opacity: 1, duration: 0.4, ease: 'power2.out' });
-      window.sound.play('woosh', 0.12, 0.6);
       /* Safety: if GSAP onComplete doesn't fire, force afterETF after 7s */
       _afterETFSafety = setTimeout(function() { afterETF(); }, 7000);
+      try { window.sound.play('woosh', 0.12, 0.6); } catch(_) {}
       const etfTL = gsap.timeline({ onComplete: afterETF });
       document.querySelectorAll('.etf-char').forEach(function(char, i) {
         var t = i * 0.23;
