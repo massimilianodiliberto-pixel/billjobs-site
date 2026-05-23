@@ -3,8 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>System — Massimiliano Di Liberto</title>
-  <meta name="description" content="Bill Jobs Studio — the operational and creative framework of Massimiliano Di Liberto.">
+  <title>Visual Systems — Bill Jobs Studio</title>
+  <meta name="description" content="Massimiliano Di Liberto, Creative Producer e Regista. Regia cinematografica, produzione video, branded content, live events e visual systems. Milano, Italia.">
+  <meta name="keywords" content="creative producer Milano, regia video Milano, Massimiliano Di Liberto, Bill Jobs Studio, branded content Italia, produzione video Milano, cinematic director, video musicali regia, visual systems">
+  <meta name="author" content="Massimiliano Di Liberto">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Visual Systems — Bill Jobs Studio">
+  <meta property="og:description" content="Massimiliano Di Liberto, Creative Producer e Regista. Regia, produzione video, branded content e visual systems. Milano.">
+  <meta property="og:image" content="https://billjobs.it/assets/img/logo_billjobs.png">
+  <meta property="og:url" content="https://billjobs.it/system/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Visual Systems — Bill Jobs Studio">
+  <meta name="twitter:description" content="Massimiliano Di Liberto, Creative Producer e Regista. Milano.">
+  <meta name="twitter:image" content="https://billjobs.it/assets/img/logo_billjobs.png">
+  <link rel="icon" type="image/png" href="/assets/img/logo_billjobs.png">
+  <link rel="apple-touch-icon" href="/assets/img/logo_billjobs.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,79 +31,178 @@
 
   <div id="page-transition"></div>
 
-  <!-- NAV -->
+  <!-- SYSTEM GATE — lightweight cinematic preloader -->
+  <div id="sys-gate" aria-hidden="true">
+    <svg id="sys-gate-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="32" stroke="rgba(255,255,255,0.07)" stroke-width="0.7" fill="none"/>
+      <circle id="sys-gate-arc" cx="60" cy="60" r="32" stroke="rgba(255,255,255,0.72)" stroke-width="0.7" fill="none"
+        stroke-dasharray="201.062" stroke-dashoffset="201.062"
+        stroke-linecap="round" transform="rotate(-90 60 60)"/>
+    </svg>
+    <span id="sys-gate-txt">SYSTEM</span>
+  </div>
+
   <nav id="nav">
-    <a class="nav-logo" href="../index.html">MDL</a>
+    <a class="nav-logo" href="../index.html"><img src="../assets/img/logo_billjobs.png" alt="Bill Jobs Studio" class="nav-logo-img"></a>
     <div class="nav-links">
       <a href="../index.html"          class="nav-link">FRAME</a>
       <a href="../work/index.html"     class="nav-link">WORK</a>
-      <a href="../system/index.html"   class="nav-link active">SYSTEM</a>
+      <a href="../about/index.html"    class="nav-link">AUTHOR</a>
       <a href="../contact/index.html"  class="nav-link">SIGNAL</a>
     </div>
     <button class="nav-toggle" aria-label="Menu">MENU</button>
   </nav>
 
   <div id="mobile-menu">
+    <video class="menu-video" muted loop playsinline preload="none">
+      <source src="../assets/img/Hero.mp4" type="video/mp4">
+    </video>
+    <div class="menu-video-overlay"></div>
     <a href="../index.html">FRAME</a>
     <a href="../work/index.html">WORK</a>
-    <a href="../system/index.html">SYSTEM</a>
+    <a href="../about/index.html">AUTHOR</a>
     <a href="../contact/index.html">SIGNAL</a>
   </div>
 
-  <main class="system-page">
+  <main class="system-main">
 
-    <section class="system-hero" data-reveal>
-      <h1 class="system-statement">Everything behind the frame.</h1>
-    </section>
-
-    <section class="system-def" data-reveal>
-      <p>
-        Bill Jobs Studio is the creative and production infrastructure
-        built over twenty years of work.<br>
-        Not a separate brand. The way things get made.
-      </p>
-    </section>
-
-    <section class="system-areas">
-      <div class="system-area" data-reveal>
-        <h3>DIRECTION</h3>
-        <p>Creative concept</p>
-        <p>Treatment &amp; narrative</p>
-        <p>Art direction</p>
-      </div>
-      <div class="system-area" data-reveal>
-        <h3>PRODUCTION</h3>
-        <p>End-to-end management</p>
-        <p>Budget · Scheduling</p>
-        <p>Team coordination</p>
-      </div>
-      <div class="system-area" data-reveal>
-        <h3>VISUAL DEVELOPMENT</h3>
-        <p>AI-enhanced workflows</p>
-        <p>Experimental visuals</p>
-        <p>Process innovation</p>
+    <section class="system-cinematic">
+      <canvas id="system-canvas"></canvas>
+      <div class="system-content">
+        <div class="system-words">
+          <span class="sys-word" id="sw1">EVERYTHING</span>
+          <span class="sys-word sys-word--mid" id="sw2">BEHIND</span>
+          <span class="sys-word sys-word--accent" id="sw3">THE FRAME.</span>
+        </div>
+        <p class="sys-desc" id="sys-desc">Behind every image there is a system holding it together.</p>
       </div>
     </section>
 
-    <section class="system-projects" data-reveal>
-      <p class="sys-label">PRODUCED UNDER THIS FRAMEWORK</p>
-      <div class="sys-list">
-        <span>Pleasure Professional &nbsp;·&nbsp; Visual Development</span>
-        <span>Maida Madò &nbsp;·&nbsp; AI-assisted music visuals</span>
+    <!-- SVG wave line -->
+    <div id="sys-line-wrap" aria-hidden="true">
+      <svg id="sys-line-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="sys-glow-f" x="-150%" y="-150%" width="400%" height="400%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <radialGradient id="sys-sphere-grad" cx="38%" cy="35%" r="55%">
+            <stop offset="0%"   stop-color="rgba(255,255,255,0.98)"/>
+            <stop offset="40%"  stop-color="rgba(220,210,200,0.80)"/>
+            <stop offset="100%" stop-color="rgba(180,160,140,0.08)"/>
+          </radialGradient>
+        </defs>
+        <g id="sys-line-g">
+          <path id="sys-line-path" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" filter="url(#sys-glow-f)"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- 01 BALANCE -->
+    <section class="sys-concept" data-idx="0">
+      <div class="sys-section-header">
+        <span class="sys-section-num">01</span>
+        <div class="sys-section-rule"></div>
+      </div>
+      <span class="sys-concept-word">BALANCE</span>
+      <p class="sys-concept-phrase" data-phrase="The point where vision survives reality."></p>
+      <div class="sys-concept-body">
+        <p>Too much control kills emotion.<br>Too much chaos kills the frame.</p>
+        <p>Direction lives between the two.</p>
       </div>
     </section>
 
-    <section class="system-contact" data-reveal>
-      <p>Projects outside the brief</p>
-      <a href="mailto:massimiliano.diliberto@gmail.com">
-        massimiliano.diliberto@gmail.com
-      </a>
+    <!-- 02 STRUCTURE -->
+    <section class="sys-concept sys-concept--right" data-idx="1">
+      <div class="sys-section-header">
+        <span class="sys-section-num">02</span>
+        <div class="sys-section-rule"></div>
+      </div>
+      <span class="sys-concept-word">STRUCTURE</span>
+      <p class="sys-concept-phrase" data-phrase="Every production is a system."></p>
+      <div class="sys-concept-body">
+        <p>People. Timing. Pressure.<br>Everything has to move together.</p>
+        <p>A frame only works<br>when the system behind it does.</p>
+      </div>
+    </section>
+
+    <!-- 03 EXECUTION -->
+    <section class="sys-concept" data-idx="2">
+      <div class="sys-section-header">
+        <span class="sys-section-num">03</span>
+        <div class="sys-section-rule"></div>
+      </div>
+      <span class="sys-concept-word">EXECUTION</span>
+      <p class="sys-concept-phrase" data-phrase="Ideas mean nothing unfinished."></p>
+      <div class="sys-concept-body">
+        <p>The difference between concepts and cinema<br>is execution.</p>
+        <p>Pressure. Adaptation. Precision. Timing.</p>
+        <p>That is where the frame becomes real.</p>
+      </div>
+    </section>
+
+    <!-- 04 CLOSING -->
+    <section class="sys-closing" data-idx="3">
+      <div class="sys-section-header">
+        <span class="sys-section-num">04</span>
+        <div class="sys-section-rule"></div>
+      </div>
+      <span class="sys-closing-line">REAL</span>
+      <span class="sys-closing-line">PRODUCTIONS</span>
+      <span class="sys-closing-line">ARE NEVER</span>
+      <span class="sys-closing-line sys-closing-line--accent">ACCIDENTAL.</span>
+      <p class="sys-closing-subtext">The system is invisible. The connections are real.</p>
+    </section>
+
+    <!-- BILL JOBS — same as Author page -->
+    <section class="auth-billjobs" id="sys-bill-jobs">
+      <h2 class="auth-bj-title">WHO IS BILL JOBS?</h2>
+      <div class="auth-bj-body">
+        <p>Not a studio.</p>
+        <p>Not an agency.</p>
+        <p>A production mind<br>built between direction,<br>systems<br>and visual instinct.</p>
+      </div>
+      <button id="sys-bj-frame-trigger" class="bj-frame-link" type="button" aria-haspopup="dialog">
+        <div class="bj-frame">
+          <img src="../assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="" class="bj-frame-img" loading="lazy">
+          <div class="bj-frame-veil"></div>
+          <div class="bj-frame-cta">
+            <svg class="bj-frame-play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>
+            <span class="bj-frame-label">WATCH THE REEL</span>
+          </div>
+        </div>
+      </button>
+      <p class="auth-bj-closing"><em>Sometimes the best creative solutions<br>come from understanding every part of the process.</em></p>
+      <p class="auth-bj-artist-cta">Emerging artist? &nbsp;<a href="https://www.billjobs.it" target="_blank" rel="noopener">billjobs.it →</a></p>
     </section>
 
   </main>
 
+  <!-- BILL JOBS PANEL -->
+  <div id="sys-bj-overlay" class="wk-ov" aria-hidden="true" role="dialog" aria-label="Bill Jobs">
+    <div class="wk-ov-backdrop"></div>
+    <div class="wk-ov-panel">
+      <button class="wk-ov-close" aria-label="Close"><span>✕</span></button>
+      <div class="wk-ov-media">
+        <div class="bj-ov-yt-wrap">
+          <iframe id="sys-bj-yt" src="" frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="wk-ov-body">
+        <div class="wk-ov-meta">
+          <span class="wk-ov-cat">BILL JOBS STUDIO</span>
+          <span class="wk-ov-role">Creative Producer &nbsp;·&nbsp; Director</span>
+        </div>
+        <h2 class="wk-ov-title">WHO IS BILL JOBS?</h2>
+        <p class="wk-ov-desc">Not a portfolio.<br>Not a company presentation.<br><br>A cinematic lab — independent, lateral, built on 24 years of real productions.<br><br>The part you usually never see: the person who reads a budget and feels a story. Who holds the visual and the logistical at the same time. Who knows the difference between a good idea and a producible one.<br><br>Music videos. Live shows. Feature development. Branded content. Experimental systems.<br>Any scale. Any format.<br><br><em>The instinct is the same.<br>The frame changes. The way of seeing does not.</em></p>
+      </div>
+    </div>
+  </div>
+
   <footer>
-    <span>© 2026 Massimiliano Di Liberto &nbsp;·&nbsp; Bill Jobs Studio</span>
+    <span>&copy; 2026 Massimiliano Di Liberto &nbsp;&middot;&nbsp; Bill Jobs Studio</span>
     <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
   </footer>
 
@@ -97,5 +211,573 @@
   <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
   <script src="../assets/js/core.js"></script>
 
+  <!-- SYSTEM GATE animation -->
+  <script>
+  (function () {
+    gsap.set('#page-transition', { autoAlpha: 0 });
+    var gate = document.getElementById('sys-gate');
+    var arc  = document.getElementById('sys-gate-arc');
+    if (!gate || !arc) return;
+
+    function revealSystemContent() {
+      gsap.fromTo('#system-canvas', { opacity: 0 }, { opacity: 1, duration: 1.25, ease: 'power1.out', delay: 0.15 });
+      gsap.fromTo('#sw1', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.88)', y: 0, duration: 1.875, ease: 'power1.out', delay: 0.55 });
+      gsap.fromTo('#sw2', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.44)', y: 0, duration: 1.875, ease: 'power1.out', delay: 0.875 });
+      gsap.fromTo('#sw3', { opacity: 0, color: 'rgba(255,255,255,0.04)', y: 16 }, { opacity: 1, color: 'rgba(255,255,255,0.92)', y: 0, duration: 1.875, ease: 'power1.out', delay: 1.2 });
+      gsap.fromTo('#sys-desc', { opacity: 0 }, { opacity: 1, duration: 1.0625, ease: 'power1.out', delay: 1.875 });
+    }
+
+    gsap.to(arc, {
+      strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', delay: 0.2,
+      onComplete: function () {
+        gsap.to(gate, { autoAlpha: 0, duration: 0.5, ease: 'power2.out', delay: 0.3,
+          onComplete: function () {
+            gate.style.display = 'none';
+            revealSystemContent();
+            document.fonts.ready.then(function () {
+              if (typeof _initSysAnims === 'function') _initSysAnims();
+            });
+          }
+        });
+      }
+    });
+  }());
+  </script>
+
+  <script>
+  (function () {
+    var canvas = document.getElementById('system-canvas');
+    var ctx = canvas.getContext('2d');
+    var W, H, orbits = [], nodes = [], words = [], vignette = null;
+    var mx = 0, my = 0, tmx = 0, tmy = 0;
+    var fontsReady = false, frame = 0;
+
+    document.fonts.ready.then(function () { fontsReady = true; });
+
+    var ORBIT_DEFS = [
+      { raF: 0.30, rbF: 0.40, tilt:  0.28, speed:  0.000470 },
+      { raF: 0.18, rbF: 0.26, tilt: -0.42, speed: -0.000620 },
+      { raF: 0.38, rbF: 0.24, tilt:  0.68, speed:  0.000400 },
+    ];
+
+    var ANCHOR_DEF = [
+      { oi: 0, phase:  2.50, r: 5.0, op: 0.70, label: 'EXPERIENCE' },
+      { oi: 1, phase:  0.90, r: 5.8, op: 0.75, label: 'CREATIVE'   },
+      { oi: 1, phase:  3.40, r: 4.4, op: 0.65, label: 'VISION'     },
+      { oi: 2, phase:  1.10, r: 5.0, op: 0.70, label: 'STRATEGY'   },
+      { oi: 2, phase: -0.60, r: 4.0, op: 0.63, label: 'BUDGET'     },
+    ];
+
+    var WORD_LIST = [
+      'VISION','BUDGET','PEOPLE','TIME','LIMITS',
+      'PRESSURE','PRECISION','EXECUTION','REALITY',
+      'EXPERIENCE','STRATEGY'
+    ];
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+      vignette = null;
+      build();
+    }
+
+    function build() {
+      var cx = W * 0.625;
+      var cy = H * 0.500;
+      orbits = ORBIT_DEFS.map(function (d) {
+        return { cx: cx, cy: cy, ra: W * d.raF, rb: H * d.rbF, tilt: d.tilt, speed: d.speed };
+      });
+      nodes = [];
+      ANCHOR_DEF.forEach(function (d) {
+        nodes.push({
+          type: 'orbit', orb: orbits[d.oi],
+          angle: d.phase, speed: orbits[d.oi].speed,
+          r: d.r, op: d.op, label: d.label, anchor: true, x: 0, y: 0
+        });
+      });
+      for (var i = 0; i < 10; i++) {
+        var orb = orbits[i % 3];
+        nodes.push({
+          type: 'orbit', orb: orb,
+          angle: Math.random() * Math.PI * 2,
+          speed: orb.speed * (0.65 + Math.random() * 0.70),
+          r: Math.random() * 0.9 + 0.5,
+          op: Math.random() * 0.05 + 0.03,
+          label: null, anchor: false, x: 0, y: 0
+        });
+      }
+      var wCols = 3, wRows = 4;
+      words = WORD_LIST.map(function (text, i) {
+        var col = i % wCols, row = Math.floor(i / wCols);
+        var cW = W / wCols, cH = H / wRows;
+        return {
+          text: text,
+          x: cW * col + cW * 0.12 + Math.random() * cW * 0.76,
+          y: cH * row + cH * 0.12 + Math.random() * cH * 0.76,
+          vx: (Math.random() - 0.5) * 0.022,
+          vy: (Math.random() - 0.5) * 0.016,
+          phase: (i / WORD_LIST.length) * Math.PI * 2 + Math.random() * 1.2,
+          cycleSpeed: 0.00035 + Math.random() * 0.00025,
+          maxOp: 0.048 + Math.random() * 0.038,
+        };
+      });
+    }
+
+    function tick() {
+      nodes.forEach(function (n) {
+        if (n.type === 'orbit') {
+          n.angle += n.speed;
+          var c = Math.cos(n.orb.tilt), s = Math.sin(n.orb.tilt);
+          var ex = Math.cos(n.angle) * n.orb.ra;
+          var ey = Math.sin(n.angle) * n.orb.rb;
+          n.x = n.orb.cx + ex * c - ey * s;
+          n.y = n.orb.cy + ex * s + ey * c;
+        }
+      });
+      words.forEach(function (w) {
+        w.x += w.vx;
+        w.y += w.vy;
+        if (w.x < -90) w.x = W + 90;
+        if (w.x > W + 90) w.x = -90;
+        if (w.y < -20) w.y = H + 20;
+        if (w.y > H + 20) w.y = -20;
+      });
+    }
+
+    function getVignette() {
+      if (vignette) return vignette;
+      var g = ctx.createRadialGradient(W / 2, H / 2, H * 0.10, W / 2, H / 2, H * 0.80);
+      g.addColorStop(0, 'rgba(0,0,0,0)');
+      g.addColorStop(1, 'rgba(0,0,0,0.78)');
+      vignette = g;
+      return vignette;
+    }
+
+    function render() {
+      frame++;
+      tick();
+      ctx.clearRect(0, 0, W, H);
+
+      tmx += (mx - tmx) * 0.038;
+      tmy += (my - tmy) * 0.038;
+
+      ctx.save();
+      ctx.translate(tmx, tmy);
+
+      orbits.forEach(function (orb) {
+        ctx.beginPath();
+        ctx.ellipse(orb.cx, orb.cy, orb.ra, orb.rb, orb.tilt, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+        ctx.lineWidth = 1.0;
+        ctx.stroke();
+      });
+
+      var anchors = nodes.filter(function (n) { return n.anchor; });
+      for (var i = 0; i < anchors.length; i++) {
+        for (var j = i + 1; j < anchors.length; j++) {
+          var a = anchors[i], b = anchors[j];
+          var d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < 260) {
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(255,255,255,' + ((1 - d / 260) * 0.10) + ')';
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      if (fontsReady) {
+        ctx.font = '300 13px "Space Grotesk", sans-serif';
+        ctx.letterSpacing = '0.14em';
+        ctx.textAlign = 'left';
+        words.forEach(function (w) {
+          var op = Math.max(0, Math.sin(frame * w.cycleSpeed + w.phase));
+          op = op * op * w.maxOp;
+          if (op > 0.005) {
+            ctx.fillStyle = 'rgba(255,255,255,' + op.toFixed(3) + ')';
+            ctx.fillText(w.text, w.x, w.y);
+          }
+        });
+      }
+
+      nodes.forEach(function (n) {
+        if (!n.anchor) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,255,255,' + n.op + ')';
+          ctx.fill();
+        }
+      });
+
+      anchors.forEach(function (n) {
+        var pulse    = 1 + Math.sin(frame * 0.018 + n.angle * 2.3) * 0.24;
+        var breathOp = n.op * (0.80 + Math.sin(frame * 0.012 + n.angle) * 0.20);
+        var glow     = 4 + Math.sin(frame * 0.015 + n.angle) * 2.2;
+        ctx.shadowColor = 'rgba(255,255,255,0.28)';
+        ctx.shadowBlur  = glow;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,' + breathOp.toFixed(3) + ')';
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        if (fontsReady) {
+          var labelOp = 0.50 + Math.sin(frame * 0.010 + n.angle * 1.5) * 0.14;
+          var px = n.x > (W * 0.625) ? n.x + n.r + 8 : n.x - n.r - 8;
+          ctx.font = '500 11px "Space Grotesk", sans-serif';
+          ctx.letterSpacing = '0.12em';
+          ctx.fillStyle = 'rgba(255,255,255,' + labelOp.toFixed(3) + ')';
+          ctx.textAlign = n.x > (W * 0.625) ? 'left' : 'right';
+          ctx.fillText(n.label, px, n.y + 3);
+        }
+      });
+
+      ctx.restore();
+
+      ctx.fillStyle = getVignette();
+      ctx.fillRect(0, 0, W, H);
+
+      requestAnimationFrame(render);
+    }
+
+    window.addEventListener('mousemove', function (e) {
+      mx = (e.clientX / W - 0.5) * 22;
+      my = (e.clientY / H - 0.5) * 14;
+    });
+
+    window.addEventListener('touchmove', function (e) {
+      if (e.touches.length > 0) {
+        mx = (e.touches[0].clientX / W - 0.5) * 22;
+        my = (e.touches[0].clientY / H - 0.5) * 14;
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', resize);
+
+    resize();
+    render();
+  })();
+
+  // Orbital connection canvas between concept sections
+  (function () {
+    var cc = document.createElement('canvas');
+    cc.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;';
+    document.body.appendChild(cc);
+    var cc2 = cc.getContext('2d');
+    var CW = 0, CH = 0;
+    function rsz() { CW = cc.width = window.innerWidth; CH = cc.height = window.innerHeight; }
+    rsz();
+    window.addEventListener('resize', rsz);
+
+    var secs = [], connDefs = [];
+    function initSecs() {
+      secs = Array.from(document.querySelectorAll('.sys-concept, .sys-closing'));
+      connDefs = secs.map(function () {
+        return { c1x: (Math.random() - 0.5) * 160, c2x: (Math.random() - 0.5) * 160 };
+      });
+    }
+
+    function drawConn() {
+      cc2.clearRect(0, 0, CW, CH);
+      for (var i = 0; i < secs.length - 1; i++) {
+        var r1 = secs[i].getBoundingClientRect();
+        var r2 = secs[i + 1].getBoundingClientRect();
+        var boundary = (r1.bottom + r2.top) / 2;
+        var dist = Math.abs(boundary - CH / 2);
+        var alpha = Math.max(0, 1 - dist / (CH * 0.60)) * 0.052;
+        if (alpha < 0.003) continue;
+        var def = connDefs[i];
+        var x1 = r1.left + r1.width * 0.62;
+        var y1 = r1.bottom;
+        var x2 = r2.left + r2.width * 0.38;
+        var y2 = r2.top;
+        var mid = (y1 + y2) / 2;
+        for (var k = 0; k < 3; k++) {
+          var off = (k - 1) * 52;
+          cc2.beginPath();
+          cc2.moveTo(x1 + off, y1);
+          cc2.bezierCurveTo(
+            x1 + def.c1x + off, y1 + (mid - y1) * 0.55,
+            x2 + def.c2x + off, y2 - (y2 - mid) * 0.55,
+            x2 + off, y2
+          );
+          cc2.strokeStyle = 'rgba(255,255,255,' + (alpha * (k === 1 ? 1.0 : 0.40)).toFixed(4) + ')';
+          cc2.lineWidth = 0.5;
+          cc2.stroke();
+        }
+      }
+      requestAnimationFrame(drawConn);
+    }
+
+    window.addEventListener('load', function () { initSecs(); drawConn(); });
+  })();
+
+  var _sysAnimsDone = false;
+  function _initSysAnims() {
+    if (_sysAnimsDone) return;
+    _sysAnimsDone = true;
+
+    function revealPhrase(el, text) {
+      el.textContent = text;
+      gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 1.0625, ease: 'power1.out' });
+    }
+
+    var sysLineWrap = document.getElementById('sys-line-wrap');
+    var sysLineSvg  = document.getElementById('sys-line-svg');
+    var sysLinePath = document.getElementById('sys-line-path');
+    var sysLineG    = document.getElementById('sys-line-g');
+    var sysMain     = document.querySelector('.system-main');
+
+    function buildSysLine() {
+      if (!sysLineSvg || !sysLinePath || !sysMain) return;
+      var W = window.innerWidth;
+      var H = sysMain.scrollHeight;
+      sysLineWrap.style.height = H + 'px';
+      sysLineSvg.setAttribute('width', W);
+      sysLineSvg.setAttribute('height', H);
+      sysLineSvg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      var hero = document.querySelector('.system-cinematic');
+      var startY = hero ? hero.offsetTop + hero.offsetHeight : 0;
+      var sections = Array.from(sysMain.querySelectorAll('.sys-concept, .sys-closing'));
+      var xL = W * 0.16, xR = W * 0.84;
+      var pts = [{ x: W * 0.50, y: startY }];
+      sections.forEach(function (sec, i) {
+        var x = (i % 2 === 0) ? xL : xR;
+        pts.push({ x: x, y: sec.offsetTop + sec.offsetHeight * 0.50 });
+      });
+      var last = sections[sections.length - 1];
+      pts.push({ x: W * 0.50, y: last ? last.offsetTop + last.offsetHeight - 40 : H });
+      var d = 'M ' + pts[0].x.toFixed(1) + ' ' + pts[0].y.toFixed(1);
+      for (var i = 0; i < pts.length - 1; i++) {
+        var p0 = pts[i], p1 = pts[i + 1], dy = p1.y - p0.y;
+        d += ' C ' + p0.x.toFixed(1) + ' ' + (p0.y + dy * 0.45).toFixed(1);
+        d += ',' + p1.x.toFixed(1) + ' ' + (p1.y - dy * 0.45).toFixed(1);
+        d += ',' + p1.x.toFixed(1) + ' ' + p1.y.toFixed(1);
+      }
+      sysLinePath.setAttribute('d', d);
+      var existing = ScrollTrigger.getAll().filter(function (t) { return t.vars && t.vars.id === 'sys-draw'; });
+      existing.forEach(function (t) { t.kill(); });
+      var pLen = sysLinePath.getTotalLength ? sysLinePath.getTotalLength() : 4000;
+      sysLinePath.style.strokeDasharray = pLen;
+      sysLinePath.style.strokeDashoffset = pLen;
+      gsap.to(sysLinePath, {
+        strokeDashoffset: 0, ease: 'none',
+        scrollTrigger: { id: 'sys-draw', trigger: sysMain, start: 'top top', end: 'bottom bottom', scrub: 1.5, invalidateOnRefresh: true }
+      });
+      gsap.killTweensOf(sysLineG);
+      gsap.to(sysLineG, { x: 1.5, duration: 9, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+      /* Breathing opacity on the drawn line */
+      gsap.to(sysLinePath, { opacity: 0.55, duration: 7, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+
+      /* Traveling sphere at tip of scroll line */
+      var sTNode = sysLineSvg.querySelector('#sys-travel-node');
+      if (!sTNode) {
+        sTNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        sTNode.id = 'sys-travel-node';
+        sTNode.setAttribute('r', '7');
+        sTNode.setAttribute('fill', 'url(#sys-sphere-grad)');
+        sTNode.setAttribute('filter', 'url(#sys-glow-f)');
+        sTNode.setAttribute('opacity', '0');
+        sysLineSvg.appendChild(sTNode);
+        gsap.to(sTNode, { attr: { r: 10 }, duration: 2.4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+      }
+      var existST = ScrollTrigger.getAll().filter(function (t) { return t.vars && t.vars.id === 'sys-travel'; });
+      existST.forEach(function (t) { t.kill(); });
+      ScrollTrigger.create({
+        id: 'sys-travel',
+        trigger: sysMain,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.5,
+        invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          if (!sysLinePath.getPointAtLength) return;
+          var totalLen = sysLinePath.getTotalLength();
+          var pt = sysLinePath.getPointAtLength(totalLen * self.progress);
+          sTNode.setAttribute('cx', pt.x.toFixed(2));
+          sTNode.setAttribute('cy', pt.y.toFixed(2));
+          var prog = self.progress;
+          var fade = prog < 0.04 ? prog / 0.04 : (prog > 0.94 ? (1 - prog) / 0.06 : 1);
+          sTNode.setAttribute('opacity', (0.60 * fade).toFixed(3));
+        }
+      });
+    }
+
+    buildSysLine();
+    ScrollTrigger.refresh();
+    setTimeout(function () { ScrollTrigger.refresh(); }, 800);
+    window.addEventListener('resize', buildSysLine);
+
+    document.querySelectorAll('.sys-concept').forEach(function (section, idx) {
+      var word   = section.querySelector('.sys-concept-word');
+      var phrase = section.querySelector('.sys-concept-phrase');
+      var num    = section.querySelector('.sys-section-num');
+      var rule   = section.querySelector('.sys-section-rule');
+      var dur    = 4.5 + idx * 1.0;
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: section, start: 'top 85%', toggleActions: 'play none none none' },
+        onComplete: function () {
+          setTimeout(function () {
+            if (phrase && phrase.dataset.phrase) {
+              gsap.set(phrase, { opacity: 1 });
+              revealPhrase(phrase, phrase.dataset.phrase);
+            }
+          }, 300);
+          var body = section.querySelector('.sys-concept-body');
+          if (body) gsap.fromTo(body, { opacity: 0 }, { opacity: 1, duration: 0.85, ease: 'power1.out', delay: 0.2 });
+          gsap.to(word, { opacity: 0.82, duration: dur, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idx * 0.4 });
+        }
+      });
+      if (num)  tl.fromTo(num,  { opacity: 0 }, { opacity: 1,    duration: 0.5, ease: 'power2.out' });
+      if (rule) tl.fromTo(rule, { scaleX: 0 },  { scaleX: 1, duration: 0.5, ease: 'power2.out', transformOrigin: 'left center' }, '-=0.20');
+      tl.fromTo(word, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.85, ease: 'power1.out' }, '-=0.12');
+    });
+
+    /* Subtle scroll-based parallax drift on large concept titles */
+    document.querySelectorAll('.sys-concept').forEach(function (sec) {
+      var word = sec.querySelector('.sys-concept-word');
+      if (!word) return;
+      var isRight = sec.classList.contains('sys-concept--right');
+      gsap.to(word, { x: isRight ? -8 : 8, ease: 'none',
+        scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 3.5 }
+      });
+    });
+
+    var closing = document.querySelector('.sys-closing');
+    if (closing) {
+      var closingNum  = closing.querySelector('.sys-section-num');
+      var closingRule = closing.querySelector('.sys-section-rule');
+      var closingTL = gsap.timeline({
+        scrollTrigger: { trigger: closing, start: 'top 85%', toggleActions: 'play none none none' }
+      });
+      if (closingNum)  closingTL.fromTo(closingNum,  { opacity: 0 }, { opacity: 0.30, duration: 0.525, ease: 'power1.out' });
+      if (closingRule) closingTL.fromTo(closingRule, { scaleX: 0 },  { scaleX: 1, duration: 0.525, ease: 'power1.out', transformOrigin: 'left center' }, '-=0.22');
+      closingTL.fromTo(
+        closing.querySelectorAll('.sys-closing-line'),
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 1.1875, ease: 'power1.out', stagger: 0.21 },
+        '-=0.15'
+      );
+      var subtext = closing.querySelector('.sys-closing-subtext');
+      if (subtext) closingTL.fromTo(subtext, { opacity: 0 }, { opacity: 1, duration: 1.25, ease: 'power1.out' }, '-=0.44');
+    }
+  }
+  window.addEventListener('load', function () { if (typeof _initSysAnims === 'function') _initSysAnims(); });
+  </script>
+
+  <!-- SYSTEM VIDEO + AUDIO LAYER -->
+  <script>
+  (function () {
+
+    /* ── Ambient distortion video behind canvas ── */
+    var cinematic = document.querySelector('.system-cinematic');
+    var canvas    = document.getElementById('system-canvas');
+    if (cinematic && canvas) {
+      var sv = document.createElement('video');
+      sv.id = 'system-vid-bg'; sv.muted = true; sv.playsInline = true;
+      sv.preload = 'none'; sv.setAttribute('preload', 'none'); sv.loop = true;
+      var ss = document.createElement('source');
+      ss.src = '../assets/video/Analog%20Overlay%208.mp4'; ss.type = 'video/mp4';
+      sv.appendChild(ss);
+      cinematic.insertBefore(sv, canvas);
+
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { sv.load(); sv.play().catch(function(){}); }
+        else { sv.pause(); }
+      }, { threshold: 0.1 }).observe(cinematic);
+    }
+
+    /* ── Audio: ambient pulse loop + section triggers ── */
+    window.addEventListener('load', function () {
+
+      function startSysAmbient () {
+        console.log('[Sound/System] sound:enabled → pulse + hum loops');
+        window.sound.loop('pulse', 0.15);
+        window.sound.loop('hum', 0.10);
+      }
+      if (window.sound.enabled) { startSysAmbient(); }
+      document.addEventListener('sound:enabled', startSysAmbient);
+
+      /* Hero to chapters scroll: ascend */
+      ScrollTrigger.create({
+        trigger: '.system-cinematic',
+        start: 'bottom 85%',
+        once: true,
+        onEnter: function () { window.sound.play('ascend', 0.12, 0.6); }
+      });
+
+      /* Section reveals: ascend stab */
+      document.querySelectorAll('.sys-concept').forEach(function (sec) {
+        ScrollTrigger.create({
+          trigger: sec, start: 'top 68%', once: true,
+          onEnter: function () { window.sound.play('ascend', 0.10, 0.18); }
+        });
+      });
+
+      /* Closing section: descend */
+      var closingSec = document.querySelector('.sys-closing');
+      if (closingSec) {
+        ScrollTrigger.create({
+          trigger: closingSec, start: 'top 72%', once: true,
+          onEnter: function () { window.sound.play('descend', 0.12, 0.5); }
+        });
+      }
+    });
+
+  }());
+  </script>
+
+  <!-- SYSTEM BILL JOBS PANEL: open/close -->
+  <script>
+  (function () {
+    var bj = document.getElementById('sys-bj-overlay');
+    if (!bj) return;
+
+    var ytFrame = document.getElementById('sys-bj-yt');
+    var YT_SRC = 'https://www.youtube.com/embed/TrLO4PL-8jI?autoplay=1&rel=0&modestbranding=1';
+
+    function openBJ () {
+      bj.setAttribute('aria-hidden', 'false');
+      bj.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      if (typeof lenis !== 'undefined') lenis.stop();
+      gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.4, ease: 'power2.out' });
+      window.sound && window.sound.play('distortion-fade', 0.06, 0.5);
+      if (ytFrame) ytFrame.src = YT_SRC;
+    }
+
+    function closeBJ () {
+      bj.classList.remove('active');
+      bj.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (typeof lenis !== 'undefined') lenis.start();
+      gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.4, ease: 'power2.out' });
+      if (ytFrame) ytFrame.src = '';
+    }
+
+    var trigger = document.getElementById('sys-bj-frame-trigger');
+    if (trigger) trigger.addEventListener('click', openBJ);
+
+    bj.querySelector('.wk-ov-close').addEventListener('click', closeBJ);
+    bj.querySelector('.wk-ov-backdrop').addEventListener('click', closeBJ);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && bj.classList.contains('active')) closeBJ();
+    });
+
+    /* Reveal BJ section on scroll */
+    window.addEventListener('load', function () {
+      var bjSec = document.getElementById('sys-bill-jobs');
+      if (bjSec) {
+        gsap.set(bjSec, { opacity: 0 });
+        gsap.to(bjSec, {
+          opacity: 1, duration: 1.25, ease: 'power1.out',
+          scrollTrigger: { trigger: bjSec, start: 'top 76%', toggleActions: 'play none none none' }
+        });
+      }
+    });
+  }());
+  </script>
 </body>
 </html>

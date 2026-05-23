@@ -1,11 +1,693 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=./mdl/">
-  <title>Massimiliano Di Liberto</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Jobs Studio — Regia, Produzione Video e Visual Systems | Milano</title>
+  <meta name="description" content="Massimiliano Di Liberto, Creative Producer e Regista. Regia cinematografica, produzione video, branded content, live events e visual systems. Milano, Italia.">
+  <meta name="keywords" content="creative producer Milano, regia video Milano, Massimiliano Di Liberto, Bill Jobs Studio, branded content Italia, produzione video Milano, cinematic director, video musicali regia, visual systems">
+  <meta name="author" content="Massimiliano Di Liberto">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Bill Jobs Studio — Creative Producer · Cinematic Director">
+  <meta property="og:description" content="Massimiliano Di Liberto, Creative Producer e Regista. Regia, produzione video, branded content e visual systems. Milano.">
+  <meta property="og:image" content="https://billjobs.it/assets/img/logo_billjobs.png">
+  <meta property="og:url" content="https://billjobs.it">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bill Jobs Studio — Creative Producer · Cinematic Director">
+  <meta name="twitter:description" content="Massimiliano Di Liberto, Creative Producer e Regista. Milano.">
+  <meta name="twitter:image" content="https://billjobs.it/assets/img/logo_billjobs.png">
+  <link rel="icon" type="image/png" href="/assets/img/logo_billjobs.png">
+  <link rel="apple-touch-icon" href="/assets/img/logo_billjobs.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <script>window.location.replace('./mdl/');</script>
+
+  <div id="intro-loader">
+    <svg id="il-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="24" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none"/>
+      <circle id="il-arc" cx="32" cy="32" r="24" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" fill="none"
+        stroke-dasharray="150.796" stroke-dashoffset="150.796"
+        stroke-linecap="round" transform="rotate(-90 32 32)"/>
+    </svg>
+    <span id="il-label">LOADING</span>
+  </div>
+
+  <div id="grain"></div>
+  <div id="page-transition"></div>
+
+  <!-- INTRO -->
+  <div id="intro">
+    <video id="intro-flash-vid" muted playsinline loop preload="auto">
+      <source src="assets/video/flash.mov" type="video/mp4">
+    </video>
+    <div class="intro-vignette"></div>
+    <div class="intro-ambient"></div>
+    <div id="intro-p1">
+      <span class="iw" id="iw1" style="opacity:0">CREATIVE PRODUCER</span>
+      <span class="iw" id="iw2" style="opacity:0">CINEMATIC DIRECTOR</span>
+      <span class="iw" id="iw3" style="opacity:0">VISUAL SYSTEMS</span>
+    </div>
+    <button id="intro-skip">SKIP</button>
+  </div>
+
+  <!-- ETF OVERLAY — analog texture + letter sequence, floats over hero space -->
+  <div id="etf-overlay">
+    <div class="menu-video-overlay"></div>
+    <span id="intro-etf"></span>
+  </div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a class="nav-logo" href="index.html"><img src="assets/img/logo_billjobs.png" alt="Bill Jobs Studio" class="nav-logo-img"></a>
+    <div class="nav-links">
+      <a href="work/index.html"    class="nav-link">WORK</a>
+      <a href="about/index.html"   class="nav-link">AUTHOR</a>
+      <a href="system/index.html"  class="nav-link">SYSTEM</a>
+      <a href="contact/index.html" class="nav-link">SIGNAL</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">MENU</button>
+  </nav>
+
+  <div id="mobile-menu">
+    <video class="menu-video" muted loop playsinline preload="none">
+      <source src="assets/img/Hero.mp4" type="video/mp4">
+    </video>
+    <div class="menu-video-overlay"></div>
+    <a href="work/index.html">WORK</a>
+    <a href="about/index.html">AUTHOR</a>
+    <a href="system/index.html">SYSTEM</a>
+    <a href="contact/index.html">SIGNAL</a>
+  </div>
+
+  <main class="entry-page">
+
+    <!-- HERO — cinematic video background -->
+    <section class="hero">
+      <div class="hero-bg">
+        <video id="hero-vid-a" class="hero-vid" muted playsinline preload="none"></video>
+        <video id="hero-vid-b" class="hero-vid" muted playsinline preload="none"></video>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-name">Massimiliano<br><span style="white-space:nowrap">Di Liberto</span></h1>
+        <p class="hero-subtitle">CREATIVE PRODUCER &nbsp;·&nbsp; CINEMATIC DIRECTOR &nbsp;·&nbsp; VISUAL SYSTEMS</p>
+        <p class="hero-descriptor">Creative Producer working between cinema, production and visual systems.</p>
+      </div>
+    </section>
+
+    <div class="hp-section-sep" aria-hidden="true"></div>
+
+    <!-- WORK FRAME 1: Mr. Rain -->
+    <section class="hp-work-frame" data-project="mr-rain">
+      <div class="hp-wf-img">
+        <img src="assets/img/IMG_7623.jpeg" alt="Mr. Rain" style="object-position: center 40%;">
+      </div>
+      <div class="hp-wf-overlay"></div>
+      <div class="hp-wf-content">
+        <span class="hp-wf-cat">MUSIC</span>
+        <h2 class="hp-wf-title">MR. RAIN — VISUAL DEVELOPMENT &amp; CREATIVE DIRECTION</h2>
+        <span class="hp-wf-cta">VIEW PROJECT →</span>
+      </div>
+    </section>
+
+    <div class="hp-section-sep" aria-hidden="true"></div>
+
+    <!-- WORK FRAME 2: Up All Night -->
+    <section class="hp-work-frame" data-project="up-all-night">
+      <div class="hp-wf-img">
+        <img src="assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png" alt="Up All Night" style="object-position: center center;">
+      </div>
+      <div class="hp-wf-overlay"></div>
+      <div class="hp-wf-content">
+        <span class="hp-wf-cat">BRAND &amp; FILM</span>
+        <h2 class="hp-wf-title">FILM DEVELOPMENT / CINEMATIC PRODUCTION</h2>
+        <span class="hp-wf-cta">VIEW PROJECT →</span>
+      </div>
+    </section>
+
+    <div class="hp-section-sep" aria-hidden="true"></div>
+
+    <!-- WORK FRAME 3: Gamma+ -->
+    <section class="hp-work-frame" data-project="gamma-duality">
+      <div class="hp-wf-img">
+        <img src="assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png" alt="Gamma+ Duality" style="object-position: center 30%;">
+      </div>
+      <div class="hp-wf-overlay"></div>
+      <div class="hp-wf-content">
+        <span class="hp-wf-cat">BEAUTY &amp; FASHION</span>
+        <h2 class="hp-wf-title">GAMMA+ — BRAND COLLABORATIONS</h2>
+        <span class="hp-wf-cta">VIEW PROJECT →</span>
+      </div>
+    </section>
+
+    <div class="hp-section-sep" aria-hidden="true"></div>
+
+    <!-- BACKSTAGE: BCK04 — left-aligned title, dark overlay -->
+    <section class="hp-backstage">
+      <div class="hp-backstage-media">
+        <img src="assets/img/BCK04.jpg" alt="" class="hp-backstage-img">
+        <div class="hp-bs-patina"></div>
+        <div class="hp-bs-overlay--left"></div>
+        <div class="hp-bs-inner hp-bs-inner--left">
+          <h2 class="hp-bs-title">Every frame is built between<br>instinct and control.</h2>
+          <p class="hp-bs-sub">VISION. STRUCTURE. EXECUTION.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSING: dark background, no image, drift text -->
+    <section class="hp-closing hp-closing--textonly">
+      <div class="hp-closing-content">
+        <p class="hp-closing-emphasis">ADAPT. CONTROL. MAKE IT REAL.</p>
+      </div>
+    </section>
+
+    <!-- WHO IS BILL JOBS? editorial section → AUTHOR -->
+    <section class="hp-bj-editorial">
+      <p class="hp-bj-editorial-title">Who is Bill Jobs?</p>
+      <a href="about/index.html" class="hp-bj-author-btn" aria-label="Go to Author page">AUTHOR</a>
+      <span class="hp-divider-h" aria-hidden="true"></span>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>© 2026 Massimiliano Di Liberto &nbsp;·&nbsp; Bill Jobs Studio</span>
+    <a href="mailto:massimiliano.diliberto@gmail.com">massimiliano.diliberto@gmail.com</a>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+  <script src="assets/js/core.js"></script>
+
+  <script>
+    /* Hide page-transition overlay immediately on home (intro handles reveal) */
+    gsap.set('#page-transition', { autoAlpha: 0 });
+
+    /* scroll-indicator removed — section separators handle that visual */
+
+    /* ── HERO ENTRANCE ──────────────────────────────────────── */
+
+    function playHeroEntrance() {
+      const tl = gsap.timeline();
+      tl.fromTo('.hero-name',       { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power1.out', delay: 0.2 })
+        .fromTo('.hero-subtitle',   { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power1.out' }, '-=0.7')
+        .fromTo('.hero-descriptor', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, '-=0.6');
+    }
+
+    function initSite() {
+      window.scrollTo(0, 0);
+      if (typeof lenis !== 'undefined') lenis.scrollTo(0, { immediate: true });
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    }
+
+    /* ── INTRO SEQUENCE ─────────────────────────────────────── */
+
+    let introTimeouts = [];
+
+    function playIntro() {
+      /* flash.mov background — fades in with the words */
+      var flashVid = document.getElementById('intro-flash-vid');
+      if (flashVid) {
+        var fp = flashVid.play(); if (fp) fp.catch(function(){});
+        gsap.to(flashVid, { opacity: 1, duration: 1.0, ease: 'power1.out', delay: 0.15 });
+      }
+      /* Phase 1: three words — slightly slower timing */
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw1').style.opacity = '1'; }, 700));
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw2').style.opacity = '1'; }, 1200));
+      introTimeouts.push(setTimeout(() => { document.getElementById('iw3').style.opacity = '1'; }, 1700));
+      /* synchronized light pulse after all three words are fully visible */
+      introTimeouts.push(setTimeout(() => {
+        gsap.timeline()
+          .to(['#iw1', '#iw2', '#iw3'], { opacity: 0.28, duration: 0.28, ease: 'power2.in' })
+          .to(['#iw1', '#iw2', '#iw3'], { opacity: 1,    duration: 0.40, ease: 'power2.out' });
+      }, 3000));
+      introTimeouts.push(setTimeout(() => {
+        document.getElementById('intro-p1').style.opacity = '0';
+        gsap.to('#intro', { opacity: 0, duration: 0.85, ease: 'power2.inOut', onComplete: () => {
+          document.getElementById('intro').style.display = 'none';
+        }});
+      }, 4500));
+      introTimeouts.push(setTimeout(startETF, 5400));
+    }
+
+    function startETF() {
+      const etfEl = document.getElementById('intro-etf');
+      etfEl.innerHTML = '';
+      'ENTER THE FRAME'.split('').forEach(ch => {
+        const s = document.createElement('span');
+        s.className = 'etf-char';
+        s.textContent = ch;
+        etfEl.appendChild(s);
+      });
+      gsap.set('.etf-char', { opacity: 0, scale: 0.88 });
+      gsap.to('#etf-overlay', { opacity: 1, duration: 0.4, ease: 'power2.out' });
+      window.sound.play('woosh', 0.12, 0.6);
+      const etfTL = gsap.timeline({ onComplete: afterETF });
+      document.querySelectorAll('.etf-char').forEach((char, i) => {
+        etfTL.to(char, {
+          keyframes: [
+            { opacity: 1, scale: 1.28, duration: 0.42, ease: 'power2.out' },
+            { opacity: 0, scale: 0.82, duration: 0.55, ease: 'power2.inOut' }
+          ],
+        }, i * 0.23);
+      });
+    }
+
+    function afterETF() {
+      startHeroVideos();
+      initSite();
+      playHeroEntrance();
+      initScrollAnimations();
+      gsap.to('#etf-overlay', { opacity: 0, duration: 0.8, ease: 'power2.inOut', onComplete: () => {
+        const el = document.getElementById('etf-overlay');
+        if (el) el.style.display = 'none';
+      }});
+    }
+
+    function skipIntro() {
+      introTimeouts.forEach(id => clearTimeout(id));
+      introTimeouts = [];
+      gsap.killTweensOf(['#intro', '#etf-overlay', '.etf-char', '#intro-flash-vid']);
+      gsap.set('#intro', { display: 'none' });
+      gsap.set('#etf-overlay', { display: 'none' });
+      startHeroVideos();
+      initSite();
+      playHeroEntrance();
+      initScrollAnimations();
+    }
+
+    document.getElementById('intro-skip')?.addEventListener('click', skipIntro);
+
+    /* ── SEQUENTIAL HERO VIDEO SYSTEM ──────────────────────── */
+
+    var HERO_VIDEOS = [
+      'assets/video/Video_Home_02.mov',
+      'assets/video/Video_Home_01.mov'
+    ];
+    var _heroVidA, _heroVidB, _heroIdx = 0, _heroActive = 'a', _heroStarted = false;
+    var HERO_OPACITY = 0.42, HERO_FADE = 1400;
+
+    function initHeroVideos() {
+      _heroVidA = document.getElementById('hero-vid-a');
+      _heroVidB = document.getElementById('hero-vid-b');
+      if (!_heroVidA || !_heroVidB) return;
+      gsap.set([_heroVidA, _heroVidB], { opacity: 0 });
+      _heroVidA.addEventListener('ended', _heroAdvance);
+      _heroVidB.addEventListener('ended', _heroAdvance);
+    }
+
+    function _heroPlay(vid, onSuccess) {
+      var p = vid.play();
+      if (p !== undefined) {
+        p.then(onSuccess || function(){}).catch(function() {
+          /* iOS blocked — retry on first touch */
+          document.addEventListener('touchstart', function _t() {
+            vid.play().then(onSuccess || function(){});
+            document.removeEventListener('touchstart', _t);
+          }, { once: true, passive: true });
+        });
+      } else if (onSuccess) { onSuccess(); }
+    }
+
+    function startHeroVideos() {
+      if (_heroStarted || !_heroVidA) return;
+      _heroStarted = true;
+      _heroIdx = 0;
+      _heroActive = 'a';
+      _heroVidA.src = HERO_VIDEOS[0];
+      _heroVidA.load();
+      _heroPlay(_heroVidA, function() {
+        gsap.to(_heroVidA, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.out' });
+      });
+    }
+
+    function _heroAdvance() {
+      var cur  = _heroActive === 'a' ? _heroVidA : _heroVidB;
+      var next = _heroActive === 'a' ? _heroVidB : _heroVidA;
+      _heroIdx = (_heroIdx + 1) % HERO_VIDEOS.length;
+      _heroActive = _heroActive === 'a' ? 'b' : 'a';
+      /* Fade current to black, then after 2-second pause fade in next */
+      gsap.to(cur, {
+        opacity: 0, duration: HERO_FADE / 1000, ease: 'power2.inOut',
+        onComplete: function() {
+          cur.pause(); cur.removeAttribute('src'); cur.load();
+          gsap.set(next, { opacity: 0 });
+          next.src = HERO_VIDEOS[_heroIdx];
+          next.load();
+          _heroPlay(next, function() {
+            setTimeout(function() {
+              gsap.to(next, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.inOut' });
+            }, 2000);
+          });
+        }
+      });
+    }
+
+    initHeroVideos();
+
+    /* ── INTRO LOADER ──────────────────────────────────────── */
+
+    function startIntroLoader(onDone) {
+      var arc  = document.getElementById('il-arc');
+      var circ = 150.796; // 2pi x r24
+      var loaded = 0, isDone = false;
+
+      var assets = [
+        { type: 'image', src: 'assets/img/BCK04.jpg' },
+        { type: 'image', src: 'assets/img/67C632E0-4438-4680-B869-DE8F8EFDE4BF.png' },
+        { type: 'image', src: 'assets/img/IMG_7623.jpeg' },
+        { type: 'image', src: 'assets/img/07AFD196-D7F2-41E0-9141-E9AB4FCFB1E7.png' },
+      ];
+      var total = assets.length;
+
+      function setProgress(p) {
+        if (arc) arc.style.strokeDashoffset = (circ * (1 - Math.min(p, 1))).toFixed(3);
+      }
+
+      function tick() {
+        loaded = Math.min(loaded + 1, total);
+        setProgress(loaded / total);
+        if (loaded >= total) complete();
+      }
+
+      function complete() {
+        if (isDone) return;
+        isDone = true;
+        setProgress(1);
+        setTimeout(function () {
+          var el = document.getElementById('intro-loader');
+          if (el) { el.style.transition = 'opacity 600ms ease-out'; el.style.opacity = '0'; }
+          setTimeout(function () {
+            if (el && el.parentNode) el.remove();
+            onDone();
+          }, 650);
+        }, 200);
+      }
+
+      setTimeout(function () { if (!isDone) complete(); }, 4000);
+
+      assets.forEach(function (asset) {
+        if (asset.type === 'image') {
+          var img = new Image();
+          img.onload = tick; img.onerror = tick; img.src = asset.src;
+        } else {
+          var _fired = false;
+          var _tick = function () { if (!_fired) { _fired = true; tick(); } };
+          var vid = document.createElement('video');
+          vid.muted = true; vid.setAttribute('playsinline', ''); vid.preload = 'auto';
+          vid.addEventListener('canplaythrough', _tick, { once: true });
+          vid.addEventListener('error', _tick, { once: true });
+          setTimeout(_tick, 2500);
+          var vsrc = document.createElement('source');
+          vsrc.src = asset.src; vsrc.type = 'video/mp4';
+          vid.appendChild(vsrc); vid.load();
+        }
+      });
+    }
+
+    if (sessionStorage.getItem('introSeen')) {
+      var _il = document.getElementById('intro-loader');
+      if (_il) _il.style.display = 'none';
+      gsap.set('#intro', { display: 'none' });
+      gsap.set('#etf-overlay', { display: 'none' });
+      startHeroVideos();
+      initSite();
+      playHeroEntrance();
+      initScrollAnimations();
+    } else {
+      sessionStorage.setItem('introSeen', 'true');
+      startIntroLoader(function () { playIntro(); });
+    }
+
+    /* ── SCROLL ANIMATIONS — called only after intro is fully gone ── */
+
+    function initScrollAnimations() {
+
+      /* ── HERO CONTENT SCROLL FADE ─────────────────────────────── */
+      gsap.to('.hero-content', {
+        y: -38, opacity: 0.12, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'center center', end: 'bottom top', scrub: 2.5 }
+      });
+
+      /* ── WORK FRAMES: ENTRANCE + IMAGE PARALLAX + HOVER ─────── */
+      document.querySelectorAll('.hp-work-frame').forEach(function(frame) {
+        gsap.fromTo(frame,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 1.5, ease: 'expo.out',
+            scrollTrigger: { trigger: frame, start: 'top 86%', toggleActions: 'play none none none' },
+            onComplete: function() { gsap.set(frame, { clearProps: 'y,transform' }); }
+          }
+        );
+        var img = frame.querySelector('.hp-wf-img img');
+        if (img) {
+          gsap.to(img, {
+            yPercent: -10, ease: 'none',
+            scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: 2 }
+          });
+          frame.addEventListener('mouseenter', function() {
+            gsap.to(img, { scale: 1.06, duration: 1.4, ease: 'power2.out' });
+          });
+          frame.addEventListener('mouseleave', function() {
+            gsap.to(img, { scale: 1, duration: 1.0, ease: 'power2.out' });
+          });
+        }
+      });
+
+      /* ── BACKSTAGE: IMAGE PARALLAX + TEXT REVEALS ───────────── */
+      document.querySelectorAll('.hp-backstage').forEach(function(section) {
+        var img   = section.querySelector('.hp-backstage-img');
+        var title = section.querySelector('.hp-bs-title');
+        var sub   = section.querySelector('.hp-bs-sub');
+        if (img) {
+          gsap.to(img, {
+            yPercent: -10, ease: 'none',
+            scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 2 }
+          });
+        }
+        if (title) {
+          gsap.fromTo(title, { opacity: 0, y: 30, x: -14 }, {
+            opacity: 1, y: 0, x: 0, duration: 1.6, ease: 'power2.out',
+            scrollTrigger: { trigger: section, start: 'top 72%', toggleActions: 'play none none none' },
+            onComplete: function() {
+              gsap.to(title, { y: '-=8', x: '+=5', duration: 8, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.5 });
+            }
+          });
+        }
+        if (sub) {
+          gsap.fromTo(sub, { opacity: 0, x: -10 }, {
+            opacity: 1, x: 0, duration: 1.2, ease: 'power1.out',
+            scrollTrigger: { trigger: section, start: 'top 62%', toggleActions: 'play none none none' },
+            delay: 0.55
+          });
+        }
+      });
+
+      /* ── CLOSING: REVEAL + PERPETUAL DRIFT ───────────────────── */
+      var closing = document.querySelector('.hp-closing');
+      if (closing) {
+        var emphasis = closing.querySelector('.hp-closing-emphasis');
+        if (emphasis) {
+          gsap.fromTo(emphasis, { opacity: 0, y: 16, letterSpacing: '0.02em' }, {
+            opacity: 1, y: 0, letterSpacing: '0.28em', duration: 2.2, ease: 'power1.out',
+            scrollTrigger: { trigger: closing, start: 'top 72%', toggleActions: 'play none none none' },
+            onComplete: function() {
+              gsap.to(emphasis, { y: -6, x: 4, duration: 11, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.5 });
+              gsap.to(emphasis, { opacity: 0.48, duration: 3.8, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.2 });
+            }
+          });
+        }
+      }
+
+      /* ── BJ EDITORIAL REVEAL ─────────────────────────────────── */
+      var bjEdit = document.querySelector('.hp-bj-editorial');
+      if (bjEdit) {
+        var bjTitle = bjEdit.querySelector('.hp-bj-editorial-title');
+        var bjBtn   = bjEdit.querySelector('.hp-bj-author-btn');
+        if (bjTitle) {
+          gsap.fromTo(bjTitle, { opacity: 0, y: 26, scale: 0.98 }, {
+            opacity: 1, y: 0, scale: 1, duration: 2.0, ease: 'power2.out',
+            scrollTrigger: { trigger: bjEdit, start: 'top 80%', toggleActions: 'play none none none' }
+          });
+        }
+        if (bjBtn) {
+          gsap.fromTo(bjBtn, { opacity: 0 }, {
+            opacity: 1, duration: 1.4, ease: 'power1.out',
+            scrollTrigger: { trigger: bjEdit, start: 'top 74%', toggleActions: 'play none none none' },
+            delay: 0.8
+          });
+        }
+      }
+
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    }
+  </script>
+
+  <!-- PROJECT OVERLAY -->
+  <div id="project-overlay" class="overlay" aria-hidden="true">
+    <div class="overlay-backdrop"></div>
+    <div class="overlay-panel">
+      <button class="overlay-close" aria-label="Close"><span>✕</span></button>
+      <div class="overlay-media"></div>
+      <div class="overlay-content">
+        <div class="overlay-header">
+          <h2 class="overlay-title"></h2>
+          <p class="overlay-credits"></p>
+        </div>
+        <div class="overlay-description"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var overlay      = document.getElementById('project-overlay');
+    var overlayMedia = overlay.querySelector('.overlay-media');
+    var overlayTitle = overlay.querySelector('.overlay-title');
+    var overlayCreds = overlay.querySelector('.overlay-credits');
+    var overlayDesc  = overlay.querySelector('.overlay-description');
+    var overlayClose = overlay.querySelector('.overlay-close');
+
+    var projects = {
+      'gamma-duality': {
+        title: 'GAMMA+ — BRAND COLLABORATIONS',
+        credits: 'Gamma+ Professional · 2023 · Creative Direction · Campaign · Live Show',
+        description: [
+          'Through multiple collaborations with Gamma+ the work evolved across creative direction, visual campaigns, live show design and branded content production.',
+          'Projects included the development of large-scale visual concepts for international campaigns, combining photography, creative strategy and product identity. One of the most recognized campaigns transformed the brand\'s visual language through the recurring image of a classical dancer, used across catalogs, exhibitions and international trade fair installations.',
+          'The collaboration also expanded into live productions, including "Duality", a 30-minute audiovisual show developed for large-scale stage screens, featuring synchronized visual content, intro films, audio mixing and live presentation sequences designed around performance timing and emotional impact.'
+        ],
+        role: 'Creative Direction · Visual Identity · Campaign Architecture · Live Show Direction',
+        images: ['assets/img/G+C09.jpg', 'assets/img/BCK06.jpg'],
+        workLink: 'work/index.html'
+      },
+      'mr-rain': {
+        title: 'MR. RAIN — VISUAL DEVELOPMENT & CREATIVE DIRECTION',
+        credits: 'Warner Music · 2021–2023 · Production · Location · Visual Systems',
+        description: [
+          'Through multiple collaborations with Mr. Rain, a large part of my visual identity evolved into a multidisciplinary creative process.',
+          'The projects moved across music videos, live visuals, production design, filmmaking, editing, VFX, colour correction and visual development, combining technical execution with emotional and cinematic storytelling.',
+          'Each collaboration became an opportunity to build visual worlds designed around atmosphere, performance and emotional connection.'
+        ],
+        role: 'Production · Location Scouting · Technical Coordination',
+        images: ['assets/img/BCK01.jpg', 'assets/img/BCK07.jpg'],
+        workLink: 'work/index.html'
+      },
+      'up-all-night': {
+        title: 'FILM DEVELOPMENT / CINEMATIC PRODUCTION',
+        credits: 'Berlinale EFM · Development · Direction · Production',
+        description: [
+          'Independent film development focused on cinematic production, international presentation and long-form storytelling.',
+          'The project included screenplay writing, production planning, budget development, casting research, location scouting and the creation of a full visual presentation package designed for international producers and investors.',
+          'A teaser trailer and complete pitch materials were developed and presented for two consecutive years at the European Film Market in Berlin.',
+          'The project received expressions of funding interest from three regional film commissions, reaching a combined value of approximately €690,000, and continues to move through international financing development.'
+        ],
+        role: 'Director · Writer · Producer',
+        images: ['assets/img/BCK05.jpg', 'assets/img/BCK03.jpg'],
+        workLink: 'work/index.html'
+      }
+    };
+
+    var carouselInterval = null;
+
+    function openOverlay(id) {
+      var p = projects[id];
+      if (!p) return;
+      overlayTitle.textContent = p.title;
+      overlayCreds.textContent = p.credits;
+      overlayMedia.innerHTML = '';
+      if (p.images && p.images.length > 1) {
+        var carousel = document.createElement('div');
+        carousel.className = 'overlay-carousel';
+        p.images.forEach(function(src, i) {
+          var img = document.createElement('img');
+          img.src = src; img.alt = p.title;
+          img.style.opacity = i === 0 ? '1' : '0';
+          carousel.appendChild(img);
+        });
+        overlayMedia.appendChild(carousel);
+        var imgs = carousel.querySelectorAll('img');
+        var current = 0;
+        carouselInterval = setInterval(function() {
+          var next = (current + 1) % imgs.length;
+          imgs[current].style.opacity = '0';
+          imgs[next].style.opacity = '1';
+          current = next;
+        }, 3000);
+      } else {
+        var img = document.createElement('img');
+        img.src = p.image; img.alt = p.title;
+        overlayMedia.appendChild(img);
+      }
+      overlayDesc.innerHTML = '';
+      p.description.forEach(function(text) {
+        var el = document.createElement('p');
+        el.textContent = text;
+        overlayDesc.appendChild(el);
+      });
+      if (p.role) {
+        var role = document.createElement('span');
+        role.className = 'overlay-role';
+        role.textContent = p.role;
+        overlayDesc.appendChild(role);
+      }
+      if (p.workLink) {
+        var wl = document.createElement('a');
+        wl.href = p.workLink;
+        wl.className = 'overlay-work-link';
+        wl.textContent = 'OPEN IN WORK →';
+        overlayDesc.appendChild(wl);
+      }
+      overlay.setAttribute('aria-hidden', 'false');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      if (typeof lenis !== 'undefined') lenis.stop();
+      gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.4, ease: 'power2.out' });
+    }
+
+    function closeOverlay() {
+      if (carouselInterval) { clearInterval(carouselInterval); carouselInterval = null; }
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (typeof lenis !== 'undefined') lenis.start();
+      gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.4, ease: 'power2.out' });
+      setTimeout(function() { overlayMedia.innerHTML = ''; }, 650);
+    }
+
+    overlayClose.addEventListener('click', closeOverlay);
+    overlay.querySelector('.overlay-backdrop').addEventListener('click', closeOverlay);
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeOverlay(); });
+
+    document.querySelectorAll('[data-project]').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        openOverlay(el.dataset.project);
+      });
+    });
+  }());
+  </script>
+
+  <!-- HOME AUDIO LAYER -->
+  <script>
+  (function () {
+
+    document.addEventListener('sound:enabled', function () {
+      console.log('[Sound/Home] sound:enabled → drone + hum loops');
+      window.sound.loop('drone', 0.15);
+      window.sound.loop('hum', 0.10);
+    });
+
+  }());
+  </script>
+
 </body>
 </html>
