@@ -16,10 +16,14 @@ try {
   lenis = { on: function(){}, scrollTo: function(){}, stop: function(){}, start: function(){}, raf: function(){} };
 }
 
-gsap.registerPlugin(ScrollTrigger);
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-gsap.ticker.lagSmoothing(0);
+if (typeof gsap !== 'undefined') {
+  try {
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  } catch (_) {}
+}
 
 /* ── Navigation gate helpers ─────────────────────────────── */
 
@@ -49,13 +53,11 @@ function waitForAboveFoldImages(maxMs) {
   });
 }
 
-/* Destination page: hold #page-transition until content is ready */
-window.addEventListener('load', async () => {
+/* Destination page: hide #page-transition (safety net — early inline script does it first) */
+window.addEventListener('load', () => {
   if (document.getElementById('intro')) return;
-  const primaryVid = document.querySelector('#system-vid-bg, #author-vid-texture');
-  if (primaryVid) await waitForVideo(primaryVid, 2500);
-  await waitForAboveFoldImages(2500);
-  gsap.to('#page-transition', { autoAlpha: 0, duration: 0.7, ease: 'power2.out', delay: 0.15 });
+  var _pt = document.getElementById('page-transition');
+  if (_pt) { _pt.style.opacity = '0'; _pt.style.visibility = 'hidden'; _pt.style.pointerEvents = 'none'; }
 });
 
 /* Source page: instant black gate + navigate */
@@ -171,6 +173,7 @@ document.querySelectorAll('a[href]').forEach(link => {
 });
 
 /* ── [data-reveal] scroll animations ────────────────────── */
+if (typeof gsap === 'undefined') return;
 gsap.utils.toArray('[data-reveal]').forEach(el => {
   gsap.fromTo(el,
     { opacity: 0, y: 18 },
