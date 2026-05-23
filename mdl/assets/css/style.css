@@ -983,6 +983,17 @@ footer a:hover { color: var(--text-primary); }
   width: 100%;
 }
 
+@keyframes bjLogoPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+.bj-logo-pulse {
+  display: block;
+  width: clamp(48px, 7vw, 90px);
+  margin: 0 auto 4vh;
+  animation: bjLogoPulse 3.5s ease-in-out infinite;
+}
+
 .auth-bj-artist-cta {
   margin-top: 3vh;
   font-family: var(--font-sans);
