@@ -983,6 +983,25 @@ footer a:hover { color: var(--text-primary); }
   width: 100%;
 }
 
+.auth-bj-artist-cta {
+  margin-top: 3vh;
+  font-family: var(--font-sans);
+  font-size: clamp(12px, 1.4vw, 16px);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  letter-spacing: 0.08em;
+}
+.auth-bj-artist-cta a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: color 0.3s ease;
+}
+.auth-bj-artist-cta a:hover {
+  color: #fff;
+}
+
 #auth-line-wrap {
   position: absolute;
   top: 0;
