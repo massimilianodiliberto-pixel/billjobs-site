@@ -436,7 +436,7 @@ footer a:hover { color: var(--text-primary); }
   font-size: var(--text-hero);
   font-weight: 300;
   color: var(--text-primary);
-  opacity: 0;
+  opacity: 1;
   letter-spacing: -0.02em;
   line-height: 1;
 }
@@ -447,7 +447,7 @@ footer a:hover { color: var(--text-primary); }
   letter-spacing: 0.28em;
   color: rgba(255, 255, 255, 0.62);
   margin-top: 18px;
-  opacity: 0;
+  opacity: 1;
 }
 .hero-descriptor {
   font-family: var(--font-ui);
@@ -456,7 +456,7 @@ footer a:hover { color: var(--text-primary); }
   letter-spacing: 0.12em;
   color: rgba(255, 255, 255, 0.36);
   margin-top: 32px;
-  opacity: 0;
+  opacity: 1;
   max-width: 480px;
   line-height: 1.9;
 }
@@ -2587,7 +2587,7 @@ footer a:hover { color: var(--text-primary); }
   overflow: hidden;
   cursor: pointer;
   margin: 0;
-  opacity: 0; /* revealed by initScrollAnimations after intro */
+  opacity: 1; /* GSAP fromTo sets it to 0 at animation start; 1 is the CSS fallback */
 }
 .hp-work-frame:hover .hp-wf-img img {
   transform: scale(1.03);

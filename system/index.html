@@ -214,7 +214,7 @@
   <!-- SYSTEM GATE animation -->
   <script>
   (function () {
-    gsap.set('#page-transition', { autoAlpha: 0 });
+    (function(){ var _pt=document.getElementById('page-transition'); if(_pt){_pt.style.opacity='0';_pt.style.visibility='hidden';_pt.style.pointerEvents='none';} })();
     var gate = document.getElementById('sys-gate');
     var arc  = document.getElementById('sys-gate-arc');
     if (!gate || !arc) return;

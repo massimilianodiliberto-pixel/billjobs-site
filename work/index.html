@@ -105,7 +105,7 @@
   <script src="../assets/js/core.js"></script>
 
   <script>
-    gsap.set('#page-transition', { autoAlpha: 0 });
+    (function(){ var _pt=document.getElementById('page-transition'); if(_pt){_pt.style.opacity='0';_pt.style.visibility='hidden';_pt.style.pointerEvents='none';} })();
     /* ── PROJECT DATA ─────────────────────────────────────────────
        action: 'image_only' | 'link_youtube' | 'link_video'
        size:   'normal' (4/12 col) | 'wide' (8/12) | 'portrait' (4/12, 3:4)

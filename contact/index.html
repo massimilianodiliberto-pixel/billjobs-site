@@ -104,7 +104,7 @@
   <script src="../assets/js/core.js"></script>
 
   <script>
-  gsap.set('#page-transition', { autoAlpha: 0 });
+  (function(){ var _pt=document.getElementById('page-transition'); if(_pt){_pt.style.opacity='0';_pt.style.visibility='hidden';_pt.style.pointerEvents='none';} })();
 (function () {
   window.addEventListener('load', function () {
     /* Animate "Send a Signal" title immediately */

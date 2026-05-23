@@ -189,8 +189,8 @@
   <script src="assets/js/core.js"></script>
 
   <script>
-    /* Hide page-transition overlay immediately on home (intro handles reveal) */
-    gsap.set('#page-transition', { autoAlpha: 0 });
+    /* Hide page-transition overlay immediately — pure JS, no GSAP dependency */
+    (function(){ var _pt=document.getElementById('page-transition'); if(_pt){_pt.style.opacity='0';_pt.style.visibility='hidden';_pt.style.pointerEvents='none';} })();
 
     /* scroll-indicator removed — section separators handle that visual */
 
