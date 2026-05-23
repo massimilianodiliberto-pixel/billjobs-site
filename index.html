@@ -239,6 +239,9 @@
       introTimeouts.push(setTimeout(startETF, 5400));
     }
 
+    var _afterETFCalled = false;
+    var _afterETFSafety;
+
     function startETF() {
       const etfEl = document.getElementById('intro-etf');
       etfEl.innerHTML = '';
@@ -251,18 +254,27 @@
       gsap.set('.etf-char', { opacity: 0, scale: 0.88 });
       gsap.to('#etf-overlay', { opacity: 1, duration: 0.4, ease: 'power2.out' });
       window.sound.play('woosh', 0.12, 0.6);
+      /* Safety: if GSAP onComplete doesn't fire, force afterETF after 7s */
+      _afterETFSafety = setTimeout(function() { afterETF(); }, 7000);
       const etfTL = gsap.timeline({ onComplete: afterETF });
-      document.querySelectorAll('.etf-char').forEach((char, i) => {
-        etfTL.to(char, {
-          keyframes: [
-            { opacity: 1, scale: 1.28, duration: 0.42, ease: 'power2.out' },
-            { opacity: 0, scale: 0.82, duration: 0.55, ease: 'power2.inOut' }
-          ],
-        }, i * 0.23);
+      document.querySelectorAll('.etf-char').forEach(function(char, i) {
+        var t = i * 0.23;
+        etfTL.fromTo(char,
+          { opacity: 0, scale: 0.88 },
+          { opacity: 1, scale: 1.28, duration: 0.42, ease: 'power2.out' },
+          t
+        );
+        etfTL.to(char,
+          { opacity: 0, scale: 0.82, duration: 0.55, ease: 'power2.inOut' },
+          t + 0.42
+        );
       });
     }
 
     function afterETF() {
+      if (_afterETFCalled) return;
+      _afterETFCalled = true;
+      clearTimeout(_afterETFSafety);
       startHeroVideos();
       initSite();
       playHeroEntrance();
@@ -276,6 +288,8 @@
     function skipIntro() {
       introTimeouts.forEach(id => clearTimeout(id));
       introTimeouts = [];
+      clearTimeout(_afterETFSafety);
+      _afterETFCalled = true;
       gsap.killTweensOf(['#intro', '#etf-overlay', '.etf-char', '#intro-flash-vid']);
       gsap.set('#intro', { display: 'none' });
       gsap.set('#etf-overlay', { display: 'none' });
@@ -443,7 +457,7 @@
         gsap.fromTo(frame,
           { opacity: 0, y: 40 },
           { opacity: 1, y: 0, duration: 1.5, ease: 'expo.out',
-            scrollTrigger: { trigger: frame, start: 'top 86%', toggleActions: 'play none none none' },
+            scrollTrigger: { trigger: frame, start: 'top 92%', toggleActions: 'play none none none' },
             onComplete: function() { gsap.set(frame, { clearProps: 'y,transform' }); }
           }
         );
