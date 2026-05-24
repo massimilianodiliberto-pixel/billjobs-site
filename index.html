@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/style.css?v=20260523">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260524">
 </head>
 <body>
 
@@ -330,7 +330,7 @@
       'assets/video/Video_Home_01.mov'
     ];
     var _heroVidA, _heroVidB, _heroIdx = 0, _heroActive = 'a', _heroStarted = false;
-    var HERO_OPACITY = 0.42, HERO_FADE = 1400;
+    var HERO_OPACITY = window.innerWidth <= 767 ? 0.62 : 0.42, HERO_FADE = 1400;
 
     function initHeroVideos() {
       _heroVidA = document.getElementById('hero-vid-a');

@@ -2797,7 +2797,7 @@ footer a:hover { color: var(--text-primary); }
   .hp-work-frame { aspect-ratio: 16/9; }
   .hp-wf-content { opacity: 1; transform: none; bottom: 20px; left: 20px; }
   .hp-section-sep { height: 6vh; }
-  .hp-closing { height: 12vh; }
+  .hp-closing { height: auto; min-height: 0; padding: 8vh 0; }
   .hp-closing-emphasis { font-size: clamp(11px, 3vw, 14px); }
   .hp-bj-footer { padding: 0 20px; }
   .hp-bj-editorial { padding: 2vh 20px 3vh; }
