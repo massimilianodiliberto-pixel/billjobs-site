@@ -173,6 +173,7 @@ button { font-family: var(--font-ui); cursor: pointer; background: none; border:
   justify-content: center;
   pointer-events: none;
   opacity: 0;
+  background: #060606;
 }
 #intro-etf {
   position: relative;
