@@ -173,22 +173,23 @@ document.querySelectorAll('a[href]').forEach(link => {
 });
 
 /* ── [data-reveal] scroll animations ────────────────────── */
-if (typeof gsap === 'undefined') return;
-gsap.utils.toArray('[data-reveal]').forEach(el => {
-  gsap.fromTo(el,
-    { opacity: 0, y: 18 },
-    {
-      opacity: 1, y: 0,
-      duration: 0.85,
-      ease: 'power1.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 83%',
-        toggleActions: 'play none none none',
-      },
-    }
-  );
-});
+if (typeof gsap !== 'undefined') {
+  gsap.utils.toArray('[data-reveal]').forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 18 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.85,
+        ease: 'power1.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 83%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+  });
+}
 
 /* ── Asset base path (works from root and subdirectories) ─ */
 const _assetBase = (function () {
