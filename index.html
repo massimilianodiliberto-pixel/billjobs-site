@@ -438,8 +438,10 @@
     if (sessionStorage.getItem('introSeen')) {
       var _il = document.getElementById('intro-loader');
       if (_il) _il.style.display = 'none';
-      gsap.set('#intro', { display: 'none' });
-      gsap.set('#etf-overlay', { display: 'none' });
+      var _is = document.getElementById('intro');
+      if (_is) { _is.style.opacity = '0'; _is.style.display = 'none'; }
+      var _eo = document.getElementById('etf-overlay');
+      if (_eo) { _eo.style.opacity = '0'; _eo.style.display = 'none'; }
       startHeroVideos();
       initSite();
       playHeroEntrance();

@@ -603,12 +603,12 @@
       const info = card.querySelector('.wk-info');
       const img  = card.querySelector('img');
       card.addEventListener('mouseenter', () => {
-        gsap.to(info, { opacity: 1, y: 0,    duration: 0.38, ease: 'power2.out' });
-        if (img) gsap.to(img, { scale: 1.04, duration: 0.9,  ease: 'power2.out' });
+        try { gsap.to(info, { opacity: 1, y: 0, duration: 0.38, ease: 'power2.out' }); } catch(_) {}
+        try { if (img) gsap.to(img, { scale: 1.04, duration: 0.9, ease: 'power2.out' }); } catch(_) {}
       });
       card.addEventListener('mouseleave', () => {
-        gsap.to(info, { opacity: 0.72, y: 0, duration: 0.32 });
-        if (img) gsap.to(img, { scale: 1,    duration: 0.7,  ease: 'power2.out' });
+        try { gsap.to(info, { opacity: 0.72, y: 0, duration: 0.32 }); } catch(_) {}
+        try { if (img) gsap.to(img, { scale: 1, duration: 0.7, ease: 'power2.out' }); } catch(_) {}
       });
     });
 
@@ -618,7 +618,8 @@
       document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
       grid.querySelectorAll('.wk-card').forEach(card => {
         card.style.display = '';
-        gsap.to(card, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+        if (typeof gsap !== 'undefined') { gsap.to(card, { opacity: 1, duration: 0.35, ease: 'power2.out' }); }
+        else { card.style.opacity = '1'; }
       });
       grid.querySelectorAll('.wk-statement').forEach(stmt => {
         stmt.style.display = 'none';
@@ -640,11 +641,17 @@
         const show = card.dataset.cat === f;
         if (show) {
           card.style.display = '';
-          gsap.to(card, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+          if (typeof gsap !== 'undefined') { gsap.to(card, { opacity: 1, duration: 0.35, ease: 'power2.out' }); }
+          else { card.style.opacity = '1'; }
         } else {
-          gsap.to(card, { opacity: 0, duration: 0.25, ease: 'power2.in',
-            onComplete: () => { card.style.display = 'none'; }
-          });
+          if (typeof gsap !== 'undefined') {
+            gsap.to(card, { opacity: 0, duration: 0.25, ease: 'power2.in',
+              onComplete: () => { card.style.display = 'none'; }
+            });
+          } else {
+            card.style.opacity = '0';
+            card.style.display = 'none';
+          }
         }
       });
       setTimeout(function() { updateCardZoom(); }, 350);
@@ -707,8 +714,10 @@
       ov.classList.add('active');
       document.body.style.overflow = 'hidden';
       if (typeof lenis !== 'undefined') lenis.stop();
-      gsap.killTweensOf('main, nav');
-      gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.35, ease: 'power1.out' });
+      if (typeof gsap !== 'undefined') {
+        gsap.killTweensOf('main, nav');
+        gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.35, ease: 'power1.out' });
+      }
     }
 
     function closeOverlay() {
@@ -718,13 +727,14 @@
       ov.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
       if (typeof lenis !== 'undefined') lenis.start();
-      gsap.killTweensOf('main, nav');
-      gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.35, ease: 'power1.out' });
-      /* Restore card info smoothly — fires while overlay is still fading, so no visible jump */
-      document.querySelectorAll('.wk-info').forEach(function(info) {
-        gsap.killTweensOf(info);
-        gsap.to(info, { opacity: 0.72, y: 0, duration: 0.22, ease: 'none' });
-      });
+      if (typeof gsap !== 'undefined') {
+        gsap.killTweensOf('main, nav');
+        gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.35, ease: 'power1.out' });
+        document.querySelectorAll('.wk-info').forEach(function(info) {
+          gsap.killTweensOf(info);
+          gsap.to(info, { opacity: 0.72, y: 0, duration: 0.22, ease: 'none' });
+        });
+      }
       /* Clean up media after CSS transition finishes */
       _ovPending = setTimeout(function() {
         _ovPending = null;
@@ -752,53 +762,67 @@
 
     /* ── ENTRANCE — staged, subdued ─────────────────────────── */
 
-    gsap.set('.filter', { opacity: 0 });
+    var _gsapEntranceDone = false;
 
-    var entranceTL = gsap.timeline({ delay: 0.08 });
-    entranceTL
-      .fromTo('#work-title',
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 1.9, ease: 'power1.out' }
-      )
-      .fromTo('#work-subtitle',
-        { opacity: 0 },
-        { opacity: 1, duration: 1.2, ease: 'power1.out' },
-        '-=1.0'
-      )
-      .fromTo('.work-tagline',
-        { opacity: 0 },
-        { opacity: 1, duration: 1.0, ease: 'power1.out' },
-        '-=0.8'
-      )
-      .to('.filter',
-        { opacity: 1, duration: 0.8, ease: 'power1.out', stagger: 0.14 },
-        '-=0.5'
-      )
-      .fromTo('.wk-card:not([style*="display: none"])',
-        { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.85, ease: 'power1.out', stagger: { amount: 0.55 } },
-        '-=0.25'
-      );
+    if (typeof gsap !== 'undefined') {
+      var entranceTL = gsap.timeline({
+        delay: 0.08,
+        onComplete: function() { _gsapEntranceDone = true; }
+      });
+      entranceTL
+        .fromTo('#work-title',
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 1.9, ease: 'power1.out' }
+        )
+        .fromTo('#work-subtitle',
+          { opacity: 0 },
+          { opacity: 1, duration: 1.2, ease: 'power1.out' },
+          '-=1.0'
+        )
+        .fromTo('.work-tagline',
+          { opacity: 0 },
+          { opacity: 1, duration: 1.0, ease: 'power1.out' },
+          '-=0.8'
+        )
+        .to('.filter',
+          { opacity: 1, duration: 0.8, ease: 'power1.out', stagger: 0.14 },
+          '-=0.5'
+        )
+        .fromTo('.wk-card:not([style*="display: none"])',
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.85, ease: 'power1.out', stagger: { amount: 0.55 } },
+          '-=0.25'
+        );
 
-    /* Title light pulse */
-    gsap.to('#work-title', {
-      textShadow: '0 0 48px rgba(255,255,255,0.16)',
-      duration: 4.5,
-      yoyo: true,
-      repeat: -1,
-      ease: 'sine.inOut',
-      delay: 2.2
-    });
+      /* Title light pulse */
+      gsap.to('#work-title', {
+        textShadow: '0 0 48px rgba(255,255,255,0.16)',
+        duration: 4.5, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2.2
+      });
 
-    /* Continuous floating animation on title */
-    gsap.to('#work-title', {
-      y: -10, x: 5,
-      duration: 6,
-      yoyo: true,
-      repeat: -1,
-      ease: 'sine.inOut',
-      delay: 2.0
-    });
+      /* Continuous floating animation on title */
+      gsap.to('#work-title', {
+        y: -10, x: 5, duration: 6, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2.0
+      });
+    } else {
+      /* No GSAP — show everything immediately */
+      document.querySelectorAll('#work-title, #work-subtitle, .work-tagline, .filter, .wk-card').forEach(function(el) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+      _gsapEntranceDone = true;
+    }
+
+    /* Emergency fallback: force visibility after 8s if animations got stuck */
+    setTimeout(function() {
+      if (!_gsapEntranceDone) {
+        document.querySelectorAll('#work-title, #work-subtitle, .work-tagline, .filter, .wk-card').forEach(function(el) {
+          el.style.transition = 'opacity 0.6s ease';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+      }
+    }, 8000);
 
     /* Card center zoom on scroll */
     (function () {
@@ -844,13 +868,15 @@
       wvf.currentTime = 0;
       wvf.load();
       wvf.play().catch(function(){});
-      gsap.fromTo(wvf, { opacity: 0 }, { opacity: 0.35, duration: 0.10, ease: 'power2.out',
-        onComplete: function () {
-          gsap.to(wvf, { opacity: 0, duration: 0.55, delay: 0.20, ease: 'power2.in',
-            onComplete: function () { wvf.pause(); }
-          });
-        }
-      });
+      if (typeof gsap !== 'undefined') {
+        gsap.fromTo(wvf, { opacity: 0 }, { opacity: 0.35, duration: 0.10, ease: 'power2.out',
+          onComplete: function () {
+            gsap.to(wvf, { opacity: 0, duration: 0.55, delay: 0.20, ease: 'power2.in',
+              onComplete: function () { wvf.pause(); }
+            });
+          }
+        });
+      }
     }
 
     /* ── Overlay open: watch for active class ── */
