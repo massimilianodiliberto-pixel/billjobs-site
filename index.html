@@ -233,9 +233,12 @@
       }, 3000));
       introTimeouts.push(setTimeout(() => {
         document.getElementById('intro-p1').style.opacity = '0';
-        gsap.to('#intro', { opacity: 0, duration: 0.85, ease: 'power2.inOut', onComplete: () => {
-          document.getElementById('intro').style.display = 'none';
-        }});
+        var _i = document.getElementById('intro');
+        if (typeof gsap !== 'undefined' && _i) {
+          gsap.to(_i, { opacity: 0, duration: 0.85, ease: 'power2.inOut', onComplete: () => { _i.style.display = 'none'; } });
+        } else if (_i) {
+          _i.style.opacity = '0'; _i.style.display = 'none';
+        }
       }, 4500));
       introTimeouts.push(setTimeout(startETF, 5400));
     }
@@ -276,14 +279,15 @@
       if (_afterETFCalled) return;
       _afterETFCalled = true;
       clearTimeout(_afterETFSafety);
+      /* Pure JS — no GSAP dependency: always hide intro and overlay */
+      var _intro = document.getElementById('intro');
+      if (_intro) { _intro.style.opacity = '0'; _intro.style.display = 'none'; }
+      var _etf = document.getElementById('etf-overlay');
+      if (_etf) { _etf.style.opacity = '0'; _etf.style.display = 'none'; }
       startHeroVideos();
       initSite();
       playHeroEntrance();
       initScrollAnimations();
-      gsap.to('#etf-overlay', { opacity: 0, duration: 0.8, ease: 'power2.inOut', onComplete: () => {
-        const el = document.getElementById('etf-overlay');
-        if (el) el.style.display = 'none';
-      }});
     }
 
     function skipIntro() {
@@ -291,9 +295,11 @@
       introTimeouts = [];
       clearTimeout(_afterETFSafety);
       _afterETFCalled = true;
-      gsap.killTweensOf(['#intro', '#etf-overlay', '.etf-char', '#intro-flash-vid']);
-      gsap.set('#intro', { display: 'none' });
-      gsap.set('#etf-overlay', { display: 'none' });
+      if (typeof gsap !== 'undefined') gsap.killTweensOf(['#intro', '#etf-overlay', '.etf-char', '#intro-flash-vid']);
+      var _intro = document.getElementById('intro');
+      if (_intro) { _intro.style.opacity = '0'; _intro.style.display = 'none'; }
+      var _etf = document.getElementById('etf-overlay');
+      if (_etf) { _etf.style.opacity = '0'; _etf.style.display = 'none'; }
       startHeroVideos();
       initSite();
       playHeroEntrance();
