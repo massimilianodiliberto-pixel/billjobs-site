@@ -198,10 +198,13 @@
     /* ── HERO ENTRANCE ──────────────────────────────────────── */
 
     function playHeroEntrance() {
-      const tl = gsap.timeline();
-      tl.fromTo('.hero-name',       { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power1.out', delay: 0.2 })
-        .fromTo('.hero-subtitle',   { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power1.out' }, '-=0.7')
-        .fromTo('.hero-descriptor', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, '-=0.6');
+      if (typeof gsap !== 'undefined') {
+        const tl = gsap.timeline();
+        tl.fromTo('.hero-name',       { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power1.out', delay: 0.2 })
+          .fromTo('.hero-subtitle',   { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power1.out' }, '-=0.7')
+          .fromTo('.hero-descriptor', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, '-=0.6');
+      }
+      /* No GSAP: CSS opacity:1 already makes hero text visible */
     }
 
     function initSite() {
@@ -219,7 +222,9 @@
       var flashVid = document.getElementById('intro-flash-vid');
       if (flashVid) {
         var fp = flashVid.play(); if (fp) fp.catch(function(){});
-        gsap.to(flashVid, { opacity: 1, duration: 1.0, ease: 'power1.out', delay: 0.15 });
+        if (typeof gsap !== 'undefined') {
+          gsap.to(flashVid, { opacity: 1, duration: 1.0, ease: 'power1.out', delay: 0.15 });
+        } else { flashVid.style.opacity = '1'; }
       }
       /* Phase 1: three words — slightly slower timing */
       introTimeouts.push(setTimeout(() => { document.getElementById('iw1').style.opacity = '1'; }, 700));
@@ -227,9 +232,11 @@
       introTimeouts.push(setTimeout(() => { document.getElementById('iw3').style.opacity = '1'; }, 1700));
       /* synchronized light pulse after all three words are fully visible */
       introTimeouts.push(setTimeout(() => {
-        gsap.timeline()
-          .to(['#iw1', '#iw2', '#iw3'], { opacity: 0.28, duration: 0.28, ease: 'power2.in' })
-          .to(['#iw1', '#iw2', '#iw3'], { opacity: 1,    duration: 0.40, ease: 'power2.out' });
+        if (typeof gsap !== 'undefined') {
+          gsap.timeline()
+            .to(['#iw1', '#iw2', '#iw3'], { opacity: 0.28, duration: 0.28, ease: 'power2.in' })
+            .to(['#iw1', '#iw2', '#iw3'], { opacity: 1,    duration: 0.40, ease: 'power2.out' });
+        }
       }, 3000));
       introTimeouts.push(setTimeout(() => {
         document.getElementById('intro-p1').style.opacity = '0';
@@ -255,24 +262,29 @@
         s.textContent = ch;
         etfEl.appendChild(s);
       });
-      gsap.set('.etf-char', { opacity: 0, scale: 0.88 });
-      gsap.to('#etf-overlay', { opacity: 1, duration: 0.4, ease: 'power2.out' });
-      /* Safety: if GSAP onComplete doesn't fire, force afterETF after 7s */
+      /* Safety: afterETF fires at most 7s after startETF even if GSAP fails */
       _afterETFSafety = setTimeout(function() { afterETF(); }, 7000);
       try { window.sound.play('woosh', 0.12, 0.6); } catch(_) {}
-      const etfTL = gsap.timeline({ onComplete: afterETF });
-      document.querySelectorAll('.etf-char').forEach(function(char, i) {
-        var t = i * 0.23;
-        etfTL.fromTo(char,
-          { opacity: 0, scale: 0.88 },
-          { opacity: 1, scale: 1.28, duration: 0.42, ease: 'power2.out' },
-          t
-        );
-        etfTL.to(char,
-          { opacity: 0, scale: 0.82, duration: 0.55, ease: 'power2.inOut' },
-          t + 0.42
-        );
-      });
+      if (typeof gsap !== 'undefined') {
+        gsap.set('.etf-char', { opacity: 0, scale: 0.88 });
+        gsap.to('#etf-overlay', { opacity: 1, duration: 0.4, ease: 'power2.out' });
+        const etfTL = gsap.timeline({ onComplete: afterETF });
+        document.querySelectorAll('.etf-char').forEach(function(char, i) {
+          var t = i * 0.23;
+          etfTL.fromTo(char,
+            { opacity: 0, scale: 0.88 },
+            { opacity: 1, scale: 1.28, duration: 0.42, ease: 'power2.out' },
+            t
+          );
+          etfTL.to(char,
+            { opacity: 0, scale: 0.82, duration: 0.55, ease: 'power2.inOut' },
+            t + 0.42
+          );
+        });
+      } else {
+        /* No GSAP: skip ETF animation and call afterETF immediately */
+        afterETF();
+      }
     }
 
     function afterETF() {
@@ -321,7 +333,7 @@
       _heroVidA = document.getElementById('hero-vid-a');
       _heroVidB = document.getElementById('hero-vid-b');
       if (!_heroVidA || !_heroVidB) return;
-      gsap.set([_heroVidA, _heroVidB], { opacity: 0 });
+      if (typeof gsap !== 'undefined') gsap.set([_heroVidA, _heroVidB], { opacity: 0 });
       _heroVidA.addEventListener('ended', _heroAdvance);
       _heroVidB.addEventListener('ended', _heroAdvance);
     }
@@ -347,7 +359,11 @@
       _heroVidA.src = HERO_VIDEOS[0];
       _heroVidA.load();
       _heroPlay(_heroVidA, function() {
-        gsap.to(_heroVidA, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.out' });
+        if (typeof gsap !== 'undefined') {
+          gsap.to(_heroVidA, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.out' });
+        } else {
+          _heroVidA.style.opacity = String(HERO_OPACITY);
+        }
       });
     }
 
@@ -356,21 +372,28 @@
       var next = _heroActive === 'a' ? _heroVidB : _heroVidA;
       _heroIdx = (_heroIdx + 1) % HERO_VIDEOS.length;
       _heroActive = _heroActive === 'a' ? 'b' : 'a';
-      /* Fade current to black, then after 2-second pause fade in next */
-      gsap.to(cur, {
-        opacity: 0, duration: HERO_FADE / 1000, ease: 'power2.inOut',
-        onComplete: function() {
-          cur.pause(); cur.removeAttribute('src'); cur.load();
-          gsap.set(next, { opacity: 0 });
-          next.src = HERO_VIDEOS[_heroIdx];
-          next.load();
-          _heroPlay(next, function() {
-            setTimeout(function() {
-              gsap.to(next, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.inOut' });
-            }, 2000);
-          });
-        }
-      });
+      if (typeof gsap !== 'undefined') {
+        gsap.to(cur, {
+          opacity: 0, duration: HERO_FADE / 1000, ease: 'power2.inOut',
+          onComplete: function() {
+            cur.pause(); cur.removeAttribute('src'); cur.load();
+            gsap.set(next, { opacity: 0 });
+            next.src = HERO_VIDEOS[_heroIdx];
+            next.load();
+            _heroPlay(next, function() {
+              setTimeout(function() {
+                gsap.to(next, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.inOut' });
+              }, 2000);
+            });
+          }
+        });
+      } else {
+        cur.style.opacity = '0';
+        cur.pause(); cur.removeAttribute('src'); cur.load();
+        next.src = HERO_VIDEOS[_heroIdx];
+        next.load();
+        _heroPlay(next, function() { next.style.opacity = String(HERO_OPACITY); });
+      }
     }
 
     initHeroVideos();
