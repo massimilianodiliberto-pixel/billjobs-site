@@ -288,7 +288,7 @@ nav.scrolled {
 }
 
 #mobile-menu {
-  display: block;
+  display: none;
   position: fixed;
   inset: 0;
   background: #060606;
