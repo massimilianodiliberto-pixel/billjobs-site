@@ -240,6 +240,9 @@
       }, 3000));
       introTimeouts.push(setTimeout(() => {
         document.getElementById('intro-p1').style.opacity = '0';
+        /* Pre-solidify etf-overlay behind the fading intro so home never shows through */
+        var _eo = document.getElementById('etf-overlay');
+        if (_eo) _eo.style.opacity = '1';
         var _i = document.getElementById('intro');
         if (typeof gsap !== 'undefined' && _i) {
           gsap.to(_i, { opacity: 0, duration: 0.85, ease: 'power2.inOut', onComplete: () => { _i.style.display = 'none'; } });
