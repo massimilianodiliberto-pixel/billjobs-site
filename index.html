@@ -198,13 +198,31 @@
     /* ── HERO ENTRANCE ──────────────────────────────────────── */
 
     function playHeroEntrance() {
+      /* Video A fades in at the same moment as the name (0.2s delay).
+         If video hasn't fired 'playing' yet, wait for it — then show.
+         Absolute fallback at 4s for very slow connections. */
+      var _shown = false;
+      function _revealHero() {
+        if (_shown) return; _shown = true;
+        if (!_heroVidA) return;
+        if (typeof gsap !== 'undefined') {
+          gsap.to(_heroVidA, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.out' });
+        } else {
+          _heroVidA.style.opacity = String(HERO_OPACITY);
+        }
+      }
+      setTimeout(function() {
+        if (_heroVidAPlaying) { _revealHero(); }
+        else if (_heroVidA) { _heroVidA.addEventListener('playing', _revealHero, { once: true }); }
+      }, 200);
+      setTimeout(_revealHero, 4000); /* absolute fallback */
+
       if (typeof gsap !== 'undefined') {
-        const tl = gsap.timeline();
-        tl.fromTo('.hero-name',       { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power1.out', delay: 0.2 })
+        gsap.timeline()
+          .fromTo('.hero-name',       { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power1.out', delay: 0.2 })
           .fromTo('.hero-subtitle',   { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power1.out' }, '-=0.7')
           .fromTo('.hero-descriptor', { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, '-=0.6');
       }
-      /* No GSAP: CSS opacity:1 already makes hero text visible */
     }
 
     function initSite() {
@@ -329,7 +347,7 @@
       'assets/video/Video_Home_02.mov',
       'assets/video/Video_Home_01.mov'
     ];
-    var _heroVidA, _heroVidB, _heroIdx = 0, _heroActive = 'a', _heroStarted = false;
+    var _heroVidA, _heroVidB, _heroStarted = false, _heroVidAPlaying = false;
     var HERO_OPACITY = window.innerWidth <= 767 ? 0.62 : 0.42, HERO_FADE = 1400;
 
     function initHeroVideos() {
@@ -337,17 +355,13 @@
       _heroVidB = document.getElementById('hero-vid-b');
       if (!_heroVidA || !_heroVidB) return;
       if (typeof gsap !== 'undefined') gsap.set([_heroVidA, _heroVidB], { opacity: 0 });
-      _heroVidA.addEventListener('ended', _heroAdvance);
-      _heroVidB.addEventListener('ended', _heroAdvance);
     }
 
     function _heroPlay(vid, onShown) {
-      /* Use 'playing' event — fires on first real frame, not on buffering resolve */
       if (onShown) vid.addEventListener('playing', onShown, { once: true });
       var p = vid.play();
       if (p !== undefined) {
         p.catch(function() {
-          /* iOS gesture required — retry on next touch or click */
           function _tryPlay() { vid.play().catch(function(){}); }
           document.addEventListener('touchstart', _tryPlay, { once: true, passive: true });
           document.addEventListener('click',      _tryPlay, { once: true });
@@ -356,56 +370,47 @@
     }
 
     function startHeroVideos() {
-      if (_heroStarted || !_heroVidA) return;
+      if (_heroStarted || !_heroVidA || !_heroVidB) return;
       _heroStarted = true;
-      _heroIdx = 0;
-      _heroActive = 'a';
-      _heroVidA.src = HERO_VIDEOS[0];
-      _heroVidA.load();
 
-      var _vidShown = false;
-      function _showHeroA() {
-        if (_vidShown) return;
-        _vidShown = true;
+      /* Load both videos simultaneously */
+      _heroVidA.src = HERO_VIDEOS[0];
+      _heroVidB.src = HERO_VIDEOS[1];
+      _heroVidA.load();
+      _heroVidB.load();
+
+      /* Track first frame of A so playHeroEntrance can sync the fade-in */
+      _heroVidA.addEventListener('playing', function() { _heroVidAPlaying = true; }, { once: true });
+
+      /* Both start playing immediately — fade-in is handled by playHeroEntrance */
+      _heroPlay(_heroVidA, null);
+      _heroPlay(_heroVidB, null);
+
+      /* When A ends: crossfade to B, restart A for next cycle */
+      _heroVidA.addEventListener('ended', function() {
         if (typeof gsap !== 'undefined') {
+          gsap.to(_heroVidA, { opacity: 0, duration: HERO_FADE / 1000, ease: 'power2.inOut' });
+          gsap.to(_heroVidB, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.out' });
+        } else {
+          _heroVidA.style.opacity = '0';
+          _heroVidB.style.opacity = String(HERO_OPACITY);
+        }
+        _heroVidA.currentTime = 0;
+        _heroPlay(_heroVidA, null);
+      });
+
+      /* When B ends: crossfade back to A, restart B for next cycle */
+      _heroVidB.addEventListener('ended', function() {
+        if (typeof gsap !== 'undefined') {
+          gsap.to(_heroVidB, { opacity: 0, duration: HERO_FADE / 1000, ease: 'power2.inOut' });
           gsap.to(_heroVidA, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.out' });
         } else {
+          _heroVidB.style.opacity = '0';
           _heroVidA.style.opacity = String(HERO_OPACITY);
         }
-      }
-      _heroPlay(_heroVidA, _showHeroA);
-      /* Fallback: if 'playing' event never fires (slow 4G / private mode),
-         reveal the video after 4s so the hero isn't stuck black */
-      setTimeout(_showHeroA, 4000);
-    }
-
-    function _heroAdvance() {
-      var cur  = _heroActive === 'a' ? _heroVidA : _heroVidB;
-      var next = _heroActive === 'a' ? _heroVidB : _heroVidA;
-      _heroIdx = (_heroIdx + 1) % HERO_VIDEOS.length;
-      _heroActive = _heroActive === 'a' ? 'b' : 'a';
-      if (typeof gsap !== 'undefined') {
-        gsap.to(cur, {
-          opacity: 0, duration: HERO_FADE / 1000, ease: 'power2.inOut',
-          onComplete: function() {
-            cur.pause(); cur.removeAttribute('src'); cur.load();
-            gsap.set(next, { opacity: 0 });
-            next.src = HERO_VIDEOS[_heroIdx];
-            next.load();
-            _heroPlay(next, function() {
-              setTimeout(function() {
-                gsap.to(next, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.inOut' });
-              }, 2000);
-            });
-          }
-        });
-      } else {
-        cur.style.opacity = '0';
-        cur.pause(); cur.removeAttribute('src'); cur.load();
-        next.src = HERO_VIDEOS[_heroIdx];
-        next.load();
-        _heroPlay(next, function() { next.style.opacity = String(HERO_OPACITY); });
-      }
+        _heroVidB.currentTime = 0;
+        _heroPlay(_heroVidB, null);
+      });
     }
 
     initHeroVideos();
