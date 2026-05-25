@@ -211,9 +211,13 @@
           _heroVidA.style.opacity = String(HERO_OPACITY);
         }
       }
-      /* Muted video always autoplays on desktop — reveal unconditionally after 200ms.
-         Keep 4s fallback for very slow connections. */
-      setTimeout(_revealHero, 200);
+      /* Reveal video A as soon as it fires 'playing' (first real frame).
+         Check at 200ms in case it already fired; otherwise wait for the event.
+         Absolute fallback at 4s for very slow connections. */
+      setTimeout(function() {
+        if (_heroVidAPlaying) { _revealHero(); }
+        else if (_heroVidA) { _heroVidA.addEventListener('playing', _revealHero, { once: true }); }
+      }, 200);
       setTimeout(_revealHero, 4000);
 
       if (typeof gsap !== 'undefined') {
@@ -356,30 +360,15 @@
       if (typeof gsap !== 'undefined') gsap.set([_heroVidA, _heroVidB], { opacity: 0 });
     }
 
-    function _heroPlay(vid) {
-      /* Wait for loadedmetadata before calling play() to avoid AbortError.
-         load() starts the fetch; play() is called only once the browser
-         has parsed the container — this works reliably even with preload="none". */
-      function _doPlay() {
-        var p = vid.play();
-        if (p !== undefined) {
-          p.catch(function(e) {
-            if (e && e.name === 'AbortError') {
-              setTimeout(_doPlay, 300);
-              return;
-            }
-            function _retry() { vid.play().catch(function(){}); }
-            document.addEventListener('touchstart', _retry, { once: true, passive: true });
-            document.addEventListener('click',      _retry, { once: true });
-          });
-        }
-      }
-      if (vid.readyState >= 1) {
-        _doPlay();
-      } else {
-        vid.addEventListener('loadedmetadata', _doPlay, { once: true });
-        /* Safety fallback: if metadata never fires (very slow network), try anyway */
-        setTimeout(_doPlay, 4000);
+    function _heroPlay(vid, onShown) {
+      if (onShown) vid.addEventListener('playing', onShown, { once: true });
+      var p = vid.play();
+      if (p !== undefined) {
+        p.catch(function() {
+          function _tryPlay() { vid.play().catch(function(){}); }
+          document.addEventListener('touchstart', _tryPlay, { once: true, passive: true });
+          document.addEventListener('click',      _tryPlay, { once: true });
+        });
       }
     }
 
@@ -389,15 +378,13 @@
 
       _heroVidA.src = HERO_VIDEOS[0];
       _heroVidB.src = HERO_VIDEOS[1];
-      /* load() starts the fetch; _heroPlay waits for loadedmetadata then calls play() */
       _heroVidA.load();
       _heroVidB.load();
 
-      /* Track first frame of A */
       _heroVidA.addEventListener('playing', function() { _heroVidAPlaying = true; }, { once: true });
 
-      _heroPlay(_heroVidA);
-      _heroPlay(_heroVidB);
+      _heroPlay(_heroVidA, null);
+      _heroPlay(_heroVidB, null);
 
       /* When A ends: crossfade to B, restart A for next cycle */
       _heroVidA.addEventListener('ended', function() {
@@ -409,7 +396,7 @@
           _heroVidB.style.opacity = String(HERO_OPACITY);
         }
         _heroVidA.currentTime = 0;
-        _heroPlay(_heroVidA);
+        _heroPlay(_heroVidA, null);
       });
 
       /* When B ends: crossfade back to A, restart B for next cycle */
@@ -422,7 +409,7 @@
           _heroVidA.style.opacity = String(HERO_OPACITY);
         }
         _heroVidB.currentTime = 0;
-        _heroPlay(_heroVidB);
+        _heroPlay(_heroVidB, null);
       });
     }
 
