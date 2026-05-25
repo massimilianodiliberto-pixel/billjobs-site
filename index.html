@@ -225,10 +225,16 @@
 
     function playLogoPhase() {
       var wrap = document.getElementById('intro-logo-wrap');
-      if (!wrap) { playIntro(); return; }
+      var logo = document.getElementById('intro-mdl-logo');
+      if (!wrap || !logo) { playIntro(); return; }
       if (typeof gsap !== 'undefined') {
-        gsap.set(wrap, { xPercent: -50, yPercent: -50, scale: 0.88, opacity: 0 });
-        gsap.to(wrap, { opacity: 1, scale: 1.0, duration: 1.3, ease: 'power2.out' });
+        /* Position wrapper via transform only — NO opacity on wrap so mix-blend-mode
+           on the img composites against the actual page background (not an offscreen buffer) */
+        gsap.set(wrap, { xPercent: -50, yPercent: -50 });
+        gsap.fromTo(logo,
+          { opacity: 0, scale: 0.88 },
+          { opacity: 1, scale: 1.0, duration: 1.3, ease: 'power2.out' }
+        );
         /* Light sweep across the monogram at 1.4s */
         logoTimeouts.push(setTimeout(function () {
           gsap.fromTo('#intro-mdl-shimmer',
@@ -238,17 +244,17 @@
         }, 1400));
       } else {
         wrap.style.transform = 'translate(-50%, -50%)';
-        wrap.style.opacity = '1';
+        logo.style.opacity = '1';
       }
       /* Logo fades out at 3.0s */
       logoTimeouts.push(setTimeout(function () {
         if (typeof gsap !== 'undefined') {
-          gsap.to(wrap, {
+          gsap.to(logo, {
             opacity: 0, scale: 0.97, duration: 0.55, ease: 'power2.inOut',
             onComplete: function () { wrap.style.display = 'none'; }
           });
         } else {
-          wrap.style.opacity = '0';
+          logo.style.opacity = '0';
           wrap.style.display = 'none';
         }
       }, 3000));
@@ -349,7 +355,7 @@
       logoTimeouts = [];
       var _lw = document.getElementById('intro-logo-wrap');
       if (_lw) { _lw.style.opacity = '0'; _lw.style.display = 'none'; }
-      if (typeof gsap !== 'undefined') gsap.killTweensOf(['#intro-logo-wrap', '#intro-mdl-shimmer']);
+      if (typeof gsap !== 'undefined') gsap.killTweensOf(['#intro-mdl-logo', '#intro-mdl-shimmer']);
       introTimeouts.forEach(id => clearTimeout(id));
       introTimeouts = [];
       clearTimeout(_afterETFSafety);

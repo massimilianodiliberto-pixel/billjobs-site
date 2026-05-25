@@ -2857,8 +2857,6 @@ footer a:hover { color: var(--text-primary); }
 }
 
 @media (max-width: 767px) {
-  /* Hero video: show full frame without zoom on portrait mobile */
-  .hero-vid { object-fit: contain; }
   .hero-philosophy { padding: 5vh var(--section-h); }
   .hp-backstage { padding: 6vh 0; }
   .hp-backstage-media { aspect-ratio: 4/3; }
