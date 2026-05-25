@@ -1902,6 +1902,8 @@ footer a:hover { color: var(--text-primary); }
   grid-column: span 4;
   aspect-ratio: 16/9;
   opacity: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .wk-wide    { grid-column: span 8; aspect-ratio: 16/9; }
 .wk-portrait { grid-column: span 4; aspect-ratio: 3/4; }

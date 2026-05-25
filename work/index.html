@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260525">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260526">
 </head>
 <body>
 
@@ -824,29 +824,42 @@
       }
     }, 8000);
 
-    /* Card center zoom on scroll */
+    /* Card center zoom on scroll — GPU-composited, no layout thrash */
     (function () {
+      var _rafId = null;
+
       function updateCardZoom() {
-        var vcenter = window.innerHeight / 2;
-        /* Desktop: base 0.88 so max zoom (~0.95) never exceeds grid cell → no overlap */
+        _rafId = null;
+        var vcenter  = window.innerHeight / 2;
+        var maxDist  = window.innerHeight * 0.58;
+        /* Desktop: base 0.88 so max zoom (~0.94) never pushes card outside grid cell */
         var base = window.innerWidth >= 768 ? 0.88 : 1.0;
-        document.querySelectorAll('.wk-card').forEach(function(card) {
-          if (card.style.display === 'none') {
-            card.style.transform = '';
-            return;
-          }
-          var r = card.getBoundingClientRect();
-          var ic = r.top + r.height / 2;
-          var dist = Math.abs(ic - vcenter);
-          var maxDist = window.innerHeight * 0.58;
-          var t = Math.max(0, 1 - dist / maxDist);
-          card.style.transform = 'scale(' + (base + t * 0.070).toFixed(4) + ')';
+        var cards = document.querySelectorAll('.wk-card');
+
+        /* Batch all reads first (avoids layout thrashing) */
+        var rects = [];
+        cards.forEach(function(card) {
+          rects.push(card.style.display === 'none' ? null : card.getBoundingClientRect());
+        });
+
+        /* Then batch all writes */
+        cards.forEach(function(card, i) {
+          var r = rects[i];
+          if (!r) { card.style.transform = 'translateZ(0)'; return; }
+          var dist = Math.abs(r.top + r.height / 2 - vcenter);
+          var t    = Math.max(0, 1 - dist / maxDist);
+          card.style.transform = 'translateZ(0) scale(' + (base + t * 0.055).toFixed(4) + ')';
         });
       }
+
+      function scheduleZoom() {
+        if (!_rafId) _rafId = requestAnimationFrame(updateCardZoom);
+      }
+
       if (typeof lenis !== 'undefined') {
-        lenis.on('scroll', updateCardZoom);
+        lenis.on('scroll', scheduleZoom);
       } else {
-        window.addEventListener('scroll', updateCardZoom, { passive: true });
+        window.addEventListener('scroll', scheduleZoom, { passive: true });
       }
     }());
 
