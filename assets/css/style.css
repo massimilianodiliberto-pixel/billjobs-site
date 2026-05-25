@@ -783,8 +783,9 @@ footer a:hover { color: var(--text-primary); }
   50%       { opacity: 0.96; }
 }
 .author-main {
-  background: #060606;
+  background: transparent;
   position: relative;
+  z-index: 1;
   animation: auth-breathe 14s ease-in-out infinite;
 }
 .author-main::before {
@@ -1150,13 +1151,14 @@ footer a:hover { color: var(--text-primary); }
   overflow: hidden;
 }
 .auth-flash-bg {
-  position: absolute;
+  position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0;
   z-index: 0;
+  pointer-events: none;
   filter: saturate(0.25) contrast(1.08) brightness(0.55);
   animation: auth-flash-fadein 2.2s 0.8s ease-out forwards;
 }
