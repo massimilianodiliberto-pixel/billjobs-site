@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/style.css?v=20260524">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260525">
 </head>
 <body>
 
@@ -341,17 +341,18 @@
       _heroVidB.addEventListener('ended', _heroAdvance);
     }
 
-    function _heroPlay(vid, onSuccess) {
+    function _heroPlay(vid, onShown) {
+      /* Use 'playing' event — fires on first real frame, not on buffering resolve */
+      if (onShown) vid.addEventListener('playing', onShown, { once: true });
       var p = vid.play();
       if (p !== undefined) {
-        p.then(onSuccess || function(){}).catch(function() {
-          /* iOS blocked — retry on first touch */
-          document.addEventListener('touchstart', function _t() {
-            vid.play().then(onSuccess || function(){});
-            document.removeEventListener('touchstart', _t);
-          }, { once: true, passive: true });
+        p.catch(function() {
+          /* iOS gesture required — retry on next touch or click */
+          function _tryPlay() { vid.play().catch(function(){}); }
+          document.addEventListener('touchstart', _tryPlay, { once: true, passive: true });
+          document.addEventListener('click',      _tryPlay, { once: true });
         });
-      } else if (onSuccess) { onSuccess(); }
+      }
     }
 
     function startHeroVideos() {
