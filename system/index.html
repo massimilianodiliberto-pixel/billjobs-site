@@ -767,14 +767,23 @@
       if (e.key === 'Escape' && bj.classList.contains('active')) closeBJ();
     });
 
-    /* Reveal BJ section on scroll */
+    /* Reveal BJ section: title first, then body lines one by one */
     window.addEventListener('load', function () {
       var bjSec = document.getElementById('sys-bill-jobs');
-      if (bjSec) {
-        gsap.set(bjSec, { opacity: 0 });
-        gsap.to(bjSec, {
-          opacity: 1, duration: 1.25, ease: 'power1.out',
-          scrollTrigger: { trigger: bjSec, start: 'top 76%', toggleActions: 'play none none none' }
+      if (bjSec && typeof gsap !== 'undefined') {
+        var bjTitle = bjSec.querySelector('.auth-bj-title');
+        var bjLines = Array.from(bjSec.querySelectorAll('.auth-bj-body p'));
+        gsap.set([bjTitle].concat(bjLines), { opacity: 0, y: 12 });
+        ScrollTrigger.create({
+          trigger: bjSec,
+          start: 'top 78%',
+          toggleActions: 'play none none none',
+          onEnter: function() {
+            if (bjTitle) gsap.to(bjTitle, { opacity: 1, y: 0, duration: 0.9, ease: 'power1.out' });
+            bjLines.forEach(function(line, i) {
+              gsap.to(line, { opacity: 1, y: 0, duration: 0.75, ease: 'power1.out', delay: 0.45 + i * 0.22 });
+            });
+          }
         });
       }
     });

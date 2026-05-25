@@ -362,13 +362,21 @@
       _heroActive = 'a';
       _heroVidA.src = HERO_VIDEOS[0];
       _heroVidA.load();
-      _heroPlay(_heroVidA, function() {
+
+      var _vidShown = false;
+      function _showHeroA() {
+        if (_vidShown) return;
+        _vidShown = true;
         if (typeof gsap !== 'undefined') {
           gsap.to(_heroVidA, { opacity: HERO_OPACITY, duration: HERO_FADE / 1000, ease: 'power2.out' });
         } else {
           _heroVidA.style.opacity = String(HERO_OPACITY);
         }
-      });
+      }
+      _heroPlay(_heroVidA, _showHeroA);
+      /* Fallback: if 'playing' event never fires (slow 4G / private mode),
+         reveal the video after 4s so the hero isn't stuck black */
+      setTimeout(_showHeroA, 4000);
     }
 
     function _heroAdvance() {
