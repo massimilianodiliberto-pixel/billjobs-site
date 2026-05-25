@@ -18,14 +18,14 @@
   <meta name="twitter:title" content="Contatti — Bill Jobs Studio | Milano">
   <meta name="twitter:description" content="Massimiliano Di Liberto, Creative Producer e Regista. Milano.">
   <meta name="twitter:image" content="https://billjobs.it/assets/img/logo_billjobs.png">
-  <link rel="icon" type="image/png" href="/assets/img/logo_billjobs.png">
-  <link rel="apple-touch-icon" href="/assets/img/logo_billjobs.png">
+  <link rel="icon" type="image/png" href="/assets/img/Mdl.PNG">
+  <link rel="apple-touch-icon" href="/assets/img/Mdl.PNG">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260523">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260601">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
 
   <!-- NAV -->
   <nav id="nav">
-    <a class="nav-logo" href="../index.html"><span class="nav-logo-text">MDL</span></a>
+    <a class="nav-logo" href="../index.html"><img src="../assets/img/Mdl.PNG" class="nav-logo-img" alt="MDL"></a>
     <div class="nav-links">
       <a href="../index.html"          class="nav-link">FRAME</a>
       <a href="../work/index.html"     class="nav-link">WORK</a>
@@ -83,6 +83,10 @@
           <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
         </svg>
       </a>
+      <div class="signal-mdl-wrap">
+        <img src="../assets/img/Mdl.PNG" class="signal-mdl-logo" alt="MDL">
+        <div class="signal-mdl-shimmer"></div>
+      </div>
     </div>
 
     <!-- BOTTOM: standalone tagline + logo -->
@@ -122,9 +126,21 @@
     tl.fromTo('.signal-email',       { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.8, ease: 'power1.out' }, 0)
       .fromTo('.signal-phone',       { opacity: 0 },         { opacity: 1, duration: 1.4, ease: 'power1.out' }, 0.7)
       .fromTo('.signal-instagram',   { opacity: 0 },         { opacity: 1, duration: 1.2, ease: 'power1.out' }, 1.1)
-      .fromTo('.signal-tagline-solo', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 2.0, ease: 'power1.out' }, 1.6)
-      .fromTo('.signal-bj-logo',     { opacity: 0 },         { opacity: 1, duration: 2.4, ease: 'power1.out' }, 2.4)
-      .fromTo('.signal-bj-email',    { opacity: 0, y: 8 },   { opacity: 1, y: 0, duration: 1.6, ease: 'power1.out' }, 3.2);
+      .fromTo('.signal-mdl-logo',    { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1.0, duration: 1.5, ease: 'power2.out' }, 2.0)
+      .fromTo('.signal-tagline-solo', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 2.0, ease: 'power1.out' }, 2.8)
+      .fromTo('.signal-bj-logo',     { opacity: 0 },         { opacity: 1, duration: 2.4, ease: 'power1.out' }, 3.6)
+      .fromTo('.signal-bj-email',    { opacity: 0, y: 8 },   { opacity: 1, y: 0, duration: 1.6, ease: 'power1.out' }, 4.4);
+
+    /* MDL shimmer — first sweep then loop every 4.5s */
+    function sweepMdlSignal() {
+      gsap.fromTo('.signal-mdl-shimmer',
+        { x: '-220%' },
+        { x: '290%', duration: 1.1, ease: 'power2.inOut',
+          onComplete: function () { setTimeout(sweepMdlSignal, 4500); }
+        }
+      );
+    }
+    setTimeout(sweepMdlSignal, 4200);
 
     /* zoom-pulse on logo after fade-in */
     setTimeout(function () {
