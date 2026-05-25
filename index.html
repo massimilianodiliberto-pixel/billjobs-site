@@ -50,11 +50,6 @@
     </video>
     <div class="intro-vignette"></div>
     <div class="intro-ambient"></div>
-    <!-- Logo phase — shown before the three discipline words -->
-    <div id="intro-logo-wrap">
-      <img id="intro-mdl-logo" src="assets/img/Mdl.PNG" alt="MDL">
-      <div id="intro-mdl-shimmer"></div>
-    </div>
     <div id="intro-p1">
       <span class="iw" id="iw1" style="opacity:0">CREATIVE PRODUCER</span>
       <span class="iw" id="iw2" style="opacity:0">CINEMATIC DIRECTOR</span>
@@ -221,46 +216,6 @@
     /* ── INTRO SEQUENCE ─────────────────────────────────────── */
 
     let introTimeouts = [];
-    var logoTimeouts = [];
-
-    function playLogoPhase() {
-      var wrap = document.getElementById('intro-logo-wrap');
-      var logo = document.getElementById('intro-mdl-logo');
-      if (!wrap || !logo) { playIntro(); return; }
-      if (typeof gsap !== 'undefined') {
-        /* Position wrapper via transform only — NO opacity on wrap so mix-blend-mode
-           on the img composites against the actual page background (not an offscreen buffer) */
-        gsap.set(wrap, { xPercent: -50, yPercent: -50 });
-        gsap.fromTo(logo,
-          { opacity: 0, scale: 0.88 },
-          { opacity: 1, scale: 1.0, duration: 1.3, ease: 'power2.out' }
-        );
-        /* Light sweep across the monogram at 1.4s */
-        logoTimeouts.push(setTimeout(function () {
-          gsap.fromTo('#intro-mdl-shimmer',
-            { x: '-220%' },
-            { x: '290%', duration: 1.05, ease: 'power2.inOut' }
-          );
-        }, 1400));
-      } else {
-        wrap.style.transform = 'translate(-50%, -50%)';
-        logo.style.opacity = '1';
-      }
-      /* Logo fades out at 3.0s */
-      logoTimeouts.push(setTimeout(function () {
-        if (typeof gsap !== 'undefined') {
-          gsap.to(logo, {
-            opacity: 0, scale: 0.97, duration: 0.55, ease: 'power2.inOut',
-            onComplete: function () { wrap.style.display = 'none'; }
-          });
-        } else {
-          logo.style.opacity = '0';
-          wrap.style.display = 'none';
-        }
-      }, 3000));
-      /* Transition to existing intro at 3.5s */
-      logoTimeouts.push(setTimeout(playIntro, 3500));
-    }
 
     function playIntro() {
       /* flash.mov background — fades in with the words */
@@ -351,11 +306,6 @@
     }
 
     function skipIntro() {
-      logoTimeouts.forEach(id => clearTimeout(id));
-      logoTimeouts = [];
-      var _lw = document.getElementById('intro-logo-wrap');
-      if (_lw) { _lw.style.opacity = '0'; _lw.style.display = 'none'; }
-      if (typeof gsap !== 'undefined') gsap.killTweensOf(['#intro-mdl-logo', '#intro-mdl-shimmer']);
       introTimeouts.forEach(id => clearTimeout(id));
       introTimeouts = [];
       clearTimeout(_afterETFSafety);
@@ -533,7 +483,7 @@
       initScrollAnimations();
     } else {
       sessionStorage.setItem('introSeen', 'true');
-      startIntroLoader(function () { playLogoPhase(); });
+      startIntroLoader(function () { playIntro(); });
     }
 
     /* ── SCROLL ANIMATIONS — called only after intro is fully gone ── */

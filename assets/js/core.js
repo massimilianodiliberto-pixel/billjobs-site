@@ -310,6 +310,37 @@ class SoundSystem {
 
 window.sound = new SoundSystem();
 
+/* ── Audio unlock — independent of button UI ────────────── */
+/* Separated so modifying or removing the button never breaks  */
+/* audio initialization. Fires on first user gesture, or auto  */
+/* on desktop Chrome (which doesn't need a gesture).           */
+(function () {
+  if (!window.sound.enabled) return;
+  var _unlockBusy = false;
+  var _UNLOCK_EVENTS = ['click', 'pointerdown', 'touchstart', 'touchend', 'keydown'];
+  function _tryUnlock (e) {
+    if (window.sound.initialized || _unlockBusy) return;
+    if (e && e.target && e.target.id === 'sound-toggle') return;
+    _unlockBusy = true;
+    window.sound.init()
+      .then(function () {
+        _unlockBusy = false;
+        document.dispatchEvent(new CustomEvent('sound:enabled'));
+        _UNLOCK_EVENTS.forEach(function (ev) {
+          document.removeEventListener(ev, _tryUnlock, true);
+        });
+      })
+      .catch(function () { _unlockBusy = false; });
+  }
+  _UNLOCK_EVENTS.forEach(function (ev) {
+    document.addEventListener(ev, _tryUnlock, { capture: true, passive: true });
+  });
+  /* Auto-unlock on desktop (Chrome allows AudioContext without user gesture) */
+  setTimeout(function () { _tryUnlock(null); }, 200);
+  /* Expose so button enable() can retrigger if needed */
+  window.sound._tryUnlock = _tryUnlock;
+}());
+
 /* ── Sound toggle button ─────────────────────────────────── */
 (function () {
   var btn = document.createElement('button');
@@ -326,14 +357,19 @@ window.sound = new SoundSystem();
     window.sound.enabled = true;
     sessionStorage.setItem('soundEnabled', 'true');
     syncBtn();
-    window.sound.init()
-      .then(function () { document.dispatchEvent(new CustomEvent('sound:enabled')); syncBtn(); })
-      .catch(function (e) {
-        console.warn('[Sound] init failed:', e);
-        window.sound.enabled = false;
-        sessionStorage.setItem('soundEnabled', 'false');
-        syncBtn();
-      });
+    if (!window.sound.initialized) {
+      window.sound.init()
+        .then(function () { document.dispatchEvent(new CustomEvent('sound:enabled')); syncBtn(); })
+        .catch(function (e) {
+          console.warn('[Sound] init failed:', e);
+          window.sound.enabled = false;
+          sessionStorage.setItem('soundEnabled', 'false');
+          syncBtn();
+        });
+    } else {
+      document.dispatchEvent(new CustomEvent('sound:enabled'));
+      syncBtn();
+    }
   }
 
   function disable () {
@@ -346,34 +382,6 @@ window.sound = new SoundSystem();
   btn.addEventListener('click', function () {
     if (window.sound.enabled) { disable(); } else { enable(); }
   });
-
-  /* Robust audio unlock — retries on any user gesture.
-     scroll is NOT a valid AudioContext gesture on iOS/Chrome mobile;
-     pointer/touch/key events are. Flag prevents overlapping init calls. */
-  if (window.sound.enabled) {
-    var _unlockBusy = false;
-    var _UNLOCK_EVENTS = ['click', 'pointerdown', 'touchstart', 'touchend', 'keydown'];
-    function tryUnlock (e) {
-      if (window.sound.initialized || _unlockBusy) return;
-      if (e && e.target === btn) return;
-      _unlockBusy = true;
-      window.sound.init()
-        .then(function () {
-          _unlockBusy = false;
-          document.dispatchEvent(new CustomEvent('sound:enabled'));
-          syncBtn();
-          _UNLOCK_EVENTS.forEach(function (ev) {
-            document.removeEventListener(ev, tryUnlock, true);
-          });
-        })
-        .catch(function () { _unlockBusy = false; });
-    }
-    _UNLOCK_EVENTS.forEach(function (ev) {
-      document.addEventListener(ev, tryUnlock, { capture: true, passive: true });
-    });
-    /* Try immediately — works in desktop Chrome without needing a gesture */
-    setTimeout(function () { tryUnlock(null); }, 200);
-  }
 
   syncBtn();
 }());
