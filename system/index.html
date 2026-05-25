@@ -689,10 +689,16 @@
       cinematic.insertBefore(sv, canvas);
 
       new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) { sv.load(); sv.play().catch(function(){}); }
+        if (entries[0].isIntersecting) { sv.play().catch(function(){}); }
         else { sv.pause(); }
       }, { threshold: 0.1 }).observe(cinematic);
     }
+
+    /* ── Programmatic play() backup for flash.mov background ── */
+    window.addEventListener('load', function () {
+      var fb = document.querySelector('.auth-flash-bg');
+      if (fb) { fb.play().catch(function () {}); }
+    });
 
     /* ── Audio: ambient pulse loop + section triggers ── */
     window.addEventListener('load', function () {

@@ -356,34 +356,42 @@
       if (typeof gsap !== 'undefined') gsap.set([_heroVidA, _heroVidB], { opacity: 0 });
     }
 
-    function _heroPlay(vid, onShown) {
-      if (onShown) vid.addEventListener('playing', onShown, { once: true });
-      var p = vid.play();
-      if (p !== undefined) {
-        p.catch(function() {
-          function _tryPlay() { vid.play().catch(function(){}); }
-          document.addEventListener('touchstart', _tryPlay, { once: true, passive: true });
-          document.addEventListener('click',      _tryPlay, { once: true });
-        });
+    function _heroPlay(vid) {
+      /* play() is enough to start loading even with preload="none".
+         Retrying on AbortError avoids waiting for a user gesture. */
+      function _attempt(retries) {
+        var p = vid.play();
+        if (p !== undefined) {
+          p.catch(function(e) {
+            if (e && e.name === 'AbortError' && retries > 0) {
+              setTimeout(function() { _attempt(retries - 1); }, 300);
+              return;
+            }
+            /* NotAllowedError or exhausted retries — last-resort gesture fallback */
+            function _tryPlay() { vid.play().catch(function(){}); }
+            document.addEventListener('touchstart', _tryPlay, { once: true, passive: true });
+            document.addEventListener('click',      _tryPlay, { once: true });
+          });
+        }
       }
+      _attempt(5);
     }
 
     function startHeroVideos() {
       if (_heroStarted || !_heroVidA || !_heroVidB) return;
       _heroStarted = true;
 
-      /* Load both videos simultaneously */
+      /* Set src — play() will start loading automatically (no explicit load() needed).
+         Calling load() before play() causes AbortError and breaks muted autoplay. */
       _heroVidA.src = HERO_VIDEOS[0];
       _heroVidB.src = HERO_VIDEOS[1];
-      _heroVidA.load();
-      _heroVidB.load();
 
       /* Track first frame of A so playHeroEntrance can sync the fade-in */
       _heroVidA.addEventListener('playing', function() { _heroVidAPlaying = true; }, { once: true });
 
-      /* Both start playing immediately — fade-in is handled by playHeroEntrance */
-      _heroPlay(_heroVidA, null);
-      _heroPlay(_heroVidB, null);
+      /* Both start playing — play() handles loading internally */
+      _heroPlay(_heroVidA);
+      _heroPlay(_heroVidB);
 
       /* When A ends: crossfade to B, restart A for next cycle */
       _heroVidA.addEventListener('ended', function() {
@@ -395,7 +403,7 @@
           _heroVidB.style.opacity = String(HERO_OPACITY);
         }
         _heroVidA.currentTime = 0;
-        _heroPlay(_heroVidA, null);
+        _heroPlay(_heroVidA);
       });
 
       /* When B ends: crossfade back to A, restart B for next cycle */
@@ -408,7 +416,7 @@
           _heroVidA.style.opacity = String(HERO_OPACITY);
         }
         _heroVidB.currentTime = 0;
-        _heroPlay(_heroVidB, null);
+        _heroPlay(_heroVidB);
       });
     }
 

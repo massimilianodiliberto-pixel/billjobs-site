@@ -1478,7 +1478,7 @@ footer a:hover { color: var(--text-primary); }
   .sys-closing-subtext { font-size: 14px; color: rgba(255, 255, 255, 0.56); }
 }
 
-.system-main { position: relative; }
+.system-main { position: relative; z-index: 1; }
 #sys-line-wrap {
   position: absolute;
   top: 0;
