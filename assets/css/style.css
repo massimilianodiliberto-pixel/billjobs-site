@@ -1098,7 +1098,7 @@ footer a:hover { color: var(--text-primary); }
 @media (max-width: 767px) {
   .auth-billjobs { padding: 12vh var(--section-h) 16vh; }
   .auth-moment { padding: 14vh var(--section-h); }
-  .auth-moment--pause { padding-top: 20vh; padding-bottom: 20vh; }
+  .auth-moment--pause { padding-top: 6vh; padding-bottom: 6vh; }
   .auth-moment-sub { font-size: 15px; color: rgba(255, 255, 255, 0.62); }
   .auth-bj-body p { font-size: 15px; color: rgba(255, 255, 255, 0.60); }
   .auth-breath-moment { padding: 10vh var(--section-h); }
@@ -1370,23 +1370,24 @@ footer a:hover { color: var(--text-primary); }
 .sys-concept-word {
   display: block;
   font-family: var(--font-editorial);
-  font-size: clamp(21px, 4.3vw, 66px);
+  font-size: clamp(22px, 3.6vw, 56px);
   font-weight: 300;
-  line-height: 1.06;
-  color: rgba(255, 255, 255, 0.78);
-  letter-spacing: -0.02em;
+  line-height: 1.14;
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: -0.01em;
   opacity: 0;
   position: relative;
   z-index: 2;
 }
 .sys-concept-phrase {
-  margin-top: 28px;
+  margin-top: 18px;
   font-family: var(--font-ui);
-  font-size: 19px;
+  font-size: 11px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.88);
-  letter-spacing: 0.06em;
-  line-height: 2.0;
+  color: rgba(255, 255, 255, 0.38);
+  letter-spacing: 0.22em;
+  line-height: 1.6;
+  text-transform: uppercase;
   max-width: 560px;
   opacity: 0;
   position: relative;
@@ -1406,12 +1407,12 @@ footer a:hover { color: var(--text-primary); }
 }
 .sys-concept-body p {
   font-family: var(--font-ui);
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.82);
-  letter-spacing: 0.04em;
-  line-height: 2.0;
-  margin-bottom: 14px;
+  color: rgba(255, 255, 255, 0.68);
+  letter-spacing: 0.07em;
+  line-height: 2.4;
+  margin-bottom: 12px;
 }
 .sys-concept-body p:last-child { margin-bottom: 0; }
 
@@ -1440,7 +1441,7 @@ footer a:hover { color: var(--text-primary); }
   .sys-concept { padding: 10vh var(--section-h); }
   .sys-closing { padding: 14vh var(--section-h) 12vh; }
   .sys-desc { font-size: 15px; color: rgba(255, 255, 255, 0.58); }
-  .sys-concept-phrase { font-size: 15px; }
+  .sys-concept-phrase { font-size: 10px; letter-spacing: 0.18em; }
   .sys-closing-subtext { font-size: 14px; color: rgba(255, 255, 255, 0.56); }
 }
 
@@ -2792,6 +2793,8 @@ footer a:hover { color: var(--text-primary); }
 }
 
 @media (max-width: 767px) {
+  /* Hero video: show full frame without zoom on portrait mobile */
+  .hero-vid { object-fit: contain; }
   .hero-philosophy { padding: 5vh var(--section-h); }
   .hp-backstage { padding: 6vh 0; }
   .hp-backstage-media { aspect-ratio: 4/3; }
