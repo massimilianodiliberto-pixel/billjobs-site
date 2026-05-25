@@ -65,6 +65,10 @@
     <a href="../contact/index.html">SIGNAL</a>
   </div>
 
+  <video class="auth-flash-bg" muted autoplay loop playsinline preload="auto">
+    <source src="../assets/video/flash.mov" type="video/mp4">
+  </video>
+
   <main class="system-main">
 
     <section class="system-cinematic">
@@ -591,7 +595,7 @@
         trigger: sysMain,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 1.5,
+        scrub: 3,
         invalidateOnRefresh: true,
         onUpdate: function (self) {
           if (!sysLinePath.getPointAtLength) return;

@@ -1577,7 +1577,11 @@ footer a:hover { color: var(--text-primary); }
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 0 var(--section-h);
+  padding: 0 var(--section-h) 8vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
 }
 .signal-email {
   display: block;
@@ -1687,6 +1691,51 @@ footer a:hover { color: var(--text-primary); }
 }
 .signal-instagram:hover { color: rgba(255, 255, 255, 0.92); }
 .signal-instagram svg { width: 22px; height: 22px; }
+
+/* "Send a Signal." fast blink below Instagram */
+.signal-blink {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(16px, 1.9vw, 24px);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 22px;
+  letter-spacing: 0.05em;
+  opacity: 0;
+}
+
+/* Thin grey separator between contacts and BJ section */
+.signal-separator {
+  width: 56px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  margin: 36px auto;
+  opacity: 0;
+}
+
+/* Bill Jobs section wrapper */
+.signal-bj-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  width: 100%;
+}
+
+/* Artist CTA text above BJ logo */
+.signal-artist-cta {
+  font-family: var(--font-sans);
+  font-size: clamp(11px, 1.1vw, 13px);
+  color: rgba(255, 255, 255, 0.40);
+  text-align: center;
+  letter-spacing: 0.07em;
+  line-height: 1.75;
+  max-width: 320px;
+  margin-bottom: 28px;
+  opacity: 0;
+}
 
 /* MDL logo in signal center */
 .signal-mdl-wrap {

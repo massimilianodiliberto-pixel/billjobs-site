@@ -211,11 +211,10 @@
           _heroVidA.style.opacity = String(HERO_OPACITY);
         }
       }
-      setTimeout(function() {
-        if (_heroVidAPlaying) { _revealHero(); }
-        else if (_heroVidA) { _heroVidA.addEventListener('playing', _revealHero, { once: true }); }
-      }, 200);
-      setTimeout(_revealHero, 4000); /* absolute fallback */
+      /* Muted video always autoplays on desktop — reveal unconditionally after 200ms.
+         Keep 4s fallback for very slow connections. */
+      setTimeout(_revealHero, 200);
+      setTimeout(_revealHero, 4000);
 
       if (typeof gsap !== 'undefined') {
         gsap.timeline()
