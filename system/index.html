@@ -66,7 +66,7 @@
     <a href="../contact/index.html">SIGNAL</a>
   </div>
 
-  <video class="auth-flash-bg" muted autoplay loop playsinline preload="auto">
+  <video class="auth-flash-bg" muted autoplay playsinline preload="auto">
     <source src="../assets/video/flash.mov" type="video/mp4">
   </video>
 
@@ -695,10 +695,22 @@
       }, { threshold: 0.1 }).observe(cinematic);
     }
 
-    /* ── Programmatic play() backup for flash.mov background ── */
+    /* ── Programmatic play() backup + custom loop-with-pause for flash.mov ── */
     window.addEventListener('load', function () {
       var fb = document.querySelector('.auth-flash-bg');
-      if (fb) { fb.play().catch(function () {}); }
+      if (fb) {
+        fb.play().catch(function () {});
+        /* Loop with ~2.5s pause: fade out → black → fade back in */
+        fb.addEventListener('ended', function () {
+          fb.style.transition = 'opacity 0.6s ease';
+          fb.style.opacity = '0';
+          setTimeout(function () {
+            fb.currentTime = 0;
+            fb.play().catch(function () {});
+            fb.style.opacity = '0.38';
+          }, 2500);
+        });
+      }
     });
 
     /* ── Audio: ambient pulse loop + section triggers ── */

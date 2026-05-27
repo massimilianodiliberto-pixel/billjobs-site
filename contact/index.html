@@ -88,13 +88,19 @@
       <!-- Blink tagline, directly below Instagram -->
       <p class="signal-blink">Send a Signal.</p>
 
-      <!-- Thin separator -->
-      <div class="signal-separator" aria-hidden="true"></div>
+      <!-- First separator -->
+      <div class="signal-separator signal-sep-1" aria-hidden="true"></div>
+
+      <!-- MDL logo — identity mark -->
+      <img src="../assets/img/MDL_LOGO.png" alt="MDL" class="signal-mdl-logo">
+
+      <!-- Second separator -->
+      <div class="signal-separator signal-sep-2" aria-hidden="true"></div>
 
       <!-- Bill Jobs section -->
       <div class="signal-bj-section">
         <p class="signal-artist-cta">Se sei un artista emergente e vuoi lavorare con Bill Jobs Studio, scrivici.</p>
-        <img src="../assets/img/MDL_LOGO.png" alt="MDL" class="signal-bj-logo signal-mdl-logo-signal">
+        <img src="../assets/img/logo_billjobs.png" alt="Bill Jobs Studio" class="signal-bj-logo">
         <a href="mailto:contact@billjobs.it" class="signal-bj-email">contact@billjobs.it</a>
       </div>
     </div>
@@ -129,29 +135,31 @@
     tl.fromTo('.signal-email',     { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.8, ease: 'power1.out' }, 0)
       .fromTo('.signal-phone',     { opacity: 0 },         { opacity: 1, duration: 1.4, ease: 'power1.out' }, 0.7)
       .fromTo('.signal-instagram', { opacity: 0 },         { opacity: 1, duration: 1.2, ease: 'power1.out' }, 1.1)
-      /* "Send a Signal." fast blink: starts at 20%, loops between 20%–100% */
+      /* "Send a Signal." — slow cinematic blink */
       .add(function () {
         gsap.fromTo('.signal-blink',
-          { opacity: 0.20 },
-          { opacity: 1.0, duration: 0.28, yoyo: true, repeat: -1, ease: 'sine.inOut' }
+          { opacity: 0.18 },
+          { opacity: 1.0, duration: 1.4, yoyo: true, repeat: -1, ease: 'sine.inOut' }
         );
       }, 1.5)
-      .fromTo('.signal-separator',  { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, 2.0)
-      .fromTo('.signal-artist-cta', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.4, ease: 'power1.out' }, 2.4)
-      .fromTo('.signal-bj-logo',    { opacity: 0 }, { opacity: 1, duration: 2.4, ease: 'power1.out' }, 2.8)
-      .fromTo('.signal-bj-email',   { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 1.6, ease: 'power1.out' }, 3.6);
+      .fromTo('.signal-sep-1',      { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, 2.0)
+      .fromTo('.signal-mdl-logo',   { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 2.0, ease: 'power1.out' }, 2.5)
+      .fromTo('.signal-sep-2',      { opacity: 0 }, { opacity: 1, duration: 1.0, ease: 'power1.out' }, 3.2)
+      .fromTo('.signal-artist-cta', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.4, ease: 'power1.out' }, 3.6)
+      .fromTo('.signal-bj-logo',    { opacity: 0 }, { opacity: 1, duration: 2.0, ease: 'power1.out' }, 4.0)
+      .fromTo('.signal-bj-email',   { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 1.6, ease: 'power1.out' }, 4.8);
 
-    /* zoom-pulse on logo after fade-in */
+    /* subtle pulse on MDL logo */
     setTimeout(function () {
-      gsap.to('.signal-bj-logo', {
-        scale: 1.08,
-        opacity: 0.82,
-        duration: 2.4,
+      gsap.to('.signal-mdl-logo', {
+        scale: 1.06,
+        opacity: 0.80,
+        duration: 2.6,
         yoyo: true,
         repeat: -1,
         ease: 'sine.inOut'
       });
-    }, 4500);
+    }, 5500);
   });
 
   document.addEventListener('sound:enabled', function () {
