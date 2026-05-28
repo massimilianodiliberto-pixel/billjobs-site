@@ -203,7 +203,7 @@ class SoundSystem {
     this.ctx         = null;
     this.buffers     = {};
     this.nodes       = {};
-    this.enabled     = sessionStorage.getItem('soundEnabled') !== 'false';
+    this.enabled     = sessionStorage.getItem('soundEnabled') === 'true';
     this.initialized = false;
     this._base       = _assetBase + 'sound/';
   }
@@ -349,17 +349,22 @@ window.sound = new SoundSystem();
   document.body.appendChild(btn);
 
   function syncBtn () {
-    btn.textContent = window.sound.enabled ? 'SOUND OFF' : 'SOUND ON';
+    btn.textContent = window.sound.enabled ? 'SOUND ON' : 'SOUND OFF';
     btn.classList.toggle('active', window.sound.enabled);
+    btn.disabled = false;
   }
 
   function enable () {
     window.sound.enabled = true;
     sessionStorage.setItem('soundEnabled', 'true');
-    syncBtn();
     if (!window.sound.initialized) {
+      btn.textContent = '...';
+      btn.disabled = true;
       window.sound.init()
-        .then(function () { document.dispatchEvent(new CustomEvent('sound:enabled')); syncBtn(); })
+        .then(function () {
+          document.dispatchEvent(new CustomEvent('sound:enabled'));
+          syncBtn();
+        })
         .catch(function (e) {
           console.warn('[Sound] init failed:', e);
           window.sound.enabled = false;
@@ -367,8 +372,8 @@ window.sound = new SoundSystem();
           syncBtn();
         });
     } else {
-      document.dispatchEvent(new CustomEvent('sound:enabled'));
       syncBtn();
+      document.dispatchEvent(new CustomEvent('sound:enabled'));
     }
   }
 
@@ -386,6 +391,27 @@ window.sound = new SoundSystem();
   syncBtn();
 }());
 
+
+/* ── Pre-fetch audio files to HTTP cache ─────────────────── */
+/* Runs silently in background after page load so that when    */
+/* the user clicks SOUND ON the files are already cached.      */
+(function () {
+  window.addEventListener('load', function () {
+    var base = _assetBase + 'sound/';
+    var files = ['hum','drone','pulse','ascend','descend','power','fade','hiss',
+                 'woosh','DistortionFade','tv-static','feedback','feedback-Transtion'];
+    function _doFetch() {
+      files.forEach(function (f) {
+        fetch(base + f + '.mp3').catch(function () {});
+      });
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(_doFetch, { timeout: 6000 });
+    } else {
+      setTimeout(_doFetch, 3000);
+    }
+  });
+}());
 
 /* ── Mobile menu analog overlay video ────────────────────── */
 (function () {
