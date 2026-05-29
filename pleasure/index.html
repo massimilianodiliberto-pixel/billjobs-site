@@ -118,8 +118,8 @@ img{max-width:100%;display:block}
 .rail .conn i{width:3px;height:3px;border-radius:50%;background:rgba(240,232,216,.22)}
 
 /* narrative captions (bottom strip — two-level layout) */
-.caption{position:fixed;left:0;right:0;bottom:0;height:44vh;z-index:70;pointer-events:none;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 20%);mask-image:linear-gradient(to bottom,transparent 0%,black 20%)}
-.caption .panel{position:absolute;left:0;right:0;bottom:0;padding:0 max(56px,5vw) 28px;text-align:center;opacity:0;will-change:transform,opacity}
+.caption{position:fixed;left:0;right:0;bottom:0;height:46vh;z-index:70;pointer-events:none;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 20%);mask-image:linear-gradient(to bottom,transparent 0%,black 20%)}
+.caption .panel{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:0 max(56px,5vw);text-align:center;opacity:0;will-change:transform,opacity}
 .caption .panel .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--oro);margin-bottom:12px}
 .caption .panel h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(20px,2.6vw,40px);line-height:1.04;color:var(--crema);margin-bottom:12px}
 .caption .panel h2 em{font-style:italic;color:var(--oro-l)}
@@ -154,7 +154,7 @@ img{max-width:100%;display:block}
   .nav{padding:0 20px}
   .nav .menu{display:none}
   .rail{display:none}
-  .caption{height:38vh}
+  .caption{height:40vh}
   .caption .panel{padding:0 20px 18px}
   .caption .panel h2{font-size:clamp(18px,5vw,32px)}
   .caption .panel p{font-size:13px}
@@ -338,7 +338,7 @@ img{max-width:100%;display:block}
           <stop offset="100%" stop-color="#a87f4f"/>
         </linearGradient>
         <clipPath id="bottleClip">
-          <path d="M520 1880 Q520 1840 560 1838 L560 1812 L640 1812 L640 1838 Q680 1840 680 1880 L692 2200 Q692 2256 636 2256 L564 2256 Q508 2256 508 2200 Z"/>
+          <path d="M536 1907 Q536 1875 568 1873 L568 1852 L632 1852 L632 1873 Q664 1875 664 1907 L674 2163 Q674 2208 629 2208 L571 2208 Q526 2208 526 2163 Z"/>
         </clipPath>
       </defs>
 
@@ -369,18 +369,18 @@ img{max-width:100%;display:block}
         <g id="particles"></g>
 
         <!-- ===== SPINE BOTTOM into bottle ===== -->
-        <path class="ink" id="spineB" data-s="0.74" data-e="0.86" d="M600 1300 C 606 1480 594 1640 600 1812"/>
+        <path class="ink" id="spineB" data-s="0.74" data-e="0.86" d="M600 1300 C 606 1480 594 1648 600 1852"/>
 
         <!-- ===== BOTTLE (boccettino, outline) ===== -->
         <g id="bottleGroup">
-          <path class="ink" id="bcap" data-s="0.72" data-e="0.80" d="M566 1772 L634 1772 L634 1812 L566 1812 Z"/>
-          <path class="ink" id="bbody" data-s="0.76" data-e="0.90" d="M520 1880 Q520 1840 560 1838 L560 1812 L640 1812 L640 1838 Q680 1840 680 1880 L692 2200 Q692 2256 636 2256 L564 2256 Q508 2256 508 2200 Z"/>
-          <path class="ink thin" id="blabel" data-s="0.86" data-e="0.93" d="M540 2010 L660 2010 L660 2150 L540 2150 Z"/>
+          <path class="ink" id="bcap" data-s="0.72" data-e="0.80" d="M573 1820 L627 1820 L627 1852 L573 1852 Z"/>
+          <path class="ink" id="bbody" data-s="0.76" data-e="0.90" d="M536 1907 Q536 1875 568 1873 L568 1852 L632 1852 L632 1873 Q664 1875 664 1907 L674 2163 Q674 2208 629 2208 L571 2208 Q526 2208 526 2163 Z"/>
+          <path class="ink thin" id="blabel" data-s="0.86" data-e="0.93" d="M552 2011 L648 2011 L648 2123 L552 2123 Z"/>
         </g>
       </g>
 
       <!-- liquid fill (clipped, not penciled) -->
-      <rect id="liquid" x="500" y="2256" width="200" height="0" fill="url(#liquidGrad)" clip-path="url(#bottleClip)" opacity="0"/>
+      <rect id="liquid" x="520" y="2208" width="160" height="0" fill="url(#liquidGrad)" clip-path="url(#bottleClip)" opacity="0"/>
 
       <!-- falling drop -->
       <g id="fallDropG" opacity="0">
@@ -389,9 +389,9 @@ img{max-width:100%;display:block}
 
       <!-- luminous drop -->
       <g id="lumG" opacity="0">
-        <circle id="lumGlow" cx="600" cy="1300" r="150" fill="url(#glowGrad)"/>
-        <path id="lumDrop" d="M600 1232 C 638 1284 638 1322 600 1346 C 562 1322 562 1284 600 1232 Z" fill="url(#dropGrad)"/>
-        <ellipse cx="585" cy="1280" rx="7" ry="13" fill="#fff6e2" opacity=".55"/>
+        <circle id="lumGlow" cx="600" cy="1298" r="120" fill="url(#glowGrad)"/>
+        <path id="lumDrop" d="M600 1243 C 630 1285 630 1315 600 1335 C 570 1315 570 1285 600 1243 Z" fill="url(#dropGrad)"/>
+        <ellipse cx="588" cy="1282" rx="6" ry="10" fill="#fff6e2" opacity=".55"/>
       </g>
 
       <!-- pencil tip -->
@@ -400,7 +400,7 @@ img{max-width:100%;display:block}
 
       <!-- brand at the end -->
       <g id="brandG" opacity="0">
-        <text x="600" y="2336" text-anchor="middle" font-family="Cormorant Garamond" font-size="40" letter-spacing="10" fill="#f0e8d8">PLEASURE</text>
+        <text x="600" y="2272" text-anchor="middle" font-family="Cormorant Garamond" font-size="40" letter-spacing="10" fill="#f0e8d8">PLEASURE</text>
       </g>
     </svg>
   </div>
@@ -605,7 +605,7 @@ function update(){
   lumG.setAttribute('opacity', lumP>0?1:0);
   const grow=smooth(win(p,0.48,0.62));
   lumDrop.setAttribute('transform',`translate(600 1289) scale(${lerp(0.5,1,grow)}) translate(-600 -1289)`);
-  lumGlow.setAttribute('r', lerp(60,170,smooth(win(p,0.5,0.7))));
+  lumGlow.setAttribute('r', lerp(48,136,smooth(win(p,0.5,0.7))));
   lumGlow.setAttribute('opacity', lerp(0.2,1,smooth(win(p,0.5,0.66))));
 
   // particles: draw in (opacity), then converge into drop
@@ -635,8 +635,8 @@ function update(){
   const fillP=smooth(win(p,0.84,0.97));
   if(fillP>0){
     liquid.setAttribute('opacity',0.9);
-    const h=lerp(0,420,fillP);
-    liquid.setAttribute('y',2256-h);
+    const h=lerp(0,336,fillP);
+    liquid.setAttribute('y',2208-h);
     liquid.setAttribute('height',h);
   } else {liquid.setAttribute('opacity',0)}
 
