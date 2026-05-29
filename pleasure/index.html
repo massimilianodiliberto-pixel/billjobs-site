@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PLEASURE · Il Flusso — dalla pianta al prodotto</title>
+<title>PLEASURE · Professional Luxury · Franciacorta, Italia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -39,8 +39,13 @@ img{max-width:100%;display:block}
 .nav .menu{display:flex;gap:34px;list-style:none}
 .nav .menu a{font-size:13px;color:var(--crema);opacity:.72;transition:opacity .3s}
 .nav .menu a:hover{opacity:1}
+.nav .right{display:flex;align-items:center;gap:24px}
 .nav .cta{font-size:12px;letter-spacing:.05em;color:var(--oro-l);border:1px solid var(--oro);padding:9px 17px;border-radius:999px;transition:background .4s,color .4s}
 .nav .cta:hover{background:var(--oro);color:var(--bg)}
+.nav .lang{display:flex;gap:10px;font-size:12px;color:var(--crema-d)}
+.nav .lang .on{color:var(--crema)}
+.nav .lang span{cursor:pointer;transition:color .3s}
+.nav .lang span:hover{color:var(--crema)}
 
 /* ===== intro ===== */
 #intro{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(ellipse at 50% 52%,#26262b 0%,rgba(38,38,43,0) 60%),linear-gradient(180deg,#1b1b1e,#1b1b1d)}
@@ -55,7 +60,7 @@ img{max-width:100%;display:block}
 @keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
 
 /* ===== flow stage ===== */
-#flow{position:relative;height:680vh}
+#flow{position:relative;height:800vh}
 .flow-stage{position:sticky;top:0;height:100vh;overflow:hidden}
 .flow-svg{position:absolute;left:50%;top:0;height:280vh;width:auto;will-change:transform}
 .flow-svg .ink{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
@@ -129,12 +134,18 @@ img{max-width:100%;display:block}
 <nav class="nav" id="nav">
   <div class="brand">PLEASURE</div>
   <ul class="menu">
-    <li><a href="#" data-ch="0">Pianta</a></li>
-    <li><a href="#" data-ch="1">Linfa</a></li>
-    <li><a href="#" data-ch="3">Scienza</a></li>
-    <li><a href="#" data-ch="5">Prodotto</a></li>
+    <li><a href="#" data-ch="0">Origine</a></li>
+    <li><a href="#" data-ch="1">Scienza</a></li>
+    <li><a href="#" data-ch="2">Metodo</a></li>
+    <li><a href="#" data-ch="3">Academy</a></li>
+    <li><a href="#" data-ch="4">Rituali</a></li>
+    <li><a href="#" data-ch="5">Linee</a></li>
+    <li><a href="#" data-ch="6">Family</a></li>
   </ul>
-  <a class="cta" href="#closing">Scopri le Linee</a>
+  <div class="right">
+    <a class="cta" href="#closing">Scopri le Linee</a>
+    <div class="lang"><span class="on">IT</span><span>EN</span><span>ES</span></div>
+  </div>
 </nav>
 
 <!-- ===== INTRO ===== -->
@@ -148,50 +159,57 @@ img{max-width:100%;display:block}
 
 <!-- ===== CHAPTER RAIL ===== -->
 <div class="rail" id="rail">
-  <div class="ch on" data-ch="0"><span class="bead"></span><span class="label">Pianta</span></div>
+  <div class="ch on" data-ch="0"><span class="bead"></span><span class="label">Origine</span></div>
   <div class="conn"><i></i><i></i></div>
-  <div class="ch" data-ch="1"><span class="bead"></span><span class="label">Linfa</span></div>
+  <div class="ch" data-ch="1"><span class="bead"></span><span class="label">Scienza</span></div>
   <div class="conn"><i></i><i></i></div>
-  <div class="ch" data-ch="2"><span class="bead"></span><span class="label">Goccia</span></div>
+  <div class="ch" data-ch="2"><span class="bead"></span><span class="label">Metodo</span></div>
   <div class="conn"><i></i><i></i></div>
-  <div class="ch" data-ch="3"><span class="bead"></span><span class="label">Scienza</span></div>
+  <div class="ch" data-ch="3"><span class="bead"></span><span class="label">Academy</span></div>
   <div class="conn"><i></i><i></i></div>
-  <div class="ch" data-ch="4"><span class="bead"></span><span class="label">Nutrimento</span></div>
+  <div class="ch" data-ch="4"><span class="bead"></span><span class="label">Rituali</span></div>
   <div class="conn"><i></i><i></i></div>
-  <div class="ch" data-ch="5"><span class="bead"></span><span class="label">Prodotto</span></div>
+  <div class="ch" data-ch="5"><span class="bead"></span><span class="label">Linee</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="6"><span class="bead"></span><span class="label">Family</span></div>
 </div>
 
 <!-- ===== CAPTIONS ===== -->
 <div class="caption" id="caption">
   <div class="panel on" data-ch="0">
     <div class="eyebrow">01 — L'origine</div>
-    <h2>La <em>pianta.</em></h2>
-    <p>Tutto comincia da una foglia. Dalla terra, prima che dal laboratorio.</p>
+    <h2>Dalla terra,<br/>prima che dal<br/><em>laboratorio.</em></h2>
+    <p>PLEASURE non estrae dalla natura. La ascolta. E impara a restituirle qualcosa in cambio.</p>
   </div>
   <div class="panel" data-ch="1">
-    <div class="eyebrow">02 — Il nutrimento</div>
-    <h2>La <em>linfa.</em></h2>
-    <p>Scende lungo lo stelo. È il nutrimento che la pianta custodisce nel silenzio.</p>
+    <div class="eyebrow">02 — La scienza</div>
+    <h2>La <em>natura</em> ha già<br/>la risposta.</h2>
+    <p>Le biotecnologie avanzate la liberano, la esprimono, la potenziano.</p>
   </div>
   <div class="panel" data-ch="2">
-    <div class="eyebrow">03 — Il dono</div>
-    <h2>La <em>goccia.</em></h2>
-    <p>Si stacca. Cade. Si offre. Un solo gesto, lentissimo.</p>
+    <div class="eyebrow">03 — Il metodo</div>
+    <h2>Questo non è<br/>un prodotto.<br/>È un <em>metodo.</em></h2>
+    <p>Un sistema vivo. Generativo. In evoluzione. Tuo.</p>
   </div>
   <div class="panel" data-ch="3">
-    <div class="eyebrow">04 — La scienza</div>
-    <h2>Le <em>biotecnologie.</em></h2>
-    <p>La scienza si raccoglie intorno alla goccia. Particella dopo particella, entra.</p>
+    <div class="eyebrow">04 — Academy</div>
+    <h2>Non eleviamo<br/>prodotti.<br/><em>Eleviamo</em> professionisti.</h2>
+    <p>Il tuo salone non è un cliente. È un laboratorio vivo. La conoscenza è un privilegio che si coltiva insieme.</p>
   </div>
   <div class="panel" data-ch="4">
-    <div class="eyebrow">05 — Il beneficio</div>
-    <h2>Una goccia <em>viva.</em></h2>
-    <p>Piena. Luminosa. Nutriente. La natura potenziata, mai forzata.</p>
+    <div class="eyebrow">05 — Rituali</div>
+    <h2>Il gesto<br/>diventa <em>rito.</em></h2>
+    <p>Non protocolli, ma percorsi. Ogni rituale è un viaggio tattile e olfattivo che il cliente porta con sé.</p>
   </div>
   <div class="panel" data-ch="5">
-    <div class="eyebrow">06 — Il prodotto</div>
-    <h2>Il <em>prodotto.</em></h2>
-    <p>La goccia scende, ed entra. Dove natura e scienza diventano una cosa sola.</p>
+    <div class="eyebrow">06 — Le Linee</div>
+    <h2>Quattro linee.<br/>Una <em>sola logica.</em></h2>
+    <p>Filler, Lifetime, Vinility, Restruct. Ogni formula parla una lingua precisa al capello.</p>
+  </div>
+  <div class="panel" data-ch="6">
+    <div class="eyebrow">07 — Family</div>
+    <h2>Entra nel<br/><em>Circolo.</em></h2>
+    <p>Quattro lettere all'anno. Note dal laboratorio, inviti privati, il prossimo capitolo del metodo.</p>
   </div>
 </div>
 
@@ -389,12 +407,13 @@ const panels=[...document.querySelectorAll('.caption .panel')];
 
 /* chapter windows for rail/caption */
 const CH=[
-  [0.00,0.16], // pianta
-  [0.16,0.30], // linfa
-  [0.30,0.50], // goccia
-  [0.50,0.66], // scienza
-  [0.66,0.78], // nutrimento
-  [0.78,1.01]  // prodotto
+  [0.00,0.14], // Origine
+  [0.14,0.28], // Scienza
+  [0.28,0.43], // Metodo
+  [0.43,0.57], // Academy
+  [0.57,0.71], // Rituali
+  [0.71,0.86], // Linee
+  [0.86,1.01]  // Family
 ];
 
 let curCh=-1;
