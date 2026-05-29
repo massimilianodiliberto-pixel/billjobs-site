@@ -27,9 +27,9 @@ img{max-width:100%;display:block}
 ::selection{background:var(--oro);color:var(--bg)}
 
 /* cursor */
-#cursor{position:fixed;top:0;left:0;width:12px;height:20px;z-index:200;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s,width .35s,height .35s;mix-blend-mode:screen}
+#cursor{position:fixed;top:0;left:0;width:10px;height:17px;z-index:200;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s,width .35s,height .35s;mix-blend-mode:screen}
 #cursor svg{width:100%;height:100%;overflow:visible}
-#cursor.lg{width:26px;height:44px}
+#cursor.lg{width:22px;height:37px}
 @media (hover:none){#cursor{opacity:0;transition:opacity .4s}}
 
 /* nav */
@@ -46,6 +46,32 @@ img{max-width:100%;display:block}
 .nav .lang .on{color:var(--crema)}
 .nav .lang span{cursor:pointer;transition:color .3s}
 .nav .lang span:hover{color:var(--crema)}
+
+/* ===== background glow (shifts per chapter) ===== */
+#bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1;transition:opacity .4s ease}
+
+/* ===== gold frame (catalog border, fades at edges) ===== */
+#gold-frame{position:fixed;inset:0;z-index:51;pointer-events:none}
+#gold-frame::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(90deg,rgba(184,149,106,.48) 0%,rgba(184,149,106,0) 22%,rgba(184,149,106,0) 78%,rgba(184,149,106,.48) 100%),
+    linear-gradient(90deg,rgba(184,149,106,.48) 0%,rgba(184,149,106,0) 22%,rgba(184,149,106,0) 78%,rgba(184,149,106,.48) 100%),
+    linear-gradient(180deg,rgba(184,149,106,.48) 0%,rgba(184,149,106,0) 26%,rgba(184,149,106,0) 74%,rgba(184,149,106,.48) 100%),
+    linear-gradient(180deg,rgba(184,149,106,.48) 0%,rgba(184,149,106,0) 26%,rgba(184,149,106,0) 74%,rgba(184,149,106,.48) 100%);
+  background-size:100% 0.6px,100% 0.6px,0.6px 100%,0.6px 100%;
+  background-position:0 0,0 100%,0 0,100% 0;
+  background-repeat:no-repeat;
+}
+/* corner accent dots */
+#gold-frame::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(circle at 0% 0%,rgba(184,149,106,.28) 0%,transparent 8%),
+    radial-gradient(circle at 100% 0%,rgba(184,149,106,.28) 0%,transparent 8%),
+    radial-gradient(circle at 0% 100%,rgba(184,149,106,.28) 0%,transparent 8%),
+    radial-gradient(circle at 100% 100%,rgba(184,149,106,.28) 0%,transparent 8%);
+}
 
 /* ===== intro flora (ambient breathing leaves) ===== */
 #intro-flora{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}
@@ -92,7 +118,7 @@ img{max-width:100%;display:block}
 .rail .conn i{width:3px;height:3px;border-radius:50%;background:rgba(240,232,216,.22)}
 
 /* narrative captions (right) */
-.caption{position:fixed;right:56px;top:50%;transform:translateY(-50%);z-index:70;width:min(420px,40vw);text-align:right;pointer-events:none}
+.caption{position:fixed;right:56px;top:63%;transform:translateY(-50%);z-index:70;width:min(420px,40vw);text-align:right;pointer-events:none}
 .caption .panel{position:absolute;right:0;top:50%;transform:translateY(-40%);opacity:0;transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);transform:translateY(20px)}
 .caption .panel.on{opacity:1;transform:translateY(0)}
 .caption .panel .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--oro);margin-bottom:18px}
@@ -142,6 +168,8 @@ img{max-width:100%;display:block}
 </head>
 <body>
 
+<div id="bg-glow"></div>
+<div id="gold-frame"></div>
 <div id="cursor"><svg viewBox="0 0 12 20"><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="#d4b283" opacity=".85"/><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="none" stroke="#b8956a" stroke-width=".6"/></svg></div>
 
 <nav class="nav" id="nav">
@@ -166,15 +194,9 @@ img{max-width:100%;display:block}
 
   <!-- ambient botanical layer -->
   <svg id="intro-flora" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <filter id="fpencil" x="-4%" y="-4%" width="108%" height="108%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.015" numOctaves="2" seed="11" result="n"/>
-        <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4"/>
-      </filter>
-    </defs>
 
     <!-- Left tall leaf -->
-    <g class="sw-a" style="transform-box:fill-box;transform-origin:50% 100%" filter="url(#fpencil)" opacity=".44">
+    <g class="sw-a" style="transform-box:fill-box;transform-origin:50% 100%" opacity=".44">
       <path class="fl" d="M100 290 C 42 380 38 570 100 880 C 162 570 158 380 100 290 Z"/>
       <path class="fl" d="M100 312 L100 866" opacity=".7"/>
       <path class="fl" d="M100 390 C 76 374 64 366 50 372" opacity=".6"/>
@@ -188,7 +210,7 @@ img{max-width:100%;display:block}
     </g>
 
     <!-- Right leaf -->
-    <g class="sw-b" style="transform-box:fill-box;transform-origin:50% 100%" filter="url(#fpencil)" opacity=".35">
+    <g class="sw-b" style="transform-box:fill-box;transform-origin:50% 100%" opacity=".35">
       <path class="fl" d="M1340 350 C 1284 430 1280 610 1340 880 C 1400 610 1396 430 1340 350 Z"/>
       <path class="fl" d="M1340 370 L1340 862" opacity=".7"/>
       <path class="fl" d="M1340 440 C 1316 424 1304 416 1290 422" opacity=".55"/>
@@ -200,7 +222,7 @@ img{max-width:100%;display:block}
     </g>
 
     <!-- Top-left sprig -->
-    <g class="sw-c" style="transform-box:fill-box;transform-origin:50% 0%" filter="url(#fpencil)" opacity=".3">
+    <g class="sw-c" style="transform-box:fill-box;transform-origin:50% 0%" opacity=".3">
       <path class="fl" d="M24 0 C 70 70 82 168 52 260 C 16 190 0 90 24 0 Z"/>
       <path class="fl" d="M24 18 L52 254" opacity=".6"/>
       <path class="fl" d="M32 80 C 52 68 64 62 78 66" opacity=".5"/>
@@ -208,7 +230,7 @@ img{max-width:100%;display:block}
     </g>
 
     <!-- Top-right sprig -->
-    <g class="sw-b" style="transform-box:fill-box;transform-origin:50% 0%;animation-delay:3.2s" filter="url(#fpencil)" opacity=".28">
+    <g class="sw-b" style="transform-box:fill-box;transform-origin:50% 0%;animation-delay:3.2s" opacity=".28">
       <path class="fl" d="M1416 0 C 1370 70 1358 168 1388 260 C 1424 190 1440 90 1416 0 Z"/>
       <path class="fl" d="M1416 18 L1388 254" opacity=".6"/>
       <path class="fl" d="M1408 80 C 1388 68 1376 62 1362 66" opacity=".5"/>
@@ -216,7 +238,7 @@ img{max-width:100%;display:block}
     </g>
 
     <!-- Center focal leaf — connects visually down into the Flow animation's leaf -->
-    <g class="sw-d" style="transform-box:fill-box;transform-origin:50% 100%" filter="url(#fpencil)" opacity=".58">
+    <g class="sw-d" style="transform-box:fill-box;transform-origin:50% 100%" opacity=".72">
       <path class="fl" d="M720 600 C 668 660 662 780 720 900 C 778 780 772 660 720 600 Z"/>
       <path class="fl" d="M720 618 L720 887" opacity=".75"/>
       <path class="fl" d="M720 660 C 698 646 686 638 672 642" opacity=".6"/>
@@ -413,7 +435,7 @@ img{max-width:100%;display:block}
 const cur=document.getElementById('cursor');
 let mx=innerWidth/2,my=innerHeight/2,cxv=mx,cyv=my;
 addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-(function t(){cxv+=(mx-cxv)*.18;cyv+=(my-cyv)*.18;cur.style.transform=`translate(${cxv}px,${cyv}px) translate(-50%,-50%)`;requestAnimationFrame(t)})();
+(function t(){cxv+=(mx-cxv)*.22;cyv+=(my-cyv)*.22;cur.style.transform=`translate(${cxv}px,${cyv}px) translate(-50%,-50%)`;requestAnimationFrame(t)})();
 addEventListener('mouseout',e=>{if(!e.relatedTarget)cur.style.opacity=0});
 addEventListener('mouseover',()=>cur.style.opacity=1);
 document.addEventListener('mouseover',e=>{if(e.target.closest('a,button'))cur.classList.add('lg')});
@@ -498,6 +520,19 @@ const tipGlow=document.getElementById('tipGlow');
 const brandG=document.getElementById('brandG');
 const rail=document.getElementById('rail');
 const fprog=document.getElementById('fprog');
+const bgGlow=document.getElementById('bg-glow');
+
+/* chapter background glows */
+const CH_BG=[
+  'radial-gradient(ellipse at 28% 72%, rgba(138,111,77,.18) 0%, transparent 56%)',  // Origine
+  'radial-gradient(ellipse at 70% 50%, rgba(184,149,106,.15) 0%, transparent 52%)',  // Scienza
+  'radial-gradient(ellipse at 50% 36%, rgba(212,178,131,.16) 0%, transparent 48%)',  // Metodo
+  'radial-gradient(ellipse at 34% 62%, rgba(138,111,77,.15) 0%, transparent 54%)',   // Academy
+  'radial-gradient(ellipse at 66% 66%, rgba(184,149,106,.17) 0%, transparent 50%)',  // Rituali
+  'radial-gradient(ellipse at 50% 50%, rgba(230,198,147,.18) 0%, transparent 44%)',  // Linee
+  'radial-gradient(ellipse at 50% 26%, rgba(184,149,106,.14) 0%, transparent 52%)',  // Family
+];
+bgGlow.style.background=CH_BG[0];
 const railChs=[...document.querySelectorAll('.rail .ch')];
 const panels=[...document.querySelectorAll('.caption .panel')];
 
@@ -520,6 +555,8 @@ function setChapter(p){
     curCh=idx;
     railChs.forEach((c,i)=>c.classList.toggle('on',i===idx));
     panels.forEach(pl=>pl.classList.toggle('on', +pl.dataset.ch===idx));
+    bgGlow.style.opacity=0;
+    setTimeout(()=>{bgGlow.style.background=CH_BG[idx];bgGlow.style.opacity=1;},400);
   }
 }
 
