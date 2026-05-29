@@ -118,7 +118,7 @@ img{max-width:100%;display:block}
 .rail .conn i{width:3px;height:3px;border-radius:50%;background:rgba(240,232,216,.22)}
 
 /* narrative captions (bottom strip — two-level layout) */
-.caption{position:fixed;left:0;right:0;bottom:0;height:30vh;z-index:70;pointer-events:none;overflow:hidden}
+.caption{position:fixed;left:0;right:0;bottom:0;height:40vh;z-index:70;pointer-events:none;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 22%);mask-image:linear-gradient(to bottom,transparent 0%,black 22%)}
 .caption .panel{position:absolute;left:0;right:0;bottom:0;padding:0 max(56px,5vw) 28px;text-align:center;opacity:0;will-change:transform,opacity}
 .caption .panel .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--oro);margin-bottom:12px}
 .caption .panel h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(20px,2.6vw,40px);line-height:1.04;color:var(--crema);margin-bottom:12px}
@@ -154,7 +154,7 @@ img{max-width:100%;display:block}
   .nav{padding:0 20px}
   .nav .menu{display:none}
   .rail{display:none}
-  .caption{height:26vh}
+  .caption{height:34vh}
   .caption .panel{padding:0 20px 18px}
   .caption .panel h2{font-size:clamp(18px,5vw,32px)}
   .caption .panel p{font-size:13px}
@@ -658,7 +658,7 @@ function update(){
   } else { tip.setAttribute('opacity',0);tipGlow.setAttribute('opacity',0); }
 
   // scroll-driven caption parallax (bottom strip)
-  const stripH=vh*0.30;
+  const stripH=vh*0.40;
   panels.forEach((pl,i)=>{
     const s=CH[i][0],e=CH[i][1];
     const raw=(p-s)/(e-s);
