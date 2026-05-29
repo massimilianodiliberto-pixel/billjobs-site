@@ -30,7 +30,7 @@ img{max-width:100%;display:block}
 #cursor{position:fixed;top:0;left:0;width:12px;height:20px;z-index:200;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s,width .35s,height .35s;mix-blend-mode:screen}
 #cursor svg{width:100%;height:100%;overflow:visible}
 #cursor.lg{width:26px;height:44px}
-@media (hover:none){#cursor{display:none}}
+@media (hover:none){#cursor{opacity:0;transition:opacity .4s}}
 
 /* nav */
 .nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 40px;transition:background .5s,backdrop-filter .5s,border-color .5s;border-bottom:1px solid transparent}
@@ -46,6 +46,19 @@ img{max-width:100%;display:block}
 .nav .lang .on{color:var(--crema)}
 .nav .lang span{cursor:pointer;transition:color .3s}
 .nav .lang span:hover{color:var(--crema)}
+
+/* ===== intro flora (ambient breathing leaves) ===== */
+#intro-flora{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}
+.fl{fill:none;stroke:rgba(240,232,216,.5);stroke-width:.9;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+@keyframes sw1{0%,100%{transform:rotate(0deg)}50%{transform:rotate(2deg)}}
+@keyframes sw2{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-1.8deg) translateX(4px)}}
+@keyframes sw3{0%,100%{transform:rotate(0deg)}50%{transform:rotate(2.4deg) translateX(-3px)}}
+.sw-a{animation:sw1 14s ease-in-out infinite}
+.sw-b{animation:sw2 10s 1.8s ease-in-out infinite}
+.sw-c{animation:sw3 12s 3.5s ease-in-out infinite}
+.sw-d{animation:sw1 17s .7s ease-in-out infinite}
+#intro .stage{position:relative;z-index:2}
+#intro .hint{z-index:2}
 
 /* ===== intro ===== */
 #intro{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(ellipse at 50% 52%,#26262b 0%,rgba(38,38,43,0) 60%),linear-gradient(180deg,#1b1b1e,#1b1b1d)}
@@ -150,6 +163,71 @@ img{max-width:100%;display:block}
 
 <!-- ===== INTRO ===== -->
 <section id="intro">
+
+  <!-- ambient botanical layer -->
+  <svg id="intro-flora" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <filter id="fpencil" x="-4%" y="-4%" width="108%" height="108%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.015" numOctaves="2" seed="11" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4"/>
+      </filter>
+    </defs>
+
+    <!-- Left tall leaf -->
+    <g class="sw-a" style="transform-box:fill-box;transform-origin:50% 100%" filter="url(#fpencil)" opacity=".44">
+      <path class="fl" d="M100 290 C 42 380 38 570 100 880 C 162 570 158 380 100 290 Z"/>
+      <path class="fl" d="M100 312 L100 866" opacity=".7"/>
+      <path class="fl" d="M100 390 C 76 374 64 366 50 372" opacity=".6"/>
+      <path class="fl" d="M100 480 C 74 462 60 452 44 458" opacity=".55"/>
+      <path class="fl" d="M100 580 C 78 564 66 556 52 560" opacity=".5"/>
+      <path class="fl" d="M100 680 C 82 668 72 662 60 666" opacity=".45"/>
+      <path class="fl" d="M100 390 C 124 374 136 366 150 372" opacity=".6"/>
+      <path class="fl" d="M100 480 C 126 462 140 452 156 458" opacity=".55"/>
+      <path class="fl" d="M100 580 C 122 564 134 556 148 560" opacity=".5"/>
+      <path class="fl" d="M100 680 C 118 668 128 662 140 666" opacity=".45"/>
+    </g>
+
+    <!-- Right leaf -->
+    <g class="sw-b" style="transform-box:fill-box;transform-origin:50% 100%" filter="url(#fpencil)" opacity=".35">
+      <path class="fl" d="M1340 350 C 1284 430 1280 610 1340 880 C 1400 610 1396 430 1340 350 Z"/>
+      <path class="fl" d="M1340 370 L1340 862" opacity=".7"/>
+      <path class="fl" d="M1340 440 C 1316 424 1304 416 1290 422" opacity=".55"/>
+      <path class="fl" d="M1340 540 C 1314 522 1300 512 1284 518" opacity=".5"/>
+      <path class="fl" d="M1340 640 C 1320 626 1308 618 1296 622" opacity=".45"/>
+      <path class="fl" d="M1340 440 C 1364 424 1376 416 1390 422" opacity=".55"/>
+      <path class="fl" d="M1340 540 C 1366 522 1380 512 1396 518" opacity=".5"/>
+      <path class="fl" d="M1340 640 C 1360 626 1372 618 1384 622" opacity=".45"/>
+    </g>
+
+    <!-- Top-left sprig -->
+    <g class="sw-c" style="transform-box:fill-box;transform-origin:50% 0%" filter="url(#fpencil)" opacity=".3">
+      <path class="fl" d="M24 0 C 70 70 82 168 52 260 C 16 190 0 90 24 0 Z"/>
+      <path class="fl" d="M24 18 L52 254" opacity=".6"/>
+      <path class="fl" d="M32 80 C 52 68 64 62 78 66" opacity=".5"/>
+      <path class="fl" d="M36 150 C 58 136 70 128 84 132" opacity=".45"/>
+    </g>
+
+    <!-- Top-right sprig -->
+    <g class="sw-b" style="transform-box:fill-box;transform-origin:50% 0%;animation-delay:3.2s" filter="url(#fpencil)" opacity=".28">
+      <path class="fl" d="M1416 0 C 1370 70 1358 168 1388 260 C 1424 190 1440 90 1416 0 Z"/>
+      <path class="fl" d="M1416 18 L1388 254" opacity=".6"/>
+      <path class="fl" d="M1408 80 C 1388 68 1376 62 1362 66" opacity=".5"/>
+      <path class="fl" d="M1404 150 C 1382 136 1370 128 1356 132" opacity=".45"/>
+    </g>
+
+    <!-- Center focal leaf — connects visually down into the Flow animation's leaf -->
+    <g class="sw-d" style="transform-box:fill-box;transform-origin:50% 100%" filter="url(#fpencil)" opacity=".58">
+      <path class="fl" d="M720 600 C 668 660 662 780 720 900 C 778 780 772 660 720 600 Z"/>
+      <path class="fl" d="M720 618 L720 887" opacity=".75"/>
+      <path class="fl" d="M720 660 C 698 646 686 638 672 642" opacity=".6"/>
+      <path class="fl" d="M720 730 C 696 714 682 706 666 710" opacity=".55"/>
+      <path class="fl" d="M720 800 C 700 788 690 782 678 784" opacity=".5"/>
+      <path class="fl" d="M720 660 C 742 646 754 638 768 642" opacity=".6"/>
+      <path class="fl" d="M720 730 C 744 714 758 706 774 710" opacity=".55"/>
+      <path class="fl" d="M720 800 C 740 788 750 782 762 784" opacity=".5"/>
+    </g>
+  </svg>
+
   <div class="stage">
     <div class="logo"><img src="pleasure-wordmark.png" alt="PLEASURE" /></div>
     <div class="sub">Professional Luxury<span class="sep">·</span>Franciacorta, Italia</div>
@@ -340,6 +418,24 @@ addEventListener('mouseout',e=>{if(!e.relatedTarget)cur.style.opacity=0});
 addEventListener('mouseover',()=>cur.style.opacity=1);
 document.addEventListener('mouseover',e=>{if(e.target.closest('a,button'))cur.classList.add('lg')});
 document.addEventListener('mouseout',e=>{if(e.target.closest('a,button'))cur.classList.remove('lg')});
+
+/* ---------- touch cursor ---------- */
+let touching=false;
+addEventListener('touchstart',e=>{
+  touching=true;
+  const t=e.touches[0];
+  mx=t.clientX;my=t.clientY;
+  cxv=mx;cyv=my;
+  cur.style.opacity=1;
+},{passive:true});
+addEventListener('touchmove',e=>{
+  const t=e.touches[0];
+  mx=t.clientX;my=t.clientY;
+},{passive:true});
+addEventListener('touchend',()=>{
+  touching=false;
+  setTimeout(()=>{if(!touching)cur.style.opacity=0;},500);
+},{passive:true});
 
 /* ---------- nav scrolled ---------- */
 const nav=document.getElementById('nav');
