@@ -1,1302 +1,1101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pleasure — Professional Luxury · Fran&ccedil;acorta, Italia</title>
-  <meta name="description" content="Il vero lusso non è per tutti. È per chi sceglie di sapere di più. Pleasure Professional Luxury — biotecnologie avanzate per la cura professionale dei capelli.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --gold:    #b8965e;
-      --gold-lt: #d4b07a;
-      --cream:   #f0ece4;
-      --bg:      #090907;
-      --bg2:     #0d0d0a;
-      --serif:   'Cormorant Garamond', Georgia, serif;
-      --sans:    'Montserrat', sans-serif;
-    }
-
-    html { scroll-behavior: auto; }
-
-    body {
-      background: var(--bg);
-      color: var(--cream);
-      font-family: var(--sans);
-      font-weight: 300;
-      overflow-x: hidden;
-    }
-
-    /* ── NARRATIVE SVG LAYER ─────────────────────────────── */
-
-    #narrative-svg {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      overflow: visible;
-    }
-
-    /* ── NAV ─────────────────────────────────────────────── */
-
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 32px 56px;
-      mix-blend-mode: normal;
-    }
-
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 22px;
-      font-weight: 400;
-      letter-spacing: 0.22em;
-      color: var(--cream);
-      text-decoration: none;
-    }
-
-    .nav-logo span {
-      display: block;
-      font-family: var(--sans);
-      font-size: 9px;
-      font-weight: 200;
-      letter-spacing: 0.38em;
-      color: var(--gold);
-      margin-top: 3px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 40px;
-    }
-
-    .nav-links a {
-      font-family: var(--sans);
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.32em;
-      color: rgba(240,236,228,0.55);
-      text-decoration: none;
-      transition: color 0.4s;
-    }
-
-    .nav-links a:hover { color: var(--gold); }
-
-    /* ── GRAIN ───────────────────────────────────────────── */
-
-    #grain {
-      position: fixed;
-      inset: -50%;
-      width: 200%;
-      height: 200%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.028;
-      pointer-events: none;
-      z-index: 1000;
-      animation: grain-drift 8s steps(10) infinite;
-    }
-
-    @keyframes grain-drift {
-      0%,100%{transform:translate(0,0)}
-      10%{transform:translate(-5%,-5%)}
-      20%{transform:translate(-10%,5%)}
-      30%{transform:translate(5%,-10%)}
-      40%{transform:translate(-5%,15%)}
-      50%{transform:translate(-10%,5%)}
-      60%{transform:translate(15%,0)}
-      70%{transform:translate(0,10%)}
-      80%{transform:translate(-15%,0)}
-      90%{transform:translate(10%,5%)}
-    }
-
-    /* ── MAIN SCROLL CONTAINER ───────────────────────────── */
-
-    main {
-      position: relative;
-      z-index: 10;
-    }
-
-    /* ── SECTION BASE ────────────────────────────────────── */
-
-    .pl-section {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      padding: 120px 56px;
-    }
-
-    /* ── HERO ────────────────────────────────────────────── */
-
-    #s-hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-    }
-
-    .hero-eyebrow {
-      font-family: var(--sans);
-      font-size: 9px;
-      font-weight: 200;
-      letter-spacing: 0.45em;
-      color: var(--gold);
-      margin-bottom: 64px;
-      opacity: 0;
-    }
-
-    .hero-headline {
-      font-family: var(--serif);
-      font-size: clamp(38px, 6vw, 82px);
-      font-weight: 300;
-      line-height: 1.18;
-      color: var(--cream);
-      max-width: 840px;
-      opacity: 0;
-    }
-
-    .hero-headline em {
-      font-style: italic;
-      color: var(--gold-lt);
-    }
-
-    .hero-sub {
-      font-family: var(--serif);
-      font-size: clamp(16px, 2vw, 22px);
-      font-style: italic;
-      font-weight: 300;
-      color: rgba(240,236,228,0.38);
-      margin-top: 48px;
-      letter-spacing: 0.04em;
-      opacity: 0;
-    }
-
-    .hero-scroll-hint {
-      position: absolute;
-      bottom: 48px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      opacity: 0;
-    }
-
-    .hero-scroll-hint span {
-      font-family: var(--sans);
-      font-size: 8px;
-      letter-spacing: 0.4em;
-      color: rgba(240,236,228,0.28);
-    }
-
-    .scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, rgba(184,150,94,0.6), transparent);
-      animation: scroll-pulse 2.4s ease-in-out infinite;
-    }
-
-    @keyframes scroll-pulse {
-      0%,100%{opacity:0.3;transform:scaleY(1)}
-      50%{opacity:1;transform:scaleY(1.2)}
-    }
-
-    /* ── TEXT SECTIONS ───────────────────────────────────── */
-
-    .pl-text-block {
-      max-width: 640px;
-    }
-
-    .pl-text-block.right  { margin-left: auto; margin-right: 8vw; }
-    .pl-text-block.left   { margin-right: auto; margin-left: 8vw; }
-    .pl-text-block.center { margin: 0 auto; text-align: center; }
-
-    .pl-label {
-      font-family: var(--sans);
-      font-size: 8px;
-      font-weight: 300;
-      letter-spacing: 0.42em;
-      color: var(--gold);
-      margin-bottom: 32px;
-      display: block;
-    }
-
-    .pl-headline {
-      font-family: var(--serif);
-      font-size: clamp(32px, 5vw, 68px);
-      font-weight: 300;
-      line-height: 1.15;
-      color: var(--cream);
-      margin-bottom: 36px;
-    }
-
-    .pl-headline em {
-      font-style: italic;
-      color: var(--gold-lt);
-    }
-
-    .pl-quote {
-      font-family: var(--serif);
-      font-size: clamp(15px, 1.8vw, 20px);
-      font-style: italic;
-      font-weight: 300;
-      color: rgba(240,236,228,0.52);
-      line-height: 1.7;
-      border-left: 1px solid rgba(184,150,94,0.3);
-      padding-left: 24px;
-      margin-top: 32px;
-    }
-
-    .pl-body {
-      font-family: var(--sans);
-      font-size: clamp(12px, 1.2vw, 14px);
-      font-weight: 200;
-      line-height: 1.9;
-      color: rgba(240,236,228,0.48);
-      margin-top: 24px;
-      letter-spacing: 0.04em;
-    }
-
-    /* ── ACTIVE PRINCIPLES GRID ──────────────────────────── */
-
-    #s-principles {
-      min-height: 100vh;
-      padding: 120px 56px;
-    }
-
-    .principles-intro {
-      text-align: center;
-      margin-bottom: 80px;
-    }
-
-    .principles-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      max-width: 1100px;
-      margin: 0 auto;
-      border: 1px solid rgba(184,150,94,0.12);
-    }
-
-    .principle-item {
-      padding: 48px 32px;
-      border-right: 1px solid rgba(184,150,94,0.12);
-    }
-
-    .principle-item:last-child { border-right: none; }
-
-    .principle-num {
-      font-family: var(--serif);
-      font-size: 11px;
-      color: rgba(184,150,94,0.4);
-      letter-spacing: 0.3em;
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .principle-name {
-      font-family: var(--serif);
-      font-size: 20px;
-      font-style: italic;
-      color: var(--cream);
-      line-height: 1.3;
-      margin-bottom: 16px;
-    }
-
-    .principle-desc {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 200;
-      color: rgba(240,236,228,0.38);
-      line-height: 1.8;
-      letter-spacing: 0.03em;
-    }
-
-    /* ── PROFESSIONAL SYSTEM ─────────────────────────────── */
-
-    #s-professional {
-      min-height: 120vh;
-    }
-
-    .pro-system-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1px;
-      margin-top: 64px;
-      border-top: 1px solid rgba(184,150,94,0.15);
-      border-bottom: 1px solid rgba(184,150,94,0.15);
-    }
-
-    .pro-item {
-      padding: 56px 40px;
-      border-right: 1px solid rgba(184,150,94,0.1);
-    }
-
-    .pro-item:last-child { border-right: none; }
-
-    .pro-item-label {
-      font-family: var(--sans);
-      font-size: 8px;
-      letter-spacing: 0.4em;
-      color: var(--gold);
-      margin-bottom: 24px;
-      display: block;
-    }
-
-    .pro-item-title {
-      font-family: var(--serif);
-      font-size: 28px;
-      font-style: italic;
-      color: var(--cream);
-      margin-bottom: 20px;
-    }
-
-    .pro-item-body {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 200;
-      color: rgba(240,236,228,0.4);
-      line-height: 1.85;
-    }
-
-    /* ── JAR SECTION ─────────────────────────────────────── */
-
-    #s-method {
-      min-height: 120vh;
-      text-align: center;
-    }
-
-    /* ── RITUALS ─────────────────────────────────────────── */
-
-    #s-rituals {
-      min-height: 120vh;
-    }
-
-    .ritual-lines {
-      margin-top: 64px;
-    }
-
-    .ritual-line {
-      display: flex;
-      align-items: baseline;
-      gap: 24px;
-      padding: 28px 0;
-      border-bottom: 1px solid rgba(184,150,94,0.1);
-      cursor: default;
-    }
-
-    .ritual-line:first-child { border-top: 1px solid rgba(184,150,94,0.1); }
-
-    .ritual-line-num {
-      font-family: var(--serif);
-      font-size: 12px;
-      color: rgba(184,150,94,0.35);
-      min-width: 32px;
-    }
-
-    .ritual-line-name {
-      font-family: var(--serif);
-      font-size: clamp(22px, 3.5vw, 44px);
-      font-style: italic;
-      font-weight: 300;
-      color: var(--cream);
-      flex: 1;
-    }
-
-    .ritual-line-desc {
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 200;
-      letter-spacing: 0.2em;
-      color: rgba(240,236,228,0.28);
-      text-align: right;
-      max-width: 200px;
-    }
-
-    /* ── CLIENT NEEDS ────────────────────────────────────── */
-
-    #s-client {
-      min-height: 100vh;
-      text-align: center;
-    }
-
-    .need-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 64px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .need-card {
-      border: 1px solid rgba(184,150,94,0.14);
-      padding: 40px 28px;
-      cursor: pointer;
-      transition: border-color 0.4s, background 0.4s;
-      text-align: left;
-    }
-
-    .need-card:hover {
-      border-color: rgba(184,150,94,0.4);
-      background: rgba(184,150,94,0.04);
-    }
-
-    .need-card-icon {
-      width: 28px;
-      height: 28px;
-      margin-bottom: 20px;
-    }
-
-    .need-card-title {
-      font-family: var(--serif);
-      font-size: 20px;
-      font-style: italic;
-      color: var(--cream);
-      margin-bottom: 12px;
-    }
-
-    .need-card-desc {
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 200;
-      color: rgba(240,236,228,0.38);
-      line-height: 1.8;
-      letter-spacing: 0.04em;
-    }
-
-    /* ── FOOTER ──────────────────────────────────────────── */
-
-    footer {
-      position: relative;
-      z-index: 10;
-      padding: 80px 56px 56px;
-      border-top: 1px solid rgba(184,150,94,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-
-    .footer-brand {
-      font-family: var(--serif);
-      font-size: 14px;
-      letter-spacing: 0.15em;
-      color: rgba(240,236,228,0.3);
-    }
-
-    .footer-brand em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 12px;
-    }
-
-    .footer-links a {
-      font-family: var(--sans);
-      font-size: 9px;
-      letter-spacing: 0.3em;
-      color: rgba(240,236,228,0.28);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .footer-links a:hover { color: var(--gold); }
-
-    /* ── SECTION DIVIDER LINE ────────────────────────────── */
-
-    .pl-divider {
-      width: 1px;
-      height: 80px;
-      background: linear-gradient(to bottom, transparent, rgba(184,150,94,0.3), transparent);
-      margin: 0 auto;
-    }
-
-    /* ── RESPONSIVE ──────────────────────────────────────── */
-
-    @media (max-width: 900px) {
-      nav { padding: 24px 28px; }
-      .nav-links { gap: 24px; }
-      .pl-section { padding: 80px 28px; }
-      .principles-grid { grid-template-columns: 1fr 1fr; }
-      .pro-system-grid { grid-template-columns: 1fr; }
-      .need-grid { grid-template-columns: 1fr 1fr; }
-      footer { flex-direction: column; gap: 32px; align-items: flex-start; }
-    }
-
-    @media (max-width: 600px) {
-      .principles-grid { grid-template-columns: 1fr; }
-      .need-grid { grid-template-columns: 1fr; }
-      #narrative-svg { opacity: 0.6; }
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PLEASURE · Professional Luxury · Franciacorta, Italia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@200;300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1e1e20;
+  --bg-d:#161618;
+  --bg-w:#22221f;
+  --oro:#b8956a;
+  --oro-l:#d4b283;
+  --oro-d:#8a6f4d;
+  --crema:#f0e8d8;
+  --crema-d:#888880;
+  --line:rgba(240,232,216,.08);
+  --line-2:rgba(240,232,216,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--crema);font-family:'Inter',sans-serif;font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;letter-spacing:.005em}
+body{overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--oro);color:var(--bg)}
+h1,h2,h3,h4,p,blockquote{font-family:inherit}
+.serif{font-family:'Cormorant Garamond',serif;font-weight:300}
+.tech{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:11px;letter-spacing:.16em}
+
+/* ===== Cursor ===== */
+#cursor{position:fixed;top:0;left:0;width:12px;height:20px;z-index:200;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s,width .35s,height .35s;mix-blend-mode:screen;will-change:transform}
+#cursor svg{width:100%;height:100%;overflow:visible}
+#cursor.lg{width:26px;height:44px}
+@media(hover:none){#cursor{display:none}}
+
+/* ===== Fixed narrative SVG layer ===== */
+#flow-svg{position:fixed;left:50%;top:0;height:280vh;width:auto;pointer-events:none;z-index:3;opacity:.52;will-change:transform}
+
+/* ===== Nav ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;height:60px;transition:background .5s ease,backdrop-filter .5s ease,border-color .5s ease;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(30,30,32,.62);backdrop-filter:blur(18px) saturate(120%);-webkit-backdrop-filter:blur(18px) saturate(120%);border-bottom-color:var(--line)}
+.nav .brand{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:18px;letter-spacing:.22em;color:var(--crema)}
+.nav .menu{display:flex;gap:38px;list-style:none}
+.nav .menu a{font-family:'Inter',sans-serif;font-weight:300;font-size:13px;color:var(--crema);opacity:.72;transition:opacity .3s}
+.nav .menu a:hover{opacity:1}
+.nav .right{display:flex;align-items:center;gap:28px}
+.nav .cta{font-family:'Inter',sans-serif;font-weight:300;font-size:12px;letter-spacing:.06em;color:var(--oro-l);border:1px solid var(--oro);padding:9px 18px;border-radius:999px;transition:background .4s,color .4s}
+.nav .cta:hover{background:var(--oro);color:var(--bg)}
+.nav .lang{display:flex;gap:10px;font-family:'Inter',sans-serif;font-weight:300;font-size:12px;color:var(--crema-d)}
+.nav .lang .on{color:var(--crema)}
+.nav .lang span{cursor:pointer;transition:color .3s}
+.nav .lang span:hover{color:var(--crema)}
+
+/* ===== Generic ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1.4s cubic-bezier(.16,1,.3,1),transform 1.4s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.15s}
+.reveal-d2{transition-delay:.3s}
+.reveal-d3{transition-delay:.45s}
+section{position:relative;overflow:hidden}
+.wrap{max-width:1280px;margin:0 auto;padding:0 80px}
+.wrap-sm{max-width:880px;margin:0 auto;padding:0 80px}
+
+/* type */
+.h-hero{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(48px,7vw,108px);line-height:1.02;letter-spacing:-.01em;color:var(--crema)}
+.h-section{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5.4vw,80px);line-height:1.04;letter-spacing:-.005em;color:var(--crema)}
+.h-section em{font-style:italic;color:var(--oro-l)}
+.quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(22px,2.8vw,38px);line-height:1.32;color:var(--crema);letter-spacing:.005em}
+.body{font-family:'Inter',sans-serif;font-weight:300;font-size:18px;line-height:1.7;color:var(--crema);max-width:540px}
+.body em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.08em;color:var(--oro-l)}
+.body-l{font-family:'Inter',sans-serif;font-weight:300;font-size:19px;line-height:1.7;color:var(--crema-d);max-width:600px}
+
+/* ===== 00 · OPENING ===== */
+#opening{height:100vh;min-height:740px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 52%,#28282d 0%,rgba(40,40,45,0) 58%),linear-gradient(180deg,#1b1b1e 0%,#1e1e20 100%)}
+#opening .stage{position:relative;display:flex;flex-direction:column;align-items:center;gap:36px}
+#opening .logo-wrap{position:relative;width:min(520px,68vw);opacity:0;animation:fadeUp 2s .5s cubic-bezier(.16,1,.3,1) forwards}
+#opening .logo-wrap img{width:100%;filter:drop-shadow(0 8px 36px rgba(184,149,106,.18))}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px) scale(.99);filter:blur(6px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+#opening .diamantino{position:absolute;left:50.1%;top:-3%;width:5.2%;transform:translateX(-50%);opacity:0;animation:diamondAppear 1.4s 1.6s cubic-bezier(.16,1,.3,1) forwards,diamondFloat 7s 3.2s ease-in-out infinite;pointer-events:none}
+#opening .diamantino svg{width:100%;height:auto;display:block;overflow:visible;filter:drop-shadow(0 0 14px rgba(230,198,147,.4))}
+@keyframes diamondAppear{from{opacity:0;transform:translateX(-50%) translateY(20px) scale(.7)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+@keyframes diamondFloat{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
+#opening .subtitle{font-family:'Inter',sans-serif;font-weight:200;font-size:13px;letter-spacing:.3em;color:var(--crema);opacity:0;animation:fadeUp 1.6s 2.4s cubic-bezier(.16,1,.3,1) forwards;text-align:center;text-transform:uppercase}
+#opening .subtitle .sep{padding:0 .8em;color:var(--oro);opacity:.7}
+#opening .scroll{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);opacity:0;animation:fadeUp 1.6s 4.6s cubic-bezier(.16,1,.3,1) forwards;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:14px;color:var(--crema-d);letter-spacing:.02em;display:flex;flex-direction:column;align-items:center;gap:14px}
+#opening .scroll .arrow{width:1px;height:40px;background:linear-gradient(180deg,transparent,var(--oro));animation:dropPulse 2.6s ease-in-out infinite}
+@keyframes dropPulse{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ===== 01 · L'ORIGINE ===== */
+#origine{padding:240px 0 280px;background:linear-gradient(180deg,#1e1e20 0%,#1d1d1a 26%,#1c1c18 58%,#1d1d1a 100%)}
+#origine .bot{position:absolute;inset:0;pointer-events:none;opacity:.7}
+#origine .bot svg{width:100%;height:100%;position:absolute;inset:0}
+#origine .layout{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:120px;max-width:1280px;margin:0 auto;padding:0 80px;z-index:5}
+#origine .col-l{display:flex;flex-direction:column;gap:60px}
+#origine .col-r{display:flex;flex-direction:column;gap:80px;padding-top:200px}
+#origine .quote{max-width:520px}
+#origine .body{max-width:480px}
+
+/* ===== 02 · LA SCIENZA ===== */
+#scienza{padding:240px 0 240px;background:linear-gradient(180deg,#1d1d1a 0%,#1c1c1a 40%,#1e1e20 100%)}
+#scienza .gold-form{position:absolute;right:-10%;top:50%;transform:translateY(-50%);width:60%;opacity:.55;pointer-events:none}
+#scienza .gold-form svg{width:100%;height:auto}
+#scienza .layout{position:relative;z-index:5;max-width:1280px;margin:0 auto;padding:0 80px;display:grid;grid-template-columns:1.3fr 1fr;gap:120px;align-items:start}
+#scienza .quote{max-width:620px;font-size:clamp(28px,3.4vw,52px);line-height:1.18}
+#scienza .quote em{color:var(--oro-l)}
+#scienza .tech-list{margin-top:140px;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 80px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);position:relative;z-index:5}
+#scienza .tech-list .item{padding:40px 32px 36px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:18px}
+#scienza .tech-list .item:last-child{border-right:none}
+#scienza .tech-list .icon{width:38px;height:38px;display:flex;align-items:center;justify-content:center;color:var(--oro)}
+#scienza .tech-list .icon svg{width:100%;height:100%;overflow:visible}
+#scienza .tech-list h4{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:24px;line-height:1.15;color:var(--crema)}
+#scienza .tech-list .item p{font-size:14.5px;line-height:1.55;color:var(--crema-d);max-width:240px}
+
+/* ===== 03 · IL METODO ===== */
+#metodo{padding:280px 0 280px;background:linear-gradient(180deg,#1e1e20 0%,#161618 55%,#161618 100%)}
+#metodo .center{position:relative;max-width:1080px;margin:0 auto;padding:0 80px;display:flex;flex-direction:column;align-items:center;gap:80px;text-align:center}
+#metodo .diamond-big{width:28px;opacity:.85;margin-bottom:8px}
+#metodo .diamond-big svg{width:100%;height:auto;filter:drop-shadow(0 0 18px rgba(230,198,147,.4))}
+#metodo .h-section{max-width:980px}
+#metodo .quote{max-width:740px;text-align:center}
+#metodo .line-out{display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:24px}
+#metodo .line-out .small{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:21px;color:var(--oro-l)}
+#metodo .v-line{width:1px;height:48px;background:linear-gradient(180deg,transparent,var(--oro))}
+
+/* ===== 04 · ACADEMY ===== */
+#academy{padding:220px 0 240px;background:linear-gradient(180deg,#161618 0%,#1a1a18 50%,#17171a 100%)}
+#academy .wrap{display:flex;flex-direction:column;gap:120px}
+#academy .top{display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:end}
+#academy .eyebrow,#rituali .eyebrow,#linee .eyebrow{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--oro);margin-bottom:22px;display:block}
+#academy .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+#academy .pillars .p{padding:48px 36px 56px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:18px}
+#academy .pillars .p:last-child{border-right:none}
+#academy .pillars .lvl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--oro-l)}
+#academy .pillars h4{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:32px;line-height:1.05;color:var(--crema)}
+#academy .pillars h4 em{font-style:italic;color:var(--oro-l)}
+#academy .pillars p{font-size:15px;line-height:1.6;color:var(--crema-d);max-width:320px}
+
+/* ===== 05 · RITUALI ===== */
+#rituali{padding:220px 0 240px;background:linear-gradient(180deg,#17171a 0%,#1e1e20 55%,#1c1c1e 100%)}
+#rituali .wrap{display:flex;flex-direction:column;gap:100px}
+#rituali .top{display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:end}
+#rituali .rit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line)}
+#rituali .rit{background:#1c1c1e;padding:56px 48px;display:flex;flex-direction:column;gap:20px;min-height:300px;position:relative;transition:background .6s}
+#rituali .rit:hover{background:#212124}
+#rituali .rit .step{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--oro);text-transform:uppercase}
+#rituali .rit h4{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,3vw,44px);line-height:1.04;color:var(--crema)}
+#rituali .rit h4 em{font-style:italic;color:var(--oro-l)}
+#rituali .rit p{font-size:15px;line-height:1.65;color:var(--crema-d);max-width:380px}
+#rituali .rit .dur{margin-top:auto;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--crema-d)}
+
+/* ===== 06 · LE LINEE ===== */
+#linee{padding:240px 0 220px;background:linear-gradient(180deg,#1a1a1c 0%,#161618 55%,#161618 100%)}
+#linee .head{display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center;margin-bottom:120px}
+#linee .head .small{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:18px;color:var(--crema-d);letter-spacing:.02em}
+#linee .head .h-section{max-width:980px}
+#linee .head .h-section em{font-style:italic;color:var(--oro-l)}
+.line-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:1280px;margin:0 auto;padding:0 80px}
+.line-card{position:relative;min-height:420px;padding:56px 48px 48px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;border-radius:2px;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.line-card:hover{transform:translateY(-4px)}
+.line-card .bg-overlay{position:absolute;inset:0;z-index:0}
+.line-card .content{position:relative;z-index:2;display:flex;flex-direction:column;gap:24px}
+.line-card .meta{font-family:'Inter',sans-serif;font-weight:300;font-size:12px;color:var(--crema-d);letter-spacing:.04em}
+.line-card .name{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1.04;color:var(--crema)}
+.line-card .name em{font-style:italic;color:var(--oro-l)}
+.line-card .desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:18px;line-height:1.45;color:var(--crema);max-width:380px}
+.line-card .more{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(240,232,216,.14);padding-top:20px;margin-top:24px}
+.line-card .more .tag{font-family:'Inter',sans-serif;font-weight:300;font-size:12px;color:var(--crema-d);letter-spacing:.04em}
+.line-card .more .arrow{display:inline-flex;align-items:center;gap:12px;font-family:'Inter',sans-serif;font-weight:400;font-size:13px;color:var(--oro-l);transition:gap .4s,color .4s}
+.line-card:hover .more .arrow{gap:18px;color:var(--crema)}
+.line-card.filler .bg-overlay{background:linear-gradient(160deg,#0e0e10 0%,#1a1612 60%,#2a1f10 100%)}
+.line-card.lifetime .bg-overlay{background:linear-gradient(160deg,#181e1a 0%,#222a22 70%,#2a322a 100%)}
+.line-card.vinility .bg-overlay{background:linear-gradient(160deg,#1a131c 0%,#2a1d34 70%,#3d2848 100%)}
+.line-card.restruct .bg-overlay{background:linear-gradient(160deg,#1c1c1e 0%,#26262a 70%,#2e2e32 100%)}
+.line-card .motif{position:absolute;right:-10%;top:-10%;width:60%;opacity:.18;z-index:1}
+.line-card .motif svg{width:100%;height:auto}
+#linee .all-lines{max-width:1280px;margin:120px auto 0;padding:0 80px}
+#linee .all-lines h5{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:20px;color:var(--crema-d);margin-bottom:32px}
+#linee .all-lines .list{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+#linee .all-lines .list .item{padding:28px 24px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+#linee .all-lines .list .item:last-child{border-right:none}
+#linee .all-lines .list .item .n{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:20px;color:var(--crema)}
+#linee .all-lines .list .item .d{font-family:'Inter',sans-serif;font-weight:300;font-size:13px;color:var(--crema-d);line-height:1.5}
+.lines-cta{display:flex;justify-content:center;margin-top:64px}
+.lines-cta a{font-family:'Inter',sans-serif;font-weight:300;font-size:13px;letter-spacing:.06em;color:var(--oro-l);border:1px solid var(--oro);padding:15px 34px;border-radius:999px;transition:background .4s,color .4s}
+.lines-cta a:hover{background:var(--oro);color:var(--bg)}
+
+/* ===== FOOTER / FAMILY ===== */
+footer{background:#161618;padding:160px 0 40px}
+footer .wrap{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:48px;padding-bottom:80px;border-bottom:1px solid var(--line)}
+footer .news h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,4.4vw,64px);line-height:1.02;color:var(--crema);margin-bottom:18px}
+footer .news h3 em{font-style:italic;color:var(--oro-l)}
+footer .news p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--crema-d);max-width:420px;margin-bottom:28px}
+footer .news form{display:flex;border-bottom:1px solid var(--crema);max-width:440px}
+footer .news input{flex:1;background:transparent;border:none;color:var(--crema);padding:14px 0;font-family:'Inter',sans-serif;font-weight:300;font-size:16px;outline:none}
+footer .news input::placeholder{color:var(--crema-d)}
+footer .news button{background:transparent;border:none;color:var(--crema);font-family:'Inter',sans-serif;font-weight:300;font-size:13px;cursor:pointer;padding:10px 0 10px 18px;letter-spacing:.04em}
+footer .col h4{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:18px;color:var(--oro-l);margin-bottom:20px}
+footer .col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+footer .col ul a{font-family:'Inter',sans-serif;font-weight:300;font-size:14px;color:var(--crema);opacity:.78;transition:opacity .3s}
+footer .col ul a:hover{opacity:1;color:var(--oro-l)}
+footer .below{display:flex;justify-content:space-between;align-items:center;max-width:1280px;margin:36px auto 0;padding:0 80px;font-family:'Inter',sans-serif;font-weight:300;font-size:12px;color:var(--crema-d)}
+footer .below .lang{display:flex;gap:14px}
+footer .below .lang .on{color:var(--crema)}
+
+/* ===== CONNECTOR ===== */
+.connector{position:relative;min-height:58vh;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:-1px;margin-bottom:-1px}
+.connector .thread{position:absolute;left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%);background:linear-gradient(180deg,rgba(240,232,216,0) 0%,rgba(240,232,216,.12) 22%,rgba(240,232,216,.12) 78%,rgba(240,232,216,0) 100%)}
+.connector .dot{position:absolute;left:50%;width:4px;height:4px;border-radius:50%;background:var(--oro-l);transform:translate(-50%,-50%);opacity:0;transition:opacity 1s ease;box-shadow:0 0 8px rgba(212,178,131,.5)}
+.connector .dot.top{top:14%}
+.connector .dot.bot{top:86%}
+.connector.in .dot{opacity:.8}
+.connector .motif{position:relative;z-index:2;width:min(240px,40vw);height:auto;overflow:visible;display:block;filter:drop-shadow(0 0 7px rgba(212,178,131,.22))}
+.connector .pl{fill:none;stroke:var(--crema);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke}
+.connector .pl.faint{stroke:rgba(240,232,216,.45);stroke-width:1}
+.connector .pl.gold{stroke:var(--oro-l)}
+.connector .fillible{fill:rgba(212,178,131,0);transition:fill 1.2s ease}
+.connector.in .fillible{fill:rgba(212,178,131,.14)}
+.connector .label{position:absolute;left:50%;bottom:11%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--crema-d);letter-spacing:.04em;white-space:nowrap;opacity:0;transition:opacity 1.1s ease .2s}
+.connector.in .label{opacity:.75}
+@media(max-width:900px){.connector{min-height:46vh}.connector .motif{width:min(180px,52vw)}}
+
+/* ===== HERO · philosophy ===== */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:160px 40px;background:linear-gradient(180deg,#1e1e20 0%,#1c1e1b 100%)}
+#hero .inner{max-width:1000px;display:flex;flex-direction:column;align-items:center;gap:64px}
+#hero .lead{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,6vw,96px);line-height:1.02;letter-spacing:-.01em;color:var(--crema)}
+#hero .lead em{font-style:italic;color:var(--oro-l)}
+#hero .divider{width:1px;height:64px;background:linear-gradient(180deg,transparent,var(--oro))}
+#hero .second{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(24px,3vw,42px);line-height:1.2;color:var(--crema-d)}
+#hero .second em{color:var(--oro-l);font-style:italic}
+#hero .word{display:inline-block;opacity:0;transform:translateY(40%);transition:opacity 1.2s cubic-bezier(.16,1,.3,1),transform 1.2s cubic-bezier(.16,1,.3,1)}
+#hero .lead.in .word{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .wrap{padding:0 40px}
+  .wrap-sm{padding:0 40px}
+  #origine .layout{gap:60px;padding:0 40px}
+  #scienza .layout{padding:0 40px}
+  #scienza .tech-list{padding:0 40px}
+  .line-cards{padding:0 40px}
+  #linee .all-lines{padding:0 40px}
+}
+@media(max-width:768px){
+  .nav{padding:14px 20px}
+  .nav .menu{display:none}
+  .nav .right .lang{display:none}
+  #origine .layout{grid-template-columns:1fr;gap:32px;padding:0 24px}
+  #scienza .layout{grid-template-columns:1fr;padding:0 24px}
+  #scienza .tech-list{grid-template-columns:1fr 1fr;padding:0 24px}
+  #metodo .center{padding:0 24px}
+  #academy .wrap{padding:0 24px}
+  #academy .top{grid-template-columns:1fr;gap:32px}
+  #academy .pillars{grid-template-columns:1fr}
+  #academy .pillars .p{border-right:none;border-bottom:1px solid var(--line)}
+  #rituali .wrap{padding:0 24px}
+  #rituali .top{grid-template-columns:1fr;gap:32px}
+  #rituali .rit-grid{grid-template-columns:1fr}
+  #linee{padding:140px 0}
+  .line-cards{grid-template-columns:1fr;padding:0 24px}
+  #linee .all-lines{padding:0 24px;margin-top:80px}
+  #linee .all-lines .list{grid-template-columns:1fr 1fr}
+  footer .wrap{grid-template-columns:1fr;gap:40px;padding:0 24px}
+  footer .below{flex-direction:column;gap:16px;padding:0 24px}
+  #hero{padding:120px 24px;min-height:auto}
+  #flow-svg{opacity:.35}
+}
+</style>
 </head>
 <body>
 
-  <div id="grain"></div>
-
-  <!-- ═══ NARRATIVE SVG LAYER ════════════════════════════════════ -->
-
-  <svg id="narrative-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <filter id="glow-gold">
-        <feGaussianBlur stdDeviation="3" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-      <filter id="glow-soft">
-        <feGaussianBlur stdDeviation="6" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-      <radialGradient id="droplet-grad" cx="42%" cy="35%">
-        <stop offset="0%" stop-color="#e8d5a8" stop-opacity="0.18"/>
-        <stop offset="60%" stop-color="#b8965e" stop-opacity="0.06"/>
-        <stop offset="100%" stop-color="#b8965e" stop-opacity="0"/>
-      </radialGradient>
-      <radialGradient id="jar-grad" cx="50%" cy="40%">
-        <stop offset="0%" stop-color="#d4b07a" stop-opacity="0.22"/>
-        <stop offset="100%" stop-color="#b8965e" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-
-    <!-- ── LEAF GROUP ─────────────────────── -->
-    <g id="g-leaf" opacity="0">
-      <!-- Main leaf outline -->
-      <path id="leaf-outline"
-        d="M 720,620 C 660,560 620,490 628,420 C 636,360 668,310 720,275 C 772,310 804,360 812,420 C 820,490 780,560 720,620 Z"
-        fill="none" stroke="#b8965e" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
-      <!-- Central vein -->
-      <line id="leaf-vein-c" x1="720" y1="620" x2="720" y2="275"
-        stroke="#b8965e" stroke-width="0.55" stroke-linecap="round" opacity="0.5"/>
-      <!-- Secondary veins left -->
-      <line id="leaf-vein-l1" x1="720" y1="520" x2="672" y2="465" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
-      <line id="leaf-vein-l2" x1="720" y1="455" x2="661" y2="405" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
-      <line id="leaf-vein-l3" x1="720" y1="395" x2="668" y2="352" stroke="#b8965e" stroke-width="0.4" opacity="0.3"/>
-      <line id="leaf-vein-l4" x1="720" y1="340" x2="682" y2="308" stroke="#b8965e" stroke-width="0.35" opacity="0.25"/>
-      <!-- Secondary veins right -->
-      <line id="leaf-vein-r1" x1="720" y1="520" x2="768" y2="465" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
-      <line id="leaf-vein-r2" x1="720" y1="455" x2="779" y2="405" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
-      <line id="leaf-vein-r3" x1="720" y1="395" x2="772" y2="352" stroke="#b8965e" stroke-width="0.4" opacity="0.3"/>
-      <line id="leaf-vein-r4" x1="720" y1="340" x2="758" y2="308" stroke="#b8965e" stroke-width="0.35" opacity="0.25"/>
-      <!-- Floating micro-leaves top right -->
-      <path id="leaf-small-1"
-        d="M 880,180 C 865,165 856,148 862,134 C 868,128 878,126 886,132 C 894,138 898,152 892,168 Z"
-        fill="none" stroke="#b8965e" stroke-width="0.65" opacity="0.22"/>
-      <line x1="880" y1="180" x2="880" y2="134" stroke="#b8965e" stroke-width="0.4" opacity="0.15"/>
-      <path id="leaf-small-2"
-        d="M 570,210 C 555,195 546,178 552,164 C 558,158 568,156 576,162 C 584,168 588,182 582,198 Z"
-        fill="none" stroke="#b8965e" stroke-width="0.65" opacity="0.18"/>
-    </g>
-
-    <!-- ── MAGNIFYING GLASS ───────────────── -->
-    <g id="g-lens" opacity="0">
-      <circle id="lens-circle" cx="720" cy="430" r="110"
-        fill="none" stroke="#c4a96e" stroke-width="0.8" opacity="0.55"/>
-      <!-- handle -->
-      <line id="lens-handle" x1="802" y1="512" x2="852" y2="562"
-        stroke="#c4a96e" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/>
-      <!-- inner glow -->
-      <circle cx="720" cy="430" r="108" fill="rgba(196,169,110,0.022)" />
-      <!-- particles inside lens -->
-      <g id="g-particles" opacity="0">
-        <circle cx="700" cy="410" r="1.8" fill="#d4b07a" opacity="0.7"/>
-        <circle cx="730" cy="400" r="1.2" fill="#d4b07a" opacity="0.5"/>
-        <circle cx="745" cy="425" r="1.5" fill="#c4a96e" opacity="0.6"/>
-        <circle cx="695" cy="445" r="1.0" fill="#d4b07a" opacity="0.4"/>
-        <circle cx="718" cy="455" r="1.6" fill="#b8965e" opacity="0.55"/>
-        <circle cx="740" cy="445" r="1.1" fill="#d4b07a" opacity="0.45"/>
-        <circle cx="708" cy="420" r="0.9" fill="#c4a96e" opacity="0.5"/>
-        <circle cx="726" cy="415" r="1.3" fill="#d4b07a" opacity="0.6"/>
-        <circle cx="752" cy="408" r="0.8" fill="#b8965e" opacity="0.4"/>
-        <!-- particle veins inside leaf -->
-        <path d="M 705,440 Q 715,430 725,420 Q 732,412 738,405"
-          fill="none" stroke="#c4a96e" stroke-width="0.4" opacity="0.35"/>
-        <path d="M 698,448 Q 710,438 720,450 Q 728,458 735,452"
-          fill="none" stroke="#c4a96e" stroke-width="0.35" opacity="0.28"/>
-      </g>
-    </g>
-
-    <!-- ── SAP LINE (leaf → droplet transition) ── -->
-    <g id="g-sap" opacity="0">
-      <line id="sap-line" x1="720" y1="620" x2="720" y2="700"
-        stroke="#b8965e" stroke-width="0.6" stroke-linecap="round" opacity="0.5"
-        stroke-dasharray="80" stroke-dashoffset="80"/>
-    </g>
-
-    <!-- ── DROPLET ─────────────────────────── -->
-    <g id="g-droplet" opacity="0" transform="translate(720, 450)">
-      <!-- glow fill -->
-      <ellipse rx="58" ry="72" fill="url(#droplet-grad)" filter="url(#glow-soft)"/>
-      <!-- outer outline -->
-      <path id="droplet-outline"
-        d="M 0,-90 C -28,-60 -56,0 -52,48 C -48,90 -28,108 0,108 C 28,108 48,90 52,48 C 56,0 28,-60 0,-90 Z"
-        fill="none" stroke="#c4a96e" stroke-width="0.85" stroke-linecap="round" opacity="0.75"/>
-      <!-- inner surface -->
-      <path d="M 0,-60 C -14,-36 -28,12 -24,44 C -20,72 -10,84 0,84"
-        fill="none" stroke="#d4b07a" stroke-width="0.4" opacity="0.3"/>
-      <!-- light refraction -->
-      <ellipse cx="-16" cy="-28" rx="10" ry="18" fill="none" stroke="#e8d5a8" stroke-width="0.3" opacity="0.22" transform="rotate(-18)"/>
-    </g>
-
-    <!-- ── MOLECULAR STRUCTURES ────────────── -->
-    <g id="g-molecular" opacity="0" transform="translate(720, 450)">
-      <!-- orbital ring 1 -->
-      <ellipse rx="165" ry="72" fill="none" stroke="#b8965e" stroke-width="0.45" opacity="0.22"
-        transform="rotate(-28)"/>
-      <!-- orbital ring 2 -->
-      <ellipse rx="195" ry="55" fill="none" stroke="#b8965e" stroke-width="0.4" opacity="0.16"
-        transform="rotate(42)"/>
-      <!-- constellation nodes + lines -->
-      <circle cx="-148" cy="-32" r="2.2" fill="#b8965e" opacity="0.35"/>
-      <circle cx="120" cy="-62" r="1.8" fill="#b8965e" opacity="0.3"/>
-      <circle cx="168" cy="28" r="1.5" fill="#c4a96e" opacity="0.28"/>
-      <circle cx="-128" cy="55" r="2.0" fill="#b8965e" opacity="0.32"/>
-      <circle cx="0" cy="-142" r="1.6" fill="#c4a96e" opacity="0.25"/>
-      <circle cx="88" cy="118" r="1.4" fill="#b8965e" opacity="0.28"/>
-      <circle cx="-95" cy="-105" r="1.3" fill="#c4a96e" opacity="0.22"/>
-      <!-- connection lines -->
-      <line x1="-148" y1="-32" x2="0" y2="0" stroke="#b8965e" stroke-width="0.3" opacity="0.18"/>
-      <line x1="120" y1="-62" x2="0" y2="0" stroke="#b8965e" stroke-width="0.3" opacity="0.16"/>
-      <line x1="168" y1="28" x2="88" y2="118" stroke="#b8965e" stroke-width="0.28" opacity="0.14"/>
-      <line x1="-128" y1="55" x2="-148" y2="-32" stroke="#b8965e" stroke-width="0.28" opacity="0.14"/>
-      <line x1="0" y1="-142" x2="120" y2="-62" stroke="#b8965e" stroke-width="0.25" opacity="0.13"/>
-      <line x1="-95" y1="-105" x2="0" y2="-142" stroke="#b8965e" stroke-width="0.25" opacity="0.12"/>
-      <line x1="-95" y1="-105" x2="-148" y2="-32" stroke="#b8965e" stroke-width="0.22" opacity="0.12"/>
-    </g>
-
-    <!-- ── SECONDARY DROPLETS ─────────────── -->
-    <g id="g-drops-secondary" opacity="0">
-      <g id="drop-s1" transform="translate(520, 480)">
-        <path d="M 0,-42 C -13,-28 -26,0 -24,22 C -22,42 -12,50 0,50 C 12,50 22,42 24,22 C 26,0 13,-28 0,-42 Z"
-          fill="none" stroke="#b8965e" stroke-width="0.65" opacity="0.38"/>
-      </g>
-      <g id="drop-s2" transform="translate(920, 440)">
-        <path d="M 0,-32 C -10,-22 -20,0 -18,16 C -16,32 -9,38 0,38 C 9,38 16,32 18,16 C 20,0 10,-22 0,-32 Z"
-          fill="none" stroke="#b8965e" stroke-width="0.6" opacity="0.3"/>
-      </g>
-      <g id="drop-s3" transform="translate(620, 560)">
-        <path d="M 0,-24 C -7,-16 -14,0 -13,12 C -12,24 -7,28 0,28 C 7,28 12,24 13,12 C 14,0 7,-16 0,-24 Z"
-          fill="none" stroke="#b8965e" stroke-width="0.55" opacity="0.25"/>
-      </g>
-    </g>
-
-    <!-- ── JAR ────────────────────────────── -->
-    <g id="g-jar" opacity="0" transform="translate(720, 460)">
-      <!-- lid -->
-      <path d="M -52,-90 L 52,-90 L 46,-76 L -46,-76 Z"
-        fill="none" stroke="#c4a96e" stroke-width="0.75" stroke-linejoin="round" opacity="0.6"/>
-      <line x1="-42" y1="-76" x2="-46" y2="-90" stroke="#c4a96e" stroke-width="0.4" opacity="0.35"/>
-      <line x1="42" y1="-76" x2="46" y2="-90" stroke="#c4a96e" stroke-width="0.4" opacity="0.35"/>
-      <!-- body outline -->
-      <path d="M -46,-76 L -54,90 Q -54,110 0,110 Q 54,110 54,90 L 46,-76 Z"
-        fill="none" stroke="#c4a96e" stroke-width="0.75" stroke-linejoin="round" opacity="0.6"/>
-      <!-- jar inner fill (light) -->
-      <path id="jar-fill"
-        d="M -46,20 L -54,90 Q -54,110 0,110 Q 54,110 54,90 L 46,20 Z"
-        fill="url(#jar-grad)" opacity="0"/>
-      <!-- label line -->
-      <line x1="-36" y1="-20" x2="36" y2="-20" stroke="#c4a96e" stroke-width="0.35" opacity="0.22"/>
-      <line x1="-36" y1="-8" x2="28" y2="-8" stroke="#c4a96e" stroke-width="0.3" opacity="0.18"/>
-    </g>
-
-    <!-- ── BACKGROUND JARS (faint) ────────── -->
-    <g id="g-jars-bg" opacity="0">
-      <g transform="translate(480, 480) scale(0.72)">
-        <path d="M -46,-76 L -54,90 Q -54,110 0,110 Q 54,110 54,90 L 46,-76 Z M -52,-90 L 52,-90 L 46,-76 L -46,-76 Z"
-          fill="none" stroke="#b8965e" stroke-width="0.5" opacity="0.14"/>
-      </g>
-      <g transform="translate(960, 480) scale(0.65)">
-        <path d="M -46,-76 L -54,90 Q -54,110 0,110 Q 54,110 54,90 L 46,-76 Z M -52,-90 L 52,-90 L 46,-76 L -46,-76 Z"
-          fill="none" stroke="#b8965e" stroke-width="0.5" opacity="0.11"/>
-      </g>
-    </g>
-
-    <!-- ── HAIR FIBER ──────────────────────── -->
-    <g id="g-hair" opacity="0" transform="translate(720, 450)">
-      <!-- scalp base -->
-      <path d="M -140,140 Q 0,100 140,140" fill="none" stroke="#b8965e" stroke-width="0.7" opacity="0.35"/>
-      <!-- hair strand 1 (central) -->
-      <path id="hair-s1"
-        d="M 0,100 C 8,20 -6,-80 2,-180"
-        fill="none" stroke="#c4a96e" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
-      <!-- cuticle layers central -->
-      <path d="M 6,80 C 12,20 2,-60 8,-140" fill="none" stroke="#b8965e" stroke-width="0.4" opacity="0.25"/>
-      <path d="M -6,80 C -10,20 -14,-60 -4,-140" fill="none" stroke="#b8965e" stroke-width="0.4" opacity="0.25"/>
-      <!-- cortex lines -->
-      <path d="M 0,60 C 2,20 -2,-40 0,-120" fill="none" stroke="#d4b07a" stroke-width="0.25" opacity="0.2"/>
-      <!-- hair strand 2 (left) -->
-      <path id="hair-s2"
-        d="M -55,120 C -48,40 -62,-60 -54,-155"
-        fill="none" stroke="#b8965e" stroke-width="0.85" stroke-linecap="round" opacity="0.3"/>
-      <!-- hair strand 3 (right) -->
-      <path id="hair-s3"
-        d="M 55,125 C 62,45 48,-55 56,-150"
-        fill="none" stroke="#b8965e" stroke-width="0.85" stroke-linecap="round" opacity="0.28"/>
-      <!-- follicle bulb -->
-      <ellipse cx="0" cy="120" rx="14" ry="22" fill="none" stroke="#b8965e" stroke-width="0.5" opacity="0.28"/>
-      <!-- droplet entering hair -->
-      <g id="drop-into-hair" opacity="0" transform="translate(0, -40)">
-        <path d="M 0,-18 C -5,-12 -10,0 -9,8 C -8,16 -4,20 0,20 C 4,20 8,16 9,8 C 10,0 5,-12 0,-18 Z"
-          fill="rgba(196,169,110,0.15)" stroke="#c4a96e" stroke-width="0.55" opacity="0.7"/>
-      </g>
-    </g>
-
+<!-- CURSOR — diamond pencil (from Pleasure Home, exact) -->
+<div id="cursor">
+  <svg viewBox="0 0 12 20">
+    <path d="M6 0 L12 5 L6 20 L0 5 Z" fill="#d4b283" opacity=".85"/>
+    <path d="M6 0 L12 5 L6 20 L0 5 Z" fill="none" stroke="#b8956a" stroke-width=".6"/>
   </svg>
+</div>
 
-  <!-- ═══ NAV ════════════════════════════════════════════════════ -->
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="brand">PLEASURE</div>
+  <ul class="menu">
+    <li><a href="#origine">Origine</a></li>
+    <li><a href="#scienza">Scienza</a></li>
+    <li><a href="#metodo">Metodo</a></li>
+    <li><a href="#academy">Academy</a></li>
+    <li><a href="#rituali">Rituali</a></li>
+    <li><a href="#linee">Linee</a></li>
+    <li><a href="#family">Family</a></li>
+  </ul>
+  <div class="right">
+    <a class="cta" href="#linee">Scopri le Linee</a>
+    <div class="lang"><span class="on">IT</span><span>EN</span><span>ES</span></div>
+  </div>
+</nav>
 
-  <nav id="nav">
-    <a class="nav-logo" href="#">
-      PLEASURE
-      <span>PROFESSIONAL LUXURY · FRANCIACORTA, ITALIA</span>
-    </a>
-    <div class="nav-links">
-      <a href="#">Linee</a>
-      <a href="#">Protocolli</a>
-      <a href="#">Academy</a>
-      <a href="#">Ricerca</a>
-      <a href="#">Atelier</a>
+<!-- ═══════════════════════════════════════════════════════
+     FIXED NARRATIVE SVG — from Pleasure Flow
+     Draws: leaf → sap → droplet → particles → bottle
+     Moves upward as user scrolls through the whole page
+════════════════════════════════════════════════════════ -->
+<svg id="flow-svg" viewBox="0 0 1200 2400" preserveAspectRatio="xMidYMin meet">
+  <defs>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.016" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2"/>
+    </filter>
+    <radialGradient id="dropGrad" cx="42%" cy="34%" r="62%">
+      <stop offset="0%" stop-color="#fff6e2"/>
+      <stop offset="38%" stop-color="#e6c693"/>
+      <stop offset="100%" stop-color="#b8956a"/>
+    </radialGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(230,198,147,.55)"/>
+      <stop offset="60%" stop-color="rgba(212,178,131,.12)"/>
+      <stop offset="100%" stop-color="rgba(212,178,131,0)"/>
+    </radialGradient>
+    <linearGradient id="liquidGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#e6c693"/>
+      <stop offset="100%" stop-color="#a87f4f"/>
+    </linearGradient>
+    <clipPath id="bottleClip">
+      <path d="M520 1880 Q520 1840 560 1838 L560 1812 L640 1812 L640 1838 Q680 1840 680 1880 L692 2200 Q692 2256 636 2256 L564 2256 Q508 2256 508 2200 Z"/>
+    </clipPath>
+  </defs>
+
+  <g filter="url(#pencil)">
+    <!-- LEAF -->
+    <g id="leafGroup">
+      <path class="ink" id="leafL"   data-s="0.02" data-e="0.13" d="M600 96 C 486 168 452 320 600 470"/>
+      <path class="ink" id="leafR"   data-s="0.04" data-e="0.15" d="M600 96 C 714 168 748 320 600 470"/>
+      <path class="ink thin" id="leafMid" data-s="0.07" data-e="0.18" d="M600 120 L600 458"/>
+      <path class="ink thin" data-s="0.10" data-e="0.18" d="M600 180 C 556 196 532 214 512 252"/>
+      <path class="ink thin" data-s="0.11" data-e="0.19" d="M600 180 C 644 196 668 214 688 252"/>
+      <path class="ink thin" data-s="0.12" data-e="0.20" d="M600 250 C 560 266 540 284 522 322"/>
+      <path class="ink thin" data-s="0.13" data-e="0.20" d="M600 250 C 640 266 660 284 678 322"/>
+      <path class="ink thin" data-s="0.14" data-e="0.21" d="M600 322 C 566 338 550 354 536 388"/>
+      <path class="ink thin" data-s="0.15" data-e="0.21" d="M600 322 C 634 338 650 354 664 388"/>
+    </g>
+    <!-- STEM + SAP -->
+    <path class="ink" id="stem"    data-s="0.16" data-e="0.30" d="M600 470 C 606 560 594 660 600 792"/>
+    <path class="ink" id="sapDrop" data-s="0.25" data-e="0.33" d="M600 770 C 622 798 622 820 600 832 C 578 820 578 798 600 770 Z"/>
+    <!-- FALL TRAIL -->
+    <path class="ink faint" id="fallTrail" data-s="0.30" data-e="0.50" d="M600 836 L600 1296" stroke-dasharray="2 9"/>
+    <!-- PARTICLES placeholder -->
+    <g id="particles"></g>
+    <!-- SPINE TO BOTTLE -->
+    <path class="ink" id="spineB" data-s="0.74" data-e="0.86" d="M600 1300 C 606 1480 594 1640 600 1812"/>
+    <!-- BOTTLE -->
+    <g id="bottleGroup">
+      <path class="ink" id="bcap"   data-s="0.72" data-e="0.80" d="M566 1772 L634 1772 L634 1812 L566 1812 Z"/>
+      <path class="ink" id="bbody"  data-s="0.76" data-e="0.90" d="M520 1880 Q520 1840 560 1838 L560 1812 L640 1812 L640 1838 Q680 1840 680 1880 L692 2200 Q692 2256 636 2256 L564 2256 Q508 2256 508 2200 Z"/>
+      <path class="ink thin" id="blabel" data-s="0.86" data-e="0.93" d="M540 2010 L660 2010 L660 2150 L540 2150 Z"/>
+    </g>
+  </g>
+
+  <!-- liquid fill -->
+  <rect id="liquid" x="500" y="2256" width="200" height="0" fill="url(#liquidGrad)" clip-path="url(#bottleClip)" opacity="0"/>
+  <!-- falling droplet -->
+  <g id="fallDropG" opacity="0">
+    <path d="M600 0 C 624 34 624 60 600 74 C 576 60 576 34 600 0 Z" fill="url(#dropGrad)"/>
+  </g>
+  <!-- luminous droplet -->
+  <g id="lumG" opacity="0">
+    <circle id="lumGlow" cx="600" cy="1300" r="150" fill="url(#glowGrad)"/>
+    <path id="lumDrop" d="M600 1232 C 638 1284 638 1322 600 1346 C 562 1322 562 1284 600 1232 Z" fill="url(#dropGrad)"/>
+    <ellipse cx="585" cy="1280" rx="7" ry="13" fill="#fff6e2" opacity=".55"/>
+  </g>
+  <!-- pencil tip glow -->
+  <circle id="tip"     r="5"  fill="#fff6e2" opacity="0"/>
+  <circle id="tipGlow" r="16" fill="url(#glowGrad)" opacity="0"/>
+  <!-- brand at the end -->
+  <g id="brandG" opacity="0">
+    <text x="600" y="2336" text-anchor="middle" font-family="Cormorant Garamond" font-size="40" letter-spacing="10" fill="#f0e8d8">PLEASURE</text>
+  </g>
+</svg>
+
+<!-- add ink class styles inline so they apply inside SVG -->
+<style>
+.ink{fill:none;stroke:#f0e8d8;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.ink.faint{stroke:rgba(240,232,216,.35);stroke-width:1}
+.ink.thin{stroke-width:1}
+</style>
+
+<!-- ═══════════════════════════════════════════════════ -->
+
+<!-- ========== 00 · OPENING ========== -->
+<section id="opening">
+  <div class="stage">
+    <div class="logo-wrap">
+      <img src="pleasure-wordmark.png" alt="PLEASURE"/>
+      <div class="diamantino">
+        <svg viewBox="0 0 14 24">
+          <defs>
+            <linearGradient id="d-g" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#f4e0b4"/>
+              <stop offset="50%" stop-color="#d4b283"/>
+              <stop offset="100%" stop-color="#8a6f4d"/>
+            </linearGradient>
+          </defs>
+          <path d="M7 0 L14 6 L7 24 L0 6 Z" fill="url(#d-g)" stroke="#b8956a" stroke-width=".4"/>
+        </svg>
+      </div>
     </div>
-  </nav>
+    <div class="subtitle">Professional Luxury<span class="sep">·</span>Franciacorta, Italia</div>
+  </div>
+  <div class="scroll">
+    <span>scorri</span>
+    <div class="arrow"></div>
+  </div>
+</section>
 
-  <!-- ═══ MAIN ════════════════════════════════════════════════════ -->
+<!-- C1 · connector: leaf -->
+<div class="connector" style="background:#1e1e20">
+  <div class="thread"></div><span class="dot top"></span><span class="dot bot"></span>
+  <svg class="motif" viewBox="0 0 120 180" preserveAspectRatio="xMidYMid meet">
+    <path class="pl" data-from="0" data-to="0.55" pathLength="1" d="M60 12 C 30 50 26 110 60 168 C 94 110 90 50 60 12 Z"/>
+    <path class="pl" data-from="0.5" data-to="0.78" pathLength="1" d="M60 22 L60 160"/>
+    <path class="pl faint" data-from="0.78" data-to="0.9" pathLength="1" d="M60 70 C 46 78 40 90 36 104"/>
+    <path class="pl faint" data-from="0.78" data-to="0.9" pathLength="1" d="M60 70 C 74 78 80 90 84 104"/>
+    <path class="pl faint" data-from="0.9" data-to="1" pathLength="1" d="M60 112 C 48 118 44 126 40 136"/>
+    <path class="pl faint" data-from="0.9" data-to="1" pathLength="1" d="M60 112 C 72 118 76 126 80 136"/>
+  </svg>
+  <span class="label">la pianta</span>
+</div>
 
-  <main>
+<!-- ========== HERO · philosophy ========== -->
+<section id="hero">
+  <div class="inner">
+    <h1 class="lead" id="heroLead">
+      <span class="word">Il</span> <span class="word">vero</span> <span class="word"><em>lusso</em></span> <span class="word">non</span> <span class="word">è</span> <span class="word">per</span> <span class="word">tutti.</span><br/>
+      <span class="word">È</span> <span class="word">per</span> <span class="word">chi</span> <span class="word">sceglie</span> <span class="word">di</span> <span class="word"><em>sapere&nbsp;di&nbsp;più.</em></span>
+    </h1>
+    <div class="divider"></div>
+    <p class="second reveal">Non vendiamo ai saloni.<br/><em>Cresciamo</em> con loro.</p>
+  </div>
+</section>
 
-    <!-- 1 ── HERO -->
-    <section id="s-hero" class="pl-section" style="min-height:100vh;flex-direction:column;text-align:center;">
-      <p class="hero-eyebrow" id="hero-eyebrow">PROFESSIONAL LUXURY · FRANCIACORTA, ITALIA</p>
-      <h1 class="hero-headline" id="hero-headline">
-        Il vero lusso<br>non è per tutti.<br>
-        È per chi sceglie di<br><em>sapere di più.</em>
-      </h1>
-      <p class="hero-sub" id="hero-sub">
-        Non vendiamo ai saloni.<br>Cresciamo con loro.
-      </p>
-      <div class="hero-scroll-hint" id="scroll-hint">
-        <span>SCORRI</span>
-        <div class="scroll-line"></div>
-      </div>
-    </section>
+<!-- C2 · connector: sprout -->
+<div class="connector" style="background:linear-gradient(180deg,#1c1f1b 0%,#1e1e20 100%)">
+  <div class="thread"></div><span class="dot top"></span><span class="dot bot"></span>
+  <svg class="motif" viewBox="0 0 120 180" preserveAspectRatio="xMidYMid meet">
+    <path class="pl" data-from="0" data-to="0.3" pathLength="1" d="M60 92 L60 42"/>
+    <path class="pl" data-from="0.3" data-to="0.6" pathLength="1" d="M60 62 C 40 56 30 62 26 78 C 44 80 56 74 60 62 Z"/>
+    <path class="pl" data-from="0.6" data-to="0.85" pathLength="1" d="M60 54 C 80 48 90 54 94 70 C 76 72 64 66 60 54 Z"/>
+    <path class="pl faint" data-from="0.85" data-to="1" pathLength="1" d="M60 92 C 58 122 64 144 56 170"/>
+  </svg>
+  <span class="label">il germoglio</span>
+</div>
 
-    <!-- 2 ── DISCOVERY -->
-    <section id="s-discovery" class="pl-section">
-      <div class="pl-text-block left">
-        <span class="pl-label">DALLA NATURA</span>
-        <h2 class="pl-headline">
-          Dalla terra,<br>prima che dal<br><em>laboratorio.</em>
-        </h2>
-        <p class="pl-quote">
-          "Ogni pianta porta un segreto.<br>
-          Noi passiamo la vita ad imparare ad ascoltarla."
-        </p>
-        <p class="pl-body">
-          PLEASURE non estrae dalla natura.<br>La ascolta. È impara a renderle qualcosa in cambio.
-        </p>
-      </div>
-    </section>
+<!-- ========== 01 · L'ORIGINE ========== -->
+<section id="origine">
+  <div class="bot">
+    <svg viewBox="0 0 1600 1400" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="ori-halo" cx="50%" cy="50%" r="60%">
+          <stop offset="0%" stop-color="rgba(184,149,106,.10)"/>
+          <stop offset="100%" stop-color="rgba(30,30,20,0)"/>
+        </radialGradient>
+        <linearGradient id="ori-leaf" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="rgba(184,149,106,.18)"/>
+          <stop offset="100%" stop-color="rgba(30,30,20,.06)"/>
+        </linearGradient>
+        <filter id="ori-blur"><feGaussianBlur stdDeviation="3"/></filter>
+        <filter id="ori-blur2"><feGaussianBlur stdDeviation="6"/></filter>
+      </defs>
+      <ellipse cx="800" cy="700" rx="1000" ry="700" fill="url(#ori-halo)"/>
+      <g filter="url(#ori-blur)" opacity=".55">
+        <g transform="translate(220 480) rotate(-22)">
+          <ellipse rx="140" ry="380" fill="url(#ori-leaf)"/>
+          <line x1="0" y1="-360" x2="0" y2="360" stroke="rgba(184,149,106,.18)"/>
+          <g stroke="rgba(184,149,106,.12)" stroke-width=".8" fill="none">
+            <path d="M0 -260 Q80 -200 130 -120"/><path d="M0 -120 Q80 -70 130 10"/>
+            <path d="M0 20 Q80 60 130 140"/><path d="M0 160 Q70 200 120 270"/>
+            <path d="M0 -260 Q-80 -200 -130 -120"/><path d="M0 -120 Q-80 -70 -130 10"/>
+            <path d="M0 20 Q-80 60 -130 140"/><path d="M0 160 Q-70 200 -120 270"/>
+          </g>
+        </g>
+      </g>
+      <g filter="url(#ori-blur)" opacity=".4">
+        <g transform="translate(1380 360) rotate(18)">
+          <ellipse rx="120" ry="320" fill="url(#ori-leaf)"/>
+          <line x1="0" y1="-300" x2="0" y2="300" stroke="rgba(184,149,106,.16)"/>
+          <g stroke="rgba(184,149,106,.10)" stroke-width=".8" fill="none">
+            <path d="M0 -220 Q70 -170 110 -100"/><path d="M0 -100 Q70 -50 110 30"/>
+            <path d="M0 40 Q70 80 110 150"/><path d="M0 -220 Q-70 -170 -110 -100"/>
+            <path d="M0 -100 Q-70 -50 -110 30"/><path d="M0 40 Q-70 80 -110 150"/>
+          </g>
+        </g>
+      </g>
+      <g fill="rgba(184,149,106,.6)">
+        <circle cx="320" cy="280" r="1.4"><animate attributeName="cy" values="280;210;280" dur="14s" repeatCount="indefinite"/></circle>
+        <circle cx="620" cy="360" r="1.1"><animate attributeName="cy" values="360;300;360" dur="16s" repeatCount="indefinite"/></circle>
+        <circle cx="1080" cy="280" r="1.5"><animate attributeName="cy" values="280;220;280" dur="12s" repeatCount="indefinite"/></circle>
+        <circle cx="1280" cy="340" r="1"><animate attributeName="cy" values="340;280;340" dur="15s" repeatCount="indefinite"/></circle>
+      </g>
+    </svg>
+  </div>
+  <div class="layout">
+    <div class="col-l">
+      <h2 class="h-section reveal">Dalla terra,<br/>prima che dal<br/><em>laboratorio.</em></h2>
+      <p class="body reveal reveal-d1">PLEASURE non estrae dalla natura.<br/>La <em>ascolta.</em><br/>E impara a restituirle qualcosa in cambio.</p>
+    </div>
+    <div class="col-r">
+      <p class="quote reveal reveal-d2">"Ogni pianta porta un segreto.<br/>Noi passiamo la vita ad imparare ad ascoltarla."</p>
+    </div>
+  </div>
+</section>
 
-    <!-- 3 ── DROPLET / NATURE HAS THE ANSWER -->
-    <section id="s-droplet" class="pl-section">
-      <div class="pl-text-block right">
-        <span class="pl-label">L'ESSENZA</span>
-        <h2 class="pl-headline">
-          La <em>natura</em> ha già<br>la risposta.
-        </h2>
-        <p class="pl-body">
-          La linfa sale. L'essenza scende.<br>
-          Ogni goccia contiene millenni di intelligenza botanica<br>
-          che le biotecnologie avanzate imparano a leggere.
-        </p>
-      </div>
-    </section>
+<!-- C3 · connector: active principles → droplet -->
+<div class="connector" style="background:#1d1d1a">
+  <div class="thread"></div><span class="dot top"></span><span class="dot bot"></span>
+  <svg class="motif" viewBox="0 0 180 220" preserveAspectRatio="xMidYMid meet">
+    <path class="pl" data-from="0" data-to="0.3" pathLength="1" d="M46 28 C 26 50 24 86 46 114 C 68 86 66 50 46 28 Z"/>
+    <path class="pl faint" data-from="0.26" data-to="0.42" pathLength="1" d="M46 36 L46 108"/>
+    <path class="pl faint" data-from="0.3" data-to="0.5" pathLength="1" d="M46 114 C 50 140 44 162 50 186"/>
+    <path class="pl faint" data-from="0.4" data-to="0.56" pathLength="1" d="M46 114 C 62 150 84 166 100 176"/>
+    <path class="pl gold" data-from="0.5" data-to="0.78" pathLength="1" d="M96 150 m -3 0 a 3 3 0 1 0 6 0 a 3 3 0 1 0 -6 0"/>
+    <path class="pl gold" data-from="0.56" data-to="0.82" pathLength="1" d="M112 162 m -3 0 a 3 3 0 1 0 6 0 a 3 3 0 1 0 -6 0"/>
+    <path class="pl gold" data-from="0.62" data-to="0.86" pathLength="1" d="M126 172 m -2.5 0 a 2.5 2.5 0 1 0 5 0 a 2.5 2.5 0 1 0 -5 0"/>
+    <path class="pl" data-from="0.6" data-to="1" pathLength="1" d="M130 120 C 152 152 152 178 130 196 C 108 178 108 152 130 120 Z"/>
+    <path class="pl faint" data-from="0.86" data-to="1" pathLength="1" d="M120 150 C 117 160 117 172 120 182"/>
+  </svg>
+  <span class="label">i principi attivi → la goccia</span>
+</div>
 
-    <!-- 4 ── BIOTECHNOLOGY -->
-    <section id="s-bio" class="pl-section">
-      <div class="pl-text-block left">
-        <span class="pl-label">BIOTECNOLOGIE AVANZATE</span>
-        <h2 class="pl-headline">
-          <em>Le biotecnologie<br>avanzate</em> la liberano,<br>
-          la esprimono,<br>la potenziano.
-        </h2>
-        <p class="pl-body">
-          Non modifichiamo la natura.<br>
-          La amplificiamo fino alla sua massima espressione.
-        </p>
-      </div>
-    </section>
-
-    <!-- 5 ── ACTIVE PRINCIPLES -->
-    <section id="s-principles" class="pl-section" style="display:block;min-height:auto;padding:120px 56px;">
-      <div class="principles-intro">
-        <span class="pl-label">I PRINCIPI ATTIVI</span>
-        <h2 class="pl-headline" style="max-width:500px;margin:0 auto;">
-          <em>Quattro segreti.<br>Un sistema.</em>
-        </h2>
-      </div>
-      <div class="principles-grid">
-        <div class="principle-item">
-          <span class="principle-num">01</span>
-          <p class="principle-name">Iperfermentazione</p>
-          <p class="principle-desc">La fermentazione spinta oltre i limiti convenzionali libera frazioni molecolari che nessun processo estrattivo standard riesce a ottenere.</p>
-        </div>
-        <div class="principle-item">
-          <span class="principle-num">02</span>
-          <p class="principle-name">Peptidi dell'avena</p>
-          <p class="principle-desc">Frammenti proteici a basso peso molecolare capaci di attraversare la corteccia del capello e operare dall'interno verso l'esterno.</p>
-        </div>
-        <div class="principle-item">
-          <span class="principle-num">03</span>
-          <p class="principle-name">Amminoacidi<br>a doppio strato</p>
-          <p class="principle-desc">Una formulazione stratificata che agisce simultaneamente sulla cuticola e sulla struttura corticale, garantendo un risultato durevole e progressivo.</p>
-        </div>
-        <div class="principle-item">
-          <span class="principle-num">04</span>
-          <p class="principle-name">Estratto di vite<br>rossa</p>
-          <p class="principle-desc">Resveratrolo e polifenoli in concentrazione avanzata. Antiossidante, rigenerante, attivante la circolazione del cuoio capelluto.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="pl-divider" style="margin:0 auto 0;position:relative;z-index:10;"></div>
-
-    <!-- 6 ── PROFESSIONAL SYSTEM -->
-    <section id="s-professional" class="pl-section" style="display:block;padding:120px 56px;">
-      <div class="pl-text-block" style="max-width:680px;margin-bottom:0;">
-        <span class="pl-label">IL SISTEMA PROFESSIONALE</span>
-        <h2 class="pl-headline">
-          <em>Eleviamo<br>professionisti.</em>
-        </h2>
-        <p class="pl-body" style="max-width:480px;">
-          Un sistema vivo. Non impari una tecnica —<br>
-          impari una lingua. E ogni testa è una frase nuova.
-        </p>
-      </div>
-      <div class="pro-system-grid">
-        <div class="pro-item">
-          <span class="pro-item-label">ACADEMY</span>
-          <p class="pro-item-title">La formazione<br>come linguaggio</p>
-          <p class="pro-item-body">Percorsi formativi costruiti attorno alla diagnosi, non alla vendita. Ogni professionista impara a leggere il capello prima di trattarlo.</p>
-        </div>
-        <div class="pro-item">
-          <span class="pro-item-label">RICERCA</span>
-          <p class="pro-item-title">Il laboratorio<br>come atelier</p>
-          <p class="pro-item-body">Ricerca continua in biotecnologia cosmetica. Ogni formula nasce da un protocollo clinico prima di diventare un prodotto.</p>
-        </div>
-        <div class="pro-item">
-          <span class="pro-item-label">ATELIER</span>
-          <p class="pro-item-title">Il salone come<br>laboratorio vivo</p>
-          <p class="pro-item-body">Il salone non è un punto vendita. È il luogo in cui il metodo Pleasure si esprime nella sua forma più alta: il gesto sul cliente.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7 ── METHOD / JAR -->
-    <section id="s-method" class="pl-section" style="flex-direction:column;text-align:center;">
-      <span class="pl-label">IL METODO</span>
-      <h2 class="pl-headline" style="max-width:560px;margin:0 auto;">
-        Questo non è un prodotto.<br>
-        È un <em>metodo.</em><br>
-        Generativo. Tuo.
-      </h2>
-      <p class="pl-body" style="max-width:420px;margin:28px auto 0;text-align:center;">
-        Meno magazzino.<br>Più risultato.
-      </p>
-    </section>
-
-    <!-- 8 ── RITUALS -->
-    <section id="s-rituals" class="pl-section" style="display:block;padding:120px 56px;">
-      <div class="pl-text-block" style="max-width:540px;">
-        <span class="pl-label">I RITUALI</span>
-        <h2 class="pl-headline">
-          Il gesto<br>diventa <em>rito.</em>
-        </h2>
-        <p class="pl-body">
-          Ogni protocollo è una sequenza precisa.<br>
-          Ogni sequenza ha una logica botanica e biotecnologica<br>
-          che il professionista padroneggia, non esegue.
-        </p>
-      </div>
-      <div class="ritual-lines" style="max-width:900px;">
-        <div class="ritual-line">
-          <span class="ritual-line-num">01</span>
-          <span class="ritual-line-name">Risveglio della cute</span>
-          <span class="ritual-line-desc">Attivazione circolatoria · cuoio capelluto</span>
-        </div>
-        <div class="ritual-line">
-          <span class="ritual-line-num">02</span>
-          <span class="ritual-line-name">Ricostruzione della fibra</span>
-          <span class="ritual-line-desc">Amminoacidi · peptidi di avena</span>
-        </div>
-        <div class="ritual-line">
-          <span class="ritual-line-num">03</span>
-          <span class="ritual-line-name">Amplificazione del colore</span>
-          <span class="ritual-line-desc">Iperfermentazione · protezione</span>
-        </div>
-        <div class="ritual-line">
-          <span class="ritual-line-num">04</span>
-          <span class="ritual-line-name">Rituale del volume</span>
-          <span class="ritual-line-desc">Estratto di vite rossa · tensione</span>
-        </div>
-        <div class="ritual-line">
-          <span class="ritual-line-num">05</span>
-          <span class="ritual-line-name">Equilibrio sensoriale</span>
-          <span class="ritual-line-desc">Aromaterapia botanica · sensoriale</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- 9 ── CLIENT NEEDS -->
-    <section id="s-client" class="pl-section" style="display:block;padding:120px 56px;text-align:center;">
-      <span class="pl-label">ORIENTAMENTO PROFESSIONALE</span>
-      <h2 class="pl-headline" style="max-width:620px;margin:0 auto 16px;">
-        Di cosa ha bisogno<br>il tuo cliente <em>oggi?</em>
-      </h2>
-      <p class="pl-body" style="max-width:420px;margin:0 auto 64px;">
-        Non un catalogo. Una diagnosi.<br>
-        Trova il protocollo giusto partendo dal bisogno reale.
-      </p>
-      <div class="need-grid">
-        <div class="need-card">
-          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 4 C10,4 7,7 7,12 C7,17 14,24 14,24 C14,24 21,17 21,12 C21,7 18,4 14,4Z" stroke="#b8965e" stroke-width="0.8"/>
-            <line x1="14" y1="4" x2="14" y2="24" stroke="#b8965e" stroke-width="0.5" opacity="0.4"/>
-          </svg>
-          <p class="need-card-title">Cuoio capelluto sensibile</p>
-          <p class="need-card-desc">Rossori, prurito, desquamazione.<br>Il risveglio comincia dalla radice.</p>
-        </div>
-        <div class="need-card">
-          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 2 C13,8 11,14 14,22 C17,14 15,8 14,2Z" stroke="#b8965e" stroke-width="0.8"/>
-            <path d="M14 2 C12,10 10,16 14,22" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
-          </svg>
-          <p class="need-card-title">Capello sfibrato e secco</p>
-          <p class="need-card-desc">Rottura, opacità, fragilità.<br>La fibra richiede ascolto prima di tutto.</p>
-        </div>
-        <div class="need-card">
-          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="14" cy="14" r="7" stroke="#b8965e" stroke-width="0.8"/>
-            <circle cx="14" cy="14" r="3" stroke="#b8965e" stroke-width="0.45" opacity="0.4"/>
-            <path d="M14 7 L14 4 M14 21 L14 24 M7 14 L4 14 M21 14 L24 14" stroke="#b8965e" stroke-width="0.5" opacity="0.3"/>
-          </svg>
-          <p class="need-card-title">Colorazione e trattamento</p>
-          <p class="need-card-desc">Protezione pre e post-colore.<br>Amplificazione della luminosità.</p>
-        </div>
-        <div class="need-card">
-          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8,22 C8,14 10,8 14,6 C18,8 20,14 20,22" stroke="#b8965e" stroke-width="0.8" stroke-linecap="round"/>
-            <ellipse cx="14" cy="22" rx="6" ry="2.5" stroke="#b8965e" stroke-width="0.5" opacity="0.4"/>
-          </svg>
-          <p class="need-card-title">Volume e struttura</p>
-          <p class="need-card-desc">Capello piatto e senza corpo.<br>Il volume si costruisce dall'interno.</p>
-        </div>
-        <div class="need-card">
-          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 5 C10,5 7,8 7,13 Q7,19 14,23 Q21,19 21,13 C21,8 18,5 14,5Z" stroke="#b8965e" stroke-width="0.8"/>
-            <path d="M 10,10 Q14,8 18,10 Q 16,14 14,16 Q12,14 10,10Z" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
-          </svg>
-          <p class="need-card-title">Caduta e diradamento</p>
-          <p class="need-card-desc">Perdita progressiva di densità.<br>Il follicolo ha bisogno di essere ascoltato.</p>
-        </div>
-        <div class="need-card">
-          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 4 L14 24 M9 9 C9,9 14,12 19,9 M9 16 C9,16 14,19 19,16" stroke="#b8965e" stroke-width="0.75" stroke-linecap="round"/>
-          </svg>
-          <p class="need-card-title">Benessere sensoriale</p>
-          <p class="need-card-desc">Il cliente che cerca un'esperienza.<br>Il rito come risposta.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ═══ FOOTER ══════════════════════════════════════════════════ -->
-
-  <footer>
+<!-- ========== 02 · LA SCIENZA ========== -->
+<section id="scienza">
+  <div class="gold-form">
+    <svg viewBox="0 0 800 700" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <radialGradient id="sci-blob" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(212,178,131,.55)"/>
+          <stop offset="60%" stop-color="rgba(184,149,106,.2)"/>
+          <stop offset="100%" stop-color="rgba(184,149,106,0)"/>
+        </radialGradient>
+        <radialGradient id="sci-blob-2" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(244,224,180,.4)"/>
+          <stop offset="100%" stop-color="rgba(184,149,106,0)"/>
+        </radialGradient>
+        <filter id="sci-blur"><feGaussianBlur stdDeviation="14"/></filter>
+      </defs>
+      <g filter="url(#sci-blur)">
+        <ellipse cx="420" cy="320" rx="280" ry="240" fill="url(#sci-blob)"/>
+        <ellipse cx="540" cy="220" rx="160" ry="120" fill="url(#sci-blob-2)"/>
+        <ellipse cx="300" cy="440" rx="200" ry="160" fill="url(#sci-blob-2)"/>
+      </g>
+      <g fill="none" stroke="rgba(212,178,131,.18)" stroke-width=".6">
+        <path d="M120 100 Q300 200 240 380 Q180 540 380 600"/>
+        <path d="M600 80 Q480 280 580 420 Q680 540 520 640"/>
+        <path d="M200 240 Q360 300 320 480"/>
+      </g>
+    </svg>
+  </div>
+  <div class="layout">
     <div>
-      <p class="footer-brand">PLEASURE<br><em>Professional Luxury · Franciacorta, Italia</em></p>
-      <p style="font-family:var(--sans);font-size:9px;color:rgba(240,236,228,0.2);margin-top:20px;letter-spacing:0.2em;">
-        © 2026 Pleasure Professional Luxury
-      </p>
+      <h2 class="h-section reveal">La <em>natura</em> ha già<br/>la risposta.</h2>
     </div>
-    <div class="footer-links">
-      <a href="#">Linee</a>
-      <a href="#">Protocolli</a>
-      <a href="#">Academy</a>
-      <a href="#">Ricerca</a>
-      <a href="#">Atelier</a>
-      <a href="#">Contatti</a>
+    <div>
+      <p class="quote reveal reveal-d1">Le biotecnologie avanzate la liberano, la esprimono, la <em style="color:var(--oro-l)">potenziano.</em></p>
     </div>
-  </footer>
+  </div>
+  <div class="tech-list">
+    <div class="item reveal">
+      <div class="icon">
+        <svg viewBox="0 0 38 38"><circle cx="19" cy="19" r="14" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="19" cy="19" r="5" fill="currentColor" opacity=".4"/><circle cx="13" cy="14" r="1.5" fill="currentColor"/><circle cx="25" cy="14" r="1.5" fill="currentColor"/><circle cx="25" cy="24" r="1.5" fill="currentColor"/><circle cx="13" cy="24" r="1.5" fill="currentColor"/></svg>
+      </div>
+      <h4>Iperfermentazione</h4>
+      <p>Processo vivo che libera principi attivi altrimenti dormienti nella materia botanica.</p>
+    </div>
+    <div class="item reveal reveal-d1">
+      <div class="icon">
+        <svg viewBox="0 0 38 38"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M8 19 Q14 12 19 19 Q24 26 30 19"/><path d="M8 14 Q14 7 19 14 Q24 21 30 14" opacity=".5"/><path d="M8 24 Q14 17 19 24 Q24 31 30 24" opacity=".5"/></g></svg>
+      </div>
+      <h4>Peptidi dell'avena</h4>
+      <p>Catene amminoacidiche che riparano e nutrono la fibra dall'interno.</p>
+    </div>
+    <div class="item reveal reveal-d2">
+      <div class="icon">
+        <svg viewBox="0 0 38 38"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M6 14 L32 14"/><path d="M6 24 L32 24"/><circle cx="11" cy="14" r="2" fill="currentColor"/><circle cx="19" cy="14" r="2" fill="currentColor"/><circle cx="27" cy="14" r="2" fill="currentColor"/><circle cx="15" cy="24" r="2" fill="currentColor" opacity=".6"/><circle cx="23" cy="24" r="2" fill="currentColor" opacity=".6"/></g></svg>
+      </div>
+      <h4>Anionici a doppio strato</h4>
+      <p>Tensioattivi che proteggono la fibra senza aggredirla. Pulizia gentile, profonda.</p>
+    </div>
+    <div class="item reveal reveal-d3">
+      <div class="icon">
+        <svg viewBox="0 0 38 38"><g fill="currentColor"><circle cx="14" cy="14" r="3"/><circle cx="22" cy="14" r="3"/><circle cx="18" cy="20" r="3"/><circle cx="14" cy="26" r="3"/><circle cx="22" cy="26" r="3"/><path d="M18 11 Q14 7 9 8" stroke="currentColor" fill="none" stroke-width="1"/></g></svg>
+      </div>
+      <h4>Estratto di vite rossa</h4>
+      <p>Polifenoli dal terroir di Franciacorta. Difesa naturale contro il tempo.</p>
+    </div>
+  </div>
+</section>
 
-  <!-- ═══ SCRIPTS ═════════════════════════════════════════════════ -->
+<!-- C4 · connector: droplet → jar -->
+<div class="connector" style="background:#1e1e20">
+  <div class="thread"></div><span class="dot top"></span><span class="dot bot"></span>
+  <svg class="motif" viewBox="0 0 140 210" preserveAspectRatio="xMidYMid meet">
+    <path class="pl gold" data-from="0" data-to="0.25" pathLength="1" d="M70 18 C 80 34 80 46 70 56 C 60 46 60 34 70 18 Z"/>
+    <path class="pl faint" data-from="0.25" data-to="0.36" pathLength="1" d="M70 60 L70 92"/>
+    <path class="pl" data-from="0.32" data-to="0.46" pathLength="1" d="M58 86 L82 86 L82 102 L58 102 Z"/>
+    <path class="pl" data-from="0.46" data-to="0.86" pathLength="1" d="M48 106 L92 106 L96 124 Q98 134 98 146 L98 182 Q98 194 86 194 L54 194 Q42 194 42 182 L42 146 Q42 134 44 124 Z"/>
+    <path class="pl gold" data-from="0.86" data-to="1" pathLength="1" d="M50 162 Q70 158 90 162"/>
+  </svg>
+  <span class="label">la goccia nel barattolo</span>
+</div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+<!-- ========== 03 · IL METODO ========== -->
+<section id="metodo">
+  <div class="center">
+    <div class="diamond-big reveal">
+      <svg viewBox="0 0 14 24">
+        <defs><linearGradient id="dm-g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f4e0b4"/><stop offset="50%" stop-color="#d4b283"/><stop offset="100%" stop-color="#8a6f4d"/></linearGradient></defs>
+        <path d="M7 0 L14 6 L7 24 L0 6 Z" fill="url(#dm-g)" stroke="#b8956a" stroke-width=".4"/>
+      </svg>
+    </div>
+    <h2 class="h-section reveal reveal-d1">Questo non è un prodotto.<br/>È un <em>metodo.</em><br/>Generativo. In <em>evoluzione.</em> Tuo.</h2>
+    <p class="quote reveal reveal-d2">Un sistema vivo. Non impari una tecnica — impari una lingua. E ogni testa è una <em style="color:var(--oro-l)">frase nuova.</em></p>
+    <div class="line-out reveal reveal-d3">
+      <div class="v-line" style="height:32px"></div>
+      <div class="small">Meno magazzino. Più risultato.</div>
+    </div>
+  </div>
+</section>
 
-  <script>
-  (function () {
-    'use strict';
+<!-- C5 · connector: one jar replaces many -->
+<div class="connector" style="background:#161618">
+  <div class="thread"></div><span class="dot top"></span><span class="dot bot"></span>
+  <svg class="motif" viewBox="0 0 240 200" preserveAspectRatio="xMidYMid meet">
+    <path class="pl faint" data-from="0" data-to="0.32" pathLength="1" d="M30 112 L60 112 L62 126 L62 172 Q62 180 54 180 L36 180 Q28 180 28 172 L28 126 Z"/>
+    <path class="pl faint" data-from="0.08" data-to="0.4" pathLength="1" d="M70 112 L100 112 L102 126 L102 172 Q102 180 94 180 L76 180 Q68 180 68 172 L68 126 Z"/>
+    <path class="pl faint" data-from="0.14" data-to="0.46" pathLength="1" d="M156 112 L186 112 L188 126 L188 172 Q188 180 180 180 L162 180 Q154 180 154 172 L154 126 Z"/>
+    <path class="pl faint" data-from="0.2" data-to="0.5" pathLength="1" d="M196 112 L224 112 L226 126 L226 170 Q226 178 218 178 L200 178 Q192 178 192 170 L192 126 Z"/>
+    <path class="pl" data-from="0.42" data-to="0.6" pathLength="1" d="M104 70 L136 70 L136 88 L104 88 Z"/>
+    <path class="pl" data-from="0.58" data-to="0.96" pathLength="1" d="M92 92 L148 92 L152 110 Q154 120 154 134 L154 178 Q154 190 140 190 L100 190 Q86 190 86 178 L86 134 Q86 120 88 110 Z"/>
+    <path class="pl gold" data-from="0.9" data-to="1" pathLength="1" d="M96 150 Q120 146 144 150"/>
+  </svg>
+  <span class="label">un solo barattolo, non cento</span>
+</div>
 
-    gsap.registerPlugin(ScrollTrigger);
+<!-- ========== 04 · ACADEMY ========== -->
+<section id="academy">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <span class="eyebrow">Academy · Formazione &amp; Ricerca</span>
+        <h2 class="h-section reveal">Non eleviamo<br/>prodotti.<br/><em>Eleviamo</em> professionisti.</h2>
+      </div>
+      <p class="body-l reveal reveal-d1">Il tuo salone non è un cliente. È un <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--oro-l)">laboratorio vivo.</em> Ogni applicazione è ricerca, ogni mano una voce che fa crescere il metodo. La conoscenza, qui, è un privilegio che si coltiva insieme.</p>
+    </div>
+    <div class="pillars">
+      <div class="p reveal">
+        <span class="lvl">Livello I — III</span>
+        <h4><em>Academy</em></h4>
+        <p>Tre livelli di formazione che attraversano i fondamenti, l'interpretazione e la maestria del metodo generativo.</p>
+      </div>
+      <div class="p reveal reveal-d1">
+        <span class="lvl">R&amp;D · Franciacorta</span>
+        <h4><em>Ricerca</em></h4>
+        <p>Le osservazioni dei saloni rientrano in laboratorio. Le mani che lavorano scrivono le prossime formule.</p>
+      </div>
+      <div class="p reveal reveal-d2">
+        <span class="lvl">Circolo privato</span>
+        <h4><em>Atelier</em></h4>
+        <p>Incontri annuali, sessioni private, un cerchio internazionale di professionisti che condividono ciò che scoprono.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    /* ── LENIS smooth scroll ──────────────────── */
-    var lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
-    gsap.ticker.lagSmoothing(0);
+<!-- C6 · connector: drops merge -->
+<div class="connector" style="background:#17171a">
+  <div class="thread"></div><span class="dot top"></span><span class="dot bot"></span>
+  <svg class="motif" viewBox="0 0 200 210" preserveAspectRatio="xMidYMid meet">
+    <path class="pl" data-from="0" data-to="0.2" pathLength="1" d="M28 56 L48 48 L55 66 L35 74 Z"/>
+    <path class="pl" data-from="0.18" data-to="0.55" pathLength="1" d="M35 74 L56 66 L70 80 Q80 86 86 100 L106 150 Q110 162 98 168 L72 178 Q60 182 54 170 L32 120 Q26 106 28 92 Z"/>
+    <path class="pl gold" data-from="0.5" data-to="0.66" pathLength="1" d="M108 150 C 116 162 116 172 108 180 C 100 172 100 162 108 150 Z"/>
+    <path class="pl gold" data-from="0.6" data-to="0.76" pathLength="1" d="M150 150 C 160 164 160 176 150 186 C 140 176 140 164 150 150 Z"/>
+    <path class="pl faint" data-from="0.74" data-to="0.92" pathLength="1" d="M150 186 C 132 196 122 196 108 186"/>
+    <path class="pl gold" data-from="0.9" data-to="1" pathLength="1" d="M129 190 m -4 0 a 4 4 0 1 0 8 0 a 4 4 0 1 0 -8 0"/>
+  </svg>
+  <span class="label">le gocce si mescolano</span>
+</div>
 
-    /* ── HERO ENTRANCE ───────────────────────── */
-    var heroTL = gsap.timeline({ delay: 0.4 });
-    heroTL
-      .to('#hero-eyebrow',   { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out' }, 0)
-      .fromTo('#hero-headline', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.8, ease: 'power2.out' }, 0.3)
-      .fromTo('#hero-sub',      { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out' }, 0.9)
-      .fromTo('#scroll-hint',   { opacity: 0 },        { opacity: 1, duration: 1.2, ease: 'power1.out' }, 1.4);
+<!-- ========== 05 · RITUALI ========== -->
+<section id="rituali">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <span class="eyebrow">Rituali · Esperienza sensoriale</span>
+        <h2 class="h-section reveal">Il gesto<br/>diventa <em>rito.</em></h2>
+      </div>
+      <p class="body-l reveal reveal-d1">Non protocolli, ma <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--oro-l)">percorsi.</em> Ogni rituale è un viaggio tattile e olfattivo che trasforma il servizio in un'esperienza che il cliente porta con sé per settimane.</p>
+    </div>
+    <div class="rit-grid">
+      <div class="rit reveal">
+        <span class="step">Rituale 01</span>
+        <h4>Risveglio della <em>cute</em></h4>
+        <p>Detossinazione e riequilibrio del microbioma. Massaggio lento, gesti precisi, respiro botanico.</p>
+        <span class="dur">— 25 minuti · in salone</span>
+      </div>
+      <div class="rit reveal reveal-d1">
+        <span class="step">Rituale 02</span>
+        <h4>Ricostruzione della <em>fibra</em></h4>
+        <p>Stratificazione di principi attivi che ricompongono il capello dall'interno. Calore, pausa, rinascita.</p>
+        <span class="dur">— 40 minuti · in salone</span>
+      </div>
+      <div class="rit reveal reveal-d2">
+        <span class="step">Rituale 03</span>
+        <h4>Idratazione <em>profonda</em></h4>
+        <p>Un bagno di nutrimento avvolgente. La materia si fa acqua, l'acqua si fa luce sulla lunghezza.</p>
+        <span class="dur">— 30 minuti · in salone</span>
+      </div>
+      <div class="rit reveal reveal-d3">
+        <span class="step">Rituale 04</span>
+        <h4>Cerimonia <em>sensoriale</em></h4>
+        <p>L'esperienza completa: fragranza, texture e silenzio. Il lusso del tempo dedicato a sé.</p>
+        <span class="dur">— 60 minuti · atelier-only</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    /* ── LEAF ENTRANCE (hero atmosphere) ─────── */
-    gsap.to('#g-leaf', {
-      opacity: 1, duration: 2.4, ease: 'power1.out', delay: 0.8
+<!-- C7 · connector: ritual loop -->
+<div class="connector" style="background:linear-gradient(180deg,#1c1c1e 0%,#1e1e20 100%)">
+  <div class="thread"></div><span class="dot top"></span><span class="dot bot"></span>
+  <svg class="motif" viewBox="0 0 200 210" preserveAspectRatio="xMidYMid meet">
+    <path class="pl gold" data-from="0" data-to="0.2" pathLength="1" d="M86 30 C 94 42 94 52 86 60 C 78 52 78 42 86 30 Z"/>
+    <path class="pl gold" data-from="0.15" data-to="0.35" pathLength="1" d="M114 30 C 122 42 122 52 114 60 C 106 52 106 42 114 30 Z"/>
+    <path class="pl" data-from="0.35" data-to="0.92" pathLength="1" d="M100 66 C 64 88 40 96 40 124 C 40 152 72 152 100 124 C 128 96 160 96 160 124 C 160 152 136 144 100 124 C 80 112 70 150 100 174"/>
+    <path class="pl gold" data-from="0.92" data-to="1" pathLength="1" d="M100 174 m -4 0 a 4 4 0 1 0 8 0 a 4 4 0 1 0 -8 0"/>
+  </svg>
+  <span class="label">il rituale da imparare</span>
+</div>
+
+<!-- ========== 06 · LE LINEE ========== -->
+<section id="linee">
+  <div class="head reveal">
+    <span class="eyebrow">Esigenze · Diagnosi guidata</span>
+    <h2 class="h-section">Di cosa ha bisogno<br/>il tuo cliente <em>oggi?</em></h2>
+  </div>
+  <div class="line-cards">
+    <a class="line-card filler reveal" href="#">
+      <div class="bg-overlay"></div>
+      <div class="motif"><svg viewBox="0 0 400 400"><circle cx="200" cy="200" r="160" fill="none" stroke="#d4b283" stroke-width=".6"/><circle cx="200" cy="200" r="100" fill="none" stroke="#d4b283" stroke-width=".4"/></svg></div>
+      <div class="content">
+        <div class="meta">Color · Transformation</div>
+        <div class="name"><em>Filler</em> Pure Oil<br/>Hair Color System</div>
+        <div class="desc">28 nuances. 119 combinazioni. Una rivoluzione in olio puro: niente ammoniaca, niente PPD, niente resorcina.</div>
+      </div>
+      <div class="more">
+        <span class="tag">28 shades · MADE IN ITALY</span>
+        <span class="arrow">Scopri →</span>
+      </div>
+    </a>
+    <a class="line-card lifetime reveal reveal-d1" href="#">
+      <div class="bg-overlay"></div>
+      <div class="motif"><svg viewBox="0 0 400 400"><ellipse cx="200" cy="200" rx="120" ry="180" fill="none" stroke="#a8c0a0" stroke-width=".5" opacity=".6"/><line x1="200" y1="20" x2="200" y2="380" stroke="#d4b283" stroke-width=".4" opacity=".4"/></svg></div>
+      <div class="content">
+        <div class="meta">Scalp · Wellness</div>
+        <div class="name"><em>Lifetime</em><br/>Natural Evolution</div>
+        <div class="desc">Rituale completo per la cute: iperfermentazione e peptidi dell'avena ricostruiscono il microbioma del bulbo.</div>
+      </div>
+      <div class="more">
+        <span class="tag">07 referenze · Pre · Bath · Treatment</span>
+        <span class="arrow">Scopri →</span>
+      </div>
+    </a>
+    <a class="line-card vinility reveal reveal-d2" href="#">
+      <div class="bg-overlay"></div>
+      <div class="motif"><svg viewBox="0 0 400 400"><g fill="#a888c0" opacity=".6"><circle cx="180" cy="160" r="16"/><circle cx="220" cy="170" r="16"/><circle cx="200" cy="195" r="16"/><circle cx="170" cy="220" r="16"/><circle cx="230" cy="220" r="16"/><circle cx="200" cy="245" r="16"/></g></svg></div>
+      <div class="content">
+        <div class="meta">Repair · Structure</div>
+        <div class="name"><em>Vinility</em><br/>Vine Restructure</div>
+        <div class="desc">Polifenoli dell'estratto di vite rossa. Difesa profonda della fibra contro il tempo e la memoria chimica.</div>
+      </div>
+      <div class="more">
+        <span class="tag">11 referenze · Salone + Casa</span>
+        <span class="arrow">Scopri →</span>
+      </div>
+    </a>
+    <a class="line-card restruct reveal reveal-d3" href="#">
+      <div class="bg-overlay"></div>
+      <div class="motif"><svg viewBox="0 0 400 400"><g stroke="#c0c0b8" stroke-width=".5" fill="none"><line x1="100" y1="200" x2="300" y2="200"/><line x1="200" y1="100" x2="200" y2="300"/><circle cx="200" cy="200" r="80"/></g></svg></div>
+      <div class="content">
+        <div class="meta">Ritual · Sensoriality</div>
+        <div class="name"><em>Restructuring</em><br/>Luxury Treatments</div>
+        <div class="desc">Trattamenti in atelier composti per i sensi. Fragranza, materia e cerimonia — il momento si fa memoria.</div>
+      </div>
+      <div class="more">
+        <span class="tag">04 rituali firmati · Atelier-only</span>
+        <span class="arrow">Scopri →</span>
+      </div>
+    </a>
+  </div>
+  <div class="all-lines reveal">
+    <h5>Tutte le linee disponibili</h5>
+    <div class="list">
+      <div class="item"><div class="n">Filler Pure Oil</div><div class="d">Color system in olio puro</div></div>
+      <div class="item"><div class="n">Lifetime</div><div class="d">Cura della cute generativa</div></div>
+      <div class="item"><div class="n">Vinility</div><div class="d">Restructure dalla vite rossa</div></div>
+      <div class="item"><div class="n">Restructuring</div><div class="d">Rituali di lusso d'atelier</div></div>
+      <div class="item"><div class="n">Pure Hands</div><div class="d">Esperienza tattile professionale</div></div>
+      <div class="item"><div class="n">Fragrance</div><div class="d">Profumeria capillare firmata</div></div>
+      <div class="item"><div class="n">Daily Ritual</div><div class="d">La cura casa per il cliente</div></div>
+      <div class="item"><div class="n">Limited Editions</div><div class="d">Pezzi rari per occasioni rare</div></div>
+    </div>
+    <div class="lines-cta"><a href="#">Scopri tutte le linee →</a></div>
+  </div>
+</section>
+
+<!-- C8 · connector: product bottle -->
+<div class="connector" style="background:#161618">
+  <div class="thread"></div><span class="dot top"></span><span class="dot bot"></span>
+  <svg class="motif" viewBox="0 0 120 184" preserveAspectRatio="xMidYMid meet">
+    <path class="pl" data-from="0" data-to="0.2" pathLength="1" d="M50 16 L70 16 L70 36 L50 36 Z"/>
+    <path class="pl" data-from="0.2" data-to="0.72" pathLength="1" d="M44 40 L76 40 L80 60 Q82 70 82 84 L82 150 Q82 168 64 168 L56 168 Q38 168 38 150 L38 84 Q38 70 40 60 Z"/>
+    <path class="pl faint" data-from="0.72" data-to="0.88" pathLength="1" d="M48 96 L72 96 L72 132 L48 132 Z"/>
+    <path class="pl gold" data-from="0.88" data-to="1" pathLength="1" d="M60 108 L60 120"/>
+  </svg>
+  <span class="label">il prodotto</span>
+</div>
+
+<!-- ========== FOOTER · FAMILY ========== -->
+<footer id="family">
+  <div class="wrap">
+    <div class="news">
+      <span class="eyebrow" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--oro);margin-bottom:22px;display:block">Family · Il Circolo Pleasure</span>
+      <h3>Entra nella<br/><em>Famiglia →</em></h3>
+      <p>Non un elenco di contatti, ma un cerchio. Distributori, saloni partner, professionisti che scelgono di sapere di più.</p>
+      <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Iscritta ✓'">
+        <input type="email" placeholder="la tua email professionale" required/>
+        <button type="submit">Iscriviti →</button>
+      </form>
+    </div>
+    <div class="col"><h4>Maison</h4><ul><li><a href="#">Manifesto</a></li><li><a href="#">Laboratorio</a></li><li><a href="#">Stampa</a></li><li><a href="#">Sostenibilità</a></li></ul></div>
+    <div class="col"><h4>Method</h4><ul><li><a href="#">Academy</a></li><li><a href="#">Atelier</a></li><li><a href="#">Ricerca</a></li><li><a href="#">Certificazioni</a></li></ul></div>
+    <div class="col"><h4>Diventa partner</h4><ul><li><a href="#">Apri un salone</a></li><li><a href="#">Distributori</a></li><li><a href="#">Collaborazioni</a></li><li><a href="#">Concierge</a></li></ul></div>
+    <div class="col"><h4>Franciacorta, Italia</h4><ul><li>Via dei Vigneti, 12</li><li>25030 Erbusco BS</li><li>+39 030 000 0000</li><li>hello@pleasure.com</li></ul></div>
+  </div>
+  <div class="below">
+    <div>© MMXXVI · Pleasure Professional Luxury</div>
+    <div>Privacy · Cookies · Termini</div>
+    <div class="lang"><span class="on">IT</span><span>·</span><span>EN</span><span>·</span><span>ES</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════════ -->
+<script>
+/* ── CURSOR (diamond pencil — from Pleasure Home, exact) ── */
+const cursor = document.getElementById('cursor');
+let cx = innerWidth/2, cy = innerHeight/2, tx = cx, ty = cy;
+addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
+(function tick(){
+  cx += (tx - cx) * 0.18;
+  cy += (ty - cy) * 0.18;
+  if (cursor) cursor.style.transform = 'translate(' + cx + 'px,' + cy + 'px) translate(-50%,-50%)';
+  requestAnimationFrame(tick);
+})();
+addEventListener('mouseout', e => { if (!e.relatedTarget && cursor) cursor.style.opacity = 0; });
+addEventListener('mouseover', () => { if (cursor) cursor.style.opacity = 1; });
+document.addEventListener('mouseover', e => { if (e.target.closest('a, button')) cursor && cursor.classList.add('lg'); });
+document.addEventListener('mouseout',  e => { if (e.target.closest('a, button')) cursor && cursor.classList.remove('lg'); });
+
+/* ── NAV scroll state ── */
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', scrollY > 60);
+}, { passive: true });
+
+/* ── REVEAL on scroll ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.14, rootMargin: '-40px' });
+document.querySelectorAll('.reveal, .connector').forEach(el => io.observe(el));
+
+/* ── HERO words stagger ── */
+const heroLead = document.getElementById('heroLead');
+if (heroLead) {
+  heroLead.querySelectorAll('.word').forEach((w, i) => { w.style.transitionDelay = (0.07 * i + 0.2) + 's'; });
+  const hio = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { heroLead.classList.add('in'); hio.unobserve(e.target); } });
+  }, { threshold: 0.4 });
+  hio.observe(heroLead);
+}
+
+/* ── CONNECTOR pencil draw ── */
+const connectors = [...document.querySelectorAll('.connector')];
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+function drawConnectors() {
+  const vh = innerHeight;
+  for (const c of connectors) {
+    const r = c.getBoundingClientRect();
+    if (r.bottom < -100 || r.top > vh + 100) continue;
+    const p = clamp((vh * 0.85 - r.top) / (vh * 0.7), 0, 1);
+    c.querySelectorAll('.pl').forEach(pa => {
+      const f = parseFloat(pa.dataset.from) || 0;
+      const t = parseFloat(pa.dataset.to)   || 1;
+      const lp = clamp((p - f) / (t - f), 0, 1);
+      const e = lp * lp * (3 - 2 * lp);
+      pa.style.strokeDashoffset = (1 - e);
     });
+  }
+}
+let cRaf = null;
+addEventListener('scroll', () => { if (cRaf) return; cRaf = requestAnimationFrame(() => { drawConnectors(); cRaf = null; }); }, { passive: true });
+addEventListener('resize', drawConnectors);
+drawConnectors();
 
-    /* Gentle floating animation on the small leaves */
-    gsap.to('#leaf-small-1', {
-      y: -12, rotation: 4, duration: 5.5, yoyo: true, repeat: -1,
-      ease: 'sine.inOut', transformOrigin: '50% 100%'
-    });
-    gsap.to('#leaf-small-2', {
-      y: -8, rotation: -3, duration: 7, yoyo: true, repeat: -1,
-      ease: 'sine.inOut', delay: 1.2, transformOrigin: '50% 100%'
-    });
+/* ── ANCHOR smooth scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id.length > 1) {
+      const t = document.querySelector(id);
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    }
+  });
+});
 
-    /* Subtle leaf breathe */
-    gsap.to('#leaf-outline', {
-      opacity: 0.45, duration: 4, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 1
-    });
+/* ═══════════════════════════════════════════════════
+   FLOW NARRATIVE ANIMATION — from Pleasure Flow
+   Animates the fixed SVG layer as user scrolls
+   through the entire homepage.
+═══════════════════════════════════════════════════ */
+(function () {
 
-    /* ── DRAW-IN HELPERS ──────────────────────
-       We use stroke-dasharray / stroke-dashoffset trick.
-       Pre-set all paths that we want to "draw" */
-    function prepareDraw(el, length) {
-      gsap.set(el, { strokeDasharray: length, strokeDashoffset: length });
+  const svg      = document.getElementById('flow-svg');
+  const fallG    = document.getElementById('fallDropG');
+  const lumG     = document.getElementById('lumG');
+  const lumDrop  = document.getElementById('lumDrop');
+  const lumGlow  = document.getElementById('lumGlow');
+  const liquid   = document.getElementById('liquid');
+  const tip      = document.getElementById('tip');
+  const tipGlow  = document.getElementById('tipGlow');
+  const brandG   = document.getElementById('brandG');
+  if (!svg) return;
+
+  const PCENTER = { x: 600, y: 1300 };
+  const NP = 14;
+  const particleEls = [];
+  const pData = [];
+  const pg = document.getElementById('particles');
+
+  for (let i = 0; i < NP; i++) {
+    const ang = (i / NP) * Math.PI * 2;
+    const rad = 150 + (i % 3) * 26;
+    const ox  = PCENTER.x + Math.cos(ang) * rad;
+    const oy  = PCENTER.y + Math.sin(ang) * rad * 0.78;
+    const r   = 2.2 + (i % 4) * 0.9;
+    const c   = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', ox); c.setAttribute('cy', oy); c.setAttribute('r', r);
+    c.setAttribute('fill', i % 2 ? '#e6c693' : '#d4b283');
+    c.setAttribute('opacity', '0');
+    pg.appendChild(c);
+    particleEls.push(c);
+    pData.push({ ox, oy, r, ring: rad, ang, delay: (i / NP) });
+  }
+
+  /* prepare ink draw lengths */
+  const inks = [...document.querySelectorAll('#flow-svg .ink[data-s]')].map(el => {
+    let len = 100;
+    try { len = el.getTotalLength(); } catch(e) {}
+    const hadDash = el.getAttribute('stroke-dasharray');
+    el.style.strokeDasharray = len;
+    el.style.strokeDashoffset = len;
+    return { el, len, s: +el.dataset.s, e: +el.dataset.e, had: hadDash };
+  });
+
+  const spineB  = document.getElementById('spineB');
+  const stem    = document.getElementById('stem');
+  const leafMid = document.getElementById('leafMid');
+  let lenSpineB = 100, lenStem = 100, lenLeafMid = 100;
+  try { lenSpineB  = spineB.getTotalLength();  } catch(e) {}
+  try { lenStem    = stem.getTotalLength();    } catch(e) {}
+  try { lenLeafMid = leafMid.getTotalLength(); } catch(e) {}
+
+  function win(p, s, e) { return clamp((p - s) / (e - s), 0, 1); }
+  function smooth(t)    { return t * t * (3 - 2 * t); }
+  function lerp(a, b, t){ return a + (b - a) * t; }
+
+  function getProgress() {
+    const total = document.body.scrollHeight - innerHeight;
+    return total > 0 ? clamp(scrollY / total, 0, 1) : 0;
+  }
+
+  function update() {
+    const p  = getProgress();
+    const vh = innerHeight;
+
+    /* pan the SVG vertically */
+    const svgH = vh * 2.8;
+    const tyPx = vh * 0.14 - p * (svgH - vh);
+    svg.style.transform = `translate(-50%, ${tyPx}px)`;
+
+    /* draw inks */
+    for (const k of inks) {
+      const lp = smooth(win(p, k.s, k.e));
+      if (k.had) {
+        k.el.style.strokeDashoffset = 0;
+        k.el.style.opacity = lp * 0.6;
+      } else {
+        k.el.style.strokeDashoffset = k.len * (1 - lp);
+      }
     }
 
-    prepareDraw('#leaf-outline', 700);
-    prepareDraw('#leaf-vein-c', 345);
-    prepareDraw('#sap-line', 80);
-    prepareDraw('#droplet-outline', 620);
-    prepareDraw('#hair-s1', 285);
-    prepareDraw('#hair-s2', 280);
-    prepareDraw('#hair-s3', 280);
+    /* falling droplet */
+    const fallP = win(p, 0.32, 0.50);
+    if (fallP > 0 && fallP < 1) {
+      fallG.setAttribute('opacity', 1);
+      const fy = lerp(836, 1300, smooth(fallP));
+      fallG.setAttribute('transform', `translate(0 ${fy - 37}) scale(1 ${lerp(1, 1.15, fallP)})`);
+    } else {
+      fallG.setAttribute('opacity', 0);
+    }
 
-    /* Draw leaf outline on scroll into discovery section */
-    ScrollTrigger.create({
-      trigger: '#s-discovery',
-      start: 'top 75%',
-      onEnter: function () {
-        gsap.to('#leaf-outline', { strokeDashoffset: 0, duration: 2.2, ease: 'power2.inOut' });
-        gsap.to(['#leaf-vein-c','#leaf-vein-l1','#leaf-vein-l2','#leaf-vein-l3','#leaf-vein-l4',
-                 '#leaf-vein-r1','#leaf-vein-r2','#leaf-vein-r3','#leaf-vein-r4'],
-          { opacity: function(i){ return [0.5,0.35,0.35,0.3,0.25,0.35,0.35,0.3,0.25][i]; },
-            duration: 1.8, stagger: 0.12, ease: 'power1.out', delay: 0.6 });
-      }
-    });
+    /* luminous droplet */
+    const lumP = win(p, 0.48, 0.74);
+    lumG.setAttribute('opacity', lumP > 0 ? 1 : 0);
+    const grow = smooth(win(p, 0.48, 0.62));
+    lumDrop.setAttribute('transform', `translate(600 1289) scale(${lerp(0.5, 1, grow)}) translate(-600 -1289)`);
+    lumGlow.setAttribute('r', lerp(60, 170, smooth(win(p, 0.5, 0.7))));
+    lumGlow.setAttribute('opacity', lerp(0.2, 1, smooth(win(p, 0.5, 0.66))));
 
-    /* ── MASTER SCROLL TIMELINE ──────────────
-       Maps the ENTIRE page scroll to SVG narrative */
+    /* particles converge */
+    const drawP = win(p, 0.46, 0.60);
+    const convP = smooth(win(p, 0.58, 0.66));
+    for (let i = 0; i < NP; i++) {
+      const d = pData[i];
+      const appear = clamp((drawP - d.delay * 0.5) * 2, 0, 1);
+      const pcx = lerp(d.ox, PCENTER.x, convP);
+      const pcy = lerp(d.oy, PCENTER.y, convP);
+      particleEls[i].setAttribute('cx', pcx);
+      particleEls[i].setAttribute('cy', pcy);
+      particleEls[i].setAttribute('opacity', appear * (1 - convP * 0.9));
+    }
 
-    var masterTL = gsap.timeline({ paused: true });
+    /* drop descends into bottle */
+    const dropToBottle = smooth(win(p, 0.74, 0.86));
+    if (dropToBottle > 0) {
+      lumG.setAttribute('transform', `translate(0 ${lerp(0, 560, dropToBottle)})`);
+      lumG.setAttribute('opacity', lerp(1, 0, smooth(win(p, 0.82, 0.9))));
+    } else {
+      lumG.setAttribute('transform', 'translate(0 0)');
+    }
 
-    /* 0 → 0.12  Hero: leaf already visible, small drift */
-    masterTL
-      .to('#g-leaf', { y: -18, duration: 0.12, ease: 'none' }, 0)
+    /* liquid fill */
+    const fillP = smooth(win(p, 0.84, 0.97));
+    if (fillP > 0) {
+      liquid.setAttribute('opacity', 0.9);
+      const h = lerp(0, 420, fillP);
+      liquid.setAttribute('y', 2256 - h);
+      liquid.setAttribute('height', h);
+    } else {
+      liquid.setAttribute('opacity', 0);
+    }
 
-    /* 0.12 → 0.28  Discovery: magnifying glass appears */
-      .to('#g-lens', { opacity: 1, duration: 0.06, ease: 'power2.out' }, 0.12)
-      .fromTo('#g-lens', { scale: 0.7, transformOrigin: '720px 430px' },
-        { scale: 1, duration: 0.10, ease: 'back.out(1.4)' }, 0.12)
-      .to('#g-particles', { opacity: 1, duration: 0.06, ease: 'power1.out' }, 0.18)
-      /* particles drift */
-      .to('#g-particles circle', {
-        y: function(i){ return (i % 2 === 0 ? -4 : 4) + (i * 1.2); },
-        x: function(i){ return (i % 3 === 0 ? 3 : -2) + (i * 0.8); },
-        duration: 0.08, stagger: 0.005, ease: 'sine.inOut'
-      }, 0.20)
+    /* brand reveal */
+    brandG.setAttribute('opacity', smooth(win(p, 0.93, 1)));
 
-    /* 0.28 → 0.44  Lens zooms out, sap forms, droplet appears */
-      .to('#g-lens', { opacity: 0, scale: 1.4, transformOrigin: '720px 430px',
-        duration: 0.08, ease: 'power2.in' }, 0.28)
-      .to('#g-sap', { opacity: 1, duration: 0.04 }, 0.28)
-      .to('#sap-line', { strokeDashoffset: 0, duration: 0.06, ease: 'power2.inOut' }, 0.30)
-      .to('#g-droplet', { opacity: 1, duration: 0.06, ease: 'power2.out' }, 0.34)
-      .to('#droplet-outline', { strokeDashoffset: 0, duration: 0.08, ease: 'power2.inOut' }, 0.34)
-      .to('#g-sap', { opacity: 0, duration: 0.04 }, 0.40)
-      /* Leaf fades as droplet arrives */
-      .to('#g-leaf', { opacity: 0.22, duration: 0.08, ease: 'power1.inOut' }, 0.35)
+    /* pencil tip follows drawing front */
+    let tp = null;
+    if (p < 0.30) {
+      if (p >= 0.16) tp = stem.getPointAtLength(lenStem * win(p, 0.16, 0.30));
+      else { const l2 = win(p, 0.07, 0.18); try { tp = leafMid.getPointAtLength(lenLeafMid * l2); } catch(e) {} }
+    } else if (p < 0.50) {
+      const fy = lerp(836, 1300, smooth(win(p, 0.32, 0.50))); tp = { x: 600, y: fy };
+    } else if (p < 0.74) {
+      tp = { x: 600, y: 1300 };
+    } else if (p < 0.88) {
+      try { tp = spineB.getPointAtLength(lenSpineB * win(p, 0.74, 0.86)); } catch(e) {}
+    }
+    if (tp) {
+      tip.setAttribute('cx', tp.x); tip.setAttribute('cy', tp.y);
+      tipGlow.setAttribute('cx', tp.x); tipGlow.setAttribute('cy', tp.y);
+      const vis = (p > 0.04 && p < 0.9) ? 1 : 0;
+      tip.setAttribute('opacity', vis * 0.9);
+      tipGlow.setAttribute('opacity', vis * 0.8);
+    } else {
+      tip.setAttribute('opacity', 0); tipGlow.setAttribute('opacity', 0);
+    }
+  }
 
-    /* 0.44 → 0.58  Molecular structures emerge */
-      .to('#g-molecular', { opacity: 1, duration: 0.10, ease: 'power1.out' }, 0.44)
-      .fromTo('#g-molecular', { scale: 0.5, transformOrigin: '720px 450px' },
-        { scale: 1, duration: 0.12, ease: 'back.out(1.2)' }, 0.44)
-      /* droplet pulses softly */
-      .to('#g-droplet', { scale: 1.08, transformOrigin: '720px 450px',
-        duration: 0.04, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 0.48)
-      .to('#g-leaf', { opacity: 0, duration: 0.06 }, 0.52)
+  let fRaf = null;
+  addEventListener('scroll', () => {
+    if (fRaf) return;
+    fRaf = requestAnimationFrame(() => { update(); fRaf = null; });
+  }, { passive: true });
+  addEventListener('resize', update);
+  update();
 
-    /* 0.58 → 0.68  Secondary droplets appear and pulse */
-      .to('#g-drops-secondary', { opacity: 1, duration: 0.06 }, 0.58)
-      .fromTo('#drop-s1', { scale: 0, transformOrigin: '520px 480px' },
-        { scale: 1, duration: 0.06, ease: 'back.out(2)' }, 0.58)
-      .fromTo('#drop-s2', { scale: 0, transformOrigin: '920px 440px' },
-        { scale: 1, duration: 0.06, ease: 'back.out(2)' }, 0.60)
-      .fromTo('#drop-s3', { scale: 0, transformOrigin: '620px 560px' },
-        { scale: 1, duration: 0.05, ease: 'back.out(2)' }, 0.62)
-      /* Secondary drops merge: move toward center */
-      .to('#drop-s1', { x: 120, y: -10, scale: 0, transformOrigin: '520px 480px',
-        duration: 0.06, ease: 'power2.in' }, 0.64)
-      .to('#drop-s2', { x: -148, y: 8, scale: 0, transformOrigin: '920px 440px',
-        duration: 0.06, ease: 'power2.in' }, 0.64)
-      .to('#drop-s3', { x: 80, y: -30, scale: 0, transformOrigin: '620px 560px',
-        duration: 0.05, ease: 'power2.in' }, 0.65)
-      .to('#g-droplet', { scale: 1.18, transformOrigin: '720px 450px',
-        duration: 0.04, ease: 'power2.out' }, 0.68)
-
-    /* 0.68 → 0.78  Jar appears — droplet descends into it */
-      .to('#g-drops-secondary', { opacity: 0, duration: 0.03 }, 0.68)
-      .to('#g-jars-bg', { opacity: 1, duration: 0.06 }, 0.68)
-      .to('#g-jar', { opacity: 1, duration: 0.06 }, 0.70)
-      .fromTo('#g-jar', { y: 40, scale: 0.8, transformOrigin: '720px 460px' },
-        { y: 0, scale: 1, duration: 0.08, ease: 'back.out(1.4)' }, 0.70)
-      /* droplet descends into jar */
-      .to('#g-droplet', { y: 120, scale: 0.4, opacity: 0.6, transformOrigin: '720px 450px',
-        duration: 0.06, ease: 'power2.in' }, 0.74)
-      .to('#jar-fill', { opacity: 1, duration: 0.06, ease: 'power2.out' }, 0.78)
-      .to('#g-droplet', { opacity: 0, duration: 0.03 }, 0.79)
-      /* background jars fade out */
-      .to('#g-jars-bg', { opacity: 0, duration: 0.04 }, 0.80)
-      .to('#g-molecular', { opacity: 0, duration: 0.06 }, 0.78)
-
-    /* 0.80 → 0.92  Hair fiber reveals */
-      .to('#g-jar', { opacity: 0, y: -30, duration: 0.06, ease: 'power2.in' }, 0.83)
-      .to('#g-hair', { opacity: 1, duration: 0.06 }, 0.85)
-      .to('#hair-s1', { strokeDashoffset: 0, duration: 0.10, ease: 'power2.inOut' }, 0.85)
-      .to('#hair-s2', { strokeDashoffset: 0, duration: 0.09, ease: 'power2.inOut', delay: 0.04 }, 0.85)
-      .to('#hair-s3', { strokeDashoffset: 0, duration: 0.09, ease: 'power2.inOut', delay: 0.06 }, 0.85)
-      .to('#drop-into-hair', { opacity: 1, y: -80, duration: 0.08, ease: 'power2.in' }, 0.90)
-
-    /* 0.92 → 1.0  Fade everything gently for client section */
-      .to('#g-hair', { opacity: 0.3, duration: 0.08 }, 0.94);
-
-    /* ── BIND MASTER TL TO SCROLL ────────────── */
-    ScrollTrigger.create({
-      trigger: 'main',
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 2.5,
-      onUpdate: function (self) {
-        masterTL.progress(self.progress);
-      }
-    });
-
-    /* ── SECTION TEXT REVEALS ────────────────── */
-    gsap.utils.toArray('.pl-text-block').forEach(function (el) {
-      var label = el.querySelector('.pl-label');
-      var headline = el.querySelector('.pl-headline');
-      var quote = el.querySelector('.pl-quote');
-      var body = el.querySelector('.pl-body');
-
-      var tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 78%',
-          toggleActions: 'play none none none'
-        }
-      });
-
-      if (label)    tl.fromTo(label,    { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' }, 0);
-      if (headline) tl.fromTo(headline, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out' }, 0.1);
-      if (quote)    tl.fromTo(quote,    { opacity: 0, x: -12 },{ opacity: 1, x: 0, duration: 1.2, ease: 'power2.out' }, 0.4);
-      if (body)     tl.fromTo(body,     { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power1.out' }, 0.5);
-    });
-
-    /* Principles grid */
-    gsap.utils.toArray('.principle-item').forEach(function (el, i) {
-      gsap.fromTo(el, { opacity: 0, y: 28 }, {
-        opacity: 1, y: 0, duration: 1.2, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
-        delay: i * 0.1
-      });
-    });
-
-    /* Pro items */
-    gsap.utils.toArray('.pro-item').forEach(function (el, i) {
-      gsap.fromTo(el, { opacity: 0, y: 24 }, {
-        opacity: 1, y: 0, duration: 1.2, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
-        delay: i * 0.12
-      });
-    });
-
-    /* Ritual lines */
-    gsap.utils.toArray('.ritual-line').forEach(function (el, i) {
-      gsap.fromTo(el, { opacity: 0, x: -16 }, {
-        opacity: 1, x: 0, duration: 1.0, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-        delay: i * 0.08
-      });
-    });
-
-    /* Need cards */
-    gsap.utils.toArray('.need-card').forEach(function (el, i) {
-      gsap.fromTo(el, { opacity: 0, y: 20 }, {
-        opacity: 1, y: 0, duration: 1.0, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-        delay: i * 0.08
-      });
-    });
-
-    /* ── NAV fade in ────────────────────────── */
-    gsap.fromTo('nav', { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power1.out', delay: 0.3 });
-
-    /* ── NAV hide on scroll down ─────────────── */
-    var lastScroll = 0;
-    ScrollTrigger.create({
-      onUpdate: function (self) {
-        var dir = self.direction;
-        var scrollY = window.scrollY;
-        if (scrollY < 80) { gsap.to('nav', { y: 0, duration: 0.4 }); return; }
-        if (dir === 1) {
-          gsap.to('nav', { y: -90, duration: 0.4, ease: 'power2.inOut' });
-        } else {
-          gsap.to('nav', { y: 0, duration: 0.5, ease: 'power2.out' });
-        }
-        lastScroll = scrollY;
-      }
-    });
-
-    ScrollTrigger.refresh();
-
-  }());
-  </script>
+}());
+</script>
 
 </body>
 </html>
