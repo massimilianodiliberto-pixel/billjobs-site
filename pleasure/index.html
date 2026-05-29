@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pleasure — Professional Luxury · Fran&ccedil;acorta, Italia</title>
+  <meta name="description" content="Il vero lusso non è per tutti. È per chi sceglie di sapere di più. Pleasure Professional Luxury — biotecnologie avanzate per la cura professionale dei capelli.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:    #b8965e;
+      --gold-lt: #d4b07a;
+      --cream:   #f0ece4;
+      --bg:      #090907;
+      --bg2:     #0d0d0a;
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'Montserrat', sans-serif;
+    }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NARRATIVE SVG LAYER ─────────────────────────────── */
+
+    #narrative-svg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: visible;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 56px;
+      mix-blend-mode: normal;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      display: block;
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 200;
+      letter-spacing: 0.38em;
+      color: var(--gold);
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.32em;
+      color: rgba(240,236,228,0.55);
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── GRAIN ───────────────────────────────────────────── */
+
+    #grain {
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 1000;
+      animation: grain-drift 8s steps(10) infinite;
+    }
+
+    @keyframes grain-drift {
+      0%,100%{transform:translate(0,0)}
+      10%{transform:translate(-5%,-5%)}
+      20%{transform:translate(-10%,5%)}
+      30%{transform:translate(5%,-10%)}
+      40%{transform:translate(-5%,15%)}
+      50%{transform:translate(-10%,5%)}
+      60%{transform:translate(15%,0)}
+      70%{transform:translate(0,10%)}
+      80%{transform:translate(-15%,0)}
+      90%{transform:translate(10%,5%)}
+    }
+
+    /* ── MAIN SCROLL CONTAINER ───────────────────────────── */
+
+    main {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ── SECTION BASE ────────────────────────────────────── */
+
+    .pl-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 120px 56px;
+    }
+
+    /* ── HERO ────────────────────────────────────────────── */
+
+    #s-hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 200;
+      letter-spacing: 0.45em;
+      color: var(--gold);
+      margin-bottom: 64px;
+      opacity: 0;
+    }
+
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(38px, 6vw, 82px);
+      font-weight: 300;
+      line-height: 1.18;
+      color: var(--cream);
+      max-width: 840px;
+      opacity: 0;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+
+    .hero-sub {
+      font-family: var(--serif);
+      font-size: clamp(16px, 2vw, 22px);
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(240,236,228,0.38);
+      margin-top: 48px;
+      letter-spacing: 0.04em;
+      opacity: 0;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+    }
+
+    .hero-scroll-hint span {
+      font-family: var(--sans);
+      font-size: 8px;
+      letter-spacing: 0.4em;
+      color: rgba(240,236,228,0.28);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(184,150,94,0.6), transparent);
+      animation: scroll-pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes scroll-pulse {
+      0%,100%{opacity:0.3;transform:scaleY(1)}
+      50%{opacity:1;transform:scaleY(1.2)}
+    }
+
+    /* ── TEXT SECTIONS ───────────────────────────────────── */
+
+    .pl-text-block {
+      max-width: 640px;
+    }
+
+    .pl-text-block.right  { margin-left: auto; margin-right: 8vw; }
+    .pl-text-block.left   { margin-right: auto; margin-left: 8vw; }
+    .pl-text-block.center { margin: 0 auto; text-align: center; }
+
+    .pl-label {
+      font-family: var(--sans);
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.42em;
+      color: var(--gold);
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .pl-headline {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 68px);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-bottom: 36px;
+    }
+
+    .pl-headline em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+
+    .pl-quote {
+      font-family: var(--serif);
+      font-size: clamp(15px, 1.8vw, 20px);
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(240,236,228,0.52);
+      line-height: 1.7;
+      border-left: 1px solid rgba(184,150,94,0.3);
+      padding-left: 24px;
+      margin-top: 32px;
+    }
+
+    .pl-body {
+      font-family: var(--sans);
+      font-size: clamp(12px, 1.2vw, 14px);
+      font-weight: 200;
+      line-height: 1.9;
+      color: rgba(240,236,228,0.48);
+      margin-top: 24px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── ACTIVE PRINCIPLES GRID ──────────────────────────── */
+
+    #s-principles {
+      min-height: 100vh;
+      padding: 120px 56px;
+    }
+
+    .principles-intro {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border: 1px solid rgba(184,150,94,0.12);
+    }
+
+    .principle-item {
+      padding: 48px 32px;
+      border-right: 1px solid rgba(184,150,94,0.12);
+    }
+
+    .principle-item:last-child { border-right: none; }
+
+    .principle-num {
+      font-family: var(--serif);
+      font-size: 11px;
+      color: rgba(184,150,94,0.4);
+      letter-spacing: 0.3em;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .principle-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .principle-desc {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 200;
+      color: rgba(240,236,228,0.38);
+      line-height: 1.8;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── PROFESSIONAL SYSTEM ─────────────────────────────── */
+
+    #s-professional {
+      min-height: 120vh;
+    }
+
+    .pro-system-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      margin-top: 64px;
+      border-top: 1px solid rgba(184,150,94,0.15);
+      border-bottom: 1px solid rgba(184,150,94,0.15);
+    }
+
+    .pro-item {
+      padding: 56px 40px;
+      border-right: 1px solid rgba(184,150,94,0.1);
+    }
+
+    .pro-item:last-child { border-right: none; }
+
+    .pro-item-label {
+      font-family: var(--sans);
+      font-size: 8px;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .pro-item-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-style: italic;
+      color: var(--cream);
+      margin-bottom: 20px;
+    }
+
+    .pro-item-body {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 200;
+      color: rgba(240,236,228,0.4);
+      line-height: 1.85;
+    }
+
+    /* ── JAR SECTION ─────────────────────────────────────── */
+
+    #s-method {
+      min-height: 120vh;
+      text-align: center;
+    }
+
+    /* ── RITUALS ─────────────────────────────────────────── */
+
+    #s-rituals {
+      min-height: 120vh;
+    }
+
+    .ritual-lines {
+      margin-top: 64px;
+    }
+
+    .ritual-line {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(184,150,94,0.1);
+      cursor: default;
+    }
+
+    .ritual-line:first-child { border-top: 1px solid rgba(184,150,94,0.1); }
+
+    .ritual-line-num {
+      font-family: var(--serif);
+      font-size: 12px;
+      color: rgba(184,150,94,0.35);
+      min-width: 32px;
+    }
+
+    .ritual-line-name {
+      font-family: var(--serif);
+      font-size: clamp(22px, 3.5vw, 44px);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream);
+      flex: 1;
+    }
+
+    .ritual-line-desc {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 200;
+      letter-spacing: 0.2em;
+      color: rgba(240,236,228,0.28);
+      text-align: right;
+      max-width: 200px;
+    }
+
+    /* ── CLIENT NEEDS ────────────────────────────────────── */
+
+    #s-client {
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .need-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .need-card {
+      border: 1px solid rgba(184,150,94,0.14);
+      padding: 40px 28px;
+      cursor: pointer;
+      transition: border-color 0.4s, background 0.4s;
+      text-align: left;
+    }
+
+    .need-card:hover {
+      border-color: rgba(184,150,94,0.4);
+      background: rgba(184,150,94,0.04);
+    }
+
+    .need-card-icon {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 20px;
+    }
+
+    .need-card-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-style: italic;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+
+    .need-card-desc {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 200;
+      color: rgba(240,236,228,0.38);
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+
+    footer {
+      position: relative;
+      z-index: 10;
+      padding: 80px 56px 56px;
+      border-top: 1px solid rgba(184,150,94,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      color: rgba(240,236,228,0.3);
+    }
+
+    .footer-brand em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      color: rgba(240,236,228,0.28);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── SECTION DIVIDER LINE ────────────────────────────── */
+
+    .pl-divider {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, rgba(184,150,94,0.3), transparent);
+      margin: 0 auto;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+
+    @media (max-width: 900px) {
+      nav { padding: 24px 28px; }
+      .nav-links { gap: 24px; }
+      .pl-section { padding: 80px 28px; }
+      .principles-grid { grid-template-columns: 1fr 1fr; }
+      .pro-system-grid { grid-template-columns: 1fr; }
+      .need-grid { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; gap: 32px; align-items: flex-start; }
+    }
+
+    @media (max-width: 600px) {
+      .principles-grid { grid-template-columns: 1fr; }
+      .need-grid { grid-template-columns: 1fr; }
+      #narrative-svg { opacity: 0.6; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="grain"></div>
+
+  <!-- ═══ NARRATIVE SVG LAYER ════════════════════════════════════ -->
+
+  <svg id="narrative-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="glow-gold">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="glow-soft">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="droplet-grad" cx="42%" cy="35%">
+        <stop offset="0%" stop-color="#e8d5a8" stop-opacity="0.18"/>
+        <stop offset="60%" stop-color="#b8965e" stop-opacity="0.06"/>
+        <stop offset="100%" stop-color="#b8965e" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="jar-grad" cx="50%" cy="40%">
+        <stop offset="0%" stop-color="#d4b07a" stop-opacity="0.22"/>
+        <stop offset="100%" stop-color="#b8965e" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <!-- ── LEAF GROUP ─────────────────────── -->
+    <g id="g-leaf" opacity="0">
+      <!-- Main leaf outline -->
+      <path id="leaf-outline"
+        d="M 720,620 C 660,560 620,490 628,420 C 636,360 668,310 720,275 C 772,310 804,360 812,420 C 820,490 780,560 720,620 Z"
+        fill="none" stroke="#b8965e" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+      <!-- Central vein -->
+      <line id="leaf-vein-c" x1="720" y1="620" x2="720" y2="275"
+        stroke="#b8965e" stroke-width="0.55" stroke-linecap="round" opacity="0.5"/>
+      <!-- Secondary veins left -->
+      <line id="leaf-vein-l1" x1="720" y1="520" x2="672" y2="465" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
+      <line id="leaf-vein-l2" x1="720" y1="455" x2="661" y2="405" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
+      <line id="leaf-vein-l3" x1="720" y1="395" x2="668" y2="352" stroke="#b8965e" stroke-width="0.4" opacity="0.3"/>
+      <line id="leaf-vein-l4" x1="720" y1="340" x2="682" y2="308" stroke="#b8965e" stroke-width="0.35" opacity="0.25"/>
+      <!-- Secondary veins right -->
+      <line id="leaf-vein-r1" x1="720" y1="520" x2="768" y2="465" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
+      <line id="leaf-vein-r2" x1="720" y1="455" x2="779" y2="405" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
+      <line id="leaf-vein-r3" x1="720" y1="395" x2="772" y2="352" stroke="#b8965e" stroke-width="0.4" opacity="0.3"/>
+      <line id="leaf-vein-r4" x1="720" y1="340" x2="758" y2="308" stroke="#b8965e" stroke-width="0.35" opacity="0.25"/>
+      <!-- Floating micro-leaves top right -->
+      <path id="leaf-small-1"
+        d="M 880,180 C 865,165 856,148 862,134 C 868,128 878,126 886,132 C 894,138 898,152 892,168 Z"
+        fill="none" stroke="#b8965e" stroke-width="0.65" opacity="0.22"/>
+      <line x1="880" y1="180" x2="880" y2="134" stroke="#b8965e" stroke-width="0.4" opacity="0.15"/>
+      <path id="leaf-small-2"
+        d="M 570,210 C 555,195 546,178 552,164 C 558,158 568,156 576,162 C 584,168 588,182 582,198 Z"
+        fill="none" stroke="#b8965e" stroke-width="0.65" opacity="0.18"/>
+    </g>
+
+    <!-- ── MAGNIFYING GLASS ───────────────── -->
+    <g id="g-lens" opacity="0">
+      <circle id="lens-circle" cx="720" cy="430" r="110"
+        fill="none" stroke="#c4a96e" stroke-width="0.8" opacity="0.55"/>
+      <!-- handle -->
+      <line id="lens-handle" x1="802" y1="512" x2="852" y2="562"
+        stroke="#c4a96e" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/>
+      <!-- inner glow -->
+      <circle cx="720" cy="430" r="108" fill="rgba(196,169,110,0.022)" />
+      <!-- particles inside lens -->
+      <g id="g-particles" opacity="0">
+        <circle cx="700" cy="410" r="1.8" fill="#d4b07a" opacity="0.7"/>
+        <circle cx="730" cy="400" r="1.2" fill="#d4b07a" opacity="0.5"/>
+        <circle cx="745" cy="425" r="1.5" fill="#c4a96e" opacity="0.6"/>
+        <circle cx="695" cy="445" r="1.0" fill="#d4b07a" opacity="0.4"/>
+        <circle cx="718" cy="455" r="1.6" fill="#b8965e" opacity="0.55"/>
+        <circle cx="740" cy="445" r="1.1" fill="#d4b07a" opacity="0.45"/>
+        <circle cx="708" cy="420" r="0.9" fill="#c4a96e" opacity="0.5"/>
+        <circle cx="726" cy="415" r="1.3" fill="#d4b07a" opacity="0.6"/>
+        <circle cx="752" cy="408" r="0.8" fill="#b8965e" opacity="0.4"/>
+        <!-- particle veins inside leaf -->
+        <path d="M 705,440 Q 715,430 725,420 Q 732,412 738,405"
+          fill="none" stroke="#c4a96e" stroke-width="0.4" opacity="0.35"/>
+        <path d="M 698,448 Q 710,438 720,450 Q 728,458 735,452"
+          fill="none" stroke="#c4a96e" stroke-width="0.35" opacity="0.28"/>
+      </g>
+    </g>
+
+    <!-- ── SAP LINE (leaf → droplet transition) ── -->
+    <g id="g-sap" opacity="0">
+      <line id="sap-line" x1="720" y1="620" x2="720" y2="700"
+        stroke="#b8965e" stroke-width="0.6" stroke-linecap="round" opacity="0.5"
+        stroke-dasharray="80" stroke-dashoffset="80"/>
+    </g>
+
+    <!-- ── DROPLET ─────────────────────────── -->
+    <g id="g-droplet" opacity="0" transform="translate(720, 450)">
+      <!-- glow fill -->
+      <ellipse rx="58" ry="72" fill="url(#droplet-grad)" filter="url(#glow-soft)"/>
+      <!-- outer outline -->
+      <path id="droplet-outline"
+        d="M 0,-90 C -28,-60 -56,0 -52,48 C -48,90 -28,108 0,108 C 28,108 48,90 52,48 C 56,0 28,-60 0,-90 Z"
+        fill="none" stroke="#c4a96e" stroke-width="0.85" stroke-linecap="round" opacity="0.75"/>
+      <!-- inner surface -->
+      <path d="M 0,-60 C -14,-36 -28,12 -24,44 C -20,72 -10,84 0,84"
+        fill="none" stroke="#d4b07a" stroke-width="0.4" opacity="0.3"/>
+      <!-- light refraction -->
+      <ellipse cx="-16" cy="-28" rx="10" ry="18" fill="none" stroke="#e8d5a8" stroke-width="0.3" opacity="0.22" transform="rotate(-18)"/>
+    </g>
+
+    <!-- ── MOLECULAR STRUCTURES ────────────── -->
+    <g id="g-molecular" opacity="0" transform="translate(720, 450)">
+      <!-- orbital ring 1 -->
+      <ellipse rx="165" ry="72" fill="none" stroke="#b8965e" stroke-width="0.45" opacity="0.22"
+        transform="rotate(-28)"/>
+      <!-- orbital ring 2 -->
+      <ellipse rx="195" ry="55" fill="none" stroke="#b8965e" stroke-width="0.4" opacity="0.16"
+        transform="rotate(42)"/>
+      <!-- constellation nodes + lines -->
+      <circle cx="-148" cy="-32" r="2.2" fill="#b8965e" opacity="0.35"/>
+      <circle cx="120" cy="-62" r="1.8" fill="#b8965e" opacity="0.3"/>
+      <circle cx="168" cy="28" r="1.5" fill="#c4a96e" opacity="0.28"/>
+      <circle cx="-128" cy="55" r="2.0" fill="#b8965e" opacity="0.32"/>
+      <circle cx="0" cy="-142" r="1.6" fill="#c4a96e" opacity="0.25"/>
+      <circle cx="88" cy="118" r="1.4" fill="#b8965e" opacity="0.28"/>
+      <circle cx="-95" cy="-105" r="1.3" fill="#c4a96e" opacity="0.22"/>
+      <!-- connection lines -->
+      <line x1="-148" y1="-32" x2="0" y2="0" stroke="#b8965e" stroke-width="0.3" opacity="0.18"/>
+      <line x1="120" y1="-62" x2="0" y2="0" stroke="#b8965e" stroke-width="0.3" opacity="0.16"/>
+      <line x1="168" y1="28" x2="88" y2="118" stroke="#b8965e" stroke-width="0.28" opacity="0.14"/>
+      <line x1="-128" y1="55" x2="-148" y2="-32" stroke="#b8965e" stroke-width="0.28" opacity="0.14"/>
+      <line x1="0" y1="-142" x2="120" y2="-62" stroke="#b8965e" stroke-width="0.25" opacity="0.13"/>
+      <line x1="-95" y1="-105" x2="0" y2="-142" stroke="#b8965e" stroke-width="0.25" opacity="0.12"/>
+      <line x1="-95" y1="-105" x2="-148" y2="-32" stroke="#b8965e" stroke-width="0.22" opacity="0.12"/>
+    </g>
+
+    <!-- ── SECONDARY DROPLETS ─────────────── -->
+    <g id="g-drops-secondary" opacity="0">
+      <g id="drop-s1" transform="translate(520, 480)">
+        <path d="M 0,-42 C -13,-28 -26,0 -24,22 C -22,42 -12,50 0,50 C 12,50 22,42 24,22 C 26,0 13,-28 0,-42 Z"
+          fill="none" stroke="#b8965e" stroke-width="0.65" opacity="0.38"/>
+      </g>
+      <g id="drop-s2" transform="translate(920, 440)">
+        <path d="M 0,-32 C -10,-22 -20,0 -18,16 C -16,32 -9,38 0,38 C 9,38 16,32 18,16 C 20,0 10,-22 0,-32 Z"
+          fill="none" stroke="#b8965e" stroke-width="0.6" opacity="0.3"/>
+      </g>
+      <g id="drop-s3" transform="translate(620, 560)">
+        <path d="M 0,-24 C -7,-16 -14,0 -13,12 C -12,24 -7,28 0,28 C 7,28 12,24 13,12 C 14,0 7,-16 0,-24 Z"
+          fill="none" stroke="#b8965e" stroke-width="0.55" opacity="0.25"/>
+      </g>
+    </g>
+
+    <!-- ── JAR ────────────────────────────── -->
+    <g id="g-jar" opacity="0" transform="translate(720, 460)">
+      <!-- lid -->
+      <path d="M -52,-90 L 52,-90 L 46,-76 L -46,-76 Z"
+        fill="none" stroke="#c4a96e" stroke-width="0.75" stroke-linejoin="round" opacity="0.6"/>
+      <line x1="-42" y1="-76" x2="-46" y2="-90" stroke="#c4a96e" stroke-width="0.4" opacity="0.35"/>
+      <line x1="42" y1="-76" x2="46" y2="-90" stroke="#c4a96e" stroke-width="0.4" opacity="0.35"/>
+      <!-- body outline -->
+      <path d="M -46,-76 L -54,90 Q -54,110 0,110 Q 54,110 54,90 L 46,-76 Z"
+        fill="none" stroke="#c4a96e" stroke-width="0.75" stroke-linejoin="round" opacity="0.6"/>
+      <!-- jar inner fill (light) -->
+      <path id="jar-fill"
+        d="M -46,20 L -54,90 Q -54,110 0,110 Q 54,110 54,90 L 46,20 Z"
+        fill="url(#jar-grad)" opacity="0"/>
+      <!-- label line -->
+      <line x1="-36" y1="-20" x2="36" y2="-20" stroke="#c4a96e" stroke-width="0.35" opacity="0.22"/>
+      <line x1="-36" y1="-8" x2="28" y2="-8" stroke="#c4a96e" stroke-width="0.3" opacity="0.18"/>
+    </g>
+
+    <!-- ── BACKGROUND JARS (faint) ────────── -->
+    <g id="g-jars-bg" opacity="0">
+      <g transform="translate(480, 480) scale(0.72)">
+        <path d="M -46,-76 L -54,90 Q -54,110 0,110 Q 54,110 54,90 L 46,-76 Z M -52,-90 L 52,-90 L 46,-76 L -46,-76 Z"
+          fill="none" stroke="#b8965e" stroke-width="0.5" opacity="0.14"/>
+      </g>
+      <g transform="translate(960, 480) scale(0.65)">
+        <path d="M -46,-76 L -54,90 Q -54,110 0,110 Q 54,110 54,90 L 46,-76 Z M -52,-90 L 52,-90 L 46,-76 L -46,-76 Z"
+          fill="none" stroke="#b8965e" stroke-width="0.5" opacity="0.11"/>
+      </g>
+    </g>
+
+    <!-- ── HAIR FIBER ──────────────────────── -->
+    <g id="g-hair" opacity="0" transform="translate(720, 450)">
+      <!-- scalp base -->
+      <path d="M -140,140 Q 0,100 140,140" fill="none" stroke="#b8965e" stroke-width="0.7" opacity="0.35"/>
+      <!-- hair strand 1 (central) -->
+      <path id="hair-s1"
+        d="M 0,100 C 8,20 -6,-80 2,-180"
+        fill="none" stroke="#c4a96e" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+      <!-- cuticle layers central -->
+      <path d="M 6,80 C 12,20 2,-60 8,-140" fill="none" stroke="#b8965e" stroke-width="0.4" opacity="0.25"/>
+      <path d="M -6,80 C -10,20 -14,-60 -4,-140" fill="none" stroke="#b8965e" stroke-width="0.4" opacity="0.25"/>
+      <!-- cortex lines -->
+      <path d="M 0,60 C 2,20 -2,-40 0,-120" fill="none" stroke="#d4b07a" stroke-width="0.25" opacity="0.2"/>
+      <!-- hair strand 2 (left) -->
+      <path id="hair-s2"
+        d="M -55,120 C -48,40 -62,-60 -54,-155"
+        fill="none" stroke="#b8965e" stroke-width="0.85" stroke-linecap="round" opacity="0.3"/>
+      <!-- hair strand 3 (right) -->
+      <path id="hair-s3"
+        d="M 55,125 C 62,45 48,-55 56,-150"
+        fill="none" stroke="#b8965e" stroke-width="0.85" stroke-linecap="round" opacity="0.28"/>
+      <!-- follicle bulb -->
+      <ellipse cx="0" cy="120" rx="14" ry="22" fill="none" stroke="#b8965e" stroke-width="0.5" opacity="0.28"/>
+      <!-- droplet entering hair -->
+      <g id="drop-into-hair" opacity="0" transform="translate(0, -40)">
+        <path d="M 0,-18 C -5,-12 -10,0 -9,8 C -8,16 -4,20 0,20 C 4,20 8,16 9,8 C 10,0 5,-12 0,-18 Z"
+          fill="rgba(196,169,110,0.15)" stroke="#c4a96e" stroke-width="0.55" opacity="0.7"/>
+      </g>
+    </g>
+
+  </svg>
+
+  <!-- ═══ NAV ════════════════════════════════════════════════════ -->
+
+  <nav id="nav">
+    <a class="nav-logo" href="#">
+      PLEASURE
+      <span>PROFESSIONAL LUXURY · FRANCIACORTA, ITALIA</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Linee</a>
+      <a href="#">Protocolli</a>
+      <a href="#">Academy</a>
+      <a href="#">Ricerca</a>
+      <a href="#">Atelier</a>
+    </div>
+  </nav>
+
+  <!-- ═══ MAIN ════════════════════════════════════════════════════ -->
+
+  <main>
+
+    <!-- 1 ── HERO -->
+    <section id="s-hero" class="pl-section" style="min-height:100vh;flex-direction:column;text-align:center;">
+      <p class="hero-eyebrow" id="hero-eyebrow">PROFESSIONAL LUXURY · FRANCIACORTA, ITALIA</p>
+      <h1 class="hero-headline" id="hero-headline">
+        Il vero lusso<br>non è per tutti.<br>
+        È per chi sceglie di<br><em>sapere di più.</em>
+      </h1>
+      <p class="hero-sub" id="hero-sub">
+        Non vendiamo ai saloni.<br>Cresciamo con loro.
+      </p>
+      <div class="hero-scroll-hint" id="scroll-hint">
+        <span>SCORRI</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- 2 ── DISCOVERY -->
+    <section id="s-discovery" class="pl-section">
+      <div class="pl-text-block left">
+        <span class="pl-label">DALLA NATURA</span>
+        <h2 class="pl-headline">
+          Dalla terra,<br>prima che dal<br><em>laboratorio.</em>
+        </h2>
+        <p class="pl-quote">
+          "Ogni pianta porta un segreto.<br>
+          Noi passiamo la vita ad imparare ad ascoltarla."
+        </p>
+        <p class="pl-body">
+          PLEASURE non estrae dalla natura.<br>La ascolta. È impara a renderle qualcosa in cambio.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3 ── DROPLET / NATURE HAS THE ANSWER -->
+    <section id="s-droplet" class="pl-section">
+      <div class="pl-text-block right">
+        <span class="pl-label">L'ESSENZA</span>
+        <h2 class="pl-headline">
+          La <em>natura</em> ha già<br>la risposta.
+        </h2>
+        <p class="pl-body">
+          La linfa sale. L'essenza scende.<br>
+          Ogni goccia contiene millenni di intelligenza botanica<br>
+          che le biotecnologie avanzate imparano a leggere.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4 ── BIOTECHNOLOGY -->
+    <section id="s-bio" class="pl-section">
+      <div class="pl-text-block left">
+        <span class="pl-label">BIOTECNOLOGIE AVANZATE</span>
+        <h2 class="pl-headline">
+          <em>Le biotecnologie<br>avanzate</em> la liberano,<br>
+          la esprimono,<br>la potenziano.
+        </h2>
+        <p class="pl-body">
+          Non modifichiamo la natura.<br>
+          La amplificiamo fino alla sua massima espressione.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5 ── ACTIVE PRINCIPLES -->
+    <section id="s-principles" class="pl-section" style="display:block;min-height:auto;padding:120px 56px;">
+      <div class="principles-intro">
+        <span class="pl-label">I PRINCIPI ATTIVI</span>
+        <h2 class="pl-headline" style="max-width:500px;margin:0 auto;">
+          <em>Quattro segreti.<br>Un sistema.</em>
+        </h2>
+      </div>
+      <div class="principles-grid">
+        <div class="principle-item">
+          <span class="principle-num">01</span>
+          <p class="principle-name">Iperfermentazione</p>
+          <p class="principle-desc">La fermentazione spinta oltre i limiti convenzionali libera frazioni molecolari che nessun processo estrattivo standard riesce a ottenere.</p>
+        </div>
+        <div class="principle-item">
+          <span class="principle-num">02</span>
+          <p class="principle-name">Peptidi dell'avena</p>
+          <p class="principle-desc">Frammenti proteici a basso peso molecolare capaci di attraversare la corteccia del capello e operare dall'interno verso l'esterno.</p>
+        </div>
+        <div class="principle-item">
+          <span class="principle-num">03</span>
+          <p class="principle-name">Amminoacidi<br>a doppio strato</p>
+          <p class="principle-desc">Una formulazione stratificata che agisce simultaneamente sulla cuticola e sulla struttura corticale, garantendo un risultato durevole e progressivo.</p>
+        </div>
+        <div class="principle-item">
+          <span class="principle-num">04</span>
+          <p class="principle-name">Estratto di vite<br>rossa</p>
+          <p class="principle-desc">Resveratrolo e polifenoli in concentrazione avanzata. Antiossidante, rigenerante, attivante la circolazione del cuoio capelluto.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="pl-divider" style="margin:0 auto 0;position:relative;z-index:10;"></div>
+
+    <!-- 6 ── PROFESSIONAL SYSTEM -->
+    <section id="s-professional" class="pl-section" style="display:block;padding:120px 56px;">
+      <div class="pl-text-block" style="max-width:680px;margin-bottom:0;">
+        <span class="pl-label">IL SISTEMA PROFESSIONALE</span>
+        <h2 class="pl-headline">
+          <em>Eleviamo<br>professionisti.</em>
+        </h2>
+        <p class="pl-body" style="max-width:480px;">
+          Un sistema vivo. Non impari una tecnica —<br>
+          impari una lingua. E ogni testa è una frase nuova.
+        </p>
+      </div>
+      <div class="pro-system-grid">
+        <div class="pro-item">
+          <span class="pro-item-label">ACADEMY</span>
+          <p class="pro-item-title">La formazione<br>come linguaggio</p>
+          <p class="pro-item-body">Percorsi formativi costruiti attorno alla diagnosi, non alla vendita. Ogni professionista impara a leggere il capello prima di trattarlo.</p>
+        </div>
+        <div class="pro-item">
+          <span class="pro-item-label">RICERCA</span>
+          <p class="pro-item-title">Il laboratorio<br>come atelier</p>
+          <p class="pro-item-body">Ricerca continua in biotecnologia cosmetica. Ogni formula nasce da un protocollo clinico prima di diventare un prodotto.</p>
+        </div>
+        <div class="pro-item">
+          <span class="pro-item-label">ATELIER</span>
+          <p class="pro-item-title">Il salone come<br>laboratorio vivo</p>
+          <p class="pro-item-body">Il salone non è un punto vendita. È il luogo in cui il metodo Pleasure si esprime nella sua forma più alta: il gesto sul cliente.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 ── METHOD / JAR -->
+    <section id="s-method" class="pl-section" style="flex-direction:column;text-align:center;">
+      <span class="pl-label">IL METODO</span>
+      <h2 class="pl-headline" style="max-width:560px;margin:0 auto;">
+        Questo non è un prodotto.<br>
+        È un <em>metodo.</em><br>
+        Generativo. Tuo.
+      </h2>
+      <p class="pl-body" style="max-width:420px;margin:28px auto 0;text-align:center;">
+        Meno magazzino.<br>Più risultato.
+      </p>
+    </section>
+
+    <!-- 8 ── RITUALS -->
+    <section id="s-rituals" class="pl-section" style="display:block;padding:120px 56px;">
+      <div class="pl-text-block" style="max-width:540px;">
+        <span class="pl-label">I RITUALI</span>
+        <h2 class="pl-headline">
+          Il gesto<br>diventa <em>rito.</em>
+        </h2>
+        <p class="pl-body">
+          Ogni protocollo è una sequenza precisa.<br>
+          Ogni sequenza ha una logica botanica e biotecnologica<br>
+          che il professionista padroneggia, non esegue.
+        </p>
+      </div>
+      <div class="ritual-lines" style="max-width:900px;">
+        <div class="ritual-line">
+          <span class="ritual-line-num">01</span>
+          <span class="ritual-line-name">Risveglio della cute</span>
+          <span class="ritual-line-desc">Attivazione circolatoria · cuoio capelluto</span>
+        </div>
+        <div class="ritual-line">
+          <span class="ritual-line-num">02</span>
+          <span class="ritual-line-name">Ricostruzione della fibra</span>
+          <span class="ritual-line-desc">Amminoacidi · peptidi di avena</span>
+        </div>
+        <div class="ritual-line">
+          <span class="ritual-line-num">03</span>
+          <span class="ritual-line-name">Amplificazione del colore</span>
+          <span class="ritual-line-desc">Iperfermentazione · protezione</span>
+        </div>
+        <div class="ritual-line">
+          <span class="ritual-line-num">04</span>
+          <span class="ritual-line-name">Rituale del volume</span>
+          <span class="ritual-line-desc">Estratto di vite rossa · tensione</span>
+        </div>
+        <div class="ritual-line">
+          <span class="ritual-line-num">05</span>
+          <span class="ritual-line-name">Equilibrio sensoriale</span>
+          <span class="ritual-line-desc">Aromaterapia botanica · sensoriale</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 ── CLIENT NEEDS -->
+    <section id="s-client" class="pl-section" style="display:block;padding:120px 56px;text-align:center;">
+      <span class="pl-label">ORIENTAMENTO PROFESSIONALE</span>
+      <h2 class="pl-headline" style="max-width:620px;margin:0 auto 16px;">
+        Di cosa ha bisogno<br>il tuo cliente <em>oggi?</em>
+      </h2>
+      <p class="pl-body" style="max-width:420px;margin:0 auto 64px;">
+        Non un catalogo. Una diagnosi.<br>
+        Trova il protocollo giusto partendo dal bisogno reale.
+      </p>
+      <div class="need-grid">
+        <div class="need-card">
+          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 4 C10,4 7,7 7,12 C7,17 14,24 14,24 C14,24 21,17 21,12 C21,7 18,4 14,4Z" stroke="#b8965e" stroke-width="0.8"/>
+            <line x1="14" y1="4" x2="14" y2="24" stroke="#b8965e" stroke-width="0.5" opacity="0.4"/>
+          </svg>
+          <p class="need-card-title">Cuoio capelluto sensibile</p>
+          <p class="need-card-desc">Rossori, prurito, desquamazione.<br>Il risveglio comincia dalla radice.</p>
+        </div>
+        <div class="need-card">
+          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2 C13,8 11,14 14,22 C17,14 15,8 14,2Z" stroke="#b8965e" stroke-width="0.8"/>
+            <path d="M14 2 C12,10 10,16 14,22" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
+          </svg>
+          <p class="need-card-title">Capello sfibrato e secco</p>
+          <p class="need-card-desc">Rottura, opacità, fragilità.<br>La fibra richiede ascolto prima di tutto.</p>
+        </div>
+        <div class="need-card">
+          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="7" stroke="#b8965e" stroke-width="0.8"/>
+            <circle cx="14" cy="14" r="3" stroke="#b8965e" stroke-width="0.45" opacity="0.4"/>
+            <path d="M14 7 L14 4 M14 21 L14 24 M7 14 L4 14 M21 14 L24 14" stroke="#b8965e" stroke-width="0.5" opacity="0.3"/>
+          </svg>
+          <p class="need-card-title">Colorazione e trattamento</p>
+          <p class="need-card-desc">Protezione pre e post-colore.<br>Amplificazione della luminosità.</p>
+        </div>
+        <div class="need-card">
+          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8,22 C8,14 10,8 14,6 C18,8 20,14 20,22" stroke="#b8965e" stroke-width="0.8" stroke-linecap="round"/>
+            <ellipse cx="14" cy="22" rx="6" ry="2.5" stroke="#b8965e" stroke-width="0.5" opacity="0.4"/>
+          </svg>
+          <p class="need-card-title">Volume e struttura</p>
+          <p class="need-card-desc">Capello piatto e senza corpo.<br>Il volume si costruisce dall'interno.</p>
+        </div>
+        <div class="need-card">
+          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 5 C10,5 7,8 7,13 Q7,19 14,23 Q21,19 21,13 C21,8 18,5 14,5Z" stroke="#b8965e" stroke-width="0.8"/>
+            <path d="M 10,10 Q14,8 18,10 Q 16,14 14,16 Q12,14 10,10Z" stroke="#b8965e" stroke-width="0.4" opacity="0.35"/>
+          </svg>
+          <p class="need-card-title">Caduta e diradamento</p>
+          <p class="need-card-desc">Perdita progressiva di densità.<br>Il follicolo ha bisogno di essere ascoltato.</p>
+        </div>
+        <div class="need-card">
+          <svg class="need-card-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 4 L14 24 M9 9 C9,9 14,12 19,9 M9 16 C9,16 14,19 19,16" stroke="#b8965e" stroke-width="0.75" stroke-linecap="round"/>
+          </svg>
+          <p class="need-card-title">Benessere sensoriale</p>
+          <p class="need-card-desc">Il cliente che cerca un'esperienza.<br>Il rito come risposta.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ══════════════════════════════════════════════════ -->
+
+  <footer>
+    <div>
+      <p class="footer-brand">PLEASURE<br><em>Professional Luxury · Franciacorta, Italia</em></p>
+      <p style="font-family:var(--sans);font-size:9px;color:rgba(240,236,228,0.2);margin-top:20px;letter-spacing:0.2em;">
+        © 2026 Pleasure Professional Luxury
+      </p>
+    </div>
+    <div class="footer-links">
+      <a href="#">Linee</a>
+      <a href="#">Protocolli</a>
+      <a href="#">Academy</a>
+      <a href="#">Ricerca</a>
+      <a href="#">Atelier</a>
+      <a href="#">Contatti</a>
+    </div>
+  </footer>
+
+  <!-- ═══ SCRIPTS ═════════════════════════════════════════════════ -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ── LENIS smooth scroll ──────────────────── */
+    var lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+
+    /* ── HERO ENTRANCE ───────────────────────── */
+    var heroTL = gsap.timeline({ delay: 0.4 });
+    heroTL
+      .to('#hero-eyebrow',   { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out' }, 0)
+      .fromTo('#hero-headline', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.8, ease: 'power2.out' }, 0.3)
+      .fromTo('#hero-sub',      { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out' }, 0.9)
+      .fromTo('#scroll-hint',   { opacity: 0 },        { opacity: 1, duration: 1.2, ease: 'power1.out' }, 1.4);
+
+    /* ── LEAF ENTRANCE (hero atmosphere) ─────── */
+    gsap.to('#g-leaf', {
+      opacity: 1, duration: 2.4, ease: 'power1.out', delay: 0.8
+    });
+
+    /* Gentle floating animation on the small leaves */
+    gsap.to('#leaf-small-1', {
+      y: -12, rotation: 4, duration: 5.5, yoyo: true, repeat: -1,
+      ease: 'sine.inOut', transformOrigin: '50% 100%'
+    });
+    gsap.to('#leaf-small-2', {
+      y: -8, rotation: -3, duration: 7, yoyo: true, repeat: -1,
+      ease: 'sine.inOut', delay: 1.2, transformOrigin: '50% 100%'
+    });
+
+    /* Subtle leaf breathe */
+    gsap.to('#leaf-outline', {
+      opacity: 0.45, duration: 4, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 1
+    });
+
+    /* ── DRAW-IN HELPERS ──────────────────────
+       We use stroke-dasharray / stroke-dashoffset trick.
+       Pre-set all paths that we want to "draw" */
+    function prepareDraw(el, length) {
+      gsap.set(el, { strokeDasharray: length, strokeDashoffset: length });
+    }
+
+    prepareDraw('#leaf-outline', 700);
+    prepareDraw('#leaf-vein-c', 345);
+    prepareDraw('#sap-line', 80);
+    prepareDraw('#droplet-outline', 620);
+    prepareDraw('#hair-s1', 285);
+    prepareDraw('#hair-s2', 280);
+    prepareDraw('#hair-s3', 280);
+
+    /* Draw leaf outline on scroll into discovery section */
+    ScrollTrigger.create({
+      trigger: '#s-discovery',
+      start: 'top 75%',
+      onEnter: function () {
+        gsap.to('#leaf-outline', { strokeDashoffset: 0, duration: 2.2, ease: 'power2.inOut' });
+        gsap.to(['#leaf-vein-c','#leaf-vein-l1','#leaf-vein-l2','#leaf-vein-l3','#leaf-vein-l4',
+                 '#leaf-vein-r1','#leaf-vein-r2','#leaf-vein-r3','#leaf-vein-r4'],
+          { opacity: function(i){ return [0.5,0.35,0.35,0.3,0.25,0.35,0.35,0.3,0.25][i]; },
+            duration: 1.8, stagger: 0.12, ease: 'power1.out', delay: 0.6 });
+      }
+    });
+
+    /* ── MASTER SCROLL TIMELINE ──────────────
+       Maps the ENTIRE page scroll to SVG narrative */
+
+    var masterTL = gsap.timeline({ paused: true });
+
+    /* 0 → 0.12  Hero: leaf already visible, small drift */
+    masterTL
+      .to('#g-leaf', { y: -18, duration: 0.12, ease: 'none' }, 0)
+
+    /* 0.12 → 0.28  Discovery: magnifying glass appears */
+      .to('#g-lens', { opacity: 1, duration: 0.06, ease: 'power2.out' }, 0.12)
+      .fromTo('#g-lens', { scale: 0.7, transformOrigin: '720px 430px' },
+        { scale: 1, duration: 0.10, ease: 'back.out(1.4)' }, 0.12)
+      .to('#g-particles', { opacity: 1, duration: 0.06, ease: 'power1.out' }, 0.18)
+      /* particles drift */
+      .to('#g-particles circle', {
+        y: function(i){ return (i % 2 === 0 ? -4 : 4) + (i * 1.2); },
+        x: function(i){ return (i % 3 === 0 ? 3 : -2) + (i * 0.8); },
+        duration: 0.08, stagger: 0.005, ease: 'sine.inOut'
+      }, 0.20)
+
+    /* 0.28 → 0.44  Lens zooms out, sap forms, droplet appears */
+      .to('#g-lens', { opacity: 0, scale: 1.4, transformOrigin: '720px 430px',
+        duration: 0.08, ease: 'power2.in' }, 0.28)
+      .to('#g-sap', { opacity: 1, duration: 0.04 }, 0.28)
+      .to('#sap-line', { strokeDashoffset: 0, duration: 0.06, ease: 'power2.inOut' }, 0.30)
+      .to('#g-droplet', { opacity: 1, duration: 0.06, ease: 'power2.out' }, 0.34)
+      .to('#droplet-outline', { strokeDashoffset: 0, duration: 0.08, ease: 'power2.inOut' }, 0.34)
+      .to('#g-sap', { opacity: 0, duration: 0.04 }, 0.40)
+      /* Leaf fades as droplet arrives */
+      .to('#g-leaf', { opacity: 0.22, duration: 0.08, ease: 'power1.inOut' }, 0.35)
+
+    /* 0.44 → 0.58  Molecular structures emerge */
+      .to('#g-molecular', { opacity: 1, duration: 0.10, ease: 'power1.out' }, 0.44)
+      .fromTo('#g-molecular', { scale: 0.5, transformOrigin: '720px 450px' },
+        { scale: 1, duration: 0.12, ease: 'back.out(1.2)' }, 0.44)
+      /* droplet pulses softly */
+      .to('#g-droplet', { scale: 1.08, transformOrigin: '720px 450px',
+        duration: 0.04, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 0.48)
+      .to('#g-leaf', { opacity: 0, duration: 0.06 }, 0.52)
+
+    /* 0.58 → 0.68  Secondary droplets appear and pulse */
+      .to('#g-drops-secondary', { opacity: 1, duration: 0.06 }, 0.58)
+      .fromTo('#drop-s1', { scale: 0, transformOrigin: '520px 480px' },
+        { scale: 1, duration: 0.06, ease: 'back.out(2)' }, 0.58)
+      .fromTo('#drop-s2', { scale: 0, transformOrigin: '920px 440px' },
+        { scale: 1, duration: 0.06, ease: 'back.out(2)' }, 0.60)
+      .fromTo('#drop-s3', { scale: 0, transformOrigin: '620px 560px' },
+        { scale: 1, duration: 0.05, ease: 'back.out(2)' }, 0.62)
+      /* Secondary drops merge: move toward center */
+      .to('#drop-s1', { x: 120, y: -10, scale: 0, transformOrigin: '520px 480px',
+        duration: 0.06, ease: 'power2.in' }, 0.64)
+      .to('#drop-s2', { x: -148, y: 8, scale: 0, transformOrigin: '920px 440px',
+        duration: 0.06, ease: 'power2.in' }, 0.64)
+      .to('#drop-s3', { x: 80, y: -30, scale: 0, transformOrigin: '620px 560px',
+        duration: 0.05, ease: 'power2.in' }, 0.65)
+      .to('#g-droplet', { scale: 1.18, transformOrigin: '720px 450px',
+        duration: 0.04, ease: 'power2.out' }, 0.68)
+
+    /* 0.68 → 0.78  Jar appears — droplet descends into it */
+      .to('#g-drops-secondary', { opacity: 0, duration: 0.03 }, 0.68)
+      .to('#g-jars-bg', { opacity: 1, duration: 0.06 }, 0.68)
+      .to('#g-jar', { opacity: 1, duration: 0.06 }, 0.70)
+      .fromTo('#g-jar', { y: 40, scale: 0.8, transformOrigin: '720px 460px' },
+        { y: 0, scale: 1, duration: 0.08, ease: 'back.out(1.4)' }, 0.70)
+      /* droplet descends into jar */
+      .to('#g-droplet', { y: 120, scale: 0.4, opacity: 0.6, transformOrigin: '720px 450px',
+        duration: 0.06, ease: 'power2.in' }, 0.74)
+      .to('#jar-fill', { opacity: 1, duration: 0.06, ease: 'power2.out' }, 0.78)
+      .to('#g-droplet', { opacity: 0, duration: 0.03 }, 0.79)
+      /* background jars fade out */
+      .to('#g-jars-bg', { opacity: 0, duration: 0.04 }, 0.80)
+      .to('#g-molecular', { opacity: 0, duration: 0.06 }, 0.78)
+
+    /* 0.80 → 0.92  Hair fiber reveals */
+      .to('#g-jar', { opacity: 0, y: -30, duration: 0.06, ease: 'power2.in' }, 0.83)
+      .to('#g-hair', { opacity: 1, duration: 0.06 }, 0.85)
+      .to('#hair-s1', { strokeDashoffset: 0, duration: 0.10, ease: 'power2.inOut' }, 0.85)
+      .to('#hair-s2', { strokeDashoffset: 0, duration: 0.09, ease: 'power2.inOut', delay: 0.04 }, 0.85)
+      .to('#hair-s3', { strokeDashoffset: 0, duration: 0.09, ease: 'power2.inOut', delay: 0.06 }, 0.85)
+      .to('#drop-into-hair', { opacity: 1, y: -80, duration: 0.08, ease: 'power2.in' }, 0.90)
+
+    /* 0.92 → 1.0  Fade everything gently for client section */
+      .to('#g-hair', { opacity: 0.3, duration: 0.08 }, 0.94);
+
+    /* ── BIND MASTER TL TO SCROLL ────────────── */
+    ScrollTrigger.create({
+      trigger: 'main',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 2.5,
+      onUpdate: function (self) {
+        masterTL.progress(self.progress);
+      }
+    });
+
+    /* ── SECTION TEXT REVEALS ────────────────── */
+    gsap.utils.toArray('.pl-text-block').forEach(function (el) {
+      var label = el.querySelector('.pl-label');
+      var headline = el.querySelector('.pl-headline');
+      var quote = el.querySelector('.pl-quote');
+      var body = el.querySelector('.pl-body');
+
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 78%',
+          toggleActions: 'play none none none'
+        }
+      });
+
+      if (label)    tl.fromTo(label,    { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' }, 0);
+      if (headline) tl.fromTo(headline, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out' }, 0.1);
+      if (quote)    tl.fromTo(quote,    { opacity: 0, x: -12 },{ opacity: 1, x: 0, duration: 1.2, ease: 'power2.out' }, 0.4);
+      if (body)     tl.fromTo(body,     { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power1.out' }, 0.5);
+    });
+
+    /* Principles grid */
+    gsap.utils.toArray('.principle-item').forEach(function (el, i) {
+      gsap.fromTo(el, { opacity: 0, y: 28 }, {
+        opacity: 1, y: 0, duration: 1.2, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+        delay: i * 0.1
+      });
+    });
+
+    /* Pro items */
+    gsap.utils.toArray('.pro-item').forEach(function (el, i) {
+      gsap.fromTo(el, { opacity: 0, y: 24 }, {
+        opacity: 1, y: 0, duration: 1.2, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+        delay: i * 0.12
+      });
+    });
+
+    /* Ritual lines */
+    gsap.utils.toArray('.ritual-line').forEach(function (el, i) {
+      gsap.fromTo(el, { opacity: 0, x: -16 }, {
+        opacity: 1, x: 0, duration: 1.0, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+        delay: i * 0.08
+      });
+    });
+
+    /* Need cards */
+    gsap.utils.toArray('.need-card').forEach(function (el, i) {
+      gsap.fromTo(el, { opacity: 0, y: 20 }, {
+        opacity: 1, y: 0, duration: 1.0, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+        delay: i * 0.08
+      });
+    });
+
+    /* ── NAV fade in ────────────────────────── */
+    gsap.fromTo('nav', { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power1.out', delay: 0.3 });
+
+    /* ── NAV hide on scroll down ─────────────── */
+    var lastScroll = 0;
+    ScrollTrigger.create({
+      onUpdate: function (self) {
+        var dir = self.direction;
+        var scrollY = window.scrollY;
+        if (scrollY < 80) { gsap.to('nav', { y: 0, duration: 0.4 }); return; }
+        if (dir === 1) {
+          gsap.to('nav', { y: -90, duration: 0.4, ease: 'power2.inOut' });
+        } else {
+          gsap.to('nav', { y: 0, duration: 0.5, ease: 'power2.out' });
+        }
+        lastScroll = scrollY;
+      }
+    });
+
+    ScrollTrigger.refresh();
+
+  }());
+  </script>
+
+</body>
+</html>
