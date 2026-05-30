@@ -73,27 +73,24 @@ img{max-width:100%;display:block}
     radial-gradient(circle at 100% 100%,rgba(184,149,106,.28) 0%,transparent 8%);
 }
 
-/* ===== intro flora (ambient breathing leaves) ===== */
-#intro-flora{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}
-.fl{fill:none;stroke:rgba(240,232,216,.5);stroke-width:.9;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-@keyframes sw1{0%,100%{transform:rotate(0deg)}50%{transform:rotate(2deg)}}
-@keyframes sw2{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-1.8deg) translateX(4px)}}
-@keyframes sw3{0%,100%{transform:rotate(0deg)}50%{transform:rotate(2.4deg) translateX(-3px)}}
-.sw-a{animation:sw1 14s ease-in-out infinite}
-.sw-b{animation:sw2 10s 1.8s ease-in-out infinite}
-.sw-c{animation:sw3 12s 3.5s ease-in-out infinite}
-.sw-d{animation:sw1 17s .7s ease-in-out infinite}
-#intro .stage{position:relative;z-index:2}
-#intro .hint{z-index:2}
-
 /* ===== intro ===== */
-#intro{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(ellipse at 50% 52%,#26262b 0%,rgba(38,38,43,0) 60%),linear-gradient(180deg,#1b1b1e,#1b1b1d)}
-#intro .stage{display:flex;flex-direction:column;align-items:center;gap:34px;text-align:center}
-#intro .logo{width:min(500px,66vw);opacity:0;animation:fade 2s .4s cubic-bezier(.16,1,.3,1) forwards}
-#intro .logo img{width:100%;filter:drop-shadow(0 8px 36px rgba(184,149,106,.18))}
-#intro .sub{font-weight:200;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--crema);opacity:0;animation:fade 1.6s 1.5s cubic-bezier(.16,1,.3,1) forwards}
-#intro .sub .sep{padding:0 .7em;color:var(--oro)}
-#intro .hint{position:absolute;left:50%;bottom:46px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:fade 1.6s 3s cubic-bezier(.16,1,.3,1) forwards;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--crema-d)}
+#intro{position:relative;height:100vh;overflow:hidden;background:radial-gradient(ellipse at 50% 38%,#28262d 0%,rgba(38,38,43,0) 64%),linear-gradient(180deg,#1b1b1e,#1b1b1d)}
+#intro-canvas{position:absolute;inset:0;z-index:1;pointer-events:none}
+#flora-left,#flora-right{position:absolute;top:0;bottom:0;width:28vw;min-width:120px;max-width:280px;z-index:2;pointer-events:none}
+#flora-left{left:0;-webkit-mask-image:linear-gradient(to right,black 52%,transparent 100%);mask-image:linear-gradient(to right,black 52%,transparent 100%)}
+#flora-right{right:0;-webkit-mask-image:linear-gradient(to left,black 52%,transparent 100%);mask-image:linear-gradient(to left,black 52%,transparent 100%)}
+.bl{fill:none;stroke:rgba(240,232,216,.34);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#intro-diam{position:absolute;left:50%;top:13%;transform:translateX(-50%);z-index:4;opacity:0;animation:ifade 1.6s .2s cubic-bezier(.16,1,.3,1) forwards}
+#intro-logo{position:absolute;left:50%;top:16%;transform:translateX(-50%);z-index:4;width:min(500px,72vw);opacity:0;animation:ifade 2.2s .4s cubic-bezier(.16,1,.3,1) forwards}
+#intro-logo img{width:100%;filter:drop-shadow(0 6px 32px rgba(184,149,106,.22))}
+#intro-manifesto{position:absolute;left:50%;top:56%;transform:translateX(-50%);z-index:4;text-align:center;white-space:nowrap}
+.mline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(22px,3vw,50px);line-height:1.25;color:var(--crema);opacity:0;display:block}
+.mline em{font-style:italic;color:var(--oro-l)}
+.mline.m0{animation:mrise 2.4s 2.0s cubic-bezier(.16,1,.3,1) forwards}
+.mline.m1{animation:mrise 2.4s 3.0s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes ifade{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes mrise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+#intro .hint{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:ifade 1.6s 4.4s cubic-bezier(.16,1,.3,1) forwards;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--crema-d);z-index:4;white-space:nowrap}
 #intro .hint .ln{width:1px;height:38px;background:linear-gradient(180deg,transparent,var(--oro));animation:pulse 2.6s ease-in-out infinite}
 @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
@@ -162,6 +159,8 @@ img{max-width:100%;display:block}
   #closing{padding:120px 20px 50px}
   .foot{grid-template-columns:1fr;gap:36px}
   .below{flex-direction:column;gap:12px}
+  #intro-manifesto{white-space:normal;width:82vw}
+  #flora-left,#flora-right{width:22vw;min-width:80px}
 }
 </style>
 </head>
@@ -190,9 +189,116 @@ img{max-width:100%;display:block}
 
 <!-- ===== INTRO ===== -->
 <section id="intro">
-  <div class="stage">
-    <div class="logo"><img src="logo-pleasure.png" alt="PLEASURE Professional Luxury" /></div>
+  <canvas id="intro-canvas"></canvas>
+
+  <!-- Botanical left — pencil landscape, same stroke as flow animation -->
+  <svg id="flora-left" viewBox="0 0 280 900" preserveAspectRatio="xMinYMid meet" width="100%" height="100%">
+    <!-- Main tall tree -->
+    <path class="bl" d="M155 900 C 150 790 145 670 142 550 C 139 440 137 350 134 240 C 132 170 130 110 128 40"/>
+    <path class="bl" d="M142 550 C 120 528 94 514 58 508"/>
+    <path class="bl" d="M139 450 C 115 430 86 416 48 410"/>
+    <path class="bl" d="M137 370 C 156 348 178 334 212 328"/>
+    <path class="bl" d="M136 300 C 110 280 80 266 42 260"/>
+    <path class="bl" d="M135 300 C 154 278 174 264 204 258"/>
+    <path class="bl" d="M133 200 C 108 180 76 165 38 158"/>
+    <path class="bl" d="M132 185 C 150 162 170 148 198 141"/>
+    <!-- Leaf tips on branches -->
+    <path class="bl" d="M58 508 C 40 496 24 490 6 494" opacity=".7"/>
+    <path class="bl" d="M38 502 C 22 492 8 488 -6 490" opacity=".6"/>
+    <path class="bl" d="M48 410 C 30 398 14 392 -2 396" opacity=".65"/>
+    <path class="bl" d="M42 260 C 24 248 8 242 -8 246" opacity=".6"/>
+    <path class="bl" d="M38 158 C 20 146 4 140 -12 144" opacity=".55"/>
+    <!-- Second tree behind -->
+    <path class="bl" d="M72 900 C 69 820 66 740 64 648 C 62 570 60 506 57 422" opacity=".55"/>
+    <path class="bl" d="M64 648 C 46 628 28 618 4 614" opacity=".48"/>
+    <path class="bl" d="M62 530 C 44 512 26 502 2 498" opacity=".44"/>
+    <path class="bl" d="M60 462 C 74 444 92 432 116 427" opacity=".42"/>
+    <!-- Low shrub / bush -->
+    <path class="bl" d="M215 900 C 210 868 200 844 184 832 C 168 820 150 816 140 822" opacity=".6"/>
+    <path class="bl" d="M184 832 C 174 814 160 804 142 800" opacity=".5"/>
+    <path class="bl" d="M215 900 C 222 864 230 838 242 816 C 254 794 268 780 278 774" opacity=".5"/>
+    <!-- Wildflower 1 -->
+    <path class="bl" d="M236 900 C 233 838 229 776 222 714 C 217 668 210 628 202 590" opacity=".68"/>
+    <path class="bl" d="M202 590 C 194 578 190 566 192 555" opacity=".58"/>
+    <path class="bl" d="M202 590 C 210 578 216 566 214 555" opacity=".58"/>
+    <path class="bl" d="M202 590 C 192 584 180 584 174 591" opacity=".52"/>
+    <path class="bl" d="M202 590 C 212 584 224 584 230 591" opacity=".52"/>
+    <!-- Wildflower 2 -->
+    <path class="bl" d="M255 900 C 253 846 250 792 244 736 C 239 692 232 652 224 612" opacity=".58"/>
+    <path class="bl" d="M224 612 C 218 602 216 590 220 581" opacity=".48"/>
+    <path class="bl" d="M224 612 C 230 602 234 590 230 581" opacity=".48"/>
+    <path class="bl" d="M224 612 C 214 607 204 611 202 620" opacity=".44"/>
+    <!-- Grass blades base -->
+    <path class="bl" d="M22 900 C 18 868 10 844 0 832" opacity=".48"/>
+    <path class="bl" d="M38 900 C 36 870 30 848 22 836" opacity=".45"/>
+    <path class="bl" d="M10 900 C 7 872 0 854 -8 848" opacity=".4"/>
+    <!-- Fern frond -->
+    <path class="bl" d="M112 900 C 106 868 96 844 80 830 C 64 816 42 812 24 818" opacity=".58"/>
+    <path class="bl" d="M80 830 C 68 814 54 806 36 802" opacity=".48"/>
+    <path class="bl" d="M68 822 C 58 808 48 802 32 800" opacity=".42"/>
+  </svg>
+
+  <!-- Botanical right — complementary, slightly different arrangement -->
+  <svg id="flora-right" viewBox="0 0 280 900" preserveAspectRatio="xMaxYMid meet" width="100%" height="100%">
+    <!-- Main tall tree (mirrored geometry) -->
+    <path class="bl" d="M125 900 C 130 790 135 670 138 550 C 141 440 143 350 146 240 C 148 170 150 110 152 40"/>
+    <path class="bl" d="M138 550 C 160 528 186 514 222 508"/>
+    <path class="bl" d="M141 450 C 165 430 194 416 232 410"/>
+    <path class="bl" d="M143 370 C 124 348 102 334 68 328"/>
+    <path class="bl" d="M144 300 C 170 280 200 266 238 260"/>
+    <path class="bl" d="M145 300 C 126 278 106 264 76 258"/>
+    <path class="bl" d="M147 200 C 172 180 204 165 242 158"/>
+    <path class="bl" d="M148 185 C 130 162 110 148 82 141"/>
+    <!-- Leaf tips -->
+    <path class="bl" d="M222 508 C 240 496 256 490 274 494" opacity=".7"/>
+    <path class="bl" d="M242 502 C 258 492 272 488 286 490" opacity=".6"/>
+    <path class="bl" d="M232 410 C 250 398 266 392 282 396" opacity=".65"/>
+    <path class="bl" d="M238 260 C 256 248 272 242 288 246" opacity=".6"/>
+    <path class="bl" d="M242 158 C 260 146 276 140 292 144" opacity=".55"/>
+    <!-- Second tree behind -->
+    <path class="bl" d="M208 900 C 211 820 214 740 216 648 C 218 570 220 506 223 422" opacity=".55"/>
+    <path class="bl" d="M216 648 C 234 628 252 618 276 614" opacity=".48"/>
+    <path class="bl" d="M218 530 C 236 512 254 502 278 498" opacity=".44"/>
+    <path class="bl" d="M220 462 C 206 444 188 432 164 427" opacity=".42"/>
+    <!-- Low shrub -->
+    <path class="bl" d="M65 900 C 70 868 80 844 96 832 C 112 820 130 816 140 822" opacity=".6"/>
+    <path class="bl" d="M96 832 C 106 814 120 804 138 800" opacity=".5"/>
+    <path class="bl" d="M65 900 C 58 864 50 838 38 816 C 26 794 12 780 2 774" opacity=".5"/>
+    <!-- Wildflower 1 -->
+    <path class="bl" d="M44 900 C 47 838 51 776 58 714 C 63 668 70 628 78 590" opacity=".68"/>
+    <path class="bl" d="M78 590 C 86 578 90 566 88 555" opacity=".58"/>
+    <path class="bl" d="M78 590 C 70 578 64 566 66 555" opacity=".58"/>
+    <path class="bl" d="M78 590 C 88 584 100 584 106 591" opacity=".52"/>
+    <path class="bl" d="M78 590 C 68 584 56 584 50 591" opacity=".52"/>
+    <!-- Wildflower 2 -->
+    <path class="bl" d="M25 900 C 27 846 30 792 36 736 C 41 692 48 652 56 612" opacity=".58"/>
+    <path class="bl" d="M56 612 C 62 602 64 590 60 581" opacity=".48"/>
+    <path class="bl" d="M56 612 C 50 602 46 590 50 581" opacity=".48"/>
+    <path class="bl" d="M56 612 C 66 607 76 611 78 620" opacity=".44"/>
+    <!-- Grass blades base -->
+    <path class="bl" d="M258 900 C 262 868 270 844 280 832" opacity=".48"/>
+    <path class="bl" d="M242 900 C 244 870 250 848 258 836" opacity=".45"/>
+    <path class="bl" d="M270 900 C 273 872 280 854 288 848" opacity=".4"/>
+    <!-- Fern frond -->
+    <path class="bl" d="M168 900 C 174 868 184 844 200 830 C 216 816 238 812 256 818" opacity=".58"/>
+    <path class="bl" d="M200 830 C 212 814 226 806 244 802" opacity=".48"/>
+    <path class="bl" d="M212 822 C 222 808 232 802 248 800" opacity=".42"/>
+  </svg>
+
+  <!-- Diamond brand mark above logo -->
+  <div id="intro-diam">
+    <svg viewBox="0 0 12 20" width="12" height="20"><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="#d4b283" opacity=".9"/><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="none" stroke="#b8956a" stroke-width=".6"/></svg>
   </div>
+
+  <!-- Logo top -->
+  <div id="intro-logo"><img src="logo-pleasure-crop.png" alt="PLEASURE Professional Luxury" /></div>
+
+  <!-- Manifesto text -->
+  <div id="intro-manifesto">
+    <span class="mline m0">Il vero <em>lusso</em> non è per tutti.</span>
+    <span class="mline m1">È per chi sceglie di <em>sapere di più.</em></span>
+  </div>
+
   <div class="hint"><span>il flusso comincia</span><span class="ln"></span></div>
 </section>
 
@@ -370,6 +476,83 @@ img{max-width:100%;display:block}
 </section>
 
 <script>
+/* ========== INTRO PARTICLES ========== */
+(function(){
+  const cv=document.getElementById('intro-canvas');
+  const ctx=cv.getContext('2d');
+  let W,H;
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+  resize();
+  addEventListener('resize',resize);
+
+  const N=32,TAU=Math.PI*2;
+  function rnd(a,b){return a+Math.random()*(b-a);}
+
+  function mkP(){
+    const z=Math.random();
+    return{
+      x:rnd(0,innerWidth),y:rnd(0,innerHeight),z,
+      vx:rnd(-0.22,0.22),vy:rnd(-0.16,0.16),
+      sz:rnd(1.1,3.6),opa:0,
+      topa:rnd(0.14,0.52)*(0.3+z*0.7),
+      life:rnd(0,280),max:rnd(200,440),
+      pid:Math.random()*100,
+    };
+  }
+
+  const pts=Array.from({length:N},mkP);
+  let frame=0;
+
+  function tick(){
+    /* stop when intro is fully scrolled past */
+    if(window.scrollY>innerHeight){requestAnimationFrame(tick);return;}
+    ctx.clearRect(0,0,W,H);
+
+    pts.forEach(p=>{
+      p.life++;
+      if(p.life>p.max){Object.assign(p,mkP());p.life=0;p.opa=0;return;}
+
+      const prog=p.life/p.max;
+      if(prog<0.18) p.opa=(prog/0.18)*p.topa;
+      else if(prog>0.82) p.opa=((1-prog)/0.18)*p.topa;
+      else p.opa=p.topa;
+
+      /* smooth curving steering */
+      const t=frame*0.006;
+      p.vx+=Math.sin(t+p.pid)*0.008;
+      p.vy+=Math.cos(t*0.78+p.pid*1.4)*0.006;
+      const spd=Math.hypot(p.vx,p.vy);
+      if(spd>0.44){p.vx=p.vx/spd*0.44;p.vy=p.vy/spd*0.44;}
+
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-12)p.x=W+12;else if(p.x>W+12)p.x=-12;
+      if(p.y<-12)p.y=H+12;else if(p.y>H+12)p.y=-12;
+
+      /* draw diamond — larger ones closer (z near 1) */
+      const s=p.sz*(0.32+p.z*0.68);
+      const a=p.opa;
+      const r=Math.floor(184+p.z*32);
+      const g=Math.floor(149+p.z*30);
+      const b=Math.floor(106+p.z*42);
+      ctx.beginPath();
+      ctx.moveTo(p.x,      p.y-s*1.9);
+      ctx.lineTo(p.x+s,    p.y-s*0.28);
+      ctx.lineTo(p.x,      p.y+s*1.9);
+      ctx.lineTo(p.x-s,    p.y-s*0.28);
+      ctx.closePath();
+      ctx.fillStyle=`rgba(${r},${g},${b},${a})`;
+      ctx.fill();
+      ctx.strokeStyle=`rgba(${r},${g},${b},${Math.min(1,a*1.6)})`;
+      ctx.lineWidth=0.35;
+      ctx.stroke();
+    });
+
+    frame++;
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
 /* ---------- cursor ---------- */
 const cur=document.getElementById('cursor');
 let mx=innerWidth/2,my=innerHeight/2,cxv=mx,cyv=my;
