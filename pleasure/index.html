@@ -100,7 +100,7 @@ img{max-width:100%;display:block}
 
 /* ===== flow stage ===== */
 #flow{position:relative;height:800vh}
-.flow-stage{position:sticky;top:0;height:100vh;overflow:hidden}
+.flow-stage{position:sticky;top:0;height:100vh;overflow:hidden;z-index:1;isolation:isolate;clip-path:inset(0)}
 .flow-svg{position:absolute;left:50%;top:0;height:280vh;width:auto;will-change:transform}
 .flow-svg .ink{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .flow-svg .ink.faint{stroke:rgba(240,232,216,.35);stroke-width:1}
