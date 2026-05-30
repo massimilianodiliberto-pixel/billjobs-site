@@ -311,10 +311,10 @@ img{max-width:100%;display:block}
 
   <div id="intro-logo"><img src="logo-pleasure-crop.png" alt="PLEASURE Professional Luxury" /></div>
   <div id="intro-manifesto">
-    <span class="mline m0">La natura, osservata <em>abbastanza a lungo,</em></span>
-    <span class="mline m1">svela i suoi <em>segreti.</em></span>
+    <span class="mline m0">Il vero <em>lusso</em> non è per tutti.</span>
+    <span class="mline m1">È per chi sceglie di <em>sapere di più.</em></span>
   </div>
-  <div class="hint"><span>scopri il metodo</span><span class="ln"></span></div>
+  <div class="hint"><span>il flusso comincia</span><span class="ln"></span></div>
 </section>
 
 <!-- ===== RAIL ===== -->
@@ -927,7 +927,7 @@ function update(){
   fprog.style.width=(p*100)+'%';
   fprog.style.opacity=inFlow?1:0;
 
-  const svgH=svg.offsetHeight;
+  const svgH = innerWidth > 900 ? vh*2.8 : vh*2.0;
   svg.style.transform=`translate(-50%,${vh*.14-p*(svgH-vh)}px)`;
 
   for(const k of inks){
