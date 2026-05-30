@@ -927,7 +927,7 @@ function update(){
   fprog.style.width=(p*100)+'%';
   fprog.style.opacity=inFlow?1:0;
 
-  const svgH=vh*2.8;
+  const svgH=svg.offsetHeight;
   svg.style.transform=`translate(-50%,${vh*.14-p*(svgH-vh)}px)`;
 
   for(const k of inks){
