@@ -3,14 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PLEASURE · Botanical Intelligence</title>
+<title>PLEASURE · Professional Luxury · Franciacorta</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0c0d0e;
-  --bg-d:#080909;
   --oro:#b8956a;
   --oro-l:#d4b283;
   --oro-g:#e6c693;
@@ -25,15 +24,13 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 ::selection{background:var(--oro);color:var(--bg)}
 
-/* cursor */
 #cursor{position:fixed;top:0;left:0;width:10px;height:17px;z-index:200;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s,width .35s,height .35s;mix-blend-mode:screen}
 #cursor svg{width:100%;height:100%;overflow:visible}
 #cursor.lg{width:22px;height:37px}
-@media(hover:none){#cursor{opacity:0;transition:opacity .4s}}
+@media(hover:none){#cursor{opacity:0}}
 
-/* nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 40px;transition:background .5s,backdrop-filter .5s,border-color .5s;border-bottom:1px solid transparent}
-.nav.scrolled{background:rgba(12,13,14,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom-color:var(--line)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 40px;transition:background .5s,border-color .5s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(12,13,14,.74);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom-color:var(--line)}
 .nav .brand{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:18px;letter-spacing:.22em}
 .nav .menu{display:flex;gap:30px;list-style:none}
 .nav .menu a{font-size:12px;color:var(--crema);opacity:.65;transition:opacity .3s;letter-spacing:.04em}
@@ -44,12 +41,9 @@ img{max-width:100%;display:block}
 .nav .lang{display:flex;gap:10px;font-size:12px;color:var(--crema-d)}
 .nav .lang .on{color:var(--crema)}
 .nav .lang span{cursor:pointer;transition:color .3s}
-.nav .lang span:hover{color:var(--crema)}
 
-/* bg glow */
-#bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1;transition:opacity .4s ease}
+#bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1;transition:opacity .4s}
 
-/* gold frame */
 #gold-frame{position:fixed;inset:0;z-index:51;pointer-events:none}
 #gold-frame::before{
   content:'';position:absolute;inset:0;
@@ -58,49 +52,57 @@ img{max-width:100%;display:block}
     linear-gradient(90deg,rgba(184,149,106,.28) 0%,rgba(184,149,106,0) 16%,rgba(184,149,106,0) 84%,rgba(184,149,106,.28) 100%),
     linear-gradient(180deg,rgba(184,149,106,.28) 0%,rgba(184,149,106,0) 20%,rgba(184,149,106,0) 80%,rgba(184,149,106,.28) 100%),
     linear-gradient(180deg,rgba(184,149,106,.28) 0%,rgba(184,149,106,0) 20%,rgba(184,149,106,0) 80%,rgba(184,149,106,.28) 100%);
-  background-size:100% 0.5px,100% 0.5px,0.5px 100%,0.5px 100%;
+  background-size:100% .5px,100% .5px,.5px 100%,.5px 100%;
   background-position:0 0,0 100%,0 0,100% 0;
   background-repeat:no-repeat;
 }
-#gold-frame::after{
-  content:'';position:absolute;inset:0;
-  background-image:
-    radial-gradient(circle at 0% 0%,rgba(184,149,106,.14) 0%,transparent 7%),
-    radial-gradient(circle at 100% 0%,rgba(184,149,106,.14) 0%,transparent 7%),
-    radial-gradient(circle at 0% 100%,rgba(184,149,106,.14) 0%,transparent 7%),
-    radial-gradient(circle at 100% 100%,rgba(184,149,106,.14) 0%,transparent 7%);
-}
+#gold-frame::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 0% 0%,rgba(184,149,106,.14) 0%,transparent 7%),radial-gradient(circle at 100% 0%,rgba(184,149,106,.14) 0%,transparent 7%),radial-gradient(circle at 0% 100%,rgba(184,149,106,.14) 0%,transparent 7%),radial-gradient(circle at 100% 100%,rgba(184,149,106,.14) 0%,transparent 7%)}
 
-/* intro */
+/* ===== INTRO ===== */
 #intro{position:relative;z-index:2;height:100vh;overflow:hidden;background:#0c0d0e}
 #intro-canvas{position:absolute;inset:0;z-index:1;pointer-events:none}
-#intro::after{content:'';position:absolute;left:0;right:0;bottom:0;height:30vh;background:linear-gradient(to bottom,rgba(12,13,14,0) 0%,#0c0d0e 100%);z-index:5;pointer-events:none}
-#intro-logo{position:absolute;left:50%;top:17%;transform:translateX(-50%);z-index:4;width:min(480px,70vw);opacity:0;animation:ifade 2.6s .5s cubic-bezier(.16,1,.3,1) forwards}
-#intro-logo img{width:100%;filter:drop-shadow(0 4px 32px rgba(184,149,106,.14))}
-#intro-manifesto{position:absolute;left:50%;top:57%;transform:translateX(-50%);z-index:4;text-align:center;white-space:nowrap}
-.mline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(18px,2.4vw,42px);line-height:1.35;color:var(--crema);opacity:0;display:block;letter-spacing:.01em}
+#intro::after{content:'';position:absolute;left:0;right:0;bottom:0;height:30vh;background:linear-gradient(to bottom,rgba(12,13,14,0),#0c0d0e);z-index:5;pointer-events:none}
+
+/* botanical landscape layers */
+#flora-left,#flora-right{position:absolute;top:0;bottom:0;width:44vw;max-width:520px;z-index:2;pointer-events:none;overflow:visible}
+#flora-left{left:0;-webkit-mask-image:linear-gradient(to right,black 52%,transparent 100%);mask-image:linear-gradient(to right,black 52%,transparent 100%)}
+#flora-right{right:0;-webkit-mask-image:linear-gradient(to left,black 52%,transparent 100%);mask-image:linear-gradient(to left,black 52%,transparent 100%)}
+
+/* layer opacities — depth simulation */
+.fl-far{opacity:.12;transition:transform .6s ease-out}
+.fl-mid{opacity:.24;transition:transform .45s ease-out}
+.fl-near{opacity:.44;transition:transform .28s ease-out}
+
+/* botanical stroke styles */
+.bs{fill:none;stroke:rgba(240,232,216,.9);stroke-width:.5;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bm{fill:none;stroke:rgba(240,232,216,.9);stroke-width:.7;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bn{fill:none;stroke:rgba(240,232,216,.9);stroke-width:.9;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl{fill:none;stroke:rgba(240,232,216,.9);stroke-width:.45;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+
+#intro-logo{position:absolute;left:50%;top:16%;transform:translateX(-50%);z-index:4;width:min(490px,72vw);opacity:0;animation:ifade 2.6s .5s cubic-bezier(.16,1,.3,1) forwards}
+#intro-logo img{width:100%;filter:drop-shadow(0 4px 32px rgba(184,149,106,.16))}
+#intro-manifesto{position:absolute;left:50%;top:58%;transform:translateX(-50%);z-index:4;text-align:center;white-space:nowrap}
+.mline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(17px,2.3vw,40px);line-height:1.38;color:var(--crema);opacity:0;display:block;letter-spacing:.01em}
 .mline em{font-style:italic;color:var(--oro-l)}
 .mline.m0{animation:mrise 2.8s 2.4s cubic-bezier(.16,1,.3,1) forwards}
 .mline.m1{animation:mrise 2.8s 3.6s cubic-bezier(.16,1,.3,1) forwards}
 @keyframes ifade{from{opacity:0;transform:translateX(-50%) translateY(14px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 @keyframes mrise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-#intro .hint{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:ifade 2s 5.2s cubic-bezier(.16,1,.3,1) forwards;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--crema-d);z-index:4;white-space:nowrap;letter-spacing:.06em}
+#intro .hint{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:ifade 2s 5.4s cubic-bezier(.16,1,.3,1) forwards;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--crema-d);z-index:4;white-space:nowrap;letter-spacing:.06em}
 #intro .hint .ln{width:1px;height:40px;background:linear-gradient(180deg,transparent,var(--oro));animation:pulse 3.2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.2;transform:scaleY(.55)}50%{opacity:.85;transform:scaleY(1)}}
+@keyframes pulse{0%,100%{opacity:.2;transform:scaleY(.5)}50%{opacity:.8;transform:scaleY(1)}}
 
-/* flow */
+/* ===== FLOW ===== */
 #flow{position:relative;height:800vh}
 .flow-stage{position:sticky;top:0;height:100vh;overflow:hidden;z-index:1;isolation:isolate;clip-path:inset(0)}
 .flow-svg{position:absolute;left:50%;top:0;height:280vh;width:auto;will-change:transform}
+.flow-svg .ink{fill:none;stroke:rgba(240,232,216,.40);stroke-width:.7;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.flow-svg .ink.vein{stroke:rgba(240,232,216,.26);stroke-width:.4;fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.flow-svg .ink.str{stroke:rgba(240,232,216,.52);stroke-width:.9;fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.flow-svg .ink.faint{stroke:rgba(240,232,216,.20);stroke-width:.45;fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.flow-svg .ink.geo{stroke:rgba(212,178,131,.38);stroke-width:.65;fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.flow-svg .ink.dot{stroke:rgba(240,232,216,.18);stroke-width:.5;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 8;vector-effect:non-scaling-stroke}
 
-/* ink styles */
-.flow-svg .ink{fill:none;stroke:rgba(240,232,216,.38);stroke-width:.7;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.flow-svg .ink.vein{stroke:rgba(240,232,216,.25);stroke-width:.4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;fill:none}
-.flow-svg .ink.str{stroke:rgba(240,232,216,.50);stroke-width:.9;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;fill:none}
-.flow-svg .ink.faint{stroke:rgba(240,232,216,.20);stroke-width:.45;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;fill:none}
-.flow-svg .ink.geo{stroke:rgba(212,178,131,.36);stroke-width:.6;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;fill:none}
-
-/* chapter rail */
 .rail{position:fixed;left:40px;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:0;opacity:0;transition:opacity .8s}
 .rail.show{opacity:1}
 .rail .ch{display:flex;align-items:center;gap:14px;height:46px;cursor:pointer}
@@ -111,7 +113,6 @@ img{max-width:100%;display:block}
 .rail .conn{display:flex;flex-direction:column;align-items:center;gap:5px;height:26px;justify-content:center;margin-left:1.5px}
 .rail .conn i{width:3px;height:3px;border-radius:50%;background:rgba(240,232,216,.16)}
 
-/* caption */
 .caption{position:fixed;left:0;right:0;bottom:0;height:46vh;z-index:70;pointer-events:none;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 20%);mask-image:linear-gradient(to bottom,transparent 0%,black 20%)}
 .caption .panel{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:0 max(56px,5vw);text-align:center;opacity:0;will-change:transform,opacity}
 .caption .panel .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--oro);margin-bottom:12px}
@@ -119,10 +120,8 @@ img{max-width:100%;display:block}
 .caption .panel h2 em{font-style:italic;color:var(--oro-l)}
 .caption .panel p{font-size:15px;line-height:1.5;color:var(--crema-d);max-width:560px;margin:0 auto}
 
-/* progress hairline */
 .flow-progress{position:fixed;left:0;bottom:0;height:1px;background:var(--oro);z-index:75;width:0%}
 
-/* closing / footer */
 #closing{position:relative;background:linear-gradient(180deg,#080909 0%,#0c0d0e 100%);padding:200px 40px 60px;text-align:center;z-index:5}
 #closing .inner{max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:40px}
 #closing h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,5vw,76px);line-height:1.04;color:var(--crema)}
@@ -145,18 +144,15 @@ img{max-width:100%;display:block}
 .below{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:12px;color:var(--crema-d)}
 
 @media(max-width:900px){
-  .nav{padding:0 20px}
-  .nav .menu{display:none}
+  .nav{padding:0 20px}.nav .menu{display:none}
   .rail{display:none}
-  .caption{height:40vh}
-  .caption .panel{padding:0 20px 18px}
-  .caption .panel h2{font-size:clamp(18px,5vw,32px)}
-  .caption .panel p{font-size:13px}
+  .caption{height:40vh}.caption .panel{padding:0 20px 18px}
+  .caption .panel h2{font-size:clamp(18px,5vw,32px)}.caption .panel p{font-size:13px}
   .flow-svg{height:200vh}
   #closing{padding:120px 20px 50px}
-  .foot{grid-template-columns:1fr;gap:36px}
-  .below{flex-direction:column;gap:12px}
+  .foot{grid-template-columns:1fr;gap:36px}.below{flex-direction:column;gap:12px}
   #intro-manifesto{white-space:normal;width:84vw}
+  #flora-left,#flora-right{width:36vw}
 }
 </style>
 </head>
@@ -164,18 +160,18 @@ img{max-width:100%;display:block}
 
 <div id="bg-glow"></div>
 <div id="gold-frame"></div>
-<div id="cursor"><svg viewBox="0 0 12 20"><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="#d4b283" opacity=".72"/><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="none" stroke="#b8956a" stroke-width=".5"/></svg></div>
+<div id="cursor"><svg viewBox="0 0 12 20"><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="#d4b283" opacity=".75"/><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="none" stroke="#b8956a" stroke-width=".5"/></svg></div>
 
 <nav class="nav" id="nav">
   <div class="brand">PLEASURE</div>
   <ul class="menu">
-    <li><a href="#" data-ch="0">Il Bosco</a></li>
-    <li><a href="#" data-ch="1">La Lente</a></li>
-    <li><a href="#" data-ch="2">Nervature</a></li>
-    <li><a href="#" data-ch="3">La Linfa</a></li>
-    <li><a href="#" data-ch="4">Il Rito</a></li>
-    <li><a href="#" data-ch="5">La Fibra</a></li>
-    <li><a href="#" data-ch="6">Sintesi</a></li>
+    <li><a href="#" data-ch="0">Origine</a></li>
+    <li><a href="#" data-ch="1">Scienza</a></li>
+    <li><a href="#" data-ch="2">Metodo</a></li>
+    <li><a href="#" data-ch="3">Academy</a></li>
+    <li><a href="#" data-ch="4">Rituali</a></li>
+    <li><a href="#" data-ch="5">Linee</a></li>
+    <li><a href="#" data-ch="6">Family</a></li>
   </ul>
   <div class="right">
     <a class="cta" href="#closing">Scopri le Linee</a>
@@ -186,431 +182,572 @@ img{max-width:100%;display:block}
 <!-- ===== INTRO ===== -->
 <section id="intro">
   <canvas id="intro-canvas"></canvas>
+
+  <!-- LEFT botanical landscape: far / mid / near layers -->
+  <svg id="flora-left" viewBox="0 0 440 920" preserveAspectRatio="xMinYMid meet" width="100%" height="100%">
+    <!-- FAR: bare stems, barely visible -->
+    <g class="fl-far" id="fll-far">
+      <path class="bs" d="M32 920 C31 800 30 666 29 528 C28 414 27 326 26 210"/>
+      <path class="bs" d="M62 920 C63 830 64 734 66 638 C67 562 68 498 70 418"/>
+      <path class="bs" d="M14 920 C14 858 13 792 12 720"/>
+    </g>
+    <!-- MID: stems with small leaves -->
+    <g class="fl-mid" id="fll-mid">
+      <path class="bm" d="M158 920 C156 800 160 656 158 512 C156 388 155 294 153 178"/>
+      <path class="bm" d="M158 512 C136 498 114 490 90 488"/>
+      <path class="bm" d="M158 356 C178 342 196 334 218 332"/>
+      <path class="bm" d="M158 244 C138 232 116 226 92 224"/>
+      <!-- small leaves on mid stems -->
+      <path class="bl" d="M88 500 C80 492 76 482 82 474 C88 482 92 492 88 500"/>
+      <path class="bl" d="M82 474 L88 500"/>
+      <path class="bl" d="M94 498 C102 490 106 480 100 472 C94 480 90 490 94 498"/>
+      <path class="bl" d="M100 472 L94 498"/>
+      <path class="bl" d="M90 228 C82 222 78 212 84 204 C90 212 94 222 90 228"/>
+      <path class="bl" d="M84 204 L90 228"/>
+      <path class="bm" d="M96 920 C95 852 94 776 92 696 C91 634 90 578 88 508"/>
+    </g>
+    <!-- NEAR: prominent foreground branch with large leaves -->
+    <g class="fl-near" id="fll-near">
+      <path class="bn" d="M-14 788 C18 714 66 602 114 474 C150 376 182 294 206 200 C222 144 232 100 240 52"/>
+      <!-- branches off near stem -->
+      <path class="bn" d="M108 498 C134 478 162 466 192 464"/>
+      <path class="bn" d="M168 380 C190 362 212 350 236 346"/>
+      <path class="bn" d="M206 200 C184 186 160 178 134 176"/>
+      <!-- large near leaves at branch junctions -->
+      <!-- at (192,464) -->
+      <path class="bm" d="M190 478 C180 466 176 452 184 440 C192 452 196 466 190 478"/>
+      <path class="bm" d="M184 440 L190 478"/>
+      <path class="bm" d="M196 476 C206 464 210 450 202 438 C194 450 190 464 196 476"/>
+      <path class="bm" d="M202 438 L196 476"/>
+      <path class="bl" d="M190 460 C184 454 182 444 188 436"/>
+      <path class="bl" d="M190 460 C196 454 198 444 192 436"/>
+      <!-- at (236,346) -->
+      <path class="bm" d="M234 360 C224 348 220 334 228 322 C236 334 240 348 234 360"/>
+      <path class="bm" d="M228 322 L234 360"/>
+      <path class="bm" d="M240 358 C250 346 254 332 246 320 C238 332 234 346 240 358"/>
+      <path class="bm" d="M246 320 L240 358"/>
+      <!-- at (134,176) -->
+      <path class="bm" d="M132 190 C122 180 118 166 126 154 C134 166 138 180 132 190"/>
+      <path class="bm" d="M126 154 L132 190"/>
+      <path class="bm" d="M138 188 C148 178 152 164 144 152 C136 164 132 178 138 188"/>
+      <path class="bm" d="M144 152 L138 188"/>
+      <!-- additional near branch lower -->
+      <path class="bn" d="M-8 920 C10 858 36 784 66 700 C88 638 112 580 138 512"/>
+      <path class="bm" d="M76 720 C96 706 118 698 142 696"/>
+      <path class="bl" d="M140 708 C132 700 128 688 134 678 C140 688 144 700 140 708"/>
+      <path class="bl" d="M134 678 L140 708"/>
+      <path class="bl" d="M146 706 C154 698 158 686 152 676 C146 686 142 698 146 706"/>
+      <path class="bl" d="M152 676 L146 706"/>
+      <!-- fern fronds at base -->
+      <path class="bm" d="M40 920 C36 882 28 848 16 826"/>
+      <path class="bl" d="M16 826 C8 816 6 804 12 796 C18 804 20 816 16 826"/>
+      <path class="bm" d="M28 920 C26 894 22 872 16 856"/>
+      <!-- wildflower center (160,740) -->
+      <circle class="bl" cx="160" cy="740" r="2.5"/>
+      <path class="bl" d="M160 740 C165 732 165 724 160 722 C155 724 155 732 160 740"/>
+      <path class="bl" d="M160 740 C169 739 176 734 176 727 C170 731 165 735 160 740"/>
+      <path class="bl" d="M160 740 C168 745 174 752 172 759 C166 754 162 748 160 740"/>
+      <path class="bl" d="M160 740 C155 748 155 756 160 758 C165 756 165 748 160 740"/>
+      <path class="bl" d="M160 740 C151 745 144 752 148 759 C154 754 158 748 160 740"/>
+      <path class="bl" d="M160 740 C151 739 144 734 144 727 C150 731 155 735 160 740"/>
+    </g>
+  </svg>
+
+  <!-- RIGHT botanical landscape: mirror -->
+  <svg id="flora-right" viewBox="0 0 440 920" preserveAspectRatio="xMaxYMid meet" width="100%" height="100%">
+    <g class="fl-far" id="flr-far">
+      <path class="bs" d="M408 920 C409 800 410 666 411 528 C412 414 413 326 414 210"/>
+      <path class="bs" d="M378 920 C377 830 376 734 374 638 C373 562 372 498 370 418"/>
+      <path class="bs" d="M426 920 C426 858 427 792 428 720"/>
+    </g>
+    <g class="fl-mid" id="flr-mid">
+      <path class="bm" d="M282 920 C284 800 280 656 282 512 C284 388 285 294 287 178"/>
+      <path class="bm" d="M282 512 C304 498 326 490 350 488"/>
+      <path class="bm" d="M282 356 C262 342 244 334 222 332"/>
+      <path class="bm" d="M282 244 C302 232 324 226 348 224"/>
+      <path class="bl" d="M352 500 C360 492 364 482 358 474 C352 482 348 492 352 500"/>
+      <path class="bl" d="M358 474 L352 500"/>
+      <path class="bl" d="M346 498 C338 490 334 480 340 472 C346 480 350 490 346 498"/>
+      <path class="bl" d="M340 472 L346 498"/>
+      <path class="bl" d="M350 228 C358 222 362 212 356 204 C350 212 346 222 350 228"/>
+      <path class="bl" d="M356 204 L350 228"/>
+      <path class="bm" d="M344 920 C345 852 346 776 348 696 C349 634 350 578 352 508"/>
+    </g>
+    <g class="fl-near" id="flr-near">
+      <path class="bn" d="M454 788 C422 714 374 602 326 474 C290 376 258 294 234 200 C218 144 208 100 200 52"/>
+      <path class="bn" d="M332 498 C306 478 278 466 248 464"/>
+      <path class="bn" d="M272 380 C250 362 228 350 204 346"/>
+      <path class="bn" d="M234 200 C256 186 280 178 306 176"/>
+      <path class="bm" d="M250 478 C260 466 264 452 256 440 C248 452 244 466 250 478"/>
+      <path class="bm" d="M256 440 L250 478"/>
+      <path class="bm" d="M244 476 C234 464 230 450 238 438 C246 450 250 464 244 476"/>
+      <path class="bm" d="M238 438 L244 476"/>
+      <path class="bl" d="M250 460 C256 454 258 444 252 436"/>
+      <path class="bl" d="M250 460 C244 454 242 444 248 436"/>
+      <path class="bm" d="M206 360 C216 348 220 334 212 322 C204 334 200 348 206 360"/>
+      <path class="bm" d="M212 322 L206 360"/>
+      <path class="bm" d="M200 358 C190 346 186 332 194 320 C202 332 206 346 200 358"/>
+      <path class="bm" d="M194 320 L200 358"/>
+      <path class="bm" d="M308 190 C318 180 322 166 314 154 C306 166 302 180 308 190"/>
+      <path class="bm" d="M314 154 L308 190"/>
+      <path class="bm" d="M302 188 C292 178 288 164 296 152 C304 164 308 178 302 188"/>
+      <path class="bm" d="M296 152 L302 188"/>
+      <path class="bn" d="M448 920 C430 858 404 784 374 700 C352 638 328 580 302 512"/>
+      <path class="bm" d="M364 720 C344 706 322 698 298 696"/>
+      <path class="bl" d="M300 708 C308 700 312 688 306 678 C300 688 296 700 300 708"/>
+      <path class="bl" d="M306 678 L300 708"/>
+      <path class="bm" d="M400 920 C404 882 412 848 424 826"/>
+      <path class="bm" d="M412 920 C414 894 418 872 424 856"/>
+      <!-- wildflower center (290,690) -->
+      <circle class="bl" cx="290" cy="690" r="2.5"/>
+      <path class="bl" d="M290 690 C295 682 295 674 290 672 C285 674 285 682 290 690"/>
+      <path class="bl" d="M290 690 C299 689 306 684 306 677 C300 681 295 685 290 690"/>
+      <path class="bl" d="M290 690 C298 695 304 702 302 709 C296 704 292 698 290 690"/>
+      <path class="bl" d="M290 690 C285 698 285 706 290 708 C295 706 295 698 290 690"/>
+      <path class="bl" d="M290 690 C281 695 274 702 278 709 C284 704 288 698 290 690"/>
+      <path class="bl" d="M290 690 C281 689 274 684 274 677 C280 681 285 685 290 690"/>
+    </g>
+  </svg>
+
   <div id="intro-logo"><img src="logo-pleasure-crop.png" alt="PLEASURE Professional Luxury" /></div>
   <div id="intro-manifesto">
     <span class="mline m0">La natura, osservata <em>abbastanza a lungo,</em></span>
     <span class="mline m1">svela i suoi <em>segreti.</em></span>
   </div>
-  <div class="hint"><span>segui il filo</span><span class="ln"></span></div>
+  <div class="hint"><span>scopri il metodo</span><span class="ln"></span></div>
 </section>
 
-<!-- ===== CHAPTER RAIL ===== -->
+<!-- ===== RAIL ===== -->
 <div class="rail" id="rail">
-  <div class="ch on" data-ch="0"><span class="bead"></span><span class="label">Il Bosco</span></div>
+  <div class="ch on" data-ch="0"><span class="bead"></span><span class="label">Origine</span></div>
   <div class="conn"><i></i><i></i></div>
-  <div class="ch" data-ch="1"><span class="bead"></span><span class="label">La Lente</span></div>
+  <div class="ch" data-ch="1"><span class="bead"></span><span class="label">Scienza</span></div>
   <div class="conn"><i></i><i></i></div>
-  <div class="ch" data-ch="2"><span class="bead"></span><span class="label">Nervature</span></div>
+  <div class="ch" data-ch="2"><span class="bead"></span><span class="label">Metodo</span></div>
   <div class="conn"><i></i><i></i></div>
-  <div class="ch" data-ch="3"><span class="bead"></span><span class="label">La Linfa</span></div>
+  <div class="ch" data-ch="3"><span class="bead"></span><span class="label">Academy</span></div>
   <div class="conn"><i></i><i></i></div>
-  <div class="ch" data-ch="4"><span class="bead"></span><span class="label">Il Rito</span></div>
+  <div class="ch" data-ch="4"><span class="bead"></span><span class="label">Rituali</span></div>
   <div class="conn"><i></i><i></i></div>
-  <div class="ch" data-ch="5"><span class="bead"></span><span class="label">La Fibra</span></div>
+  <div class="ch" data-ch="5"><span class="bead"></span><span class="label">Linee</span></div>
   <div class="conn"><i></i><i></i></div>
-  <div class="ch" data-ch="6"><span class="bead"></span><span class="label">Sintesi</span></div>
+  <div class="ch" data-ch="6"><span class="bead"></span><span class="label">Family</span></div>
 </div>
 
 <!-- ===== CAPTIONS ===== -->
 <div class="caption" id="caption">
   <div class="panel on" data-ch="0">
-    <div class="eyebrow">01 — Il Bosco</div>
-    <h2>Tutto comincia<br/>nel <em>bosco.</em></h2>
-    <p>La foresta non è uno sfondo. È il primo laboratorio. Ogni stelo, ogni radice conosce già la risposta.</p>
+    <div class="eyebrow">01 — L'origine</div>
+    <h2>Dalla terra,<br/>prima che dal<br/><em>laboratorio.</em></h2>
+    <p>PLEASURE non estrae dalla natura. La ascolta. E impara a restituirle qualcosa in cambio.</p>
   </div>
   <div class="panel" data-ch="1">
-    <div class="eyebrow">02 — La Lente</div>
-    <h2>Osservare<br/><em>abbastanza a lungo.</em></h2>
-    <p>La lente non ingrandisce la natura. La rivela. Ogni dettaglio nasconde un sistema completo.</p>
+    <div class="eyebrow">02 — La scienza</div>
+    <h2>La <em>natura</em> ha già<br/>la risposta.</h2>
+    <p>Le biotecnologie avanzate la liberano, la esprimono, la potenziano.</p>
   </div>
   <div class="panel" data-ch="2">
-    <div class="eyebrow">03 — Le Nervature</div>
-    <h2>Le nervature<br/>sono già <em>un metodo.</em></h2>
-    <p>La foglia ha già risolto il problema della distribuzione perfetta. Non servono ingegneri.</p>
+    <div class="eyebrow">03 — Il metodo</div>
+    <h2>Questo non è<br/>un prodotto.<br/>È un <em>metodo.</em></h2>
+    <p>Un sistema vivo. Generativo. In evoluzione. Tuo.</p>
   </div>
   <div class="panel" data-ch="3">
-    <div class="eyebrow">04 — La Linfa</div>
-    <h2>La linfa<br/>conosce <em>la strada.</em></h2>
-    <p>Attraverso capillari invisibili, la pianta porta esattamente ciò che serve, dove serve.</p>
+    <div class="eyebrow">04 — Academy</div>
+    <h2>Non eleviamo<br/>prodotti.<br/><em>Eleviamo</em> professionisti.</h2>
+    <p>Il tuo salone non è un cliente. È un laboratorio vivo. La conoscenza è un privilegio che si coltiva insieme.</p>
   </div>
   <div class="panel" data-ch="4">
-    <div class="eyebrow">05 — Il Rito</div>
-    <h2>Il rito nasce<br/>dall'<em>osservazione.</em></h2>
-    <p>Non un protocollo. Un cerchio che si chiude. La geometria del gesto ripete quella della natura.</p>
+    <div class="eyebrow">05 — Rituali</div>
+    <h2>Il gesto<br/>diventa <em>rito.</em></h2>
+    <p>Non protocolli, ma percorsi. Ogni rituale è un viaggio tattile e olfattivo che il cliente porta con sé.</p>
   </div>
   <div class="panel" data-ch="5">
-    <div class="eyebrow">06 — La Fibra</div>
-    <h2>Ogni fibra<br/>porta <em>la firma.</em></h2>
-    <p>Il capello è un archivio. Ogni filo racconta una storia biologica precisa, irripetibile.</p>
+    <div class="eyebrow">06 — Le Linee</div>
+    <h2>Quattro linee.<br/>Una <em>sola logica.</em></h2>
+    <p>Filler, Lifetime, Vinility, Restruct. Ogni formula parla una lingua precisa al capello.</p>
   </div>
   <div class="panel" data-ch="6">
-    <div class="eyebrow">07 — Botanical Intelligence</div>
-    <h2><em>Botanical</em><br/>Intelligence.</h2>
-    <p>Non lusso cosmetico. Natura osservata fino a scoprirne i segreti. Professional Luxury.</p>
+    <div class="eyebrow">07 — Family</div>
+    <h2>Entra nel<br/><em>Circolo.</em></h2>
+    <p>Quattro lettere all'anno. Note dal laboratorio, inviti privati, il prossimo capitolo del metodo.</p>
   </div>
 </div>
 
 <div class="flow-progress" id="fprog"></div>
 
-<!-- ===== FLOW ===== -->
+<!-- ===== FLOW SVG ===== -->
 <section id="flow">
   <div class="flow-stage">
     <svg class="flow-svg" id="svg" viewBox="0 0 1200 2400" preserveAspectRatio="xMidYMin meet">
       <defs>
         <filter id="pencil" x="-6%" y="-6%" width="112%" height="112%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.018 0.022" numOctaves="2" seed="9" result="n"/>
-          <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/>
+          <feTurbulence type="fractalNoise" baseFrequency="0.016 0.020" numOctaves="2" seed="9" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="1.8"/>
         </filter>
         <radialGradient id="tipGrad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="rgba(230,198,147,.55)"/>
+          <stop offset="0%" stop-color="rgba(230,198,147,.58)"/>
           <stop offset="60%" stop-color="rgba(212,178,131,.10)"/>
           <stop offset="100%" stop-color="rgba(212,178,131,0)"/>
         </radialGradient>
       </defs>
 
-      <!-- invisible spine: pencil tip follows this path end-to-end -->
+      <!-- Pencil spine: invisible, guides the tip -->
       <path id="mainSpine" fill="none" stroke="none"
-        d="M600 155 C597 290 603 430 600 590 C597 750 603 890 600 1045 C597 1200 603 1340 600 1460 C597 1610 603 1740 600 1862"/>
+        d="M600 162 C597 300 603 440 600 600 C597 760 603 900 600 1060 C597 1220 603 1370 600 1480 C597 1620 603 1750 600 1870"/>
 
       <g filter="url(#pencil)">
 
-        <!-- ====================================================== -->
-        <!-- CH 0 · IL BOSCO  (p 0.00 – 0.14)  SVG y 155–510       -->
-        <!-- ====================================================== -->
+        <!-- ================================================ -->
+        <!-- CH0 · L'ORIGINE  p 0.00–0.14  SVG y 162–510     -->
+        <!-- From the earth: roots + plant emerging upward    -->
+        <!-- ================================================ -->
 
-        <!-- central stem -->
-        <path class="ink str" data-s="0.01" data-e="0.11"
-          d="M600 505 C599 440 601 365 600 295 C599 235 600 195 600 158"/>
+        <!-- soil line (dotted, very faint) -->
+        <path class="ink dot" data-s="0.01" data-e="0.06" d="M390 462 L810 462"/>
 
-        <!-- flanking stems -->
-        <path class="ink" data-s="0.02" data-e="0.12"
-          d="M520 505 C519 443 521 372 520 308 C519 258 518 215 517 172"/>
-        <path class="ink" data-s="0.02" data-e="0.12"
-          d="M680 505 C681 443 679 372 680 308 C681 258 682 215 683 172"/>
-        <path class="ink faint" data-s="0.03" data-e="0.12"
-          d="M450 505 C450 452 450 396 449 340 C448 298 447 264 446 232"/>
-        <path class="ink faint" data-s="0.03" data-e="0.12"
-          d="M750 505 C750 452 750 396 751 340 C752 298 753 264 754 232"/>
+        <!-- ROOTS spreading below soil -->
+        <path class="ink" data-s="0.01" data-e="0.10" d="M600 462 C572 474 542 484 508 488"/>
+        <path class="ink" data-s="0.01" data-e="0.10" d="M600 462 C628 474 658 484 692 488"/>
+        <path class="ink faint" data-s="0.02" data-e="0.10" d="M600 462 C556 480 516 496 474 502"/>
+        <path class="ink faint" data-s="0.02" data-e="0.10" d="M600 462 C644 480 684 496 726 502"/>
+        <path class="ink faint" data-s="0.03" data-e="0.11" d="M600 462 C542 486 490 508 444 514"/>
+        <path class="ink faint" data-s="0.03" data-e="0.11" d="M600 462 C658 486 710 508 756 514"/>
+        <!-- tap root straight down -->
+        <path class="ink" data-s="0.02" data-e="0.10" d="M600 462 C599 478 601 492 600 510"/>
+        <!-- root tip forks -->
+        <path class="ink vein" data-s="0.06" data-e="0.11" d="M508 488 C498 492 488 490 480 486"/>
+        <path class="ink vein" data-s="0.06" data-e="0.11" d="M508 488 C502 496 494 498 486 496"/>
+        <path class="ink vein" data-s="0.06" data-e="0.11" d="M692 488 C702 492 712 490 720 486"/>
+        <path class="ink vein" data-s="0.06" data-e="0.11" d="M692 488 C698 496 706 498 714 496"/>
+        <path class="ink vein" data-s="0.07" data-e="0.12" d="M474 502 C462 506 450 504 440 500"/>
+        <path class="ink vein" data-s="0.07" data-e="0.12" d="M474 502 C468 510 458 512 448 510"/>
+        <path class="ink vein" data-s="0.07" data-e="0.12" d="M726 502 C738 506 750 504 760 500"/>
+        <path class="ink vein" data-s="0.07" data-e="0.12" d="M726 502 C732 510 742 512 752 510"/>
 
-        <!-- branches from central stem -->
-        <path class="ink" data-s="0.04" data-e="0.11"
-          d="M600 248 C578 237 558 231 538 229"/>
-        <path class="ink" data-s="0.04" data-e="0.11"
-          d="M600 248 C622 237 642 231 662 229"/>
-        <path class="ink" data-s="0.06" data-e="0.12"
-          d="M600 348 C576 337 554 331 532 329"/>
-        <path class="ink" data-s="0.06" data-e="0.12"
-          d="M600 348 C624 337 646 331 668 329"/>
-        <path class="ink faint" data-s="0.07" data-e="0.12"
-          d="M600 430 C578 421 558 417 540 415"/>
-        <path class="ink faint" data-s="0.07" data-e="0.12"
-          d="M600 430 C622 421 642 417 660 415"/>
+        <!-- PLANT STEM rising from soil to top -->
+        <path class="ink str" id="origStem" data-s="0.03" data-e="0.12"
+          d="M600 462 C598 400 602 328 600 258 C598 198 600 175 600 165"/>
 
-        <!-- branches from flanking stems -->
-        <path class="ink faint" data-s="0.05" data-e="0.12"
-          d="M520 314 C502 304 486 298 468 296"/>
-        <path class="ink faint" data-s="0.05" data-e="0.12"
-          d="M520 404 C502 396 486 392 470 390"/>
-        <path class="ink faint" data-s="0.05" data-e="0.12"
-          d="M680 314 C698 304 714 298 732 296"/>
-        <path class="ink faint" data-s="0.05" data-e="0.12"
-          d="M680 404 C698 396 714 392 730 390"/>
+        <!-- Leaf pair 1 at y≈295 -->
+        <path class="ink" data-s="0.05" data-e="0.12"
+          d="M600 295 C576 282 558 266 566 250 C578 266 594 282 600 295"/>
+        <path class="ink" data-s="0.05" data-e="0.12"
+          d="M600 295 C624 282 642 266 634 250 C622 266 606 282 600 295"/>
+        <path class="ink vein" data-s="0.06" data-e="0.12" d="M566 250 L600 295"/>
+        <path class="ink vein" data-s="0.06" data-e="0.12" d="M634 250 L600 295"/>
+        <path class="ink vein" data-s="0.07" data-e="0.12" d="M600 268 C590 266 582 264 576 262"/>
+        <path class="ink vein" data-s="0.07" data-e="0.12" d="M600 268 C610 266 618 264 624 262"/>
+        <path class="ink vein" data-s="0.07" data-e="0.12" d="M600 280 C590 278 582 276 576 274"/>
+        <path class="ink vein" data-s="0.07" data-e="0.12" d="M600 280 C610 278 618 276 624 274"/>
 
-        <!-- leaves at branch tips — almond shapes -->
-        <!-- central left branch tip ~(538,229) -->
-        <path class="ink vein" data-s="0.05" data-e="0.12"
-          d="M538 241 C530 233 526 223 532 215 C538 223 542 233 538 241"/>
-        <path class="ink vein" data-s="0.05" data-e="0.12"
-          d="M532 215 L538 241"/>
-        <path class="ink vein" data-s="0.052" data-e="0.12"
-          d="M544 239 C552 231 556 221 550 213 C544 221 540 231 544 239"/>
-        <path class="ink vein" data-s="0.052" data-e="0.12"
-          d="M550 213 L544 239"/>
+        <!-- Leaf pair 2 at y≈380 -->
+        <path class="ink" data-s="0.07" data-e="0.13"
+          d="M600 380 C578 368 562 352 570 338 C582 352 596 368 600 380"/>
+        <path class="ink" data-s="0.07" data-e="0.13"
+          d="M600 380 C622 368 638 352 630 338 C618 352 604 368 600 380"/>
+        <path class="ink vein" data-s="0.08" data-e="0.13" d="M570 338 L600 380"/>
+        <path class="ink vein" data-s="0.08" data-e="0.13" d="M630 338 L600 380"/>
+        <path class="ink vein" data-s="0.09" data-e="0.13" d="M600 354 C590 352 582 350 576 348"/>
+        <path class="ink vein" data-s="0.09" data-e="0.13" d="M600 354 C610 352 618 350 624 348"/>
 
-        <!-- central right branch tip ~(662,229) -->
-        <path class="ink vein" data-s="0.05" data-e="0.12"
-          d="M662 241 C670 233 674 223 668 215 C662 223 658 233 662 241"/>
-        <path class="ink vein" data-s="0.05" data-e="0.12"
-          d="M668 215 L662 241"/>
-        <path class="ink vein" data-s="0.052" data-e="0.12"
-          d="M656 239 C648 231 644 221 650 213 C656 221 660 231 656 239"/>
-        <path class="ink vein" data-s="0.052" data-e="0.12"
-          d="M650 213 L656 239"/>
+        <!-- Bud at top -->
+        <path class="ink" data-s="0.09" data-e="0.13"
+          d="M600 176 C592 168 588 158 594 150 C600 158 606 168 606 176"/>
+        <path class="ink" data-s="0.09" data-e="0.13"
+          d="M600 176 C608 168 612 158 606 150 C600 158 594 168 594 176"/>
+        <path class="ink vein" data-s="0.10" data-e="0.13" d="M600 152 L600 176"/>
 
-        <!-- lower branch tips -->
-        <path class="ink vein" data-s="0.07" data-e="0.13"
-          d="M530 341 C522 333 518 323 524 315 C530 323 534 333 530 341"/>
-        <path class="ink vein" data-s="0.07" data-e="0.13"
-          d="M524 315 L530 341"/>
-        <path class="ink vein" data-s="0.07" data-e="0.13"
-          d="M670 341 C678 333 682 323 676 315 C670 323 666 333 670 341"/>
-        <path class="ink vein" data-s="0.07" data-e="0.13"
-          d="M676 315 L670 341"/>
+        <!-- ================================================ -->
+        <!-- CH1 · LA SCIENZA  p 0.14–0.28  SVG y ≈ 578–714  -->
+        <!-- La foglia: la risposta della natura              -->
+        <!-- ================================================ -->
 
-        <!-- far stem branch tips -->
-        <path class="ink vein" data-s="0.06" data-e="0.13"
-          d="M466 306 C458 298 454 288 460 280 C466 288 470 298 466 306"/>
-        <path class="ink vein" data-s="0.06" data-e="0.13"
-          d="M460 280 L466 306"/>
-        <path class="ink vein" data-s="0.06" data-e="0.13"
-          d="M734 306 C742 298 746 288 740 280 C734 288 730 298 734 306"/>
-        <path class="ink vein" data-s="0.06" data-e="0.13"
-          d="M740 280 L734 306"/>
+        <!-- leaf right outline: tip(600,578) → base(600,714) -->
+        <path class="ink str" data-s="0.15" data-e="0.22"
+          d="M600 578 C624 592 654 616 660 642 C664 660 648 692 600 714"/>
+        <!-- leaf left outline -->
+        <path class="ink str" data-s="0.155" data-e="0.225"
+          d="M600 578 C576 592 546 616 540 642 C536 660 552 692 600 714"/>
 
-        <!-- root network at base -->
-        <path class="ink faint" data-s="0.09" data-e="0.14"
-          d="M600 505 C566 516 530 522 492 519"/>
-        <path class="ink faint" data-s="0.09" data-e="0.14"
-          d="M600 505 C634 516 670 522 708 519"/>
-        <path class="ink faint" data-s="0.10" data-e="0.14"
-          d="M600 505 C550 518 505 532 462 526"/>
-        <path class="ink faint" data-s="0.10" data-e="0.14"
-          d="M600 505 C650 518 695 532 738 526"/>
-        <path class="ink faint" data-s="0.11" data-e="0.14"
-          d="M492 519 C476 524 460 522 446 516"/>
-        <path class="ink faint" data-s="0.11" data-e="0.14"
-          d="M708 519 C724 524 740 522 754 516"/>
-
-        <!-- ====================================================== -->
-        <!-- CH 1 · LA LENTE  (p 0.14 – 0.28)  SVG y ≈ 560–705     -->
-        <!-- circle cx=600 cy=634 r=90                              -->
-        <!-- ====================================================== -->
-
-        <!-- outer circle — top half then bottom half -->
-        <path class="ink geo" data-s="0.15" data-e="0.23"
-          d="M510 634 A 90 90 0 0 1 690 634"/>
-        <path class="ink geo" data-s="0.16" data-e="0.25"
-          d="M690 634 A 90 90 0 0 1 510 634"/>
-
-        <!-- inner ring r=50 -->
-        <path class="ink faint" data-s="0.18" data-e="0.25"
-          d="M550 634 A 50 50 0 0 1 650 634"/>
-        <path class="ink faint" data-s="0.19" data-e="0.26"
-          d="M650 634 A 50 50 0 0 1 550 634"/>
-
-        <!-- crosshairs -->
-        <path class="ink geo" data-s="0.20" data-e="0.26"
-          d="M514 634 L686 634"/>
-        <path class="ink geo" data-s="0.20" data-e="0.26"
-          d="M600 548 L600 720"/>
-
-        <!-- cardinal tick marks -->
-        <path class="ink geo" data-s="0.22" data-e="0.27"
-          d="M600 544 L600 556 M600 724 L600 712 M510 634 L522 634 M690 634 L678 634"/>
-
-        <!-- diagonal 45° marks -->
-        <path class="ink faint" data-s="0.23" data-e="0.27"
-          d="M664 570 L657 577 M536 570 L543 577 M664 698 L657 691 M536 698 L543 691"/>
-
-        <!-- tiny magnified leaf inside -->
-        <path class="ink vein" data-s="0.24" data-e="0.28"
-          d="M600 610 C588 618 584 630 592 638 C600 630 604 618 600 610"/>
-        <path class="ink vein" data-s="0.24" data-e="0.28"
-          d="M600 610 C612 618 616 630 608 638 C600 630 596 618 600 610"/>
-        <path class="ink vein" data-s="0.25" data-e="0.28"
-          d="M600 612 L600 636"/>
-
-        <!-- ====================================================== -->
-        <!-- CH 2 · LE NERVATURE  (p 0.28 – 0.43)  SVG y ≈ 780–990 -->
-        <!-- leaf cx=600 top=782 bottom=974                         -->
-        <!-- ====================================================== -->
-
-        <!-- leaf outline left half -->
-        <path class="ink str" data-s="0.29" data-e="0.38"
-          d="M600 782 C568 802 546 844 540 882 C534 922 548 954 600 974"/>
-        <!-- leaf outline right half -->
-        <path class="ink str" data-s="0.30" data-e="0.39"
-          d="M600 782 C632 802 654 844 660 882 C666 922 652 954 600 974"/>
         <!-- midrib -->
-        <path class="ink str" data-s="0.31" data-e="0.38"
-          d="M600 786 L600 970"/>
+        <path class="ink" data-s="0.17" data-e="0.26" d="M600 578 L600 714"/>
 
-        <!-- lateral veins — 6 pairs drawing in cascade -->
-        <path class="ink vein" data-s="0.33" data-e="0.40"
-          d="M600 812 C582 814 566 820 554 830"/>
-        <path class="ink vein" data-s="0.33" data-e="0.40"
-          d="M600 812 C618 814 634 820 646 830"/>
-        <path class="ink vein" data-s="0.34" data-e="0.41"
-          d="M600 836 C580 838 562 844 548 854"/>
-        <path class="ink vein" data-s="0.34" data-e="0.41"
-          d="M600 836 C620 838 638 844 652 854"/>
-        <path class="ink vein" data-s="0.35" data-e="0.41"
-          d="M600 862 C578 864 560 870 546 880"/>
-        <path class="ink vein" data-s="0.35" data-e="0.41"
-          d="M600 862 C622 864 640 870 654 880"/>
-        <path class="ink vein" data-s="0.36" data-e="0.42"
-          d="M600 888 C580 890 564 896 552 904"/>
-        <path class="ink vein" data-s="0.36" data-e="0.42"
-          d="M600 888 C620 890 636 896 648 904"/>
-        <path class="ink vein" data-s="0.37" data-e="0.42"
-          d="M600 914 C582 916 568 922 558 930"/>
-        <path class="ink vein" data-s="0.37" data-e="0.42"
-          d="M600 914 C618 916 632 922 642 930"/>
-        <path class="ink vein" data-s="0.38" data-e="0.43"
-          d="M600 938 C584 940 574 946 568 952"/>
-        <path class="ink vein" data-s="0.38" data-e="0.43"
-          d="M600 938 C616 940 626 946 632 952"/>
+        <!-- lateral veins pair 1 y=598 -->
+        <path class="ink vein" data-s="0.20" data-e="0.26" d="M600 598 C612 596 622 594 628 592"/>
+        <path class="ink vein" data-s="0.20" data-e="0.26" d="M600 598 C588 596 578 594 572 592"/>
 
-        <!-- sub-veins off lateral tips -->
-        <path class="ink vein" data-s="0.39" data-e="0.43"
-          d="M554 830 C548 834 541 834 534 831"/>
-        <path class="ink vein" data-s="0.39" data-e="0.43"
-          d="M646 830 C652 834 659 834 666 831"/>
-        <path class="ink vein" data-s="0.40" data-e="0.43"
-          d="M548 854 C541 858 534 858 527 854"/>
-        <path class="ink vein" data-s="0.40" data-e="0.43"
-          d="M652 854 C659 858 666 858 673 854"/>
+        <!-- lateral veins pair 2 y=616 -->
+        <path class="ink vein" data-s="0.21" data-e="0.27" d="M600 616 C616 612 630 608 640 604"/>
+        <path class="ink vein" data-s="0.21" data-e="0.27" d="M600 616 C584 612 570 608 560 604"/>
 
-        <!-- ====================================================== -->
-        <!-- CH 3 · LA LINFA  (p 0.43 – 0.57)  SVG y ≈ 1024–1230   -->
-        <!-- ====================================================== -->
+        <!-- lateral veins pair 3 y=634 -->
+        <path class="ink vein" data-s="0.22" data-e="0.27" d="M600 634 C618 629 634 624 644 619"/>
+        <path class="ink vein" data-s="0.22" data-e="0.27" d="M600 634 C582 629 566 624 556 619"/>
 
-        <!-- central capillary -->
-        <path class="ink" data-s="0.44" data-e="0.53"
-          d="M600 1024 C597 1086 603 1148 600 1210"/>
+        <!-- lateral veins pair 4 y=652 -->
+        <path class="ink vein" data-s="0.22" data-e="0.27" d="M600 652 C616 647 630 642 638 637"/>
+        <path class="ink vein" data-s="0.22" data-e="0.27" d="M600 652 C584 647 570 642 562 637"/>
 
-        <!-- flanking capillaries -->
-        <path class="ink faint" data-s="0.44" data-e="0.53"
-          d="M588 1034 C585 1094 582 1152 579 1192 C577 1206 580 1214 587 1220"/>
-        <path class="ink faint" data-s="0.44" data-e="0.53"
-          d="M612 1034 C615 1094 618 1152 621 1192 C623 1206 620 1214 613 1220"/>
-        <path class="ink faint" data-s="0.45" data-e="0.54"
-          d="M575 1058 C571 1112 569 1162 571 1192 C573 1206 579 1214 587 1220"/>
-        <path class="ink faint" data-s="0.45" data-e="0.54"
-          d="M625 1058 C629 1112 631 1162 629 1192 C627 1206 621 1214 613 1220"/>
-        <path class="ink faint" data-s="0.46" data-e="0.54"
-          d="M560 1084 C556 1132 556 1172 562 1196"/>
-        <path class="ink faint" data-s="0.46" data-e="0.54"
-          d="M640 1084 C644 1132 644 1172 638 1196"/>
+        <!-- lateral veins pair 5 y=670 -->
+        <path class="ink vein" data-s="0.23" data-e="0.28" d="M600 670 C612 666 622 662 628 658"/>
+        <path class="ink vein" data-s="0.23" data-e="0.28" d="M600 670 C588 666 578 662 572 658"/>
 
-        <!-- tributaries joining from sides -->
-        <path class="ink vein" data-s="0.47" data-e="0.54"
-          d="M546 1104 C554 1110 562 1118 569 1126"/>
-        <path class="ink vein" data-s="0.47" data-e="0.54"
-          d="M654 1104 C646 1110 638 1118 631 1126"/>
-        <path class="ink vein" data-s="0.48" data-e="0.55"
-          d="M536 1144 C546 1148 557 1154 566 1162"/>
-        <path class="ink vein" data-s="0.48" data-e="0.55"
-          d="M664 1144 C654 1148 643 1154 634 1162"/>
+        <!-- lateral veins pair 6 y=688 -->
+        <path class="ink vein" data-s="0.24" data-e="0.28" d="M600 688 C608 685 614 682 618 679"/>
+        <path class="ink vein" data-s="0.24" data-e="0.28" d="M600 688 C592 685 586 682 582 679"/>
 
-        <!-- drop outline (pure stroke, no fill) -->
-        <path class="ink str" data-s="0.52" data-e="0.57"
-          d="M600 1168 C622 1196 622 1220 600 1232 C578 1220 578 1196 600 1168 Z"/>
+        <!-- ================================================ -->
+        <!-- CH2 · IL METODO  p 0.28–0.43  SVG y ≈ 800–1060  -->
+        <!-- Linfa → goccia → caduta → flacone              -->
+        <!-- ================================================ -->
 
-        <!-- ====================================================== -->
-        <!-- CH 4 · IL RITO  (p 0.57 – 0.71)  SVG y ≈ 1270–1420    -->
-        <!-- concentric circles cx=600 cy=1344                      -->
-        <!-- ====================================================== -->
+        <!-- sap trail descending from leaf -->
+        <path class="ink str" data-s="0.29" data-e="0.33"
+          d="M600 800 C598 814 602 828 600 848"/>
 
-        <!-- inner circle r=38 -->
-        <path class="ink geo" data-s="0.58" data-e="0.64"
-          d="M562 1344 A 38 38 0 0 1 638 1344"/>
-        <path class="ink geo" data-s="0.585" data-e="0.645"
-          d="M638 1344 A 38 38 0 0 1 562 1344"/>
+        <!-- drop forming: teardrop outline -->
+        <path class="ink str" data-s="0.32" data-e="0.37"
+          d="M600 848 C620 856 630 872 622 890 C614 906 586 906 578 890 C570 872 580 856 600 848"/>
 
-        <!-- mid circle r=68 -->
-        <path class="ink geo" data-s="0.60" data-e="0.67"
-          d="M532 1344 A 68 68 0 0 1 668 1344"/>
-        <path class="ink geo" data-s="0.605" data-e="0.675"
-          d="M668 1344 A 68 68 0 0 1 532 1344"/>
+        <!-- drop highlight arc -->
+        <path class="ink faint" data-s="0.34" data-e="0.38"
+          d="M590 862 C597 856 606 856 612 862"/>
 
-        <!-- outer circle r=98 -->
-        <path class="ink geo" data-s="0.62" data-e="0.70"
-          d="M502 1344 A 98 98 0 0 1 698 1344"/>
-        <path class="ink geo" data-s="0.625" data-e="0.705"
-          d="M698 1344 A 98 98 0 0 1 502 1344"/>
+        <!-- fall: dashed trail below drop -->
+        <path class="ink dot" data-s="0.37" data-e="0.40"
+          d="M600 906 C598 922 602 936 600 954"/>
 
-        <!-- 6 radial lines at 60° intervals, from center to r=98 -->
-        <!-- 0° N, 60° NE, 120° SE, 180° S, 240° SW, 300° NW      -->
-        <path class="ink faint" data-s="0.64" data-e="0.71"
-          d="M600 1344 L600 1246"/>
-        <path class="ink faint" data-s="0.64" data-e="0.71"
-          d="M600 1344 L685 1295"/>
-        <path class="ink faint" data-s="0.64" data-e="0.71"
-          d="M600 1344 L685 1393"/>
-        <path class="ink faint" data-s="0.64" data-e="0.71"
-          d="M600 1344 L600 1442"/>
-        <path class="ink faint" data-s="0.64" data-e="0.71"
-          d="M600 1344 L515 1393"/>
-        <path class="ink faint" data-s="0.64" data-e="0.71"
-          d="M600 1344 L515 1295"/>
+        <!-- bottle cap -->
+        <path class="ink geo" data-s="0.38" data-e="0.41"
+          d="M588 948 L588 964 M588 964 L612 964 M612 964 L612 948"/>
 
-        <!-- cardinal ticks on outer circle -->
-        <path class="ink geo" data-s="0.67" data-e="0.71"
-          d="M600 1246 L600 1254 M600 1442 L600 1434 M698 1344 L690 1344 M502 1344 L510 1344"/>
+        <!-- bottle neck -->
+        <path class="ink geo" data-s="0.39" data-e="0.41"
+          d="M590 964 L590 980 M610 964 L610 980"/>
 
-        <!-- ====================================================== -->
-        <!-- CH 5 · LA FIBRA  (p 0.71 – 0.86)  SVG y ≈ 1455–1675   -->
-        <!-- 14 hair fiber lines x 476 to 724                       -->
-        <!-- ====================================================== -->
+        <!-- bottle shoulder + body left -->
+        <path class="ink str" data-s="0.40" data-e="0.43"
+          d="M590 980 C578 988 572 1000 572 1014 L572 1060"/>
+        <!-- bottle body right -->
+        <path class="ink str" data-s="0.40" data-e="0.43"
+          d="M610 980 C622 988 628 1000 628 1014 L628 1060"/>
+        <!-- bottle base -->
+        <path class="ink geo" data-s="0.41" data-e="0.43"
+          d="M572 1060 L628 1060"/>
 
-        <path class="ink faint" data-s="0.710" data-e="0.820" d="M476 1455 C477 1515 475 1575 476 1635 C477 1658 476 1668 476 1675"/>
-        <path class="ink faint" data-s="0.715" data-e="0.825" d="M495 1455 C497 1517 493 1577 495 1637 C496 1660 495 1669 495 1675"/>
-        <path class="ink faint" data-s="0.720" data-e="0.830" d="M514 1455 C512 1515 516 1575 514 1635 C513 1658 514 1668 514 1675"/>
-        <path class="ink faint" data-s="0.725" data-e="0.835" d="M533 1455 C535 1517 531 1577 533 1637 C534 1660 533 1669 533 1675"/>
-        <path class="ink"       data-s="0.730" data-e="0.840" d="M552 1455 C550 1515 554 1575 552 1635 C551 1658 552 1668 552 1675"/>
-        <path class="ink"       data-s="0.735" data-e="0.845" d="M571 1455 C573 1517 569 1577 571 1637 C572 1660 571 1669 571 1675"/>
-        <path class="ink str"   data-s="0.740" data-e="0.850" d="M590 1455 C588 1515 592 1575 590 1635 C589 1658 590 1668 590 1675"/>
-        <path class="ink str"   data-s="0.745" data-e="0.855" d="M610 1455 C612 1517 608 1577 610 1637 C611 1660 610 1669 610 1675"/>
-        <path class="ink"       data-s="0.750" data-e="0.860" d="M629 1455 C627 1515 631 1575 629 1635 C628 1658 629 1668 629 1675"/>
-        <path class="ink"       data-s="0.755" data-e="0.855" d="M648 1455 C650 1517 646 1577 648 1637 C649 1660 648 1669 648 1675"/>
-        <path class="ink faint" data-s="0.760" data-e="0.850" d="M667 1455 C665 1515 669 1575 667 1635 C666 1658 667 1668 667 1675"/>
-        <path class="ink faint" data-s="0.765" data-e="0.845" d="M686 1455 C688 1517 684 1577 686 1637 C687 1660 686 1669 686 1675"/>
-        <path class="ink faint" data-s="0.770" data-e="0.840" d="M705 1455 C703 1515 707 1575 705 1635 C704 1658 705 1668 705 1675"/>
-        <path class="ink faint" data-s="0.775" data-e="0.835" d="M724 1455 C726 1517 722 1577 724 1637 C725 1660 724 1669 724 1675"/>
+        <!-- label lines -->
+        <path class="ink faint" data-s="0.42" data-e="0.43" d="M578 1018 L622 1018"/>
+        <path class="ink faint" data-s="0.42" data-e="0.43" d="M578 1028 L622 1028"/>
 
-        <!-- ====================================================== -->
-        <!-- CH 6 · SINTESI  (p 0.86 – 1.01)  SVG y ≈ 1715–1870    -->
-        <!-- ====================================================== -->
+        <!-- flanking faint bottles -->
+        <path class="ink faint" data-s="0.41" data-e="0.43"
+          d="M516 988 C506 996 502 1006 502 1018 L502 1058 M502 1058 L536 1058 M536 1058 L536 1018 C536 1006 532 996 522 988"/>
+        <path class="ink faint" data-s="0.41" data-e="0.43"
+          d="M678 988 C668 996 664 1006 664 1018 L664 1058 M664 1058 L698 1058 M698 1058 L698 1018 C698 1006 694 996 684 988"/>
 
-        <!-- vertical spine -->
-        <path class="ink str" data-s="0.87" data-e="0.93"
-          d="M600 1720 L600 1868"/>
+        <!-- ================================================ -->
+        <!-- CH3 · ACADEMY  p 0.43–0.57  SVG y ≈ 1048–1200   -->
+        <!-- Micelio della conoscenza: nodi + connessioni     -->
+        <!-- ================================================ -->
 
-        <!-- two symmetrical leaves at ~y=1788 -->
-        <path class="ink" data-s="0.88" data-e="0.94"
-          d="M600 1804 C580 1786 570 1764 580 1746 C590 1764 598 1786 600 1804"/>
-        <path class="ink" data-s="0.88" data-e="0.94"
-          d="M600 1804 C620 1786 630 1764 620 1746 C610 1764 602 1786 600 1804"/>
+        <!-- nodes: organic circle arcs -->
+        <path class="ink geo" data-s="0.44" data-e="0.49"
+          d="M600 1048 A 6 6 0 1 0 600.01 1048"/>
+        <path class="ink geo" data-s="0.46" data-e="0.51"
+          d="M538 1080 A 5 5 0 1 0 538.01 1080"/>
+        <path class="ink geo" data-s="0.46" data-e="0.51"
+          d="M657 1080 A 5 5 0 1 0 657.01 1080"/>
+        <path class="ink geo" data-s="0.48" data-e="0.53"
+          d="M506 1130 A 4 4 0 1 0 506.01 1130"/>
+        <path class="ink geo" data-s="0.48" data-e="0.53"
+          d="M576 1138 A 4 4 0 1 0 576.01 1138"/>
+        <path class="ink geo" data-s="0.48" data-e="0.53"
+          d="M630 1138 A 4 4 0 1 0 630.01 1138"/>
+        <path class="ink geo" data-s="0.48" data-e="0.53"
+          d="M692 1128 A 4 4 0 1 0 692.01 1128"/>
+        <path class="ink geo" data-s="0.50" data-e="0.55"
+          d="M546 1188 A 4 4 0 1 0 546.01 1188"/>
+        <path class="ink geo" data-s="0.50" data-e="0.55"
+          d="M664 1188 A 4 4 0 1 0 664.01 1188"/>
 
-        <!-- midribs -->
-        <path class="ink vein" data-s="0.89" data-e="0.945"
-          d="M580 1746 L600 1804"/>
-        <path class="ink vein" data-s="0.89" data-e="0.945"
-          d="M620 1746 L600 1804"/>
+        <!-- connections: organic curved lines -->
+        <path class="ink" data-s="0.45" data-e="0.52"
+          d="M606 1048 C588 1056 566 1064 543 1080"/>
+        <path class="ink" data-s="0.45" data-e="0.52"
+          d="M606 1048 C624 1056 640 1064 657 1080"/>
+        <path class="ink" data-s="0.47" data-e="0.53"
+          d="M543 1080 C530 1096 516 1112 510 1130"/>
+        <path class="ink" data-s="0.47" data-e="0.53"
+          d="M543 1080 C554 1100 564 1118 580 1138"/>
+        <path class="ink" data-s="0.47" data-e="0.53"
+          d="M657 1080 C648 1100 638 1118 626 1138"/>
+        <path class="ink" data-s="0.47" data-e="0.53"
+          d="M657 1080 C668 1096 680 1112 692 1128"/>
+        <path class="ink faint" data-s="0.49" data-e="0.55"
+          d="M510 1130 C522 1152 532 1170 546 1188"/>
+        <path class="ink faint" data-s="0.49" data-e="0.55"
+          d="M580 1138 C572 1156 560 1174 550 1188"/>
+        <path class="ink faint" data-s="0.49" data-e="0.55"
+          d="M630 1138 C638 1154 650 1172 660 1188"/>
+        <path class="ink faint" data-s="0.49" data-e="0.55"
+          d="M692 1128 C686 1148 676 1168 664 1188"/>
 
-        <!-- leaf veins -->
-        <path class="ink vein" data-s="0.90" data-e="0.955"
-          d="M600 1770 C594 1768 588 1766 583 1764"/>
-        <path class="ink vein" data-s="0.90" data-e="0.955"
-          d="M600 1770 C606 1768 612 1766 617 1764"/>
-        <path class="ink vein" data-s="0.905" data-e="0.960"
-          d="M600 1784 C593 1782 587 1780 582 1778"/>
-        <path class="ink vein" data-s="0.905" data-e="0.960"
-          d="M600 1784 C607 1782 613 1780 618 1778"/>
+        <!-- cross-connections: knowledge sharing -->
+        <path class="ink vein" data-s="0.52" data-e="0.57"
+          d="M580 1138 C598 1136 612 1136 630 1138"/>
+        <path class="ink vein" data-s="0.53" data-e="0.57"
+          d="M550 1188 C576 1193 628 1193 660 1188"/>
+        <!-- subtle diagonal tendrils -->
+        <path class="ink faint" data-s="0.51" data-e="0.57"
+          d="M510 1130 C536 1118 560 1112 580 1138"/>
+        <path class="ink faint" data-s="0.51" data-e="0.57"
+          d="M692 1128 C666 1116 642 1112 630 1138"/>
 
-        <!-- synthesis circle at base r=28, cy=1846 -->
-        <path class="ink geo" data-s="0.93" data-e="0.99"
-          d="M572 1846 A 28 28 0 0 1 628 1846"/>
-        <path class="ink geo" data-s="0.935" data-e="0.995"
-          d="M628 1846 A 28 28 0 0 1 572 1846"/>
+        <!-- ================================================ -->
+        <!-- CH4 · RITUALI  p 0.57–0.71  SVG y ≈ 1268–1428   -->
+        <!-- Concentric circles + gesture arc                 -->
+        <!-- ================================================ -->
 
-        <!-- cardinal ticks on synthesis circle -->
-        <path class="ink geo" data-s="0.965" data-e="1.01"
-          d="M600 1818 L600 1812 M600 1874 L600 1880 M628 1846 L634 1846 M572 1846 L566 1846"/>
+        <!-- inner circle r=38, center (600,1348) -->
+        <path class="ink geo" data-s="0.58" data-e="0.645" d="M562 1348 A 38 38 0 0 1 638 1348"/>
+        <path class="ink geo" data-s="0.585" data-e="0.650" d="M638 1348 A 38 38 0 0 1 562 1348"/>
 
-        <!-- final mark: two fine horizontal lines (scientific label) -->
-        <path class="ink faint" data-s="0.975" data-e="1.01"
-          d="M566 1858 L634 1858"/>
-        <path class="ink faint" data-s="0.985" data-e="1.01"
-          d="M574 1864 L626 1864"/>
+        <!-- mid circle r=70 -->
+        <path class="ink geo" data-s="0.60" data-e="0.67" d="M530 1348 A 70 70 0 0 1 670 1348"/>
+        <path class="ink geo" data-s="0.605" data-e="0.675" d="M670 1348 A 70 70 0 0 1 530 1348"/>
+
+        <!-- outer circle r=102 -->
+        <path class="ink geo" data-s="0.62" data-e="0.70" d="M498 1348 A 102 102 0 0 1 702 1348"/>
+        <path class="ink geo" data-s="0.625" data-e="0.705" d="M702 1348 A 102 102 0 0 1 498 1348"/>
+
+        <!-- 6 radial lines to outer circle -->
+        <path class="ink faint" data-s="0.65" data-e="0.71" d="M600 1348 L600 1246"/>
+        <path class="ink faint" data-s="0.65" data-e="0.71" d="M600 1348 L688 1297"/>
+        <path class="ink faint" data-s="0.65" data-e="0.71" d="M600 1348 L688 1399"/>
+        <path class="ink faint" data-s="0.65" data-e="0.71" d="M600 1348 L600 1450"/>
+        <path class="ink faint" data-s="0.65" data-e="0.71" d="M600 1348 L512 1399"/>
+        <path class="ink faint" data-s="0.65" data-e="0.71" d="M600 1348 L512 1297"/>
+
+        <!-- flowing gesture arc (il gesto) — a sweeping S-curve -->
+        <path class="ink str" data-s="0.66" data-e="0.71"
+          d="M496 1398 C530 1374 556 1344 578 1310 C600 1276 622 1258 662 1248 C702 1238 720 1268 706 1306 C692 1344 656 1368 628 1380"/>
+
+        <!-- tick marks on outer circle -->
+        <path class="ink geo" data-s="0.68" data-e="0.71"
+          d="M600 1246 L600 1254 M600 1450 L600 1442 M702 1348 L694 1348 M498 1348 L506 1348"/>
+
+        <!-- ================================================ -->
+        <!-- CH5 · LE LINEE  p 0.71–0.86  SVG y ≈ 1462–1680  -->
+        <!-- Four product lines: Filler / Lifetime / Vinility / Restruct -->
+        <!-- ================================================ -->
+
+        <!-- column separators (very faint) -->
+        <path class="ink faint" data-s="0.72" data-e="0.78"
+          d="M500 1462 L500 1680 M700 1462 L700 1680"/>
+
+        <!-- FILLER (x=300, y center 1571) — plump oval: fullness -->
+        <path class="ink str" data-s="0.72" data-e="0.81"
+          d="M300 1510 C278 1520 262 1542 262 1566 C262 1590 278 1612 300 1622 C322 1612 338 1590 338 1566 C338 1542 322 1520 300 1510 Z"/>
+        <path class="ink vein" data-s="0.74" data-e="0.82" d="M300 1510 L300 1622"/>
+        <path class="ink vein" data-s="0.75" data-e="0.82" d="M300 1538 C286 1538 276 1544 270 1552"/>
+        <path class="ink vein" data-s="0.75" data-e="0.82" d="M300 1538 C314 1538 324 1544 330 1552"/>
+        <path class="ink vein" data-s="0.76" data-e="0.83" d="M300 1558 C284 1558 272 1564 266 1572"/>
+        <path class="ink vein" data-s="0.76" data-e="0.83" d="M300 1558 C316 1558 328 1564 334 1572"/>
+        <path class="ink vein" data-s="0.77" data-e="0.83" d="M300 1578 C286 1578 276 1582 270 1588"/>
+        <path class="ink vein" data-s="0.77" data-e="0.83" d="M300 1578 C314 1578 324 1582 330 1588"/>
+        <!-- label mark -->
+        <path class="ink geo" data-s="0.82" data-e="0.86" d="M268 1640 L332 1640 M276 1648 L324 1648"/>
+
+        <!-- LIFETIME (x=500, y center 1571) — unfurling fern spiral: time -->
+        <path class="ink str" data-s="0.73" data-e="0.82"
+          d="M500 1490 C518 1508 526 1534 520 1558 C514 1582 498 1598 480 1600 C462 1602 448 1588 446 1570 C444 1552 454 1538 466 1536 C478 1534 486 1546 484 1558 C482 1570 474 1576 466 1574"/>
+        <path class="ink vein" data-s="0.77" data-e="0.83" d="M500 1490 L498 1510"/>
+        <path class="ink vein" data-s="0.77" data-e="0.83" d="M500 1490 C494 1498 490 1504 488 1512"/>
+        <path class="ink geo" data-s="0.82" data-e="0.86" d="M448 1640 L552 1640 M456 1648 L544 1648"/>
+
+        <!-- VINILITY (x=700, y center 1571) — vine tendril: vitality -->
+        <path class="ink str" data-s="0.74" data-e="0.83"
+          d="M668 1500 C680 1490 698 1488 712 1498 C726 1508 730 1528 722 1544 C714 1560 698 1566 686 1558 C674 1550 674 1534 684 1526 C694 1518 706 1522 710 1532"/>
+        <!-- tendril curl -->
+        <path class="ink faint" data-s="0.77" data-e="0.83"
+          d="M668 1500 C660 1510 658 1526 664 1540 C670 1554 682 1562 694 1562"/>
+        <!-- leaf on vine -->
+        <path class="ink" data-s="0.78" data-e="0.84"
+          d="M722 1544 C734 1538 742 1548 736 1560 C730 1572 716 1576 710 1564 C704 1552 710 1540 722 1544"/>
+        <path class="ink vein" data-s="0.80" data-e="0.84" d="M722 1544 C716 1556 714 1566 718 1572"/>
+        <path class="ink geo" data-s="0.82" data-e="0.86" d="M648 1640 L752 1640 M656 1648 L744 1648"/>
+
+        <!-- RESTRUCT (x=900, y center 1571) — geometric lattice: structure -->
+        <path class="ink str" data-s="0.75" data-e="0.84" d="M900 1510 L870 1560 L900 1610 L930 1560 L900 1510 Z"/>
+        <path class="ink" data-s="0.77" data-e="0.84" d="M870 1560 L930 1560"/>
+        <path class="ink faint" data-s="0.79" data-e="0.84" d="M900 1510 L900 1610"/>
+        <path class="ink faint" data-s="0.79" data-e="0.85"
+          d="M870 1510 L900 1560 M930 1510 L900 1560 M870 1610 L900 1560 M930 1610 L900 1560"/>
+        <path class="ink vein" data-s="0.81" data-e="0.85"
+          d="M885 1510 L900 1485 L915 1510 M885 1610 L900 1635 L915 1610"/>
+        <path class="ink geo" data-s="0.82" data-e="0.86" d="M868 1640 L932 1640 M876 1648 L924 1648"/>
+
+        <!-- ================================================ -->
+        <!-- CH6 · FAMILY  p 0.86–1.01  SVG y ≈ 1728–1872    -->
+        <!-- Botanical wreath: il Circolo                     -->
+        <!-- ================================================ -->
+
+        <!-- wreath ring r=90, center (600,1800) -->
+        <path class="ink geo" data-s="0.87" data-e="0.94" d="M510 1800 A 90 90 0 0 1 690 1800"/>
+        <path class="ink geo" data-s="0.875" data-e="0.945" d="M690 1800 A 90 90 0 0 1 510 1800"/>
+
+        <!-- 8 leaf sprigs growing off the ring at cardinal and diagonal points -->
+        <!-- Top (600,1710): upward leaf -->
+        <path class="ink" data-s="0.89" data-e="0.95"
+          d="M600 1730 C588 1718 584 1704 592 1692 C600 1704 608 1718 600 1730"/>
+        <path class="ink vein" data-s="0.90" data-e="0.95" d="M592 1692 L600 1730"/>
+
+        <!-- Top-right (664,1736) -->
+        <path class="ink" data-s="0.895" data-e="0.955"
+          d="M673 1729 C668 1714 672 1700 682 1694 C684 1708 680 1722 673 1729"/>
+        <path class="ink vein" data-s="0.905" data-e="0.955" d="M682 1694 L673 1729"/>
+
+        <!-- Right (690,1800) -->
+        <path class="ink" data-s="0.90" data-e="0.96"
+          d="M730 1800 C726 1786 730 1772 742 1768 C744 1782 740 1796 730 1800"/>
+        <path class="ink vein" data-s="0.91" data-e="0.96" d="M742 1768 L730 1800"/>
+
+        <!-- Bottom-right (664,1864) -->
+        <path class="ink" data-s="0.905" data-e="0.965"
+          d="M673 1871 C668 1886 672 1900 682 1906 C684 1892 680 1878 673 1871"/>
+        <path class="ink vein" data-s="0.915" data-e="0.965" d="M682 1906 L673 1871"/>
+
+        <!-- Bottom (600,1890) -->
+        <path class="ink" data-s="0.91" data-e="0.97"
+          d="M600 1870 C588 1882 584 1896 592 1908 C600 1896 608 1882 600 1870"/>
+        <path class="ink vein" data-s="0.92" data-e="0.97" d="M592 1908 L600 1870"/>
+
+        <!-- Bottom-left (536,1864) -->
+        <path class="ink" data-s="0.915" data-e="0.975"
+          d="M527 1871 C532 1886 528 1900 518 1906 C516 1892 520 1878 527 1871"/>
+        <path class="ink vein" data-s="0.925" data-e="0.975" d="M518 1906 L527 1871"/>
+
+        <!-- Left (510,1800) -->
+        <path class="ink" data-s="0.92" data-e="0.98"
+          d="M470 1800 C474 1786 470 1772 458 1768 C456 1782 460 1796 470 1800"/>
+        <path class="ink vein" data-s="0.93" data-e="0.98" d="M458 1768 L470 1800"/>
+
+        <!-- Top-left (536,1736) -->
+        <path class="ink" data-s="0.925" data-e="0.985"
+          d="M527 1729 C532 1714 528 1700 518 1694 C516 1708 520 1722 527 1729"/>
+        <path class="ink vein" data-s="0.935" data-e="0.985" d="M518 1694 L527 1729"/>
+
+        <!-- small center mark -->
+        <path class="ink geo" data-s="0.96" data-e="1.01"
+          d="M592 1800 A 8 8 0 0 1 608 1800 A 8 8 0 0 1 592 1800"/>
+        <!-- final horizontal marks -->
+        <path class="ink faint" data-s="0.975" data-e="1.01" d="M558 1836 L642 1836"/>
+        <path class="ink faint" data-s="0.985" data-e="1.01" d="M566 1842 L634 1842"/>
 
       </g><!-- /pencil filter -->
 
-      <!-- pencil tip (above filter, not displaced) -->
       <circle id="tip" r="3.5" fill="#fff6e2" opacity="0"/>
       <circle id="tipGlow" r="16" fill="url(#tipGrad)" opacity="0"/>
-
     </svg>
   </div>
 </section>
@@ -619,7 +756,7 @@ img{max-width:100%;display:block}
 <section id="closing">
   <div class="inner">
     <div class="v-line"></div>
-    <h2>Dalla foresta al capello.<br/>Lo stesso <em>linguaggio.</em></h2>
+    <h2>Dalla pianta alla goccia.<br/>Dalla goccia al <em>tuo gesto.</em></h2>
     <a class="cta" href="#">Entra nel mondo PLEASURE →</a>
   </div>
   <div class="foot">
@@ -639,71 +776,75 @@ img{max-width:100%;display:block}
 </section>
 
 <script>
-/* ===== INTRO PARTICLES ===== */
+/* ===== PARTICLES / SPIRITELLI ===== */
 (function(){
   const cv=document.getElementById('intro-canvas');
   const ctx=cv.getContext('2d');
   let W,H;
   function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
-  resize();
-  addEventListener('resize',resize);
-
-  const N=15;
+  resize();addEventListener('resize',resize);
+  const N=22;
   function rnd(a,b){return a+Math.random()*(b-a);}
-
   function mkP(){
     const z=Math.random();
-    return{
-      x:rnd(0,innerWidth),y:rnd(0,innerHeight),z,
-      vx:rnd(-0.15,0.15),vy:rnd(-0.11,0.11),
-      sz:rnd(0.8,2.6),opa:0,
-      topa:rnd(0.09,0.34)*(0.3+z*0.7),
-      life:rnd(0,340),max:rnd(260,540),
-      pid:Math.random()*100,
-    };
+    return{x:rnd(0,W),y:rnd(0,H),z,vx:rnd(-.18,.18),vy:rnd(-.13,.13),
+      sz:rnd(.8,2.8),opa:0,topa:rnd(.08,.36)*(0.3+z*.7),
+      life:rnd(0,360),max:rnd(280,580),pid:Math.random()*100};
   }
-
   const pts=Array.from({length:N},mkP);
   let frame=0;
-
   function tick(){
-    if(window.scrollY>innerHeight){requestAnimationFrame(tick);return;}
+    if(scrollY>innerHeight){requestAnimationFrame(tick);return;}
     ctx.clearRect(0,0,W,H);
     pts.forEach(p=>{
       p.life++;
       if(p.life>p.max){Object.assign(p,mkP());p.life=0;p.opa=0;return;}
-      const prog=p.life/p.max;
-      if(prog<0.18) p.opa=(prog/0.18)*p.topa;
-      else if(prog>0.82) p.opa=((1-prog)/0.18)*p.topa;
+      const pr=p.life/p.max;
+      if(pr<.18)p.opa=(pr/.18)*p.topa;
+      else if(pr>.82)p.opa=((1-pr)/.18)*p.topa;
       else p.opa=p.topa;
-      const t=frame*0.005;
-      p.vx+=Math.sin(t+p.pid)*0.006;
-      p.vy+=Math.cos(t*0.8+p.pid*1.3)*0.005;
-      const spd=Math.hypot(p.vx,p.vy);
-      if(spd>0.34){p.vx=p.vx/spd*0.34;p.vy=p.vy/spd*0.34;}
+      const t=frame*.005;
+      p.vx+=Math.sin(t+p.pid)*.007;p.vy+=Math.cos(t*.8+p.pid*1.3)*.005;
+      const sp=Math.hypot(p.vx,p.vy);if(sp>.36){p.vx=p.vx/sp*.36;p.vy=p.vy/sp*.36;}
       p.x+=p.vx;p.y+=p.vy;
       if(p.x<-12)p.x=W+12;else if(p.x>W+12)p.x=-12;
       if(p.y<-12)p.y=H+12;else if(p.y>H+12)p.y=-12;
-      const s=p.sz*(0.3+p.z*0.7);
-      const rv=Math.floor(172+p.z*26);
-      const gv=Math.floor(134+p.z*26);
-      const bv=Math.floor(96+p.z*36);
+      const s=p.sz*(.3+p.z*.7);
+      const rv=Math.floor(172+p.z*28),gv=Math.floor(134+p.z*28),bv=Math.floor(96+p.z*38);
       ctx.beginPath();
-      ctx.moveTo(p.x,       p.y-s*1.9);
-      ctx.lineTo(p.x+s,     p.y-s*0.28);
-      ctx.lineTo(p.x,       p.y+s*1.9);
-      ctx.lineTo(p.x-s,     p.y-s*0.28);
+      ctx.moveTo(p.x,p.y-s*1.9);ctx.lineTo(p.x+s,p.y-s*.28);
+      ctx.lineTo(p.x,p.y+s*1.9);ctx.lineTo(p.x-s,p.y-s*.28);
       ctx.closePath();
-      ctx.fillStyle=`rgba(${rv},${gv},${bv},${p.opa})`;
-      ctx.fill();
+      ctx.fillStyle=`rgba(${rv},${gv},${bv},${p.opa})`;ctx.fill();
       ctx.strokeStyle=`rgba(${rv},${gv},${bv},${Math.min(1,p.opa*1.4)})`;
-      ctx.lineWidth=0.26;
-      ctx.stroke();
+      ctx.lineWidth=.26;ctx.stroke();
     });
-    frame++;
-    requestAnimationFrame(tick);
+    frame++;requestAnimationFrame(tick);
   }
   tick();
+})();
+
+/* ===== PARALLAX BOTANICAL LAYERS ===== */
+(function(){
+  const farL=document.getElementById('fll-far'),farR=document.getElementById('flr-far');
+  const midL=document.getElementById('fll-mid'),midR=document.getElementById('flr-mid');
+  const nrL=document.getElementById('fll-near'),nrR=document.getElementById('flr-near');
+  let tx=0,ty=0;
+  addEventListener('mousemove',e=>{
+    tx=(e.clientX/innerWidth-.5);ty=(e.clientY/innerHeight-.5);
+  });
+  addEventListener('touchmove',e=>{
+    const t=e.touches[0];
+    tx=(t.clientX/innerWidth-.5);ty=(t.clientY/innerHeight-.5);
+  },{passive:true});
+  function applyPx(){
+    const f=6,m=16,n=30;
+    [farL,farR].forEach(g=>{if(g)g.style.transform=`translate(${tx*f}px,${ty*f*.5}px)`;});
+    [midL,midR].forEach(g=>{if(g)g.style.transform=`translate(${tx*m}px,${ty*m*.5}px)`;});
+    [nrL,nrR].forEach(g=>{if(g)g.style.transform=`translate(${tx*n}px,${ty*n*.5}px)`;});
+    requestAnimationFrame(applyPx);
+  }
+  applyPx();
 })();
 
 /* ===== CURSOR ===== */
@@ -715,13 +856,8 @@ addEventListener('mouseout',e=>{if(!e.relatedTarget)cur.style.opacity=0;});
 addEventListener('mouseover',()=>cur.style.opacity=1);
 document.addEventListener('mouseover',e=>{if(e.target.closest('a,button'))cur.classList.add('lg');});
 document.addEventListener('mouseout',e=>{if(e.target.closest('a,button'))cur.classList.remove('lg');});
-
-/* touch cursor */
 let touching=false;
-addEventListener('touchstart',e=>{
-  touching=true;const t=e.touches[0];
-  mx=t.clientX;my=t.clientY;cxv=mx;cyv=my;cur.style.opacity=1;
-},{passive:true});
+addEventListener('touchstart',e=>{touching=true;const t=e.touches[0];mx=t.clientX;my=t.clientY;cxv=mx;cyv=my;cur.style.opacity=1;},{passive:true});
 addEventListener('touchmove',e=>{const t=e.touches[0];mx=t.clientX;my=t.clientY;},{passive:true});
 addEventListener('touchend',()=>{touching=false;setTimeout(()=>{if(!touching)cur.style.opacity=0;},500);},{passive:true});
 
@@ -731,20 +867,16 @@ addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>60);},{pa
 
 /* ===== INK DRAW SYSTEM ===== */
 const inks=[...document.querySelectorAll('.ink[data-s]')].map(el=>{
-  let len=80;
-  try{len=el.getTotalLength();}catch(e){}
-  el.style.strokeDasharray=len;
-  el.style.strokeDashoffset=len;
+  let len=80;try{len=el.getTotalLength();}catch(e){}
+  el.style.strokeDasharray=len;el.style.strokeDashoffset=len;
   return{el,len,s:+el.dataset.s,e:+el.dataset.e};
 });
 
-/* ===== HELPERS ===== */
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function win(p,s,e){return clamp((p-s)/(e-s),0,1);}
 function smooth(t){return t*t*(3-2*t);}
 function lerp(a,b,t){return a+(b-a)*t;}
 
-/* ===== ELEMENTS ===== */
 const svg=document.getElementById('svg');
 const flow=document.getElementById('flow');
 const tip=document.getElementById('tip');
@@ -753,34 +885,23 @@ const rail=document.getElementById('rail');
 const fprog=document.getElementById('fprog');
 const bgGlow=document.getElementById('bg-glow');
 const mainSpine=document.getElementById('mainSpine');
+let spineLen=0;try{spineLen=mainSpine.getTotalLength();}catch(e){}
 
-let spineLen=0;
-try{spineLen=mainSpine.getTotalLength();}catch(e){}
-
-/* ===== CHAPTER BACKGROUNDS (very restrained) ===== */
 const CH_BG=[
-  'radial-gradient(ellipse at 30% 72%, rgba(80,70,50,.10) 0%, transparent 62%)',
-  'radial-gradient(ellipse at 68% 50%, rgba(100,84,60,.09) 0%, transparent 56%)',
-  'radial-gradient(ellipse at 50% 36%, rgba(120,100,72,.10) 0%, transparent 52%)',
-  'radial-gradient(ellipse at 36% 62%, rgba(90,76,54,.09) 0%, transparent 58%)',
-  'radial-gradient(ellipse at 64% 64%, rgba(110,92,66,.10) 0%, transparent 54%)',
-  'radial-gradient(ellipse at 50% 52%, rgba(136,114,80,.11) 0%, transparent 48%)',
-  'radial-gradient(ellipse at 50% 28%, rgba(104,88,62,.09) 0%, transparent 56%)',
+  'radial-gradient(ellipse at 32% 68%, rgba(72,60,42,.12) 0%, transparent 62%)',
+  'radial-gradient(ellipse at 66% 50%, rgba(90,76,54,.11) 0%, transparent 56%)',
+  'radial-gradient(ellipse at 50% 38%, rgba(110,92,64,.12) 0%, transparent 52%)',
+  'radial-gradient(ellipse at 36% 62%, rgba(80,68,48,.11) 0%, transparent 58%)',
+  'radial-gradient(ellipse at 64% 64%, rgba(100,84,58,.12) 0%, transparent 54%)',
+  'radial-gradient(ellipse at 50% 50%, rgba(130,108,76,.13) 0%, transparent 48%)',
+  'radial-gradient(ellipse at 50% 30%, rgba(96,80,56,.10) 0%, transparent 56%)',
 ];
 bgGlow.style.background=CH_BG[0];
 
 const railChs=[...document.querySelectorAll('.rail .ch')];
 const panels=[...document.querySelectorAll('.caption .panel')];
 
-const CH=[
-  [0.00,0.14],
-  [0.14,0.28],
-  [0.28,0.43],
-  [0.43,0.57],
-  [0.57,0.71],
-  [0.71,0.86],
-  [0.86,1.01],
-];
+const CH=[[0,.14],[.14,.28],[.28,.43],[.43,.57],[.57,.71],[.71,.86],[.86,1.01]];
 
 let curCh=-1;
 function setChapter(p){
@@ -794,57 +915,52 @@ function setChapter(p){
   }
 }
 
-/* ===== MAIN UPDATE ===== */
 function update(){
   const rect=flow.getBoundingClientRect();
   const total=flow.offsetHeight-innerHeight;
   const p=clamp(-rect.top/total,0,1);
   const vh=innerHeight;
 
-  const inFlow=rect.top<vh*0.5&&rect.bottom>vh*0.5;
+  const inFlow=rect.top<vh*.5&&rect.bottom>vh*.5;
   rail.classList.toggle('show',inFlow);
   document.getElementById('caption').style.opacity=inFlow?1:0;
   fprog.style.width=(p*100)+'%';
   fprog.style.opacity=inFlow?1:0;
 
-  /* pan SVG */
   const svgH=vh*2.8;
-  const ty=vh*0.14-p*(svgH-vh);
-  svg.style.transform=`translate(-50%,${ty}px)`;
+  svg.style.transform=`translate(-50%,${vh*.14-p*(svgH-vh)}px)`;
 
-  /* draw inks */
   for(const k of inks){
-    const lp=smooth(win(p,k.s,k.e));
-    k.el.style.strokeDashoffset=k.len*(1-lp);
+    k.el.style.strokeDashoffset=k.len*(1-smooth(win(p,k.s,k.e)));
   }
 
-  /* pencil tip follows mainSpine */
-  if(spineLen>0&&p>0.01&&p<0.99){
-    const pt=mainSpine.getPointAtLength(spineLen*smooth(win(p,0.01,0.99)));
-    tip.setAttribute('cx',pt.x);
-    tip.setAttribute('cy',pt.y);
-    tipGlow.setAttribute('cx',pt.x);
-    tipGlow.setAttribute('cy',pt.y);
-    tip.setAttribute('opacity',0.82);
-    tipGlow.setAttribute('opacity',0.66);
+  if(spineLen>0&&p>.01&&p<.99){
+    const pt=mainSpine.getPointAtLength(spineLen*smooth(win(p,.01,.99)));
+    tip.setAttribute('cx',pt.x);tip.setAttribute('cy',pt.y);
+    tipGlow.setAttribute('cx',pt.x);tipGlow.setAttribute('cy',pt.y);
+    // cursor evolves: small+dim → grows → peaks inside the drop (p≈0.35) → settles
+    let tipR,tipO;
+    if(p<0.14){const t=p/0.14;tipR=2.5+t*1.5;tipO=0.55+t*0.27;}
+    else if(p<0.35){const t=(p-0.14)/0.21;tipR=4+t*1.5;tipO=0.82+t*0.14;}
+    else if(p<0.43){const t=(p-0.35)/0.08;tipR=5.5-t*1;tipO=0.96-t*0.08;}
+    else if(p<0.71){const t=(p-0.43)/0.28;tipR=4.5-t*0.5;tipO=0.88-t*0.10;}
+    else{const t=Math.min((p-0.71)/0.28,1);tipR=4-t*0.5;tipO=0.78-t*0.03;}
+    tip.setAttribute('r',tipR);tipGlow.setAttribute('r',tipR*4.5);
+    tip.setAttribute('opacity',tipO);tipGlow.setAttribute('opacity',tipO*0.72);
   } else {
-    tip.setAttribute('opacity',0);
-    tipGlow.setAttribute('opacity',0);
+    tip.setAttribute('opacity',0);tipGlow.setAttribute('opacity',0);
   }
 
-  /* caption parallax */
-  const stripH=vh*0.44;
+  const stripH=vh*.44;
   panels.forEach((pl,i)=>{
-    const s=CH[i][0],e=CH[i][1];
-    const raw=(p-s)/(e-s);
+    const s=CH[i][0],e=CH[i][1],raw=(p-s)/(e-s);
     let opa,dy,sc;
-    if(raw<=0){opa=0;dy=stripH*0.85;sc=0.88;}
-    else if(raw<0.12){const t=smooth(raw/0.12);opa=t;dy=lerp(stripH*0.85,0,t);sc=lerp(0.88,1,t);}
-    else if(raw<0.88){const t=(raw-0.12)/0.76;opa=1;dy=lerp(0,-stripH*0.22,t);sc=1;}
-    else if(raw<=1){const t=smooth((raw-0.88)/0.12);opa=1-t;dy=lerp(-stripH*0.22,-stripH*0.85,t);sc=1;}
-    else{opa=0;dy=-stripH*0.85;sc=1;}
-    pl.style.opacity=opa;
-    pl.style.transform=`translateY(${dy}px) scale(${sc})`;
+    if(raw<=0){opa=0;dy=stripH*.85;sc=.88;}
+    else if(raw<.12){const t=smooth(raw/.12);opa=t;dy=lerp(stripH*.85,0,t);sc=lerp(.88,1,t);}
+    else if(raw<.88){const t=(raw-.12)/.76;opa=1;dy=lerp(0,-stripH*.22,t);sc=1;}
+    else if(raw<=1){const t=smooth((raw-.88)/.12);opa=1-t;dy=lerp(-stripH*.22,-stripH*.85,t);sc=1;}
+    else{opa=0;dy=-stripH*.85;sc=1;}
+    pl.style.opacity=opa;pl.style.transform=`translateY(${dy}px) scale(${sc})`;
   });
 
   setChapter(p);
@@ -855,11 +971,9 @@ addEventListener('scroll',()=>{if(raf)return;raf=requestAnimationFrame(()=>{upda
 addEventListener('resize',update);
 update();
 
-/* ===== NAV + RAIL JUMP ===== */
 function jumpTo(idx){
   const total=flow.offsetHeight-innerHeight;
-  const y=flow.offsetTop+total*(CH[idx][0]+0.01);
-  scrollTo({top:y,behavior:'smooth'});
+  scrollTo({top:flow.offsetTop+total*(CH[idx][0]+.01),behavior:'smooth'});
 }
 railChs.forEach(c=>c.addEventListener('click',()=>jumpTo(+c.dataset.ch)));
 document.querySelectorAll('.nav .menu a[data-ch]').forEach(a=>{
