@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PLEASURE · Botanical Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0d0e;
+  --bg-d:#080909;
+  --oro:#b8956a;
+  --oro-l:#d4b283;
+  --oro-g:#e6c693;
+  --crema:#f0e8d8;
+  --crema-d:#8a8a82;
+  --line:rgba(240,232,216,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--crema);font-family:'Inter',sans-serif;font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--oro);color:var(--bg)}
+
+/* cursor */
+#cursor{position:fixed;top:0;left:0;width:10px;height:17px;z-index:200;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s,width .35s,height .35s;mix-blend-mode:screen}
+#cursor svg{width:100%;height:100%;overflow:visible}
+#cursor.lg{width:22px;height:37px}
+@media(hover:none){#cursor{opacity:0;transition:opacity .4s}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 40px;transition:background .5s,backdrop-filter .5s,border-color .5s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(12,13,14,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom-color:var(--line)}
+.nav .brand{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:18px;letter-spacing:.22em}
+.nav .menu{display:flex;gap:30px;list-style:none}
+.nav .menu a{font-size:12px;color:var(--crema);opacity:.65;transition:opacity .3s;letter-spacing:.04em}
+.nav .menu a:hover{opacity:1}
+.nav .right{display:flex;align-items:center;gap:24px}
+.nav .cta{font-size:12px;letter-spacing:.05em;color:var(--oro-l);border:1px solid var(--oro);padding:9px 17px;border-radius:999px;transition:background .4s,color .4s}
+.nav .cta:hover{background:var(--oro);color:var(--bg)}
+.nav .lang{display:flex;gap:10px;font-size:12px;color:var(--crema-d)}
+.nav .lang .on{color:var(--crema)}
+.nav .lang span{cursor:pointer;transition:color .3s}
+.nav .lang span:hover{color:var(--crema)}
+
+/* bg glow */
+#bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1;transition:opacity .4s ease}
+
+/* gold frame */
+#gold-frame{position:fixed;inset:0;z-index:51;pointer-events:none}
+#gold-frame::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(90deg,rgba(184,149,106,.28) 0%,rgba(184,149,106,0) 16%,rgba(184,149,106,0) 84%,rgba(184,149,106,.28) 100%),
+    linear-gradient(90deg,rgba(184,149,106,.28) 0%,rgba(184,149,106,0) 16%,rgba(184,149,106,0) 84%,rgba(184,149,106,.28) 100%),
+    linear-gradient(180deg,rgba(184,149,106,.28) 0%,rgba(184,149,106,0) 20%,rgba(184,149,106,0) 80%,rgba(184,149,106,.28) 100%),
+    linear-gradient(180deg,rgba(184,149,106,.28) 0%,rgba(184,149,106,0) 20%,rgba(184,149,106,0) 80%,rgba(184,149,106,.28) 100%);
+  background-size:100% 0.5px,100% 0.5px,0.5px 100%,0.5px 100%;
+  background-position:0 0,0 100%,0 0,100% 0;
+  background-repeat:no-repeat;
+}
+#gold-frame::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(circle at 0% 0%,rgba(184,149,106,.14) 0%,transparent 7%),
+    radial-gradient(circle at 100% 0%,rgba(184,149,106,.14) 0%,transparent 7%),
+    radial-gradient(circle at 0% 100%,rgba(184,149,106,.14) 0%,transparent 7%),
+    radial-gradient(circle at 100% 100%,rgba(184,149,106,.14) 0%,transparent 7%);
+}
+
+/* intro */
+#intro{position:relative;z-index:2;height:100vh;overflow:hidden;background:#0c0d0e}
+#intro-canvas{position:absolute;inset:0;z-index:1;pointer-events:none}
+#intro::after{content:'';position:absolute;left:0;right:0;bottom:0;height:30vh;background:linear-gradient(to bottom,rgba(12,13,14,0) 0%,#0c0d0e 100%);z-index:5;pointer-events:none}
+#intro-logo{position:absolute;left:50%;top:17%;transform:translateX(-50%);z-index:4;width:min(480px,70vw);opacity:0;animation:ifade 2.6s .5s cubic-bezier(.16,1,.3,1) forwards}
+#intro-logo img{width:100%;filter:drop-shadow(0 4px 32px rgba(184,149,106,.14))}
+#intro-manifesto{position:absolute;left:50%;top:57%;transform:translateX(-50%);z-index:4;text-align:center;white-space:nowrap}
+.mline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(18px,2.4vw,42px);line-height:1.35;color:var(--crema);opacity:0;display:block;letter-spacing:.01em}
+.mline em{font-style:italic;color:var(--oro-l)}
+.mline.m0{animation:mrise 2.8s 2.4s cubic-bezier(.16,1,.3,1) forwards}
+.mline.m1{animation:mrise 2.8s 3.6s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes ifade{from{opacity:0;transform:translateX(-50%) translateY(14px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes mrise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+#intro .hint{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:ifade 2s 5.2s cubic-bezier(.16,1,.3,1) forwards;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--crema-d);z-index:4;white-space:nowrap;letter-spacing:.06em}
+#intro .hint .ln{width:1px;height:40px;background:linear-gradient(180deg,transparent,var(--oro));animation:pulse 3.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.2;transform:scaleY(.55)}50%{opacity:.85;transform:scaleY(1)}}
+
+/* flow */
+#flow{position:relative;height:800vh}
+.flow-stage{position:sticky;top:0;height:100vh;overflow:hidden;z-index:1;isolation:isolate;clip-path:inset(0)}
+.flow-svg{position:absolute;left:50%;top:0;height:280vh;width:auto;will-change:transform}
+
+/* ink styles */
+.flow-svg .ink{fill:none;stroke:rgba(240,232,216,.38);stroke-width:.7;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.flow-svg .ink.vein{stroke:rgba(240,232,216,.25);stroke-width:.4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;fill:none}
+.flow-svg .ink.str{stroke:rgba(240,232,216,.50);stroke-width:.9;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;fill:none}
+.flow-svg .ink.faint{stroke:rgba(240,232,216,.20);stroke-width:.45;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;fill:none}
+.flow-svg .ink.geo{stroke:rgba(212,178,131,.36);stroke-width:.6;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;fill:none}
+
+/* chapter rail */
+.rail{position:fixed;left:40px;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:0;opacity:0;transition:opacity .8s}
+.rail.show{opacity:1}
+.rail .ch{display:flex;align-items:center;gap:14px;height:46px;cursor:pointer}
+.rail .ch .label{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--crema-d);transition:color .5s,letter-spacing .5s;letter-spacing:.01em}
+.rail .ch.on .label{color:var(--crema);letter-spacing:.04em}
+.rail .ch .bead{width:5px;height:5px;border-radius:50%;background:var(--crema-d);transition:background .5s,transform .5s;flex:none}
+.rail .ch.on .bead{background:var(--oro-g);transform:scale(1.5)}
+.rail .conn{display:flex;flex-direction:column;align-items:center;gap:5px;height:26px;justify-content:center;margin-left:1.5px}
+.rail .conn i{width:3px;height:3px;border-radius:50%;background:rgba(240,232,216,.16)}
+
+/* caption */
+.caption{position:fixed;left:0;right:0;bottom:0;height:46vh;z-index:70;pointer-events:none;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 20%);mask-image:linear-gradient(to bottom,transparent 0%,black 20%)}
+.caption .panel{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:0 max(56px,5vw);text-align:center;opacity:0;will-change:transform,opacity}
+.caption .panel .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--oro);margin-bottom:12px}
+.caption .panel h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(20px,2.6vw,40px);line-height:1.04;color:var(--crema);margin-bottom:12px}
+.caption .panel h2 em{font-style:italic;color:var(--oro-l)}
+.caption .panel p{font-size:15px;line-height:1.5;color:var(--crema-d);max-width:560px;margin:0 auto}
+
+/* progress hairline */
+.flow-progress{position:fixed;left:0;bottom:0;height:1px;background:var(--oro);z-index:75;width:0%}
+
+/* closing / footer */
+#closing{position:relative;background:linear-gradient(180deg,#080909 0%,#0c0d0e 100%);padding:200px 40px 60px;text-align:center;z-index:5}
+#closing .inner{max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:40px}
+#closing h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,5vw,76px);line-height:1.04;color:var(--crema)}
+#closing h2 em{font-style:italic;color:var(--oro-l)}
+#closing .v-line{width:1px;height:70px;background:linear-gradient(180deg,transparent,var(--oro))}
+#closing .cta{font-size:13px;letter-spacing:.06em;color:var(--oro-l);border:1px solid var(--oro);padding:14px 30px;border-radius:999px;transition:background .4s,color .4s}
+#closing .cta:hover{background:var(--oro);color:var(--bg)}
+.foot{max-width:1200px;margin:120px auto 0;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;text-align:left;padding-bottom:60px;border-top:1px solid var(--line);padding-top:60px}
+.foot .news h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:40px;line-height:1.02;margin-bottom:16px}
+.foot .news h3 em{font-style:italic;color:var(--oro-l)}
+.foot .news p{color:var(--crema-d);max-width:380px;margin-bottom:22px;font-size:16px}
+.foot .news form{display:flex;border-bottom:1px solid var(--crema);max-width:380px}
+.foot .news input{flex:1;background:transparent;border:none;color:var(--crema);padding:12px 0;font-size:15px;outline:none}
+.foot .news input::placeholder{color:var(--crema-d)}
+.foot .news button{background:transparent;border:none;color:var(--crema);font-size:13px;cursor:pointer;padding:0 0 0 16px}
+.foot .col h4{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--oro-l);margin-bottom:16px}
+.foot .col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot .col ul a{font-size:14px;color:var(--crema);opacity:.76}
+.foot .col ul a:hover{opacity:1;color:var(--oro-l)}
+.below{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:12px;color:var(--crema-d)}
+
+@media(max-width:900px){
+  .nav{padding:0 20px}
+  .nav .menu{display:none}
+  .rail{display:none}
+  .caption{height:40vh}
+  .caption .panel{padding:0 20px 18px}
+  .caption .panel h2{font-size:clamp(18px,5vw,32px)}
+  .caption .panel p{font-size:13px}
+  .flow-svg{height:200vh}
+  #closing{padding:120px 20px 50px}
+  .foot{grid-template-columns:1fr;gap:36px}
+  .below{flex-direction:column;gap:12px}
+  #intro-manifesto{white-space:normal;width:84vw}
+}
+</style>
+</head>
+<body>
+
+<div id="bg-glow"></div>
+<div id="gold-frame"></div>
+<div id="cursor"><svg viewBox="0 0 12 20"><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="#d4b283" opacity=".72"/><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="none" stroke="#b8956a" stroke-width=".5"/></svg></div>
+
+<nav class="nav" id="nav">
+  <div class="brand">PLEASURE</div>
+  <ul class="menu">
+    <li><a href="#" data-ch="0">Il Bosco</a></li>
+    <li><a href="#" data-ch="1">La Lente</a></li>
+    <li><a href="#" data-ch="2">Nervature</a></li>
+    <li><a href="#" data-ch="3">La Linfa</a></li>
+    <li><a href="#" data-ch="4">Il Rito</a></li>
+    <li><a href="#" data-ch="5">La Fibra</a></li>
+    <li><a href="#" data-ch="6">Sintesi</a></li>
+  </ul>
+  <div class="right">
+    <a class="cta" href="#closing">Scopri le Linee</a>
+    <div class="lang"><span class="on">IT</span><span>EN</span><span>ES</span></div>
+  </div>
+</nav>
+
+<!-- ===== INTRO ===== -->
+<section id="intro">
+  <canvas id="intro-canvas"></canvas>
+  <div id="intro-logo"><img src="logo-pleasure-crop.png" alt="PLEASURE Professional Luxury" /></div>
+  <div id="intro-manifesto">
+    <span class="mline m0">La natura, osservata <em>abbastanza a lungo,</em></span>
+    <span class="mline m1">svela i suoi <em>segreti.</em></span>
+  </div>
+  <div class="hint"><span>segui il filo</span><span class="ln"></span></div>
+</section>
+
+<!-- ===== CHAPTER RAIL ===== -->
+<div class="rail" id="rail">
+  <div class="ch on" data-ch="0"><span class="bead"></span><span class="label">Il Bosco</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="1"><span class="bead"></span><span class="label">La Lente</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="2"><span class="bead"></span><span class="label">Nervature</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="3"><span class="bead"></span><span class="label">La Linfa</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="4"><span class="bead"></span><span class="label">Il Rito</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="5"><span class="bead"></span><span class="label">La Fibra</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="6"><span class="bead"></span><span class="label">Sintesi</span></div>
+</div>
+
+<!-- ===== CAPTIONS ===== -->
+<div class="caption" id="caption">
+  <div class="panel on" data-ch="0">
+    <div class="eyebrow">01 — Il Bosco</div>
+    <h2>Tutto comincia<br/>nel <em>bosco.</em></h2>
+    <p>La foresta non è uno sfondo. È il primo laboratorio. Ogni stelo, ogni radice conosce già la risposta.</p>
+  </div>
+  <div class="panel" data-ch="1">
+    <div class="eyebrow">02 — La Lente</div>
+    <h2>Osservare<br/><em>abbastanza a lungo.</em></h2>
+    <p>La lente non ingrandisce la natura. La rivela. Ogni dettaglio nasconde un sistema completo.</p>
+  </div>
+  <div class="panel" data-ch="2">
+    <div class="eyebrow">03 — Le Nervature</div>
+    <h2>Le nervature<br/>sono già <em>un metodo.</em></h2>
+    <p>La foglia ha già risolto il problema della distribuzione perfetta. Non servono ingegneri.</p>
+  </div>
+  <div class="panel" data-ch="3">
+    <div class="eyebrow">04 — La Linfa</div>
+    <h2>La linfa<br/>conosce <em>la strada.</em></h2>
+    <p>Attraverso capillari invisibili, la pianta porta esattamente ciò che serve, dove serve.</p>
+  </div>
+  <div class="panel" data-ch="4">
+    <div class="eyebrow">05 — Il Rito</div>
+    <h2>Il rito nasce<br/>dall'<em>osservazione.</em></h2>
+    <p>Non un protocollo. Un cerchio che si chiude. La geometria del gesto ripete quella della natura.</p>
+  </div>
+  <div class="panel" data-ch="5">
+    <div class="eyebrow">06 — La Fibra</div>
+    <h2>Ogni fibra<br/>porta <em>la firma.</em></h2>
+    <p>Il capello è un archivio. Ogni filo racconta una storia biologica precisa, irripetibile.</p>
+  </div>
+  <div class="panel" data-ch="6">
+    <div class="eyebrow">07 — Botanical Intelligence</div>
+    <h2><em>Botanical</em><br/>Intelligence.</h2>
+    <p>Non lusso cosmetico. Natura osservata fino a scoprirne i segreti. Professional Luxury.</p>
+  </div>
+</div>
+
+<div class="flow-progress" id="fprog"></div>
+
+<!-- ===== FLOW ===== -->
+<section id="flow">
+  <div class="flow-stage">
+    <svg class="flow-svg" id="svg" viewBox="0 0 1200 2400" preserveAspectRatio="xMidYMin meet">
+      <defs>
+        <filter id="pencil" x="-6%" y="-6%" width="112%" height="112%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.018 0.022" numOctaves="2" seed="9" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/>
+        </filter>
+        <radialGradient id="tipGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(230,198,147,.55)"/>
+          <stop offset="60%" stop-color="rgba(212,178,131,.10)"/>
+          <stop offset="100%" stop-color="rgba(212,178,131,0)"/>
+        </radialGradient>
+      </defs>
+
+      <!-- invisible spine: pencil tip follows this path end-to-end -->
+      <path id="mainSpine" fill="none" stroke="none"
+        d="M600 155 C597 290 603 430 600 590 C597 750 603 890 600 1045 C597 1200 603 1340 600 1460 C597 1610 603 1740 600 1862"/>
+
+      <g filter="url(#pencil)">
+
+        <!-- ====================================================== -->
+        <!-- CH 0 · IL BOSCO  (p 0.00 – 0.14)  SVG y 155–510       -->
+        <!-- ====================================================== -->
+
+        <!-- central stem -->
+        <path class="ink str" data-s="0.01" data-e="0.11"
+          d="M600 505 C599 440 601 365 600 295 C599 235 600 195 600 158"/>
+
+        <!-- flanking stems -->
+        <path class="ink" data-s="0.02" data-e="0.12"
+          d="M520 505 C519 443 521 372 520 308 C519 258 518 215 517 172"/>
+        <path class="ink" data-s="0.02" data-e="0.12"
+          d="M680 505 C681 443 679 372 680 308 C681 258 682 215 683 172"/>
+        <path class="ink faint" data-s="0.03" data-e="0.12"
+          d="M450 505 C450 452 450 396 449 340 C448 298 447 264 446 232"/>
+        <path class="ink faint" data-s="0.03" data-e="0.12"
+          d="M750 505 C750 452 750 396 751 340 C752 298 753 264 754 232"/>
+
+        <!-- branches from central stem -->
+        <path class="ink" data-s="0.04" data-e="0.11"
+          d="M600 248 C578 237 558 231 538 229"/>
+        <path class="ink" data-s="0.04" data-e="0.11"
+          d="M600 248 C622 237 642 231 662 229"/>
+        <path class="ink" data-s="0.06" data-e="0.12"
+          d="M600 348 C576 337 554 331 532 329"/>
+        <path class="ink" data-s="0.06" data-e="0.12"
+          d="M600 348 C624 337 646 331 668 329"/>
+        <path class="ink faint" data-s="0.07" data-e="0.12"
+          d="M600 430 C578 421 558 417 540 415"/>
+        <path class="ink faint" data-s="0.07" data-e="0.12"
+          d="M600 430 C622 421 642 417 660 415"/>
+
+        <!-- branches from flanking stems -->
+        <path class="ink faint" data-s="0.05" data-e="0.12"
+          d="M520 314 C502 304 486 298 468 296"/>
+        <path class="ink faint" data-s="0.05" data-e="0.12"
+          d="M520 404 C502 396 486 392 470 390"/>
+        <path class="ink faint" data-s="0.05" data-e="0.12"
+          d="M680 314 C698 304 714 298 732 296"/>
+        <path class="ink faint" data-s="0.05" data-e="0.12"
+          d="M680 404 C698 396 714 392 730 390"/>
+
+        <!-- leaves at branch tips — almond shapes -->
+        <!-- central left branch tip ~(538,229) -->
+        <path class="ink vein" data-s="0.05" data-e="0.12"
+          d="M538 241 C530 233 526 223 532 215 C538 223 542 233 538 241"/>
+        <path class="ink vein" data-s="0.05" data-e="0.12"
+          d="M532 215 L538 241"/>
+        <path class="ink vein" data-s="0.052" data-e="0.12"
+          d="M544 239 C552 231 556 221 550 213 C544 221 540 231 544 239"/>
+        <path class="ink vein" data-s="0.052" data-e="0.12"
+          d="M550 213 L544 239"/>
+
+        <!-- central right branch tip ~(662,229) -->
+        <path class="ink vein" data-s="0.05" data-e="0.12"
+          d="M662 241 C670 233 674 223 668 215 C662 223 658 233 662 241"/>
+        <path class="ink vein" data-s="0.05" data-e="0.12"
+          d="M668 215 L662 241"/>
+        <path class="ink vein" data-s="0.052" data-e="0.12"
+          d="M656 239 C648 231 644 221 650 213 C656 221 660 231 656 239"/>
+        <path class="ink vein" data-s="0.052" data-e="0.12"
+          d="M650 213 L656 239"/>
+
+        <!-- lower branch tips -->
+        <path class="ink vein" data-s="0.07" data-e="0.13"
+          d="M530 341 C522 333 518 323 524 315 C530 323 534 333 530 341"/>
+        <path class="ink vein" data-s="0.07" data-e="0.13"
+          d="M524 315 L530 341"/>
+        <path class="ink vein" data-s="0.07" data-e="0.13"
+          d="M670 341 C678 333 682 323 676 315 C670 323 666 333 670 341"/>
+        <path class="ink vein" data-s="0.07" data-e="0.13"
+          d="M676 315 L670 341"/>
+
+        <!-- far stem branch tips -->
+        <path class="ink vein" data-s="0.06" data-e="0.13"
+          d="M466 306 C458 298 454 288 460 280 C466 288 470 298 466 306"/>
+        <path class="ink vein" data-s="0.06" data-e="0.13"
+          d="M460 280 L466 306"/>
+        <path class="ink vein" data-s="0.06" data-e="0.13"
+          d="M734 306 C742 298 746 288 740 280 C734 288 730 298 734 306"/>
+        <path class="ink vein" data-s="0.06" data-e="0.13"
+          d="M740 280 L734 306"/>
+
+        <!-- root network at base -->
+        <path class="ink faint" data-s="0.09" data-e="0.14"
+          d="M600 505 C566 516 530 522 492 519"/>
+        <path class="ink faint" data-s="0.09" data-e="0.14"
+          d="M600 505 C634 516 670 522 708 519"/>
+        <path class="ink faint" data-s="0.10" data-e="0.14"
+          d="M600 505 C550 518 505 532 462 526"/>
+        <path class="ink faint" data-s="0.10" data-e="0.14"
+          d="M600 505 C650 518 695 532 738 526"/>
+        <path class="ink faint" data-s="0.11" data-e="0.14"
+          d="M492 519 C476 524 460 522 446 516"/>
+        <path class="ink faint" data-s="0.11" data-e="0.14"
+          d="M708 519 C724 524 740 522 754 516"/>
+
+        <!-- ====================================================== -->
+        <!-- CH 1 · LA LENTE  (p 0.14 – 0.28)  SVG y ≈ 560–705     -->
+        <!-- circle cx=600 cy=634 r=90                              -->
+        <!-- ====================================================== -->
+
+        <!-- outer circle — top half then bottom half -->
+        <path class="ink geo" data-s="0.15" data-e="0.23"
+          d="M510 634 A 90 90 0 0 1 690 634"/>
+        <path class="ink geo" data-s="0.16" data-e="0.25"
+          d="M690 634 A 90 90 0 0 1 510 634"/>
+
+        <!-- inner ring r=50 -->
+        <path class="ink faint" data-s="0.18" data-e="0.25"
+          d="M550 634 A 50 50 0 0 1 650 634"/>
+        <path class="ink faint" data-s="0.19" data-e="0.26"
+          d="M650 634 A 50 50 0 0 1 550 634"/>
+
+        <!-- crosshairs -->
+        <path class="ink geo" data-s="0.20" data-e="0.26"
+          d="M514 634 L686 634"/>
+        <path class="ink geo" data-s="0.20" data-e="0.26"
+          d="M600 548 L600 720"/>
+
+        <!-- cardinal tick marks -->
+        <path class="ink geo" data-s="0.22" data-e="0.27"
+          d="M600 544 L600 556 M600 724 L600 712 M510 634 L522 634 M690 634 L678 634"/>
+
+        <!-- diagonal 45° marks -->
+        <path class="ink faint" data-s="0.23" data-e="0.27"
+          d="M664 570 L657 577 M536 570 L543 577 M664 698 L657 691 M536 698 L543 691"/>
+
+        <!-- tiny magnified leaf inside -->
+        <path class="ink vein" data-s="0.24" data-e="0.28"
+          d="M600 610 C588 618 584 630 592 638 C600 630 604 618 600 610"/>
+        <path class="ink vein" data-s="0.24" data-e="0.28"
+          d="M600 610 C612 618 616 630 608 638 C600 630 596 618 600 610"/>
+        <path class="ink vein" data-s="0.25" data-e="0.28"
+          d="M600 612 L600 636"/>
+
+        <!-- ====================================================== -->
+        <!-- CH 2 · LE NERVATURE  (p 0.28 – 0.43)  SVG y ≈ 780–990 -->
+        <!-- leaf cx=600 top=782 bottom=974                         -->
+        <!-- ====================================================== -->
+
+        <!-- leaf outline left half -->
+        <path class="ink str" data-s="0.29" data-e="0.38"
+          d="M600 782 C568 802 546 844 540 882 C534 922 548 954 600 974"/>
+        <!-- leaf outline right half -->
+        <path class="ink str" data-s="0.30" data-e="0.39"
+          d="M600 782 C632 802 654 844 660 882 C666 922 652 954 600 974"/>
+        <!-- midrib -->
+        <path class="ink str" data-s="0.31" data-e="0.38"
+          d="M600 786 L600 970"/>
+
+        <!-- lateral veins — 6 pairs drawing in cascade -->
+        <path class="ink vein" data-s="0.33" data-e="0.40"
+          d="M600 812 C582 814 566 820 554 830"/>
+        <path class="ink vein" data-s="0.33" data-e="0.40"
+          d="M600 812 C618 814 634 820 646 830"/>
+        <path class="ink vein" data-s="0.34" data-e="0.41"
+          d="M600 836 C580 838 562 844 548 854"/>
+        <path class="ink vein" data-s="0.34" data-e="0.41"
+          d="M600 836 C620 838 638 844 652 854"/>
+        <path class="ink vein" data-s="0.35" data-e="0.41"
+          d="M600 862 C578 864 560 870 546 880"/>
+        <path class="ink vein" data-s="0.35" data-e="0.41"
+          d="M600 862 C622 864 640 870 654 880"/>
+        <path class="ink vein" data-s="0.36" data-e="0.42"
+          d="M600 888 C580 890 564 896 552 904"/>
+        <path class="ink vein" data-s="0.36" data-e="0.42"
+          d="M600 888 C620 890 636 896 648 904"/>
+        <path class="ink vein" data-s="0.37" data-e="0.42"
+          d="M600 914 C582 916 568 922 558 930"/>
+        <path class="ink vein" data-s="0.37" data-e="0.42"
+          d="M600 914 C618 916 632 922 642 930"/>
+        <path class="ink vein" data-s="0.38" data-e="0.43"
+          d="M600 938 C584 940 574 946 568 952"/>
+        <path class="ink vein" data-s="0.38" data-e="0.43"
+          d="M600 938 C616 940 626 946 632 952"/>
+
+        <!-- sub-veins off lateral tips -->
+        <path class="ink vein" data-s="0.39" data-e="0.43"
+          d="M554 830 C548 834 541 834 534 831"/>
+        <path class="ink vein" data-s="0.39" data-e="0.43"
+          d="M646 830 C652 834 659 834 666 831"/>
+        <path class="ink vein" data-s="0.40" data-e="0.43"
+          d="M548 854 C541 858 534 858 527 854"/>
+        <path class="ink vein" data-s="0.40" data-e="0.43"
+          d="M652 854 C659 858 666 858 673 854"/>
+
+        <!-- ====================================================== -->
+        <!-- CH 3 · LA LINFA  (p 0.43 – 0.57)  SVG y ≈ 1024–1230   -->
+        <!-- ====================================================== -->
+
+        <!-- central capillary -->
+        <path class="ink" data-s="0.44" data-e="0.53"
+          d="M600 1024 C597 1086 603 1148 600 1210"/>
+
+        <!-- flanking capillaries -->
+        <path class="ink faint" data-s="0.44" data-e="0.53"
+          d="M588 1034 C585 1094 582 1152 579 1192 C577 1206 580 1214 587 1220"/>
+        <path class="ink faint" data-s="0.44" data-e="0.53"
+          d="M612 1034 C615 1094 618 1152 621 1192 C623 1206 620 1214 613 1220"/>
+        <path class="ink faint" data-s="0.45" data-e="0.54"
+          d="M575 1058 C571 1112 569 1162 571 1192 C573 1206 579 1214 587 1220"/>
+        <path class="ink faint" data-s="0.45" data-e="0.54"
+          d="M625 1058 C629 1112 631 1162 629 1192 C627 1206 621 1214 613 1220"/>
+        <path class="ink faint" data-s="0.46" data-e="0.54"
+          d="M560 1084 C556 1132 556 1172 562 1196"/>
+        <path class="ink faint" data-s="0.46" data-e="0.54"
+          d="M640 1084 C644 1132 644 1172 638 1196"/>
+
+        <!-- tributaries joining from sides -->
+        <path class="ink vein" data-s="0.47" data-e="0.54"
+          d="M546 1104 C554 1110 562 1118 569 1126"/>
+        <path class="ink vein" data-s="0.47" data-e="0.54"
+          d="M654 1104 C646 1110 638 1118 631 1126"/>
+        <path class="ink vein" data-s="0.48" data-e="0.55"
+          d="M536 1144 C546 1148 557 1154 566 1162"/>
+        <path class="ink vein" data-s="0.48" data-e="0.55"
+          d="M664 1144 C654 1148 643 1154 634 1162"/>
+
+        <!-- drop outline (pure stroke, no fill) -->
+        <path class="ink str" data-s="0.52" data-e="0.57"
+          d="M600 1168 C622 1196 622 1220 600 1232 C578 1220 578 1196 600 1168 Z"/>
+
+        <!-- ====================================================== -->
+        <!-- CH 4 · IL RITO  (p 0.57 – 0.71)  SVG y ≈ 1270–1420    -->
+        <!-- concentric circles cx=600 cy=1344                      -->
+        <!-- ====================================================== -->
+
+        <!-- inner circle r=38 -->
+        <path class="ink geo" data-s="0.58" data-e="0.64"
+          d="M562 1344 A 38 38 0 0 1 638 1344"/>
+        <path class="ink geo" data-s="0.585" data-e="0.645"
+          d="M638 1344 A 38 38 0 0 1 562 1344"/>
+
+        <!-- mid circle r=68 -->
+        <path class="ink geo" data-s="0.60" data-e="0.67"
+          d="M532 1344 A 68 68 0 0 1 668 1344"/>
+        <path class="ink geo" data-s="0.605" data-e="0.675"
+          d="M668 1344 A 68 68 0 0 1 532 1344"/>
+
+        <!-- outer circle r=98 -->
+        <path class="ink geo" data-s="0.62" data-e="0.70"
+          d="M502 1344 A 98 98 0 0 1 698 1344"/>
+        <path class="ink geo" data-s="0.625" data-e="0.705"
+          d="M698 1344 A 98 98 0 0 1 502 1344"/>
+
+        <!-- 6 radial lines at 60° intervals, from center to r=98 -->
+        <!-- 0° N, 60° NE, 120° SE, 180° S, 240° SW, 300° NW      -->
+        <path class="ink faint" data-s="0.64" data-e="0.71"
+          d="M600 1344 L600 1246"/>
+        <path class="ink faint" data-s="0.64" data-e="0.71"
+          d="M600 1344 L685 1295"/>
+        <path class="ink faint" data-s="0.64" data-e="0.71"
+          d="M600 1344 L685 1393"/>
+        <path class="ink faint" data-s="0.64" data-e="0.71"
+          d="M600 1344 L600 1442"/>
+        <path class="ink faint" data-s="0.64" data-e="0.71"
+          d="M600 1344 L515 1393"/>
+        <path class="ink faint" data-s="0.64" data-e="0.71"
+          d="M600 1344 L515 1295"/>
+
+        <!-- cardinal ticks on outer circle -->
+        <path class="ink geo" data-s="0.67" data-e="0.71"
+          d="M600 1246 L600 1254 M600 1442 L600 1434 M698 1344 L690 1344 M502 1344 L510 1344"/>
+
+        <!-- ====================================================== -->
+        <!-- CH 5 · LA FIBRA  (p 0.71 – 0.86)  SVG y ≈ 1455–1675   -->
+        <!-- 14 hair fiber lines x 476 to 724                       -->
+        <!-- ====================================================== -->
+
+        <path class="ink faint" data-s="0.710" data-e="0.820" d="M476 1455 C477 1515 475 1575 476 1635 C477 1658 476 1668 476 1675"/>
+        <path class="ink faint" data-s="0.715" data-e="0.825" d="M495 1455 C497 1517 493 1577 495 1637 C496 1660 495 1669 495 1675"/>
+        <path class="ink faint" data-s="0.720" data-e="0.830" d="M514 1455 C512 1515 516 1575 514 1635 C513 1658 514 1668 514 1675"/>
+        <path class="ink faint" data-s="0.725" data-e="0.835" d="M533 1455 C535 1517 531 1577 533 1637 C534 1660 533 1669 533 1675"/>
+        <path class="ink"       data-s="0.730" data-e="0.840" d="M552 1455 C550 1515 554 1575 552 1635 C551 1658 552 1668 552 1675"/>
+        <path class="ink"       data-s="0.735" data-e="0.845" d="M571 1455 C573 1517 569 1577 571 1637 C572 1660 571 1669 571 1675"/>
+        <path class="ink str"   data-s="0.740" data-e="0.850" d="M590 1455 C588 1515 592 1575 590 1635 C589 1658 590 1668 590 1675"/>
+        <path class="ink str"   data-s="0.745" data-e="0.855" d="M610 1455 C612 1517 608 1577 610 1637 C611 1660 610 1669 610 1675"/>
+        <path class="ink"       data-s="0.750" data-e="0.860" d="M629 1455 C627 1515 631 1575 629 1635 C628 1658 629 1668 629 1675"/>
+        <path class="ink"       data-s="0.755" data-e="0.855" d="M648 1455 C650 1517 646 1577 648 1637 C649 1660 648 1669 648 1675"/>
+        <path class="ink faint" data-s="0.760" data-e="0.850" d="M667 1455 C665 1515 669 1575 667 1635 C666 1658 667 1668 667 1675"/>
+        <path class="ink faint" data-s="0.765" data-e="0.845" d="M686 1455 C688 1517 684 1577 686 1637 C687 1660 686 1669 686 1675"/>
+        <path class="ink faint" data-s="0.770" data-e="0.840" d="M705 1455 C703 1515 707 1575 705 1635 C704 1658 705 1668 705 1675"/>
+        <path class="ink faint" data-s="0.775" data-e="0.835" d="M724 1455 C726 1517 722 1577 724 1637 C725 1660 724 1669 724 1675"/>
+
+        <!-- ====================================================== -->
+        <!-- CH 6 · SINTESI  (p 0.86 – 1.01)  SVG y ≈ 1715–1870    -->
+        <!-- ====================================================== -->
+
+        <!-- vertical spine -->
+        <path class="ink str" data-s="0.87" data-e="0.93"
+          d="M600 1720 L600 1868"/>
+
+        <!-- two symmetrical leaves at ~y=1788 -->
+        <path class="ink" data-s="0.88" data-e="0.94"
+          d="M600 1804 C580 1786 570 1764 580 1746 C590 1764 598 1786 600 1804"/>
+        <path class="ink" data-s="0.88" data-e="0.94"
+          d="M600 1804 C620 1786 630 1764 620 1746 C610 1764 602 1786 600 1804"/>
+
+        <!-- midribs -->
+        <path class="ink vein" data-s="0.89" data-e="0.945"
+          d="M580 1746 L600 1804"/>
+        <path class="ink vein" data-s="0.89" data-e="0.945"
+          d="M620 1746 L600 1804"/>
+
+        <!-- leaf veins -->
+        <path class="ink vein" data-s="0.90" data-e="0.955"
+          d="M600 1770 C594 1768 588 1766 583 1764"/>
+        <path class="ink vein" data-s="0.90" data-e="0.955"
+          d="M600 1770 C606 1768 612 1766 617 1764"/>
+        <path class="ink vein" data-s="0.905" data-e="0.960"
+          d="M600 1784 C593 1782 587 1780 582 1778"/>
+        <path class="ink vein" data-s="0.905" data-e="0.960"
+          d="M600 1784 C607 1782 613 1780 618 1778"/>
+
+        <!-- synthesis circle at base r=28, cy=1846 -->
+        <path class="ink geo" data-s="0.93" data-e="0.99"
+          d="M572 1846 A 28 28 0 0 1 628 1846"/>
+        <path class="ink geo" data-s="0.935" data-e="0.995"
+          d="M628 1846 A 28 28 0 0 1 572 1846"/>
+
+        <!-- cardinal ticks on synthesis circle -->
+        <path class="ink geo" data-s="0.965" data-e="1.01"
+          d="M600 1818 L600 1812 M600 1874 L600 1880 M628 1846 L634 1846 M572 1846 L566 1846"/>
+
+        <!-- final mark: two fine horizontal lines (scientific label) -->
+        <path class="ink faint" data-s="0.975" data-e="1.01"
+          d="M566 1858 L634 1858"/>
+        <path class="ink faint" data-s="0.985" data-e="1.01"
+          d="M574 1864 L626 1864"/>
+
+      </g><!-- /pencil filter -->
+
+      <!-- pencil tip (above filter, not displaced) -->
+      <circle id="tip" r="3.5" fill="#fff6e2" opacity="0"/>
+      <circle id="tipGlow" r="16" fill="url(#tipGrad)" opacity="0"/>
+
+    </svg>
+  </div>
+</section>
+
+<!-- ===== CLOSING ===== -->
+<section id="closing">
+  <div class="inner">
+    <div class="v-line"></div>
+    <h2>Dalla foresta al capello.<br/>Lo stesso <em>linguaggio.</em></h2>
+    <a class="cta" href="#">Entra nel mondo PLEASURE →</a>
+  </div>
+  <div class="foot">
+    <div class="news">
+      <h3>Entra nel<br/><em>Circolo →</em></h3>
+      <p>Quattro lettere all'anno. Note dal laboratorio, inviti privati, il prossimo capitolo del metodo.</p>
+      <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Iscritta ✓'">
+        <input type="email" placeholder="la tua email professionale" required />
+        <button type="submit">Iscriviti →</button>
+      </form>
+    </div>
+    <div class="col"><h4>Maison</h4><ul><li><a href="#">Manifesto</a></li><li><a href="#">Laboratorio</a></li><li><a href="#">Franciacorta</a></li></ul></div>
+    <div class="col"><h4>Method</h4><ul><li><a href="#">Academy</a></li><li><a href="#">Atelier</a></li><li><a href="#">Ricerca</a></li></ul></div>
+    <div class="col"><h4>Connect</h4><ul><li><a href="#">Apri un salone</a></li><li><a href="#">Concierge</a></li><li><a href="#">Contatti</a></li></ul></div>
+  </div>
+  <div class="below"><span>© MMXXVI · Pleasure Professional Luxury</span><span>IT · EN · ES</span></div>
+</section>
+
+<script>
+/* ===== INTRO PARTICLES ===== */
+(function(){
+  const cv=document.getElementById('intro-canvas');
+  const ctx=cv.getContext('2d');
+  let W,H;
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+  resize();
+  addEventListener('resize',resize);
+
+  const N=15;
+  function rnd(a,b){return a+Math.random()*(b-a);}
+
+  function mkP(){
+    const z=Math.random();
+    return{
+      x:rnd(0,innerWidth),y:rnd(0,innerHeight),z,
+      vx:rnd(-0.15,0.15),vy:rnd(-0.11,0.11),
+      sz:rnd(0.8,2.6),opa:0,
+      topa:rnd(0.09,0.34)*(0.3+z*0.7),
+      life:rnd(0,340),max:rnd(260,540),
+      pid:Math.random()*100,
+    };
+  }
+
+  const pts=Array.from({length:N},mkP);
+  let frame=0;
+
+  function tick(){
+    if(window.scrollY>innerHeight){requestAnimationFrame(tick);return;}
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.life++;
+      if(p.life>p.max){Object.assign(p,mkP());p.life=0;p.opa=0;return;}
+      const prog=p.life/p.max;
+      if(prog<0.18) p.opa=(prog/0.18)*p.topa;
+      else if(prog>0.82) p.opa=((1-prog)/0.18)*p.topa;
+      else p.opa=p.topa;
+      const t=frame*0.005;
+      p.vx+=Math.sin(t+p.pid)*0.006;
+      p.vy+=Math.cos(t*0.8+p.pid*1.3)*0.005;
+      const spd=Math.hypot(p.vx,p.vy);
+      if(spd>0.34){p.vx=p.vx/spd*0.34;p.vy=p.vy/spd*0.34;}
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-12)p.x=W+12;else if(p.x>W+12)p.x=-12;
+      if(p.y<-12)p.y=H+12;else if(p.y>H+12)p.y=-12;
+      const s=p.sz*(0.3+p.z*0.7);
+      const rv=Math.floor(172+p.z*26);
+      const gv=Math.floor(134+p.z*26);
+      const bv=Math.floor(96+p.z*36);
+      ctx.beginPath();
+      ctx.moveTo(p.x,       p.y-s*1.9);
+      ctx.lineTo(p.x+s,     p.y-s*0.28);
+      ctx.lineTo(p.x,       p.y+s*1.9);
+      ctx.lineTo(p.x-s,     p.y-s*0.28);
+      ctx.closePath();
+      ctx.fillStyle=`rgba(${rv},${gv},${bv},${p.opa})`;
+      ctx.fill();
+      ctx.strokeStyle=`rgba(${rv},${gv},${bv},${Math.min(1,p.opa*1.4)})`;
+      ctx.lineWidth=0.26;
+      ctx.stroke();
+    });
+    frame++;
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ===== CURSOR ===== */
+const cur=document.getElementById('cursor');
+let mx=innerWidth/2,my=innerHeight/2,cxv=mx,cyv=my;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function loop(){cxv+=(mx-cxv)*.22;cyv+=(my-cyv)*.22;cur.style.transform=`translate(${cxv}px,${cyv}px) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
+addEventListener('mouseout',e=>{if(!e.relatedTarget)cur.style.opacity=0;});
+addEventListener('mouseover',()=>cur.style.opacity=1);
+document.addEventListener('mouseover',e=>{if(e.target.closest('a,button'))cur.classList.add('lg');});
+document.addEventListener('mouseout',e=>{if(e.target.closest('a,button'))cur.classList.remove('lg');});
+
+/* touch cursor */
+let touching=false;
+addEventListener('touchstart',e=>{
+  touching=true;const t=e.touches[0];
+  mx=t.clientX;my=t.clientY;cxv=mx;cyv=my;cur.style.opacity=1;
+},{passive:true});
+addEventListener('touchmove',e=>{const t=e.touches[0];mx=t.clientX;my=t.clientY;},{passive:true});
+addEventListener('touchend',()=>{touching=false;setTimeout(()=>{if(!touching)cur.style.opacity=0;},500);},{passive:true});
+
+/* ===== NAV ===== */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>60);},{passive:true});
+
+/* ===== INK DRAW SYSTEM ===== */
+const inks=[...document.querySelectorAll('.ink[data-s]')].map(el=>{
+  let len=80;
+  try{len=el.getTotalLength();}catch(e){}
+  el.style.strokeDasharray=len;
+  el.style.strokeDashoffset=len;
+  return{el,len,s:+el.dataset.s,e:+el.dataset.e};
+});
+
+/* ===== HELPERS ===== */
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function win(p,s,e){return clamp((p-s)/(e-s),0,1);}
+function smooth(t){return t*t*(3-2*t);}
+function lerp(a,b,t){return a+(b-a)*t;}
+
+/* ===== ELEMENTS ===== */
+const svg=document.getElementById('svg');
+const flow=document.getElementById('flow');
+const tip=document.getElementById('tip');
+const tipGlow=document.getElementById('tipGlow');
+const rail=document.getElementById('rail');
+const fprog=document.getElementById('fprog');
+const bgGlow=document.getElementById('bg-glow');
+const mainSpine=document.getElementById('mainSpine');
+
+let spineLen=0;
+try{spineLen=mainSpine.getTotalLength();}catch(e){}
+
+/* ===== CHAPTER BACKGROUNDS (very restrained) ===== */
+const CH_BG=[
+  'radial-gradient(ellipse at 30% 72%, rgba(80,70,50,.10) 0%, transparent 62%)',
+  'radial-gradient(ellipse at 68% 50%, rgba(100,84,60,.09) 0%, transparent 56%)',
+  'radial-gradient(ellipse at 50% 36%, rgba(120,100,72,.10) 0%, transparent 52%)',
+  'radial-gradient(ellipse at 36% 62%, rgba(90,76,54,.09) 0%, transparent 58%)',
+  'radial-gradient(ellipse at 64% 64%, rgba(110,92,66,.10) 0%, transparent 54%)',
+  'radial-gradient(ellipse at 50% 52%, rgba(136,114,80,.11) 0%, transparent 48%)',
+  'radial-gradient(ellipse at 50% 28%, rgba(104,88,62,.09) 0%, transparent 56%)',
+];
+bgGlow.style.background=CH_BG[0];
+
+const railChs=[...document.querySelectorAll('.rail .ch')];
+const panels=[...document.querySelectorAll('.caption .panel')];
+
+const CH=[
+  [0.00,0.14],
+  [0.14,0.28],
+  [0.28,0.43],
+  [0.43,0.57],
+  [0.57,0.71],
+  [0.71,0.86],
+  [0.86,1.01],
+];
+
+let curCh=-1;
+function setChapter(p){
+  let idx=0;
+  for(let i=0;i<CH.length;i++){if(p>=CH[i][0])idx=i;}
+  if(idx!==curCh){
+    curCh=idx;
+    railChs.forEach((c,i)=>c.classList.toggle('on',i===idx));
+    bgGlow.style.opacity=0;
+    setTimeout(()=>{bgGlow.style.background=CH_BG[idx];bgGlow.style.opacity=1;},400);
+  }
+}
+
+/* ===== MAIN UPDATE ===== */
+function update(){
+  const rect=flow.getBoundingClientRect();
+  const total=flow.offsetHeight-innerHeight;
+  const p=clamp(-rect.top/total,0,1);
+  const vh=innerHeight;
+
+  const inFlow=rect.top<vh*0.5&&rect.bottom>vh*0.5;
+  rail.classList.toggle('show',inFlow);
+  document.getElementById('caption').style.opacity=inFlow?1:0;
+  fprog.style.width=(p*100)+'%';
+  fprog.style.opacity=inFlow?1:0;
+
+  /* pan SVG */
+  const svgH=vh*2.8;
+  const ty=vh*0.14-p*(svgH-vh);
+  svg.style.transform=`translate(-50%,${ty}px)`;
+
+  /* draw inks */
+  for(const k of inks){
+    const lp=smooth(win(p,k.s,k.e));
+    k.el.style.strokeDashoffset=k.len*(1-lp);
+  }
+
+  /* pencil tip follows mainSpine */
+  if(spineLen>0&&p>0.01&&p<0.99){
+    const pt=mainSpine.getPointAtLength(spineLen*smooth(win(p,0.01,0.99)));
+    tip.setAttribute('cx',pt.x);
+    tip.setAttribute('cy',pt.y);
+    tipGlow.setAttribute('cx',pt.x);
+    tipGlow.setAttribute('cy',pt.y);
+    tip.setAttribute('opacity',0.82);
+    tipGlow.setAttribute('opacity',0.66);
+  } else {
+    tip.setAttribute('opacity',0);
+    tipGlow.setAttribute('opacity',0);
+  }
+
+  /* caption parallax */
+  const stripH=vh*0.44;
+  panels.forEach((pl,i)=>{
+    const s=CH[i][0],e=CH[i][1];
+    const raw=(p-s)/(e-s);
+    let opa,dy,sc;
+    if(raw<=0){opa=0;dy=stripH*0.85;sc=0.88;}
+    else if(raw<0.12){const t=smooth(raw/0.12);opa=t;dy=lerp(stripH*0.85,0,t);sc=lerp(0.88,1,t);}
+    else if(raw<0.88){const t=(raw-0.12)/0.76;opa=1;dy=lerp(0,-stripH*0.22,t);sc=1;}
+    else if(raw<=1){const t=smooth((raw-0.88)/0.12);opa=1-t;dy=lerp(-stripH*0.22,-stripH*0.85,t);sc=1;}
+    else{opa=0;dy=-stripH*0.85;sc=1;}
+    pl.style.opacity=opa;
+    pl.style.transform=`translateY(${dy}px) scale(${sc})`;
+  });
+
+  setChapter(p);
+}
+
+let raf=null;
+addEventListener('scroll',()=>{if(raf)return;raf=requestAnimationFrame(()=>{update();raf=null});},{passive:true});
+addEventListener('resize',update);
+update();
+
+/* ===== NAV + RAIL JUMP ===== */
+function jumpTo(idx){
+  const total=flow.offsetHeight-innerHeight;
+  const y=flow.offsetTop+total*(CH[idx][0]+0.01);
+  scrollTo({top:y,behavior:'smooth'});
+}
+railChs.forEach(c=>c.addEventListener('click',()=>jumpTo(+c.dataset.ch)));
+document.querySelectorAll('.nav .menu a[data-ch]').forEach(a=>{
+  a.addEventListener('click',e=>{e.preventDefault();jumpTo(+a.dataset.ch);});
+});
+</script>
+</body>
+</html>
