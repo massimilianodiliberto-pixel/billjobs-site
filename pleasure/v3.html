@@ -97,6 +97,16 @@ img{max-width:100%;display:block}
 @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
 
+/* ===== flora wind sway ===== */
+@keyframes sway-l{0%,100%{transform:rotate(0deg)}18%{transform:rotate(-1.3deg) skewX(-.4deg)}36%{transform:rotate(.4deg)}52%{transform:rotate(-2.8deg) skewX(-.7deg)}68%{transform:rotate(.6deg)}84%{transform:rotate(-1.1deg)}}
+@keyframes sway-r{0%,100%{transform:rotate(0deg)}18%{transform:rotate(1.3deg) skewX(.4deg)}36%{transform:rotate(-.4deg)}52%{transform:rotate(2.8deg) skewX(.7deg)}68%{transform:rotate(-.6deg)}84%{transform:rotate(1.1deg)}}
+@keyframes sway-close{0%,100%{transform:rotate(0deg)}20%{transform:rotate(-3.4deg)}42%{transform:rotate(1.0deg)}58%{transform:rotate(-4.6deg)}76%{transform:rotate(.8deg)}90%{transform:rotate(-1.6deg)}}
+.sway-l{transform-origin:60px 900px;animation:sway-l 11.4s ease-in-out infinite}
+.sway-r{transform-origin:220px 900px;animation:sway-r 10.2s ease-in-out infinite;animation-delay:-4.1s}
+.sway-close{transform-origin:0px 780px;animation:sway-close 8.8s ease-in-out infinite;animation-delay:-1.8s}
+.bl-close{fill:none;stroke:rgba(240,232,216,.72);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-close-lf{fill:none;stroke:rgba(240,232,216,.64);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+
 /* ===== flow stage ===== */
 #flow{position:relative;height:800vh}
 .flow-stage{position:sticky;top:0;height:100vh;overflow:hidden;z-index:1;isolation:isolate;clip-path:inset(0)}
@@ -209,6 +219,7 @@ img{max-width:100%;display:block}
     <path class="bl" d="M51 514 C34 496 16 486 -6 482" opacity=".22"/>
     </g><!-- /fl-far-l -->
     <g id="fl-near-l">
+    <g class="sway-l">
     <!-- foreground branch: enters lower-left, sweeps up-right -->
     <path class="bl-fg" d="M-10 732 C22 664 65 566 106 460 C134 384 160 316 178 242 C190 192 198 150 204 102"/>
     <path class="bl-fg" d="M94 488 C118 466 146 450 178 444"/>
@@ -260,6 +271,27 @@ img{max-width:100%;display:block}
     <path class="bl-lf" d="M202 104 L196 80" opacity=".78"/>
     <path class="bl-lf" d="M206 102 C214 96,218 86,212 78 C206 86,202 96,206 102" opacity=".78"/>
     <path class="bl-lf" d="M206 102 L212 78" opacity=".78"/>
+    </g><!-- /sway-l -->
+    <!-- very close branch (left only) — almost caresses the logo -->
+    <g class="sway-close">
+    <path class="bl-close" d="M-44 826 C-14 704 22 570 64 438 C96 334 126 248 150 168 C160 136 167 110 170 90"/>
+    <path class="bl-close" d="M96 422 C118 382 142 350 164 326"/>
+    <!-- large organic leaf at tip: asymmetric, hand-drawn feel -->
+    <path class="bl-close-lf" d="M170 90 C138 110 120 148 124 180 C128 208 144 228 162 234 C170 236 178 232 184 224 C194 208 198 184 194 158 C190 132 182 108 170 90"/>
+    <path class="bl-close-lf" d="M170 90 C168 126 164 168 162 234"/>
+    <path class="bl-close-lf" d="M167 120 C157 114 148 110 140 108" opacity=".72"/>
+    <path class="bl-close-lf" d="M166 142 C156 136 147 132 139 130" opacity=".66"/>
+    <path class="bl-close-lf" d="M165 165 C156 159 148 155 141 153" opacity=".60"/>
+    <path class="bl-close-lf" d="M164 188 C156 183 149 180 143 179" opacity=".54"/>
+    <path class="bl-close-lf" d="M167 120 C177 114 186 110 192 110" opacity=".70"/>
+    <path class="bl-close-lf" d="M166 142 C176 136 185 132 191 132" opacity=".64"/>
+    <path class="bl-close-lf" d="M165 165 C175 160 183 156 189 156" opacity=".58"/>
+    <!-- small secondary leaf at sub-branch tip -->
+    <path class="bl-close-lf" d="M172 326 C160 314 154 300 162 290 C170 298 174 312 172 326"/>
+    <path class="bl-close-lf" d="M172 326 L162 290"/>
+    <path class="bl-close-lf" d="M174 324 C186 312 190 298 182 288 C174 296 170 310 174 324"/>
+    <path class="bl-close-lf" d="M174 324 L182 288"/>
+    </g><!-- /sway-close -->
     </g><!-- /fl-near-l -->
     <g id="fl-mid-l">
     <!-- fern at base -->
@@ -296,57 +328,53 @@ img{max-width:100%;display:block}
     <path class="bl" d="M229 514 C246 496 264 486 286 482" opacity=".22"/>
     </g><!-- /fl-far-r -->
     <g id="fl-near-r">
+    <g class="sway-r">
     <!-- foreground branch: enters lower-right, sweeps up-left -->
     <path class="bl-fg" d="M290 732 C258 664 215 566 174 460 C146 384 120 316 102 242 C90 192 82 150 76 102"/>
     <path class="bl-fg" d="M186 488 C162 466 134 450 102 444"/>
     <path class="bl-fg" d="M135 370 C116 348 96 332 74 320"/>
     <path class="bl-fg" d="M102 242 C120 226 142 216 168 210"/>
-    <!-- leaves pos 1 ~(260,700) -->
-    <path class="bl-lf" d="M260 700 C268 694,272 684,266 676 C260 684,256 694,260 700"/>
-    <path class="bl-lf" d="M260 700 L266 676"/>
-    <path class="bl-lf" d="M258 698 C250 692,246 682,252 674 C258 682,262 692,258 698"/>
-    <path class="bl-lf" d="M258 698 L252 674"/>
-    <!-- leaves pos 2 ~(224,598) -->
+    <!-- leaves pos 1 ~(264,718) — shifted down, sparser than left -->
+    <path class="bl-lf" d="M264 718 C272 712,276 702,270 694 C264 702,260 712,264 718"/>
+    <path class="bl-lf" d="M264 718 L270 694"/>
+    <path class="bl-lf" d="M262 716 C254 710,250 700,256 692 C262 700,266 710,262 716"/>
+    <path class="bl-lf" d="M262 716 L256 692"/>
+    <!-- leaves pos 2 ~(224,598) — fewer leaves (no oval) -->
     <path class="bl-lf" d="M225 600 C233 594,237 584,231 576 C225 584,221 594,225 600"/>
     <path class="bl-lf" d="M225 600 L231 576"/>
     <path class="bl-lf" d="M222 598 C214 592,210 582,216 574 C222 582,226 592,222 598"/>
     <path class="bl-lf" d="M222 598 L216 574"/>
-    <path class="bl-lf" d="M224 600 C232 592,232 580,224 572 C216 580,216 592,224 600"/>
-    <path class="bl-lf" d="M224 600 L224 572"/>
-    <!-- leaves junction ~(186,488) -->
-    <path class="bl-lf" d="M188 490 C196 484,200 474,194 466 C188 474,184 484,188 490"/>
-    <path class="bl-lf" d="M188 490 L194 466"/>
-    <path class="bl-lf" d="M184 488 C176 482,172 472,178 464 C184 472,188 482,184 488"/>
-    <path class="bl-lf" d="M184 488 L178 464"/>
-    <path class="bl-lf" d="M186 490 C194 482,194 470,186 462 C178 470,178 482,186 490"/>
-    <path class="bl-lf" d="M186 490 L186 462"/>
+    <!-- leaves junction ~(190,492) — slightly shifted position -->
+    <path class="bl-lf" d="M192 494 C200 488,204 478,198 470 C192 478,188 488,192 494"/>
+    <path class="bl-lf" d="M192 494 L198 470"/>
+    <path class="bl-lf" d="M188 492 C180 486,176 476,182 468 C188 476,192 486,188 492"/>
+    <path class="bl-lf" d="M188 492 L182 468"/>
+    <path class="bl-lf" d="M190 494 C198 486,198 474,190 466 C182 474,182 486,190 494"/>
+    <path class="bl-lf" d="M190 494 L190 466"/>
     <!-- leaves ~(150,414) -->
     <path class="bl-lf" d="M152 416 C160 410,164 400,158 392 C152 400,148 410,152 416"/>
     <path class="bl-lf" d="M152 416 L158 392"/>
     <path class="bl-lf" d="M148 414 C140 408,136 398,142 390 C148 398,152 408,148 414"/>
     <path class="bl-lf" d="M148 414 L142 390"/>
-    <!-- branch A end ~(102,444) -->
+    <!-- branch A end ~(102,444) — two leaves instead of three -->
     <path class="bl-lf" d="M104 446 C112 440,116 430,110 422 C104 430,100 440,104 446"/>
     <path class="bl-lf" d="M104 446 L110 422"/>
     <path class="bl-lf" d="M100 444 C92 438,88 428,94 420 C100 428,104 438,100 444"/>
     <path class="bl-lf" d="M100 444 L94 420"/>
-    <path class="bl-lf" d="M102 446 C110 438,110 426,102 418 C94 426,94 438,102 446"/>
-    <path class="bl-lf" d="M102 446 L102 418"/>
-    <!-- branch B end ~(74,320) -->
-    <path class="bl-lf" d="M76 322 C84 316,88 306,82 298 C76 306,72 316,76 322"/>
-    <path class="bl-lf" d="M76 322 L82 298"/>
-    <path class="bl-lf" d="M72 320 C64 314,60 304,66 296 C72 304,76 314,72 320"/>
-    <path class="bl-lf" d="M72 320 L66 296"/>
-    <!-- branch C end ~(168,210) -->
+    <!-- branch B end — shifted to (78,336), different angle -->
+    <path class="bl-lf" d="M80 338 C88 332,92 322,86 314 C80 322,76 332,80 338"/>
+    <path class="bl-lf" d="M80 338 L86 314"/>
+    <path class="bl-lf" d="M76 336 C68 330,64 320,70 312 C76 320,80 330,76 336"/>
+    <path class="bl-lf" d="M76 336 L70 312"/>
+    <!-- branch C end ~(168,210) — one leaf only -->
     <path class="bl-lf" d="M170 212 C178 206,182 196,176 188 C170 196,166 206,170 212"/>
     <path class="bl-lf" d="M170 212 L176 188"/>
-    <path class="bl-lf" d="M166 210 C158 204,154 194,160 186 C166 194,170 204,166 210"/>
-    <path class="bl-lf" d="M166 210 L160 186"/>
     <!-- top ~(76,102) -->
     <path class="bl-lf" d="M78 104 C86 98,90 88,84 80 C78 88,74 98,78 104" opacity=".78"/>
     <path class="bl-lf" d="M78 104 L84 80" opacity=".78"/>
     <path class="bl-lf" d="M74 102 C66 96,62 86,68 78 C74 86,78 96,74 102" opacity=".78"/>
     <path class="bl-lf" d="M74 102 L68 78" opacity=".78"/>
+    </g><!-- /sway-r -->
     </g><!-- /fl-near-r -->
     <g id="fl-mid-r">
     <!-- fern at base -->
@@ -466,6 +494,21 @@ img{max-width:100%;display:block}
       </defs>
 
       <g filter="url(#pencil)">
+
+        <!-- ===== ROOTS (underground — always visible, fills the void before scroll) ===== -->
+        <g id="roots" opacity=".52">
+          <path class="ink faint" d="M600 -30 C598 20 596 74 596 138 C596 190 598 242 600 294"/>
+          <path class="ink faint" d="M594 142 C566 164 524 190 478 218 C440 242 400 264 362 292 C336 310 312 330 290 352"/>
+          <path class="ink faint" d="M546 186 C516 208 484 230 454 256 C430 276 414 298 406 322" opacity=".65"/>
+          <path class="ink faint" d="M606 148 C634 172 674 198 718 226 C756 250 792 272 830 298 C854 316 876 334 898 358"/>
+          <path class="ink faint" d="M658 192 C684 214 712 238 738 264 C758 284 772 304 782 326" opacity=".65"/>
+          <path class="ink faint" d="M362 292 C348 310 336 330 330 350 C324 366 322 380 322 394" opacity=".50"/>
+          <path class="ink faint" d="M290 352 C276 370 266 390 262 410" opacity=".42"/>
+          <path class="ink faint" d="M406 322 C396 342 390 362 388 382" opacity=".46"/>
+          <path class="ink faint" d="M830 298 C844 316 854 336 860 356 C864 370 866 384 864 398" opacity=".50"/>
+          <path class="ink faint" d="M898 358 C912 376 922 396 926 416" opacity=".42"/>
+          <path class="ink faint" d="M782 326 C790 346 794 366 794 386" opacity=".46"/>
+        </g>
 
         <!-- ===== LEAF (the plant) ===== -->
         <g id="leafGroup">
