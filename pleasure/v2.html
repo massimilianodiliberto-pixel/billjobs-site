@@ -74,13 +74,14 @@ img{max-width:100%;display:block}
 }
 
 /* ===== intro ===== */
-#intro{position:relative;height:100vh;overflow:hidden;background:radial-gradient(ellipse at 50% 38%,#28262d 0%,rgba(38,38,43,0) 64%),linear-gradient(180deg,#1b1b1e,#1b1b1d)}
-#intro-canvas{position:absolute;inset:0;z-index:1;pointer-events:none}
-#flora-left,#flora-right{position:absolute;top:0;bottom:0;width:28vw;min-width:120px;max-width:280px;z-index:2;pointer-events:none}
-#flora-left{left:0;-webkit-mask-image:linear-gradient(to right,black 52%,transparent 100%);mask-image:linear-gradient(to right,black 52%,transparent 100%)}
-#flora-right{right:0;-webkit-mask-image:linear-gradient(to left,black 52%,transparent 100%);mask-image:linear-gradient(to left,black 52%,transparent 100%)}
-.bl{fill:none;stroke:rgba(240,232,216,.34);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-#intro-diam{position:absolute;left:50%;top:13%;transform:translateX(-50%);z-index:4;opacity:0;animation:ifade 1.6s .2s cubic-bezier(.16,1,.3,1) forwards}
+#intro{position:relative;z-index:2;height:100vh;overflow:hidden;background:#1b1b1d}
+#intro-canvas{position:absolute;inset:0;z-index:1;pointer-events:none;background:transparent}
+#flora-left,#flora-right{position:absolute;top:0;bottom:0;width:30vw;min-width:130px;max-width:300px;z-index:2;pointer-events:none}
+#flora-left{left:0;-webkit-mask-image:linear-gradient(to right,black 48%,transparent 100%);mask-image:linear-gradient(to right,black 48%,transparent 100%)}
+#flora-right{right:0;-webkit-mask-image:linear-gradient(to left,black 48%,transparent 100%);mask-image:linear-gradient(to left,black 48%,transparent 100%)}
+.bl{fill:none;stroke:rgba(240,232,216,.36);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-fg{fill:none;stroke:rgba(240,232,216,.52);stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-lf{fill:none;stroke:rgba(240,232,216,.44);stroke-width:.8;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 #intro-logo{position:absolute;left:50%;top:16%;transform:translateX(-50%);z-index:4;width:min(500px,72vw);opacity:0;animation:ifade 2.2s .4s cubic-bezier(.16,1,.3,1) forwards}
 #intro-logo img{width:100%;filter:drop-shadow(0 6px 32px rgba(184,149,106,.22))}
 #intro-manifesto{position:absolute;left:50%;top:56%;transform:translateX(-50%);z-index:4;text-align:center;white-space:nowrap}
@@ -191,104 +192,167 @@ img{max-width:100%;display:block}
 <section id="intro">
   <canvas id="intro-canvas"></canvas>
 
-  <!-- Botanical left — pencil landscape, same stroke as flow animation -->
+  <!-- Botanical left: background trees + foreground branch with drawn leaves -->
   <svg id="flora-left" viewBox="0 0 280 900" preserveAspectRatio="xMinYMid meet" width="100%" height="100%">
-    <!-- Main tall tree -->
-    <path class="bl" d="M155 900 C 150 790 145 670 142 550 C 139 440 137 350 134 240 C 132 170 130 110 128 40"/>
-    <path class="bl" d="M142 550 C 120 528 94 514 58 508"/>
-    <path class="bl" d="M139 450 C 115 430 86 416 48 410"/>
-    <path class="bl" d="M137 370 C 156 348 178 334 212 328"/>
-    <path class="bl" d="M136 300 C 110 280 80 266 42 260"/>
-    <path class="bl" d="M135 300 C 154 278 174 264 204 258"/>
-    <path class="bl" d="M133 200 C 108 180 76 165 38 158"/>
-    <path class="bl" d="M132 185 C 150 162 170 148 198 141"/>
-    <!-- Leaf tips on branches -->
-    <path class="bl" d="M58 508 C 40 496 24 490 6 494" opacity=".7"/>
-    <path class="bl" d="M38 502 C 22 492 8 488 -6 490" opacity=".6"/>
-    <path class="bl" d="M48 410 C 30 398 14 392 -2 396" opacity=".65"/>
-    <path class="bl" d="M42 260 C 24 248 8 242 -8 246" opacity=".6"/>
-    <path class="bl" d="M38 158 C 20 146 4 140 -12 144" opacity=".55"/>
-    <!-- Second tree behind -->
-    <path class="bl" d="M72 900 C 69 820 66 740 64 648 C 62 570 60 506 57 422" opacity=".55"/>
-    <path class="bl" d="M64 648 C 46 628 28 618 4 614" opacity=".48"/>
-    <path class="bl" d="M62 530 C 44 512 26 502 2 498" opacity=".44"/>
-    <path class="bl" d="M60 462 C 74 444 92 432 116 427" opacity=".42"/>
-    <!-- Low shrub / bush -->
-    <path class="bl" d="M215 900 C 210 868 200 844 184 832 C 168 820 150 816 140 822" opacity=".6"/>
-    <path class="bl" d="M184 832 C 174 814 160 804 142 800" opacity=".5"/>
-    <path class="bl" d="M215 900 C 222 864 230 838 242 816 C 254 794 268 780 278 774" opacity=".5"/>
-    <!-- Wildflower 1 -->
-    <path class="bl" d="M236 900 C 233 838 229 776 222 714 C 217 668 210 628 202 590" opacity=".68"/>
-    <path class="bl" d="M202 590 C 194 578 190 566 192 555" opacity=".58"/>
-    <path class="bl" d="M202 590 C 210 578 216 566 214 555" opacity=".58"/>
-    <path class="bl" d="M202 590 C 192 584 180 584 174 591" opacity=".52"/>
-    <path class="bl" d="M202 590 C 212 584 224 584 230 591" opacity=".52"/>
-    <!-- Wildflower 2 -->
-    <path class="bl" d="M255 900 C 253 846 250 792 244 736 C 239 692 232 652 224 612" opacity=".58"/>
-    <path class="bl" d="M224 612 C 218 602 216 590 220 581" opacity=".48"/>
-    <path class="bl" d="M224 612 C 230 602 234 590 230 581" opacity=".48"/>
-    <path class="bl" d="M224 612 C 214 607 204 611 202 620" opacity=".44"/>
-    <!-- Grass blades base -->
-    <path class="bl" d="M22 900 C 18 868 10 844 0 832" opacity=".48"/>
-    <path class="bl" d="M38 900 C 36 870 30 848 22 836" opacity=".45"/>
-    <path class="bl" d="M10 900 C 7 872 0 854 -8 848" opacity=".4"/>
-    <!-- Fern frond -->
-    <path class="bl" d="M112 900 C 106 868 96 844 80 830 C 64 816 42 812 24 818" opacity=".58"/>
-    <path class="bl" d="M80 830 C 68 814 54 806 36 802" opacity=".48"/>
-    <path class="bl" d="M68 822 C 58 808 48 802 32 800" opacity=".42"/>
+    <!-- bg tree 1 -->
+    <path class="bl" d="M148 900 C144 800 140 688 137 576 C134 466 131 374 128 262 C126 190 124 126 122 46" opacity=".4"/>
+    <path class="bl" d="M137 576 C118 556 96 542 60 536" opacity=".33"/>
+    <path class="bl" d="M134 466 C112 446 82 432 44 426" opacity=".3"/>
+    <path class="bl" d="M131 374 C150 352 172 338 208 332" opacity=".28"/>
+    <path class="bl" d="M128 262 C148 240 168 226 200 220" opacity=".26"/>
+    <path class="bl" d="M128 262 C104 240 74 226 36 220" opacity=".26"/>
+    <!-- bg tree 2 -->
+    <path class="bl" d="M62 900 C59 818 56 734 54 642 C52 562 50 498 47 412" opacity=".3"/>
+    <path class="bl" d="M54 642 C38 622 20 612 -2 608" opacity=".24"/>
+    <path class="bl" d="M51 514 C34 496 16 486 -6 482" opacity=".22"/>
+    <!-- foreground branch: enters lower-left, sweeps up-right -->
+    <path class="bl-fg" d="M-10 732 C22 664 65 566 106 460 C134 384 160 316 178 242 C190 192 198 150 204 102"/>
+    <path class="bl-fg" d="M94 488 C118 466 146 450 178 444"/>
+    <path class="bl-fg" d="M145 370 C164 348 184 332 206 320"/>
+    <path class="bl-fg" d="M178 242 C160 226 138 216 112 210"/>
+    <!-- leaves pos 1 ~(20,700) -->
+    <path class="bl-lf" d="M20 700 C12 694,8 684,14 676 C20 684,24 694,20 700"/>
+    <path class="bl-lf" d="M20 700 L14 676"/>
+    <path class="bl-lf" d="M22 698 C30 692,34 682,28 674 C22 682,18 692,22 698"/>
+    <path class="bl-lf" d="M22 698 L28 674"/>
+    <!-- leaves pos 2 ~(56,598) -->
+    <path class="bl-lf" d="M55 600 C47 594,43 584,49 576 C55 584,59 594,55 600"/>
+    <path class="bl-lf" d="M55 600 L49 576"/>
+    <path class="bl-lf" d="M58 598 C66 592,70 582,64 574 C58 582,54 592,58 598"/>
+    <path class="bl-lf" d="M58 598 L64 574"/>
+    <path class="bl-lf" d="M56 600 C48 592,48 580,56 572 C64 580,64 592,56 600"/>
+    <path class="bl-lf" d="M56 600 L56 572"/>
+    <!-- leaves junction ~(94,488) -->
+    <path class="bl-lf" d="M92 490 C84 484,80 474,86 466 C92 474,96 484,92 490"/>
+    <path class="bl-lf" d="M92 490 L86 466"/>
+    <path class="bl-lf" d="M96 488 C104 482,108 472,102 464 C96 472,92 482,96 488"/>
+    <path class="bl-lf" d="M96 488 L102 464"/>
+    <path class="bl-lf" d="M94 490 C86 482,86 470,94 462 C102 470,102 482,94 490"/>
+    <path class="bl-lf" d="M94 490 L94 462"/>
+    <!-- leaves ~(130,414) -->
+    <path class="bl-lf" d="M128 416 C120 410,116 400,122 392 C128 400,132 410,128 416"/>
+    <path class="bl-lf" d="M128 416 L122 392"/>
+    <path class="bl-lf" d="M132 414 C140 408,144 398,138 390 C132 398,128 408,132 414"/>
+    <path class="bl-lf" d="M132 414 L138 390"/>
+    <!-- branch A end ~(178,444) -->
+    <path class="bl-lf" d="M176 446 C168 440,164 430,170 422 C176 430,180 440,176 446"/>
+    <path class="bl-lf" d="M176 446 L170 422"/>
+    <path class="bl-lf" d="M180 444 C188 438,192 428,186 420 C180 428,176 438,180 444"/>
+    <path class="bl-lf" d="M180 444 L186 420"/>
+    <path class="bl-lf" d="M178 446 C170 438,170 426,178 418 C186 426,186 438,178 446"/>
+    <path class="bl-lf" d="M178 446 L178 418"/>
+    <!-- branch B end ~(206,320) -->
+    <path class="bl-lf" d="M204 322 C196 316,192 306,198 298 C204 306,208 316,204 322"/>
+    <path class="bl-lf" d="M204 322 L198 298"/>
+    <path class="bl-lf" d="M208 320 C216 314,220 304,214 296 C208 304,204 314,208 320"/>
+    <path class="bl-lf" d="M208 320 L214 296"/>
+    <!-- branch C end ~(112,210) -->
+    <path class="bl-lf" d="M110 212 C102 206,98 196,104 188 C110 196,114 206,110 212"/>
+    <path class="bl-lf" d="M110 212 L104 188"/>
+    <path class="bl-lf" d="M114 210 C122 204,126 194,120 186 C114 194,110 204,114 210"/>
+    <path class="bl-lf" d="M114 210 L120 186"/>
+    <!-- top ~(204,102) -->
+    <path class="bl-lf" d="M202 104 C194 98,190 88,196 80 C202 88,206 98,202 104" opacity=".78"/>
+    <path class="bl-lf" d="M202 104 L196 80" opacity=".78"/>
+    <path class="bl-lf" d="M206 102 C214 96,218 86,212 78 C206 86,202 96,206 102" opacity=".78"/>
+    <path class="bl-lf" d="M206 102 L212 78" opacity=".78"/>
+    <!-- fern at base -->
+    <path class="bl" d="M120 900 C110 870 94 846 74 830 C54 814 28 808 8 814" opacity=".5"/>
+    <path class="bl-lf" d="M50 836 C46 822,50 812,58 810 C58 820,54 830,50 836"/>
+    <path class="bl-lf" d="M50 836 L58 810"/>
+    <path class="bl-lf" d="M38 830 C32 816,36 806,44 804 C46 816,42 826,38 830"/>
+    <path class="bl-lf" d="M38 830 L44 804"/>
+    <!-- wildflower -->
+    <path class="bl" d="M235 900 C230 834 224 768 215 702 C208 652 200 608 192 566" opacity=".6"/>
+    <path class="bl-lf" d="M192 566 C184 554,182 542,188 534 C194 542,196 554,192 566"/>
+    <path class="bl-lf" d="M192 566 C200 554,202 542,196 534 C190 542,188 554,192 566"/>
+    <path class="bl-lf" d="M192 566 C180 560,176 550,182 542 C188 548,192 558,192 566"/>
+    <path class="bl-lf" d="M192 566 C204 560,208 550,202 542 C196 548,192 558,192 566"/>
+    <!-- grass -->
+    <path class="bl" d="M20 900 C16 870 8 846 -2 836" opacity=".4"/>
+    <path class="bl" d="M36 900 C33 872 26 850 18 840" opacity=".36"/>
   </svg>
 
-  <!-- Botanical right — complementary, slightly different arrangement -->
+  <!-- Botanical right: mirror foreground branch with leaves -->
   <svg id="flora-right" viewBox="0 0 280 900" preserveAspectRatio="xMaxYMid meet" width="100%" height="100%">
-    <!-- Main tall tree (mirrored geometry) -->
-    <path class="bl" d="M125 900 C 130 790 135 670 138 550 C 141 440 143 350 146 240 C 148 170 150 110 152 40"/>
-    <path class="bl" d="M138 550 C 160 528 186 514 222 508"/>
-    <path class="bl" d="M141 450 C 165 430 194 416 232 410"/>
-    <path class="bl" d="M143 370 C 124 348 102 334 68 328"/>
-    <path class="bl" d="M144 300 C 170 280 200 266 238 260"/>
-    <path class="bl" d="M145 300 C 126 278 106 264 76 258"/>
-    <path class="bl" d="M147 200 C 172 180 204 165 242 158"/>
-    <path class="bl" d="M148 185 C 130 162 110 148 82 141"/>
-    <!-- Leaf tips -->
-    <path class="bl" d="M222 508 C 240 496 256 490 274 494" opacity=".7"/>
-    <path class="bl" d="M242 502 C 258 492 272 488 286 490" opacity=".6"/>
-    <path class="bl" d="M232 410 C 250 398 266 392 282 396" opacity=".65"/>
-    <path class="bl" d="M238 260 C 256 248 272 242 288 246" opacity=".6"/>
-    <path class="bl" d="M242 158 C 260 146 276 140 292 144" opacity=".55"/>
-    <!-- Second tree behind -->
-    <path class="bl" d="M208 900 C 211 820 214 740 216 648 C 218 570 220 506 223 422" opacity=".55"/>
-    <path class="bl" d="M216 648 C 234 628 252 618 276 614" opacity=".48"/>
-    <path class="bl" d="M218 530 C 236 512 254 502 278 498" opacity=".44"/>
-    <path class="bl" d="M220 462 C 206 444 188 432 164 427" opacity=".42"/>
-    <!-- Low shrub -->
-    <path class="bl" d="M65 900 C 70 868 80 844 96 832 C 112 820 130 816 140 822" opacity=".6"/>
-    <path class="bl" d="M96 832 C 106 814 120 804 138 800" opacity=".5"/>
-    <path class="bl" d="M65 900 C 58 864 50 838 38 816 C 26 794 12 780 2 774" opacity=".5"/>
-    <!-- Wildflower 1 -->
-    <path class="bl" d="M44 900 C 47 838 51 776 58 714 C 63 668 70 628 78 590" opacity=".68"/>
-    <path class="bl" d="M78 590 C 86 578 90 566 88 555" opacity=".58"/>
-    <path class="bl" d="M78 590 C 70 578 64 566 66 555" opacity=".58"/>
-    <path class="bl" d="M78 590 C 88 584 100 584 106 591" opacity=".52"/>
-    <path class="bl" d="M78 590 C 68 584 56 584 50 591" opacity=".52"/>
-    <!-- Wildflower 2 -->
-    <path class="bl" d="M25 900 C 27 846 30 792 36 736 C 41 692 48 652 56 612" opacity=".58"/>
-    <path class="bl" d="M56 612 C 62 602 64 590 60 581" opacity=".48"/>
-    <path class="bl" d="M56 612 C 50 602 46 590 50 581" opacity=".48"/>
-    <path class="bl" d="M56 612 C 66 607 76 611 78 620" opacity=".44"/>
-    <!-- Grass blades base -->
-    <path class="bl" d="M258 900 C 262 868 270 844 280 832" opacity=".48"/>
-    <path class="bl" d="M242 900 C 244 870 250 848 258 836" opacity=".45"/>
-    <path class="bl" d="M270 900 C 273 872 280 854 288 848" opacity=".4"/>
-    <!-- Fern frond -->
-    <path class="bl" d="M168 900 C 174 868 184 844 200 830 C 216 816 238 812 256 818" opacity=".58"/>
-    <path class="bl" d="M200 830 C 212 814 226 806 244 802" opacity=".48"/>
-    <path class="bl" d="M212 822 C 222 808 232 802 248 800" opacity=".42"/>
+    <!-- bg tree 1 -->
+    <path class="bl" d="M132 900 C136 800 140 688 143 576 C146 466 149 374 152 262 C154 190 156 126 158 46" opacity=".4"/>
+    <path class="bl" d="M143 576 C162 556 184 542 220 536" opacity=".33"/>
+    <path class="bl" d="M146 466 C168 446 198 432 236 426" opacity=".3"/>
+    <path class="bl" d="M149 374 C130 352 108 338 72 332" opacity=".28"/>
+    <path class="bl" d="M152 262 C132 240 112 226 80 220" opacity=".26"/>
+    <path class="bl" d="M152 262 C176 240 206 226 244 220" opacity=".26"/>
+    <!-- bg tree 2 -->
+    <path class="bl" d="M218 900 C221 818 224 734 226 642 C228 562 230 498 233 412" opacity=".3"/>
+    <path class="bl" d="M226 642 C242 622 260 612 282 608" opacity=".24"/>
+    <path class="bl" d="M229 514 C246 496 264 486 286 482" opacity=".22"/>
+    <!-- foreground branch: enters lower-right, sweeps up-left -->
+    <path class="bl-fg" d="M290 732 C258 664 215 566 174 460 C146 384 120 316 102 242 C90 192 82 150 76 102"/>
+    <path class="bl-fg" d="M186 488 C162 466 134 450 102 444"/>
+    <path class="bl-fg" d="M135 370 C116 348 96 332 74 320"/>
+    <path class="bl-fg" d="M102 242 C120 226 142 216 168 210"/>
+    <!-- leaves pos 1 ~(260,700) -->
+    <path class="bl-lf" d="M260 700 C268 694,272 684,266 676 C260 684,256 694,260 700"/>
+    <path class="bl-lf" d="M260 700 L266 676"/>
+    <path class="bl-lf" d="M258 698 C250 692,246 682,252 674 C258 682,262 692,258 698"/>
+    <path class="bl-lf" d="M258 698 L252 674"/>
+    <!-- leaves pos 2 ~(224,598) -->
+    <path class="bl-lf" d="M225 600 C233 594,237 584,231 576 C225 584,221 594,225 600"/>
+    <path class="bl-lf" d="M225 600 L231 576"/>
+    <path class="bl-lf" d="M222 598 C214 592,210 582,216 574 C222 582,226 592,222 598"/>
+    <path class="bl-lf" d="M222 598 L216 574"/>
+    <path class="bl-lf" d="M224 600 C232 592,232 580,224 572 C216 580,216 592,224 600"/>
+    <path class="bl-lf" d="M224 600 L224 572"/>
+    <!-- leaves junction ~(186,488) -->
+    <path class="bl-lf" d="M188 490 C196 484,200 474,194 466 C188 474,184 484,188 490"/>
+    <path class="bl-lf" d="M188 490 L194 466"/>
+    <path class="bl-lf" d="M184 488 C176 482,172 472,178 464 C184 472,188 482,184 488"/>
+    <path class="bl-lf" d="M184 488 L178 464"/>
+    <path class="bl-lf" d="M186 490 C194 482,194 470,186 462 C178 470,178 482,186 490"/>
+    <path class="bl-lf" d="M186 490 L186 462"/>
+    <!-- leaves ~(150,414) -->
+    <path class="bl-lf" d="M152 416 C160 410,164 400,158 392 C152 400,148 410,152 416"/>
+    <path class="bl-lf" d="M152 416 L158 392"/>
+    <path class="bl-lf" d="M148 414 C140 408,136 398,142 390 C148 398,152 408,148 414"/>
+    <path class="bl-lf" d="M148 414 L142 390"/>
+    <!-- branch A end ~(102,444) -->
+    <path class="bl-lf" d="M104 446 C112 440,116 430,110 422 C104 430,100 440,104 446"/>
+    <path class="bl-lf" d="M104 446 L110 422"/>
+    <path class="bl-lf" d="M100 444 C92 438,88 428,94 420 C100 428,104 438,100 444"/>
+    <path class="bl-lf" d="M100 444 L94 420"/>
+    <path class="bl-lf" d="M102 446 C110 438,110 426,102 418 C94 426,94 438,102 446"/>
+    <path class="bl-lf" d="M102 446 L102 418"/>
+    <!-- branch B end ~(74,320) -->
+    <path class="bl-lf" d="M76 322 C84 316,88 306,82 298 C76 306,72 316,76 322"/>
+    <path class="bl-lf" d="M76 322 L82 298"/>
+    <path class="bl-lf" d="M72 320 C64 314,60 304,66 296 C72 304,76 314,72 320"/>
+    <path class="bl-lf" d="M72 320 L66 296"/>
+    <!-- branch C end ~(168,210) -->
+    <path class="bl-lf" d="M170 212 C178 206,182 196,176 188 C170 196,166 206,170 212"/>
+    <path class="bl-lf" d="M170 212 L176 188"/>
+    <path class="bl-lf" d="M166 210 C158 204,154 194,160 186 C166 194,170 204,166 210"/>
+    <path class="bl-lf" d="M166 210 L160 186"/>
+    <!-- top ~(76,102) -->
+    <path class="bl-lf" d="M78 104 C86 98,90 88,84 80 C78 88,74 98,78 104" opacity=".78"/>
+    <path class="bl-lf" d="M78 104 L84 80" opacity=".78"/>
+    <path class="bl-lf" d="M74 102 C66 96,62 86,68 78 C74 86,78 96,74 102" opacity=".78"/>
+    <path class="bl-lf" d="M74 102 L68 78" opacity=".78"/>
+    <!-- fern at base -->
+    <path class="bl" d="M160 900 C170 870 186 846 206 830 C226 814 252 808 272 814" opacity=".5"/>
+    <path class="bl-lf" d="M230 836 C234 822,230 812,222 810 C222 820,226 830,230 836"/>
+    <path class="bl-lf" d="M230 836 L222 810"/>
+    <path class="bl-lf" d="M242 830 C248 816,244 806,236 804 C234 816,238 826,242 830"/>
+    <path class="bl-lf" d="M242 830 L236 804"/>
+    <!-- wildflower -->
+    <path class="bl" d="M45 900 C50 834 56 768 65 702 C72 652 80 608 88 566" opacity=".6"/>
+    <path class="bl-lf" d="M88 566 C96 554,98 542,92 534 C86 542,84 554,88 566"/>
+    <path class="bl-lf" d="M88 566 C80 554,78 542,84 534 C90 542,92 554,88 566"/>
+    <path class="bl-lf" d="M88 566 C100 560,104 550,98 542 C92 548,88 558,88 566"/>
+    <path class="bl-lf" d="M88 566 C76 560,72 550,78 542 C84 548,88 558,88 566"/>
+    <!-- grass -->
+    <path class="bl" d="M260 900 C264 870 272 846 282 836" opacity=".4"/>
+    <path class="bl" d="M244 900 C247 872 254 850 262 840" opacity=".36"/>
   </svg>
-
-  <!-- Diamond brand mark above logo -->
-  <div id="intro-diam">
-    <svg viewBox="0 0 12 20" width="12" height="20"><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="#d4b283" opacity=".9"/><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="none" stroke="#b8956a" stroke-width=".6"/></svg>
-  </div>
 
   <!-- Logo top -->
   <div id="intro-logo"><img src="logo-pleasure-crop.png" alt="PLEASURE Professional Luxury" /></div>
