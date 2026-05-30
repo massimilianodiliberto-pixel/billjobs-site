@@ -79,10 +79,10 @@ img{max-width:100%;display:block}
 #flora-left,#flora-right{position:absolute;top:0;bottom:0;width:30vw;min-width:130px;max-width:300px;z-index:2;pointer-events:none}
 #flora-left{left:0;-webkit-mask-image:linear-gradient(to right,black 60%,transparent 100%);mask-image:linear-gradient(to right,black 60%,transparent 100%)}
 #flora-right{right:0;-webkit-mask-image:linear-gradient(to left,black 60%,transparent 100%);mask-image:linear-gradient(to left,black 60%,transparent 100%)}
-.bl{fill:none;stroke:rgba(240,232,216,.36);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.bl-fg{fill:none;stroke:rgba(240,232,216,.52);stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.bl-lf{fill:none;stroke:rgba(240,232,216,.44);stroke-width:.8;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-#intro::after{content:'';position:absolute;left:0;right:0;bottom:0;height:22vh;background:linear-gradient(to bottom,rgba(27,27,29,0) 0%,#1b1b1d 100%);z-index:5;pointer-events:none}
+.bl{fill:none;stroke:rgba(240,232,216,.22);stroke-width:.7;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-fg{fill:none;stroke:rgba(240,232,216,.46);stroke-width:1.0;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-lf{fill:none;stroke:rgba(240,232,216,.38);stroke-width:.7;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#intro::after{content:'';position:absolute;left:0;right:0;bottom:0;height:28vh;background:linear-gradient(to bottom,rgba(27,27,29,0) 0%,rgba(27,27,29,.88) 80%,rgba(27,27,29,.92) 100%);z-index:5;pointer-events:none}
 #intro-logo{position:absolute;left:50%;top:16%;transform:translateX(-50%);z-index:4;width:min(500px,72vw);opacity:0;animation:ifade 2.2s .4s cubic-bezier(.16,1,.3,1) forwards}
 #intro-logo img{width:100%;filter:drop-shadow(0 6px 32px rgba(184,149,106,.22))}
 #intro-manifesto{position:absolute;left:50%;top:56%;transform:translateX(-50%);z-index:4;text-align:center;white-space:nowrap}
@@ -104,8 +104,8 @@ img{max-width:100%;display:block}
 .sway-l{transform-origin:60px 900px;animation:sway-l 11.4s ease-in-out infinite}
 .sway-r{transform-origin:220px 900px;animation:sway-r 10.2s ease-in-out infinite;animation-delay:-4.1s}
 .sway-close{transform-origin:0px 780px;animation:sway-close 8.8s ease-in-out infinite;animation-delay:-1.8s}
-.bl-close{fill:none;stroke:rgba(240,232,216,.72);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.bl-close-lf{fill:none;stroke:rgba(240,232,216,.64);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-close{fill:none;stroke:rgba(240,232,216,.84);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-close-lf{fill:none;stroke:rgba(240,232,216,.76);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 
 /* ===== flow stage ===== */
 #flow{position:relative;height:800vh}
@@ -206,13 +206,13 @@ img{max-width:100%;display:block}
   <!-- Botanical left: background trees + foreground branch with drawn leaves -->
   <svg id="flora-left" viewBox="0 0 280 900" preserveAspectRatio="none" width="100%" height="100%">
     <g id="fl-far-l">
-    <!-- bg tree 1 -->
-    <path class="bl" d="M148 900 C144 800 140 688 137 576 C134 466 131 374 128 262 C126 190 124 126 122 46" opacity=".4"/>
-    <path class="bl" d="M137 576 C118 556 96 542 60 536" opacity=".33"/>
-    <path class="bl" d="M134 466 C112 446 82 432 44 426" opacity=".3"/>
-    <path class="bl" d="M131 374 C150 352 172 338 208 332" opacity=".28"/>
-    <path class="bl" d="M128 262 C148 240 168 226 200 220" opacity=".26"/>
-    <path class="bl" d="M128 262 C104 240 74 226 36 220" opacity=".26"/>
+    <!-- bg tree 1 — sinuous trunk leaning slightly left -->
+    <path class="bl" d="M152 900 C144 808 132 710 122 606 C114 516 110 432 112 334 C114 262 118 192 124 108 C126 78 128 56 130 28" opacity=".36"/>
+    <path class="bl" d="M122 606 C106 584 86 570 58 564" opacity=".28"/>
+    <path class="bl" d="M114 432 C96 412 72 400 38 396" opacity=".25"/>
+    <path class="bl" d="M112 334 C128 314 148 302 176 298" opacity=".23"/>
+    <path class="bl" d="M118 192 C136 174 156 162 182 158" opacity=".21"/>
+    <path class="bl" d="M118 192 C100 174 76 162 46 158" opacity=".21"/>
     <!-- bg tree 2 -->
     <path class="bl" d="M62 900 C59 818 56 734 54 642 C52 562 50 498 47 412" opacity=".3"/>
     <path class="bl" d="M54 642 C38 622 20 612 -2 608" opacity=".24"/>
@@ -300,12 +300,12 @@ img{max-width:100%;display:block}
     <path class="bl-lf" d="M50 836 L58 810"/>
     <path class="bl-lf" d="M38 830 C32 816,36 806,44 804 C46 816,42 826,38 830"/>
     <path class="bl-lf" d="M38 830 L44 804"/>
-    <!-- wildflower -->
-    <path class="bl" d="M235 900 C230 834 224 768 215 702 C208 652 200 608 192 566" opacity=".6"/>
-    <path class="bl-lf" d="M192 566 C184 554,182 542,188 534 C194 542,196 554,192 566"/>
-    <path class="bl-lf" d="M192 566 C200 554,202 542,196 534 C190 542,188 554,192 566"/>
-    <path class="bl-lf" d="M192 566 C180 560,176 550,182 542 C188 548,192 558,192 566"/>
-    <path class="bl-lf" d="M192 566 C204 560,208 550,202 542 C196 548,192 558,192 566"/>
+    <!-- wildflower — curved stem, not straight -->
+    <path class="bl" d="M240 900 C228 848 208 792 190 736 C172 682 156 632 144 582 C138 556 134 534 134 514" opacity=".58"/>
+    <path class="bl-lf" d="M134 514 C126 502,124 490,130 482 C136 490,138 502,134 514"/>
+    <path class="bl-lf" d="M134 514 C142 502,144 490,138 482 C132 490,130 502,134 514"/>
+    <path class="bl-lf" d="M134 514 C122 508,118 498,124 490 C130 496,134 506,134 514"/>
+    <path class="bl-lf" d="M134 514 C146 508,150 498,144 490 C138 496,134 506,134 514"/>
     <!-- grass -->
     <path class="bl" d="M20 900 C16 870 8 846 -2 836" opacity=".4"/>
     <path class="bl" d="M36 900 C33 872 26 850 18 840" opacity=".36"/>
@@ -493,31 +493,19 @@ img{max-width:100%;display:block}
       <g filter="url(#pencil)">
 
         <!-- ===== ROOTS (underground — always visible, fills the void before scroll) ===== -->
-        <g id="roots" opacity=".54">
-          <!-- central tap root descends toward leaf -->
-          <path class="ink faint" d="M600 -60 C600 -10 599 40 598 88"/>
-          <!-- left primary root: sinuous, hooks down-left with multiple bends -->
-          <path class="ink faint" d="M596 130 C582 142 564 154 544 168 C526 180 510 194 494 210 C480 224 466 240 452 258 C440 272 428 288 416 308 C406 324 396 342 388 362"/>
-          <!-- left secondary: steeper descent, branches off early -->
-          <path class="ink faint" d="M554 162 C542 174 530 186 518 200 C508 212 498 224 490 240 C482 254 476 268 472 284" opacity=".58"/>
-          <!-- left tertiary tendril: small fork, goes more downward -->
-          <path class="ink faint" d="M452 258 C442 272 434 288 428 306 C422 318 418 332 416 348" opacity=".46"/>
-          <!-- left fine tip -->
-          <path class="ink faint" d="M388 362 C380 378 374 396 372 414" opacity=".40"/>
-          <!-- left whisker from secondary -->
-          <path class="ink faint" d="M490 240 C482 252 476 266 474 282" opacity=".34"/>
-
-          <!-- right primary root: steeper angle, hits further right — NOT a mirror of left -->
-          <path class="ink faint" d="M605 134 C620 148 638 164 660 180 C680 194 702 210 724 228 C744 244 762 262 778 282 C792 300 804 318 812 340"/>
-          <!-- right secondary: shorter spread than left secondary -->
-          <path class="ink faint" d="M648 172 C664 186 680 202 696 220 C710 236 722 252 730 270 C736 284 740 298 740 314" opacity=".58"/>
-          <!-- right tertiary: hooks down toward center -->
-          <path class="ink faint" d="M778 282 C786 298 792 316 794 334 C796 348 794 362 790 374" opacity=".46"/>
-          <!-- right fine tip -->
-          <path class="ink faint" d="M812 340 C820 358 824 378 820 396" opacity=".40"/>
-          <!-- right whisker from secondary -->
-          <path class="ink faint" d="M730 270 C736 284 740 300 740 316" opacity=".34"/>
-        </g>
+        <!-- ROOTS: L & R sides matching intro flora, draw with scroll (data-s negative = half-drawn on entry) -->
+        <!-- LEFT roots x≈310-420, matches left intro plants -->
+        <path class="ink faint" data-s="-0.02" data-e="0.015" d="M420 44 C414 74 404 106 392 138 C380 168 366 198 354 228 C342 258 332 286 324 316 C316 344 310 372 308 402"/>
+        <path class="ink faint" data-s="-0.015" data-e="0.016" d="M394 124 C384 146 376 170 370 196 C364 220 360 244 358 270 C356 290 356 308 358 328" opacity=".65"/>
+        <path class="ink faint" data-s="-0.008" data-e="0.017" d="M354 228 C346 250 340 274 336 300 C332 318 330 336 332 354" opacity=".50"/>
+        <path class="ink faint" data-s="-0.012" data-e="0.015" d="M308 402 C302 424 298 448 300 472 C302 492 308 510 316 526" opacity=".44"/>
+        <path class="ink faint" data-s="-0.005" data-e="0.013" d="M370 196 C362 214 358 234 356 256" opacity=".40"/>
+        <!-- RIGHT roots x≈780-890, matches right intro plants -->
+        <path class="ink faint" data-s="-0.02" data-e="0.015" d="M780 44 C786 74 796 106 808 138 C820 168 834 198 846 228 C858 258 868 286 876 316 C884 344 890 372 892 402"/>
+        <path class="ink faint" data-s="-0.015" data-e="0.016" d="M806 124 C816 146 824 170 830 196 C836 220 840 244 842 270 C844 290 844 308 842 328" opacity=".65"/>
+        <path class="ink faint" data-s="-0.008" data-e="0.017" d="M846 228 C854 250 860 274 864 300 C868 318 870 336 868 354" opacity=".50"/>
+        <path class="ink faint" data-s="-0.012" data-e="0.015" d="M892 402 C898 424 902 448 900 472 C898 492 892 510 884 526" opacity=".44"/>
+        <path class="ink faint" data-s="-0.005" data-e="0.013" d="M830 196 C838 214 842 234 844 256" opacity=".40"/>
 
         <!-- ===== LEAF (the plant) ===== -->
         <g id="leafGroup">
