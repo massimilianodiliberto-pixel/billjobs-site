@@ -77,8 +77,8 @@ img{max-width:100%;display:block}
 #intro{position:relative;z-index:2;height:100vh;overflow:hidden;background:#1b1b1d}
 #intro-canvas{position:absolute;inset:0;z-index:1;pointer-events:none;background:transparent}
 #flora-left,#flora-right{position:absolute;top:0;bottom:0;width:30vw;min-width:130px;max-width:300px;z-index:2;pointer-events:none}
-#flora-left{left:0;-webkit-mask-image:linear-gradient(to right,black 48%,transparent 100%);mask-image:linear-gradient(to right,black 48%,transparent 100%)}
-#flora-right{right:0;-webkit-mask-image:linear-gradient(to left,black 48%,transparent 100%);mask-image:linear-gradient(to left,black 48%,transparent 100%)}
+#flora-left{left:0;-webkit-mask-image:linear-gradient(to right,black 60%,transparent 100%);mask-image:linear-gradient(to right,black 60%,transparent 100%)}
+#flora-right{right:0;-webkit-mask-image:linear-gradient(to left,black 60%,transparent 100%);mask-image:linear-gradient(to left,black 60%,transparent 100%)}
 .bl{fill:none;stroke:rgba(240,232,216,.36);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .bl-fg{fill:none;stroke:rgba(240,232,216,.52);stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .bl-lf{fill:none;stroke:rgba(240,232,216,.44);stroke-width:.8;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
@@ -162,7 +162,7 @@ img{max-width:100%;display:block}
   .foot{grid-template-columns:1fr;gap:36px}
   .below{flex-direction:column;gap:12px}
   #intro-manifesto{white-space:normal;width:82vw}
-  #flora-left,#flora-right{width:22vw;min-width:80px}
+  #flora-left,#flora-right{width:46vw;min-width:120px}
 }
 </style>
 </head>
@@ -194,7 +194,7 @@ img{max-width:100%;display:block}
   <canvas id="intro-canvas"></canvas>
 
   <!-- Botanical left: background trees + foreground branch with drawn leaves -->
-  <svg id="flora-left" viewBox="0 0 280 900" preserveAspectRatio="xMinYMid meet" width="100%" height="100%">
+  <svg id="flora-left" viewBox="0 0 280 900" preserveAspectRatio="none" width="100%" height="100%">
     <g id="fl-far-l">
     <!-- bg tree 1 -->
     <path class="bl" d="M148 900 C144 800 140 688 137 576 C134 466 131 374 128 262 C126 190 124 126 122 46" opacity=".4"/>
@@ -281,7 +281,7 @@ img{max-width:100%;display:block}
   </svg>
 
   <!-- Botanical right: mirror foreground branch with leaves -->
-  <svg id="flora-right" viewBox="0 0 280 900" preserveAspectRatio="xMaxYMid meet" width="100%" height="100%">
+  <svg id="flora-right" viewBox="0 0 280 900" preserveAspectRatio="none" width="100%" height="100%">
     <g id="fl-far-r">
     <!-- bg tree 1 -->
     <path class="bl" d="M132 900 C136 800 140 688 143 576 C146 466 149 374 152 262 C154 190 156 126 158 46" opacity=".4"/>
