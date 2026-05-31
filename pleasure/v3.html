@@ -97,6 +97,13 @@ img{max-width:100%;display:block}
 @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
 
+/* ===== aloe intro center-bottom ===== */
+#intro-aloe{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(720px,100vw);height:54vh;z-index:3;pointer-events:none;-webkit-mask-image:linear-gradient(to top,transparent 0%,rgba(0,0,0,.38) 18%,black 42%,black 100%);mask-image:linear-gradient(to top,transparent 0%,rgba(0,0,0,.38) 18%,black 42%,black 100%)}
+.bl-al{fill:none;stroke:rgba(240,232,216,.27);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-al-s{fill:none;stroke:rgba(240,232,216,.21);stroke-width:.8;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-al-v{fill:none;stroke:rgba(240,232,216,.14);stroke-width:.5;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-al-sh{fill:none;stroke:rgba(240,232,216,.17);stroke-width:.7;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+
 /* ===== flora wind sway ===== */
 @keyframes sway-l{0%,100%{transform:rotate(0deg)}18%{transform:rotate(-1.3deg) skewX(-.4deg)}36%{transform:rotate(.4deg)}52%{transform:rotate(-2.8deg) skewX(-.7deg)}68%{transform:rotate(.6deg)}84%{transform:rotate(-1.1deg)}}
 @keyframes sway-r{0%,100%{transform:rotate(0deg)}18%{transform:rotate(1.3deg) skewX(.4deg)}36%{transform:rotate(-.4deg)}52%{transform:rotate(2.8deg) skewX(.7deg)}68%{transform:rotate(-.6deg)}84%{transform:rotate(1.1deg)}}
@@ -202,6 +209,84 @@ img{max-width:100%;display:block}
 <!-- ===== INTRO ===== -->
 <section id="intro">
   <canvas id="intro-canvas"></canvas>
+
+  <!-- Aloe plants + shrubs at center-bottom — same pencil aesthetic as flow leaf -->
+  <svg id="intro-aloe" viewBox="0 0 640 480" preserveAspectRatio="xMidYMax meet" width="100%" height="100%">
+
+    <!-- === LEFT SHRUB (x≈58) === -->
+    <path class="bl-al-sh" d="M56,478 C52,460 44,438 32,418 C22,402 14,388 16,376 C18,368 26,364 36,368 C44,374 48,386 48,400"/>
+    <path class="bl-al-sh" d="M58,476 C56,456 56,434 62,414 C68,396 76,382 86,378 C94,374 100,376 102,386"/>
+    <path class="bl-al-sh" d="M60,476 C64,456 72,432 84,414 C96,396 110,382 122,378 C130,376 136,380 138,390"/>
+    <path class="bl-al-sh" d="M54,478 C46,460 34,436 20,416 C8,398 0,382 0,368 C0,360 4,352 12,350 C20,348 28,354 32,366"/>
+    <path class="bl-al-sh" d="M52,478 C42,458 28,432 12,412 C-2,394 -10,376 -8,362 C-6,352 0,346 10,346"/>
+    <path class="bl-al-sh" d="M58,474 C56,454 52,430 54,408 C56,390 62,374 70,364 C78,356 88,354 96,362 C102,370 104,386 100,406"/>
+
+    <!-- === LEFT ALOE PLANT (cx=176, base y=474) — smaller === -->
+    <!-- Leaf straight up -->
+    <path class="bl-al-s" d="M173,472 C171,446 167,410 165,372 C163,334 164,296 167,264 C169,242 171,222 173,206"/>
+    <path class="bl-al-s" d="M179,472 C181,446 185,410 187,372 C189,334 188,296 185,264 C183,242 181,222 179,206"/>
+    <path class="bl-al-v" d="M176,471 L176,206"/>
+    <!-- Leaf 26° right -->
+    <path class="bl-al-s" d="M178,471 C180,445 186,408 196,372 C206,336 218,302 230,272 C240,248 249,226 255,210"/>
+    <path class="bl-al-s" d="M184,472 C186,446 194,410 206,374 C218,338 232,304 246,274 C256,250 266,228 274,212"/>
+    <!-- Leaf 26° left -->
+    <path class="bl-al-s" d="M174,471 C172,445 166,408 156,372 C146,336 134,302 122,272 C112,248 103,226 97,210"/>
+    <path class="bl-al-s" d="M168,472 C166,446 158,410 146,374 C134,338 120,304 106,274 C96,250 86,228 78,212"/>
+    <!-- Leaf 52° left -->
+    <path class="bl-al-s" d="M172,472 C166,450 150,420 130,392 C110,364 88,336 70,312 C58,294 48,280 44,270"/>
+    <path class="bl-al-s" d="M168,472 C162,450 145,420 124,392 C104,364 82,336 64,312 C52,294 42,280 38,270"/>
+
+    <!-- === CENTER ALOE PLANT (cx=320, base y=474) — largest === -->
+    <!-- Leaf 50° left -->
+    <path class="bl-al" d="M316,472 C308,450 290,418 268,386 C246,354 222,320 200,290 C184,268 170,250 162,240"/>
+    <path class="bl-al" d="M322,474 C315,452 298,420 278,388 C256,356 232,322 210,292 C194,270 180,252 173,242"/>
+    <path class="bl-al-v" d="M319,473 C311,451 293,418 271,386 C249,354 225,320 203,290 C187,268 172,250 165,240"/>
+    <!-- Leaf 24° left -->
+    <path class="bl-al" d="M317,472 C313,442 305,400 294,360 C283,318 271,278 259,246 C250,220 241,198 238,178 C236,160 237,146 240,134"/>
+    <path class="bl-al" d="M323,474 C319,444 312,402 302,362 C292,320 280,280 268,248 C259,222 251,200 249,180 C247,162 248,148 252,136"/>
+    <path class="bl-al-v" d="M320,472 C315,442 307,400 296,358 C285,316 273,274 261,242 C252,216 244,194 242,174 C240,156 241,142 244,130"/>
+    <!-- Leaf straight up (tallest) -->
+    <path class="bl-al" d="M316,472 C313,440 308,394 306,348 C304,302 307,258 312,220 C315,198 318,178 320,162 C321,150 321,138 320,128"/>
+    <path class="bl-al" d="M324,472 C327,440 332,394 334,348 C336,302 333,258 328,220 C325,198 322,178 320,162 C319,150 319,138 320,128"/>
+    <path class="bl-al-v" d="M320,471 L320,128"/>
+    <!-- lateral texture marks on center leaf -->
+    <path class="bl-al-v" d="M320,302 C312,297 306,292 302,286"/>
+    <path class="bl-al-v" d="M320,302 C328,297 334,292 338,286"/>
+    <path class="bl-al-v" d="M320,222 C313,217 308,212 305,206"/>
+    <path class="bl-al-v" d="M320,222 C327,217 332,212 335,206"/>
+    <!-- Leaf 24° right -->
+    <path class="bl-al" d="M323,472 C327,442 335,400 346,360 C357,318 369,278 381,246 C390,220 399,198 402,178 C404,160 402,146 400,134"/>
+    <path class="bl-al" d="M317,474 C321,444 328,402 338,362 C348,320 360,280 372,248 C381,222 389,200 391,180 C393,162 391,148 389,138"/>
+    <path class="bl-al-v" d="M320,472 C325,442 332,400 343,358 C354,316 366,274 378,242 C387,216 395,194 396,174 C397,156 395,142 393,132"/>
+    <!-- Leaf 50° right -->
+    <path class="bl-al" d="M324,472 C332,450 350,418 372,386 C394,354 418,320 440,290 C456,268 470,250 478,240"/>
+    <path class="bl-al" d="M318,474 C325,452 342,420 362,388 C382,356 406,322 428,292 C444,270 458,252 465,242"/>
+    <path class="bl-al-v" d="M321,473 C329,451 347,418 369,386 C391,354 415,320 437,290 C453,268 467,250 474,240"/>
+
+    <!-- === RIGHT ALOE PLANT (cx=464, base y=474) — smaller === -->
+    <!-- Leaf straight up -->
+    <path class="bl-al-s" d="M461,472 C459,446 455,410 453,372 C451,334 452,296 455,264 C457,242 459,222 461,206"/>
+    <path class="bl-al-s" d="M467,472 C469,446 473,410 475,372 C477,334 476,296 473,264 C471,242 469,222 467,206"/>
+    <path class="bl-al-v" d="M464,471 L464,206"/>
+    <!-- Leaf 26° left -->
+    <path class="bl-al-s" d="M462,471 C460,445 454,408 444,372 C434,336 422,302 410,272 C400,248 391,226 385,210"/>
+    <path class="bl-al-s" d="M456,472 C454,446 446,410 434,374 C422,338 408,304 394,274 C384,250 374,228 366,212"/>
+    <!-- Leaf 26° right -->
+    <path class="bl-al-s" d="M466,471 C468,445 474,408 484,372 C494,336 506,302 518,272 C528,248 537,226 543,210"/>
+    <path class="bl-al-s" d="M472,472 C474,446 482,410 494,374 C506,338 520,304 534,274 C544,250 554,228 562,212"/>
+    <!-- Leaf 52° right -->
+    <path class="bl-al-s" d="M468,472 C474,450 490,420 510,392 C530,364 552,336 570,312 C582,294 592,280 596,270"/>
+    <path class="bl-al-s" d="M472,472 C478,450 495,420 516,392 C536,364 558,336 576,312 C588,294 598,280 602,270"/>
+
+    <!-- === RIGHT SHRUB (x≈582) === -->
+    <path class="bl-al-sh" d="M584,478 C588,460 596,438 608,418 C618,402 626,388 624,376 C622,368 614,364 604,368 C596,374 592,386 592,400"/>
+    <path class="bl-al-sh" d="M582,476 C584,456 584,434 578,414 C572,396 564,382 554,378 C546,374 540,376 538,386"/>
+    <path class="bl-al-sh" d="M580,476 C576,456 568,432 556,414 C544,396 530,382 518,378 C510,376 504,380 502,390"/>
+    <path class="bl-al-sh" d="M586,478 C594,460 606,436 620,416 C632,398 640,382 640,368 C640,360 636,352 628,350 C620,348 612,354 608,366"/>
+    <path class="bl-al-sh" d="M588,478 C598,458 612,432 628,412 C642,394 650,376 648,362 C646,352 640,346 630,346"/>
+    <path class="bl-al-sh" d="M582,474 C584,454 588,430 586,408 C584,390 578,374 570,364 C562,356 552,354 544,362 C538,370 536,386 540,406"/>
+
+  </svg>
 
   <!-- Botanical left: background trees + foreground branch with drawn leaves -->
   <svg id="flora-left" viewBox="0 0 280 900" preserveAspectRatio="none" width="100%" height="100%">
@@ -528,6 +613,28 @@ img{max-width:100%;display:block}
         <path class="ink faint" data-s="-0.002" data-e="0.016" d="M848 366 C856 380 860 396 860 412" opacity=".28"/>
         <path class="ink faint" data-s="-0.001" data-e="0.015" d="M850 400 C858 414 862 430 860 446 C858 458 852 468 844 474" opacity=".26"/>
         <path class="ink faint" data-s="0.001" data-e="0.014" d="M880 236 C888 250 894 266 896 284" opacity=".24"/>
+
+        <!-- ===== SCROLL SIDE BOTANICALS — sparse decorations alternating L/R ===== -->
+        <!-- Left: grass stems at y≈580-720, visible ~p=0.05-0.12 -->
+        <path class="ink faint" data-s="0.04" data-e="0.10" d="M218 724 C214 698 210 664 212 630 C214 606 220 587 229 574" opacity=".30"/>
+        <path class="ink faint" data-s="0.05" data-e="0.11" d="M238 722 C236 694 236 660 243 630 C250 604 260 584 272 572" opacity=".26"/>
+        <path class="ink faint" data-s="0.06" data-e="0.12" d="M257 720 C260 692 266 658 278 630 C290 604 304 584 318 574" opacity=".22"/>
+        <!-- Left: small organic leaf at y≈1040-1120, p≈0.22-0.27 -->
+        <path class="ink faint" data-s="0.21" data-e="0.27" d="M235 1086 C215 1066 204 1044 210 1022 C216 1004 232 998 247 1006 C258 1013 262 1030 257 1050 C252 1068 242 1080 235 1086" opacity=".28"/>
+        <path class="ink faint" data-s="0.22" data-e="0.27" d="M247 1006 C242 1030 238 1058 235 1086" opacity=".16"/>
+        <!-- Left: arching branch at y≈1460-1580, p≈0.38-0.44 -->
+        <path class="ink faint" data-s="0.37" data-e="0.43" d="M144 1574 C162 1546 186 1516 212 1488 C232 1466 252 1446 270 1432" opacity=".28"/>
+        <path class="ink faint" data-s="0.39" data-e="0.44" d="M212 1488 C204 1466 202 1442 210 1420 C218 1402 232 1394 246 1400 C256 1406 260 1424 256 1446 C252 1466 240 1480 226 1488" opacity=".24"/>
+
+        <!-- Right: curved stem at y≈670-820, p≈0.09-0.15 -->
+        <path class="ink faint" data-s="0.08" data-e="0.14" d="M982 824 C990 796 994 762 990 730 C986 700 976 674 966 654 C958 638 953 626 956 614" opacity=".28"/>
+        <path class="ink faint" data-s="0.09" data-e="0.15" d="M1002 820 C1008 790 1010 754 1004 720 C998 686 988 660 976 640 C968 624 963 612 966 600" opacity=".24"/>
+        <!-- Right: small leaf at y≈1140-1220, p≈0.26-0.32 -->
+        <path class="ink faint" data-s="0.25" data-e="0.31" d="M972 1158 C993 1138 1006 1114 1000 1090 C994 1072 978 1064 963 1070 C952 1076 948 1094 953 1116 C958 1136 966 1150 972 1158" opacity=".28"/>
+        <path class="ink faint" data-s="0.26" data-e="0.31" d="M963 1070 C966 1094 969 1122 972 1158" opacity=".16"/>
+        <!-- Right: drooping frond at y≈1700-1800, p≈0.44-0.52 -->
+        <path class="ink faint" data-s="0.43" data-e="0.50" d="M1054 1718 C1040 1742 1018 1764 992 1782 C968 1798 944 1808 926 1810" opacity=".28"/>
+        <path class="ink faint" data-s="0.44" data-e="0.50" d="M992 1782 C984 1764 982 1742 990 1722 C998 1706 1014 1698 1028 1704 C1040 1710 1046 1726 1042 1746 C1038 1764 1026 1778 1010 1784" opacity=".24"/>
 
         <!-- ===== LEAF (the plant) — starts AFTER roots finish drawing ===== -->
         <g id="leafGroup">
