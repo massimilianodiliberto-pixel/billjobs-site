@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PLEASURE · v4 · Franciacorta, Italia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1b1b1d;
+  --bg-d:#161618;
+  --oro:#b8956a;
+  --oro-l:#d4b283;
+  --oro-g:#e6c693;
+  --crema:#f0e8d8;
+  --crema-d:#8a8a82;
+  --ink:#f0e8d8;
+  --line:rgba(240,232,216,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--crema);font-family:'Inter',sans-serif;font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--oro);color:var(--bg)}
+
+/* cursor */
+#cursor{position:fixed;top:0;left:0;width:10px;height:17px;z-index:200;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s,width .35s,height .35s;mix-blend-mode:screen}
+#cursor svg{width:100%;height:100%;overflow:visible}
+#cursor.lg{width:22px;height:37px}
+@media (hover:none){#cursor{opacity:0;transition:opacity .4s}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 40px;transition:background .5s,backdrop-filter .5s,border-color .5s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(27,27,29,.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--line)}
+.nav .brand{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:18px;letter-spacing:.22em}
+.nav .menu{display:flex;gap:34px;list-style:none}
+.nav .menu a{font-size:13px;color:var(--crema);opacity:.72;transition:opacity .3s}
+.nav .menu a:hover{opacity:1}
+.nav .right{display:flex;align-items:center;gap:24px}
+.nav .cta{font-size:12px;letter-spacing:.05em;color:var(--oro-l);border:1px solid var(--oro);padding:9px 17px;border-radius:999px;transition:background .4s,color .4s}
+.nav .cta:hover{background:var(--oro);color:var(--bg)}
+.nav .lang{display:flex;gap:10px;font-size:12px;color:var(--crema-d)}
+.nav .lang .on{color:var(--crema)}
+.nav .lang span{cursor:pointer;transition:color .3s}
+.nav .lang span:hover{color:var(--crema)}
+
+/* background glow */
+#bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1;transition:opacity .4s ease}
+
+/* gold frame */
+#gold-frame{position:fixed;inset:0;z-index:51;pointer-events:none}
+#gold-frame::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(90deg,rgba(184,149,106,.48) 0%,rgba(184,149,106,0) 22%,rgba(184,149,106,0) 78%,rgba(184,149,106,.48) 100%),
+    linear-gradient(90deg,rgba(184,149,106,.48) 0%,rgba(184,149,106,0) 22%,rgba(184,149,106,0) 78%,rgba(184,149,106,.48) 100%),
+    linear-gradient(180deg,rgba(184,149,106,.48) 0%,rgba(184,149,106,0) 26%,rgba(184,149,106,0) 74%,rgba(184,149,106,.48) 100%),
+    linear-gradient(180deg,rgba(184,149,106,.48) 0%,rgba(184,149,106,0) 26%,rgba(184,149,106,0) 74%,rgba(184,149,106,.48) 100%);
+  background-size:100% 0.6px,100% 0.6px,0.6px 100%,0.6px 100%;
+  background-position:0 0,0 100%,0 0,100% 0;
+  background-repeat:no-repeat;
+}
+#gold-frame::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(circle at 0% 0%,rgba(184,149,106,.28) 0%,transparent 8%),
+    radial-gradient(circle at 100% 0%,rgba(184,149,106,.28) 0%,transparent 8%),
+    radial-gradient(circle at 0% 100%,rgba(184,149,106,.28) 0%,transparent 8%),
+    radial-gradient(circle at 100% 100%,rgba(184,149,106,.28) 0%,transparent 8%);
+}
+
+/* ===== intro ===== */
+#intro{position:relative;z-index:2;height:100vh;overflow:hidden;background:radial-gradient(ellipse at 28% 50%, rgba(138,111,77,.16) 0%, transparent 52%), radial-gradient(ellipse at 72% 44%, rgba(120,95,60,.10) 0%, transparent 46%)}
+#intro-canvas{position:absolute;inset:0;z-index:1;pointer-events:none;background:transparent}
+
+/* large atmospheric leaf (upper right, static) */
+#intro-leaf{position:absolute;right:-4vw;top:-8vh;width:62vw;max-width:480px;height:98vh;z-index:2;pointer-events:none;-webkit-mask-image:radial-gradient(ellipse at 56% 44%, rgba(0,0,0,.62) 18%, transparent 66%);mask-image:radial-gradient(ellipse at 56% 44%, rgba(0,0,0,.62) 18%, transparent 66%)}
+.il-e{fill:none;stroke:rgba(240,232,216,.17);stroke-width:.7;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.il-v{fill:none;stroke:rgba(240,232,216,.08);stroke-width:.35;stroke-linecap:round;vector-effect:non-scaling-stroke}
+
+/* flora side branches */
+#flora-left,#flora-right{position:absolute;top:0;bottom:0;width:30vw;min-width:130px;max-width:300px;z-index:2;pointer-events:none}
+#flora-left{left:0;-webkit-mask-image:linear-gradient(to right,black 60%,transparent 100%);mask-image:linear-gradient(to right,black 60%,transparent 100%)}
+#flora-right{right:0;-webkit-mask-image:linear-gradient(to left,black 60%,transparent 100%);mask-image:linear-gradient(to left,black 60%,transparent 100%)}
+.bl-fg{fill:none;stroke:rgba(240,232,216,.46);stroke-width:1.0;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-lf{fill:none;stroke:rgba(240,232,216,.38);stroke-width:.7;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#intro::after{content:'';position:absolute;left:0;right:0;bottom:0;height:32vh;background:linear-gradient(to bottom,rgba(27,27,29,0) 0%,rgba(27,27,29,.96) 78%,rgba(27,27,29,1) 100%);z-index:5;pointer-events:none}
+
+/* intro text / logo */
+#intro-logo{position:absolute;left:50%;top:16%;transform:translateX(-50%);z-index:4;width:min(500px,72vw);opacity:0;animation:ifade 2.2s .4s cubic-bezier(.16,1,.3,1) forwards}
+#intro-logo img{width:100%;filter:drop-shadow(0 6px 32px rgba(184,149,106,.22))}
+#intro-manifesto{position:absolute;left:50%;top:56%;transform:translateX(-50%);z-index:4;text-align:center;white-space:nowrap}
+.mline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(22px,3vw,50px);line-height:1.25;color:var(--crema);opacity:0;display:block}
+.mline em{font-style:italic;color:var(--oro-l)}
+.mline.m0{animation:mrise 2.4s 2.0s cubic-bezier(.16,1,.3,1) forwards}
+.mline.m1{animation:mrise 2.4s 3.0s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes ifade{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes mrise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+#intro .hint{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:ifade 1.6s 4.4s cubic-bezier(.16,1,.3,1) forwards;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--crema-d);z-index:4;white-space:nowrap}
+#intro .hint .ln{width:1px;height:38px;background:linear-gradient(180deg,transparent,var(--oro));animation:pulse 2.6s ease-in-out infinite}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
+
+/* flora sway */
+@keyframes sway-l{0%,100%{transform:rotate(0deg)}18%{transform:rotate(-1.3deg) skewX(-.4deg)}36%{transform:rotate(.4deg)}52%{transform:rotate(-2.8deg) skewX(-.7deg)}68%{transform:rotate(.6deg)}84%{transform:rotate(-1.1deg)}}
+@keyframes sway-r{0%,100%{transform:rotate(0deg)}18%{transform:rotate(1.3deg) skewX(.4deg)}36%{transform:rotate(-.4deg)}52%{transform:rotate(2.8deg) skewX(.7deg)}68%{transform:rotate(-.6deg)}84%{transform:rotate(1.1deg)}}
+.sway-l{transform-origin:60px 900px;animation:sway-l 11.4s ease-in-out infinite}
+.sway-r{transform-origin:220px 900px;animation:sway-r 10.2s ease-in-out infinite;animation-delay:-4.1s}
+
+/* ===== flow stage ===== */
+#flow{position:relative;height:800vh;background:var(--bg)}
+.flow-stage{position:sticky;top:0;height:100vh;overflow:hidden;z-index:1;isolation:isolate;clip-path:inset(0);background:var(--bg)}
+.flow-svg{position:absolute;left:50%;top:0;height:280vh;width:auto;will-change:transform}
+.flow-svg .ink{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.flow-svg .ink.faint{stroke:rgba(240,232,216,.35);stroke-width:1}
+.flow-svg .ink.thin{stroke-width:.9}
+.flow-svg .ink.vein{stroke:rgba(240,232,216,.55);stroke-width:.8}
+
+/* chapter rail */
+.rail{position:fixed;left:40px;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:0;opacity:0;transition:opacity .8s}
+.rail.show{opacity:1}
+.rail .ch{display:flex;align-items:center;gap:14px;height:46px;cursor:pointer}
+.rail .ch .label{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--crema-d);transition:color .5s,letter-spacing .5s;letter-spacing:.01em}
+.rail .ch.on .label{color:var(--crema);letter-spacing:.04em}
+.rail .ch .bead{width:5px;height:5px;border-radius:50%;background:var(--crema-d);transition:background .5s,transform .5s;flex:none}
+.rail .ch.on .bead{background:var(--oro-g);transform:scale(1.5)}
+.rail .conn{display:flex;flex-direction:column;align-items:center;gap:5px;height:26px;justify-content:center;margin-left:1.5px}
+.rail .conn i{width:3px;height:3px;border-radius:50%;background:rgba(240,232,216,.22)}
+
+/* captions */
+.caption{position:fixed;left:0;right:0;bottom:0;height:46vh;z-index:70;pointer-events:none;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 20%);mask-image:linear-gradient(to bottom,transparent 0%,black 20%)}
+.caption .panel{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:0 max(56px,5vw);text-align:center;opacity:0;will-change:transform,opacity}
+.caption .panel .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--oro);margin-bottom:12px}
+.caption .panel h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(20px,2.6vw,40px);line-height:1.04;color:var(--crema);margin-bottom:12px}
+.caption .panel h2 em{font-style:italic;color:var(--oro-l)}
+.caption .panel p{font-size:15px;line-height:1.5;color:var(--crema-d);max-width:560px;margin:0 auto}
+
+/* progress hairline */
+.flow-progress{position:fixed;left:0;bottom:0;height:1px;background:var(--oro);z-index:75;width:0%}
+
+/* closing / footer */
+#closing{position:relative;background:linear-gradient(180deg,#161618 0%,#1b1b1d 100%);padding:200px 40px 60px;text-align:center;z-index:5}
+#closing .inner{max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:40px}
+#closing h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,5vw,76px);line-height:1.04;color:var(--crema)}
+#closing h2 em{font-style:italic;color:var(--oro-l)}
+#closing .v-line{width:1px;height:70px;background:linear-gradient(180deg,transparent,var(--oro))}
+#closing .cta{font-size:13px;letter-spacing:.06em;color:var(--oro-l);border:1px solid var(--oro);padding:14px 30px;border-radius:999px;transition:background .4s,color .4s}
+#closing .cta:hover{background:var(--oro);color:var(--bg)}
+.foot{max-width:1200px;margin:120px auto 0;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;text-align:left;padding-bottom:60px;border-top:1px solid var(--line);padding-top:60px}
+.foot .news h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:40px;line-height:1.02;margin-bottom:16px}
+.foot .news h3 em{font-style:italic;color:var(--oro-l)}
+.foot .news p{color:var(--crema-d);max-width:380px;margin-bottom:22px;font-size:16px}
+.foot .news form{display:flex;border-bottom:1px solid var(--crema);max-width:380px}
+.foot .news input{flex:1;background:transparent;border:none;color:var(--crema);padding:12px 0;font-size:15px;outline:none}
+.foot .news input::placeholder{color:var(--crema-d)}
+.foot .news button{background:transparent;border:none;color:var(--crema);font-size:13px;cursor:pointer;padding:0 0 0 16px}
+.foot .col h4{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--oro-l);margin-bottom:16px}
+.foot .col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot .col ul a{font-size:14px;color:var(--crema);opacity:.76}
+.foot .col ul a:hover{opacity:1;color:var(--oro-l)}
+.below{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:12px;color:var(--crema-d)}
+
+@media (max-width:900px){
+  .nav{padding:0 20px}
+  .nav .menu{display:none}
+  .rail{display:none}
+  .caption{height:40vh}
+  .caption .panel{padding:0 20px 18px}
+  .caption .panel h2{font-size:clamp(18px,5vw,32px)}
+  .caption .panel p{font-size:13px}
+  .flow-svg{height:200vh}
+  #closing{padding:120px 20px 50px}
+  .foot{grid-template-columns:1fr;gap:36px}
+  .below{flex-direction:column;gap:12px}
+  #intro-manifesto{white-space:normal;width:82vw}
+  #flora-left,#flora-right{width:46vw;min-width:120px}
+}
+</style>
+</head>
+<body>
+
+<div id="bg-glow"></div>
+<div id="gold-frame"></div>
+<div id="cursor"><svg viewBox="0 0 12 20"><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="#d4b283" opacity=".85"/><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="none" stroke="#b8956a" stroke-width=".6"/></svg></div>
+
+<nav class="nav" id="nav">
+  <div class="brand">PLEASURE</div>
+  <ul class="menu">
+    <li><a href="#" data-ch="0">Origine</a></li>
+    <li><a href="#" data-ch="1">Scienza</a></li>
+    <li><a href="#" data-ch="2">Metodo</a></li>
+    <li><a href="#" data-ch="3">Academy</a></li>
+    <li><a href="#" data-ch="4">Rituali</a></li>
+    <li><a href="#" data-ch="5">Linee</a></li>
+    <li><a href="#" data-ch="6">Family</a></li>
+  </ul>
+  <div class="right">
+    <a class="cta" href="#closing">Scopri le Linee</a>
+    <div class="lang"><span class="on">IT</span><span>EN</span><span>ES</span></div>
+  </div>
+</nav>
+
+<!-- ===== INTRO ===== -->
+<section id="intro">
+  <canvas id="intro-canvas"></canvas>
+
+  <!-- Large atmospheric botanical leaf (upper-right, decorative) -->
+  <svg id="intro-leaf" viewBox="0 0 400 700" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+    <path class="il-e" d="M200,28 C 146,52 96,130 82,220 C 68,310 84,430 200,518"/>
+    <path class="il-e" d="M200,28 C 254,52 304,130 318,220 C 332,310 316,430 200,518"/>
+    <path class="il-v" d="M200,36 L200,508"/>
+    <path class="il-v" d="M200,88 C 172,96 146,104 114,110"/>
+    <path class="il-v" d="M200,88 C 228,96 254,104 286,110"/>
+    <path class="il-v" d="M200,144 C 168,152 140,158 106,162"/>
+    <path class="il-v" d="M200,144 C 232,152 260,158 294,162"/>
+    <path class="il-v" d="M200,204 C 164,210 132,214 98,214"/>
+    <path class="il-v" d="M200,204 C 236,210 268,214 302,214"/>
+    <path class="il-v" d="M200,264 C 162,266 128,264 96,258"/>
+    <path class="il-v" d="M200,264 C 238,266 272,264 304,258"/>
+    <path class="il-v" d="M200,326 C 164,322 132,316 102,306"/>
+    <path class="il-v" d="M200,326 C 236,322 268,316 298,306"/>
+    <path class="il-v" d="M200,384 C 166,378 138,370 112,356"/>
+    <path class="il-v" d="M200,384 C 234,378 262,370 288,356"/>
+    <path class="il-v" d="M200,440 C 170,432 146,422 122,408"/>
+    <path class="il-v" d="M200,440 C 230,432 254,422 278,408"/>
+    <path class="il-v" d="M200,488 C 176,478 156,466 136,450"/>
+    <path class="il-v" d="M200,488 C 224,478 244,466 264,450"/>
+  </svg>
+
+  <!-- Botanical left: single branch crossing left→right -->
+  <svg id="flora-left" viewBox="0 0 280 900" preserveAspectRatio="none" width="100%" height="100%">
+    <g id="fl-near-l">
+      <g class="sway-l">
+        <path class="bl-fg" d="M-14 548 C18 522 56 492 96 460 C138 428 180 396 220 366 C246 348 262 334 270 316"/>
+        <path class="bl-fg" d="M88 466 C78 446 64 426 48 412 C38 404 28 402 20 406" opacity=".72"/>
+        <path class="bl-lf" d="M18 406 C8 394 10 380 20 378 C30 382 34 396 30 408 C26 416 18 418 18 406"/>
+        <path class="bl-lf" d="M18 406 L20 378"/>
+        <path class="bl-lf" d="M26 408 C36 396 36 382 26 378 C16 384 14 398 18 408 C20 416 26 416 26 408"/>
+        <path class="bl-lf" d="M26 408 L26 378"/>
+        <path class="bl-fg" d="M202 372 C188 352 170 332 152 318 C138 308 124 304 114 308" opacity=".72"/>
+        <path class="bl-lf" d="M112 308 C100 296 102 282 112 280 C122 284 126 298 122 310 C118 318 112 320 112 308"/>
+        <path class="bl-lf" d="M112 308 L112 280"/>
+        <path class="bl-lf" d="M120 310 C132 298 132 284 122 280 C112 286 110 300 114 310 C116 318 120 318 120 310"/>
+        <path class="bl-lf" d="M120 310 L122 280"/>
+      </g>
+    </g>
+  </svg>
+
+  <!-- Botanical right: single branch crossing right→left -->
+  <svg id="flora-right" viewBox="0 0 280 900" preserveAspectRatio="none" width="100%" height="100%">
+    <g id="fl-near-r">
+      <g class="sway-r">
+        <path class="bl-fg" d="M294 548 C262 522 224 492 184 460 C142 428 100 396 60 366 C34 348 18 334 10 316"/>
+        <path class="bl-fg" d="M192 466 C202 446 216 426 232 412 C242 404 252 402 260 406" opacity=".72"/>
+        <path class="bl-lf" d="M262 406 C272 394 270 380 260 378 C250 382 246 396 250 408 C254 416 262 418 262 406"/>
+        <path class="bl-lf" d="M262 406 L260 378"/>
+        <path class="bl-lf" d="M254 408 C244 396 244 382 254 378 C264 384 266 398 262 408 C260 416 254 416 254 408"/>
+        <path class="bl-lf" d="M254 408 L254 378"/>
+        <path class="bl-fg" d="M78 372 C92 352 110 332 128 318 C142 308 156 304 166 308" opacity=".72"/>
+        <path class="bl-lf" d="M168 308 C180 296 178 282 168 280 C158 284 154 298 158 310 C162 318 168 320 168 308"/>
+        <path class="bl-lf" d="M168 308 L168 280"/>
+        <path class="bl-lf" d="M160 310 C148 298 148 284 158 280 C168 286 170 300 166 310 C164 318 160 318 160 310"/>
+        <path class="bl-lf" d="M160 310 L158 280"/>
+      </g>
+    </g>
+  </svg>
+
+  <!-- Logo top -->
+  <div id="intro-logo"><img src="logo-pleasure-crop.png" alt="PLEASURE Professional Luxury" /></div>
+
+  <!-- Manifesto -->
+  <div id="intro-manifesto">
+    <span class="mline m0">Il vero <em>lusso</em> non è per tutti.</span>
+    <span class="mline m1">È per chi sceglie di <em>sapere di più.</em></span>
+  </div>
+
+  <div class="hint"><span>il flusso comincia</span><span class="ln"></span></div>
+</section>
+
+<!-- ===== CHAPTER RAIL ===== -->
+<div class="rail" id="rail">
+  <div class="ch on" data-ch="0"><span class="bead"></span><span class="label">Origine</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="1"><span class="bead"></span><span class="label">Scienza</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="2"><span class="bead"></span><span class="label">Metodo</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="3"><span class="bead"></span><span class="label">Academy</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="4"><span class="bead"></span><span class="label">Rituali</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="5"><span class="bead"></span><span class="label">Linee</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="6"><span class="bead"></span><span class="label">Family</span></div>
+</div>
+
+<!-- ===== CAPTIONS ===== -->
+<div class="caption" id="caption">
+  <div class="panel on" data-ch="0">
+    <div class="eyebrow">01 — L'origine</div>
+    <h2>Dalla terra,<br/>prima che dal<br/><em>laboratorio.</em></h2>
+    <p>PLEASURE non estrae dalla natura. La ascolta. E impara a restituirle qualcosa in cambio.</p>
+  </div>
+  <div class="panel" data-ch="1">
+    <div class="eyebrow">02 — La scienza</div>
+    <h2>La <em>natura</em> ha già<br/>la risposta.</h2>
+    <p>Le biotecnologie avanzate la liberano, la esprimono, la potenziano.</p>
+  </div>
+  <div class="panel" data-ch="2">
+    <div class="eyebrow">03 — Il metodo</div>
+    <h2>Questo non è<br/>un prodotto.<br/>È un <em>metodo.</em></h2>
+    <p>Un sistema vivo. Generativo. In evoluzione. Tuo.</p>
+  </div>
+  <div class="panel" data-ch="3">
+    <div class="eyebrow">04 — Academy</div>
+    <h2>Non eleviamo<br/>prodotti.<br/><em>Eleviamo</em> professionisti.</h2>
+    <p>Il tuo salone non è un cliente. È un laboratorio vivo. La conoscenza è un privilegio che si coltiva insieme.</p>
+  </div>
+  <div class="panel" data-ch="4">
+    <div class="eyebrow">05 — Rituali</div>
+    <h2>Il gesto<br/>diventa <em>rito.</em></h2>
+    <p>Non protocolli, ma percorsi. Ogni rituale è un viaggio tattile e olfattivo che il cliente porta con sé.</p>
+  </div>
+  <div class="panel" data-ch="5">
+    <div class="eyebrow">06 — Le Linee</div>
+    <h2>Quattro linee.<br/>Una <em>sola logica.</em></h2>
+    <p>Filler, Lifetime, Vinility, Restruct. Ogni formula parla una lingua precisa al capello.</p>
+  </div>
+  <div class="panel" data-ch="6">
+    <div class="eyebrow">07 — Family</div>
+    <h2>Entra nel<br/><em>Circolo.</em></h2>
+    <p>Quattro lettere all'anno. Note dal laboratorio, inviti privati, il prossimo capitolo del metodo.</p>
+  </div>
+</div>
+
+<div class="flow-progress" id="fprog"></div>
+
+<!-- ===== FLOW ===== -->
+<section id="flow">
+  <div class="flow-stage">
+    <svg class="flow-svg" id="svg" viewBox="0 0 1200 2400" preserveAspectRatio="xMidYMin meet">
+      <defs>
+        <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.010 0.014" numOctaves="2" seed="7" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="2.8"/>
+        </filter>
+        <radialGradient id="dropGrad" cx="38%" cy="30%" r="64%">
+          <stop offset="0%" stop-color="#fff8ee"/>
+          <stop offset="28%" stop-color="#f0d49a"/>
+          <stop offset="65%" stop-color="#c9994e"/>
+          <stop offset="100%" stop-color="#8a6030"/>
+        </radialGradient>
+        <radialGradient id="dropGradSm" cx="42%" cy="34%" r="62%">
+          <stop offset="0%" stop-color="#fff6e2"/>
+          <stop offset="38%" stop-color="#e6c693"/>
+          <stop offset="100%" stop-color="#b8956a"/>
+        </radialGradient>
+        <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(230,198,147,.60)"/>
+          <stop offset="50%" stop-color="rgba(212,178,131,.16)"/>
+          <stop offset="100%" stop-color="rgba(212,178,131,0)"/>
+        </radialGradient>
+        <radialGradient id="glowGradLg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(240,210,160,.50)"/>
+          <stop offset="40%" stop-color="rgba(212,178,131,.14)"/>
+          <stop offset="100%" stop-color="rgba(212,178,131,0)"/>
+        </radialGradient>
+        <linearGradient id="liquidGrad" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#e8c88a"/>
+          <stop offset="100%" stop-color="#9a7040"/>
+        </linearGradient>
+        <!-- wide jar clip -->
+        <clipPath id="jarClip">
+          <path d="M502,1964 Q502,1944 520,1940 L520,1924 L680,1924 L680,1940 Q698,1944 698,1964 L706,2196 Q706,2228 676,2228 L524,2228 Q494,2228 494,2196 Z"/>
+        </clipPath>
+      </defs>
+
+      <g filter="url(#pencil)">
+
+        <!-- ===== ROOTS (compact, centered) ===== -->
+        <path id="rootPrimaryL" class="ink faint" data-s="-0.025" data-e="0.030" d="M600 20 C600 30 600 40 599 50 C598 56 597 64 596 72"/>
+        <path class="ink faint" data-s="-0.018" data-e="0.026" d="M599 22 C582 30 562 44 540 60 C524 72 512 82 508 90" opacity=".58"/>
+        <path class="ink faint" data-s="-0.018" data-e="0.026" d="M601 22 C618 30 638 44 660 60 C676 72 688 82 692 90" opacity=".58"/>
+        <path class="ink faint" data-s="-0.012" data-e="0.024" d="M598 36 C578 46 554 62 528 78 C508 90 496 100 494 108" opacity=".44"/>
+        <path class="ink faint" data-s="-0.012" data-e="0.024" d="M602 36 C622 46 646 62 672 78 C692 90 704 100 706 108" opacity=".44"/>
+        <path class="ink faint" data-s="-0.006" data-e="0.020" d="M597 48 C578 60 556 74 534 88 C516 100 506 110 506 118" opacity=".34"/>
+        <path class="ink faint" data-s="-0.006" data-e="0.020" d="M603 48 C622 60 644 74 666 88 C684 100 694 110 694 118" opacity=".34"/>
+        <path class="ink faint" data-s="-0.002" data-e="0.016" d="M597 54 C592 64 588 76 590 86 C592 94 596 102 600 106" opacity=".26"/>
+
+        <!-- ===== BOTANICAL LEAF — wide oval with veins ===== -->
+        <g id="leafGroup">
+          <!-- outer edges -->
+          <path class="ink" id="leafL" data-s="0.06" data-e="0.18" d="M600,80 C 528,108 466,182 448,272 C 430,360 450,462 600,530"/>
+          <path class="ink" id="leafR" data-s="0.07" data-e="0.19" d="M600,80 C 672,108 734,182 752,272 C 770,360 750,462 600,530"/>
+          <!-- central midrib -->
+          <path class="ink thin" id="leafMid" data-s="0.10" data-e="0.22" d="M600,90 L600,520"/>
+          <!-- veins left — 8 pairs, fan from midrib outward -->
+          <path class="ink vein" data-s="0.12" data-e="0.20" d="M600,128 C 574,136 548,144 516,150"/>
+          <path class="ink vein" data-s="0.13" data-e="0.21" d="M600,174 C 568,182 536,188 502,192"/>
+          <path class="ink vein" data-s="0.14" data-e="0.22" d="M600,224 C 564,230 528,234 494,234"/>
+          <path class="ink vein" data-s="0.15" data-e="0.22" d="M600,274 C 562,276 524,276 488,272"/>
+          <path class="ink vein" data-s="0.16" data-e="0.23" d="M600,324 C 562,322 524,318 490,312"/>
+          <path class="ink vein" data-s="0.17" data-e="0.23" d="M600,370 C 564,366 530,360 500,352"/>
+          <path class="ink vein" data-s="0.18" data-e="0.24" d="M600,414 C 566,408 536,400 510,390"/>
+          <path class="ink vein" data-s="0.19" data-e="0.25" d="M600,456 C 570,448 546,438 522,424"/>
+          <!-- veins right — mirror -->
+          <path class="ink vein" data-s="0.12" data-e="0.20" d="M600,128 C 626,136 652,144 684,150"/>
+          <path class="ink vein" data-s="0.13" data-e="0.21" d="M600,174 C 632,182 664,188 698,192"/>
+          <path class="ink vein" data-s="0.14" data-e="0.22" d="M600,224 C 636,230 672,234 706,234"/>
+          <path class="ink vein" data-s="0.15" data-e="0.22" d="M600,274 C 638,276 676,276 712,272"/>
+          <path class="ink vein" data-s="0.16" data-e="0.23" d="M600,324 C 638,322 676,318 710,312"/>
+          <path class="ink vein" data-s="0.17" data-e="0.23" d="M600,370 C 636,366 670,360 700,352"/>
+          <path class="ink vein" data-s="0.18" data-e="0.24" d="M600,414 C 634,408 664,400 690,390"/>
+          <path class="ink vein" data-s="0.19" data-e="0.25" d="M600,456 C 630,448 654,438 678,424"/>
+        </g>
+
+        <!-- ===== STEM ===== -->
+        <path class="ink" id="stem" data-s="0.26" data-e="0.37" d="M600,530 C 607,618 593,716 600,852"/>
+        <!-- sap drop forming -->
+        <path class="ink" id="sapDrop" data-s="0.32" data-e="0.40" d="M600,830 C 626,860 626,884 600,898 C 574,884 574,860 600,830 Z"/>
+
+        <!-- ===== FALL TRAIL ===== -->
+        <path class="ink faint" id="fallTrail" data-s="0.38" data-e="0.54" d="M600,898 L600,1178" stroke-dasharray="2 10"/>
+
+        <!-- ===== PARTICLES ===== -->
+        <g id="particles"></g>
+
+        <!-- ===== ORBITAL RINGS (molecular chapter) ===== -->
+        <g id="orbitalG" opacity="0">
+          <circle id="ring1" cx="600" cy="1275" r="0" fill="none" stroke="rgba(212,178,131,.16)" stroke-width="0.8" vector-effect="non-scaling-stroke"/>
+          <ellipse id="ring2" cx="600" cy="1275" rx="0" ry="0" fill="none" stroke="rgba(212,178,131,.11)" stroke-width="0.6" vector-effect="non-scaling-stroke" transform="rotate(34 600 1275)"/>
+          <ellipse id="ring3" cx="600" cy="1275" rx="0" ry="0" fill="none" stroke="rgba(212,178,131,.11)" stroke-width="0.6" vector-effect="non-scaling-stroke" transform="rotate(-28 600 1275)"/>
+          <!-- nodes -->
+          <circle id="node1" cx="600" cy="1275" r="3.2" fill="#d4b283" opacity=".0"/>
+          <circle id="node2" cx="600" cy="1275" r="3.2" fill="#d4b283" opacity=".0"/>
+          <circle id="node3" cx="600" cy="1275" r="3.2" fill="#d4b283" opacity=".0"/>
+        </g>
+
+        <!-- ===== SPINE into jar ===== -->
+        <path class="ink" id="spineB" data-s="0.74" data-e="0.86" d="M600,1375 C 607,1540 593,1730 600,1924"/>
+
+        <!-- ===== JAR (wide, round shoulders) ===== -->
+        <g id="jarGroup">
+          <!-- cap/lid -->
+          <path class="ink" id="bcap" data-s="0.72" data-e="0.80" d="M504,1900 L696,1900 L696,1924 L504,1924 Z"/>
+          <!-- body with rounded shoulders -->
+          <path class="ink" id="bbody" data-s="0.76" data-e="0.90" d="M502,1964 Q502,1944 520,1940 L520,1924 L680,1924 L680,1940 Q698,1944 698,1964 L708,2196 Q708,2228 676,2228 L524,2228 Q492,2228 492,2196 Z"/>
+          <!-- label area -->
+          <path class="ink thin" id="blabel" data-s="0.86" data-e="0.93" d="M512,2028 L688,2028 L688,2152 L512,2152 Z"/>
+        </g>
+
+      </g>
+
+      <!-- liquid fill (clipped) -->
+      <rect id="liquid" x="494" y="2228" width="214" height="0" fill="url(#liquidGrad)" clip-path="url(#jarClip)" opacity="0"/>
+
+      <!-- falling drop -->
+      <g id="fallDropG" opacity="0">
+        <path d="M600 0 C 626 38 626 66 600 82 C 574 66 574 38 600 0 Z" fill="url(#dropGradSm)"/>
+      </g>
+
+      <!-- luminous drop — large, moodboard-style -->
+      <g id="lumG" opacity="0">
+        <circle id="lumGlow" cx="600" cy="1275" r="80" fill="url(#glowGradLg)"/>
+        <path id="lumDrop" d="M600,1178 C 658,1258 658,1336 600,1374 C 542,1336 542,1258 600,1178 Z" fill="url(#dropGrad)"/>
+        <!-- specular highlights -->
+        <ellipse cx="576" cy="1222" rx="11" ry="19" fill="#fff8ee" opacity=".52"/>
+        <ellipse cx="585" cy="1200" rx="4.5" ry="8" fill="#fff8ee" opacity=".38"/>
+      </g>
+
+      <!-- pencil tip -->
+      <circle id="tip" r="5" fill="#fff6e2" opacity="0"/>
+      <circle id="tipGlow" r="18" fill="url(#glowGrad)" opacity="0"/>
+
+      <!-- brand at end -->
+      <g id="brandG" opacity="0">
+        <text x="600" y="2282" text-anchor="middle" font-family="Cormorant Garamond" font-size="40" letter-spacing="10" fill="#f0e8d8">PLEASURE</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== CLOSING ===== -->
+<section id="closing">
+  <div class="inner">
+    <div class="v-line"></div>
+    <h2>Dalla pianta alla goccia.<br/>Dalla goccia al <em>tuo gesto.</em></h2>
+    <a class="cta" href="#">Entra nel mondo PLEASURE →</a>
+  </div>
+  <div class="foot">
+    <div class="news">
+      <h3>Entra nel<br/><em>Circolo →</em></h3>
+      <p>Quattro lettere all'anno. Note dal laboratorio, inviti privati, il prossimo capitolo del metodo.</p>
+      <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Iscritta ✓'">
+        <input type="email" placeholder="la tua email professionale" required />
+        <button type="submit">Iscriviti →</button>
+      </form>
+    </div>
+    <div class="col"><h4>Maison</h4><ul><li><a href="#">Manifesto</a></li><li><a href="#">Laboratorio</a></li><li><a href="#">Franciacorta</a></li></ul></div>
+    <div class="col"><h4>Method</h4><ul><li><a href="#">Academy</a></li><li><a href="#">Atelier</a></li><li><a href="#">Ricerca</a></li></ul></div>
+    <div class="col"><h4>Connect</h4><ul><li><a href="#">Apri un salone</a></li><li><a href="#">Concierge</a></li><li><a href="#">Contatti</a></li></ul></div>
+  </div>
+  <div class="below"><span>© MMXXVI · Pleasure Professional Luxury</span><span>IT · EN · ES</span></div>
+</section>
+
+<script>
+/* ========== INTRO PARTICLES ========== */
+(function(){
+  const cv=document.getElementById('intro-canvas');
+  const ctx=cv.getContext('2d');
+  let W,H;
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+  resize();
+  addEventListener('resize',resize);
+  const N=28,TAU=Math.PI*2;
+  function rnd(a,b){return a+Math.random()*(b-a);}
+  function mkP(){
+    const z=Math.random();
+    return{x:rnd(0,innerWidth),y:rnd(0,innerHeight),z,vx:rnd(-0.20,0.20),vy:rnd(-0.14,0.14),sz:rnd(1.0,3.2),opa:0,topa:rnd(0.12,0.48)*(0.3+z*0.7),life:rnd(0,280),max:rnd(200,440),pid:Math.random()*100};
+  }
+  const pts=Array.from({length:N},mkP);
+  let frame=0;
+  function tick(){
+    if(window.scrollY>innerHeight){requestAnimationFrame(tick);return;}
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.life++;
+      if(p.life>p.max){Object.assign(p,mkP());p.life=0;p.opa=0;return;}
+      const prog=p.life/p.max;
+      if(prog<0.18) p.opa=(prog/0.18)*p.topa;
+      else if(prog>0.82) p.opa=((1-prog)/0.18)*p.topa;
+      else p.opa=p.topa;
+      const t=frame*0.006;
+      p.vx+=Math.sin(t+p.pid)*0.008;p.vy+=Math.cos(t*0.78+p.pid*1.4)*0.006;
+      const spd=Math.hypot(p.vx,p.vy);
+      if(spd>0.44){p.vx=p.vx/spd*0.44;p.vy=p.vy/spd*0.44;}
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-12)p.x=W+12;else if(p.x>W+12)p.x=-12;
+      if(p.y<-12)p.y=H+12;else if(p.y>H+12)p.y=-12;
+      const s=p.sz*(0.28+p.z*0.72),a=p.opa;
+      const ri=Math.round(240+p.z*15),gi=Math.round(225+p.z*7),bi=Math.round(198+p.z*18);
+      ctx.beginPath();ctx.arc(p.x,p.y,s*.8,0,TAU);
+      ctx.fillStyle=`rgba(${ri},${gi},${bi},${a*0.88})`;ctx.fill();
+      const grd=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,s*3.4);
+      grd.addColorStop(0,`rgba(${ri},${gi},${bi},${a*0.42})`);
+      grd.addColorStop(0.44,`rgba(${ri},${gi},${bi},${a*0.34})`);
+      grd.addColorStop(1,`rgba(${ri},${gi},${bi},0)`);
+      ctx.beginPath();ctx.arc(p.x,p.y,s*3.4,0,TAU);ctx.fillStyle=grd;ctx.fill();
+    });
+    frame++;requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ========== INTRO PARALLAX ========== */
+(function(){
+  const nearL=document.getElementById('fl-near-l');
+  const nearR=document.getElementById('fl-near-r');
+  let tx=0,ty=0,cx=0,cy=0;
+  addEventListener('mousemove',e=>{tx=(e.clientX/innerWidth-.5);ty=(e.clientY/innerHeight-.5);});
+  addEventListener('touchmove',e=>{tx=(e.touches[0].clientX/innerWidth-.5);ty=(e.touches[0].clientY/innerHeight-.5);},{passive:true});
+  function px(){
+    cx+=(tx-cx)*.055;cy+=(ty-cy)*.055;
+    const n=24;
+    if(nearL)nearL.style.transform=`translate(${cx*n}px,${cy*n*.5}px)`;
+    if(nearR)nearR.style.transform=`translate(${cx*n}px,${cy*n*.5}px)`;
+    requestAnimationFrame(px);
+  }
+  px();
+})();
+
+/* cursor */
+const cur=document.getElementById('cursor');
+let mx=innerWidth/2,my=innerHeight/2,cxv=mx,cyv=my;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function t(){cxv+=(mx-cxv)*.22;cyv+=(my-cyv)*.22;cur.style.transform=`translate(${cxv}px,${cyv}px) translate(-50%,-50%)`;requestAnimationFrame(t)})();
+addEventListener('mouseout',e=>{if(!e.relatedTarget)cur.style.opacity=0});
+addEventListener('mouseover',()=>cur.style.opacity=1);
+document.addEventListener('mouseover',e=>{if(e.target.closest('a,button'))cur.classList.add('lg')});
+document.addEventListener('mouseout',e=>{if(e.target.closest('a,button'))cur.classList.remove('lg')});
+
+/* touch cursor */
+let touching=false;
+addEventListener('touchstart',e=>{touching=true;const t=e.touches[0];mx=t.clientX;my=t.clientY;cxv=mx;cyv=my;cur.style.opacity=1;},{passive:true});
+addEventListener('touchmove',e=>{const t=e.touches[0];mx=t.clientX;my=t.clientY;},{passive:true});
+addEventListener('touchend',()=>{touching=false;setTimeout(()=>{if(!touching)cur.style.opacity=0;},500);},{passive:true});
+
+/* nav */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>60)},{passive:true});
+
+/* particles (biotech) — orbit around drop center */
+const PCENTER={x:600,y:1275};
+const NP=14;
+const particleEls=[];
+const pg=document.getElementById('particles');
+const pData=[];
+for(let i=0;i<NP;i++){
+  const ang=(i/NP)*Math.PI*2;
+  const rad=160+(i%3)*28;
+  const ox=PCENTER.x+Math.cos(ang)*rad;
+  const oy=PCENTER.y+Math.sin(ang)*rad*0.76;
+  const r=2.2+(i%4)*0.9;
+  const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',ox);c.setAttribute('cy',oy);c.setAttribute('r',r);
+  c.setAttribute('fill',i%2?'#e6c693':'#d4b283');
+  c.setAttribute('opacity','0');
+  pg.appendChild(c);
+  particleEls.push(c);
+  pData.push({ox,oy,r,ring:rad,ang,delay:(i/NP)});
+}
+
+/* ink draw setup */
+const inks=[...document.querySelectorAll('.ink[data-s]')].map(el=>{
+  let len=100;try{len=el.getTotalLength()}catch(e){}
+  const hadDash=el.getAttribute('stroke-dasharray');
+  el.dataset.len=len;el.dataset.had=hadDash||'';
+  el.style.strokeDasharray=len;el.style.strokeDashoffset=len;
+  return{el,len,s:+el.dataset.s,e:+el.dataset.e,had:hadDash};
+});
+
+const spineB=document.getElementById('spineB');
+const stem=document.getElementById('stem');
+const leafMid=document.getElementById('leafMid');
+const rootPrimaryL=document.getElementById('rootPrimaryL');
+const ring1=document.getElementById('ring1');
+const ring2=document.getElementById('ring2');
+const ring3=document.getElementById('ring3');
+const orbitalG=document.getElementById('orbitalG');
+const node1=document.getElementById('node1');
+const node2=document.getElementById('node2');
+const node3=document.getElementById('node3');
+const lenSpineB=spineB.getTotalLength();
+const lenStem=stem.getTotalLength();
+const lenRootPL=rootPrimaryL.getTotalLength();
+
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function win(p,s,e){return clamp((p-s)/(e-s),0,1)}
+function smooth(t){return t*t*(3-2*t)}
+function lerp(a,b,t){return a+(b-a)*t}
+
+const svg=document.getElementById('svg');
+const flow=document.getElementById('flow');
+const fallG=document.getElementById('fallDropG');
+const lumG=document.getElementById('lumG');
+const lumDrop=document.getElementById('lumDrop');
+const lumGlow=document.getElementById('lumGlow');
+const liquid=document.getElementById('liquid');
+const tip=document.getElementById('tip');
+const tipGlow=document.getElementById('tipGlow');
+const brandG=document.getElementById('brandG');
+const rail=document.getElementById('rail');
+const fprog=document.getElementById('fprog');
+const bgGlow=document.getElementById('bg-glow');
+
+const CH_BG=[
+  'radial-gradient(ellipse at 28% 72%, rgba(138,111,77,.18) 0%, transparent 56%)',
+  'radial-gradient(ellipse at 70% 50%, rgba(184,149,106,.15) 0%, transparent 52%)',
+  'radial-gradient(ellipse at 50% 36%, rgba(212,178,131,.16) 0%, transparent 48%)',
+  'radial-gradient(ellipse at 34% 62%, rgba(138,111,77,.15) 0%, transparent 54%)',
+  'radial-gradient(ellipse at 66% 66%, rgba(184,149,106,.17) 0%, transparent 50%)',
+  'radial-gradient(ellipse at 50% 50%, rgba(230,198,147,.18) 0%, transparent 44%)',
+  'radial-gradient(ellipse at 50% 26%, rgba(184,149,106,.14) 0%, transparent 52%)',
+];
+bgGlow.style.background=CH_BG[0];
+const railChs=[...document.querySelectorAll('.rail .ch')];
+const panels=[...document.querySelectorAll('.caption .panel')];
+
+const CH=[
+  [0.00,0.14],[0.14,0.28],[0.28,0.43],[0.43,0.57],[0.57,0.71],[0.71,0.86],[0.86,1.01]
+];
+
+let curCh=-1;
+function setChapter(p){
+  let idx=0;
+  for(let i=0;i<CH.length;i++){if(p>=CH[i][0])idx=i;}
+  if(idx!==curCh){
+    curCh=idx;
+    railChs.forEach((c,i)=>c.classList.toggle('on',i===idx));
+    bgGlow.style.opacity=0;
+    setTimeout(()=>{bgGlow.style.background=CH_BG[idx];bgGlow.style.opacity=1;},400);
+  }
+}
+
+function update(){
+  const rect=flow.getBoundingClientRect();
+  const total=flow.offsetHeight-innerHeight;
+  const p=clamp(-rect.top/total,0,1);
+  const vh=innerHeight;
+
+  const inFlow=rect.top<vh*0.5&&rect.bottom>vh*0.5;
+  rail.classList.toggle('show',inFlow);
+  document.getElementById('caption').style.opacity=inFlow?1:0;
+  fprog.style.width=(p*100)+'%';
+  fprog.style.opacity=inFlow?1:0;
+
+  const svgH=vh*2.8;
+  const ty=vh*0.14-p*(svgH-vh);
+  svg.style.transform=`translate(-50%, ${ty}px)`;
+
+  /* ink draw */
+  for(const k of inks){
+    const lp=smooth(win(p,k.s,k.e));
+    if(k.had){k.el.style.strokeDashoffset=0;k.el.style.opacity=lp*0.6;}
+    else{k.el.style.strokeDashoffset=k.len*(1-lp);}
+  }
+
+  /* falling drop: from sap bottom (898) to lum top (1178) */
+  const fallP=win(p,0.40,0.54);
+  if(fallP>0&&fallP<1){
+    fallG.setAttribute('opacity',1);
+    const y=lerp(898,1178,smooth(fallP));
+    fallG.setAttribute('transform',`translate(0 ${y-41}) scale(1 ${lerp(1,1.18,fallP)})`);
+  } else {fallG.setAttribute('opacity',0);}
+
+  /* luminous large drop */
+  const lumP=win(p,0.50,0.74);
+  lumG.setAttribute('opacity',lumP>0?1:0);
+  const grow=smooth(win(p,0.50,0.64));
+  lumDrop.setAttribute('transform',`translate(600 1276) scale(${lerp(0.4,1,grow)}) translate(-600 -1276)`);
+  lumGlow.setAttribute('r',lerp(40,220,smooth(win(p,0.52,0.72))));
+  lumGlow.setAttribute('opacity',lerp(0.18,1,smooth(win(p,0.52,0.68))));
+
+  /* orbital rings */
+  const orbIn=smooth(win(p,0.48,0.62));
+  const orbOut=1-smooth(win(p,0.64,0.72));
+  const orbA=orbIn*orbOut;
+  orbitalG.setAttribute('opacity',orbA);
+  if(orbA>0){
+    const rot=(p-0.48)*90;
+    ring1.setAttribute('r',lerp(0,192,orbIn));
+    ring2.setAttribute('rx',lerp(0,258,orbIn));
+    ring2.setAttribute('ry',lerp(0,80,orbIn));
+    ring2.setAttribute('transform',`rotate(${34+rot*0.35} 600 1275)`);
+    ring3.setAttribute('rx',lerp(0,226,orbIn));
+    ring3.setAttribute('ry',lerp(0,66,orbIn));
+    ring3.setAttribute('transform',`rotate(${-28-rot*0.25} 600 1275)`);
+    /* nodes appear on ring circumference */
+    const na=smooth(win(p,0.52,0.62))*orbOut;
+    const r1=lerp(0,192,orbIn);
+    node1.setAttribute('cx',600);node1.setAttribute('cy',1275-r1);node1.setAttribute('opacity',na*0.7);
+    node2.setAttribute('cx',600+r1);node2.setAttribute('cy',1275);node2.setAttribute('opacity',na*0.6);
+    node3.setAttribute('cx',600);node3.setAttribute('cy',1275+r1);node3.setAttribute('opacity',na*0.5);
+  }
+
+  /* particles */
+  const drawP=win(p,0.48,0.62);
+  const convP=smooth(win(p,0.60,0.68));
+  for(let i=0;i<NP;i++){
+    const d=pData[i];
+    const appear=clamp((drawP-d.delay*0.5)*2,0,1);
+    const cx=lerp(d.ox,PCENTER.x,convP);
+    const cy=lerp(d.oy,PCENTER.y,convP);
+    particleEls[i].setAttribute('cx',cx);
+    particleEls[i].setAttribute('cy',cy);
+    particleEls[i].setAttribute('opacity',appear*(1-convP*0.9));
+  }
+
+  /* drop descends into jar */
+  const dropToBottle=smooth(win(p,0.74,0.86));
+  if(dropToBottle>0){
+    const dy=lerp(0,549,dropToBottle);
+    lumG.setAttribute('transform',`translate(0 ${dy})`);
+    lumG.setAttribute('opacity',lerp(1,0,smooth(win(p,0.82,0.90))));
+  } else {lumG.setAttribute('transform','translate(0 0)');}
+
+  /* liquid fill in jar (jar height 2228-1964=264) */
+  const fillP=smooth(win(p,0.84,0.97));
+  if(fillP>0){
+    liquid.setAttribute('opacity',0.9);
+    const h=lerp(0,264,fillP);
+    liquid.setAttribute('y',2228-h);
+    liquid.setAttribute('height',h);
+  } else {liquid.setAttribute('opacity',0);}
+
+  /* brand */
+  brandG.setAttribute('opacity',smooth(win(p,0.93,1)));
+
+  /* tip tracking */
+  let tp=null;
+  if(p<0.030){
+    tp=rootPrimaryL.getPointAtLength(lenRootPL*win(p,-0.025,0.030));
+  } else if(p>=0.10&&p<0.40){
+    if(p>=0.26) tp=stem.getPointAtLength(lenStem*win(p,0.26,0.37));
+    else tp=leafMid.getPointAtLength(leafMid.getTotalLength()*win(p,0.10,0.22));
+  } else if(p>=0.40&&p<0.54){
+    const y=lerp(898,1178,smooth(win(p,0.40,0.54)));
+    tp={x:600,y};
+  } else if(p>=0.54&&p<0.74){tp={x:600,y:1275};}
+  else if(p>=0.74&&p<0.88){tp=spineB.getPointAtLength(lenSpineB*win(p,0.74,0.86));}
+  if(tp){
+    tip.setAttribute('cx',tp.x);tip.setAttribute('cy',tp.y);
+    tipGlow.setAttribute('cx',tp.x);tipGlow.setAttribute('cy',tp.y);
+    tip.setAttribute('opacity',0.9);tipGlow.setAttribute('opacity',0.8);
+  } else {tip.setAttribute('opacity',0);tipGlow.setAttribute('opacity',0);}
+
+  /* caption parallax */
+  const stripH=vh*0.44;
+  panels.forEach((pl,i)=>{
+    const s=CH[i][0],e=CH[i][1];
+    const raw=(p-s)/(e-s);
+    let opa,ty,sc;
+    if(raw<=0){opa=0;ty=stripH*0.85;sc=0.86;}
+    else if(raw<0.12){const t=smooth(raw/0.12);opa=t;ty=lerp(stripH*0.85,0,t);sc=lerp(0.86,1.0,t);}
+    else if(raw<0.88){const t=(raw-0.12)/0.76;opa=1;ty=lerp(0,-stripH*0.22,t);sc=1;}
+    else if(raw<=1){const t=smooth((raw-0.88)/0.12);opa=1-t;ty=lerp(-stripH*0.22,-stripH*0.85,t);sc=1;}
+    else{opa=0;ty=-stripH*0.85;sc=1;}
+    pl.style.opacity=opa;pl.style.transform=`translateY(${ty}px) scale(${sc})`;
+  });
+
+  setChapter(p);
+}
+
+let raf=null;
+addEventListener('scroll',()=>{if(raf)return;raf=requestAnimationFrame(()=>{update();raf=null});},{passive:true});
+addEventListener('resize',update);
+update();
+
+function jumpTo(idx){
+  const total=flow.offsetHeight-innerHeight;
+  const targetP=CH[idx][0]+0.01;
+  const y=flow.offsetTop+total*targetP;
+  scrollTo({top:y,behavior:'smooth'});
+}
+railChs.forEach(c=>c.addEventListener('click',()=>jumpTo(+c.dataset.ch)));
+document.querySelectorAll('.nav .menu a[data-ch]').forEach(a=>{
+  a.addEventListener('click',e=>{e.preventDefault();jumpTo(+a.dataset.ch)});
+});
+</script>
+</body>
+</html>
