@@ -74,7 +74,7 @@ img{max-width:100%;display:block}
 }
 
 /* ===== intro ===== */
-#intro{position:relative;z-index:2;height:100vh;overflow:hidden}
+#intro{position:relative;z-index:2;height:100vh;overflow:hidden;background:radial-gradient(ellipse at 28% 72%, rgba(138,111,77,.18) 0%, transparent 55%), radial-gradient(ellipse at 72% 80%, rgba(120,95,60,.12) 0%, transparent 50%)}
 #intro-canvas{position:absolute;inset:0;z-index:1;pointer-events:none;background:transparent}
 #flora-left,#flora-right{position:absolute;top:0;bottom:0;width:30vw;min-width:130px;max-width:300px;z-index:2;pointer-events:none}
 #flora-left{left:0;-webkit-mask-image:linear-gradient(to right,black 60%,transparent 100%);mask-image:linear-gradient(to right,black 60%,transparent 100%)}
@@ -492,41 +492,63 @@ img{max-width:100%;display:block}
 
       <g filter="url(#pencil)">
 
-        <!-- ===== ROOTS (underground — always visible, fills the void before scroll) ===== -->
-        <!-- ROOTS: L & R sides matching intro flora, draw with scroll (data-s negative = half-drawn on entry) -->
-        <!-- LEFT roots x≈310-420, matches left intro plants -->
-        <path class="ink faint" data-s="-0.02" data-e="0.015" d="M420 44 C414 74 404 106 392 138 C380 168 366 198 354 228 C342 258 332 286 324 316 C316 344 310 372 308 402"/>
-        <path class="ink faint" data-s="-0.015" data-e="0.016" d="M394 124 C384 146 376 170 370 196 C364 220 360 244 358 270 C356 290 356 308 358 328" opacity=".65"/>
-        <path class="ink faint" data-s="-0.008" data-e="0.017" d="M354 228 C346 250 340 274 336 300 C332 318 330 336 332 354" opacity=".50"/>
-        <path class="ink faint" data-s="-0.012" data-e="0.015" d="M308 402 C302 424 298 448 300 472 C302 492 308 510 316 526" opacity=".44"/>
-        <path class="ink faint" data-s="-0.005" data-e="0.013" d="M370 196 C362 214 358 234 356 256" opacity=".40"/>
-        <!-- RIGHT roots x≈780-890, matches right intro plants -->
-        <path class="ink faint" data-s="-0.02" data-e="0.015" d="M780 44 C786 74 796 106 808 138 C820 168 834 198 846 228 C858 258 868 286 876 316 C884 344 890 372 892 402"/>
-        <path class="ink faint" data-s="-0.015" data-e="0.016" d="M806 124 C816 146 824 170 830 196 C836 220 840 244 842 270 C844 290 844 308 842 328" opacity=".65"/>
-        <path class="ink faint" data-s="-0.008" data-e="0.017" d="M846 228 C854 250 860 274 864 300 C868 318 870 336 868 354" opacity=".50"/>
-        <path class="ink faint" data-s="-0.012" data-e="0.015" d="M892 402 C898 424 902 448 900 472 C898 492 892 510 884 526" opacity=".44"/>
-        <path class="ink faint" data-s="-0.005" data-e="0.013" d="M830 196 C838 214 842 234 844 256" opacity=".40"/>
+        <!-- ===== ROOTS: dense organic branching from intro plants, draws with scroll ===== -->
+        <!-- LEFT primary trunk — rises from bottom of intro flora (y=-10 = above SVG, connects to tree) -->
+        <path class="ink faint" data-s="-0.025" data-e="0.030" d="M418 -10 C412 28 404 68 392 110 C380 150 364 188 350 226 C336 262 322 296 312 330 C302 360 296 390 294 420 C292 446 294 468 298 490"/>
+        <!-- LEFT secondary A — branches at y≈108, arcs leftward then down -->
+        <path class="ink faint" data-s="-0.018" data-e="0.028" d="M394 108 C378 128 362 152 348 178 C336 200 326 224 318 250 C310 272 306 296 304 320 C302 342 304 362 308 382" opacity=".70"/>
+        <!-- LEFT secondary B — branches at y≈222 from primary, curves right then down -->
+        <path class="ink faint" data-s="-0.014" data-e="0.026" d="M352 222 C342 244 334 268 330 294 C326 316 326 338 330 358 C334 376 342 392 352 406" opacity=".62"/>
+        <!-- LEFT tertiary A1 — off secondary A at y≈174, curls tighter left -->
+        <path class="ink faint" data-s="-0.010" data-e="0.024" d="M348 174 C336 190 326 210 318 232 C312 250 308 270 308 292" opacity=".52"/>
+        <!-- LEFT tertiary A2 — off secondary A at y≈248, short spur down-left -->
+        <path class="ink faint" data-s="-0.007" data-e="0.022" d="M318 248 C310 262 304 278 300 296 C296 310 296 324 298 338" opacity=".44"/>
+        <!-- LEFT tertiary B1 — off secondary B at y≈292, veers left -->
+        <path class="ink faint" data-s="-0.006" data-e="0.021" d="M330 292 C320 308 312 326 306 346 C300 362 298 378 300 394" opacity=".42"/>
+        <!-- LEFT fine tips — capillary ends, very faint -->
+        <path class="ink faint" data-s="-0.004" data-e="0.018" d="M294 420 C286 436 280 454 278 472 C276 488 280 502 286 514" opacity=".34"/>
+        <path class="ink faint" data-s="-0.002" data-e="0.016" d="M308 382 C300 396 294 412 292 428" opacity=".28"/>
+        <path class="ink faint" data-s="-0.001" data-e="0.015" d="M352 406 C344 420 338 436 338 452 C338 464 342 474 350 482" opacity=".26"/>
+        <path class="ink faint" data-s="0.001" data-e="0.014" d="M318 232 C308 246 300 262 296 280" opacity=".24"/>
 
-        <!-- ===== LEAF (the plant) ===== -->
+        <!-- RIGHT primary trunk — leans outward (right side asymmetric angle) -->
+        <path class="ink faint" data-s="-0.025" data-e="0.030" d="M782 -10 C790 28 800 68 814 110 C826 150 840 188 854 226 C866 260 876 294 882 328 C888 358 890 388 888 416 C886 440 880 462 872 482"/>
+        <!-- RIGHT secondary A — branches at y≈108 arcs rightward (asymmetric vs left) -->
+        <path class="ink faint" data-s="-0.018" data-e="0.028" d="M812 108 C828 130 842 154 852 180 C862 204 868 230 870 256 C872 278 870 298 866 318 C862 336 856 352 848 366" opacity=".70"/>
+        <!-- RIGHT secondary B — branches at y≈220, curves further right -->
+        <path class="ink faint" data-s="-0.014" data-e="0.026" d="M852 220 C862 242 870 266 874 292 C878 316 876 338 872 358 C868 374 860 388 850 400" opacity=".62"/>
+        <!-- RIGHT tertiary A1 — off secondary A at y≈178, hooks right then down -->
+        <path class="ink faint" data-s="-0.010" data-e="0.024" d="M852 178 C864 194 874 214 880 236 C884 256 884 278 880 298" opacity=".52"/>
+        <!-- RIGHT tertiary A2 — off secondary A at y≈254, short spur right -->
+        <path class="ink faint" data-s="-0.007" data-e="0.022" d="M870 254 C878 268 884 286 886 304 C888 318 886 332 882 344" opacity=".44"/>
+        <!-- RIGHT tertiary B1 — off secondary B at y≈290, veers further right -->
+        <path class="ink faint" data-s="-0.006" data-e="0.021" d="M874 290 C882 306 888 324 890 344 C892 360 890 376 886 390" opacity=".42"/>
+        <!-- RIGHT fine tips -->
+        <path class="ink faint" data-s="-0.004" data-e="0.018" d="M888 416 C894 432 898 450 898 468 C896 484 890 498 882 508" opacity=".34"/>
+        <path class="ink faint" data-s="-0.002" data-e="0.016" d="M848 366 C856 380 860 396 860 412" opacity=".28"/>
+        <path class="ink faint" data-s="-0.001" data-e="0.015" d="M850 400 C858 414 862 430 860 446 C858 458 852 468 844 474" opacity=".26"/>
+        <path class="ink faint" data-s="0.001" data-e="0.014" d="M880 236 C888 250 894 266 896 284" opacity=".24"/>
+
+        <!-- ===== LEAF (the plant) — starts AFTER roots finish drawing ===== -->
         <g id="leafGroup">
-          <path class="ink" id="leafL" data-s="0.02" data-e="0.13" d="M600 96 C 486 168 452 320 600 470"/>
-          <path class="ink" id="leafR" data-s="0.04" data-e="0.15" d="M600 96 C 714 168 748 320 600 470"/>
-          <path class="ink thin" id="leafMid" data-s="0.07" data-e="0.18" d="M600 120 L600 458"/>
-          <path class="ink thin" data-s="0.10" data-e="0.18" d="M600 180 C 556 196 532 214 512 252"/>
-          <path class="ink thin" data-s="0.11" data-e="0.19" d="M600 180 C 644 196 668 214 688 252"/>
-          <path class="ink thin" data-s="0.12" data-e="0.20" d="M600 250 C 560 266 540 284 522 322"/>
-          <path class="ink thin" data-s="0.13" data-e="0.20" d="M600 250 C 640 266 660 284 678 322"/>
-          <path class="ink thin" data-s="0.14" data-e="0.21" d="M600 322 C 566 338 550 354 536 388"/>
-          <path class="ink thin" data-s="0.15" data-e="0.21" d="M600 322 C 634 338 650 354 664 388"/>
+          <path class="ink" id="leafL" data-s="0.06" data-e="0.17" d="M600 96 C 486 168 452 320 600 470"/>
+          <path class="ink" id="leafR" data-s="0.08" data-e="0.19" d="M600 96 C 714 168 748 320 600 470"/>
+          <path class="ink thin" id="leafMid" data-s="0.11" data-e="0.22" d="M600 120 L600 458"/>
+          <path class="ink thin" data-s="0.14" data-e="0.22" d="M600 180 C 556 196 532 214 512 252"/>
+          <path class="ink thin" data-s="0.15" data-e="0.23" d="M600 180 C 644 196 668 214 688 252"/>
+          <path class="ink thin" data-s="0.16" data-e="0.24" d="M600 250 C 560 266 540 284 522 322"/>
+          <path class="ink thin" data-s="0.17" data-e="0.24" d="M600 250 C 640 266 660 284 678 322"/>
+          <path class="ink thin" data-s="0.18" data-e="0.25" d="M600 322 C 566 338 550 354 536 388"/>
+          <path class="ink thin" data-s="0.19" data-e="0.25" d="M600 322 C 634 338 650 354 664 388"/>
         </g>
 
         <!-- ===== STEM + SAP (linfa) ===== -->
-        <path class="ink" id="stem" data-s="0.16" data-e="0.30" d="M600 470 C 606 560 594 660 600 792"/>
+        <path class="ink" id="stem" data-s="0.20" data-e="0.34" d="M600 470 C 606 560 594 660 600 792"/>
         <!-- sap droplet bulge forming at stem tip -->
-        <path class="ink" id="sapDrop" data-s="0.25" data-e="0.33" d="M600 770 C 622 798 622 820 600 832 C 578 820 578 798 600 770 Z"/>
+        <path class="ink" id="sapDrop" data-s="0.29" data-e="0.37" d="M600 770 C 622 798 622 820 600 832 C 578 820 578 798 600 770 Z"/>
 
         <!-- ===== FALL TRAIL ===== -->
-        <path class="ink faint" id="fallTrail" data-s="0.30" data-e="0.50" d="M600 836 L600 1296" stroke-dasharray="2 9"/>
+        <path class="ink faint" id="fallTrail" data-s="0.34" data-e="0.54" d="M600 836 L600 1296" stroke-dasharray="2 9"/>
 
         <!-- ===== PARTICLES (biotech) ===== -->
         <g id="particles"></g>
