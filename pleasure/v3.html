@@ -494,7 +494,7 @@ img{max-width:100%;display:block}
 
         <!-- ===== ROOTS: dense organic branching from intro plants, draws with scroll ===== -->
         <!-- LEFT primary trunk — rises from bottom of intro flora (y=-10 = above SVG, connects to tree) -->
-        <path class="ink faint" data-s="-0.025" data-e="0.030" d="M418 -10 C412 28 404 68 392 110 C380 150 364 188 350 226 C336 262 322 296 312 330 C302 360 296 390 294 420 C292 446 294 468 298 490"/>
+        <path id="rootPrimaryL" class="ink faint" data-s="-0.025" data-e="0.030" d="M418 -10 C412 28 404 68 392 110 C380 150 364 188 350 226 C336 262 322 296 312 330 C302 360 296 390 294 420 C292 446 294 468 298 490"/>
         <!-- LEFT secondary A — branches at y≈108, arcs leftward then down -->
         <path class="ink faint" data-s="-0.018" data-e="0.028" d="M394 108 C378 128 362 152 348 178 C336 200 326 224 318 250 C310 272 306 296 304 320 C302 342 304 362 308 382" opacity=".70"/>
         <!-- LEFT secondary B — branches at y≈222 from primary, curves right then down -->
@@ -783,8 +783,10 @@ const inks=[...document.querySelectorAll('.ink[data-s]')].map(el=>{
 const spineB=document.getElementById('spineB');
 const stem=document.getElementById('stem');
 const leafMid=document.getElementById('leafMid');
+const rootPrimaryL=document.getElementById('rootPrimaryL');
 const lenSpineB=spineB.getTotalLength();
 const lenStem=stem.getTotalLength();
+const lenRootPL=rootPrimaryL.getTotalLength();
 
 /* ---------- helpers ---------- */
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -873,7 +875,7 @@ function update(){
   }
 
   // sap drop subtle scale handled by draw; falling drop
-  const fallP=win(p,0.32,0.50);
+  const fallP=win(p,0.38,0.54);
   if(fallP>0&&fallP<1){
     fallG.setAttribute('opacity',1);
     const y=lerp(836,1300,smooth(fallP));
@@ -929,17 +931,25 @@ function update(){
   brandG.setAttribute('opacity', smooth(win(p,0.93,1)));
 
   // pencil tip follows the active drawing front
+  // root phase → hidden gap → leaf/stem/fall/bottle
   let tp=null;
-  if(p<0.30){ const lp=win(p,0.16,0.30); if(p>=0.16) tp=stem.getPointAtLength(lenStem*lp); else {const l2=win(p,0.07,0.18); tp=leafMid.getPointAtLength(leafMid.getTotalLength()*l2);} }
-  else if(p<0.50){ const y=lerp(836,1300,smooth(win(p,0.32,0.50))); tp={x:600,y}; }
-  else if(p<0.74){ tp={x:600,y:1300}; }
-  else if(p<0.88){ const lp=win(p,0.74,0.86); tp=spineB.getPointAtLength(lenSpineB*lp); }
+  if(p<0.030){
+    // travels down the left root as it draws
+    tp=rootPrimaryL.getPointAtLength(lenRootPL*win(p,-0.025,0.030));
+  } else if(p>=0.11&&p<0.34){
+    // gap 0.030→0.11: tip hidden underground, then emerges at leaf tip
+    if(p>=0.20) tp=stem.getPointAtLength(lenStem*win(p,0.20,0.34));
+    else tp=leafMid.getPointAtLength(leafMid.getTotalLength()*win(p,0.11,0.22));
+  } else if(p>=0.38&&p<0.54){
+    const y=lerp(836,1300,smooth(win(p,0.38,0.54)));
+    tp={x:600,y};
+  } else if(p>=0.54&&p<0.74){ tp={x:600,y:1300}; }
+  else if(p>=0.74&&p<0.88){ tp=spineB.getPointAtLength(lenSpineB*win(p,0.74,0.86)); }
   if(tp){
     tip.setAttribute('cx',tp.x);tip.setAttribute('cy',tp.y);
     tipGlow.setAttribute('cx',tp.x);tipGlow.setAttribute('cy',tp.y);
-    const vis=(p>0.04&&p<0.9)?1:0;
-    tip.setAttribute('opacity',vis*0.9);
-    tipGlow.setAttribute('opacity',vis*0.8);
+    tip.setAttribute('opacity',0.9);
+    tipGlow.setAttribute('opacity',0.8);
   } else { tip.setAttribute('opacity',0);tipGlow.setAttribute('opacity',0); }
 
   // scroll-driven caption parallax (bottom strip)
