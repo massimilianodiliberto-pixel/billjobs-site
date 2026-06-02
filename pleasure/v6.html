@@ -158,7 +158,7 @@ a{color:inherit;text-decoration:none}
   .nav{padding:0 18px}.nav .menu{display:none}
   .rail{display:none}.cap{height:38vh}
   .cap .pan{padding:0 18px 14px}.cap .pan h2{font-size:clamp(16px,5vw,30px)}.cap .pan p{font-size:12px}
-  .fsvg{height:200vh}#cl{padding:110px 18px 44px}
+  #cl{padding:110px 18px 44px}
   .foot{grid-template-columns:1fr;gap:32px}.bel{flex-direction:column;gap:10px}
   #mnf{white-space:normal;width:84vw}
 }
@@ -960,7 +960,7 @@ function update(){
   document.getElementById('cap').style.opacity=inFlow?1:0;
   fpr.style.width=(p*100)+'%';fpr.style.opacity=inFlow?1:0;
 
-  const svgH=vh*2.8;
+  const svgH=svg.getBoundingClientRect().height;
   svg.style.transform=`translate(-50%,${vh*.14-p*(svgH-vh)}px)`;
 
   /* ink paths */
