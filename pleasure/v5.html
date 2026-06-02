@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PLEASURE · v5 · Franciacorta, Italia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@200;300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070910;
+  --oro:#b8923e;
+  --oro-l:#cfa84c;
+  --oro-g:#e0bc60;
+  --crema:#f0e8d4;
+  --crema-d:#8a8474;
+  --line:rgba(195,155,55,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--crema);font-family:'Montserrat',sans-serif;font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--oro);color:var(--bg)}
+
+/* cursor */
+#cursor{position:fixed;top:0;left:0;width:10px;height:17px;z-index:200;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s,width .35s,height .35s;mix-blend-mode:screen}
+#cursor svg{width:100%;height:100%;overflow:visible}
+#cursor.lg{width:22px;height:37px}
+@media(hover:none){#cursor{opacity:0;transition:opacity .4s}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 40px;transition:background .5s,backdrop-filter .5s,border-color .5s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(7,9,16,.62);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--line)}
+.nav .brand{font-family:'Playfair Display',serif;font-weight:400;font-size:18px;letter-spacing:.22em}
+.nav .menu{display:flex;gap:34px;list-style:none}
+.nav .menu a{font-size:12px;letter-spacing:.08em;color:var(--crema);opacity:.72;transition:opacity .3s}
+.nav .menu a:hover{opacity:1}
+.nav .right{display:flex;align-items:center;gap:24px}
+.nav .cta{font-size:11px;letter-spacing:.08em;color:var(--oro-l);border:1px solid rgba(195,155,55,.55);padding:9px 17px;border-radius:999px;transition:background .4s,color .4s}
+.nav .cta:hover{background:var(--oro);color:var(--bg)}
+.nav .lang{display:flex;gap:10px;font-size:11px;color:var(--crema-d)}
+.nav .lang .on{color:var(--crema)}
+.nav .lang span{cursor:pointer;transition:color .3s}
+.nav .lang span:hover{color:var(--crema)}
+
+#bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1;transition:opacity .4s ease}
+
+#gold-frame{position:fixed;inset:0;z-index:51;pointer-events:none}
+#gold-frame::before{content:'';position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(184,149,106,.38) 0%,rgba(184,149,106,0) 22%,rgba(184,149,106,0) 78%,rgba(184,149,106,.38) 100%),linear-gradient(90deg,rgba(184,149,106,.38) 0%,rgba(184,149,106,0) 22%,rgba(184,149,106,0) 78%,rgba(184,149,106,.38) 100%),linear-gradient(180deg,rgba(184,149,106,.38) 0%,rgba(184,149,106,0) 26%,rgba(184,149,106,0) 74%,rgba(184,149,106,.38) 100%),linear-gradient(180deg,rgba(184,149,106,.38) 0%,rgba(184,149,106,0) 26%,rgba(184,149,106,0) 74%,rgba(184,149,106,.38) 100%);background-size:100% 0.6px,100% 0.6px,0.6px 100%,0.6px 100%;background-position:0 0,0 100%,0 0,100% 0;background-repeat:no-repeat}
+#gold-frame::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 0% 0%,rgba(184,149,106,.22) 0%,transparent 8%),radial-gradient(circle at 100% 0%,rgba(184,149,106,.22) 0%,transparent 8%),radial-gradient(circle at 0% 100%,rgba(184,149,106,.22) 0%,transparent 8%),radial-gradient(circle at 100% 100%,rgba(184,149,106,.22) 0%,transparent 8%)}
+
+/* intro */
+#intro{position:relative;z-index:2;height:100vh;overflow:hidden;background:radial-gradient(ellipse at 28% 50%,rgba(120,90,40,.14) 0%,transparent 52%),radial-gradient(ellipse at 72% 44%,rgba(100,75,30,.10) 0%,transparent 46%)}
+#intro-canvas{position:absolute;inset:0;z-index:1;pointer-events:none}
+
+/* large atmospheric leaf top-right */
+#intro-leaf{position:absolute;right:-6vw;top:-10vh;width:66vw;max-width:500px;height:100vh;z-index:2;pointer-events:none;-webkit-mask-image:radial-gradient(ellipse at 54% 42%,rgba(0,0,0,.45) 14%,transparent 64%);mask-image:radial-gradient(ellipse at 54% 42%,rgba(0,0,0,.45) 14%,transparent 64%)}
+.il-edge{fill:none;stroke:rgba(195,155,55,.14);stroke-width:.9;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.il-midrib{fill:none;stroke:rgba(195,155,55,.10);stroke-width:.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.il-vein{fill:none;stroke:rgba(195,155,55,.07);stroke-width:.35;stroke-linecap:round;vector-effect:non-scaling-stroke}
+
+/* flora branches */
+#flora-left,#flora-right{position:absolute;top:0;bottom:0;width:30vw;min-width:130px;max-width:300px;z-index:2;pointer-events:none}
+#flora-left{left:0;-webkit-mask-image:linear-gradient(to right,black 60%,transparent 100%);mask-image:linear-gradient(to right,black 60%,transparent 100%)}
+#flora-right{right:0;-webkit-mask-image:linear-gradient(to left,black 60%,transparent 100%);mask-image:linear-gradient(to left,black 60%,transparent 100%)}
+.bl-fg{fill:none;stroke:rgba(195,155,55,.48);stroke-width:1.0;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bl-lf{fill:none;stroke:rgba(195,155,55,.36);stroke-width:.7;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#intro::after{content:'';position:absolute;left:0;right:0;bottom:0;height:32vh;background:linear-gradient(to bottom,rgba(7,9,16,0) 0%,rgba(7,9,16,.96) 78%,rgba(7,9,16,1) 100%);z-index:5;pointer-events:none}
+@keyframes sway-l{0%,100%{transform:rotate(0deg)}18%{transform:rotate(-1.3deg) skewX(-.4deg)}36%{transform:rotate(.4deg)}52%{transform:rotate(-2.8deg) skewX(-.7deg)}68%{transform:rotate(.6deg)}84%{transform:rotate(-1.1deg)}}
+@keyframes sway-r{0%,100%{transform:rotate(0deg)}18%{transform:rotate(1.3deg) skewX(.4deg)}36%{transform:rotate(-.4deg)}52%{transform:rotate(2.8deg) skewX(.7deg)}68%{transform:rotate(-.6deg)}84%{transform:rotate(1.1deg)}}
+.sway-l{transform-origin:60px 900px;animation:sway-l 11.4s ease-in-out infinite}
+.sway-r{transform-origin:220px 900px;animation:sway-r 10.2s ease-in-out infinite;animation-delay:-4.1s}
+
+/* logo / text */
+#intro-logo{position:absolute;left:50%;top:16%;transform:translateX(-50%);z-index:4;width:min(500px,72vw);opacity:0;animation:ifade 2.2s .4s cubic-bezier(.16,1,.3,1) forwards}
+#intro-logo img{width:100%;filter:drop-shadow(0 6px 32px rgba(184,149,106,.22))}
+#intro-manifesto{position:absolute;left:50%;top:56%;transform:translateX(-50%);z-index:4;text-align:center;white-space:nowrap}
+.mline{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(22px,3vw,50px);line-height:1.25;color:var(--crema);opacity:0;display:block}
+.mline em{font-style:italic;color:var(--oro-l)}
+.mline.m0{animation:mrise 2.4s 2.0s cubic-bezier(.16,1,.3,1) forwards}
+.mline.m1{animation:mrise 2.4s 3.0s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes ifade{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes mrise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+#intro .hint{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:ifade 1.6s 4.4s cubic-bezier(.16,1,.3,1) forwards;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--crema-d);z-index:4;white-space:nowrap}
+#intro .hint .ln{width:1px;height:38px;background:linear-gradient(180deg,transparent,var(--oro));animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
+
+/* flow stage */
+#flow{position:relative;height:800vh;background:var(--bg)}
+.flow-stage{position:sticky;top:0;height:100vh;overflow:hidden;z-index:1;isolation:isolate;clip-path:inset(0);background:var(--bg)}
+.flow-svg{position:absolute;left:50%;top:0;height:280vh;width:auto;will-change:transform}
+
+/* golden line styles */
+.gl{fill:none;stroke:rgba(195,155,55,.68);stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.gl.thin{stroke:rgba(195,155,55,.38);stroke-width:.7}
+.gl.bright{stroke:rgba(220,175,62,.86);stroke-width:1.3}
+.gl.faint{stroke:rgba(195,155,55,.26);stroke-width:.8}
+
+/* chapter rail */
+.rail{position:fixed;left:40px;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:0;opacity:0;transition:opacity .8s}
+.rail.show{opacity:1}
+.rail .ch{display:flex;align-items:center;gap:14px;height:46px;cursor:pointer}
+.rail .ch .label{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--crema-d);transition:color .5s,letter-spacing .5s;letter-spacing:.01em}
+.rail .ch.on .label{color:var(--crema);letter-spacing:.04em}
+.rail .ch .bead{width:5px;height:5px;border-radius:50%;background:var(--crema-d);transition:background .5s,transform .5s;flex:none}
+.rail .ch.on .bead{background:var(--oro-g);transform:scale(1.5)}
+.rail .conn{display:flex;flex-direction:column;align-items:center;gap:5px;height:26px;justify-content:center;margin-left:1.5px}
+.rail .conn i{width:3px;height:3px;border-radius:50%;background:rgba(195,155,55,.22)}
+
+/* captions */
+.caption{position:fixed;left:0;right:0;bottom:0;height:46vh;z-index:70;pointer-events:none;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 20%);mask-image:linear-gradient(to bottom,transparent 0%,black 20%)}
+.caption .panel{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:0 max(56px,5vw);text-align:center;opacity:0;will-change:transform,opacity}
+.caption .panel .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--oro);margin-bottom:12px}
+.caption .panel h2{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(20px,2.6vw,40px);line-height:1.04;color:var(--crema);margin-bottom:12px}
+.caption .panel h2 em{font-style:italic;color:var(--oro-l)}
+.caption .panel p{font-size:14px;line-height:1.6;color:var(--crema-d);max-width:560px;margin:0 auto;letter-spacing:.02em}
+.flow-progress{position:fixed;left:0;bottom:0;height:1px;background:var(--oro);z-index:75;width:0%}
+
+/* closing */
+#closing{position:relative;background:linear-gradient(180deg,#0a0c14 0%,#070910 100%);padding:200px 40px 60px;text-align:center;z-index:5}
+#closing .inner{max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:40px}
+#closing h2{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(38px,5vw,76px);line-height:1.04;color:var(--crema)}
+#closing h2 em{font-style:italic;color:var(--oro-l)}
+#closing .v-line{width:1px;height:70px;background:linear-gradient(180deg,transparent,var(--oro))}
+#closing .cta{font-size:12px;letter-spacing:.08em;color:var(--oro-l);border:1px solid rgba(195,155,55,.55);padding:14px 30px;border-radius:999px;transition:background .4s,color .4s}
+#closing .cta:hover{background:var(--oro);color:var(--bg)}
+.foot{max-width:1200px;margin:120px auto 0;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;text-align:left;padding-bottom:60px;border-top:1px solid var(--line);padding-top:60px}
+.foot .news h3{font-family:'Playfair Display',serif;font-weight:400;font-size:40px;line-height:1.02;margin-bottom:16px}
+.foot .news h3 em{font-style:italic;color:var(--oro-l)}
+.foot .news p{color:var(--crema-d);max-width:380px;margin-bottom:22px;font-size:15px}
+.foot .news form{display:flex;border-bottom:1px solid rgba(195,155,55,.35);max-width:380px}
+.foot .news input{flex:1;background:transparent;border:none;color:var(--crema);padding:12px 0;font-size:14px;outline:none}
+.foot .news input::placeholder{color:var(--crema-d)}
+.foot .news button{background:transparent;border:none;color:var(--oro-l);font-size:12px;cursor:pointer;padding:0 0 0 16px;letter-spacing:.05em}
+.foot .col h4{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:var(--oro-l);margin-bottom:16px}
+.foot .col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot .col ul a{font-size:13px;color:var(--crema);opacity:.76;letter-spacing:.03em}
+.foot .col ul a:hover{opacity:1;color:var(--oro-l)}
+.below{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:11px;color:var(--crema-d);letter-spacing:.06em}
+
+@media(max-width:900px){
+  .nav{padding:0 20px}
+  .nav .menu{display:none}
+  .rail{display:none}
+  .caption{height:40vh}
+  .caption .panel{padding:0 20px 18px}
+  .caption .panel h2{font-size:clamp(18px,5vw,32px)}
+  .caption .panel p{font-size:13px}
+  .flow-svg{height:200vh}
+  #closing{padding:120px 20px 50px}
+  .foot{grid-template-columns:1fr;gap:36px}
+  .below{flex-direction:column;gap:12px}
+  #intro-manifesto{white-space:normal;width:82vw}
+  #flora-left,#flora-right{width:46vw;min-width:120px}
+}
+</style>
+</head>
+<body>
+
+<div id="bg-glow"></div>
+<div id="gold-frame"></div>
+<div id="cursor"><svg viewBox="0 0 12 20"><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="#cfa84c" opacity=".82"/><path d="M6 0 L12 5 L6 20 L0 5 Z" fill="none" stroke="#b8923e" stroke-width=".6"/></svg></div>
+
+<nav class="nav" id="nav">
+  <div class="brand">PLEASURE</div>
+  <ul class="menu">
+    <li><a href="#" data-ch="0">Origine</a></li>
+    <li><a href="#" data-ch="1">Scoperta</a></li>
+    <li><a href="#" data-ch="2">Essenza</a></li>
+    <li><a href="#" data-ch="3">Scienza</a></li>
+    <li><a href="#" data-ch="4">Alchimia</a></li>
+    <li><a href="#" data-ch="5">Rituale</a></li>
+    <li><a href="#" data-ch="6">Risultato</a></li>
+  </ul>
+  <div class="right">
+    <a class="cta" href="#closing">Scopri le Linee</a>
+    <div class="lang"><span class="on">IT</span><span>EN</span><span>ES</span></div>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<section id="intro">
+  <canvas id="intro-canvas"></canvas>
+
+  <svg id="intro-leaf" viewBox="0 0 400 700" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+    <path class="il-edge" d="M200,28 C 144,54 94,134 80,226 C 66,318 82,436 200,522 C 318,436 334,318 320,226 C 306,134 256,54 200,28 Z"/>
+    <path class="il-midrib" d="M200,36 L200,512"/>
+    <path class="il-vein" d="M200,90 C 172,98 144,106 112,112"/>
+    <path class="il-vein" d="M200,90 C 228,98 256,106 288,112"/>
+    <path class="il-vein" d="M200,148 C 168,156 138,162 104,164"/>
+    <path class="il-vein" d="M200,148 C 232,156 262,162 296,164"/>
+    <path class="il-vein" d="M200,210 C 162,216 128,218 94,216"/>
+    <path class="il-vein" d="M200,210 C 238,216 272,218 306,216"/>
+    <path class="il-vein" d="M200,272 C 162,272 126,268 92,260"/>
+    <path class="il-vein" d="M200,272 C 238,272 274,268 308,260"/>
+    <path class="il-vein" d="M200,334 C 164,330 130,322 98,310"/>
+    <path class="il-vein" d="M200,334 C 236,330 270,322 302,310"/>
+    <path class="il-vein" d="M200,390 C 166,384 136,374 108,360"/>
+    <path class="il-vein" d="M200,390 C 234,384 264,374 292,360"/>
+    <path class="il-vein" d="M200,444 C 170,436 146,424 122,410"/>
+    <path class="il-vein" d="M200,444 C 230,436 254,424 278,410"/>
+    <path class="il-vein" d="M200,490 C 176,480 156,468 136,452"/>
+    <path class="il-vein" d="M200,490 C 224,480 244,468 264,452"/>
+  </svg>
+
+  <svg id="flora-left" viewBox="0 0 280 900" preserveAspectRatio="none" width="100%" height="100%">
+    <g id="fl-near-l"><g class="sway-l">
+      <path class="bl-fg" d="M-14 548 C18 522 56 492 96 460 C138 428 180 396 220 366 C246 348 262 334 270 316"/>
+      <path class="bl-fg" d="M88 466 C78 446 64 426 48 412 C38 404 28 402 20 406" opacity=".72"/>
+      <path class="bl-lf" d="M18 406 C8 394 10 380 20 378 C30 382 34 396 30 408 C26 416 18 418 18 406"/>
+      <path class="bl-lf" d="M18 406 L20 378"/>
+      <path class="bl-lf" d="M26 408 C36 396 36 382 26 378 C16 384 14 398 18 408 C20 416 26 416 26 408"/>
+      <path class="bl-lf" d="M26 408 L26 378"/>
+      <path class="bl-fg" d="M202 372 C188 352 170 332 152 318 C138 308 124 304 114 308" opacity=".72"/>
+      <path class="bl-lf" d="M112 308 C100 296 102 282 112 280 C122 284 126 298 122 310 C118 318 112 320 112 308"/>
+      <path class="bl-lf" d="M112 308 L112 280"/>
+      <path class="bl-lf" d="M120 310 C132 298 132 284 122 280 C112 286 110 300 114 310 C116 318 120 318 120 310"/>
+      <path class="bl-lf" d="M120 310 L122 280"/>
+    </g></g>
+  </svg>
+  <svg id="flora-right" viewBox="0 0 280 900" preserveAspectRatio="none" width="100%" height="100%">
+    <g id="fl-near-r"><g class="sway-r">
+      <path class="bl-fg" d="M294 548 C262 522 224 492 184 460 C142 428 100 396 60 366 C34 348 18 334 10 316"/>
+      <path class="bl-fg" d="M192 466 C202 446 216 426 232 412 C242 404 252 402 260 406" opacity=".72"/>
+      <path class="bl-lf" d="M262 406 C272 394 270 380 260 378 C250 382 246 396 250 408 C254 416 262 418 262 406"/>
+      <path class="bl-lf" d="M262 406 L260 378"/>
+      <path class="bl-lf" d="M254 408 C244 396 244 382 254 378 C264 384 266 398 262 408 C260 416 254 416 254 408"/>
+      <path class="bl-lf" d="M254 408 L254 378"/>
+      <path class="bl-fg" d="M78 372 C92 352 110 332 128 318 C142 308 156 304 166 308" opacity=".72"/>
+      <path class="bl-lf" d="M168 308 C180 296 178 282 168 280 C158 284 154 298 158 310 C162 318 168 320 168 308"/>
+      <path class="bl-lf" d="M168 308 L168 280"/>
+      <path class="bl-lf" d="M160 310 C148 298 148 284 158 280 C168 286 170 300 166 310 C164 318 160 318 160 310"/>
+      <path class="bl-lf" d="M160 310 L158 280"/>
+    </g></g>
+  </svg>
+
+  <div id="intro-logo"><img src="logo-pleasure-crop.png" alt="PLEASURE Professional Luxury"/></div>
+  <div id="intro-manifesto">
+    <span class="mline m0">Il vero <em>lusso</em> non è per tutti.</span>
+    <span class="mline m1">È per chi sceglie di <em>sapere di più.</em></span>
+  </div>
+  <div class="hint"><span>il flusso comincia</span><span class="ln"></span></div>
+</section>
+
+<!-- RAIL -->
+<div class="rail" id="rail">
+  <div class="ch on" data-ch="0"><span class="bead"></span><span class="label">Origine</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="1"><span class="bead"></span><span class="label">Scoperta</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="2"><span class="bead"></span><span class="label">Essenza</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="3"><span class="bead"></span><span class="label">Scienza</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="4"><span class="bead"></span><span class="label">Alchimia</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="5"><span class="bead"></span><span class="label">Rituale</span></div>
+  <div class="conn"><i></i><i></i></div>
+  <div class="ch" data-ch="6"><span class="bead"></span><span class="label">Risultato</span></div>
+</div>
+
+<!-- CAPTIONS -->
+<div class="caption" id="caption">
+  <div class="panel on" data-ch="0">
+    <div class="eyebrow">01 — L'origine</div>
+    <h2>Dalla terra,<br/>prima che dal<br/><em>laboratorio.</em></h2>
+    <p>PLEASURE non estrae dalla natura. La ascolta. E impara a restituirle qualcosa in cambio.</p>
+  </div>
+  <div class="panel" data-ch="1">
+    <div class="eyebrow">02 — La scoperta</div>
+    <h2>Scegliere di<br/><em>osservare.</em></h2>
+    <p>Andare oltre la superficie per comprendere l'essenza. Ogni dettaglio nasconde una risposta.</p>
+  </div>
+  <div class="panel" data-ch="2">
+    <div class="eyebrow">03 — L'essenza</div>
+    <h2>Ogni pianta<br/>porta un <em>segreto.</em></h2>
+    <p>Noi passiamo la vita ad ascoltarla. La linfa è il linguaggio. La goccia è la promessa.</p>
+  </div>
+  <div class="panel" data-ch="3">
+    <div class="eyebrow">04 — La scienza</div>
+    <h2>La <em>natura</em> ha già<br/>la risposta.</h2>
+    <p>Le biotecnologie avanzate la liberano, la esprimono, la potenziano. Sinergie che amplificano il potere naturale.</p>
+  </div>
+  <div class="panel" data-ch="4">
+    <div class="eyebrow">05 — L'alchimia</div>
+    <h2>Formule <em>essenziali.</em><br/>Efficacia reale.</h2>
+    <p>Meno magazzino, più risultato. Ogni formula parla una lingua precisa al capello.</p>
+  </div>
+  <div class="panel" data-ch="5">
+    <div class="eyebrow">06 — Il rituale</div>
+    <h2>Il gesto<br/>diventa <em>rito.</em></h2>
+    <p>Non protocolli, ma percorsi. Ogni rituale è un viaggio tattile e olfattivo che il cliente porta con sé.</p>
+  </div>
+  <div class="panel" data-ch="6">
+    <div class="eyebrow">07 — Il risultato</div>
+    <h2>Forza, bellezza,<br/><em>lucentezza.</em></h2>
+    <p>Un equilibrio visibile e duraturo. La scienza incontra la natura. Il capello ritrova la sua migliore versione.</p>
+  </div>
+</div>
+
+<div class="flow-progress" id="fprog"></div>
+
+<!-- FLOW -->
+<section id="flow">
+  <div class="flow-stage">
+    <svg class="flow-svg" id="svg" viewBox="0 0 1200 2400" preserveAspectRatio="xMidYMin meet">
+      <defs>
+        <!-- drop fill (very subtle inner glow) -->
+        <radialGradient id="dropFillGrad" cx="36%" cy="28%" r="64%">
+          <stop offset="0%" stop-color="rgba(220,175,62,.10)"/>
+          <stop offset="50%" stop-color="rgba(195,155,55,.05)"/>
+          <stop offset="100%" stop-color="rgba(150,110,30,0)"/>
+        </radialGradient>
+
+        <!-- sap/small drop -->
+        <radialGradient id="sapGrad" cx="38%" cy="32%" r="60%">
+          <stop offset="0%" stop-color="rgba(235,210,130,.75)"/>
+          <stop offset="50%" stop-color="rgba(195,155,55,.55)"/>
+          <stop offset="100%" stop-color="rgba(120,80,20,.30)"/>
+        </radialGradient>
+
+        <!-- liquid fill (golden) -->
+        <linearGradient id="liquidGrad" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="rgba(220,175,62,.55)"/>
+          <stop offset="100%" stop-color="rgba(140,95,25,.72)"/>
+        </linearGradient>
+
+        <!-- tip halo -->
+        <radialGradient id="tipHaloGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(220,175,62,.60)"/>
+          <stop offset="60%" stop-color="rgba(195,155,55,.14)"/>
+          <stop offset="100%" stop-color="rgba(170,130,40,0)"/>
+        </radialGradient>
+
+        <!-- node / molecular dot -->
+        <radialGradient id="nodeGrad" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#fff0c0"/>
+          <stop offset="50%" stop-color="#e0b030"/>
+          <stop offset="100%" stop-color="#7a4a08"/>
+        </radialGradient>
+
+        <!-- flask cap gradient -->
+        <linearGradient id="capGrad" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="rgba(200,170,100,.52)"/>
+          <stop offset="50%" stop-color="rgba(160,130,70,.36)"/>
+          <stop offset="100%" stop-color="rgba(110,85,40,.58)"/>
+        </linearGradient>
+
+        <!-- clip for flask interior -->
+        <clipPath id="flaskClip">
+          <path d="M568,1945 C520,1985 478,2065 478,2150 Q476,2232 558,2234 L642,2234 Q724,2232 722,2150 C722,2065 680,1985 632,1945 Z"/>
+        </clipPath>
+
+        <!-- glow filters -->
+        <filter id="glow8" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="8"/>
+        </filter>
+        <filter id="glow20" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="20"/>
+        </filter>
+        <filter id="glow40" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="40"/>
+        </filter>
+        <filter id="softEdge" x="-4%" y="-4%" width="108%" height="108%">
+          <feGaussianBlur stdDeviation="1.4"/>
+        </filter>
+        <filter id="glowLine" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- ===== MOUNTAIN SILHOUETTE (chapter 1, fades out) ===== -->
+      <g id="mountainsG" opacity="0">
+        <path d="M0,270 L80,218 L160,246 L290,172 L410,240 L520,196 L600,228 L680,184 L790,242 L920,188 L1040,238 L1130,208 L1200,258 L1200,280 L0,280 Z"
+          fill="rgba(195,155,55,.04)" stroke="rgba(195,155,55,.14)" stroke-width="0.7" stroke-linejoin="round"/>
+        <!-- small detail stars near mountains -->
+        <circle cx="282" cy="152" r="1.2" fill="rgba(220,178,62,.55)"/>
+        <circle cx="518" cy="178" r="1.0" fill="rgba(220,178,62,.44)"/>
+        <circle cx="682" cy="162" r="1.4" fill="rgba(220,178,62,.60)"/>
+        <circle cx="930" cy="170" r="1.0" fill="rgba(220,178,62,.42)"/>
+        <line x1="282" y1="152" x2="518" y2="178" stroke="rgba(220,178,62,.12)" stroke-width="0.5"/>
+        <line x1="518" y1="178" x2="682" y2="162" stroke="rgba(220,178,62,.10)" stroke-width="0.5"/>
+        <line x1="682" y1="162" x2="930" y2="170" stroke="rgba(220,178,62,.12)" stroke-width="0.5"/>
+      </g>
+
+      <!-- ===== ROOTS (compact) ===== -->
+      <g id="rootsG">
+        <path id="rootPrimaryL" class="gl faint" data-s="-0.025" data-e="0.030" d="M600 20 C600 30 600 40 599 50 C598 56 597 64 596 72"/>
+        <path class="gl faint" data-s="-0.018" data-e="0.026" d="M599 22 C582 30 562 44 540 60 C524 72 512 82 508 90" opacity=".55"/>
+        <path class="gl faint" data-s="-0.018" data-e="0.026" d="M601 22 C618 30 638 44 660 60 C676 72 688 82 692 90" opacity=".55"/>
+        <path class="gl faint" data-s="-0.012" data-e="0.024" d="M598 36 C578 46 554 62 528 78 C508 90 496 100 494 108" opacity=".38"/>
+        <path class="gl faint" data-s="-0.012" data-e="0.024" d="M602 36 C622 46 646 62 672 78 C692 90 704 100 706 108" opacity=".38"/>
+        <path class="gl faint" data-s="-0.006" data-e="0.020" d="M597 48 C578 60 556 74 534 88 C516 100 506 110 506 118" opacity=".26"/>
+        <path class="gl faint" data-s="-0.006" data-e="0.020" d="M603 48 C622 60 644 74 666 88 C684 100 694 110 694 118" opacity=".26"/>
+      </g>
+
+      <!-- ===== BOTANICAL LEAF ===== -->
+      <g id="leafGroup">
+        <!-- backlit halo -->
+        <ellipse id="leafGlow" cx="600" cy="300" rx="200" ry="240" fill="rgba(195,155,55,.06)" opacity="0" filter="url(#glow40)"/>
+        <!-- body fill (revealed as edges draw) -->
+        <path id="leafFill"
+          d="M600,40 C510,74 440,164 420,274 C400,384 428,490 600,560 C772,490 800,384 780,274 C760,164 690,74 600,40 Z"
+          fill="rgba(195,155,55,.04)" opacity="0"/>
+        <!-- outer edges -->
+        <path class="gl bright" id="leafL" data-s="0.06" data-e="0.18"
+          d="M600,40 C510,74 440,164 420,274 C400,384 428,490 600,560"/>
+        <path class="gl bright" id="leafR" data-s="0.07" data-e="0.19"
+          d="M600,40 C690,74 760,164 780,274 C800,384 772,490 600,560"/>
+        <!-- midrib -->
+        <path class="gl" id="leafMid" data-s="0.10" data-e="0.22"
+          d="M600,52 L600,550"/>
+        <!-- veins left -->
+        <path class="gl thin" data-s="0.12" data-e="0.20" d="M600,100 C572,110 542,120 506,126"/>
+        <path class="gl thin" data-s="0.13" data-e="0.21" d="M600,154 C566,164 534,172 498,176"/>
+        <path class="gl thin" data-s="0.14" data-e="0.22" d="M600,212 C562,220 526,226 490,226"/>
+        <path class="gl thin" data-s="0.15" data-e="0.22" d="M600,270 C560,272 522,272 486,268"/>
+        <path class="gl thin" data-s="0.16" data-e="0.23" d="M600,328 C560,326 522,320 488,312"/>
+        <path class="gl thin" data-s="0.17" data-e="0.23" d="M600,378 C562,374 526,368 496,358"/>
+        <path class="gl thin" data-s="0.18" data-e="0.24" d="M600,426 C564,420 532,412 504,400"/>
+        <path class="gl thin" data-s="0.19" data-e="0.25" d="M600,472 C568,464 540,454 514,440"/>
+        <!-- veins right -->
+        <path class="gl thin" data-s="0.12" data-e="0.20" d="M600,100 C628,110 658,120 694,126"/>
+        <path class="gl thin" data-s="0.13" data-e="0.21" d="M600,154 C634,164 666,172 702,176"/>
+        <path class="gl thin" data-s="0.14" data-e="0.22" d="M600,212 C638,220 674,226 710,226"/>
+        <path class="gl thin" data-s="0.15" data-e="0.22" d="M600,270 C640,272 678,272 714,268"/>
+        <path class="gl thin" data-s="0.16" data-e="0.23" d="M600,328 C640,326 678,320 712,312"/>
+        <path class="gl thin" data-s="0.17" data-e="0.23" d="M600,378 C638,374 674,368 704,358"/>
+        <path class="gl thin" data-s="0.18" data-e="0.24" d="M600,426 C636,420 668,412 696,400"/>
+        <path class="gl thin" data-s="0.19" data-e="0.25" d="M600,472 C632,464 660,454 686,440"/>
+        <!-- constellation dots on leaf -->
+        <circle cx="540" cy="200" r="1.4" fill="rgba(220,178,62,.50)" opacity="0" id="ldot1"/>
+        <circle cx="490" cy="280" r="1.2" fill="rgba(220,178,62,.44)" opacity="0" id="ldot2"/>
+        <circle cx="660" cy="160" r="1.4" fill="rgba(220,178,62,.50)" opacity="0" id="ldot3"/>
+        <circle cx="710" cy="280" r="1.2" fill="rgba(220,178,62,.44)" opacity="0" id="ldot4"/>
+        <line id="ldotLine1" x1="540" y1="200" x2="490" y2="280" stroke="rgba(220,178,62,.16)" stroke-width="0.5" opacity="0"/>
+        <line id="ldotLine2" x1="660" y1="160" x2="710" y2="280" stroke="rgba(220,178,62,.16)" stroke-width="0.5" opacity="0"/>
+      </g>
+
+      <!-- ===== STEM ===== -->
+      <path class="gl" id="stem" data-s="0.26" data-e="0.37"
+        d="M600,560 C607,648 593,746 600,882"/>
+
+      <!-- ===== MAGNIFYING GLASS (replaces sap drop) ===== -->
+      <g id="lensG" opacity="0">
+        <!-- outer ring glow -->
+        <circle cx="600" cy="940" r="96" fill="rgba(195,155,55,.04)" filter="url(#glow20)"/>
+        <!-- lens circle -->
+        <circle id="lensRing" cx="600" cy="940" r="90"
+          fill="rgba(195,155,55,.03)" stroke="rgba(195,155,55,.65)" stroke-width="1.2" vector-effect="non-scaling-stroke"/>
+        <!-- lens highlight arc -->
+        <path d="M526,906 C540,886 568,876 600,876 C616,876 630,880 642,886"
+          fill="none" stroke="rgba(220,178,62,.20)" stroke-width="0.8" stroke-linecap="round"/>
+        <!-- handle -->
+        <path id="lensHandle" d="M667,1003 L726,1055"
+          fill="none" stroke="rgba(195,155,55,.65)" stroke-width="3.0" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        <!-- handle end cap -->
+        <circle cx="726" cy="1055" r="5" fill="none" stroke="rgba(195,155,55,.55)" stroke-width="1.2" vector-effect="non-scaling-stroke"/>
+        <circle cx="726" cy="1055" r="2" fill="rgba(220,178,62,.60)"/>
+        <!-- inner: small leaf + constellation -->
+        <path d="M600,892 C580,910 566,932 566,952 C566,970 582,984 600,984 C618,984 634,970 634,952 C634,932 620,910 600,892"
+          fill="none" stroke="rgba(195,155,55,.48)" stroke-width="0.8" stroke-linecap="round"/>
+        <path d="M600,892 L600,984"
+          fill="none" stroke="rgba(195,155,55,.30)" stroke-width="0.6"/>
+        <path d="M600,918 C582,926 566,934 556,944 M600,918 C618,926 634,934 644,944"
+          fill="none" stroke="rgba(195,155,55,.26)" stroke-width="0.5" stroke-linecap="round"/>
+        <!-- constellation dots inside lens -->
+        <circle cx="572" cy="922" r="1.6" fill="rgba(220,178,62,.78)"/>
+        <circle cx="626" cy="915" r="1.2" fill="rgba(220,178,62,.65)"/>
+        <circle cx="618" cy="964" r="1.6" fill="rgba(220,178,62,.78)"/>
+        <circle cx="576" cy="972" r="1.2" fill="rgba(220,178,62,.55)"/>
+        <circle cx="600" cy="940" r="1.8" fill="rgba(220,178,62,.85)" filter="url(#glow8)"/>
+        <!-- constellation connecting lines -->
+        <line x1="572" y1="922" x2="626" y2="915" stroke="rgba(220,178,62,.22)" stroke-width="0.55"/>
+        <line x1="626" y1="915" x2="618" y2="964" stroke="rgba(220,178,62,.20)" stroke-width="0.55"/>
+        <line x1="618" y1="964" x2="576" y2="972" stroke="rgba(220,178,62,.22)" stroke-width="0.55"/>
+        <line x1="576" y1="972" x2="572" y2="922" stroke="rgba(220,178,62,.18)" stroke-width="0.5"/>
+        <line x1="572" y1="922" x2="600" y2="940" stroke="rgba(220,178,62,.18)" stroke-width="0.45"/>
+        <line x1="626" y1="915" x2="600" y2="940" stroke="rgba(220,178,62,.18)" stroke-width="0.45"/>
+      </g>
+
+      <!-- ===== FALL TRAIL ===== -->
+      <line id="fallTrail" x1="600" y1="1030" x2="600" y2="1150"
+        stroke="rgba(195,155,55,.22)" stroke-width="0.8" stroke-dasharray="2 9" opacity="0"/>
+
+      <!-- ===== PARTICLES ===== -->
+      <g id="particles"></g>
+
+      <!-- ===== ORBITAL RINGS + MOLECULAR DIAGRAM ===== -->
+      <g id="orbitalG" opacity="0">
+        <!-- molecular connecting lines -->
+        <g id="molLines" opacity="0">
+          <line x1="600" y1="1280" x2="600" y2="1082" stroke="rgba(195,155,55,.22)" stroke-width="0.6"/>
+          <line x1="600" y1="1280" x2="780" y2="1186" stroke="rgba(195,155,55,.18)" stroke-width="0.5"/>
+          <line x1="600" y1="1280" x2="780" y2="1374" stroke="rgba(195,155,55,.18)" stroke-width="0.5"/>
+          <line x1="600" y1="1280" x2="600" y2="1478" stroke="rgba(195,155,55,.22)" stroke-width="0.6"/>
+          <line x1="600" y1="1280" x2="420" y2="1374" stroke="rgba(195,155,55,.18)" stroke-width="0.5"/>
+          <line x1="600" y1="1280" x2="420" y2="1186" stroke="rgba(195,155,55,.18)" stroke-width="0.5"/>
+        </g>
+        <!-- molecular atom nodes -->
+        <circle id="mol0" cx="600" cy="1082" r="5" fill="url(#nodeGrad)" opacity="0" filter="url(#glow8)"/>
+        <circle id="mol1" cx="780" cy="1186" r="4" fill="url(#nodeGrad)" opacity="0" filter="url(#glow8)"/>
+        <circle id="mol2" cx="780" cy="1374" r="4" fill="url(#nodeGrad)" opacity="0" filter="url(#glow8)"/>
+        <circle id="mol3" cx="600" cy="1478" r="5" fill="url(#nodeGrad)" opacity="0" filter="url(#glow8)"/>
+        <circle id="mol4" cx="420" cy="1374" r="4" fill="url(#nodeGrad)" opacity="0" filter="url(#glow8)"/>
+        <circle id="mol5" cx="420" cy="1186" r="4" fill="url(#nodeGrad)" opacity="0" filter="url(#glow8)"/>
+        <!-- orbital rings -->
+        <circle id="ring1" cx="600" cy="1280" r="0"
+          fill="none" stroke="rgba(195,155,55,.20)" stroke-width="0.9" vector-effect="non-scaling-stroke"/>
+        <ellipse id="ring2" cx="600" cy="1280" rx="0" ry="0"
+          fill="none" stroke="rgba(195,155,55,.14)" stroke-width="0.7" vector-effect="non-scaling-stroke"/>
+        <ellipse id="ring3" cx="600" cy="1280" rx="0" ry="0"
+          fill="none" stroke="rgba(195,155,55,.14)" stroke-width="0.7" vector-effect="non-scaling-stroke"/>
+        <!-- ring nodes -->
+        <circle id="nodeT" cx="600" cy="1280" r="4.5" fill="url(#nodeGrad)" opacity="0" filter="url(#glow8)"/>
+        <circle id="nodeR" cx="600" cy="1280" r="4.0" fill="url(#nodeGrad)" opacity="0" filter="url(#glow8)"/>
+        <circle id="nodeL" cx="600" cy="1280" r="3.5" fill="url(#nodeGrad)" opacity="0" filter="url(#glow8)"/>
+        <!-- central glow (drop center when visible) -->
+        <circle cx="600" cy="1280" r="28" fill="rgba(195,155,55,.08)" filter="url(#glow20)"/>
+      </g>
+
+      <!-- ===== FINE-LINE LUMINOUS DROP ===== -->
+      <g id="lumG" opacity="0">
+        <!-- far ambient halo -->
+        <ellipse cx="600" cy="1295" rx="360" ry="380" fill="rgba(195,155,55,.05)" filter="url(#glow40)"/>
+        <!-- mid glow -->
+        <ellipse id="lumGlow" cx="600" cy="1295" rx="0" ry="0" fill="rgba(195,155,55,.10)" filter="url(#glow20)"/>
+        <!-- drop body: subtle fill + golden outline -->
+        <path id="lumDrop"
+          d="M600,1150 C672,1246 672,1358 600,1404 C528,1358 528,1246 600,1150 Z"
+          fill="url(#dropFillGrad)"/>
+        <path d="M600,1150 C672,1246 672,1358 600,1404 C528,1358 528,1246 600,1150 Z"
+          fill="none" stroke="rgba(195,155,55,.72)" stroke-width="1.3" stroke-linejoin="round" vector-effect="non-scaling-stroke"
+          filter="url(#glowLine)"/>
+        <!-- inner refraction lines -->
+        <path d="M574,1196 C570,1248 574,1322 582,1378"
+          fill="none" stroke="rgba(195,155,55,.32)" stroke-width="0.7" stroke-linecap="round"/>
+        <path d="M626,1196 C630,1248 626,1322 618,1378"
+          fill="none" stroke="rgba(195,155,55,.22)" stroke-width="0.6" stroke-linecap="round"/>
+        <!-- caustic arc inside -->
+        <path d="M564,1296 C580,1272 620,1272 636,1296"
+          fill="none" stroke="rgba(220,178,62,.35)" stroke-width="0.7" stroke-linecap="round"/>
+        <!-- ripple rings at base -->
+        <ellipse id="ripple1" cx="600" cy="1395" rx="0" ry="0"
+          fill="none" stroke="rgba(195,155,55,.28)" stroke-width="0.8" vector-effect="non-scaling-stroke"/>
+        <ellipse id="ripple2" cx="600" cy="1395" rx="0" ry="0"
+          fill="none" stroke="rgba(195,155,55,.16)" stroke-width="0.6" vector-effect="non-scaling-stroke"/>
+        <ellipse id="ripple3" cx="600" cy="1395" rx="0" ry="0"
+          fill="none" stroke="rgba(195,155,55,.09)" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
+        <!-- specular highlight -->
+        <ellipse cx="572" cy="1206" rx="6" ry="12" fill="rgba(235,210,130,.50)" filter="url(#softEdge)"/>
+        <ellipse cx="577" cy="1196" rx="2.5" ry="5" fill="rgba(245,230,160,.70)"/>
+      </g>
+
+      <!-- ===== SPINE into flask ===== -->
+      <path class="gl" id="spineB" data-s="0.74" data-e="0.86"
+        d="M600,1400 C607,1560 593,1740 600,1880"/>
+
+      <!-- ===== ERLENMEYER FLASK ===== -->
+      <g id="flaskGroup" opacity="0">
+        <!-- body fill (very subtle) -->
+        <path d="M568,1945 C520,1985 478,2065 478,2150 Q476,2232 558,2234 L642,2234 Q724,2232 722,2150 C722,2065 680,1985 632,1945 Z"
+          fill="rgba(195,155,55,.03)"/>
+        <!-- cap/neck fill -->
+        <path id="capFill" d="M562,1868 L562,1945 L638,1945 L638,1868 Z"
+          fill="rgba(195,155,55,.05)"/>
+        <!-- neck rim -->
+        <path class="gl" id="bcap" data-s="0.72" data-e="0.80"
+          d="M556,1868 L644,1868 M562,1868 L562,1945 M638,1868 L638,1945"/>
+        <!-- body outline -->
+        <path class="gl" id="bbody" data-s="0.76" data-e="0.90"
+          d="M568,1945 C520,1985 478,2065 478,2150 Q476,2232 558,2234 L642,2234 Q724,2232 722,2150 C722,2065 680,1985 632,1945"/>
+        <!-- label rectangle -->
+        <path class="gl" id="blabel" data-s="0.86" data-e="0.93"
+          style="stroke:rgba(195,155,55,.32);stroke-width:.8"
+          d="M508,2052 L692,2052 L692,2168 L508,2168 Z"/>
+        <!-- internal botanical stem -->
+        <path class="gl thin" id="fplant" data-s="0.84" data-e="0.94"
+          d="M600,2200 L600,2068 C600,2028 584,2004 572,1994 M600,2088 C600,2048 618,2018 632,2008 M600,2110 C584,2096 568,2090 556,2092 M600,2130 C616,2116 634,2110 646,2112"/>
+        <!-- shine arc on left side -->
+        <path d="M492,2020 C500,2006 510,1996 520,1990"
+          fill="none" stroke="rgba(220,178,62,.18)" stroke-width="0.8" stroke-linecap="round"/>
+      </g>
+
+      <!-- liquid fill inside flask -->
+      <rect id="liquid" x="476" y="2234" width="248" height="0"
+        fill="url(#liquidGrad)" clip-path="url(#flaskClip)" opacity="0"/>
+
+      <!-- ===== FALLING DROP ===== -->
+      <g id="fallDropG" opacity="0">
+        <ellipse id="fallGlow" cx="600" cy="40" rx="52" ry="60" fill="rgba(195,155,55,.28)" filter="url(#glow20)"/>
+        <path d="M600,0 C626,38 626,64 600,80 C574,64 574,38 600,0 Z"
+          fill="rgba(195,155,55,.45)"/>
+        <path d="M600,0 C626,38 626,64 600,80 C574,64 574,38 600,0 Z"
+          fill="none" stroke="rgba(195,155,55,.70)" stroke-width="1.1" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        <ellipse cx="590" cy="18" rx="5" ry="10" fill="rgba(235,210,130,.55)"/>
+        <ellipse cx="594" cy="10" rx="2" ry="4" fill="rgba(245,230,160,.78)"/>
+      </g>
+
+      <!-- tip / diamantino -->
+      <circle id="tip" r="4.5" fill="#e8c840" opacity="0"/>
+      <circle id="tipGlow" r="20" fill="url(#tipHaloGrad)" opacity="0"/>
+
+      <!-- brand -->
+      <g id="brandG" opacity="0">
+        <text x="600" y="2295" text-anchor="middle"
+          font-family="Playfair Display" font-size="42" letter-spacing="12"
+          fill="rgba(195,155,55,.88)">PLEASURE</text>
+        <text x="600" y="2322" text-anchor="middle"
+          font-family="Montserrat" font-size="11" letter-spacing="6" font-weight="300"
+          fill="rgba(195,155,55,.50)">PROFESSIONAL LUXURY</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section id="closing">
+  <div class="inner">
+    <div class="v-line"></div>
+    <h2>Dalla pianta alla goccia.<br/>Dalla goccia al <em>tuo gesto.</em></h2>
+    <a class="cta" href="#">Entra nel mondo PLEASURE →</a>
+  </div>
+  <div class="foot">
+    <div class="news">
+      <h3>Entra nel<br/><em>Circolo →</em></h3>
+      <p>Quattro lettere all'anno. Note dal laboratorio, inviti privati, il prossimo capitolo del metodo.</p>
+      <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Iscritta ✓'">
+        <input type="email" placeholder="la tua email professionale" required />
+        <button type="submit">Iscriviti →</button>
+      </form>
+    </div>
+    <div class="col"><h4>Maison</h4><ul><li><a href="#">Manifesto</a></li><li><a href="#">Laboratorio</a></li><li><a href="#">Franciacorta</a></li></ul></div>
+    <div class="col"><h4>Method</h4><ul><li><a href="#">Academy</a></li><li><a href="#">Atelier</a></li><li><a href="#">Ricerca</a></li></ul></div>
+    <div class="col"><h4>Connect</h4><ul><li><a href="#">Apri un salone</a></li><li><a href="#">Concierge</a></li><li><a href="#">Contatti</a></li></ul></div>
+  </div>
+  <div class="below"><span>© MMXXVI · Pleasure Professional Luxury</span><span>IT · EN · ES</span></div>
+</section>
+
+<script>
+/* INTRO PARTICLES (golden) */
+(function(){
+  const cv=document.getElementById('intro-canvas');
+  const ctx=cv.getContext('2d');
+  let W,H;
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+  resize();addEventListener('resize',resize);
+  const N=24,TAU=Math.PI*2;
+  function rnd(a,b){return a+Math.random()*(b-a);}
+  function mkP(){const z=Math.random();return{x:rnd(0,innerWidth),y:rnd(0,innerHeight),z,vx:rnd(-.18,.18),vy:rnd(-.12,.12),sz:rnd(0.9,2.8),opa:0,topa:rnd(.10,.38)*(0.3+z*0.7),life:rnd(0,260),max:rnd(180,400),pid:Math.random()*100};}
+  const pts=Array.from({length:N},mkP);let frame=0;
+  function tick(){
+    if(window.scrollY>innerHeight){requestAnimationFrame(tick);return;}
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.life++;if(p.life>p.max){Object.assign(p,mkP());p.life=0;p.opa=0;return;}
+      const prog=p.life/p.max;
+      if(prog<0.18)p.opa=(prog/0.18)*p.topa;else if(prog>0.82)p.opa=((1-prog)/0.18)*p.topa;else p.opa=p.topa;
+      const t=frame*0.006;p.vx+=Math.sin(t+p.pid)*0.007;p.vy+=Math.cos(t*0.78+p.pid*1.4)*0.005;
+      const spd=Math.hypot(p.vx,p.vy);if(spd>0.40){p.vx=p.vx/spd*0.40;p.vy=p.vy/spd*0.40;}
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-12)p.x=W+12;else if(p.x>W+12)p.x=-12;
+      if(p.y<-12)p.y=H+12;else if(p.y>H+12)p.y=-12;
+      const s=p.sz*(0.28+p.z*0.72),a=p.opa;
+      // golden particles: r=195+, g=155+, b=55+
+      const ri=Math.round(195+p.z*25),gi=Math.round(155+p.z*20),bi=Math.round(55+p.z*20);
+      ctx.beginPath();ctx.arc(p.x,p.y,s*.8,0,TAU);ctx.fillStyle=`rgba(${ri},${gi},${bi},${a*.9})`;ctx.fill();
+      const grd=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,s*3.2);
+      grd.addColorStop(0,`rgba(${ri},${gi},${bi},${a*.35})`);grd.addColorStop(1,`rgba(${ri},${gi},${bi},0)`);
+      ctx.beginPath();ctx.arc(p.x,p.y,s*3.2,0,TAU);ctx.fillStyle=grd;ctx.fill();
+    });
+    frame++;requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* PARALLAX */
+(function(){
+  const nearL=document.getElementById('fl-near-l'),nearR=document.getElementById('fl-near-r');
+  let tx=0,ty=0,cx=0,cy=0;
+  addEventListener('mousemove',e=>{tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5;});
+  addEventListener('touchmove',e=>{tx=e.touches[0].clientX/innerWidth-.5;ty=e.touches[0].clientY/innerHeight-.5;},{passive:true});
+  function px(){cx+=(tx-cx)*.055;cy+=(ty-cy)*.055;const n=24;if(nearL)nearL.style.transform=`translate(${cx*n}px,${cy*n*.5}px)`;if(nearR)nearR.style.transform=`translate(${cx*n}px,${cy*n*.5}px)`;requestAnimationFrame(px);}
+  px();
+})();
+
+/* CURSOR */
+const cur=document.getElementById('cursor');
+let mx=innerWidth/2,my=innerHeight/2,cxv=mx,cyv=my;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function t(){cxv+=(mx-cxv)*.22;cyv+=(my-cyv)*.22;cur.style.transform=`translate(${cxv}px,${cyv}px) translate(-50%,-50%)`;requestAnimationFrame(t)})();
+addEventListener('mouseout',e=>{if(!e.relatedTarget)cur.style.opacity=0});addEventListener('mouseover',()=>cur.style.opacity=1);
+document.addEventListener('mouseover',e=>{if(e.target.closest('a,button'))cur.classList.add('lg')});
+document.addEventListener('mouseout',e=>{if(e.target.closest('a,button'))cur.classList.remove('lg')});
+let touching=false;
+addEventListener('touchstart',e=>{touching=true;const t=e.touches[0];mx=t.clientX;my=t.clientY;cxv=mx;cyv=my;cur.style.opacity=1;},{passive:true});
+addEventListener('touchmove',e=>{const t=e.touches[0];mx=t.clientX;my=t.clientY;},{passive:true});
+addEventListener('touchend',()=>{touching=false;setTimeout(()=>{if(!touching)cur.style.opacity=0;},500);},{passive:true});
+
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>60)},{passive:true});
+
+/* PARTICLES around drop */
+const PCENTER={x:600,y:1280};
+const NP=12;const particleEls=[];const pg=document.getElementById('particles');const pData=[];
+for(let i=0;i<NP;i++){
+  const ang=(i/NP)*Math.PI*2,rad=160+(i%3)*28;
+  const ox=PCENTER.x+Math.cos(ang)*rad,oy=PCENTER.y+Math.sin(ang)*rad*0.76;
+  const r=2.2+(i%4)*.8;
+  const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',ox);c.setAttribute('cy',oy);c.setAttribute('r',r);
+  c.setAttribute('fill',i%2?'rgba(220,178,62,.75)':'rgba(195,155,55,.65)');c.setAttribute('opacity','0');
+  pg.appendChild(c);particleEls.push(c);pData.push({ox,oy,r,ang,delay:i/NP});
+}
+
+/* INK DRAW (now .gl paths) */
+const inks=[...document.querySelectorAll('.gl[data-s]')].map(el=>{
+  let len=100;try{len=el.getTotalLength()}catch(e){}
+  el.dataset.len=len;el.style.strokeDasharray=len;el.style.strokeDashoffset=len;
+  return{el,len,s:+el.dataset.s,e:+el.dataset.e};
+});
+
+const spineB=document.getElementById('spineB');
+const stem=document.getElementById('stem');
+const leafMid=document.getElementById('leafMid');
+const rootPrimaryL=document.getElementById('rootPrimaryL');
+const lumDrop=document.getElementById('lumDrop');
+const lumGlow=document.getElementById('lumGlow');
+const ring1=document.getElementById('ring1');
+const ring2=document.getElementById('ring2');
+const ring3=document.getElementById('ring3');
+const orbitalG=document.getElementById('orbitalG');
+const nodeT=document.getElementById('nodeT');
+const nodeR=document.getElementById('nodeR');
+const nodeL=document.getElementById('nodeL');
+const molLines=document.getElementById('molLines');
+const molNodes=[0,1,2,3,4,5].map(i=>document.getElementById('mol'+i));
+const ripple1=document.getElementById('ripple1');
+const ripple2=document.getElementById('ripple2');
+const ripple3=document.getElementById('ripple3');
+
+const lenSpineB=spineB.getTotalLength();
+const lenStem=stem.getTotalLength();
+const lenRootPL=rootPrimaryL.getTotalLength();
+
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function win(p,s,e){return clamp((p-s)/(e-s),0,1)}
+function smooth(t){return t*t*(3-2*t)}
+function lerp(a,b,t){return a+(b-a)*t}
+
+const svg=document.getElementById('svg');
+const flow=document.getElementById('flow');
+const fallG=document.getElementById('fallDropG');
+const fallGlowEl=document.getElementById('fallGlow');
+const lumG=document.getElementById('lumG');
+const lensG=document.getElementById('lensG');
+const fallTrail=document.getElementById('fallTrail');
+const liquid=document.getElementById('liquid');
+const tip=document.getElementById('tip');
+const tipGlow=document.getElementById('tipGlow');
+const brandG=document.getElementById('brandG');
+const flaskGroup=document.getElementById('flaskGroup');
+const leafFill=document.getElementById('leafFill');
+const leafGlow=document.getElementById('leafGlow');
+const mountainsG=document.getElementById('mountainsG');
+const ldot1=document.getElementById('ldot1');
+const ldot2=document.getElementById('ldot2');
+const ldot3=document.getElementById('ldot3');
+const ldot4=document.getElementById('ldot4');
+const ldotLine1=document.getElementById('ldotLine1');
+const ldotLine2=document.getElementById('ldotLine2');
+const rail=document.getElementById('rail');
+const fprog=document.getElementById('fprog');
+const bgGlow=document.getElementById('bg-glow');
+
+const CH_BG=[
+  'radial-gradient(ellipse at 28% 72%,rgba(100,80,30,.16) 0%,transparent 56%)',
+  'radial-gradient(ellipse at 70% 50%,rgba(140,110,45,.14) 0%,transparent 52%)',
+  'radial-gradient(ellipse at 50% 36%,rgba(170,135,50,.15) 0%,transparent 48%)',
+  'radial-gradient(ellipse at 34% 62%,rgba(110,85,32,.14) 0%,transparent 54%)',
+  'radial-gradient(ellipse at 66% 66%,rgba(140,110,45,.16) 0%,transparent 50%)',
+  'radial-gradient(ellipse at 50% 50%,rgba(185,148,56,.17) 0%,transparent 44%)',
+  'radial-gradient(ellipse at 50% 26%,rgba(140,110,45,.13) 0%,transparent 52%)',
+];
+bgGlow.style.background=CH_BG[0];
+const railChs=[...document.querySelectorAll('.rail .ch')];
+const panels=[...document.querySelectorAll('.caption .panel')];
+const CH=[[0.00,0.14],[0.14,0.28],[0.28,0.43],[0.43,0.57],[0.57,0.71],[0.71,0.86],[0.86,1.01]];
+
+let curCh=-1;
+function setChapter(p){
+  let idx=0;for(let i=0;i<CH.length;i++){if(p>=CH[i][0])idx=i;}
+  if(idx!==curCh){curCh=idx;railChs.forEach((c,i)=>c.classList.toggle('on',i===idx));bgGlow.style.opacity=0;setTimeout(()=>{bgGlow.style.background=CH_BG[idx];bgGlow.style.opacity=1;},400);}
+}
+
+function update(){
+  const rect=flow.getBoundingClientRect();
+  const total=flow.offsetHeight-innerHeight;
+  const p=clamp(-rect.top/total,0,1);
+  const vh=innerHeight;
+
+  const inFlow=rect.top<vh*0.5&&rect.bottom>vh*0.5;
+  rail.classList.toggle('show',inFlow);
+  document.getElementById('caption').style.opacity=inFlow?1:0;
+  fprog.style.width=(p*100)+'%';fprog.style.opacity=inFlow?1:0;
+
+  const svgH=vh*2.8;
+  svg.style.transform=`translate(-50%,${vh*0.14-p*(svgH-vh)}px)`;
+
+  /* gl paths draw */
+  for(const k of inks){
+    const lp=smooth(win(p,k.s,k.e));
+    k.el.style.strokeDashoffset=k.len*(1-lp);
+  }
+
+  /* mountains (fade in then out) */
+  mountainsG.setAttribute('opacity', smooth(win(p,0,0.04))*(1-smooth(win(p,0.08,0.18))));
+
+  /* leaf fill + glow */
+  const leafDrawn=smooth(win(p,0.14,0.26));
+  leafFill.setAttribute('opacity',leafDrawn*0.85);
+  leafGlow.setAttribute('opacity',leafDrawn*0.7);
+
+  /* leaf constellation dots */
+  const dotA=smooth(win(p,0.18,0.28))*(1-smooth(win(p,0.30,0.38)));
+  [ldot1,ldot2,ldot3,ldot4,ldotLine1,ldotLine2].forEach(el=>el.setAttribute('opacity',dotA));
+
+  /* magnifying glass (replaces sap drop) */
+  const lensP=smooth(win(p,0.30,0.40))*(1-smooth(win(p,0.44,0.52)));
+  lensG.setAttribute('opacity',lensP);
+
+  /* fall trail */
+  const trailP=smooth(win(p,0.40,0.54));
+  fallTrail.setAttribute('opacity',trailP*0.55);
+
+  /* falling drop: lens bottom (1030) to lum top (1150) */
+  const fallP=win(p,0.42,0.54);
+  if(fallP>0&&fallP<1){
+    fallG.setAttribute('opacity',1);
+    const y=lerp(1030,1150,smooth(fallP));
+    const sc=lerp(1,1.18,fallP);
+    fallG.setAttribute('transform',`translate(0 ${y-43}) scale(1 ${sc})`);
+    const gr=lerp(52,90,fallP);
+    fallGlowEl.setAttribute('rx',gr);fallGlowEl.setAttribute('ry',gr);
+  } else {fallG.setAttribute('opacity',0);}
+
+  /* fine-line luminous drop */
+  const lumP=win(p,0.50,0.74);
+  lumG.setAttribute('opacity',lumP>0?1:0);
+  const grow=smooth(win(p,0.50,0.64));
+  const gr2=lerp(0,200,smooth(win(p,0.52,0.72)));
+  lumGlow.setAttribute('rx',gr2);lumGlow.setAttribute('ry',gr2*1.08);
+  lumGlow.setAttribute('opacity',lerp(0,1,smooth(win(p,0.52,0.68))));
+  /* ripples grow */
+  const rp=smooth(win(p,0.52,0.68));
+  ripple1.setAttribute('rx',lerp(0,80,rp));ripple1.setAttribute('ry',lerp(0,18,rp));
+  ripple2.setAttribute('rx',lerp(0,120,rp));ripple2.setAttribute('ry',lerp(0,26,rp));
+  ripple3.setAttribute('rx',lerp(0,168,rp));ripple3.setAttribute('ry',lerp(0,36,rp));
+  /* drop scale in */
+  lumDrop.setAttribute('transform',`translate(600 1277) scale(${lerp(0.25,1,grow)}) translate(-600 -1277)`);
+
+  /* orbital rings + molecular diagram */
+  const orbIn=smooth(win(p,0.48,0.63));
+  const orbOut=1-smooth(win(p,0.65,0.73));
+  const orbA=orbIn*orbOut;
+  orbitalG.setAttribute('opacity',orbA);
+  if(orbA>0){
+    const rot=(p-0.48)*100;
+    ring1.setAttribute('r',lerp(0,198,orbIn));
+    ring2.setAttribute('rx',lerp(0,264,orbIn));ring2.setAttribute('ry',lerp(0,82,orbIn));
+    ring2.setAttribute('transform',`rotate(${33+rot*.34} 600 1280)`);
+    ring3.setAttribute('rx',lerp(0,230,orbIn));ring3.setAttribute('ry',lerp(0,68,orbIn));
+    ring3.setAttribute('transform',`rotate(${-27-rot*.26} 600 1280)`);
+    const na=smooth(win(p,0.54,0.63))*orbOut;
+    const r1=lerp(0,198,orbIn);
+    nodeT.setAttribute('cx',600);nodeT.setAttribute('cy',1280-r1);nodeT.setAttribute('opacity',na*.8);
+    nodeR.setAttribute('cx',600+r1);nodeR.setAttribute('cy',1280);nodeR.setAttribute('opacity',na*.65);
+    nodeL.setAttribute('cx',600-r1);nodeL.setAttribute('cy',1280);nodeL.setAttribute('opacity',na*.55);
+    /* molecular nodes */
+    const ma=smooth(win(p,0.46,0.58))*orbOut;
+    molLines.setAttribute('opacity',ma*0.85);
+    molNodes.forEach((n,i)=>n.setAttribute('opacity',ma*(0.65+i%2*.25)));
+  }
+
+  /* particles */
+  const drawP=win(p,0.50,0.63);const convP=smooth(win(p,0.61,0.69));
+  for(let i=0;i<NP;i++){
+    const d=pData[i];const appear=clamp((drawP-d.delay*0.5)*2,0,1);
+    const cx=lerp(d.ox,PCENTER.x,convP),cy=lerp(d.oy,PCENTER.y,convP);
+    particleEls[i].setAttribute('cx',cx);particleEls[i].setAttribute('cy',cy);
+    particleEls[i].setAttribute('opacity',appear*(1-convP*.9));
+  }
+
+  /* flask appear */
+  const jarP=smooth(win(p,0.70,0.78));
+  flaskGroup.setAttribute('opacity',jarP);
+
+  /* drop descends into flask */
+  const dropToFlask=smooth(win(p,0.74,0.86));
+  if(dropToFlask>0){
+    const dy=lerp(0,480,dropToFlask);
+    lumG.setAttribute('transform',`translate(0 ${dy})`);
+    lumG.setAttribute('opacity',lerp(1,0,smooth(win(p,0.82,0.90))));
+  } else {lumG.setAttribute('transform','translate(0 0)');}
+
+  /* liquid fill */
+  const fillP=smooth(win(p,0.84,0.97));
+  if(fillP>0){liquid.setAttribute('opacity',.88);const h=lerp(0,264,fillP);liquid.setAttribute('y',2234-h);liquid.setAttribute('height',h);}
+  else{liquid.setAttribute('opacity',0);}
+
+  /* brand */
+  brandG.setAttribute('opacity',smooth(win(p,0.93,1)));
+
+  /* TIP / diamantino */
+  let tp=null;
+  if(p<0.030){
+    tp=rootPrimaryL.getPointAtLength(lenRootPL*win(p,-0.025,0.030));
+  } else if(p>=0.10&&p<0.40){
+    if(p>=0.26)tp=stem.getPointAtLength(lenStem*win(p,0.26,0.37));
+    else tp=leafMid.getPointAtLength(leafMid.getTotalLength()*win(p,0.10,0.22));
+  } else if(p>=0.42&&p<0.54){
+    const y=lerp(1030,1150,smooth(win(p,0.42,0.54)));tp={x:600,y};
+  } else if(p>=0.54&&p<0.74){tp={x:600,y:1280};}
+  else if(p>=0.74&&p<0.88){tp=spineB.getPointAtLength(lenSpineB*win(p,0.74,0.86));}
+  if(tp){
+    tip.setAttribute('cx',tp.x);tip.setAttribute('cy',tp.y);
+    tipGlow.setAttribute('cx',tp.x);tipGlow.setAttribute('cy',tp.y);
+    tip.setAttribute('opacity',.88);tipGlow.setAttribute('opacity',.70);
+  } else {tip.setAttribute('opacity',0);tipGlow.setAttribute('opacity',0);}
+
+  /* caption parallax */
+  const stripH=vh*0.44;
+  panels.forEach((pl,i)=>{
+    const s=CH[i][0],e=CH[i][1],raw=(p-s)/(e-s);
+    let opa,ty,sc;
+    if(raw<=0){opa=0;ty=stripH*.85;sc=.86;}
+    else if(raw<0.12){const t=smooth(raw/0.12);opa=t;ty=lerp(stripH*.85,0,t);sc=lerp(.86,1,t);}
+    else if(raw<0.88){const t=(raw-0.12)/.76;opa=1;ty=lerp(0,-stripH*.22,t);sc=1;}
+    else if(raw<=1){const t=smooth((raw-.88)/.12);opa=1-t;ty=lerp(-stripH*.22,-stripH*.85,t);sc=1;}
+    else{opa=0;ty=-stripH*.85;sc=1;}
+    pl.style.opacity=opa;pl.style.transform=`translateY(${ty}px) scale(${sc})`;
+  });
+
+  setChapter(p);
+}
+
+let raf=null;
+addEventListener('scroll',()=>{if(raf)return;raf=requestAnimationFrame(()=>{update();raf=null});},{passive:true});
+addEventListener('resize',update);
+update();
+
+function jumpTo(idx){const total=flow.offsetHeight-innerHeight;scrollTo({top:flow.offsetTop+total*(CH[idx][0]+0.01),behavior:'smooth'});}
+railChs.forEach(c=>c.addEventListener('click',()=>jumpTo(+c.dataset.ch)));
+document.querySelectorAll('.nav .menu a[data-ch]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();jumpTo(+a.dataset.ch)});});
+</script>
+</body>
+</html>
