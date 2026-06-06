@@ -417,9 +417,8 @@
       _heroVidA.addEventListener('playing', function() { _heroVidAPlaying = true; }, { once: true });
 
       _heroPlay(_heroVidA, null);
-      _heroPlay(_heroVidB, null);
 
-      /* When A ends: crossfade to B, restart A for next cycle */
+      /* When A ends: crossfade to B, start B from beginning */
       _heroVidA.addEventListener('ended', function() {
         if (typeof gsap !== 'undefined') {
           gsap.to(_heroVidA, { opacity: 0, duration: HERO_FADE / 1000, ease: 'power2.inOut' });
@@ -428,11 +427,11 @@
           _heroVidA.style.opacity = '0';
           _heroVidB.style.opacity = String(HERO_OPACITY);
         }
-        _heroVidA.currentTime = 0;
-        _heroPlay(_heroVidA, null);
+        _heroVidB.currentTime = 0;
+        _heroPlay(_heroVidB, null);
       });
 
-      /* When B ends: crossfade back to A, restart B for next cycle */
+      /* When B ends: crossfade back to A, start A from beginning */
       _heroVidB.addEventListener('ended', function() {
         if (typeof gsap !== 'undefined') {
           gsap.to(_heroVidB, { opacity: 0, duration: HERO_FADE / 1000, ease: 'power2.inOut' });
@@ -441,8 +440,8 @@
           _heroVidB.style.opacity = '0';
           _heroVidA.style.opacity = String(HERO_OPACITY);
         }
-        _heroVidB.currentTime = 0;
-        _heroPlay(_heroVidB, null);
+        _heroVidA.currentTime = 0;
+        _heroPlay(_heroVidA, null);
       });
     }
 
