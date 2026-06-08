@@ -459,6 +459,26 @@
       font-weight: 600; padding: 5px 14px; border-radius: 20px;
     }
 
+    /* ── AUTHOR CREDIT ── */
+    .author-credit {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 28px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50px;
+      padding: 8px 20px 8px 8px;
+      font-size: .85rem; color: rgba(255,255,255,.65);
+    }
+    .author-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 700; color: var(--blue-deep);
+      flex-shrink: 0;
+    }
+    .author-credit strong { color: var(--white); }
+    .author-credit span { opacity: .6; margin-right: 2px; }
+
     /* ── KEYBOARD HINT ── */
     #keyboard-hint {
       position: fixed; top: 28px; right: 36px;
@@ -537,6 +557,10 @@
   <!-- ── SLIDE 1 · COVER ── -->
   <div class="slide active" id="slide-1">
     <p class="kicker">Progetto di Mobilità Sostenibile · Lago di Garda</p>
+    <div class="author-credit">
+      <div class="author-avatar">M</div>
+      <div><span>Un'idea di</span> <strong>Massimiliano Di Liberto</strong></div>
+    </div>
     <h1>La Metropolitana<br>del Lago</h1>
     <p class="tagline">Una rete di vaporetti che collega i comuni gardesani,<br>riduce il traffico, attrae turismo e migliora la qualità della vita.</p>
     <button class="cta-btn" onclick="goTo(1)">Scopri il Progetto &nbsp;→</button>
@@ -1061,7 +1085,10 @@
       <div class="contact-pill"><span class="icon">🌐</span> www.gardawatertransport.it</div>
       <div class="contact-pill"><span class="icon">📍</span> Lago di Garda, Italia</div>
     </div>
-    <p style="margin-top:24px;font-size:.8rem;color:rgba(255,255,255,.3);text-align:center;">
+    <p style="margin-top:28px;font-size:.82rem;color:rgba(255,255,255,.45);text-align:center;letter-spacing:.04em;">
+      Un'idea di <strong style="color:rgba(255,255,255,.7);">Massimiliano Di Liberto</strong>
+    </p>
+    <p style="margin-top:8px;font-size:.75rem;color:rgba(255,255,255,.25);text-align:center;">
       Presentazione confidenziale — per uso esclusivo nei confronti di enti pubblici, investitori e partner strategici.
     </p>
   </div>
