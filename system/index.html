@@ -66,10 +66,6 @@
     <a href="../contact/index.html">SIGNAL</a>
   </div>
 
-  <video class="auth-flash-bg" muted autoplay playsinline preload="auto">
-    <source src="../assets/video/flash.mov" type="video/mp4">
-  </video>
-
   <main class="system-main">
 
     <section class="system-cinematic">
@@ -160,52 +156,13 @@
       <p class="sys-closing-subtext">The system is invisible. The connections are real.</p>
     </section>
 
-    <!-- BILL JOBS — same as Author page -->
-    <section class="auth-billjobs" id="sys-bill-jobs">
-      <h2 class="auth-bj-title">WHO IS BILL JOBS?</h2>
-      <div class="auth-bj-body">
-        <p>Not a studio.</p>
-        <p>Not an agency.</p>
-        <p>A production mind<br>built between direction,<br>systems<br>and visual instinct.</p>
-      </div>
-      <button id="sys-bj-frame-trigger" class="bj-frame-link" type="button" aria-haspopup="dialog">
-        <div class="bj-frame">
-          <img src="../assets/img/Logo%20Who%20Is%20BillJobsd.jpg" alt="" class="bj-frame-img" loading="lazy">
-          <div class="bj-frame-veil"></div>
-          <div class="bj-frame-cta">
-            <svg class="bj-frame-play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>
-            <span class="bj-frame-label">WATCH THE REEL</span>
-          </div>
-        </div>
-      </button>
-      <p class="auth-bj-closing"><em>Sometimes the best creative solutions<br>come from understanding every part of the process.</em></p>
+    <!-- FOOTER EDITORIAL → WORK -->
+    <section class="hp-bj-editorial" id="sys-work-editorial">
+      <a href="../work/index.html" class="hp-bj-author-btn" aria-label="Go to Work page">WORK</a>
+      <span class="hp-divider-h" aria-hidden="true"></span>
     </section>
 
   </main>
-
-  <!-- BILL JOBS PANEL -->
-  <div id="sys-bj-overlay" class="wk-ov" aria-hidden="true" role="dialog" aria-label="MDL Studio">
-    <div class="wk-ov-backdrop"></div>
-    <div class="wk-ov-panel">
-      <button class="wk-ov-close" aria-label="Close"><span>✕</span></button>
-      <div class="wk-ov-media">
-        <div class="bj-ov-yt-wrap">
-          <iframe id="sys-bj-yt" src="" frameborder="0"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="wk-ov-body">
-        <div class="wk-ov-meta">
-          <span class="wk-ov-cat">MDL STUDIO</span>
-          <span class="wk-ov-role">Creative Producer &nbsp;·&nbsp; Director</span>
-        </div>
-        <h2 class="wk-ov-title">CHI È MASSIMILIANO DI LIBERTO?</h2>
-        <p class="wk-ov-desc">Not a portfolio.<br>Not a company presentation.<br><br>A cinematic lab — independent, lateral, built on 24 years of real productions.<br><br>The part you usually never see: the person who reads a budget and feels a story. Who holds the visual and the logistical at the same time. Who knows the difference between a good idea and a producible one.<br><br>Music videos. Live shows. Feature development. Branded content. Experimental systems.<br>Any scale. Any format.<br><br><em>The instinct is the same.<br>The frame changes. The way of seeing does not.</em></p>
-        <p class="auth-bj-artist-cta" style="margin-top:28px;">Emerging artist? &nbsp;<a href="https://www.billjobs.it" target="_blank" rel="noopener">billjobs.it →</a></p>
-      </div>
-    </div>
-  </div>
 
   <footer>
     <span>&copy; 2026 Massimiliano Di Liberto</span>
@@ -695,24 +652,6 @@
       }, { threshold: 0.1 }).observe(cinematic);
     }
 
-    /* ── Programmatic play() backup + custom loop-with-pause for flash.mov ── */
-    window.addEventListener('load', function () {
-      var fb = document.querySelector('.auth-flash-bg');
-      if (fb) {
-        fb.play().catch(function () {});
-        /* Loop with ~2.5s pause: fade out → black → fade back in */
-        fb.addEventListener('ended', function () {
-          fb.style.transition = 'opacity 0.6s ease';
-          fb.style.opacity = '0';
-          setTimeout(function () {
-            fb.currentTime = 0;
-            fb.play().catch(function () {});
-            fb.style.opacity = '0.38';
-          }, 2500);
-        });
-      }
-    });
-
     /* ── Audio: ambient pulse loop + section triggers ── */
     window.addEventListener('load', function () {
 
@@ -753,64 +692,21 @@
   }());
   </script>
 
-  <!-- SYSTEM BILL JOBS PANEL: open/close -->
+  <!-- SYSTEM editorial reveal -->
   <script>
-  (function () {
-    var bj = document.getElementById('sys-bj-overlay');
-    if (!bj) return;
-
-    var ytFrame = document.getElementById('sys-bj-yt');
-    var YT_SRC = 'https://www.youtube.com/embed/TrLO4PL-8jI?autoplay=1&rel=0&modestbranding=1';
-
-    function openBJ () {
-      bj.setAttribute('aria-hidden', 'false');
-      bj.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      if (typeof lenis !== 'undefined') lenis.stop();
-      gsap.to('main, nav', { filter: 'blur(4px)', duration: 0.4, ease: 'power2.out' });
-      window.sound && window.sound.play('distortion-fade', 0.06, 0.5);
-      if (ytFrame) ytFrame.src = YT_SRC;
+  window.addEventListener('load', function () {
+    var workEdit = document.getElementById('sys-work-editorial');
+    if (workEdit && typeof gsap !== 'undefined') {
+      var editBtn = workEdit.querySelector('.hp-bj-author-btn');
+      gsap.set(editBtn, { opacity: 0 });
+      ScrollTrigger.create({
+        trigger: workEdit, start: 'top 82%', once: true,
+        onEnter: function () {
+          gsap.to(editBtn, { opacity: 1, duration: 1.0, ease: 'power1.out' });
+        }
+      });
     }
-
-    function closeBJ () {
-      bj.classList.remove('active');
-      bj.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      if (typeof lenis !== 'undefined') lenis.start();
-      gsap.to('main, nav', { filter: 'blur(0px)', duration: 0.4, ease: 'power2.out' });
-      if (ytFrame) ytFrame.src = '';
-    }
-
-    var trigger = document.getElementById('sys-bj-frame-trigger');
-    if (trigger) trigger.addEventListener('click', openBJ);
-
-    bj.querySelector('.wk-ov-close').addEventListener('click', closeBJ);
-    bj.querySelector('.wk-ov-backdrop').addEventListener('click', closeBJ);
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && bj.classList.contains('active')) closeBJ();
-    });
-
-    /* Reveal BJ section: title first, then body lines one by one */
-    window.addEventListener('load', function () {
-      var bjSec = document.getElementById('sys-bill-jobs');
-      if (bjSec && typeof gsap !== 'undefined') {
-        var bjTitle = bjSec.querySelector('.auth-bj-title');
-        var bjLines = Array.from(bjSec.querySelectorAll('.auth-bj-body p'));
-        gsap.set([bjTitle].concat(bjLines), { opacity: 0, y: 12 });
-        ScrollTrigger.create({
-          trigger: bjSec,
-          start: 'top 78%',
-          toggleActions: 'play none none none',
-          onEnter: function() {
-            if (bjTitle) gsap.to(bjTitle, { opacity: 1, y: 0, duration: 0.9, ease: 'power1.out' });
-            bjLines.forEach(function(line, i) {
-              gsap.to(line, { opacity: 1, y: 0, duration: 0.75, ease: 'power1.out', delay: 0.45 + i * 0.22 });
-            });
-          }
-        });
-      }
-    });
-  }());
+  });
   </script>
 </body>
 </html>

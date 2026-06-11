@@ -53,11 +53,6 @@
     <a href="../contact/index.html">SIGNAL</a>
   </div>
 
-  <!-- Full-page background video — fixed so it persists while scrolling -->
-  <video class="auth-flash-bg" muted autoplay playsinline preload="auto">
-    <source src="../assets/video/flash.mov" type="video/mp4">
-  </video>
-
   <main class="author-main">
 
     <!-- Organic path line -->
@@ -138,9 +133,8 @@
       <p class="auth-bj-closing"><em>Sometimes the best creative solutions<br>come from understanding every part of the process.</em></p>
     </section>
 
-    <!-- FOOTER EDITORIAL → SYSTEM (same layout as Frame → AUTHOR) -->
+    <!-- FOOTER EDITORIAL → SYSTEM -->
     <section class="hp-bj-editorial" id="auth-sys-editorial">
-      <p class="hp-bj-editorial-title">Chi è Massimiliano Di Liberto?</p>
       <a href="../system/index.html" class="hp-bj-author-btn" aria-label="Go to System page">SYSTEM</a>
       <span class="hp-divider-h" aria-hidden="true"></span>
     </section>
@@ -258,29 +252,6 @@
     }
 
     window.addEventListener('load', function () {
-      /* iOS video autoplay fallback + custom loop-with-pause */
-      var flashVid = document.querySelector('.auth-flash-bg');
-      if (flashVid) {
-        var vp = flashVid.play();
-        if (vp !== undefined) {
-          vp.catch(function () {
-            var resume = function () { flashVid.play(); };
-            document.addEventListener('touchstart', resume, { once: true });
-            document.addEventListener('click',      resume, { once: true });
-          });
-        }
-        /* Loop with ~2.5s pause: fade out → black → fade back in */
-        flashVid.addEventListener('ended', function () {
-          flashVid.style.transition = 'opacity 0.6s ease';
-          flashVid.style.opacity = '0';
-          setTimeout(function () {
-            flashVid.currentTime = 0;
-            flashVid.play().catch(function () {});
-            flashVid.style.opacity = '0.38';
-          }, 2500);
-        });
-      }
-
       document.fonts.ready.then(function () {
         buildAuthLine();
         ScrollTrigger.refresh();
